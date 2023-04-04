@@ -115,7 +115,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\openvr_api.dll" />
+    <Content Include="Resources\openvr_api.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

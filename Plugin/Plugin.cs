@@ -15,7 +15,7 @@ namespace Plugin
 
         private static void InitSteamVR()
         {
-            SteamVR.Initialize();
+            SteamVR.Initialize(true); // idk why force vr but yes
             SteamVR_Settings.instance.pauseGameWhenDashboardVisible = true;
         }
     }
