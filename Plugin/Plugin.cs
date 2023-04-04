@@ -1,5 +1,6 @@
 ﻿using System;
 using BepInEx;
+using Valve.VR;
 
 namespace Plugin
 {
@@ -8,7 +9,14 @@ namespace Plugin
     {
         private void Awake()
         {
+            Logger.Log(0, $"VRTRAKILL is loaded, initializing SteamVR");
+            InitSteamVR();
+        }
 
+        private static void InitSteamVR()
+        {
+            SteamVR.Initialize();
+            SteamVR_Settings.instance.pauseGameWhenDashboardVisible = true;
         }
     }
 }
