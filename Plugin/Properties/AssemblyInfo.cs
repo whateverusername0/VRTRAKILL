@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Plugin")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("VRTRAKILL")]
+[assembly: AssemblyDescription("ULTRAKILLing in VR is now a thing")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Plugin")]
-[assembly: AssemblyCopyright("Copyright ©  2023")]
+[assembly: AssemblyProduct("VRTRAKILL")]
+[assembly: AssemblyCopyright("Copyright popikman © 2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -3,9 +3,12 @@ using BepInEx;
 
 namespace Plugin
 {
-    [BepInPlugin("com.bepinex.plugin.vrmod", "Ultrakill VR UPDATE!!!", "0.1")]
+    [BepInPlugin("com.popikman.vrtrakill", "ULTRAKILLing in VR is now a thing.", "0.1")]
     public class Plugin : BaseUnityPlugin
     {
+        private void Awake()
+        {
 
+        }
     }
 }
