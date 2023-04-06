@@ -1,22 +1,28 @@
 ﻿using System;
+using System.Reflection;
 using BepInEx;
-using Valve.VR;
+using BepInEx.Logging;
 
 namespace Plugin
 {
-    [BepInPlugin("com.popikman.vrtrakill", "ULTRAKILLing in VR is now a thing.", "0.1")]
+    [BepInPlugin("com.popikman.vrtrakill", "VRTRAKILL", "0.1")]
     public class Plugin : BaseUnityPlugin
     {
+        internal static ManualLogSource PLogger { get; private set; }
+
         private void Awake()
         {
-            Logger.Log(0, $"VRTRAKILL is loaded, initializing SteamVR");
-            InitSteamVR();
+            AppDomain.CurrentDomain.UnhandledException += CustomExceptionHandler;
+            PLogger = Logger;
+            HarmonyLib.Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
+
+
         }
 
-        private static void InitSteamVR()
+        private void CustomExceptionHandler(object sender, UnhandledExceptionEventArgs e)
         {
-            SteamVR.Initialize(true); // idk why force vr but yes
-            SteamVR_Settings.instance.pauseGameWhenDashboardVisible = true;
+            Exception E = e.ExceptionObject as Exception;
+            PLogger.LogError($"Unknown error at {E.Source}\n Details: {E.Message}");
         }
     }
 }
