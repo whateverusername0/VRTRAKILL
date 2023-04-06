@@ -1,5 +1,7 @@
 # VRTRAKILL
 ULTRAKILLing in VR is now a thing.  
+This mod exists because [HuskVR](https://github.com/TeamDoodz/HuskVR) is not being updated for like 7 months, so I was like "Fine, I'll do it myself"  
+
 ##### Scroll all the way down to see requirements & installing process.
 
 ## Features
@@ -17,11 +19,10 @@ Since you cannot use keyboard with VR (if you do you're a weirdo) I've made a **
 
 ## Requirements
 - A (preferably) working VR compatible PC
-- One of the supported devices
-### Fully compatible headsets:
-- Oculus Quest (1 + 2)  
-- More devices will get added when somebody sends me their valve index / htc vive / win mixed reality etc.  
-Feel free to pull request your code for those devices though (sending me your headset is a better option)
+- A PCVR headset (or oculus with crutches)
+### Tested headsets:
+- Oculus Quest (1 + 2) + ALVR  
+- I don't have all the headsets to test them out and add here, but you can open up an issue describing how using a different headset came out to be.
 
 ## Installing VRTRAKILL in less than 10 steps
 1. Begin doing ULTRAKILL shenanigans:  
