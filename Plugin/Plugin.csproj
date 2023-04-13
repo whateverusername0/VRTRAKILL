@@ -79,13 +79,21 @@
       <HintPath>Libraries\MonoMod.Utils.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="SteamVR, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\SteamVR\SteamVR.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="SteamVR_Actions, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\SteamVR\SteamVR_Actions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
     <Reference Include="Unity.InputSystem">
       <HintPath>Libraries\Unity.InputSystem.dll</HintPath>
       <Private>False</Private>
@@ -98,16 +106,12 @@
       <HintPath>Libraries\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>Libraries\UnityEngine.InputLegacyModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.InputModule">
-      <HintPath>Libraries\UnityEngine.InputModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Libraries\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>Libraries\UnityEngine.UIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.VRModule">
@@ -116,28 +120,43 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\GazeUIInteraction.cs" />
-    <Compile Include="Helpers\TheShadowRealm.cs" />
-    <Compile Include="Helpers\UKStuff.cs" />
-    <Compile Include="VRTRAKILL\Patches\VRCameraP.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VRTRAKILL\Input.cs" />
-    <Compile Include="VRTRAKILL\UI\UIManager.cs" />
-    <Compile Include="VRTRAKILL\VRCamera.cs" />
+    <Compile Include="VRTRAKILL\Patches\Helpers.cs" />
+    <Compile Include="VRTRAKILL\Patches\VRCamera.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\BepInEx.cfg">
+    <None Include="CopyToGameRoot\ULTRAKILL\BepInEx\config\BepInEx.cfg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\classdata.tpk">
+    <None Include="CopyToGameRoot\ULTRAKILL\BepInEx\patchers\classdata.tpk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\actions.json" />
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\bindings_holographic_controller.json" />
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\bindings_knuckles.json" />
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\bindings_logitech_stylus.json" />
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\bindings_oculus_touch.json" />
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\bindings_vive_controller.json" />
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\bindings_vive_cosmos_controller.json" />
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\binding_holographic_hmd.json" />
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\binding_index_hmd.json" />
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\binding_rift.json" />
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\binding_vive.json" />
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\binding_vive_cosmos.json" />
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\binding_vive_pro.json" />
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\binding_vive_tracker_camera.json" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\openvr_api.dll">
+    <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\plugins\SteamVR.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\plugins\SteamVR_Actions.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\Plugins\x86_64\AudioPluginOculusSpatializer.dll" />
+    <Content Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\Plugins\x86_64\openvr_api.dll" />
+    <Content Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\Plugins\x86_64\OVRPlugin.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

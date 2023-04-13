@@ -68,7 +68,7 @@ namespace VRPatcher
             List<AssetsReplacer> Replacers = new List<AssetsReplacer>();
 
             AssetFileInfoEx BuildSettings = GGMTable.GetAssetInfo(11);
-            AssetTypeValueField BuildSettingsBase = AM.GetATI(GGMFile, BuildSettings).GetBaseField();
+            AssetTypeValueField BuildSettingsBase = AM.GetTypeInstance(GGMFile, BuildSettings).GetBaseField();
             AssetTypeValueField EnabledVRDevices = BuildSettingsBase.Get("enabledVRDevices").Get("Array");
             AssetTypeTemplateField StringTemplate = EnabledVRDevices.templateField.children[1];
             AssetTypeValueField[] VRDevicesList = new[] { StringField("OpenVR", StringTemplate) };
