@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("VRTRAKILL")]
-[assembly: AssemblyDescription("ULTRAKILLing in VR is now a thing")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("VRTRAKILL")]
-[assembly: AssemblyCopyright("Copyright popikman © 2023")]
+[assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("8041637b-9d77-41fc-b07e-6c0e5819be63")]
+[assembly: Guid("3fbb1fc9-b424-404c-b0c5-1a8afff14f5b")]
 
 // Version information for an assembly consists of the following four values:
 //

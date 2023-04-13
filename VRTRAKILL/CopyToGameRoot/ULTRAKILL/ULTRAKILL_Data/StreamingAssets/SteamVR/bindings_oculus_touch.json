@@ -13,7 +13,16 @@
       "/actions/default" : {
          "chords" : [],
          "haptics" : [],
-         "poses" : [],
+         "poses" : [
+            {
+               "output" : "/actions/default/in/lhp",
+               "path" : "/user/hand/left/pose/raw"
+            },
+            {
+               "output" : "/actions/default/in/rhp",
+               "path" : "/user/hand/right/pose/raw"
+            }
+         ],
          "skeleton" : [],
          "sources" : [
             {

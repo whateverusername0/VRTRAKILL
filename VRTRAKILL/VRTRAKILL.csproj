@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8041637B-9D77-41FC-B07E-6C0E5819BE63}</ProjectGuid>
+    <ProjectGuid>{3FBB1FC9-B424-404C-B0C5-1A8AFFF14F5B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Plugin</RootNamespace>
+    <RootNamespace>VRTRAKILL</RootNamespace>
     <AssemblyName>VRTRAKILL</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -81,12 +81,12 @@
     </Reference>
     <Reference Include="SteamVR, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Libraries\SteamVR\SteamVR.dll</HintPath>
+      <HintPath>..\Plugin\Libraries\SteamVR\SteamVR.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SteamVR_Actions, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Libraries\SteamVR\SteamVR_Actions.dll</HintPath>
+      <HintPath>..\Plugin\Libraries\SteamVR\SteamVR_Actions.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -142,10 +142,10 @@
   <ItemGroup>
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VRTRAKILL\VRInputManager.cs" />
-    <Compile Include="VRTRAKILL\Patches\Helpers.cs" />
     <Compile Include="VRTRAKILL\Patches\VRCamera.cs" />
     <Compile Include="VRTRAKILL\Movement\Patches\VRMovement.cs" />
+    <Compile Include="VRTRAKILL\Patches\Helpers.cs" />
+    <Compile Include="VRTRAKILL\VRInputManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CopyToGameRoot\ULTRAKILL\BepInEx\config\BepInEx.cfg">
@@ -161,9 +161,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\bindings_knuckles.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\bindings_logitech_stylus.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\bindings_oculus_touch.json">
@@ -198,15 +195,27 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\patchers\AssetsTools.NET.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\patchers\VRPatcher.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\plugins\SteamVR.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\plugins\SteamVR_Actions.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\Plugins\x86_64\AudioPluginOculusSpatializer.dll" />
-    <Content Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\Plugins\x86_64\openvr_api.dll" />
-    <Content Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\Plugins\x86_64\OVRPlugin.dll" />
+    <Content Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\Plugins\x86_64\AudioPluginOculusSpatializer.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\Plugins\x86_64\openvr_api.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\Plugins\x86_64\OVRPlugin.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="VRTRAKILL\Arms\Patches\" />

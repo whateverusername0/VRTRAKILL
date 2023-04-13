@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin", "Plugin\Plugin.csproj", "{8041637B-9D77-41FC-B07E-6C0E5819BE63}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VRPatcher", "VRPatcher\VRPatcher.csproj", "{423F0911-CCF0-4DBD-B8D3-423BF7BE559C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VRTRAKILL", "VRTRAKILL\VRTRAKILL.csproj", "{3FBB1FC9-B424-404C-B0C5-1A8AFFF14F5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8041637B-9D77-41FC-B07E-6C0E5819BE63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8041637B-9D77-41FC-B07E-6C0E5819BE63}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8041637B-9D77-41FC-B07E-6C0E5819BE63}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8041637B-9D77-41FC-B07E-6C0E5819BE63}.Release|Any CPU.Build.0 = Release|Any CPU
 		{423F0911-CCF0-4DBD-B8D3-423BF7BE559C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{423F0911-CCF0-4DBD-B8D3-423BF7BE559C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{423F0911-CCF0-4DBD-B8D3-423BF7BE559C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{423F0911-CCF0-4DBD-B8D3-423BF7BE559C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FBB1FC9-B424-404C-B0C5-1A8AFFF14F5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FBB1FC9-B424-404C-B0C5-1A8AFFF14F5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FBB1FC9-B424-404C-B0C5-1A8AFFF14F5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FBB1FC9-B424-404C-B0C5-1A8AFFF14F5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

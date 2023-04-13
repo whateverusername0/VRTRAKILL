@@ -96,5 +96,21 @@ namespace Valve.VR
                 return SteamVR_Actions.default_Pause;
             }
         }
+        
+        public virtual SteamVR_Action_Pose LHP
+        {
+            get
+            {
+                return SteamVR_Actions.default_LHP;
+            }
+        }
+        
+        public virtual SteamVR_Action_Pose RHP
+        {
+            get
+            {
+                return SteamVR_Actions.default_RHP;
+            }
+        }
     }
 }

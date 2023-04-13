@@ -5,8 +5,13 @@ using UnityEngine.UI;
 
 namespace Plugin.VRTRAKILL.Movement.Patches
 {
-    internal class VRMovement
+    [HarmonyPatch] internal class VRMovement
     {
+        //[HarmonyPrefix] [HarmonyPatch(typeof(CameraController), "Start")] static void InitVRInput(CameraController __instance)
+        //{
+        //
+        //}
+
         // fucking hell this shit took more time than any other thing in here combined
         // great job, hakita. nice shitnames. cool private fields.
         // this is why we can't have nice things
@@ -41,8 +46,8 @@ namespace Plugin.VRTRAKILL.Movement.Patches
             ref bool ___quakeJump, ref GameObject ___quakeJumpSound, ref bool ___exploded, ref float ___clingFade, ref bool ___stillHolding,
             ref float ___slamForce, ref bool ___slamStorage, ref bool ___launched, ref int ___difficulty, ref int ___sameCheckpointRestarts,
             ref CustomGroundProperties ___groundProperties, ref int ___rocketJumps, ref Grenade ___ridingRocket, ref int ___rocketRides
-            )
         #endregion
+            )
         {
             Vector2 vector = Vector2.zero;
             if (___activated)
@@ -54,8 +59,7 @@ namespace Plugin.VRTRAKILL.Movement.Patches
 
                 ___movementDirection = Vector3.ClampMagnitude(vector.x * __instance.transform.right + vector.y * __instance.transform.forward, 1f);
 
-                if (___punch == null)
-                    ___punch = __instance.GetComponentInChildren<FistControl>();
+                if (___punch == null) ___punch = __instance.GetComponentInChildren<FistControl>();
                 else if (!___punch.enabled) ___punch.YesFist();
             }
             else

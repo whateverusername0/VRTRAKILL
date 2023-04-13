@@ -5,6 +5,7 @@ using System.Reflection;
 using BepInEx;
 using BepInEx.Logging;
 using Valve.VR;
+using UnityEngine;
 
 namespace Plugin
 {
@@ -23,7 +24,8 @@ namespace Plugin
         private void Awake()
         {
             PLogger = Logger;
-            HarmonyLib.Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
+
+            new HarmonyLib.Harmony(PLUGIN_GUID).PatchAll();
 
             InitializeSteamVR();
         }
@@ -32,6 +34,8 @@ namespace Plugin
         {
             SteamVR_Actions.PreInitialize();
             SteamVR.Initialize();
+
+            VRTRAKILL.VRInputManager.Init();
         }
     }
 }

@@ -37,6 +37,10 @@ namespace Valve.VR
         
         private static SteamVR_Action_Boolean p_default_Pause;
         
+        private static SteamVR_Action_Pose p_default_LHP;
+        
+        private static SteamVR_Action_Pose p_default_RHP;
+        
         public static SteamVR_Action_Vector2 default_Movement
         {
             get
@@ -117,6 +121,22 @@ namespace Valve.VR
             }
         }
         
+        public static SteamVR_Action_Pose default_LHP
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_LHP.GetCopy<SteamVR_Action_Pose>();
+            }
+        }
+        
+        public static SteamVR_Action_Pose default_RHP
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_RHP.GetCopy<SteamVR_Action_Pose>();
+            }
+        }
+        
         private static void InitializeActionArrays()
         {
             Valve.VR.SteamVR_Input.actions = new Valve.VR.SteamVR_Action[] {
@@ -129,7 +149,9 @@ namespace Valve.VR
                     SteamVR_Actions.default_JumpSlam,
                     SteamVR_Actions.default_Slide,
                     SteamVR_Actions.default_Dash,
-                    SteamVR_Actions.default_Pause};
+                    SteamVR_Actions.default_Pause,
+                    SteamVR_Actions.default_LHP,
+                    SteamVR_Actions.default_RHP};
             Valve.VR.SteamVR_Input.actionsIn = new Valve.VR.ISteamVR_Action_In[] {
                     SteamVR_Actions.default_Movement,
                     SteamVR_Actions.default_Turn,
@@ -140,10 +162,14 @@ namespace Valve.VR
                     SteamVR_Actions.default_JumpSlam,
                     SteamVR_Actions.default_Slide,
                     SteamVR_Actions.default_Dash,
-                    SteamVR_Actions.default_Pause};
+                    SteamVR_Actions.default_Pause,
+                    SteamVR_Actions.default_LHP,
+                    SteamVR_Actions.default_RHP};
             Valve.VR.SteamVR_Input.actionsOut = new Valve.VR.ISteamVR_Action_Out[0];
             Valve.VR.SteamVR_Input.actionsVibration = new Valve.VR.SteamVR_Action_Vibration[0];
-            Valve.VR.SteamVR_Input.actionsPose = new Valve.VR.SteamVR_Action_Pose[0];
+            Valve.VR.SteamVR_Input.actionsPose = new Valve.VR.SteamVR_Action_Pose[] {
+                    SteamVR_Actions.default_LHP,
+                    SteamVR_Actions.default_RHP};
             Valve.VR.SteamVR_Input.actionsBoolean = new Valve.VR.SteamVR_Action_Boolean[] {
                     SteamVR_Actions.default_Shoot,
                     SteamVR_Actions.default_AltShoot,
@@ -184,6 +210,8 @@ namespace Valve.VR
             SteamVR_Actions.p_default_Slide = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Slide")));
             SteamVR_Actions.p_default_Dash = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Dash")));
             SteamVR_Actions.p_default_Pause = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Pause")));
+            SteamVR_Actions.p_default_LHP = ((SteamVR_Action_Pose)(SteamVR_Action.Create<SteamVR_Action_Pose>("/actions/default/in/LHP")));
+            SteamVR_Actions.p_default_RHP = ((SteamVR_Action_Pose)(SteamVR_Action.Create<SteamVR_Action_Pose>("/actions/default/in/RHP")));
         }
     }
 }
