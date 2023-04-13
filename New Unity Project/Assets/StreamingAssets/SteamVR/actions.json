@@ -1,50 +1,50 @@
 {
   "actions": [
     {
-      "name": "/actions/Default/in/Movement",
+      "name": "/actions/default/in/Movement",
       "type": "vector2",
       "requirement": "mandatory"
     },
     {
-      "name": "/actions/Default/in/Turn",
+      "name": "/actions/default/in/Turn",
       "type": "vector2"
     },
     {
-      "name": "/actions/Default/in/Shoot",
+      "name": "/actions/default/in/Shoot",
       "type": "boolean"
     },
     {
-      "name": "/actions/Default/in/AltShoot",
+      "name": "/actions/default/in/AltShoot",
       "type": "boolean"
     },
     {
-      "name": "/actions/Default/in/OpenWeaponWheel",
+      "name": "/actions/default/in/OpenWeaponWheel",
       "type": "boolean"
     },
     {
-      "name": "/actions/Default/in/InteractUI",
+      "name": "/actions/default/in/InteractUI",
       "type": "boolean"
     },
     {
-      "name": "/actions/Default/in/JumpSlam",
+      "name": "/actions/default/in/JumpSlam",
       "type": "boolean"
     },
     {
-      "name": "/actions/Default/in/Slide",
+      "name": "/actions/default/in/Slide",
       "type": "boolean"
     },
     {
-      "name": "/actions/Default/in/Dash",
+      "name": "/actions/default/in/Dash",
       "type": "boolean"
     },
     {
-      "name": "/actions/Default/in/Pause",
+      "name": "/actions/default/in/Pause",
       "type": "boolean"
     }
   ],
   "action_sets": [
     {
-      "name": "/actions/Default",
+      "name": "/actions/default",
       "usage": "leftright"
     }
   ],

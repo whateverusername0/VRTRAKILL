@@ -28,5 +28,9 @@ namespace Plugin.VRTRAKILL.Patches
 
             GameObject.Find("Virtual Camera").SetActive(false);
         }
+        [HarmonyPostfix] [HarmonyPatch(typeof(CameraController), "Start")] static void MainCameraTweaks(CameraController __instance)
+        {
+            __instance.enabled = false; // this should disable mouselook
+        }
     }
 }
