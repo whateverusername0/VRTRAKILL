@@ -147,6 +147,29 @@
     <Compile Include="Helpers\Libraries\Mono.Reflection\Image.cs" />
     <Compile Include="Helpers\Libraries\Mono.Reflection\Instruction.cs" />
     <Compile Include="Helpers\Libraries\Mono.Reflection\MethodBodyReader.cs" />
+    <Compile Include="Helpers\Libraries\WindowsInput\IInputDeviceStateAdaptor.cs" />
+    <Compile Include="Helpers\Libraries\WindowsInput\IInputMessageDispatcher.cs" />
+    <Compile Include="Helpers\Libraries\WindowsInput\IInputSimulator.cs" />
+    <Compile Include="Helpers\Libraries\WindowsInput\IKeyboardSimulator.cs" />
+    <Compile Include="Helpers\Libraries\WindowsInput\IMouseSimulator.cs" />
+    <Compile Include="Helpers\Libraries\WindowsInput\InputBuilder.cs" />
+    <Compile Include="Helpers\Libraries\WindowsInput\InputSimulator.cs" />
+    <Compile Include="Helpers\Libraries\WindowsInput\KeyboardSimulator.cs" />
+    <Compile Include="Helpers\Libraries\WindowsInput\MouseButton.cs" />
+    <Compile Include="Helpers\Libraries\WindowsInput\MouseSimulator.cs" />
+    <Compile Include="Helpers\Libraries\WindowsInput\Native\HARDWAREINPUT.cs" />
+    <Compile Include="Helpers\Libraries\WindowsInput\Native\INPUT.cs" />
+    <Compile Include="Helpers\Libraries\WindowsInput\Native\InputType.cs" />
+    <Compile Include="Helpers\Libraries\WindowsInput\Native\KEYBDINPUT.cs" />
+    <Compile Include="Helpers\Libraries\WindowsInput\Native\KeyboardFlag.cs" />
+    <Compile Include="Helpers\Libraries\WindowsInput\Native\MouseFlag.cs" />
+    <Compile Include="Helpers\Libraries\WindowsInput\Native\MOUSEINPUT.cs" />
+    <Compile Include="Helpers\Libraries\WindowsInput\Native\MOUSEKEYBDHARDWAREINPUT.cs" />
+    <Compile Include="Helpers\Libraries\WindowsInput\Native\NativeMethods.cs" />
+    <Compile Include="Helpers\Libraries\WindowsInput\Native\VirtualKeyCode.cs" />
+    <Compile Include="Helpers\Libraries\WindowsInput\Native\XButton.cs" />
+    <Compile Include="Helpers\Libraries\WindowsInput\WindowsInputDeviceStateAdaptor.cs" />
+    <Compile Include="Helpers\Libraries\WindowsInput\WindowsInputMessageDispatcher.cs" />
     <Compile Include="Helpers\ReadonlyModifier.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -154,6 +177,10 @@
     <Compile Include="VRTRAKILL\Movement\Patches\VRMovement.cs" />
     <Compile Include="VRTRAKILL\Patches\Helpers.cs" />
     <Compile Include="VRTRAKILL\Patches\VRPlayer.cs" />
+    <Compile Include="VRTRAKILL\UI\GazeUIInteraction.cs" />
+    <Compile Include="VRTRAKILL\UI\UICanvas.cs" />
+    <Compile Include="VRTRAKILL\UI\VRUIController.cs" />
+    <Compile Include="VRTRAKILL\Vars.cs" />
     <Compile Include="VRTRAKILL\VRInputManager.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -228,6 +255,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="VRTRAKILL\Arms\Patches\" />
+    <Folder Include="VRTRAKILL\UI\Patches\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
