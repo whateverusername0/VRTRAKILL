@@ -51,10 +51,21 @@ namespace Plugin.VRTRAKILL
             SteamVR_Actions._default.Shoot.AddOnUpdateListener(RHShootH, SteamVR_Input_Sources.RightHand);
             SteamVR_Actions._default.AltShoot.AddOnUpdateListener(RHAltShootH, SteamVR_Input_Sources.RightHand);
 
+            // note: ADD WEAPONWHEELIE
+
             // Movement Buttons
             SteamVR_Actions._default.JumpSlam.AddOnUpdateListener(JumpSlamH, SteamVR_Input_Sources.Any);
-            SteamVR_Actions._default.Dash.AddOnUpdateListener(DashH, SteamVR_Input_Sources.Any);
             SteamVR_Actions._default.Slide.AddOnUpdateListener(SlideH, SteamVR_Input_Sources.Any);
+            SteamVR_Actions._default.Dash.AddOnUpdateListener(DashH, SteamVR_Input_Sources.Any);
+
+
+
+            SteamVR_Actions._default.Pause.AddOnUpdateListener(PauseH, SteamVR_Input_Sources.Any);
+        }
+
+        private static void PauseH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
+        {
+            throw new NotImplementedException();
         }
 
         private static void MovementH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
@@ -76,20 +87,20 @@ namespace Plugin.VRTRAKILL
                 InputManager.Instance.InputSource.Jump.Trigger(Jump, !Jump);
             }
         }
-        private static void DashH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        {
-            if (newState != Dash)
-            {
-                Dash = newState;
-                InputManager.Instance.InputSource.Dodge.Trigger(Dash, !Dash);
-            }
-        }
         private static void SlideH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         {
             if (newState != Slide)
             {
                 Slide = newState;
                 InputManager.Instance.InputSource.Slide.Trigger(Slide, !Slide);
+            }
+        }
+        private static void DashH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
+        {
+            if (newState != Dash)
+            {
+                Dash = newState;
+                InputManager.Instance.InputSource.Dodge.Trigger(Dash, !Dash);
             }
         }
 
@@ -128,7 +139,8 @@ namespace Plugin.VRTRAKILL
             }
         }
 
-        // later
+        // I don't know how to utilize InputActions because they're mostly readonly and refuse to work.
+        // Better simulate keys using WindowsInput.
         private static void TriggerKey(WindowsInput.Native.VirtualKeyCode KeyCode)
         {
             InputSimulator InpSim = new InputSimulator();
