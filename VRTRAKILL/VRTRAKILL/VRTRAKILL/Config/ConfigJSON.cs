@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 using WindowsInput.Native;
 
 namespace Plugin.VRTRAKILL.Config
