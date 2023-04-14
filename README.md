@@ -8,20 +8,21 @@ This mod exists because [HuskVR](https://github.com/TeamDoodz/HuskVR) is not bei
 ##### Scroll all the way down to see requirements & installing process.
 
 ## Features
-
+### README is almost always outdated, better check releases for features
 ### Full-sized VR support
-- WIP LOL, only camera works atm (not without crutches)
+- WIP LOL. Only camera and movement works at the moment.
 
 ### VR Weapon Wheelie thing!!
-Since you cannot use keyboard with VR (if you do you're a weirdo) I've made a **COOL WEAPON WHEELIE THING!!!**
-- WIP LOL
+Since you cannot use keyboard to swap weapons with VR (if you do you're a weirdo) I made a **COOL WEAPON WHEELIE THING!!!**
+- WIP LOL.
 
 ## Requirements
 - A (preferably) working VR compatible PC  
 - A PCVR headset w/ SteamVR installed
 ### Tested headsets:
 - Oculus Quest + ALVR  
-- I don't have all the headsets to test them out and add here
+- HTC Vive (unsure. somebody else was trying it)  
+- It should support all headsets that SteamVR supports, oh well.
 
 ## Installing VRTRAKILL in less than 10 steps
 1. Begin doing ULTRAKILL shenanigans:  
