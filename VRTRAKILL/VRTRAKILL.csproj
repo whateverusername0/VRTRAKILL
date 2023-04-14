@@ -7,7 +7,7 @@
     <ProjectGuid>{3FBB1FC9-B424-404C-B0C5-1A8AFFF14F5B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VRTRAKILL</RootNamespace>
+    <RootNamespace>Plugin</RootNamespace>
     <AssemblyName>VRTRAKILL</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -140,11 +140,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\Libraries\Mono.Reflection\BackingFieldResolver.cs" />
+    <Compile Include="Helpers\Libraries\Mono.Reflection\ByteBuffer.cs" />
+    <Compile Include="Helpers\Libraries\Mono.Reflection\Disassembler.cs" />
+    <Compile Include="Helpers\Libraries\Mono.Reflection\ILPattern.cs" />
+    <Compile Include="Helpers\Libraries\Mono.Reflection\Image.cs" />
+    <Compile Include="Helpers\Libraries\Mono.Reflection\Instruction.cs" />
+    <Compile Include="Helpers\Libraries\Mono.Reflection\MethodBodyReader.cs" />
+    <Compile Include="Helpers\ReadonlyModifier.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VRTRAKILL\Patches\VRCamera.cs" />
     <Compile Include="VRTRAKILL\Movement\Patches\VRMovement.cs" />
     <Compile Include="VRTRAKILL\Patches\Helpers.cs" />
+    <Compile Include="VRTRAKILL\Patches\VRPlayer.cs" />
     <Compile Include="VRTRAKILL\VRInputManager.cs" />
   </ItemGroup>
   <ItemGroup>

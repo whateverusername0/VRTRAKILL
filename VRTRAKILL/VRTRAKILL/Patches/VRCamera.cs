@@ -24,8 +24,9 @@ namespace Plugin.VRTRAKILL.Patches
         // No snap turn because motion sickness should not be considered a problem, ESPECIALLY when playing ULTRAKILL.
         [HarmonyPrefix] [HarmonyPatch(typeof(NewMovement), "Update")] static void SmoothTurn(NewMovement __instance)
         {
+            // note: fix a stupid bug where camera gets posessed when respawning (idk how, send help)
             if (__instance.dead) return;
-            __instance.transform.rotation =
+            __instance.gameObject.transform.rotation =
                 Quaternion.Euler(__instance.transform.rotation.eulerAngles.x,
                                  GameObject.Find("Main Camera").transform.rotation.eulerAngles.y,
                                  __instance.transform.rotation.eulerAngles.z);
@@ -39,8 +40,6 @@ namespace Plugin.VRTRAKILL.Patches
             while (__instance.cam == null) {}
             __instance.gameObject.AddComponent<SteamVR_CameraHelper>();
 
-            //__instance.cam.useOcclusionCulling = true;
-            //__instance.cam.backgroundColor = Color.black;
             __instance.cam.depth++;
 
             __instance.cam.stereoTargetEye = StereoTargetEyeMask.Both;
@@ -55,7 +54,7 @@ namespace Plugin.VRTRAKILL.Patches
         }
         [HarmonyPostfix] [HarmonyPatch(typeof(CameraController), "Start")] static void MainCameraTweaks(CameraController __instance)
         {
-            __instance.enabled = false; // this should disable mouselook
+            __instance.enabled = false; // disable mouselook
         }
     }
 }

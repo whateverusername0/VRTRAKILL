@@ -7,14 +7,10 @@ namespace Plugin.VRTRAKILL.Movement.Patches
 {
     [HarmonyPatch] internal class VRMovement
     {
-        //[HarmonyPrefix] [HarmonyPatch(typeof(CameraController), "Start")] static void InitVRInput(CameraController __instance)
-        //{
-        //
-        //}
-
-        // fucking hell this shit took more time than any other thing in here combined
         // great job, hakita. nice shitnames. cool private fields.
         // this is why we can't have nice things
+
+        // note: next time use a transpiler, dumbass
         [HarmonyPrefix] [HarmonyPatch(typeof(NewMovement), "Update")] static bool UpdateMovement
         #region Args that i'm ashamed of
             (

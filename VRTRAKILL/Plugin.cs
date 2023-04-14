@@ -1,11 +1,8 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Diagnostics;
-using System.Reflection;
 using BepInEx;
 using BepInEx.Logging;
 using Valve.VR;
-using UnityEngine;
 
 namespace Plugin
 {
