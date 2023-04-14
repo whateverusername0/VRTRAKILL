@@ -10,7 +10,7 @@ namespace Plugin
     {
         public const string PLUGIN_GUID = "com.popikman.vrtrakill",
                             PLUGIN_NAME = "VRTRAKILL",
-                            PLUGIN_VERSION = "0.1";
+                            PLUGIN_VERSION = "0.5";
 
         public static string GameExePath = Process.GetCurrentProcess().MainModule.FileName,
                              GamePath = Path.GetDirectoryName(GameExePath),
@@ -23,6 +23,8 @@ namespace Plugin
             PLogger = Logger;
 
             new HarmonyLib.Harmony(PLUGIN_GUID).PatchAll();
+
+            VRTRAKILL.UI.VRUIController.Init();
 
             InitializeSteamVR();
         }
