@@ -14,12 +14,14 @@ namespace Plugin.VRTRAKILL.Patches
 
         [HarmonyPrefix] [HarmonyPatch(typeof(NewMovement), "Start")] static void Containerize(NewMovement __instance)
         {
-            Container = new GameObject("Main Camera Container");
-            Container.transform.parent = GameObject.Find("Main Camera").transform.parent;
-            Container.transform.localPosition = Vector3.zero;
-            Container.transform.localRotation = GameObject.Find("Main Camera").transform.rotation;
+            //GameObject.Find("Main Camera")
 
-            GameObject.Find("Main Camera").transform.parent = Container.transform;
+            Container = new GameObject("Main Camera Container");
+            Container.transform.parent = Vars.MainCamera.transform.parent;
+            Container.transform.localPosition = Vector3.zero;
+            Container.transform.localRotation = Vars.MainCamera.transform.rotation;
+
+            Vars.MainCamera.transform.parent = Container.transform;
         }
         // No snap turn because motion sickness should not be considered a problem, ESPECIALLY when playing ULTRAKILL.
         [HarmonyPrefix] [HarmonyPatch(typeof(NewMovement), "Update")] static void SmoothTurn(NewMovement __instance)
@@ -28,7 +30,7 @@ namespace Plugin.VRTRAKILL.Patches
             if (__instance.dead) return;
             __instance.gameObject.transform.rotation =
                 Quaternion.Euler(__instance.transform.rotation.eulerAngles.x,
-                                 GameObject.Find("Main Camera").transform.rotation.eulerAngles.y,
+                                 Vars.MainCamera.transform.rotation.eulerAngles.y,
                                  __instance.transform.rotation.eulerAngles.z);
 
             Container.transform.rotation = Quaternion.Euler(0f, VRInputManager.TurnOffset, 0f);
