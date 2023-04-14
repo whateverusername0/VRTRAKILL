@@ -412,6 +412,7 @@
     <Compile Include="VRTRAKILL\Patches\VRCamera.cs" />
     <Compile Include="VRTRAKILL\Movement\Patches\VRMovement.cs" />
     <Compile Include="VRTRAKILL\Patches\Helpers.cs" />
+    <Compile Include="VRTRAKILL\Patches\VRCamera.cs" />
     <Compile Include="VRTRAKILL\Patches\VRPlayer.cs" />
     <Compile Include="VRTRAKILL\UI\GazeUIInteraction.cs" />
     <Compile Include="VRTRAKILL\UI\Patches\QOL.cs" />
