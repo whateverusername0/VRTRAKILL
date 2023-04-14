@@ -3,13 +3,14 @@ using UnityEngine;
 using Valve.VR;
 using HarmonyLib;
 using Plugin.Helpers;
+using WindowsInput;
 
 namespace Plugin.VRTRAKILL
 {
-    internal class VRInputManager
+    internal static class VRInputManager
     {
         // Movement
-        public static Vector2 MoveVector = Vector2.zero; //public static float Deadzone = 0.45f; // max 0.5
+        public static Vector2 MoveVector = Vector2.zero;
         public static float TurnOffset = 0; public static float Deadzone = 0.4f;
 
         private static bool
@@ -59,13 +60,11 @@ namespace Plugin.VRTRAKILL
         private static void MovementH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
         {
             MoveVector = axis;
-            //Plugin.PLogger.LogMessage($"Movement Action [{MoveVector.x}, {MoveVector.y}]");
         }
         private static void TurnH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
         {
             if (axis.x > 0 + Deadzone) TurnOffset += TurnSpeed * Time.deltaTime;
             if (axis.x < 0 - Deadzone) TurnOffset -= TurnSpeed * Time.deltaTime;
-            //Plugin.PLogger.LogMessage($"Turn Action [{TurnOffset}]");
         }
 
         // note: rename JumpSlam to Jump
@@ -74,7 +73,7 @@ namespace Plugin.VRTRAKILL
             if (newState != Jump)
             {
                 Jump = newState;
-                Trigger(InputManager.Instance.InputSource.Jump, Jump, !Jump);
+                InputManager.Instance.InputSource.Jump.Trigger(Jump, !Jump);
             }
         }
         private static void DashH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
@@ -82,7 +81,7 @@ namespace Plugin.VRTRAKILL
             if (newState != Dash)
             {
                 Dash = newState;
-                Trigger(InputManager.Instance.InputSource.Dodge, Dash, !Dash);
+                InputManager.Instance.InputSource.Dodge.Trigger(Dash, !Dash);
             }
         }
         private static void SlideH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
@@ -90,7 +89,7 @@ namespace Plugin.VRTRAKILL
             if (newState != Slide)
             {
                 Slide = newState;
-                Trigger(InputManager.Instance.InputSource.Slide, Slide, !Slide);
+                InputManager.Instance.InputSource.Slide.Trigger(Slide, !Slide);
             }
         }
 
@@ -100,7 +99,7 @@ namespace Plugin.VRTRAKILL
             if (newState != Punch)
             {
                 Punch = newState;
-                Trigger(InputManager.Instance.InputSource.Punch, Punch, !Punch);
+                InputManager.Instance.InputSource.Punch.Trigger(Punch, !Punch);
             }
         }
         private static void LHAltShootH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
@@ -108,7 +107,7 @@ namespace Plugin.VRTRAKILL
             if (newState != SwapHand)
             {
                 SwapHand = newState;
-                Trigger(InputManager.Instance.InputSource.ChangeFist, SwapHand, !SwapHand);
+                InputManager.Instance.InputSource.ChangeFist.Trigger(SwapHand, !SwapHand);
             }
         }
 
@@ -117,7 +116,7 @@ namespace Plugin.VRTRAKILL
             if (newState != RHPrimaryFire)
             {
                 RHPrimaryFire = newState;
-                Trigger(InputManager.Instance.InputSource.Fire1, RHPrimaryFire, !RHPrimaryFire);
+                InputManager.Instance.InputSource.Fire1.Trigger(RHPrimaryFire, !RHPrimaryFire);
             }
         }
         private static void RHAltShootH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
@@ -125,11 +124,17 @@ namespace Plugin.VRTRAKILL
             if (newState != RHAltFire)
             {
                 RHAltFire = newState;
-                Trigger(InputManager.Instance.InputSource.Fire2, RHAltFire, !RHAltFire);
+                InputManager.Instance.InputSource.Fire2.Trigger(RHAltFire, !RHAltFire);
             }
         }
 
-        public static void Trigger(InputActionState state, bool started, bool cancelled)
+        // later
+        private static void TriggerKey(WindowsInput.Native.VirtualKeyCode KeyCode)
+        {
+            InputSimulator InpSim = new InputSimulator();
+        }
+
+        public static void Trigger(this InputActionState state, bool started, bool cancelled)
         {
             if (started)
             {
