@@ -1,10 +1,8 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Valve.VR;
 using HarmonyLib;
 using Plugin.Helpers;
-using UnityEngine.InputSystem.LowLevel;
 
 namespace Plugin.VRTRAKILL
 {
@@ -12,7 +10,7 @@ namespace Plugin.VRTRAKILL
     {
         // Movement
         public static Vector2 MoveVector = Vector2.zero; //public static float Deadzone = 0.45f; // max 0.5
-        public static float TurnOffset = 0;
+        public static float TurnOffset = 0; public static float Deadzone = 0.4f;
 
         private static bool
             Jump = false,
@@ -65,8 +63,8 @@ namespace Plugin.VRTRAKILL
         }
         private static void TurnH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
         {
-            if (axis.x > 0) TurnOffset += TurnSpeed * Time.deltaTime;
-            if (axis.x < 0) TurnOffset -= TurnSpeed * Time.deltaTime;
+            if (axis.x > 0 + Deadzone) TurnOffset += TurnSpeed * Time.deltaTime;
+            if (axis.x < 0 - Deadzone) TurnOffset -= TurnSpeed * Time.deltaTime;
             //Plugin.PLogger.LogMessage($"Turn Action [{TurnOffset}]");
         }
 
