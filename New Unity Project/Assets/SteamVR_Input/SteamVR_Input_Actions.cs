@@ -25,21 +25,49 @@ namespace Valve.VR
         
         private static SteamVR_Action_Boolean p_default_AltShoot;
         
-        private static SteamVR_Action_Boolean p_default_OpenWeaponWheel;
-        
-        private static SteamVR_Action_Boolean p_default_InteractUI;
-        
-        private static SteamVR_Action_Boolean p_default_JumpSlam;
+        private static SteamVR_Action_Boolean p_default_Jump;
         
         private static SteamVR_Action_Boolean p_default_Slide;
         
         private static SteamVR_Action_Boolean p_default_Dash;
         
-        private static SteamVR_Action_Boolean p_default_Pause;
+        private static SteamVR_Action_Boolean p_default_Escape;
         
         private static SteamVR_Action_Pose p_default_LHP;
         
         private static SteamVR_Action_Pose p_default_RHP;
+        
+        private static SteamVR_Action_Boolean p_default_OpenWeaponWheel;
+        
+        private static SteamVR_Action_Boolean p_default_ChangeWeaponVariation;
+        
+        private static SteamVR_Action_Vector2 p_default_IterateWeapon;
+        
+        private static SteamVR_Action_Boolean p_default_SwapHand;
+        
+        private static SteamVR_Action_Boolean p_default_Slot1;
+        
+        private static SteamVR_Action_Boolean p_default_Slot2;
+        
+        private static SteamVR_Action_Boolean p_default_Slot3;
+        
+        private static SteamVR_Action_Boolean p_default_Slot4;
+        
+        private static SteamVR_Action_Boolean p_default_Slot5;
+        
+        private static SteamVR_Action_Boolean p_default_Slot6;
+        
+        private static SteamVR_Action_Boolean p_default_Slot7;
+        
+        private static SteamVR_Action_Boolean p_default_Slot8;
+        
+        private static SteamVR_Action_Boolean p_default_Slot9;
+        
+        private static SteamVR_Action_Boolean p_default_Slot0;
+        
+        private static SteamVR_Action_Boolean p_default_Whiplash;
+        
+        private static SteamVR_Action_Vibration p_default_Haptic;
         
         public static SteamVR_Action_Vector2 default_Movement
         {
@@ -73,27 +101,11 @@ namespace Valve.VR
             }
         }
         
-        public static SteamVR_Action_Boolean default_OpenWeaponWheel
+        public static SteamVR_Action_Boolean default_Jump
         {
             get
             {
-                return SteamVR_Actions.p_default_OpenWeaponWheel.GetCopy<SteamVR_Action_Boolean>();
-            }
-        }
-        
-        public static SteamVR_Action_Boolean default_InteractUI
-        {
-            get
-            {
-                return SteamVR_Actions.p_default_InteractUI.GetCopy<SteamVR_Action_Boolean>();
-            }
-        }
-        
-        public static SteamVR_Action_Boolean default_JumpSlam
-        {
-            get
-            {
-                return SteamVR_Actions.p_default_JumpSlam.GetCopy<SteamVR_Action_Boolean>();
+                return SteamVR_Actions.p_default_Jump.GetCopy<SteamVR_Action_Boolean>();
             }
         }
         
@@ -113,11 +125,11 @@ namespace Valve.VR
             }
         }
         
-        public static SteamVR_Action_Boolean default_Pause
+        public static SteamVR_Action_Boolean default_Escape
         {
             get
             {
-                return SteamVR_Actions.p_default_Pause.GetCopy<SteamVR_Action_Boolean>();
+                return SteamVR_Actions.p_default_Escape.GetCopy<SteamVR_Action_Boolean>();
             }
         }
         
@@ -137,6 +149,134 @@ namespace Valve.VR
             }
         }
         
+        public static SteamVR_Action_Boolean default_OpenWeaponWheel
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_OpenWeaponWheel.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Boolean default_ChangeWeaponVariation
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_ChangeWeaponVariation.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Vector2 default_IterateWeapon
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_IterateWeapon.GetCopy<SteamVR_Action_Vector2>();
+            }
+        }
+        
+        public static SteamVR_Action_Boolean default_SwapHand
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_SwapHand.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Boolean default_Slot1
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_Slot1.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Boolean default_Slot2
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_Slot2.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Boolean default_Slot3
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_Slot3.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Boolean default_Slot4
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_Slot4.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Boolean default_Slot5
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_Slot5.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Boolean default_Slot6
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_Slot6.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Boolean default_Slot7
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_Slot7.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Boolean default_Slot8
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_Slot8.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Boolean default_Slot9
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_Slot9.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Boolean default_Slot0
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_Slot0.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Boolean default_Whiplash
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_Whiplash.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Vibration default_Haptic
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_Haptic.GetCopy<SteamVR_Action_Vibration>();
+            }
+        }
+        
         private static void InitializeActionArrays()
         {
             Valve.VR.SteamVR_Input.actions = new Valve.VR.SteamVR_Action[] {
@@ -144,45 +284,87 @@ namespace Valve.VR
                     SteamVR_Actions.default_Turn,
                     SteamVR_Actions.default_Shoot,
                     SteamVR_Actions.default_AltShoot,
-                    SteamVR_Actions.default_OpenWeaponWheel,
-                    SteamVR_Actions.default_InteractUI,
-                    SteamVR_Actions.default_JumpSlam,
+                    SteamVR_Actions.default_Jump,
                     SteamVR_Actions.default_Slide,
                     SteamVR_Actions.default_Dash,
-                    SteamVR_Actions.default_Pause,
+                    SteamVR_Actions.default_Escape,
                     SteamVR_Actions.default_LHP,
-                    SteamVR_Actions.default_RHP};
+                    SteamVR_Actions.default_RHP,
+                    SteamVR_Actions.default_OpenWeaponWheel,
+                    SteamVR_Actions.default_ChangeWeaponVariation,
+                    SteamVR_Actions.default_IterateWeapon,
+                    SteamVR_Actions.default_SwapHand,
+                    SteamVR_Actions.default_Slot1,
+                    SteamVR_Actions.default_Slot2,
+                    SteamVR_Actions.default_Slot3,
+                    SteamVR_Actions.default_Slot4,
+                    SteamVR_Actions.default_Slot5,
+                    SteamVR_Actions.default_Slot6,
+                    SteamVR_Actions.default_Slot7,
+                    SteamVR_Actions.default_Slot8,
+                    SteamVR_Actions.default_Slot9,
+                    SteamVR_Actions.default_Slot0,
+                    SteamVR_Actions.default_Whiplash,
+                    SteamVR_Actions.default_Haptic};
             Valve.VR.SteamVR_Input.actionsIn = new Valve.VR.ISteamVR_Action_In[] {
                     SteamVR_Actions.default_Movement,
                     SteamVR_Actions.default_Turn,
                     SteamVR_Actions.default_Shoot,
                     SteamVR_Actions.default_AltShoot,
-                    SteamVR_Actions.default_OpenWeaponWheel,
-                    SteamVR_Actions.default_InteractUI,
-                    SteamVR_Actions.default_JumpSlam,
+                    SteamVR_Actions.default_Jump,
                     SteamVR_Actions.default_Slide,
                     SteamVR_Actions.default_Dash,
-                    SteamVR_Actions.default_Pause,
+                    SteamVR_Actions.default_Escape,
                     SteamVR_Actions.default_LHP,
-                    SteamVR_Actions.default_RHP};
-            Valve.VR.SteamVR_Input.actionsOut = new Valve.VR.ISteamVR_Action_Out[0];
-            Valve.VR.SteamVR_Input.actionsVibration = new Valve.VR.SteamVR_Action_Vibration[0];
+                    SteamVR_Actions.default_RHP,
+                    SteamVR_Actions.default_OpenWeaponWheel,
+                    SteamVR_Actions.default_ChangeWeaponVariation,
+                    SteamVR_Actions.default_IterateWeapon,
+                    SteamVR_Actions.default_SwapHand,
+                    SteamVR_Actions.default_Slot1,
+                    SteamVR_Actions.default_Slot2,
+                    SteamVR_Actions.default_Slot3,
+                    SteamVR_Actions.default_Slot4,
+                    SteamVR_Actions.default_Slot5,
+                    SteamVR_Actions.default_Slot6,
+                    SteamVR_Actions.default_Slot7,
+                    SteamVR_Actions.default_Slot8,
+                    SteamVR_Actions.default_Slot9,
+                    SteamVR_Actions.default_Slot0,
+                    SteamVR_Actions.default_Whiplash};
+            Valve.VR.SteamVR_Input.actionsOut = new Valve.VR.ISteamVR_Action_Out[] {
+                    SteamVR_Actions.default_Haptic};
+            Valve.VR.SteamVR_Input.actionsVibration = new Valve.VR.SteamVR_Action_Vibration[] {
+                    SteamVR_Actions.default_Haptic};
             Valve.VR.SteamVR_Input.actionsPose = new Valve.VR.SteamVR_Action_Pose[] {
                     SteamVR_Actions.default_LHP,
                     SteamVR_Actions.default_RHP};
             Valve.VR.SteamVR_Input.actionsBoolean = new Valve.VR.SteamVR_Action_Boolean[] {
                     SteamVR_Actions.default_Shoot,
                     SteamVR_Actions.default_AltShoot,
-                    SteamVR_Actions.default_OpenWeaponWheel,
-                    SteamVR_Actions.default_InteractUI,
-                    SteamVR_Actions.default_JumpSlam,
+                    SteamVR_Actions.default_Jump,
                     SteamVR_Actions.default_Slide,
                     SteamVR_Actions.default_Dash,
-                    SteamVR_Actions.default_Pause};
+                    SteamVR_Actions.default_Escape,
+                    SteamVR_Actions.default_OpenWeaponWheel,
+                    SteamVR_Actions.default_ChangeWeaponVariation,
+                    SteamVR_Actions.default_SwapHand,
+                    SteamVR_Actions.default_Slot1,
+                    SteamVR_Actions.default_Slot2,
+                    SteamVR_Actions.default_Slot3,
+                    SteamVR_Actions.default_Slot4,
+                    SteamVR_Actions.default_Slot5,
+                    SteamVR_Actions.default_Slot6,
+                    SteamVR_Actions.default_Slot7,
+                    SteamVR_Actions.default_Slot8,
+                    SteamVR_Actions.default_Slot9,
+                    SteamVR_Actions.default_Slot0,
+                    SteamVR_Actions.default_Whiplash};
             Valve.VR.SteamVR_Input.actionsSingle = new Valve.VR.SteamVR_Action_Single[0];
             Valve.VR.SteamVR_Input.actionsVector2 = new Valve.VR.SteamVR_Action_Vector2[] {
                     SteamVR_Actions.default_Movement,
-                    SteamVR_Actions.default_Turn};
+                    SteamVR_Actions.default_Turn,
+                    SteamVR_Actions.default_IterateWeapon};
             Valve.VR.SteamVR_Input.actionsVector3 = new Valve.VR.SteamVR_Action_Vector3[0];
             Valve.VR.SteamVR_Input.actionsSkeleton = new Valve.VR.SteamVR_Action_Skeleton[0];
             Valve.VR.SteamVR_Input.actionsNonPoseNonSkeletonIn = new Valve.VR.ISteamVR_Action_In[] {
@@ -190,12 +372,25 @@ namespace Valve.VR
                     SteamVR_Actions.default_Turn,
                     SteamVR_Actions.default_Shoot,
                     SteamVR_Actions.default_AltShoot,
-                    SteamVR_Actions.default_OpenWeaponWheel,
-                    SteamVR_Actions.default_InteractUI,
-                    SteamVR_Actions.default_JumpSlam,
+                    SteamVR_Actions.default_Jump,
                     SteamVR_Actions.default_Slide,
                     SteamVR_Actions.default_Dash,
-                    SteamVR_Actions.default_Pause};
+                    SteamVR_Actions.default_Escape,
+                    SteamVR_Actions.default_OpenWeaponWheel,
+                    SteamVR_Actions.default_ChangeWeaponVariation,
+                    SteamVR_Actions.default_IterateWeapon,
+                    SteamVR_Actions.default_SwapHand,
+                    SteamVR_Actions.default_Slot1,
+                    SteamVR_Actions.default_Slot2,
+                    SteamVR_Actions.default_Slot3,
+                    SteamVR_Actions.default_Slot4,
+                    SteamVR_Actions.default_Slot5,
+                    SteamVR_Actions.default_Slot6,
+                    SteamVR_Actions.default_Slot7,
+                    SteamVR_Actions.default_Slot8,
+                    SteamVR_Actions.default_Slot9,
+                    SteamVR_Actions.default_Slot0,
+                    SteamVR_Actions.default_Whiplash};
         }
         
         private static void PreInitActions()
@@ -204,14 +399,28 @@ namespace Valve.VR
             SteamVR_Actions.p_default_Turn = ((SteamVR_Action_Vector2)(SteamVR_Action.Create<SteamVR_Action_Vector2>("/actions/default/in/Turn")));
             SteamVR_Actions.p_default_Shoot = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Shoot")));
             SteamVR_Actions.p_default_AltShoot = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/AltShoot")));
-            SteamVR_Actions.p_default_OpenWeaponWheel = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/OpenWeaponWheel")));
-            SteamVR_Actions.p_default_InteractUI = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/InteractUI")));
-            SteamVR_Actions.p_default_JumpSlam = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/JumpSlam")));
+            SteamVR_Actions.p_default_Jump = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Jump")));
             SteamVR_Actions.p_default_Slide = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Slide")));
             SteamVR_Actions.p_default_Dash = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Dash")));
-            SteamVR_Actions.p_default_Pause = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Pause")));
+            SteamVR_Actions.p_default_Escape = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Escape")));
             SteamVR_Actions.p_default_LHP = ((SteamVR_Action_Pose)(SteamVR_Action.Create<SteamVR_Action_Pose>("/actions/default/in/LHP")));
             SteamVR_Actions.p_default_RHP = ((SteamVR_Action_Pose)(SteamVR_Action.Create<SteamVR_Action_Pose>("/actions/default/in/RHP")));
+            SteamVR_Actions.p_default_OpenWeaponWheel = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/OpenWeaponWheel")));
+            SteamVR_Actions.p_default_ChangeWeaponVariation = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/ChangeWeaponVariation")));
+            SteamVR_Actions.p_default_IterateWeapon = ((SteamVR_Action_Vector2)(SteamVR_Action.Create<SteamVR_Action_Vector2>("/actions/default/in/IterateWeapon")));
+            SteamVR_Actions.p_default_SwapHand = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/SwapHand")));
+            SteamVR_Actions.p_default_Slot1 = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Slot1")));
+            SteamVR_Actions.p_default_Slot2 = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Slot2")));
+            SteamVR_Actions.p_default_Slot3 = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Slot3")));
+            SteamVR_Actions.p_default_Slot4 = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Slot4")));
+            SteamVR_Actions.p_default_Slot5 = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Slot5")));
+            SteamVR_Actions.p_default_Slot6 = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Slot6")));
+            SteamVR_Actions.p_default_Slot7 = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Slot7")));
+            SteamVR_Actions.p_default_Slot8 = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Slot8")));
+            SteamVR_Actions.p_default_Slot9 = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Slot9")));
+            SteamVR_Actions.p_default_Slot0 = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Slot0")));
+            SteamVR_Actions.p_default_Whiplash = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Whiplash")));
+            SteamVR_Actions.p_default_Haptic = ((SteamVR_Action_Vibration)(SteamVR_Action.Create<SteamVR_Action_Vibration>("/actions/default/out/Haptic")));
         }
     }
 }

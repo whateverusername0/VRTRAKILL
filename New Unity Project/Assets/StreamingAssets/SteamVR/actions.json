@@ -18,15 +18,7 @@
       "type": "boolean"
     },
     {
-      "name": "/actions/default/in/OpenWeaponWheel",
-      "type": "boolean"
-    },
-    {
-      "name": "/actions/default/in/InteractUI",
-      "type": "boolean"
-    },
-    {
-      "name": "/actions/default/in/JumpSlam",
+      "name": "/actions/default/in/Jump",
       "type": "boolean"
     },
     {
@@ -38,16 +30,94 @@
       "type": "boolean"
     },
     {
-      "name": "/actions/default/in/Pause",
+      "name": "/actions/default/in/Escape",
       "type": "boolean"
     },
     {
       "name": "/actions/default/in/LHP",
-      "type": "pose"
+      "type": "pose",
+      "requirement": "mandatory"
     },
     {
       "name": "/actions/default/in/RHP",
-      "type": "pose"
+      "type": "pose",
+      "requirement": "mandatory"
+    },
+    {
+      "name": "/actions/default/in/OpenWeaponWheel",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/ChangeWeaponVariation",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/IterateWeapon",
+      "type": "vector2",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/SwapHand",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/Slot1",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/Slot2",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/Slot3",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/Slot4",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/Slot5",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/Slot6",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/Slot7",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/Slot8",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/Slot9",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/Slot0",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/Whiplash",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/out/Haptic",
+      "type": "vibration",
+      "requirement": "optional"
     }
   ],
   "action_sets": [
@@ -113,17 +183,32 @@
   "localization": [
     {
       "language_tag": "en_US",
-      "/actions/default/in/InteractUI": "Interact With UI",
       "/actions/Default/in/Movement": "Movement",
       "/actions/Default/in/Turn": "Turn",
       "/actions/Default/in/Shoot": "Shoot",
       "/actions/Default/in/AltShoot": "Alternative Shoot",
-      "/actions/Default/in/OpenWeaponWheel": "Open Weapon Wheel",
-      "/actions/Default/in/InteractUI": "Interact with UI",
-      "/actions/Default/in/JumpSlam": "Jump Slam",
       "/actions/Default/in/Slide": "Slide",
       "/actions/Default/in/Dash": "Dash",
-      "/actions/Default/in/Pause": "Open Pause Menu"
+      "/actions/default/in/Escape": "Escape (Pause, etc.)",
+      "/actions/default/in/LHP": "Left Hand Pose",
+      "/actions/default/in/RHP": "Right Hand Pose",
+      "/actions/default/in/Slide": "Slide (or Slam)",
+      "/actions/default/in/OpenWeaponWheel": "Open Weapon Wheel",
+      "/actions/default/in/ChangeWeaponVariation": "Change Weapon Variation",
+      "/actions/default/in/IterateWeapon": "Change Weapon (Scroll)",
+      "/actions/default/in/SwapHand": "Change Hand",
+      "/actions/default/in/Slot1": "Weapon Slot 1",
+      "/actions/default/in/Slot2": "Weapon Slot 2",
+      "/actions/default/in/Slot3": "Weapon Slot 3",
+      "/actions/default/in/Slot4": "Weapon Slot 4",
+      "/actions/default/in/Slot5": "Weapon Slot 5",
+      "/actions/default/in/Slot6": "Weapon Slot 6",
+      "/actions/default/in/Slot7": "Weapon Slot 7",
+      "/actions/default/in/Slot8": "Weapon Slot 8",
+      "/actions/default/in/Slot9": "Weapon Slot 9",
+      "/actions/default/in/Slot0": "Weapon Slot 0",
+      "/actions/default/in/Whiplash": "Whiplash",
+      "/actions/default/in/AltShoot": "Alternative Shoot"
     }
   ]
 }

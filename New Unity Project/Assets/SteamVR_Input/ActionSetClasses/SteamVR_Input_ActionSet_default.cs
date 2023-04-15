@@ -49,27 +49,11 @@ namespace Valve.VR
             }
         }
         
-        public virtual SteamVR_Action_Boolean OpenWeaponWheel
+        public virtual SteamVR_Action_Boolean Jump
         {
             get
             {
-                return SteamVR_Actions.default_OpenWeaponWheel;
-            }
-        }
-        
-        public virtual SteamVR_Action_Boolean InteractUI
-        {
-            get
-            {
-                return SteamVR_Actions.default_InteractUI;
-            }
-        }
-        
-        public virtual SteamVR_Action_Boolean JumpSlam
-        {
-            get
-            {
-                return SteamVR_Actions.default_JumpSlam;
+                return SteamVR_Actions.default_Jump;
             }
         }
         
@@ -89,11 +73,11 @@ namespace Valve.VR
             }
         }
         
-        public virtual SteamVR_Action_Boolean Pause
+        public virtual SteamVR_Action_Boolean Escape
         {
             get
             {
-                return SteamVR_Actions.default_Pause;
+                return SteamVR_Actions.default_Escape;
             }
         }
         
@@ -110,6 +94,134 @@ namespace Valve.VR
             get
             {
                 return SteamVR_Actions.default_RHP;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean OpenWeaponWheel
+        {
+            get
+            {
+                return SteamVR_Actions.default_OpenWeaponWheel;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean ChangeWeaponVariation
+        {
+            get
+            {
+                return SteamVR_Actions.default_ChangeWeaponVariation;
+            }
+        }
+        
+        public virtual SteamVR_Action_Vector2 IterateWeapon
+        {
+            get
+            {
+                return SteamVR_Actions.default_IterateWeapon;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean SwapHand
+        {
+            get
+            {
+                return SteamVR_Actions.default_SwapHand;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean Slot1
+        {
+            get
+            {
+                return SteamVR_Actions.default_Slot1;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean Slot2
+        {
+            get
+            {
+                return SteamVR_Actions.default_Slot2;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean Slot3
+        {
+            get
+            {
+                return SteamVR_Actions.default_Slot3;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean Slot4
+        {
+            get
+            {
+                return SteamVR_Actions.default_Slot4;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean Slot5
+        {
+            get
+            {
+                return SteamVR_Actions.default_Slot5;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean Slot6
+        {
+            get
+            {
+                return SteamVR_Actions.default_Slot6;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean Slot7
+        {
+            get
+            {
+                return SteamVR_Actions.default_Slot7;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean Slot8
+        {
+            get
+            {
+                return SteamVR_Actions.default_Slot8;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean Slot9
+        {
+            get
+            {
+                return SteamVR_Actions.default_Slot9;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean Slot0
+        {
+            get
+            {
+                return SteamVR_Actions.default_Slot0;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean Whiplash
+        {
+            get
+            {
+                return SteamVR_Actions.default_Whiplash;
+            }
+        }
+        
+        public virtual SteamVR_Action_Vibration Haptic
+        {
+            get
+            {
+                return SteamVR_Actions.default_Haptic;
             }
         }
     }
