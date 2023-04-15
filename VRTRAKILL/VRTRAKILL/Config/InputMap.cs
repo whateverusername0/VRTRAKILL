@@ -1,5 +1,4 @@
-﻿using System;
-using WindowsInput.Native;
+﻿using WindowsInput.Native;
 using System.Collections.Generic;
 
 namespace Plugin.VRTRAKILL.Config
@@ -105,6 +104,36 @@ namespace Plugin.VRTRAKILL.Config
             { "X",             VirtualKeyCode.VK_X },
             { "Y",             VirtualKeyCode.VK_Y },
             { "Z",             VirtualKeyCode.VK_Z },
+            // Alphabet without the capslock (perhaps somebody is gonna put it and get dunked on)
+            { "a",             VirtualKeyCode.VK_A },
+            { "b",             VirtualKeyCode.VK_B },
+            { "c",             VirtualKeyCode.VK_C },
+            { "d",             VirtualKeyCode.VK_D },
+            { "e",             VirtualKeyCode.VK_E },
+            { "f",             VirtualKeyCode.VK_F },
+            { "g",             VirtualKeyCode.VK_G },
+            { "h",             VirtualKeyCode.VK_H },
+            { "i",             VirtualKeyCode.VK_I },
+            { "j",             VirtualKeyCode.VK_J },
+            { "k",             VirtualKeyCode.VK_K },
+            { "l",             VirtualKeyCode.VK_L },
+            { "m",             VirtualKeyCode.VK_M },
+            { "n",             VirtualKeyCode.VK_N },
+            { "o",             VirtualKeyCode.VK_O },
+            { "p",             VirtualKeyCode.VK_P },
+            { "q",             VirtualKeyCode.VK_Q },
+            { "r",             VirtualKeyCode.VK_R },
+            { "s",             VirtualKeyCode.VK_S },
+            { "t",             VirtualKeyCode.VK_T },
+            { "u",             VirtualKeyCode.VK_U },
+            { "v",             VirtualKeyCode.VK_V },
+            { "w",             VirtualKeyCode.VK_W },
+            { "x",             VirtualKeyCode.VK_X },
+            { "y",             VirtualKeyCode.VK_Y },
+            { "z",             VirtualKeyCode.VK_Z },
+
+            // Empty keys for the null vars
+            { "", 0 }, { "Empty", 0 }
         };
     }
 }
