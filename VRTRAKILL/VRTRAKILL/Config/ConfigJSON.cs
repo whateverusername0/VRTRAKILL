@@ -1,36 +1,24 @@
-﻿using System.Collections.Generic;
-using WindowsInput.Native;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.IO;
 
 namespace Plugin.VRTRAKILL.Config
 {
-    public class ConfigJSON
+    internal class ConfigJSON
     {
-        // this is straight forward boilerplate, it's not even needed most of the part, lol
-        public string JumpKey { get; set; }
-        public string SlideKey { get; set; }
-        public string DashKey { get; set; }
+        public Input.VRSettings VRSettings { get; set; }
+        public Input.LegacyInput LegacyInputs { get; set; }
 
-        public string OpenWeaponWheelieKey { get; set; }
-        public string IterateWeaponKey { get; set; }
-        public string ChangeWeaponVariationKey { get; set; }
-        public string SwapHandKey { get; set; }
-
-        public string PauseKey { get; set; }
-
-
-
-        public static ConfigJSON Deserialize()
+        public ConfigJSON Deserialize()
         {
             try
             {
                 string Temp = File.ReadAllText(ConfigMaster.ConfigPath);
                 ConfigJSON Config = JsonConvert.DeserializeObject<ConfigJSON>(Temp);
                 return Config;
-            } catch (FileNotFoundException)
+            }
+            catch (FileNotFoundException)
             {
-                Plugin.PLogger.LogError("Unable to find VRTRAKILL_Config.json, without it you cannot fully ULTRAKILL, because there'll be no input.\n" +
+                Plugin.PLogger.LogError("Unable to find VRTRAKILL_Config.json, without it you literally cannot use the mod.\n" +
                                         "Generating a new one. Please quit the game and fill it out, ty.");
                 Serialize(new ConfigJSON());
             }
