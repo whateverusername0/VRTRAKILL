@@ -48,7 +48,7 @@ namespace Plugin.VRTRAKILL.Movement.Patches
             Vector2 vector = Vector2.zero;
             if (___activated)
             {
-                vector = VRInputManager.MoveVector;
+                vector = Input.VRInputVars.MoveVector;
 
                 ___cc.movementHor = vector.x;
                 ___cc.movementVer = vector.y;
