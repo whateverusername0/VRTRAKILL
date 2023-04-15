@@ -1,9 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Valve.VR;
-using HarmonyLib;
 using Plugin.Helpers;
 using WindowsInput;
+using Plugin.VRTRAKILL.Config;
 
 namespace Plugin.VRTRAKILL
 {
@@ -27,7 +26,9 @@ namespace Plugin.VRTRAKILL
         private static bool
             Punch = false,
             SwapHand = false,
-            IterateGun = false;
+            ChangeWeaponVariation = false;
+
+        private static bool Pause;
 
         enum eTurnSpeed
         {
@@ -58,15 +59,15 @@ namespace Plugin.VRTRAKILL
             SteamVR_Actions._default.Slide.AddOnUpdateListener(SlideH, SteamVR_Input_Sources.Any);
             SteamVR_Actions._default.Dash.AddOnUpdateListener(DashH, SteamVR_Input_Sources.Any);
 
-
+            // For now it just changes weapons variation
+            SteamVR_Actions._default.OpenWeaponWheel.AddOnUpdateListener(ChangeVariationH, SteamVR_Input_Sources.Any);
 
             SteamVR_Actions._default.Pause.AddOnUpdateListener(PauseH, SteamVR_Input_Sources.Any);
         }
 
-        private static void PauseH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        {
-            throw new NotImplementedException();
-        }
+        
+
+        
 
         private static void MovementH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
         {
@@ -83,24 +84,21 @@ namespace Plugin.VRTRAKILL
         {
             if (newState != Jump)
             {
-                Jump = newState;
-                InputManager.Instance.InputSource.Jump.Trigger(Jump, !Jump);
+                Jump = newState; TriggerKey(ConfigMaster.Jump, Jump, !Jump);
             }
         }
         private static void SlideH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         {
             if (newState != Slide)
             {
-                Slide = newState;
-                InputManager.Instance.InputSource.Slide.Trigger(Slide, !Slide);
+                Slide = newState; TriggerKey(ConfigMaster.Slide, Slide, !Slide);
             }
         }
         private static void DashH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         {
             if (newState != Dash)
             {
-                Dash = newState;
-                InputManager.Instance.InputSource.Dodge.Trigger(Dash, !Dash);
+                Dash = newState; TriggerKey(ConfigMaster.Dash, Dash, !Dash);
             }
         }
 
@@ -117,8 +115,7 @@ namespace Plugin.VRTRAKILL
         {
             if (newState != SwapHand)
             {
-                SwapHand = newState;
-                InputManager.Instance.InputSource.ChangeFist.Trigger(SwapHand, !SwapHand);
+                SwapHand = newState; TriggerKey(ConfigMaster.SwapHand, SwapHand, !SwapHand);
             }
         }
 
@@ -139,11 +136,31 @@ namespace Plugin.VRTRAKILL
             }
         }
 
+        private static void ChangeVariationH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
+        {
+            if (newState != ChangeWeaponVariation)
+            {
+                SwapHand = newState;
+                TriggerKey(ConfigMaster.ChangeWeaponVariation, ChangeWeaponVariation, !ChangeWeaponVariation);
+            }
+        }
+
+        private static void PauseH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
+        {
+            if (newState != Pause)
+            {
+                Pause = newState;
+                TriggerKey(ConfigMaster.Pause, Pause, !Pause);
+            }
+        }
+
         // I don't know how to utilize InputActions because they're mostly readonly and refuse to work.
         // Better simulate keys using WindowsInput.
-        private static void TriggerKey(WindowsInput.Native.VirtualKeyCode KeyCode)
+        private static void TriggerKey(WindowsInput.Native.VirtualKeyCode KeyCode, bool Started, bool Ended)
         {
             InputSimulator InpSim = new InputSimulator();
+            if (Started) InpSim.Keyboard.KeyDown(KeyCode);
+            else if (Ended) InpSim.Keyboard.KeyUp(KeyCode);
         }
 
         public static void Trigger(this InputActionState state, bool started, bool cancelled)
