@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using HarmonyLib;
+﻿using HarmonyLib;
 using UnityEngine;
-using UnityEngine.Diagnostics;
 using UnityEngine.XR;
 using Valve.VR;
 
@@ -24,7 +22,7 @@ namespace Plugin.VRTRAKILL.Patches
         // No snap turn because motion sickness should not be considered a problem, ESPECIALLY when playing ULTRAKILL.
         [HarmonyPrefix] [HarmonyPatch(typeof(NewMovement), "Update")] static void SmoothTurn(NewMovement __instance)
         {
-            // note: fix a stupid bug where camera gets posessed when respawning (idk how, send help)
+            // note: figure out how camera rotation gets reset, then fit it's rotation into vrcam ones 
             // if smbdy reading this just restart the mission don't care about checkpoints
             if (__instance.dead) return;
             __instance.gameObject.transform.rotation =
@@ -32,7 +30,7 @@ namespace Plugin.VRTRAKILL.Patches
                                  Vars.MainCamera.transform.rotation.eulerAngles.y,
                                  __instance.transform.rotation.eulerAngles.z);
 
-            Container.transform.rotation = Quaternion.Euler(0f, VRInputManager.TurnOffset, 0f);
+            Container.transform.rotation = Quaternion.Euler(0f, Input.VRInputVars.TurnOffset, 0f);
         }
 
         [HarmonyPrefix] [HarmonyPatch(typeof(CameraController), "Start")] static void ConvertMainCamera(CameraController __instance)
