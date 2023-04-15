@@ -6,7 +6,7 @@ using UnityEngine.XR;
 
 namespace Plugin.VRTRAKILL.UI
 {
-    // "borrowed" from huskvr
+    // "borrowed" from huskvr, ty you pretty
     internal class GazeUIInteraction : MonoBehaviour
     {
         // Prevents loop over the same selectable

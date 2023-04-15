@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
 using HarmonyLib;
 
 namespace Plugin.VRTRAKILL.UI.Patches
