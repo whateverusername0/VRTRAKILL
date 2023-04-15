@@ -8,7 +8,7 @@ namespace Plugin
 {
     [BepInPlugin(PLUGIN_GUID, PLUGIN_NAME, PLUGIN_VERSION)] public class Plugin : BaseUnityPlugin
     {
-        public const string PLUGIN_GUID = "com.popikman.vrtrakill",
+        public const string PLUGIN_GUID = "com.whateverusername0.vrtrakill",
                             PLUGIN_NAME = "VRTRAKILL",
                             PLUGIN_VERSION = "0.5";
 
@@ -23,6 +23,8 @@ namespace Plugin
             PLogger = Logger;
 
             new HarmonyLib.Harmony(PLUGIN_GUID).PatchAll();
+
+            VRTRAKILL.Config.ConfigMaster.Init();
 
             VRTRAKILL.UI.VRUIController.Init();
 
