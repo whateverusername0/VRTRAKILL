@@ -9,13 +9,11 @@ namespace Plugin.VRTRAKILL.Patches
 {
     [HarmonyPatch] internal class VRCamera
     {
-        // ty huskvr for le cod
+        // ty huskvr you pretty
         public static GameObject Container;
 
         [HarmonyPrefix] [HarmonyPatch(typeof(NewMovement), "Start")] static void Containerize(NewMovement __instance)
         {
-            //GameObject.Find("Main Camera")
-
             Container = new GameObject("Main Camera Container");
             Container.transform.parent = Vars.MainCamera.transform.parent;
             Container.transform.localPosition = Vector3.zero;
@@ -27,6 +25,7 @@ namespace Plugin.VRTRAKILL.Patches
         [HarmonyPrefix] [HarmonyPatch(typeof(NewMovement), "Update")] static void SmoothTurn(NewMovement __instance)
         {
             // note: fix a stupid bug where camera gets posessed when respawning (idk how, send help)
+            // if smbdy reading this just restart the mission don't care about checkpoints
             if (__instance.dead) return;
             __instance.gameObject.transform.rotation =
                 Quaternion.Euler(__instance.transform.rotation.eulerAngles.x,
