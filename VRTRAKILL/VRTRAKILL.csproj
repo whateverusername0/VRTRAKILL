@@ -91,6 +91,7 @@
     <Reference Include="SteamVR_Actions, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libraries\SteamVR\SteamVR_Actions.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -181,11 +182,11 @@
     <Compile Include="VRTRAKILL\Config\Input\LegacyInput.cs" />
     <Compile Include="VRTRAKILL\Config\ConfigMaster.cs" />
     <Compile Include="VRTRAKILL\Config\InputMap.cs" />
+    <Compile Include="VRTRAKILL\Config\Input\LegacyInput.cs" />
     <Compile Include="VRTRAKILL\Config\Input\VRSettings.cs" />
     <Compile Include="VRTRAKILL\Guns\Patches\RemoveHands.cs" />
     <Compile Include="VRTRAKILL\Input\VRInputVars.cs" />
     <Compile Include="VRTRAKILL\Movement\Patches\VRMovement.cs" />
-    <Compile Include="VRTRAKILL\Movement\Patches\VRPlayer.cs" />
     <Compile Include="VRTRAKILL\Patches\Helpers.cs" />
     <Compile Include="VRTRAKILL\Patches\VRCamera.cs" />
     <Compile Include="VRTRAKILL\UI\GazeUIInteraction.cs" />
