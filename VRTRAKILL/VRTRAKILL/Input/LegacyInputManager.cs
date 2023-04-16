@@ -132,8 +132,8 @@ namespace Plugin.VRTRAKILL.Input
         private static void IterateWeaponH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
         {
             // crutch, wait for weapon wheel to come out
-            if (axis.y > 0 + VRSettings.Deadzone) MouseScroll(1);
-            if (axis.y < 0 - VRSettings.Deadzone) MouseScroll(-1);
+            if (axis.y > 0 + VRSettings.Deadzone * 1.5f) MouseScroll(1);
+            if (axis.y < 0 - VRSettings.Deadzone * 1.5f) MouseScroll(-1);
         }
         private static void ChangeWeaponVariationH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != ChangeWeaponVariation) { SwapHand = newState; TriggerKey(ConfigMaster.ChangeWeaponVariation, ChangeWeaponVariation, !ChangeWeaponVariation); } }
