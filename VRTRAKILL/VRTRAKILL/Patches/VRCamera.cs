@@ -45,9 +45,7 @@ namespace Plugin.VRTRAKILL.Patches
             XRSettings.gameViewRenderMode = GameViewRenderMode.RightEye;
 
             if (PostProcessV2_Handler.Instance != null)
-            {
                 Traverse.Create(PostProcessV2_Handler.Instance).Field("mainCam").SetValue(__instance.cam);
-            }
 
             GameObject.Find("Virtual Camera").SetActive(false);
         }
