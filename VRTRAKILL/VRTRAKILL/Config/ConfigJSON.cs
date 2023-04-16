@@ -5,10 +5,10 @@ namespace Plugin.VRTRAKILL.Config
 {
     internal class ConfigJSON
     {
-        public Input.VRSettings VRSettings { get; set; }
-        public Input.LegacyInput LegacyInputs { get; set; }
+        public Input.VRSettings VRSettings => new Input.VRSettings();
+        public Input.LegacyInput LegacyInputs => new Input.LegacyInput();
 
-        public ConfigJSON Deserialize()
+        public static ConfigJSON Deserialize()
         {
             try
             {

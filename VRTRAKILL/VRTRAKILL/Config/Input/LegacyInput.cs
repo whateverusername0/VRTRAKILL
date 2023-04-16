@@ -17,7 +17,7 @@ namespace Plugin.VRTRAKILL.Config.Input
         public string DashKey => "LeftShift";
 
         public string LastWeaponUsedKey => "Q";
-        public string ChangeWeaponVariationKey => "";
+        public string ChangeWeaponVariationKey => "E";
         public string IterateWeaponKey => "MouseScroll";
         public string SwapHandKey => "G";
         public string WhiplashKey => "R";
@@ -34,26 +34,5 @@ namespace Plugin.VRTRAKILL.Config.Input
         public string Slot8Key => "8";
         public string Slot9Key => "9";
         public string Slot0Key => "0";
-
-        public static LegacyInput Deserialize()
-        {
-            try
-            {
-                string Temp = File.ReadAllText(ConfigMaster.ConfigPath);
-                LegacyInput Config = JsonConvert.DeserializeObject<LegacyInput>(Temp);
-                return Config;
-            } catch (FileNotFoundException)
-            {
-                Plugin.PLogger.LogError("Unable to find VRTRAKILL_Config.json, without it you cannot fully ULTRAKILL, because there'll be no input.\n" +
-                                        "Generating a new one. Please quit the game and fill it out, ty.");
-                Serialize(new LegacyInput());
-            }
-            return null;
-        }
-        public static void Serialize(LegacyInput Config)
-        {
-            string JSON = JsonConvert.SerializeObject(Config, Formatting.Indented);
-            File.WriteAllText(ConfigMaster.ConfigPath, JSON);
-        }
     }
 }

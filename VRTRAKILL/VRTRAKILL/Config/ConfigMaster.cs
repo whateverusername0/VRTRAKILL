@@ -28,7 +28,12 @@ namespace Plugin.VRTRAKILL.Config
 
         public static void Init()
         {
-            /*if (Input.LegacyInput.Enabled) {*/ Input.LegacyInput Config = Input.LegacyInput.Deserialize(); ConvertJSONToKeys(Config); /*}*/
+           /*if (Input.LegacyInput.Enabled)
+            {*/
+            ConfigJSON Config = ConfigJSON.Deserialize();
+            Input.LegacyInput LegacyInput = Config.LegacyInputs;
+            ConvertJSONToKeys(LegacyInput);
+          /*}*/
         }
 
         private static void ConvertJSONToKeys(Input.LegacyInput Config)
