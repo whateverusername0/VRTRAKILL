@@ -42,7 +42,7 @@ namespace Plugin.VRTRAKILL.UI
 
         public static void ConvertCanvas(Canvas C)
         {
-            if (C.renderMode != RenderMode.ScreenSpaceOverlay || C.renderMode != RenderMode.ScreenSpaceCamera) return;
+            if (C.renderMode != RenderMode.ScreenSpaceOverlay) return;
             C.worldCamera = VRUIController.UICamera;
             C.renderMode = RenderMode.WorldSpace;
             C.gameObject.layer = 5; // ui
