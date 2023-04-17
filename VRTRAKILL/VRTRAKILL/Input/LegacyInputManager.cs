@@ -26,7 +26,6 @@ namespace Plugin.VRTRAKILL.Input
         private static bool
             RHPrimaryFire = false,
             RHAltFire = false,
-            IterateWeapon = false,
             ChangeWeaponVariation = false,
             OpenWeaponWheel = false;
 
