@@ -42,7 +42,7 @@ namespace Plugin.VRTRAKILL.UI
 
         public static void ConvertCanvas(Canvas C)
         {
-            if (C.renderMode != RenderMode.ScreenSpaceOverlay) return;
+            if (C.renderMode != RenderMode.ScreenSpaceOverlay || C.renderMode != RenderMode.ScreenSpaceCamera) return;
             C.worldCamera = VRUIController.UICamera;
             C.renderMode = RenderMode.WorldSpace;
             C.gameObject.layer = 5; // ui
@@ -56,7 +56,7 @@ namespace Plugin.VRTRAKILL.UI
             if (Element.GetComponent<Selectable>() is Selectable Button)
             {
                 ColorBlock block = Button.colors;
-                block.highlightedColor = Color.yellow;
+                block.highlightedColor = Color.red;
                 Button.colors = block;
             }
 
