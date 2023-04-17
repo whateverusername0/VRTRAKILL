@@ -11,7 +11,7 @@ namespace Plugin.VRTRAKILL.Input
     {
         // Legacy Input System
         // Uses WindowsInput to simulate keypresses
-        // Soon to be replaced with hand system (either in 0.x or 1.x)
+        // To be replaced with hand system (either in 0.x or 1.x) // might not be replaced at all, because unity.inputsystem sucks ass
 
         private static bool
             WalkForward = false,  WalkForwardState = false,
@@ -117,7 +117,7 @@ namespace Plugin.VRTRAKILL.Input
         private static void SlideH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != Slide) { Slide = newState; TriggerKey(ConfigMaster.Slide, Slide, !Slide); } }
         private static void DashH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != Dash) { Dash = newState; TriggerKey(ConfigMaster.Dash, Dash, !Dash); /* Dash is broken for some reason */ } }
+        { if (newState != Dash) { Dash = newState; TriggerKey(ConfigMaster.Dash, Dash, !Dash); HarmonyLib.Traverse.Create(NewMovement.Instance).Method("Dodge").GetValue(); } }
 
         private static void LHShootH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != Punch) { Punch = newState; InputManager.Instance.InputSource.Punch.Trigger(Punch, !Punch); } }
@@ -135,7 +135,7 @@ namespace Plugin.VRTRAKILL.Input
             if (axis.y < 0 - VRSettings.Deadzone * 1.5f) MouseScroll(-1);
         }
         private static void ChangeWeaponVariationH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != ChangeWeaponVariation) { SwapHand = newState; TriggerKey(ConfigMaster.ChangeWeaponVariation, ChangeWeaponVariation, !ChangeWeaponVariation); } }
+        { if (newState != ChangeWeaponVariation) { ChangeWeaponVariation = newState; TriggerKey(ConfigMaster.ChangeWeaponVariation, ChangeWeaponVariation, !ChangeWeaponVariation); } }
         private static void OpenWeaponWheelH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         {
             // waiting for the new wheel to come out... for now it just triggers the last gun used
