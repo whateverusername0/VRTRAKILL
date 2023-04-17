@@ -5,42 +5,28 @@ using UnityEngine.UI;
 
 namespace Plugin.VRTRAKILL.Movement.Patches
 {
-    [HarmonyPatch] internal class Movement
+    [HarmonyPatch(typeof(NewMovement))] internal class Movement
     {
         // this is why we can't have nice things
-        [HarmonyPrefix] [HarmonyPatch(typeof(NewMovement), "Update")] static bool UpdateMovement
-        #region Args that i'm ashamed of
-            (
-            NewMovement __instance,
-            ref bool ___modNoDashSlide, ref bool ___modNoJump, ref float ___modForcedFrictionMultip, ref InputManager ___inman,
-            ref AssistController ___asscon, ref float ___walkSpeed, ref float ___jumpPower, ref float ___airAcceleration,
-            ref float ___wallJumpPower, ref bool ___jumpCooldown, ref bool ___falling, ref Rigidbody ___rb, ref Vector3 ___movementDirection,
-            ref Vector3 ___movementDirection2, ref Vector3 ___airDirection, ref float ___timeBetweenSteps, ref float ___stepTime,
-            ref int ___currentStep, ref Animator ___anim, ref Quaternion ___tempRotation, ref GameObject ___forwardPoint,
-            ref GroundCheck ___gc, ref GroundCheck ___slopeCheck, ref WallCheck ___wc, ref PlayerAnimations ___pa, ref Vector3 ___wallJumpPos,
-            ref int ___currentWallJumps, ref AudioSource ___aud, ref AudioSource ___aud2, ref AudioSource ___aud3, ref int ___currentSound,
-            ref AudioClip ___jumpSound, ref AudioClip ___landingSound, ref AudioClip ___finalWallJump, ref bool ___walking, ref int ___hp,
-            ref float ___antiHp, ref float ___antiHpCooldown, ref Image ___hurtScreen, ref AudioSource ___hurtAud, ref Color ___hurtColor,
-            ref Color ___currentColor, ref bool ___hurting, ref bool ___dead, ref bool ___endlessMode,
-            ref Image ___blackScreen, ref Color ___blackColor, ref Text ___youDiedText, ref Color ___youDiedColor, ref FlashImage ___hpFlash,
-            ref FlashImage ___antiHpFlash, ref AudioSource ___greenHpAud, ref float ___currentAllPitch, ref float ___currentAllVolume,
-            ref bool ___boost, ref Vector3 ___dodgeDirection, ref float ___boostLeft, ref float ___boostCharge, ref AudioClip ___dodgeSound,
-            ref CameraController ___cc, ref GameObject ___staminaFailSound, ref GameObject ___screenHud, ref Vector3 ___hudOriginalPos,
-            ref GameObject ___dodgeParticle, ref GameObject ___scrnBlood, ref Canvas ___fullHud, ref GameObject ___hudCam,
-            ref Vector3 ___camOriginalPos, ref RigidbodyConstraints ___defaultRBConstraints, ref GameObject ___revolver, ref StyleHUD ___shud,
-            ref GameObject ___scrapePrefab, ref GameObject ___scrapeParticle, ref LayerMask ___lmask, ref StyleCalculator ___scalc,
-            ref bool ___activated, ref int ___gamepadFreezeCount, ref float ___fallSpeed, ref bool ___jumping, ref float ___fallTime,
-            ref GameObject ___impactDust, ref GameObject ___fallParticle, ref GameObject ___currentFallParticle, ref CapsuleCollider ___playerCollider,
-            ref bool ___sliding, ref float ___slideSafety, ref GameObject ___slideParticle, ref GameObject ___currentSlideParticle,
-            ref GameObject ___slideScrapePrefab, ref GameObject ___slideScrape, ref Vector3 ___slideMovDirection, ref GameObject ___slideStopSound,
-            ref bool ___crouching, ref bool ___standing, ref bool ___rising, ref bool ___slideEnding, ref Vector3 ___groundCheckPos,
-            ref GunControl ___gunc, ref float ___currentSpeed, ref FistControl ___punch, ref GameObject ___dashJumpSound, ref bool ___slowMode,
-            ref Vector3 ___pushForce, ref float ___slideLength, ref float ___longestSlide, ref float ___preSlideSpeed, ref float ___preSlideDelay,
-            ref bool ___quakeJump, ref GameObject ___quakeJumpSound, ref bool ___exploded, ref float ___clingFade, ref bool ___stillHolding,
-            ref float ___slamForce, ref bool ___slamStorage, ref bool ___launched, ref int ___difficulty, ref int ___sameCheckpointRestarts,
-            ref CustomGroundProperties ___groundProperties, ref int ___rocketJumps, ref Grenade ___ridingRocket, ref int ___rocketRides
-        #endregion
-            )
+        [HarmonyPrefix] [HarmonyPatch("Update")] static bool Update(NewMovement __instance,
+        ref bool ___modNoDashSlide, ref AssistController ___asscon, ref bool ___jumpCooldown, ref bool ___falling,
+        ref Rigidbody ___rb, ref Vector3 ___movementDirection, ref Animator ___anim, ref GroundCheck ___gc,
+        ref GroundCheck ___slopeCheck, ref WallCheck ___wc, ref PlayerAnimations ___pa,
+        ref int ___currentWallJumps, ref AudioSource ___aud, ref AudioSource ___aud2, ref AudioSource ___aud3,
+        ref AudioClip ___landingSound, ref bool ___walking, ref int ___hp, ref float ___antiHp, ref float ___antiHpCooldown,
+        ref Image ___hurtScreen, ref Color ___currentColor, ref bool ___hurting, ref bool ___dead, ref bool ___endlessMode,
+        ref Image ___blackScreen, ref Color ___blackColor, ref Text ___youDiedText, ref Color ___youDiedColor, ref float ___currentAllPitch,
+        ref bool ___boost, ref Vector3 ___dodgeDirection, ref float ___boostLeft, ref float ___boostCharge, ref AudioClip ___dodgeSound,
+        ref CameraController ___cc, ref GameObject ___staminaFailSound, ref GameObject ___screenHud, ref Vector3 ___hudOriginalPos,
+        ref GameObject ___dodgeParticle, ref GameObject ___hudCam, ref Vector3 ___camOriginalPos,
+        ref GameObject ___scrapePrefab, ref GameObject ___scrapeParticle, ref LayerMask ___lmask, 
+        ref bool ___activated, ref int ___gamepadFreezeCount, ref float ___fallSpeed, ref bool ___jumping, ref float ___fallTime,
+        ref GameObject ___impactDust, ref GameObject ___fallParticle, ref GameObject ___currentFallParticle, ref CapsuleCollider ___playerCollider,
+        ref bool ___sliding, ref float ___slideSafety, ref GameObject ___currentSlideParticle, ref GameObject ___slideScrape,
+        ref bool ___crouching, ref bool ___standing, ref bool ___rising, ref Vector3 ___groundCheckPos, 
+        ref FistControl ___punch, ref bool ___slowMode, ref float ___slideLength, ref float ___clingFade, ref bool ___stillHolding,
+        ref float ___slamForce, ref bool ___slamStorage, ref int ___difficulty, 
+        ref CustomGroundProperties ___groundProperties, ref int ___rocketJumps, ref int ___rocketRides)
         {
             Vector2 vector = Vector2.zero;
             if (___activated)
@@ -51,6 +37,12 @@ namespace Plugin.VRTRAKILL.Movement.Patches
                 ___cc.movementVer = vector.y;
 
                 ___movementDirection = Vector3.ClampMagnitude(vector.x * __instance.transform.right + vector.y * __instance.transform.forward, 1f);
+                // Dash fix
+                ___dodgeDirection = ___movementDirection;
+                if (___dodgeDirection == Vector3.zero)
+                {
+                    ___dodgeDirection = __instance.transform.forward;
+                }
 
                 if (___punch == null) ___punch = __instance.GetComponentInChildren<FistControl>();
                 else if (!___punch.enabled) ___punch.YesFist();
@@ -505,7 +497,5 @@ namespace Plugin.VRTRAKILL.Movement.Patches
 
             return false;
         }
-
-
     }
 }
