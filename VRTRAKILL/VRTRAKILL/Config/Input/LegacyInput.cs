@@ -17,7 +17,7 @@ namespace Plugin.VRTRAKILL.Config.Input
         public string DashKey => "LeftShift";
 
         public string LastWeaponUsedKey => "Q";
-        public string ChangeWeaponVariationKey => "E";
+        public string ChangeWeaponVariationKey => "F";
         public string IterateWeaponKey => "MouseScroll";
         public string SwapHandKey => "G";
         public string WhiplashKey => "R";
