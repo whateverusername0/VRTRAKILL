@@ -31,8 +31,7 @@ namespace Plugin.VRTRAKILL.Config
            /*if (Input.LegacyInput.Enabled)
             {*/
             ConfigJSON Config = ConfigJSON.Deserialize();
-            Input.LegacyInput LegacyInput = Config.LegacyInputs;
-            ConvertJSONToKeys(LegacyInput);
+            Input.LegacyInput LegacyInput = Config.LegacyInputs; ConvertJSONToKeys(LegacyInput);
           /*}*/
         }
 
@@ -70,7 +69,7 @@ namespace Plugin.VRTRAKILL.Config
                 InputMap.Keys.TryGetValue(Config.Slot9Key, out Slot9);
             }
             catch (Exception)
-            { Plugin.PLogger.LogError("Unable to convert keys in config. Perhaps mismatch? Perhaps keys are liiterally null?" +
+            { Plugin.PLogger.LogError("Unable to convert keys in config. Perhaps mismatch? Perhaps keys are literally null?" +
                                       "Check spelling and replace every null key either with \"\", \"Empty\" or assign a value to it."); }
         }
     }
