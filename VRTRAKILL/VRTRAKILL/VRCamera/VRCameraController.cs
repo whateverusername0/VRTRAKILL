@@ -7,7 +7,7 @@ namespace Plugin.VRTRAKILL.VRCamera
         // Camera getting posessed fix (also CLEAAAAAAAAN)
         private void Start()
         {
-            NewMovement.Instance.transform.right = this.transform.right;
+            NewMovement.Instance.transform.eulerAngles = this.transform.eulerAngles;
             NewMovement.Instance.transform.forward = this.transform.forward;
         }
 

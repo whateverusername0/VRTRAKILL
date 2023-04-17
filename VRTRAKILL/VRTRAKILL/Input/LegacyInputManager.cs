@@ -117,7 +117,7 @@ namespace Plugin.VRTRAKILL.Input
         private static void SlideH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != Slide) { Slide = newState; TriggerKey(ConfigMaster.Slide, Slide, !Slide); } }
         private static void DashH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != Dash) { Dash = newState; TriggerKey(ConfigMaster.Dash, Dash, !Dash); HarmonyLib.Traverse.Create(NewMovement.Instance).Method("Dodge").GetValue(); } }
+        { if (newState != Dash) { Dash = newState; TriggerKey(ConfigMaster.Dash, Dash, !Dash); } }
 
         private static void LHShootH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != Punch) { Punch = newState; InputManager.Instance.InputSource.Punch.Trigger(Punch, !Punch); } }
@@ -131,8 +131,8 @@ namespace Plugin.VRTRAKILL.Input
         private static void IterateWeaponH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
         {
             // crutch, wait for weapon wheel to come out
-            if (axis.y > 0 + VRSettings.Deadzone * 1.5f) MouseScroll(1);
-            if (axis.y < 0 - VRSettings.Deadzone * 1.5f) MouseScroll(-1);
+            if (axis.y > 0 + VRSettings.Deadzone * 1.5f) MouseScroll(-1);
+            if (axis.y < 0 - VRSettings.Deadzone * 1.5f) MouseScroll(1);
         }
         private static void ChangeWeaponVariationH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != ChangeWeaponVariation) { ChangeWeaponVariation = newState; TriggerKey(ConfigMaster.ChangeWeaponVariation, ChangeWeaponVariation, !ChangeWeaponVariation); } }
