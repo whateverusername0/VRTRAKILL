@@ -183,12 +183,12 @@
     <Compile Include="VRTRAKILL\Config\InputMap.cs" />
     <Compile Include="VRTRAKILL\Config\Input\LegacyInput.cs" />
     <Compile Include="VRTRAKILL\Config\Input\VRSettings.cs" />
-    <Compile Include="VRTRAKILL\Config\Input\VRSettings.cs" />
     <Compile Include="VRTRAKILL\Guns\Patches\RemoveHands.cs" />
     <Compile Include="VRTRAKILL\Input\VRInputVars.cs" />
-    <Compile Include="VRTRAKILL\Movement\Patches\VRMovement.cs" />
+    <Compile Include="VRTRAKILL\Movement\Patches\Dash.cs" />
+    <Compile Include="VRTRAKILL\Movement\Patches\Movement.cs" />
+    <Compile Include="VRTRAKILL\Patches\CheckpointCameraFix.cs" />
     <Compile Include="VRTRAKILL\Patches\Helpers.cs" />
-    <Compile Include="VRTRAKILL\Patches\VRCamera.cs" />
     <Compile Include="VRTRAKILL\Patches\VRCamera.cs" />
     <Compile Include="VRTRAKILL\UI\GazeUIInteraction.cs" />
     <Compile Include="VRTRAKILL\UI\Patches\QOL.cs" />
@@ -230,6 +230,7 @@
     <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\binding_index_hmd.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\binding_index_hmd.json" />
     <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\binding_rift.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -257,7 +258,6 @@
     <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\plugins\VRTRAKILL\Newtonsoft.Json.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\plugins\VRTRAKILL\Newtonsoft.Json.dll" />
     <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\plugins\VRTRAKILL\SteamVR.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -273,7 +273,6 @@
     <Content Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\Plugins\x86_64\OVRPlugin.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\Plugins\x86_64\OVRPlugin.dll" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="VRTRAKILL\Arms\Feedbacker\" />
