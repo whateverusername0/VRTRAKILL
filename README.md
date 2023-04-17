@@ -12,18 +12,18 @@ This mod exists because [HuskVR](https://github.com/TeamDoodz/HuskVR) is not bei
 ## Features
 ### README is almost always outdated, better check releases for features
 ### Full-sized VR support
-WIP LOL. For now you can only interact with objects by looking at the mwith your camera. Full controller support WIP
+WIP LOL. For now you can only interact with objects by looking at them with your camera. Full controller support WIP
 
 ### VR Weapon Wheelie thing!!
 Since you cannot use keyboard to swap weapons with VR (if you do you're a weirdo) I made a **COOL WEAPON WHEELIE THING!!!**  
-(Waiting for PITR to release new weapon wheel, too lazy to do it now lol) For now you can bind weapon scroll to joysticks.
+(Waiting for PITR to release new weapon wheel, too lazy to do it now lol) For now you can bind weapon scroll to vertical joystick axis movement.
 
 ## Requirements
 - A copy of ULTRAKILL (any kind)
 - A (preferably) working VR compatible PC  
 - A PCVR headset w/ SteamVR installed
-### Tested 100% working headsets:
-- Oculus Quest (+ ALVR)  
+### Tested 100% working devices:
+- Oculus Quest (+ ALVR) (+ Virtual Desktop)  
 - HTC Vive (unsure. somebody else was trying it)  
 - It should support all headsets that SteamVR supports, oh well.
 
