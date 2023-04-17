@@ -7,7 +7,7 @@ namespace Plugin.VRTRAKILL.Arms
     // note: remove this when time comes
     [HarmonyPatch] internal class DebugArms
     {
-        [HarmonyPostfix] [HarmonyPatch(typeof(CameraController), "Start")] static void AddPlaceholderHands(NewMovement __instance)
+        [HarmonyPrefix] [HarmonyPatch(typeof(CameraController), "Start")] static void AddPlaceholderHands(NewMovement __instance)
         {
             // Left Hand
             GameObject LHGO = new GameObject("Left Controller"); LHGO.transform.parent = __instance.transform;
@@ -18,6 +18,7 @@ namespace Plugin.VRTRAKILL.Arms
             GameObject LHMGO = new GameObject("Model"); LHMGO.transform.parent = LHGO.transform;
             SteamVR_RenderModel LHMGORM =  LHMGO.AddComponent<SteamVR_RenderModel>(); // it should create model automatically
             LHMGORM.createComponents = true;
+
             // Right Hand
             GameObject RHGO = new GameObject("Right Controller"); RHGO.transform.parent = __instance.transform;
             SteamVR_Behaviour_Pose RightHand = RHGO.AddComponent<SteamVR_Behaviour_Pose>();
