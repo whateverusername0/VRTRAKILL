@@ -4,10 +4,10 @@ using UnityEngine;
 namespace Plugin.VRTRAKILL.Movement.Patches
 {
     // hopefully fixes dashing once and for all
-    [HarmonyPatch] internal class Dash
+    [HarmonyPatch(typeof(NewMovement))] internal class Dash
     {
         // i never learn to use a fucking transpiler, oh well
-        [HarmonyPrefix] [HarmonyPatch(typeof(NewMovement), "Dodge")] static bool FixDash
+        [HarmonyPrefix] [HarmonyPatch("Dodge")] static bool DashFix
         (NewMovement __instance, ref bool ___hurting, ref float ___boostLeft, ref float ___preSlideSpeed, ref float ___preSlideDelay,
          ref Vector3 ___movementDirection, ref Vector3 ___movementDirection2, ref bool ___slideEnding)
         {
@@ -72,7 +72,7 @@ namespace Plugin.VRTRAKILL.Movement.Patches
 
             float num2 = 2.75f;
             ___movementDirection2 = new Vector3(__instance.dodgeDirection.x * __instance.walkSpeed * Time.deltaTime * num2,
-                                                        y, __instance.dodgeDirection.z * __instance.walkSpeed * Time.deltaTime * num2);
+                                                y, __instance.dodgeDirection.z * __instance.walkSpeed * Time.deltaTime * num2);
             if (!___slideEnding || (__instance.gc.onGround && !__instance.jumping))
                 __instance.rb.velocity = ___movementDirection2 * 3f;
 
@@ -89,7 +89,5 @@ namespace Plugin.VRTRAKILL.Movement.Patches
 
             return false;
         }
-
-
     }
 }
