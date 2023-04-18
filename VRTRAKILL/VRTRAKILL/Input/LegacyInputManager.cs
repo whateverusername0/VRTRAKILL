@@ -47,21 +47,22 @@ namespace Plugin.VRTRAKILL.Input
             // Movement
             SteamVR_Actions._default.Movement.AddOnUpdateListener(MovementH, SteamVR_Input_Sources.Any);
             SteamVR_Actions._default.Turn.AddOnUpdateListener(TurnH, SteamVR_Input_Sources.Any);
-            SteamVR_Actions._default.Jump.AddOnUpdateListener(JumpH, SteamVR_Input_Sources.Any);
-            SteamVR_Actions._default.Slide.AddOnUpdateListener(SlideH, SteamVR_Input_Sources.Any);
-            SteamVR_Actions._default.Dash.AddOnUpdateListener(DashH, SteamVR_Input_Sources.Any);
+            SteamVR_Actions._default.Jump.AddOnChangeListener(JumpH, SteamVR_Input_Sources.Any);
+            SteamVR_Actions._default.Slide.AddOnChangeListener(SlideH, SteamVR_Input_Sources.Any);
+            SteamVR_Actions._default.Dash.AddOnChangeListener(DashH, SteamVR_Input_Sources.Any);
 
             // Weapons
-            SteamVR_Actions._default.Shoot.AddOnUpdateListener(LHShootH, SteamVR_Input_Sources.LeftHand);
-            SteamVR_Actions._default.AltShoot.AddOnUpdateListener(LHAltShootH, SteamVR_Input_Sources.LeftHand);
-            SteamVR_Actions._default.Shoot.AddOnUpdateListener(RHShootH, SteamVR_Input_Sources.RightHand);
-            SteamVR_Actions._default.AltShoot.AddOnUpdateListener(RHAltShootH, SteamVR_Input_Sources.RightHand);
+            SteamVR_Actions._default.Shoot.AddOnChangeListener(LHShootH, SteamVR_Input_Sources.LeftHand);
+            SteamVR_Actions._default.AltShoot.AddOnChangeListener(LHAltShootH, SteamVR_Input_Sources.LeftHand);
+            SteamVR_Actions._default.Shoot.AddOnChangeListener(RHShootH, SteamVR_Input_Sources.RightHand);
+            SteamVR_Actions._default.AltShoot.AddOnChangeListener(RHAltShootH, SteamVR_Input_Sources.RightHand);
             SteamVR_Actions._default.IterateWeapon.AddOnChangeListener(IterateWeaponH, SteamVR_Input_Sources.Any);
             SteamVR_Actions._default.ChangeWeaponVariation.AddOnChangeListener(ChangeWeaponVariationH, SteamVR_Input_Sources.Any);
             SteamVR_Actions._default.OpenWeaponWheel.AddOnChangeListener(OpenWeaponWheelH, SteamVR_Input_Sources.Any);
 
             SteamVR_Actions._default.Slot0.AddOnChangeListener(Slot0H, SteamVR_Input_Sources.Any);
             SteamVR_Actions._default.Slot1.AddOnChangeListener(Slot1H, SteamVR_Input_Sources.Any);
+            SteamVR_Actions._default.Slot2.AddOnChangeListener(Slot2H, SteamVR_Input_Sources.Any);
             SteamVR_Actions._default.Slot2.AddOnChangeListener(Slot2H, SteamVR_Input_Sources.Any);
             SteamVR_Actions._default.Slot3.AddOnChangeListener(Slot3H, SteamVR_Input_Sources.Any);
             SteamVR_Actions._default.Slot4.AddOnChangeListener(Slot4H, SteamVR_Input_Sources.Any);
@@ -117,7 +118,7 @@ namespace Plugin.VRTRAKILL.Input
         private static void SlideH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != Slide) { Slide = newState; TriggerKey(ConfigMaster.Slide, Slide, !Slide); } }
         private static void DashH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != Dash) { Dash = newState; TriggerKey(ConfigMaster.Dash, Dash, !Dash); } }
+        { if (newState != Dash) { Dash = newState; /*TriggerKey(ConfigMaster.Dash, Dash, !Dash);*/ InputManager.Instance.InputSource.Dodge.Trigger(Dash, !Dash); } }
 
         private static void LHShootH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != Punch) { Punch = newState; InputManager.Instance.InputSource.Punch.Trigger(Punch, !Punch); } }
