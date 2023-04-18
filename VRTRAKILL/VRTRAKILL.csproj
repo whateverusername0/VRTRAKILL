@@ -177,25 +177,29 @@
     <Compile Include="Helpers\ReadonlyModifier.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VRTRAKILL\Arms\Patches\DebugArms.cs" />
+    <Compile Include="VRTRAKILL\Config\Input\LegacyInput.cs" />
+    <Compile Include="VRTRAKILL\Input\NewInput\VRInputManager.cs" />
+    <Compile Include="VRTRAKILL\UI\Patches\HUD.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Arms\ArmsController.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\RemoveHands.cs" />
+    <Compile Include="VRTRAKILL\Input\LegacyInputManager.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\DebugArms.cs" />
     <Compile Include="VRTRAKILL\Input\NewInput\InputValues.cs" />
-    <Compile Include="VRTRAKILL\VRCamera\VRCameraController.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\RemoveHands.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Movement\Patches\ClimbStepP.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Movement\Patches\NewMovementP.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRCamera\VRCameraController.cs" />
     <Compile Include="VRTRAKILL\Config\ConfigJSON.cs" />
     <Compile Include="VRTRAKILL\Config\ConfigMaster.cs" />
     <Compile Include="VRTRAKILL\Config\InputMap.cs" />
-    <Compile Include="VRTRAKILL\Config\Input\LegacyInput.cs" />
     <Compile Include="VRTRAKILL\Config\Input\VRSettings.cs" />
-    <Compile Include="VRTRAKILL\Guns\Patches\RemoveHands.cs" />
     <Compile Include="VRTRAKILL\Input\VRInputVars.cs" />
-    <Compile Include="VRTRAKILL\Movement\Patches\Dash.cs" />
-    <Compile Include="VRTRAKILL\Movement\Patches\Movement.cs" />
-    <Compile Include="VRTRAKILL\VRCamera\Patches\CameraConverter.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\CameraConverter.cs" />
     <Compile Include="VRTRAKILL\UI\GazeUIInteraction.cs" />
     <Compile Include="VRTRAKILL\UI\Patches\QOL.cs" />
     <Compile Include="VRTRAKILL\UI\UICanvas.cs" />
     <Compile Include="VRTRAKILL\UI\VRUIController.cs" />
     <Compile Include="VRTRAKILL\Vars.cs" />
-    <Compile Include="VRTRAKILL\Input\LegacyInputManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CopyToGameRoot\ULTRAKILL\BepInEx\config\BepInEx.cfg">
@@ -275,16 +279,17 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="VRTRAKILL\Arms\Feedbacker\" />
-    <Folder Include="VRTRAKILL\Arms\GrapplingHook\" />
-    <Folder Include="VRTRAKILL\Arms\Knuckleblaster\" />
-    <Folder Include="VRTRAKILL\Guns\Nailgun\Alternative\" />
-    <Folder Include="VRTRAKILL\Guns\Nailgun\Default\" />
-    <Folder Include="VRTRAKILL\Guns\Railcannon\Default\" />
-    <Folder Include="VRTRAKILL\Guns\Revolver\Alternative\" />
-    <Folder Include="VRTRAKILL\Guns\Revolver\Default\" />
-    <Folder Include="VRTRAKILL\Guns\RocketLauncher\Default\" />
-    <Folder Include="VRTRAKILL\Guns\Shotgun\Default\" />
+    <Folder Include="VRTRAKILL\VRPlayer\Arms\Feedbacker\" />
+    <Folder Include="VRTRAKILL\VRPlayer\Arms\GrapplingHook\" />
+    <Folder Include="VRTRAKILL\VRPlayer\Arms\Knuckleblaster\" />
+    <Folder Include="VRTRAKILL\VRPlayer\Arms\Sandboxer\" />
+    <Folder Include="VRTRAKILL\VRPlayer\Guns\Nailgun\Alternative\" />
+    <Folder Include="VRTRAKILL\VRPlayer\Guns\Nailgun\Default\" />
+    <Folder Include="VRTRAKILL\VRPlayer\Guns\Railcannon\Default\" />
+    <Folder Include="VRTRAKILL\VRPlayer\Guns\Revolver\Alternative\" />
+    <Folder Include="VRTRAKILL\VRPlayer\Guns\Revolver\Default\" />
+    <Folder Include="VRTRAKILL\VRPlayer\Guns\RocketLauncher\Default\" />
+    <Folder Include="VRTRAKILL\VRPlayer\Guns\Shotgun\Default\" />
     <Folder Include="VRTRAKILL\WeaponWheelie\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
