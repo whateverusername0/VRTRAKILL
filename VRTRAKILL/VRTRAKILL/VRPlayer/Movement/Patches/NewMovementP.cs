@@ -1,222 +1,194 @@
 ﻿using HarmonyLib;
 using UnityEngine.InputSystem;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 {
-    // big ass "rewrite" (kind of) of the NewMovement class to support vr
+    // big ass "rewrite" (kind of) of the NewMovement class to support vr inputs
     [HarmonyPatch(typeof(NewMovement))] internal class NewMovementP
     {
         // those private properties is why we cant have nice things
-        [HarmonyPrefix] [HarmonyPatch("Update")] static bool Update(NewMovement __instance,
-        ref bool ___modNoDashSlide, ref AssistController ___asscon, ref bool ___jumpCooldown, ref bool ___falling,
-        ref Rigidbody ___rb, ref Vector3 ___movementDirection, ref Animator ___anim, ref GroundCheck ___gc,
-        ref GroundCheck ___slopeCheck, ref WallCheck ___wc, ref PlayerAnimations ___pa,
-        ref int ___currentWallJumps, ref AudioSource ___aud, ref AudioSource ___aud2, ref AudioSource ___aud3,
-        ref AudioClip ___landingSound, ref bool ___walking, ref int ___hp, ref float ___antiHp, ref float ___antiHpCooldown,
-        ref Image ___hurtScreen, ref Color ___currentColor, ref bool ___hurting, ref bool ___dead, ref bool ___endlessMode,
-        ref Image ___blackScreen, ref Color ___blackColor, ref Text ___youDiedText, ref Color ___youDiedColor, ref float ___currentAllPitch,
-        ref bool ___boost, ref Vector3 ___dodgeDirection, ref float ___boostLeft, ref float ___boostCharge, ref AudioClip ___dodgeSound,
-        ref CameraController ___cc, ref GameObject ___staminaFailSound, ref GameObject ___screenHud, ref Vector3 ___hudOriginalPos,
-        ref GameObject ___dodgeParticle, ref GameObject ___hudCam, ref Vector3 ___camOriginalPos,
-        ref GameObject ___scrapePrefab, ref GameObject ___scrapeParticle, ref LayerMask ___lmask,
-        ref bool ___activated, ref int ___gamepadFreezeCount, ref float ___fallSpeed, ref bool ___jumping, ref float ___fallTime,
-        ref GameObject ___impactDust, ref GameObject ___fallParticle, ref GameObject ___currentFallParticle, ref CapsuleCollider ___playerCollider,
-        ref bool ___sliding, ref float ___slideSafety, ref GameObject ___currentSlideParticle, ref GameObject ___slideScrape,
-        ref bool ___crouching, ref bool ___standing, ref bool ___rising, ref Vector3 ___groundCheckPos,
-        ref FistControl ___punch, ref bool ___slowMode, ref float ___slideLength, ref float ___clingFade, ref bool ___stillHolding,
-        ref float ___slamForce, ref bool ___slamStorage, ref int ___difficulty,
-        ref CustomGroundProperties ___groundProperties, ref int ___rocketJumps, ref int ___rocketRides)
+        [HarmonyPrefix] [HarmonyPatch("Update")] static bool Update(NewMovement __instance)
         {
             Vector2 vector = Vector2.zero;
-            if (___activated)
+            if (__instance.activated)
             {
                 vector = Input.VRInputVars.MoveVector;
 
-                ___cc.movementHor = vector.x;
-                ___cc.movementVer = vector.y;
+                __instance.cc.movementHor = vector.x;
+                __instance.cc.movementVer = vector.y;
 
-                ___movementDirection = Vector3.ClampMagnitude(vector.x * __instance.transform.right + vector.y * __instance.transform.forward, 1f);
-                // Dash fix
-                ___dodgeDirection = ___movementDirection;
-                if (___dodgeDirection == Vector3.zero)
-                {
-                    ___dodgeDirection = __instance.transform.forward;
-                }
+                __instance.movementDirection = Vector3.ClampMagnitude(vector.x * __instance.transform.right + vector.y * __instance.transform.forward, 1f);
 
-                if (___punch == null) ___punch = __instance.GetComponentInChildren<FistControl>();
-                else if (!___punch.enabled) ___punch.YesFist();
+                if (__instance.punch == null) __instance.punch = __instance.GetComponentInChildren<FistControl>();
+                else if (!__instance.punch.enabled) __instance.punch.YesFist();
             }
             else
             {
-                ___rb.velocity = new Vector3(0f, ___rb.velocity.y, 0f);
+                __instance.rb.velocity = new Vector3(0f, __instance.rb.velocity.y, 0f);
 
-                if (___currentFallParticle != null) Object.Destroy(___currentFallParticle);
+                if (__instance.currentFallParticle != null) Object.Destroy(__instance.currentFallParticle);
 
-                if (___currentSlideParticle != null) Object.Destroy(___currentSlideParticle);
-                else if (___slideScrape != null) Object.Destroy(___slideScrape);
+                if (__instance.currentSlideParticle != null) Object.Destroy(__instance.currentSlideParticle);
+                else if (__instance.slideScrape != null) Object.Destroy(__instance.slideScrape);
 
-                if (___punch == null)
-                    ___punch = __instance.GetComponentInChildren<FistControl>();
+                if (__instance.punch == null) __instance.punch = __instance.GetComponentInChildren<FistControl>();
 
-                else
-                    ___punch.NoFist();
+                else __instance.punch.NoFist();
             }
 
-            if (MonoSingleton<InputManager>.Instance.LastButtonDevice is Gamepad && ___gamepadFreezeCount > 0)
+            if (MonoSingleton<InputManager>.Instance.LastButtonDevice is Gamepad && __instance.gamepadFreezeCount > 0)
             {
                 vector = Vector2.zero;
-                ___rb.velocity = new Vector3(0f, ___rb.velocity.y, 0f);
-                ___cc.movementHor = 0f;
-                ___cc.movementVer = 0f;
-                ___movementDirection = Vector3.zero;
+                __instance.rb.velocity = new Vector3(0f, __instance.rb.velocity.y, 0f);
+                __instance.cc.movementHor = 0f;
+                __instance.cc.movementVer = 0f;
+                __instance.movementDirection = Vector3.zero;
                 return false;
             }
 
-            if (___dead && !___endlessMode)
+            if (__instance.dead && !__instance.endlessMode)
             {
-                ___currentAllPitch -= 0.1f * Time.deltaTime;
-                MonoSingleton<AudioMixerController>.Instance.allSound.SetFloat("allPitch", ___currentAllPitch);
-                MonoSingleton<AudioMixerController>.Instance.doorSound.SetFloat("allPitch", ___currentAllPitch);
-                if (___blackColor.a < 0.5f)
+                __instance.currentAllPitch -= 0.1f * Time.deltaTime;
+                MonoSingleton<AudioMixerController>.Instance.allSound.SetFloat("allPitch", __instance.currentAllPitch);
+                MonoSingleton<AudioMixerController>.Instance.doorSound.SetFloat("allPitch", __instance.currentAllPitch);
+                if (__instance.blackColor.a < 0.5f)
                 {
-                    ___blackColor.a += 0.75f * Time.deltaTime;
-                    ___youDiedColor.a += 0.75f * Time.deltaTime;
+                    __instance.blackColor.a += 0.75f * Time.deltaTime;
+                    __instance.youDiedColor.a += 0.75f * Time.deltaTime;
                 }
                 else
                 {
-                    ___blackColor.a += 0.05f * Time.deltaTime;
-                    ___youDiedColor.a += 0.05f * Time.deltaTime;
+                    __instance.blackColor.a += 0.05f * Time.deltaTime;
+                    __instance.youDiedColor.a += 0.05f * Time.deltaTime;
                 }
 
-                ___blackScreen.color = ___blackColor;
-                ___youDiedText.color = ___youDiedColor;
+                __instance.blackScreen.color = __instance.blackColor;
+                __instance.youDiedText.color = __instance.youDiedColor;
             }
 
-            if (___gc.onGround != ___pa.onGround)
-                ___pa.onGround = ___gc.onGround;
+            if (__instance.gc.onGround != __instance.pa.onGround)
+                __instance.pa.onGround = __instance.gc.onGround;
 
-            if (!___gc.onGround)
+            if (!__instance.gc.onGround)
             {
-                if (___fallTime < 1f)
+                if (__instance.fallTime < 1f)
                 {
-                    ___fallTime += Time.deltaTime * 5f;
-                    if (___fallTime > 1f) ___falling = true;
+                    __instance.fallTime += Time.deltaTime * 5f;
+                    if (__instance.fallTime > 1f) __instance.falling = true;
                 }
-                else if (___rb.velocity.y < -2f)
-                    ___fallSpeed = ___rb.velocity.y;
+                else if (__instance.rb.velocity.y < -2f) __instance.fallSpeed = __instance.rb.velocity.y;
             }
-            else if (___gc.onGround)
+            else if (__instance.gc.onGround)
             {
-                ___fallTime = 0f;
-                ___clingFade = 0f;
+                __instance.fallTime = 0f;
+                __instance.clingFade = 0f;
             }
 
-            if (!___gc.onGround && ___rb.velocity.y < -20f)
+            if (!__instance.gc.onGround && __instance.rb.velocity.y < -20f)
             {
-                ___aud3.pitch = ___rb.velocity.y * -1f / 120f;
-                if (___activated) ___aud3.volume = ___rb.velocity.y * -1f / 80f;
-                else ___aud3.volume = ___rb.velocity.y * -1f / 240f;
+                __instance.aud3.pitch = __instance.rb.velocity.y * -1f / 120f;
+                if (__instance.activated) __instance.aud3.volume = __instance.rb.velocity.y * -1f / 80f;
+                else __instance.aud3.volume = __instance.rb.velocity.y * -1f / 240f;
             }
             else if (__instance.rb.velocity.y > -20f)
             {
-                ___aud3.pitch = 0f;
-                ___aud3.volume = 0f;
+                __instance.aud3.pitch = 0f;
+                __instance.aud3.volume = 0f;
             }
 
-            if (___rb.velocity.y < -100f) ___rb.velocity = new Vector3(___rb.velocity.x, -100f, ___rb.velocity.z);
+            if (__instance.rb.velocity.y < -100f) __instance.rb.velocity = new Vector3(__instance.rb.velocity.x, -100f, __instance.rb.velocity.z);
 
-            if (___gc.onGround && ___falling && !___jumpCooldown)
+            if (__instance.gc.onGround && __instance.falling && !__instance.jumpCooldown)
             {
-                ___falling = false;
-                ___slamStorage = false;
-                if (___fallSpeed > -50f)
+                __instance.falling = false;
+                __instance.slamStorage = false;
+                if (__instance.fallSpeed > -50f)
                 {
-                    ___aud2.clip = ___landingSound;
-                    ___aud2.volume = 0.5f + ___fallSpeed * -0.01f;
-                    ___aud2.pitch = Random.Range(0.9f, 1.1f);
-                    ___aud2.Play();
+                    __instance.aud2.clip = __instance.landingSound;
+                    __instance.aud2.volume = 0.5f + __instance.fallSpeed * -0.01f;
+                    __instance.aud2.pitch = Random.Range(0.9f, 1.1f);
+                    __instance.aud2.Play();
                 }
                 else
                 {
-                    Object.Instantiate(___impactDust, ___gc.transform.position, Quaternion.identity).transform.forward = Vector3.up;
-                    ___cc.CameraShake(0.5f);
+                    Object.Instantiate(__instance.impactDust, __instance.gc.transform.position, Quaternion.identity).transform.forward = Vector3.up;
+                    __instance.cc.CameraShake(0.5f);
                     MonoSingleton<RumbleManager>.Instance.SetVibration("rumble.fall_impact");
                 }
 
-                ___fallSpeed = 0f; ___gc.heavyFall = false;
-                if (___currentFallParticle != null) Object.Destroy(___currentFallParticle);
+                __instance.fallSpeed = 0f; __instance.gc.heavyFall = false;
+                if (__instance.currentFallParticle != null) Object.Destroy(__instance.currentFallParticle);
             }
 
-            if (!___gc.onGround && ___activated
+            if (!__instance.gc.onGround && __instance.activated
                 && MonoSingleton<InputManager>.Instance.InputSource.Slide.WasPerformedThisFrame
                 && !GameStateManager.Instance.PlayerInputLocked)
             {
-                if (___sliding) __instance.StopSlide();
+                if (__instance.sliding) __instance.StopSlide();
 
-                if (___boost)
+                if (__instance.boost)
                 {
-                    ___boostLeft = 0f;
-                    ___boost = false;
+                    __instance.boostLeft = 0f;
+                    __instance.boost = false;
                 }
 
                 RaycastHit val = default(RaycastHit);
-                if (___fallTime > 0.5f
-                    && !Physics.Raycast(___gc.transform.position + __instance.transform.up,
+                if (__instance.fallTime > 0.5f
+                    && !Physics.Raycast(__instance.gc.transform.position + __instance.transform.up,
                                         __instance.transform.up * -1f, out val, 3f,
-                                        (int)__instance.lmask) && !___gc.heavyFall)
+                                        (int)__instance.lmask) && !__instance.gc.heavyFall)
                 {
-                    ___stillHolding = true;
-                    ___rb.velocity = new Vector3(0f, -100f, 0f);
-                    ___falling = true;
-                    ___fallSpeed = -100f;
-                    ___gc.heavyFall = true;
-                    ___slamForce = 1f;
-                    if (___currentFallParticle != null)
-                        Object.Destroy(___currentFallParticle);
+                    __instance.stillHolding = true;
+                    __instance.rb.velocity = new Vector3(0f, -100f, 0f);
+                    __instance.falling = true;
+                    __instance.fallSpeed = -100f;
+                    __instance.gc.heavyFall = true;
+                    __instance.slamForce = 1f;
+                    if (__instance.currentFallParticle != null)
+                        Object.Destroy(__instance.currentFallParticle);
 
-                    ___currentFallParticle = Object.Instantiate(___fallParticle, __instance.transform);
+                    __instance.currentFallParticle = Object.Instantiate(__instance.fallParticle, __instance.transform);
                 }
             }
 
-            if (___gc.heavyFall && !___slamStorage)
-                ___rb.velocity = new Vector3(0f, -100f, 0f);
+            if (__instance.gc.heavyFall && !__instance.slamStorage)
+                __instance.rb.velocity = new Vector3(0f, -100f, 0f);
 
-            if (___gc.heavyFall || ___sliding) Physics.IgnoreLayerCollision(2, 12, true);
+            if (__instance.gc.heavyFall || __instance.sliding) Physics.IgnoreLayerCollision(2, 12, true);
             else Physics.IgnoreLayerCollision(2, 12, false);
 
-            if (!___slopeCheck.onGround
-                && ___slopeCheck.forcedOff <= 0
-                && !___jumping && !___boost)
+            if (!__instance.slopeCheck.onGround
+                && __instance.slopeCheck.forcedOff <= 0
+                && !__instance.jumping && !__instance.boost)
             {
-                float num = ___playerCollider.height / 2f - ___playerCollider.center.y;
+                float num = __instance.playerCollider.height / 2f - __instance.playerCollider.center.y;
                 RaycastHit val2 = default(RaycastHit);
-                if (___rb.velocity != Vector3.zero
-                    && Physics.Raycast(__instance.transform.position, __instance.transform.up * -1f, out val2, num + 1f, (int)___lmask))
+                if (__instance.rb.velocity != Vector3.zero
+                    && Physics.Raycast(__instance.transform.position, __instance.transform.up * -1f, out val2, num + 1f, (int)__instance.lmask))
                 {
                     Vector3 target = new Vector3(__instance.transform.position.x,
                                                  __instance.transform.position.y - ((RaycastHit)(val2)).distance + num,
                                                  __instance.transform.position.z);
                     __instance.transform.position = Vector3.MoveTowards(__instance.transform.position, target,
                                                                         ((RaycastHit)(val2)).distance * Time.deltaTime * 10f);
-                    if (___rb.velocity.y > 0f)
+                    if (__instance.rb.velocity.y > 0f)
                         __instance.rb.velocity = new Vector3(__instance.rb.velocity.x, 0f, __instance.rb.velocity.z);
                 }
             }
 
-            if (___gc.heavyFall)
+            if (__instance.gc.heavyFall)
             {
-                ___slamForce += Time.deltaTime * 5f;
+                __instance.slamForce += Time.deltaTime * 5f;
                 RaycastHit val3 = default(RaycastHit);
-                if (Physics.Raycast(___gc.transform.position + __instance.transform.up, __instance.transform.up * -1f, out val3, 5f, (int)___lmask)
-                                    || Physics.SphereCast(___gc.transform.position + __instance.transform.up, 1f, __instance.transform.up * -1f,
-                                       out val3, 5f, (int)___lmask))
+                if (Physics.Raycast(__instance.gc.transform.position + __instance.transform.up, __instance.transform.up * -1f, out val3, 5f, (int)__instance.lmask)
+                                    || Physics.SphereCast(__instance.gc.transform.position + __instance.transform.up, 1f, __instance.transform.up * -1f,
+                                       out val3, 5f, (int)__instance.lmask))
                 {
                     Breakable component = ((Component)(object)((RaycastHit)(val3)).collider).GetComponent<Breakable>();
                     if (component != null && component.weak && !component.precisionOnly)
                     {
-                        Object.Instantiate(___impactDust, ((RaycastHit)(val3)).point, Quaternion.identity);
+                        Object.Instantiate(__instance.impactDust, ((RaycastHit)(val3)).point, Quaternion.identity);
                         component.Break();
                     }
 
@@ -227,131 +199,132 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                 }
             }
 
-            if (___stillHolding && MonoSingleton<InputManager>.Instance.InputSource.Slide.WasCanceledThisFrame) ___stillHolding = false;
+            if (__instance.stillHolding && MonoSingleton<InputManager>.Instance.InputSource.Slide.WasCanceledThisFrame) __instance.stillHolding = false;
 
-            if (___activated)
+            if (__instance.activated)
             {
                 if (!GameStateManager.Instance.PlayerInputLocked && MonoSingleton<InputManager>.Instance.InputSource.Jump.WasPerformedThisFrame
-                    && (!___falling || ___gc.canJump || ___wc.CheckForEnemyCols()) && !___jumpCooldown)
+                    && (!__instance.falling || __instance.gc.canJump || __instance.wc.CheckForEnemyCols()) && !__instance.jumpCooldown)
                 {
-                    if (___gc.canJump || ___wc.CheckForEnemyCols())
+                    if (__instance.gc.canJump || __instance.wc.CheckForEnemyCols())
                     {
-                        ___currentWallJumps = 0;
-                        ___rocketJumps = 0;
-                        ___clingFade = 0f;
-                        ___rocketRides = 0;
+                        __instance.currentWallJumps = 0;
+                        __instance.rocketJumps = 0;
+                        __instance.clingFade = 0f;
+                        __instance.rocketRides = 0;
                     }
 
                     __instance.Jump();
                 }
 
-                if (!___gc.onGround && ___wc.onWall)
+                if (!__instance.gc.onGround && __instance.wc.onWall)
                 {
                     RaycastHit val4 = default(RaycastHit);
-                    if (Physics.Raycast(__instance.transform.position, ___movementDirection, out val4, 1f, (int)___lmask))
+                    if (Physics.Raycast(__instance.transform.position, __instance.movementDirection, out val4, 1f, (int)__instance.lmask))
                     {
-                        if (___rb.velocity.y < -1f && !___gc.heavyFall)
+                        if (__instance.rb.velocity.y < -1f && !__instance.gc.heavyFall)
                         {
-                            ___rb.velocity = (new Vector3(Mathf.Clamp(___rb.velocity.x, -1f, 1f), -2f * ___clingFade, Mathf.Clamp(___rb.velocity.z, -1f, 1f)));
-                            if (___scrapeParticle == null)
+                            __instance.rb.velocity = (new Vector3(Mathf.Clamp(__instance.rb.velocity.x, -1f, 1f), -2f * __instance.clingFade, Mathf.Clamp(__instance.rb.velocity.z, -1f, 1f)));
+                            if (__instance.scrapeParticle == null)
                             {
-                                ___scrapeParticle = Object.Instantiate(___scrapePrefab, ((RaycastHit)(val4)).point, Quaternion.identity);
+                                __instance.scrapeParticle = Object.Instantiate(__instance.scrapePrefab, ((RaycastHit)(val4)).point, Quaternion.identity);
                             }
 
-                            ___scrapeParticle.transform.position = new Vector3(((RaycastHit)(val4)).point.x, ((RaycastHit)(val4)).point.y + 1f, ((RaycastHit)(val4)).point.z);
-                            ___scrapeParticle.transform.forward = ((RaycastHit)(val4)).normal;
-                            ___clingFade = Mathf.MoveTowards(___clingFade, 50f, Time.deltaTime * 4f);
+                            __instance.scrapeParticle.transform.position = new Vector3(((RaycastHit)(val4)).point.x, ((RaycastHit)(val4)).point.y + 1f, ((RaycastHit)(val4)).point.z);
+                            __instance.scrapeParticle.transform.forward = ((RaycastHit)(val4)).normal;
+                            __instance.clingFade = Mathf.MoveTowards(__instance.clingFade, 50f, Time.deltaTime * 4f);
                         }
                     }
-                    else if (___scrapeParticle != null)
+                    else if (__instance.scrapeParticle != null)
                     {
-                        Object.Destroy(___scrapeParticle);
-                        ___scrapeParticle = null;
+                        Object.Destroy(__instance.scrapeParticle);
+                        __instance.scrapeParticle = null;
                     }
 
                     if (!GameStateManager.Instance.PlayerInputLocked && MonoSingleton<InputManager>.Instance.InputSource.Jump.WasPerformedThisFrame
-                        && !___jumpCooldown && ___currentWallJumps < 3 && (bool)___wc && ___wc.CheckForCols())
+                        && !__instance.jumpCooldown && __instance.currentWallJumps < 3 && (bool)__instance.wc && __instance.wc.CheckForCols())
                         Traverse.Create(__instance).Method("WallJump").GetValue();
                 }
-                else if (___scrapeParticle != null)
+                else if (__instance.scrapeParticle != null)
                 {
-                    Object.Destroy(___scrapeParticle);
-                    ___scrapeParticle = null;
+                    Object.Destroy(__instance.scrapeParticle);
+                    __instance.scrapeParticle = null;
                 }
             }
-            if (MonoSingleton<InputManager>.Instance.InputSource.Slide.WasPerformedThisFrame && ___gc.onGround && ___activated
-                && (!___slowMode || ___crouching) && !GameStateManager.Instance.PlayerInputLocked && !___sliding)
+            if (MonoSingleton<InputManager>.Instance.InputSource.Slide.WasPerformedThisFrame && __instance.gc.onGround && __instance.activated
+                && (!__instance.slowMode || __instance.crouching) && !GameStateManager.Instance.PlayerInputLocked && !__instance.sliding)
                 Traverse.Create(__instance).Method("StartSlide").GetValue();
 
             RaycastHit val5 = default(RaycastHit);
-            if (MonoSingleton<InputManager>.Instance.InputSource.Slide.WasPerformedThisFrame && !___gc.onGround && !___sliding && !___jumping
-                && ___activated && !___slowMode && !GameStateManager.Instance.PlayerInputLocked
-                && Physics.Raycast(___gc.transform.position + __instance.transform.up, __instance.transform.up * -1f, out val5, 2f, (int)___lmask))
+            if (MonoSingleton<InputManager>.Instance.InputSource.Slide.WasPerformedThisFrame && !__instance.gc.onGround && !__instance.sliding && !__instance.jumping
+                && __instance.activated && !__instance.slowMode && !GameStateManager.Instance.PlayerInputLocked
+                && Physics.Raycast(__instance.gc.transform.position + __instance.transform.up, __instance.transform.up * -1f, out val5, 2f, (int)__instance.lmask))
                 Traverse.Create(__instance).Method("StartSlide").GetValue();
-            if ((MonoSingleton<InputManager>.Instance.InputSource.Slide.WasCanceledThisFrame || (___slowMode && !___crouching)) && ___sliding) __instance.StopSlide();
+            if ((MonoSingleton<InputManager>.Instance.InputSource.Slide.WasCanceledThisFrame || (__instance.slowMode && !__instance.crouching)) && __instance.sliding) __instance.StopSlide();
 
-            if (___sliding && ___activated)
+            if (__instance.sliding && __instance.activated)
             {
-                ___standing = false;
-                ___slideLength += Time.deltaTime;
-                if (___cc.defaultPos.y != ___cc.originalPos.y - 0.625f)
+                __instance.standing = false;
+                __instance.slideLength += Time.deltaTime;
+                if (__instance.cc.defaultPos.y != __instance.cc.originalPos.y - 0.625f)
                 {
-                    Vector3 vector2 = new Vector3(___cc.originalPos.x, ___cc.originalPos.y - 0.625f, ___cc.originalPos.z);
-                    ___cc.defaultPos = Vector3.MoveTowards(___cc.defaultPos, vector2, ((___cc.defaultPos - vector2).magnitude + 0.5f) * Time.deltaTime * 20f);
+                    Vector3 vector2 = new Vector3(__instance.cc.originalPos.x, __instance.cc.originalPos.y - 0.625f, __instance.cc.originalPos.z);
+                    __instance.cc.defaultPos = Vector3.MoveTowards(__instance.cc.defaultPos, vector2, ((__instance.cc.defaultPos - vector2).magnitude + 0.5f) * Time.deltaTime * 20f);
                 }
 
-                if (___currentSlideParticle != null) ___currentSlideParticle.transform.position = __instance.transform.position + ___dodgeDirection * 10f;
+                if (__instance.currentSlideParticle != null) __instance.currentSlideParticle.transform.position = __instance.transform.position + __instance.dodgeDirection * 10f;
 
-                if (___slideSafety > 0f) ___slideSafety -= Time.deltaTime * 5f;
+                if (__instance.slideSafety > 0f) __instance.slideSafety -= Time.deltaTime * 5f;
 
-                if (___gc.onGround)
+                if (__instance.gc.onGround)
                 {
-                    ___slideScrape.transform.position = __instance.transform.position + ___dodgeDirection;
-                    ___cc.CameraShake(0.1f);
+                    __instance.slideScrape.transform.position = __instance.transform.position + __instance.dodgeDirection;
+                    __instance.cc.CameraShake(0.1f);
                 }
-                else ___slideScrape.transform.position = Vector3.one * 5000f;
+                else __instance.slideScrape.transform.position = Vector3.one * 5000f;
 
-                if (___rising)
+                if (__instance.rising)
                 {
-                    if (___cc.defaultPos != ___cc.originalPos - Vector3.up * 0.625f)
+                    if (__instance.cc.defaultPos != __instance.cc.originalPos - Vector3.up * 0.625f)
                     {
-                        ___cc.defaultPos = Vector3.MoveTowards(___cc.defaultPos, ___cc.originalPos,
-                                                               ((___cc.originalPos - ___cc.defaultPos).magnitude + 0.5f) * Time.deltaTime * 10f);
+                        __instance.cc.defaultPos =
+                            Vector3.MoveTowards(__instance.cc.defaultPos, __instance.cc.originalPos,
+                                                ((__instance.cc.originalPos - __instance.cc.defaultPos).magnitude + 0.5f) * Time.deltaTime * 10f);
                     }
-                    else ___rising = false;
+                    else __instance.rising = false;
                 }
             }
-            else if ((bool)___groundProperties && ___groundProperties.forceCrouch)
+            else if ((bool)__instance.groundProperties && __instance.groundProperties.forceCrouch)
             {
-                ___playerCollider.height = 1.25f;
-                ___crouching = true;
-                if (___standing)
+                __instance.playerCollider.height = 1.25f;
+                __instance.crouching = true;
+                if (__instance.standing)
                 {
-                    ___standing = false;
+                    __instance.standing = false;
                     __instance.transform.position = new Vector3(__instance.transform.position.x, __instance.transform.position.y - 1.125f, __instance.transform.position.z);
-                    ___gc.transform.localPosition = ___groundCheckPos + Vector3.up * 1.125f;
+                    __instance.gc.transform.localPosition = __instance.groundCheckPos + Vector3.up * 1.125f;
                 }
 
-                if (___cc.defaultPos != ___cc.originalPos - Vector3.up * 0.625f)
+                if (__instance.cc.defaultPos != __instance.cc.originalPos - Vector3.up * 0.625f)
                 {
-                    ___cc.defaultPos = Vector3.MoveTowards(___cc.defaultPos, ___cc.originalPos - Vector3.up * 0.625f,
-                                                           ((___cc.originalPos - Vector3.up * 0.625f - ___cc.defaultPos).magnitude + 0.5f) * Time.deltaTime * 10f);
+                    __instance.cc.defaultPos = Vector3.MoveTowards(__instance.cc.defaultPos, __instance.cc.originalPos - Vector3.up * 0.625f,
+                                                           ((__instance.cc.originalPos - Vector3.up * 0.625f - __instance.cc.defaultPos).magnitude + 0.5f) * Time.deltaTime * 10f);
                 }
             }
             else
             {
-                if (___activated)
+                if (__instance.activated)
                 {
-                    if (!___standing)
+                    if (!__instance.standing)
                     {
-                        if ((bool)(Object)(object)___playerCollider && ___playerCollider.height != 3.5f)
+                        if ((bool)(Object)(object)__instance.playerCollider && __instance.playerCollider.height != 3.5f)
                         {
-                            if (!Physics.Raycast(__instance.transform.position, Vector3.up, 2.25f, (int)___lmask, (QueryTriggerInteraction)1)
-                                && !Physics.SphereCast(new Ray(__instance.transform.position, Vector3.up), 0.5f, 2f, (int)___lmask, (QueryTriggerInteraction)1))
+                            if (!Physics.Raycast(__instance.transform.position, Vector3.up, 2.25f, (int)__instance.lmask, (QueryTriggerInteraction)1)
+                                && !Physics.SphereCast(new Ray(__instance.transform.position, Vector3.up), 0.5f, 2f, (int)__instance.lmask, (QueryTriggerInteraction)1))
                             {
-                                ___playerCollider.height = 3.5f;
-                                ___gc.transform.localPosition = ___groundCheckPos;
-                                if (Physics.Raycast(__instance.transform.position, Vector3.up * -1f, 2.25f, (int)___lmask, (QueryTriggerInteraction)1))
+                                __instance.playerCollider.height = 3.5f;
+                                __instance.gc.transform.localPosition = __instance.groundCheckPos;
+                                if (Physics.Raycast(__instance.transform.position, Vector3.up * -1f, 2.25f, (int)__instance.lmask, (QueryTriggerInteraction)1))
                                 {
                                     __instance.transform.position = new Vector3(__instance.transform.position.x,
                                                                                 __instance.transform.position.y + 1.125f,
@@ -362,165 +335,163 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                                     __instance.transform.position = new Vector3(__instance.transform.position.x,
                                                                                 __instance.transform.position.y - 0.625f,
                                                                                 __instance.transform.position.z);
-                                    ___cc.defaultPos = ___cc.originalPos;
-                                    ___standing = true;
+                                    __instance.cc.defaultPos = __instance.cc.originalPos;
+                                    __instance.standing = true;
                                 }
 
-                                if (___crouching)
+                                if (__instance.crouching)
                                 {
-                                    ___crouching = false;
-                                    ___slowMode = false;
+                                    __instance.crouching = false;
+                                    __instance.slowMode = false;
                                 }
                             }
                             else
                             {
-                                ___crouching = true;
-                                ___slowMode = true;
+                                __instance.crouching = true;
+                                __instance.slowMode = true;
                             }
                         }
-                        else if (___cc.defaultPos.y != ___cc.originalPos.y)
-                            ___cc.defaultPos = Vector3.MoveTowards(___cc.defaultPos, ___cc.originalPos,
-                                                                   (___cc.originalPos.y - ___cc.defaultPos.y + 0.5f) * Time.deltaTime * 10f);
-                        else ___standing = true;
+                        else if (__instance.cc.defaultPos.y != __instance.cc.originalPos.y)
+                            __instance.cc.defaultPos = Vector3.MoveTowards(__instance.cc.defaultPos, __instance.cc.originalPos,
+                                                                   (__instance.cc.originalPos.y - __instance.cc.defaultPos.y + 0.5f) * Time.deltaTime * 10f);
+                        else __instance.standing = true;
                     }
-                    else if (___rising)
+                    else if (__instance.rising)
                     {
-                        if (___cc.defaultPos != ___cc.originalPos)
-                            ___cc.defaultPos = Vector3.MoveTowards(___cc.defaultPos, ___cc.originalPos,
-                                                                   ((___cc.originalPos - ___cc.defaultPos).magnitude + 0.5f) * Time.deltaTime * 10f);
-                        else ___rising = false;
+                        if (__instance.cc.defaultPos != __instance.cc.originalPos)
+                            __instance.cc.defaultPos = Vector3.MoveTowards(__instance.cc.defaultPos, __instance.cc.originalPos,
+                                                                   ((__instance.cc.originalPos - __instance.cc.defaultPos).magnitude + 0.5f) * Time.deltaTime * 10f);
+                        else __instance.rising = false;
                     }
                 }
 
-                if (___currentSlideParticle != null) Object.Destroy(___currentSlideParticle);
+                if (__instance.currentSlideParticle != null) Object.Destroy(__instance.currentSlideParticle);
 
-                if (___slideScrape != null) Object.Destroy(___slideScrape);
+                if (__instance.slideScrape != null) Object.Destroy(__instance.slideScrape);
             }
 
-            if (___rising && Vector3.Distance(___cc.defaultPos, ___cc.originalPos) > 10f)
+            if (__instance.rising && Vector3.Distance(__instance.cc.defaultPos, __instance.cc.originalPos) > 10f)
             {
-                ___rising = false;
-                ___cc.defaultPos = ___cc.originalPos;
+                __instance.rising = false;
+                __instance.cc.defaultPos = __instance.cc.originalPos;
             }
 
             if (MonoSingleton<InputManager>.Instance.InputSource.Dodge.WasPerformedThisFrame
-                && ___activated && !___slowMode && !GameStateManager.Instance.PlayerInputLocked)
+                && __instance.activated && !__instance.slowMode && !GameStateManager.Instance.PlayerInputLocked)
             {
-                if (((bool)___groundProperties && !___groundProperties.canDash) || ___modNoDashSlide)
-                    if (___modNoDashSlide || !___groundProperties.silentDashFail)
-                        Object.Instantiate(___staminaFailSound);
-                    else if (___boostCharge >= 100f)
+                if (((bool)__instance.groundProperties && !__instance.groundProperties.canDash) || __instance.modNoDashSlide)
+                    if (__instance.modNoDashSlide || !__instance.groundProperties.silentDashFail)
+                        Object.Instantiate(__instance.staminaFailSound);
+                    else if (__instance.boostCharge >= 100f)
                     {
-                        if (___sliding) __instance.StopSlide();
+                        if (__instance.sliding) __instance.StopSlide();
 
-                        ___boostLeft = 100f;
-                        ___boost = true;
-                        ___dodgeDirection = ___movementDirection;
-                        if (___dodgeDirection == Vector3.zero) ___dodgeDirection = __instance.transform.forward;
+                        __instance.boostLeft = 100f;
+                        __instance.boost = true;
+                        __instance.dodgeDirection = __instance.movementDirection;
+                        if (__instance.dodgeDirection == Vector3.zero) __instance.dodgeDirection = __instance.transform.forward;
 
                         Quaternion identity = Quaternion.identity;
-                        identity.SetLookRotation(___dodgeDirection * -1f);
-                        Object.Instantiate(___dodgeParticle, __instance.transform.position + ___dodgeDirection * 10f, identity);
-                        if (!___asscon.majorEnabled || !___asscon.infiniteStamina)
-                            ___boostCharge -= 100f;
+                        identity.SetLookRotation(__instance.dodgeDirection * -1f);
+                        Object.Instantiate(__instance.dodgeParticle, __instance.transform.position + __instance.dodgeDirection * 10f, identity);
+                        if (!__instance.asscon.majorEnabled || !__instance.asscon.infiniteStamina)
+                            __instance.boostCharge -= 100f;
 
-                        if (___dodgeDirection == __instance.transform.forward) ___cc.dodgeDirection = 0;
-                        else if (___dodgeDirection == __instance.transform.forward * -1f) ___cc.dodgeDirection = 1;
-                        else ___cc.dodgeDirection = 2;
+                        if (__instance.dodgeDirection == __instance.transform.forward) __instance.cc.dodgeDirection = 0;
+                        else if (__instance.dodgeDirection == __instance.transform.forward * -1f) __instance.cc.dodgeDirection = 1;
+                        else __instance.cc.dodgeDirection = 2;
 
-                        ___aud.clip = ___dodgeSound;
-                        ___aud.volume = 1f;
-                        ___aud.pitch = 1f;
-                        ___aud.Play();
+                        __instance.aud.clip = __instance.dodgeSound;
+                        __instance.aud.volume = 1f;
+                        __instance.aud.pitch = 1f;
+                        __instance.aud.Play();
                         MonoSingleton<RumbleManager>.Instance.SetVibration("rumble.dash");
-                        if (___gc.heavyFall)
+                        if (__instance.gc.heavyFall)
                         {
-                            ___fallSpeed = 0f;
-                            ___gc.heavyFall = false;
-                            if (___currentFallParticle != null)
-                                Object.Destroy(___currentFallParticle);
+                            __instance.fallSpeed = 0f;
+                            __instance.gc.heavyFall = false;
+                            if (__instance.currentFallParticle != null)
+                                Object.Destroy(__instance.currentFallParticle);
                         }
                     }
-                    else Object.Instantiate(___staminaFailSound);
+                    else Object.Instantiate(__instance.staminaFailSound);
             }
 
-            if (!___walking && vector.sqrMagnitude > 0f && !___sliding && ___gc.onGround)
+            if (!__instance.walking && vector.sqrMagnitude > 0f && !__instance.sliding && __instance.gc.onGround)
             {
-                ___walking = true;
-                ___anim.SetBool("WalkF", true);
+                __instance.walking = true;
+                __instance.anim.SetBool("WalkF", true);
             }
-            else if ((___walking && Mathf.Approximately(vector.sqrMagnitude, 0f)) || !___gc.onGround || ___sliding)
+            else if ((__instance.walking && Mathf.Approximately(vector.sqrMagnitude, 0f)) || !__instance.gc.onGround || __instance.sliding)
             {
-                ___walking = false;
-                ___anim.SetBool("WalkF", false);
-            }
-
-            if (___hurting && ___hp > 0)
-            {
-                ___currentColor.a -= Time.deltaTime;
-                ___hurtScreen.color = ___currentColor;
-                if (___currentColor.a <= 0f) ___hurting = false;
+                __instance.walking = false;
+                __instance.anim.SetBool("WalkF", false);
             }
 
-            if (___boostCharge != 300f && !___sliding && !___slowMode)
+            if (__instance.hurting && __instance.hp > 0)
+            {
+                __instance.currentColor.a -= Time.deltaTime;
+                __instance.hurtScreen.color = __instance.currentColor;
+                if (__instance.currentColor.a <= 0f) __instance.hurting = false;
+            }
+
+            if (__instance.boostCharge != 300f && !__instance.sliding && !__instance.slowMode)
             {
                 float num2 = 1f;
-                if (___difficulty == 1) num2 = 1.5f;
-                else if (___difficulty == 0) num2 = 2f;
+                if (__instance.difficulty == 1) num2 = 1.5f;
+                else if (__instance.difficulty == 0) num2 = 2f;
 
-                ___boostCharge = Mathf.MoveTowards(___boostCharge, 300f, 70f * Time.deltaTime * num2);
+                __instance.boostCharge = Mathf.MoveTowards(__instance.boostCharge, 300f, 70f * Time.deltaTime * num2);
             }
 
-            Vector3 vector3 = ___hudOriginalPos - ___cc.transform.InverseTransformDirection(___rb.velocity) / 1000f;
-            float num3 = Vector3.Distance(vector3, ___screenHud.transform.localPosition);
-            ___screenHud.transform.localPosition = Vector3.MoveTowards(___screenHud.transform.localPosition, vector3, Time.deltaTime * 15f * num3);
-            Vector3 vector4 = Vector3.ClampMagnitude(___camOriginalPos - ___cc.transform.InverseTransformDirection(___rb.velocity) / 350f * -1f, 0.2f);
-            float num4 = Vector3.Distance(vector4, ___hudCam.transform.localPosition);
-            ___hudCam.transform.localPosition = Vector3.MoveTowards(___hudCam.transform.localPosition, vector4, Time.deltaTime * 25f * num4);
+            Vector3 vector3 = __instance.hudOriginalPos - __instance.cc.transform.InverseTransformDirection(__instance.rb.velocity) / 1000f;
+            float num3 = Vector3.Distance(vector3, __instance.screenHud.transform.localPosition);
+            __instance.screenHud.transform.localPosition = Vector3.MoveTowards(__instance.screenHud.transform.localPosition, vector3, Time.deltaTime * 15f * num3);
+            Vector3 vector4 = Vector3.ClampMagnitude(__instance.camOriginalPos - __instance.cc.transform.InverseTransformDirection(__instance.rb.velocity) / 350f * -1f, 0.2f);
+            float num4 = Vector3.Distance(vector4, __instance.hudCam.transform.localPosition);
+            __instance.hudCam.transform.localPosition = Vector3.MoveTowards(__instance.hudCam.transform.localPosition, vector4, Time.deltaTime * 25f * num4);
             int rankIndex = MonoSingleton<StyleHUD>.Instance.rankIndex;
-            if (rankIndex == 7 || ___difficulty <= 1)
+            if (rankIndex == 7 || __instance.difficulty <= 1)
             {
-                ___antiHp = 0f;
-                ___antiHpCooldown = 0f;
+                __instance.antiHp = 0f;
+                __instance.antiHpCooldown = 0f;
             }
-            else if (___antiHpCooldown > 0f)
+            else if (__instance.antiHpCooldown > 0f)
             {
-                if (rankIndex >= 4) ___antiHpCooldown = Mathf.MoveTowards(___antiHpCooldown, 0f, Time.deltaTime * (float)(rankIndex / 2));
-                else ___antiHpCooldown = Mathf.MoveTowards(___antiHpCooldown, 0f, Time.deltaTime);
+                if (rankIndex >= 4) __instance.antiHpCooldown = Mathf.MoveTowards(__instance.antiHpCooldown, 0f, Time.deltaTime * (float)(rankIndex / 2));
+                else __instance.antiHpCooldown = Mathf.MoveTowards(__instance.antiHpCooldown, 0f, Time.deltaTime);
             }
-            else if (___antiHp > 0f)
+            else if (__instance.antiHp > 0f)
             {
-                if (rankIndex >= 4) ___antiHp = Mathf.MoveTowards(___antiHp, 0f, Time.deltaTime * (float)rankIndex * 10f);
-                else ___antiHp = Mathf.MoveTowards(___antiHp, 0f, Time.deltaTime * 15f);
+                if (rankIndex >= 4) __instance.antiHp = Mathf.MoveTowards(__instance.antiHp, 0f, Time.deltaTime * (float)rankIndex * 10f);
+                else __instance.antiHp = Mathf.MoveTowards(__instance.antiHp, 0f, Time.deltaTime * 15f);
             }
 
-            if (!___gc.heavyFall && ___currentFallParticle != null) Object.Destroy(___currentFallParticle);
+            if (!__instance.gc.heavyFall && __instance.currentFallParticle != null) Object.Destroy(__instance.currentFallParticle);
 
             return false;
         }
 
-        [HarmonyPrefix] [HarmonyPatch("Dodge")] static bool Dash
-        (NewMovement __instance, ref bool ___hurting, ref float ___boostLeft, ref float ___preSlideSpeed, ref float ___preSlideDelay,
-         ref Vector3 ___movementDirection, ref Vector3 ___movementDirection2, ref bool ___slideEnding)
+        [HarmonyPrefix] [HarmonyPatch("Dodge")] static bool Dash (NewMovement __instance)
         {
             if (__instance.sliding)
             {
-                if (!___hurting && ___boostLeft <= 0f)
+                if (!__instance.hurting && __instance.boostLeft <= 0f)
                 {
                     __instance.gameObject.layer = 2;
                     __instance.exploded = false;
                 }
 
                 float num = 1f;
-                if (___preSlideSpeed > 1f)
+                if (__instance.preSlideSpeed > 1f)
                 {
-                    if (___preSlideSpeed > 3f) ___preSlideSpeed = 3f;
+                    if (__instance.preSlideSpeed > 3f) __instance.preSlideSpeed = 3f;
 
-                    num = ___preSlideSpeed;
+                    num = __instance.preSlideSpeed;
                     if (__instance.gc.onGround)
-                        ___preSlideSpeed -= Time.fixedDeltaTime * ___preSlideSpeed;
+                        __instance.preSlideSpeed -= Time.fixedDeltaTime * __instance.preSlideSpeed;
 
-                    ___preSlideDelay = 0f;
+                    __instance.preSlideDelay = 0f;
                 }
 
                 if (__instance.modNoDashSlide)
@@ -551,33 +522,33 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                     vector += vector2;
                 }
 
-                ___movementDirection = Vector3.ClampMagnitude(Input.VRInputVars.MoveVector.x * __instance.transform.right, 1f) * 5f;
+                __instance.movementDirection = Vector3.ClampMagnitude(Input.VRInputVars.MoveVector.x * __instance.transform.right, 1f) * 5f;
                 if (!MonoSingleton<HookArm>.Instance || !MonoSingleton<HookArm>.Instance.beingPulled)
-                    __instance.rb.velocity = vector + __instance.pushForce + ___movementDirection;
+                    __instance.rb.velocity = vector + __instance.pushForce + __instance.movementDirection;
                 else __instance.StopSlide();
 
                 return false;
             }
 
             float y = 0f;
-            if (___slideEnding) y = __instance.rb.velocity.y;
+            if (__instance.slideEnding) y = __instance.rb.velocity.y;
 
             float num2 = 2.75f;
-            ___movementDirection2 = new Vector3(__instance.dodgeDirection.x * __instance.walkSpeed * Time.deltaTime * num2,
+            __instance.movementDirection2 = new Vector3(__instance.dodgeDirection.x * __instance.walkSpeed * Time.deltaTime * num2,
                                                 y, __instance.dodgeDirection.z * __instance.walkSpeed * Time.deltaTime * num2);
-            if (!___slideEnding || (__instance.gc.onGround && !__instance.jumping))
-                __instance.rb.velocity = ___movementDirection2 * 3f;
+            if (!__instance.slideEnding || (__instance.gc.onGround && !__instance.jumping))
+                __instance.rb.velocity = __instance.movementDirection2 * 3f;
 
             __instance.gameObject.layer = 15;
-            ___boostLeft -= 4f;
-            if (___boostLeft <= 0f)
+            __instance.boostLeft -= 4f;
+            if (__instance.boostLeft <= 0f)
             {
                 __instance.boost = false;
-                if (!__instance.gc.onGround && !___slideEnding)
-                    __instance.rb.velocity = ___movementDirection2;
+                if (!__instance.gc.onGround && !__instance.slideEnding)
+                    __instance.rb.velocity = __instance.movementDirection2;
             }
 
-            ___slideEnding = false;
+            __instance.slideEnding = false;
 
             return false;
         }
