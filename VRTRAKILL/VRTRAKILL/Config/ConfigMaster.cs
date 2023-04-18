@@ -31,11 +31,11 @@ namespace Plugin.VRTRAKILL.Config
            /*if (Input.LegacyInput.Enabled)
             {*/
             ConfigJSON Config = ConfigJSON.Deserialize();
-            Input.LegacyInput LegacyInput = Config.LegacyInputs; ConvertJSONToKeys(LegacyInput);
+            Input.Keybinds Keybinds = Config.LegacyInputs; ConvertJSONToKeys(Keybinds);
           /*}*/
         }
 
-        private static void ConvertJSONToKeys(Input.LegacyInput Config)
+        private static void ConvertJSONToKeys(Input.Keybinds Config)
         {
             try
             {

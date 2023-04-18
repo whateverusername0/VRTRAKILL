@@ -177,7 +177,7 @@
     <Compile Include="Helpers\Libraries\WindowsInput\WindowsInputMessageDispatcher.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VRTRAKILL\Config\Input\LegacyInput.cs" />
+    <Compile Include="VRTRAKILL\Config\Input\Keybinds.cs" />
     <Compile Include="VRTRAKILL\UI\Patches\HUD.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\ArmsController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\DisableAutoaimRotation.cs" />

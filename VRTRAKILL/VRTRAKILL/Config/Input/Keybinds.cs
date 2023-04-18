@@ -3,10 +3,8 @@ using System.IO;
 
 namespace Plugin.VRTRAKILL.Config.Input
 {
-    internal class LegacyInput
+    internal class Keybinds
     {
-        [JsonProperty] public static bool Enabled = false; // placeholder
-
         public string WalkForwardKey => "W";
         public string WalkBackwardKey => "S";
         public string WalkLeftKey => "A";
