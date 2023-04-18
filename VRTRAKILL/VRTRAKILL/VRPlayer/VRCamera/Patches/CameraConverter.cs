@@ -12,7 +12,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
 
         [HarmonyPrefix] [HarmonyPatch(typeof(NewMovement), "Start")] static void Containerize(NewMovement __instance)
         {
-            Container = new GameObject("Main Camera Container");
+            Container = new GameObject("Main Camera Rig");
             Container.transform.parent = Vars.MainCamera.transform.parent;
             Container.transform.localPosition = Vector3.zero;
             Container.transform.localRotation = Vars.MainCamera.transform.rotation;
@@ -21,19 +21,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
 
             Vars.MainCamera.transform.parent = Container.transform;
         }
-        /* No snap turn because motion sickness should not be considered a problem, ESPECIALLY when playing ULTRAKILL.
-        [HarmonyPrefix] [HarmonyPatch(typeof(NewMovement), "Update")] static void SmoothTurn(NewMovement __instance)
-        {
-            // note: figure out how camera rotation gets reset, then fit it's rotation into vrcam ones 
-            // if smbdy reading this just restart the mission don't care about checkpoints
-            if (__instance.dead) return;
-            __instance.gameObject.transform.rotation =
-                Quaternion.Euler(__instance.transform.rotation.eulerAngles.x,
-                                 Vars.MainCamera.transform.rotation.eulerAngles.y,
-                                 __instance.transform.rotation.eulerAngles.z);
-
-            Container.transform.rotation = Quaternion.Euler(0f, Input.VRInputVars.TurnOffset, 0f);
-        } */
 
         [HarmonyPrefix] [HarmonyPatch(typeof(CameraController), "Start")] static void ConvertMainCamera(CameraController __instance)
         {
