@@ -217,6 +217,22 @@ namespace Valve.VR
             }
         }
         
+        public virtual SteamVR_Action_Boolean Punch
+        {
+            get
+            {
+                return SteamVR_Actions.default_Punch;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean ActivateCheatMenu
+        {
+            get
+            {
+                return SteamVR_Actions.default_ActivateCheatMenu;
+            }
+        }
+        
         public virtual SteamVR_Action_Vibration Haptic
         {
             get

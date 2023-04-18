@@ -115,6 +115,14 @@
       "type": "boolean"
     },
     {
+      "name": "/actions/default/in/Punch",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/ActivateCheatMenu",
+      "type": "boolean"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration",
       "requirement": "optional"
@@ -208,7 +216,14 @@
       "/actions/default/in/Slot9": "Weapon Slot 9",
       "/actions/default/in/Slot0": "Weapon Slot 0",
       "/actions/default/in/Whiplash": "Whiplash",
-      "/actions/default/in/AltShoot": "Alternative Shoot"
+      "/actions/default/in/AltShoot": "Alternative Shoot",
+      "/actions/default/in/Shoot": "Shoot",
+      "/actions/default/in/Movement": "Movement",
+      "/actions/default/in/Turn": "Turning",
+      "/actions/default/in/Jump": "Jump",
+      "/actions/default/in/Dash": "Dash",
+      "/actions/default/in/Punch": "Punch",
+      "/actions/default/in/ActivateCheatMenu": "Activate Cheat Menu"
     }
   ]
 }

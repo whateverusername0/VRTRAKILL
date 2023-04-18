@@ -67,6 +67,10 @@ namespace Valve.VR
         
         private static SteamVR_Action_Boolean p_default_Whiplash;
         
+        private static SteamVR_Action_Boolean p_default_Punch;
+        
+        private static SteamVR_Action_Boolean p_default_ActivateCheatMenu;
+        
         private static SteamVR_Action_Vibration p_default_Haptic;
         
         public static SteamVR_Action_Vector2 default_Movement
@@ -269,6 +273,22 @@ namespace Valve.VR
             }
         }
         
+        public static SteamVR_Action_Boolean default_Punch
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_Punch.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Boolean default_ActivateCheatMenu
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_ActivateCheatMenu.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
         public static SteamVR_Action_Vibration default_Haptic
         {
             get
@@ -305,6 +325,8 @@ namespace Valve.VR
                     SteamVR_Actions.default_Slot9,
                     SteamVR_Actions.default_Slot0,
                     SteamVR_Actions.default_Whiplash,
+                    SteamVR_Actions.default_Punch,
+                    SteamVR_Actions.default_ActivateCheatMenu,
                     SteamVR_Actions.default_Haptic};
             Valve.VR.SteamVR_Input.actionsIn = new Valve.VR.ISteamVR_Action_In[] {
                     SteamVR_Actions.default_Movement,
@@ -331,7 +353,9 @@ namespace Valve.VR
                     SteamVR_Actions.default_Slot8,
                     SteamVR_Actions.default_Slot9,
                     SteamVR_Actions.default_Slot0,
-                    SteamVR_Actions.default_Whiplash};
+                    SteamVR_Actions.default_Whiplash,
+                    SteamVR_Actions.default_Punch,
+                    SteamVR_Actions.default_ActivateCheatMenu};
             Valve.VR.SteamVR_Input.actionsOut = new Valve.VR.ISteamVR_Action_Out[] {
                     SteamVR_Actions.default_Haptic};
             Valve.VR.SteamVR_Input.actionsVibration = new Valve.VR.SteamVR_Action_Vibration[] {
@@ -359,7 +383,9 @@ namespace Valve.VR
                     SteamVR_Actions.default_Slot8,
                     SteamVR_Actions.default_Slot9,
                     SteamVR_Actions.default_Slot0,
-                    SteamVR_Actions.default_Whiplash};
+                    SteamVR_Actions.default_Whiplash,
+                    SteamVR_Actions.default_Punch,
+                    SteamVR_Actions.default_ActivateCheatMenu};
             Valve.VR.SteamVR_Input.actionsSingle = new Valve.VR.SteamVR_Action_Single[0];
             Valve.VR.SteamVR_Input.actionsVector2 = new Valve.VR.SteamVR_Action_Vector2[] {
                     SteamVR_Actions.default_Movement,
@@ -390,7 +416,9 @@ namespace Valve.VR
                     SteamVR_Actions.default_Slot8,
                     SteamVR_Actions.default_Slot9,
                     SteamVR_Actions.default_Slot0,
-                    SteamVR_Actions.default_Whiplash};
+                    SteamVR_Actions.default_Whiplash,
+                    SteamVR_Actions.default_Punch,
+                    SteamVR_Actions.default_ActivateCheatMenu};
         }
         
         private static void PreInitActions()
@@ -420,6 +448,8 @@ namespace Valve.VR
             SteamVR_Actions.p_default_Slot9 = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Slot9")));
             SteamVR_Actions.p_default_Slot0 = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Slot0")));
             SteamVR_Actions.p_default_Whiplash = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Whiplash")));
+            SteamVR_Actions.p_default_Punch = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Punch")));
+            SteamVR_Actions.p_default_ActivateCheatMenu = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/ActivateCheatMenu")));
             SteamVR_Actions.p_default_Haptic = ((SteamVR_Action_Vibration)(SteamVR_Action.Create<SteamVR_Action_Vibration>("/actions/default/out/Haptic")));
         }
     }
