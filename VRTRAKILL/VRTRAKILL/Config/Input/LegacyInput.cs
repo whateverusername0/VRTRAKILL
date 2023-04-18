@@ -5,7 +5,7 @@ namespace Plugin.VRTRAKILL.Config.Input
 {
     public class LegacyInput
     {
-        [JsonProperty] public static bool Enabled = true; // placeholder
+        [JsonProperty] public static bool Enabled = false; // placeholder
 
         public string WalkForwardKey => "W";
         public string WalkBackwardKey => "S";

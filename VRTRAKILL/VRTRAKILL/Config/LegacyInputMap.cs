@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Plugin.VRTRAKILL.Config
 {
-    internal class InputMap
+    internal class LegacyInputMap
     {
         public static readonly Dictionary<string, VirtualKeyCode> Keys = new Dictionary<string, VirtualKeyCode>
         {
