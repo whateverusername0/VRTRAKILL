@@ -4,7 +4,7 @@ using ULTRAKILL.Cheats;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 {
-    [HarmonyPatch] internal class FlightNoclipP
+    [HarmonyPatch] static class FlightNoclipP
     {
         [HarmonyPrefix] [HarmonyPatch(typeof(Flight), nameof(Flight.Update))] static bool FlightUpdate(Flight __instance)
         {

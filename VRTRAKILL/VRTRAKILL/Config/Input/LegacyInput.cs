@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Plugin.VRTRAKILL.Config.Input
 {
-    public class LegacyInput
+    internal class LegacyInput
     {
         [JsonProperty] public static bool Enabled = false; // placeholder
 

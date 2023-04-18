@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 {
-    [HarmonyPatch(typeof(PlatformerMovement))] internal class PlatformerMovementP
+    [HarmonyPatch(typeof(PlatformerMovement))] static class PlatformerMovementP
     {
         // change movement vector to vr one
         [HarmonyPrefix] [HarmonyPatch(nameof(PlatformerMovement.Update))] static bool Update(PlatformerMovement __instance)

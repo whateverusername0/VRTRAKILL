@@ -2,7 +2,7 @@
 
 namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 {
-    [HarmonyPatch(typeof(RotateToFaceFrustumTarget))] internal class DisableAutoaimRotation
+    [HarmonyPatch(typeof(RotateToFaceFrustumTarget))] static class DisableAutoaimRotation
     {
         [HarmonyPrefix] [HarmonyPatch(nameof(RotateToFaceFrustumTarget.Update))] static bool DisableRotation(RotateToFaceFrustumTarget __instance)
         {

@@ -3,7 +3,7 @@ using HarmonyLib;
 
 namespace Plugin.VRTRAKILL.UI.Patches
 {
-    [HarmonyPatch] internal class QOL
+    [HarmonyPatch] static class QOL
     {
         [HarmonyPrefix] [HarmonyPatch(typeof(CanvasController), "Awake")] static void RemoveEyeSore(CanvasController __instance)
         {

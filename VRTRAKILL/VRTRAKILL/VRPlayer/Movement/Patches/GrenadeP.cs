@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 {
     // Rocket riding patch - change movement vector to vr one
-    [HarmonyPatch(typeof(Grenade))] internal class GrenadeP
+    [HarmonyPatch(typeof(Grenade))] static class GrenadeP
     {
         [HarmonyPrefix] [HarmonyPatch(nameof(Grenade.LateUpdate))] static bool FixRocketRiding(Grenade __instance)
         {

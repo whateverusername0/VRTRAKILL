@@ -29,6 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
@@ -189,6 +190,7 @@
     <Compile Include="VRTRAKILL\VRPlayer\Movement\Patches\NewMovementP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Movement\Patches\GrenadeP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Movement\Patches\PlatformerMovementP.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\FixCameraOnRespawn.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\VRCameraController.cs" />
     <Compile Include="VRTRAKILL\Config\ConfigJSON.cs" />
     <Compile Include="VRTRAKILL\Config\ConfigMaster.cs" />
@@ -271,7 +273,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\plugins\VRTRAKILL\SteamVR_Actions.dll" />
-    <Content Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\Managed\Assembly-CSharp.dll" />
     <Content Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\Plugins\x86_64\AudioPluginOculusSpatializer.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -283,6 +284,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\Managed\" />
     <Folder Include="VRTRAKILL\VRPlayer\Arms\Feedbacker\" />
     <Folder Include="VRTRAKILL\VRPlayer\Arms\GrapplingHook\" />
     <Folder Include="VRTRAKILL\VRPlayer\Arms\Knuckleblaster\" />

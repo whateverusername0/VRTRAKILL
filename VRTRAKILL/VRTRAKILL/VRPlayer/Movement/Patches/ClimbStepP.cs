@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 {
     // ClimbStep fix (make you climb ladders like a real machine)
-    [HarmonyPatch(typeof(ClimbStep))] internal class ClimbStepP
+    [HarmonyPatch(typeof(ClimbStep))] static class ClimbStepP
     {
         [HarmonyPrefix] [HarmonyPatch(nameof(ClimbStep.FixedUpdate))]
         static bool FixedUpdate(ClimbStep __instance)

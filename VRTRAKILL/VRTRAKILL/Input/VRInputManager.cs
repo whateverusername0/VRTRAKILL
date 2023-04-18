@@ -3,16 +3,23 @@ using Valve.VR;
 using WindowsInput;
 using Plugin.VRTRAKILL.Config;
 using Plugin.VRTRAKILL.Config.Input;
+using System;
+using UnityEngine.InputSystem.LowLevel;
 
 namespace Plugin.VRTRAKILL.Input
 {
-    internal static class VRInputManager
+    static class VRInputManager
     {
         // Legacy Input System
         // Uses WindowsInput to simulate keypresses
         // To be replaced with hand system (either in 0.x or 1.x) // might not be replaced at all, because unity.inputsystem sucks ass
 
         private static bool
+            WalkForward = false,  WalkForwardState = false,
+            WalkBackward = false, WalkBackwardState = false,
+            WalkLeft = false,     WalkLeftState = false,
+            WalkRight = false,    WalkRightState = false,
+
             Jump = false,
             Dash = false,
             Slide = false;
@@ -87,7 +94,16 @@ namespace Plugin.VRTRAKILL.Input
         }
 
         private static void MovementH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
-        { VRInputVars.MoveVector = axis; }
+        {
+            VRInputVars.MoveVector = axis;
+
+            // Used for noclip and rocket riding
+            // For some reason does not affect regular walking
+            if (axis.y > 0 + VRSettings.Deadzone) WalkForwardState = true;  else WalkForwardState = false;
+            if (axis.y < 0 - VRSettings.Deadzone) WalkBackwardState = true; else WalkBackwardState = false;
+            if (axis.x > 0 + VRSettings.Deadzone) WalkLeftState = true;     else WalkLeftState = false;
+            if (axis.x < 0 - VRSettings.Deadzone) WalkRightState = true;    else WalkRightState = false;
+        }
         private static void TurnH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
         {
             if (axis.x > 0 + VRSettings.Deadzone) VRInputVars.TurnOffset += VRSettings.SmoothTurningSpeed * Time.deltaTime;
@@ -95,16 +111,16 @@ namespace Plugin.VRTRAKILL.Input
         }
 
         private static void JumpH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != Jump) { Jump = newState; InputManager.Instance.InputSource.Jump.Trigger(Jump, !Jump); } }
+        { if (newState != Jump) { Jump = newState; TriggerKey(ConfigMaster.Jump, Jump, !Jump); } }
         private static void SlideH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != Slide) { Slide = newState; InputManager.Instance.InputSource.Slide.Trigger(Slide, !Slide); } }
+        { if (newState != Slide) { Slide = newState; TriggerKey(ConfigMaster.Slide, Slide, !Slide); } }
         private static void DashH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != Dash) { Dash = newState; InputManager.Instance.InputSource.Dodge.Trigger(Dash, !Dash); } }
+        { if (newState != Dash) { Dash = newState; TriggerKey(ConfigMaster.Dash, Dash, !Dash); } }
 
         private static void LHShootH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != Punch) { Punch = newState; InputManager.Instance.InputSource.Punch.Trigger(Punch, !Punch); } }
         private static void LHAltShootH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != SwapHand) { SwapHand = newState; InputManager.Instance.InputSource.ChangeFist.Trigger(SwapHand, !SwapHand); } }
+        { if (newState != SwapHand) { SwapHand = newState; TriggerKey(ConfigMaster.SwapHand, SwapHand, !SwapHand); } }
 
         private static void RHShootH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != RHPrimaryFire) { RHPrimaryFire = newState; InputManager.Instance.InputSource.Fire1.Trigger(RHPrimaryFire, !RHPrimaryFire); } }
@@ -112,45 +128,43 @@ namespace Plugin.VRTRAKILL.Input
         { if (newState != RHAltFire) { RHAltFire = newState; InputManager.Instance.InputSource.Fire2.Trigger(RHAltFire, !RHAltFire); } }
         private static void IterateWeaponH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
         {
-            if (axis.y > 0 + VRSettings.Deadzone * 1.5f) NextWeapon = true; else NextWeapon = false;
-            if (axis.y < 0 - VRSettings.Deadzone * 1.5f) PreviousWeapon = true; else PreviousWeapon = false;
-
-            if (NextWeapon) InputManager.Instance.InputSource.NextWeapon.Trigger(NextWeapon, !NextWeapon);
-            if (PreviousWeapon) InputManager.Instance.InputSource.NextWeapon.Trigger(PreviousWeapon, !PreviousWeapon);
+            // crutch, wait for weapon wheel to come out
+            if (axis.y > 0 + VRSettings.Deadzone * 1.5f) MouseScroll(-1);
+            if (axis.y < 0 - VRSettings.Deadzone * 1.5f) MouseScroll(1);
         }
         private static void ChangeWeaponVariationH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != ChangeWeaponVariation) { ChangeWeaponVariation = newState; InputManager.Instance.InputSource.ChangeVariation.Trigger(ChangeWeaponVariation, !ChangeWeaponVariation); } }
+        { if (newState != ChangeWeaponVariation) { ChangeWeaponVariation = newState; TriggerKey(ConfigMaster.ChangeWeaponVariation, ChangeWeaponVariation, !ChangeWeaponVariation); } }
         private static void OpenWeaponWheelH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         {
             // waiting for the new wheel to come out... for now it just triggers the last gun used
-            if (newState != OpenWeaponWheel) { OpenWeaponWheel = newState; InputManager.Instance.InputSource.LastWeapon.Trigger(OpenWeaponWheel, !OpenWeaponWheel); }
+            if (newState != OpenWeaponWheel) { OpenWeaponWheel = newState; TriggerKey(ConfigMaster.LastWeaponUsed, OpenWeaponWheel, !OpenWeaponWheel); }
         }
 
         private static void SwapHandH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != SwapHand) { SwapHand = newState; InputManager.Instance.InputSource.ChangeFist.Trigger(SwapHand, !SwapHand); } }
+        { if (newState != SwapHand) { SwapHand = newState; TriggerKey(ConfigMaster.SwapHand, SwapHand, !SwapHand); } }
         private static void WhiplashH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != Whiplash) { Whiplash = newState; InputManager.Instance.InputSource.Hook.Trigger(Whiplash, !Whiplash); } }
+        { if (newState != Whiplash) { Whiplash = newState; TriggerKey(ConfigMaster.Whiplash, Whiplash, !Whiplash); } }
 
         private static void Slot0H(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != Slot0) { Slot0 = newState; InputManager.Instance.InputSource.Slot0.Trigger(Slot0, !Slot0); } }
+        { if (newState != Slot0) { Slot0 = newState; TriggerKey(ConfigMaster.Slot0, Slot0, !Slot0); } }
         private static void Slot1H(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != Slot1) { Slot1 = newState; InputManager.Instance.InputSource.Slot1.Trigger(Slot1, !Slot1); } }
+        { if (newState != Slot1) { Slot1 = newState; TriggerKey(ConfigMaster.Slot1, Slot1, !Slot1); } }
         private static void Slot2H(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != Slot2) { Slot2 = newState; InputManager.Instance.InputSource.Slot2.Trigger(Slot2, !Slot2); } }
+        { if (newState != Slot2) { Slot2 = newState; TriggerKey(ConfigMaster.Slot2, Slot2, !Slot2); } }
         private static void Slot3H(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != Slot3) { Slot3 = newState; InputManager.Instance.InputSource.Slot3.Trigger(Slot3, !Slot3); } }
+        { if (newState != Slot3) { Slot3 = newState; TriggerKey(ConfigMaster.Slot3, Slot3, !Slot3); } }
         private static void Slot4H(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != Slot4) { Slot4 = newState; InputManager.Instance.InputSource.Slot4.Trigger(Slot4, !Slot4); } }
+        { if (newState != Slot4) { Slot4 = newState; TriggerKey(ConfigMaster.Slot4, Slot4, !Slot4); } }
         private static void Slot5H(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != Slot5) { Slot5 = newState; InputManager.Instance.InputSource.Slot5.Trigger(Slot5, !Slot5); } }
+        { if (newState != Slot5) { Slot5 = newState; TriggerKey(ConfigMaster.Slot5, Slot5, !Slot5); } }
         private static void Slot6H(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != Slot6) { Slot6 = newState; InputManager.Instance.InputSource.Slot6.Trigger(Slot6, !Slot6); } }
+        { if (newState != Slot6) { Slot6 = newState; TriggerKey(ConfigMaster.Slot6, Slot6, !Slot6); } }
         private static void Slot7H(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != Slot7) { Slot7 = newState; InputManager.Instance.InputSource.Slot7.Trigger(Slot7, !Slot7); } }
+        { if (newState != Slot7) { Slot7 = newState; TriggerKey(ConfigMaster.Slot7, Slot7, !Slot7); } }
         private static void Slot8H(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != Slot8) { Slot8 = newState; InputManager.Instance.InputSource.Slot8.Trigger(Slot8, !Slot8); } }
+        { if (newState != Slot8) { Slot8 = newState; TriggerKey(ConfigMaster.Slot8, Slot8, !Slot8); } }
         private static void Slot9H(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != Slot9) { Slot9 = newState; InputManager.Instance.InputSource.Slot9.Trigger(Slot9, !Slot9); } }
+        { if (newState != Slot9) { Slot9 = newState; TriggerKey(ConfigMaster.Slot9, Slot9, !Slot9); } }
 
         private static void EscapeH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != Escape) { Escape = newState; TriggerKey(ConfigMaster.Escape, Escape, !Escape); } }

@@ -5,10 +5,10 @@ using UnityEngine;
 namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 {
     // big ass "rewrite" (kind of) of the NewMovement class to support vr inputs
-    [HarmonyPatch(typeof(NewMovement))] internal class NewMovementP
+    [HarmonyPatch(typeof(NewMovement))] static class NewMovementP
     {
         // those private properties is why we cant have nice things
-        [HarmonyPrefix] [HarmonyPatch("Update")] static bool Update(NewMovement __instance)
+        [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Update))] static bool Update(NewMovement __instance)
         {
             Vector2 vector = Vector2.zero;
             if (__instance.activated)
@@ -472,7 +472,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
             return false;
         }
 
-        [HarmonyPrefix] [HarmonyPatch("Dodge")] static bool Dash (NewMovement __instance)
+        [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Dodge))] static bool Dash (NewMovement __instance)
         {
             if (__instance.sliding)
             {

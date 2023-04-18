@@ -4,7 +4,7 @@ using HarmonyLib;
 namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 {
     // Removes hands from revolver & shotgun
-    [HarmonyPatch] internal class RemoveHands
+    [HarmonyPatch] static class RemoveHands
     {
         [HarmonyPrefix] [HarmonyPatch(typeof(Revolver), nameof(Revolver.Start))] static void RemoveRevolverHand(Revolver __instance)
         {

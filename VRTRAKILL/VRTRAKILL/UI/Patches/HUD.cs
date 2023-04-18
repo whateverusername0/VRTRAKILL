@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Plugin.VRTRAKILL.UI.Patches
 {
-    [HarmonyPatch(typeof(HUDPos))] internal class HUD
+    [HarmonyPatch(typeof(HUDPos))] static class HUD
     {
         [HarmonyPrefix] [HarmonyPatch("Start")] static void FixPos(HUDPos __instance)
         {

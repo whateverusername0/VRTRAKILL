@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Plugin.VRTRAKILL.WeaponWheelie.Patches
 {
-    [HarmonyPatch(typeof(WeaponWheel))] internal class LockTurnWhenActive
+    [HarmonyPatch(typeof(WeaponWheel))] static class LockTurnWhenActive
     {
 
     }

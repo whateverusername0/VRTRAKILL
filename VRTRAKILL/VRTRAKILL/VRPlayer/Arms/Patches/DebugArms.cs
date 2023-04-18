@@ -5,7 +5,7 @@ using Valve.VR;
 namespace Plugin.VRTRAKILL.VRPlayer.Arms
 {
     // note: remove this when time comes
-    [HarmonyPatch] internal class DebugArms
+    [HarmonyPatch] static class DebugArms
     {
         [HarmonyPrefix] [HarmonyPatch(typeof(CameraController), "Start")] static void AddPlaceholderHands(CameraController __instance)
         {
