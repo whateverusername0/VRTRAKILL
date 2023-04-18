@@ -6,8 +6,8 @@ namespace Plugin.VRTRAKILL
     {
         public static GameObject VRCameraContainer
         {
-            get { return VRCamera.Patches.CameraConverter.Container; }
-            set { VRCamera.Patches.CameraConverter.Container = value; }
+            get { return VRPlayer.VRCamera.Patches.CameraConverter.Container; }
+            set { VRPlayer.VRCamera.Patches.CameraConverter.Container = value; }
         }
         private static Camera _MainCamera; public static Camera MainCamera
         {
