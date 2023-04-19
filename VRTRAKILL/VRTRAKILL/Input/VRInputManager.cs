@@ -3,23 +3,12 @@ using Valve.VR;
 using WindowsInput;
 using Plugin.VRTRAKILL.Config;
 using Plugin.VRTRAKILL.Config.Input;
-using System;
-using UnityEngine.InputSystem.LowLevel;
 
 namespace Plugin.VRTRAKILL.Input
 {
     static class VRInputManager
     {
-        // Legacy Input System
-        // Uses WindowsInput to simulate keypresses
-        // To be replaced with hand system (either in 0.x or 1.x) // might not be replaced at all, because unity.inputsystem sucks ass
-
         private static bool
-            WalkForward = false,  WalkForwardState = false,
-            WalkBackward = false, WalkBackwardState = false,
-            WalkLeft = false,     WalkLeftState = false,
-            WalkRight = false,    WalkRightState = false,
-
             Jump = false,
             Dash = false,
             Slide = false;
@@ -28,7 +17,6 @@ namespace Plugin.VRTRAKILL.Input
             RHPrimaryFire = false,
             RHAltFire = false,
             ChangeWeaponVariation = false,
-            NextWeapon = false, PreviousWeapon = false,
             OpenWeaponWheel = false;
 
         private static bool
@@ -74,36 +62,14 @@ namespace Plugin.VRTRAKILL.Input
             SteamVR_Actions._default.Slot8.AddOnUpdateListener(Slot8H, SteamVR_Input_Sources.Any);
             SteamVR_Actions._default.Slot9.AddOnUpdateListener(Slot9H, SteamVR_Input_Sources.Any);
 
-            // Hands
-            SteamVR_Actions._default.LHP.AddOnUpdateListener(SteamVR_Input_Sources.Any, LeftHandPoseH);
-            SteamVR_Actions._default.RHP.AddOnUpdateListener(SteamVR_Input_Sources.Any, RightHandPoseH);
-
             SteamVR_Actions._default.SwapHand.AddOnUpdateListener(SwapHandH, SteamVR_Input_Sources.Any);
             SteamVR_Actions._default.Whiplash.AddOnUpdateListener(WhiplashH, SteamVR_Input_Sources.Any);
 
             SteamVR_Actions._default.Escape.AddOnUpdateListener(EscapeH, SteamVR_Input_Sources.Any);
         }
 
-        private static void LeftHandPoseH(SteamVR_Action_Pose fromAction, SteamVR_Input_Sources fromSource)
-        {
-            // idk do something (lol)
-        }
-        private static void RightHandPoseH(SteamVR_Action_Pose fromAction, SteamVR_Input_Sources fromSource)
-        {
-            // idk do something (lol)
-        }
-
         private static void MovementH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
-        {
-            VRInputVars.MoveVector = axis;
-
-            // Used for noclip and rocket riding
-            // For some reason does not affect regular walking
-            if (axis.y > 0 + VRSettings.Deadzone) WalkForwardState = true;  else WalkForwardState = false;
-            if (axis.y < 0 - VRSettings.Deadzone) WalkBackwardState = true; else WalkBackwardState = false;
-            if (axis.x > 0 + VRSettings.Deadzone) WalkLeftState = true;     else WalkLeftState = false;
-            if (axis.x < 0 - VRSettings.Deadzone) WalkRightState = true;    else WalkRightState = false;
-        }
+        { VRInputVars.MoveVector = axis; }
         private static void TurnH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
         {
             if (axis.x > 0 + VRSettings.Deadzone) VRInputVars.TurnOffset += VRSettings.SmoothTurningSpeed * Time.deltaTime;
