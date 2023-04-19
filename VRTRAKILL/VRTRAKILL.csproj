@@ -183,7 +183,6 @@
     <Compile Include="VRTRAKILL\VRPlayer\Arms\RightArmController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\LeftArmController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\DisableAutoaimRotation.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\RemoveHands.cs" />
     <Compile Include="VRTRAKILL\Input\VRInputManager.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\RemoveHands.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Movement\Patches\ClimbStepP.cs" />
