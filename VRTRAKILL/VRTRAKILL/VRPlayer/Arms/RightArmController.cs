@@ -2,7 +2,7 @@
 
 namespace Plugin.VRTRAKILL.VRPlayer.Arms
 {
-    class ArmsController : MonoBehaviour
+    class RightArmController : MonoBehaviour
     {
 
     }
