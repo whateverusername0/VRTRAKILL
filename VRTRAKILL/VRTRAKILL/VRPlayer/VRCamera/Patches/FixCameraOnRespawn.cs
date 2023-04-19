@@ -1,5 +1,5 @@
 ﻿using HarmonyLib;
-using System;
+using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
 {
@@ -7,7 +7,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
     {
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Respawn))] static void SetPlayerRotation(NewMovement __instance)
         {
-            // HOW :(
+            CameraConverter.Container.transform.localPosition = Vector3.zero;
+            CameraConverter.Container.transform.localRotation = Vars.MainCamera.transform.rotation;
+
+            __instance.transform.localRotation = CameraConverter.Container.transform.localRotation;
         }
     }
 }
