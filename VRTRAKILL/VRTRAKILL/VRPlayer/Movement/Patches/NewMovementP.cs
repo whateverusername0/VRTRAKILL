@@ -7,7 +7,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
     // big ass "rewrite" (kind of) of the NewMovement class to support vr inputs
     [HarmonyPatch(typeof(NewMovement))] static class NewMovementP
     {
-        // those private properties is why we cant have nice things
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Update))] static bool Update(NewMovement __instance)
         {
             Vector2 vector = Vector2.zero;
@@ -376,45 +375,47 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                 __instance.cc.defaultPos = __instance.cc.originalPos;
             }
 
+            // Dash
             if (MonoSingleton<InputManager>.Instance.InputSource.Dodge.WasPerformedThisFrame
                 && __instance.activated && !__instance.slowMode && !GameStateManager.Instance.PlayerInputLocked)
             {
                 if (((bool)__instance.groundProperties && !__instance.groundProperties.canDash) || __instance.modNoDashSlide)
-                    if (__instance.modNoDashSlide || !__instance.groundProperties.silentDashFail)
-                        Object.Instantiate(__instance.staminaFailSound);
-                    else if (__instance.boostCharge >= 100f)
+                    if (__instance.modNoDashSlide || !__instance.groundProperties.silentDashFail) Object.Instantiate(__instance.staminaFailSound);
+                /* else */ if (__instance.boostCharge >= 100f)
+                {
+                    if (__instance.sliding) __instance.StopSlide();
+
+                    __instance.boostLeft = 100f;
+                    __instance.boost = true;
+                    __instance.dodgeDirection = __instance.movementDirection;
+
+                    if (__instance.dodgeDirection == Vector3.zero) __instance.dodgeDirection = __instance.transform.forward;
+
+                    Quaternion identity = Quaternion.identity;
+                    identity.SetLookRotation(__instance.dodgeDirection * -1f);
+                    Object.Instantiate(__instance.dodgeParticle, __instance.transform.position + __instance.dodgeDirection * 10f, identity);
+
+                    if (!__instance.asscon.majorEnabled || !__instance.asscon.infiniteStamina) __instance.boostCharge -= 100f;
+
+                    if (__instance.dodgeDirection == __instance.transform.forward) __instance.cc.dodgeDirection = 0;
+                    else if (__instance.dodgeDirection == __instance.transform.forward * -1f) __instance.cc.dodgeDirection = 1;
+                    else __instance.cc.dodgeDirection = 2;
+
+                    __instance.aud.clip = __instance.dodgeSound;
+                    __instance.aud.volume = 1f;
+                    __instance.aud.pitch = 1f;
+                    __instance.aud.Play();
+
+                    MonoSingleton<RumbleManager>.Instance.SetVibration("rumble.dash");
+                    if (__instance.gc.heavyFall)
                     {
-                        if (__instance.sliding) __instance.StopSlide();
-
-                        __instance.boostLeft = 100f;
-                        __instance.boost = true;
-                        __instance.dodgeDirection = __instance.movementDirection;
-                        if (__instance.dodgeDirection == Vector3.zero) __instance.dodgeDirection = __instance.transform.forward;
-
-                        Quaternion identity = Quaternion.identity;
-                        identity.SetLookRotation(__instance.dodgeDirection * -1f);
-                        Object.Instantiate(__instance.dodgeParticle, __instance.transform.position + __instance.dodgeDirection * 10f, identity);
-                        if (!__instance.asscon.majorEnabled || !__instance.asscon.infiniteStamina)
-                            __instance.boostCharge -= 100f;
-
-                        if (__instance.dodgeDirection == __instance.transform.forward) __instance.cc.dodgeDirection = 0;
-                        else if (__instance.dodgeDirection == __instance.transform.forward * -1f) __instance.cc.dodgeDirection = 1;
-                        else __instance.cc.dodgeDirection = 2;
-
-                        __instance.aud.clip = __instance.dodgeSound;
-                        __instance.aud.volume = 1f;
-                        __instance.aud.pitch = 1f;
-                        __instance.aud.Play();
-                        MonoSingleton<RumbleManager>.Instance.SetVibration("rumble.dash");
-                        if (__instance.gc.heavyFall)
-                        {
-                            __instance.fallSpeed = 0f;
-                            __instance.gc.heavyFall = false;
-                            if (__instance.currentFallParticle != null)
-                                Object.Destroy(__instance.currentFallParticle);
-                        }
+                        __instance.fallSpeed = 0f;
+                        __instance.gc.heavyFall = false;
+                        if (__instance.currentFallParticle != null)
+                            Object.Destroy(__instance.currentFallParticle);
                     }
-                    else Object.Instantiate(__instance.staminaFailSound);
+                }
+                else Object.Instantiate(__instance.staminaFailSound);
             }
 
             if (!__instance.walking && vector.sqrMagnitude > 0f && !__instance.sliding && __instance.gc.onGround)

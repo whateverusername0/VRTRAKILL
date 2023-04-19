@@ -72,12 +72,12 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                 else __instance.currentSlideScrape.transform.position = Vector3.one * 5000f;
             }
 
+            // Dash fix
             if (MonoSingleton<InputManager>.Instance.InputSource.Dodge.WasPerformedThisFrame && __instance.activated)
             {
                 if (__instance.groundProperties && !__instance.groundProperties.canDash)
-                    if (!__instance.groundProperties.silentDashFail)
-                        Object.Instantiate<GameObject>(__instance.staminaFailSound);
-                else if (__instance.boostCharge >= 100f)
+                    if (!__instance.groundProperties.silentDashFail) Object.Instantiate<GameObject>(__instance.staminaFailSound);
+                /* else */ if (__instance.boostCharge >= 100f)
                 {
                     if (__instance.sliding) __instance.StopSlide();
                     __instance.boostLeft = 100f;
