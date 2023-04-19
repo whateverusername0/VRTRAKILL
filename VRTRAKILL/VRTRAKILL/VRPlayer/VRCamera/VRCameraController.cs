@@ -4,13 +4,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
 {
     internal class VRCameraController : MonoBehaviour
     {
-        // Camera getting posessed fix (also CLEAAAAAAAAN)
-        private void Start()
-        {
-            NewMovement.Instance.gameObject.transform.eulerAngles = this.gameObject.transform.eulerAngles;
-            NewMovement.Instance.gameObject.transform.forward = this.gameObject.transform.forward;
-        }
-
         private void Update()
         {
             // Smooth turn
