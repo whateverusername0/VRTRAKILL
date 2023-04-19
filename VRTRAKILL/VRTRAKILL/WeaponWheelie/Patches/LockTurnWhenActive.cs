@@ -5,6 +5,6 @@ namespace Plugin.VRTRAKILL.WeaponWheelie.Patches
 {
     [HarmonyPatch(typeof(WeaponWheel))] static class LockTurnWhenActive
     {
-
+        // placeholder
     }
 }
