@@ -81,22 +81,6 @@ namespace Valve.VR
             }
         }
         
-        public virtual SteamVR_Action_Pose LHP
-        {
-            get
-            {
-                return SteamVR_Actions.default_LHP;
-            }
-        }
-        
-        public virtual SteamVR_Action_Pose RHP
-        {
-            get
-            {
-                return SteamVR_Actions.default_RHP;
-            }
-        }
-        
         public virtual SteamVR_Action_Boolean OpenWeaponWheel
         {
             get
@@ -230,6 +214,22 @@ namespace Valve.VR
             get
             {
                 return SteamVR_Actions.default_ActivateCheatMenu;
+            }
+        }
+        
+        public virtual SteamVR_Action_Pose LeftPose
+        {
+            get
+            {
+                return SteamVR_Actions.default_LeftPose;
+            }
+        }
+        
+        public virtual SteamVR_Action_Pose RightPose
+        {
+            get
+            {
+                return SteamVR_Actions.default_RightPose;
             }
         }
         

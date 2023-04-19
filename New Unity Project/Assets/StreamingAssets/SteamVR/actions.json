@@ -34,16 +34,6 @@
       "type": "boolean"
     },
     {
-      "name": "/actions/default/in/LHP",
-      "type": "pose",
-      "requirement": "mandatory"
-    },
-    {
-      "name": "/actions/default/in/RHP",
-      "type": "pose",
-      "requirement": "mandatory"
-    },
-    {
       "name": "/actions/default/in/OpenWeaponWheel",
       "type": "boolean"
     },
@@ -123,6 +113,16 @@
       "type": "boolean"
     },
     {
+      "name": "/actions/default/in/LeftPose",
+      "type": "pose",
+      "requirement": "mandatory"
+    },
+    {
+      "name": "/actions/default/in/RightPose",
+      "type": "pose",
+      "requirement": "mandatory"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration",
       "requirement": "optional"
@@ -198,8 +198,6 @@
       "/actions/Default/in/Slide": "Slide",
       "/actions/Default/in/Dash": "Dash",
       "/actions/default/in/Escape": "Escape (Pause, etc.)",
-      "/actions/default/in/LHP": "Left Hand Pose",
-      "/actions/default/in/RHP": "Right Hand Pose",
       "/actions/default/in/Slide": "Slide (or Slam)",
       "/actions/default/in/OpenWeaponWheel": "Open Weapon Wheel",
       "/actions/default/in/ChangeWeaponVariation": "Change Weapon Variation",
