@@ -14,7 +14,7 @@ namespace Plugin.VRTRAKILL.UI
 
         private Vector3 LastCamFwd = Vector3.zero;
 
-        private const float Distance = 69f;
+        private const float Distance = 72f;
         private static float Scale = 0.0625f;
 
         public void UpdatePos()
