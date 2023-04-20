@@ -22,7 +22,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
             Vars.MainCamera.transform.parent = Container.transform;
         }
 
-        [HarmonyPrefix] [HarmonyPatch(typeof(CameraController), "Start")] static void ConvertMainCamera(CameraController __instance)
+        [HarmonyPrefix] [HarmonyPatch(typeof(CameraController), "Start")] static void ConvertCameras(CameraController __instance)
         {
             // MainCamera
             while (__instance.cam == null) {}
@@ -31,10 +31,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
             __instance.cam.depth++;
 
             __instance.cam.stereoTargetEye = StereoTargetEyeMask.Both;
+            __instance.hudCamera.stereoTargetEye = StereoTargetEyeMask.Both;
             XRSettings.gameViewRenderMode = GameViewRenderMode.RightEye;
 
             if (PostProcessV2_Handler.Instance != null)
-                Traverse.Create(PostProcessV2_Handler.Instance).Field("mainCam").SetValue(__instance.cam);
+                PostProcessV2_Handler.Instance.mainCam = __instance.cam;
 
             GameObject.Find("Virtual Camera").SetActive(false);
         }
