@@ -15,7 +15,16 @@ namespace Plugin.VRTRAKILL.UI.Patches
                 "UnderwaterOverlay",
             };
             foreach (string ScreenEffect in ScreenEffects)
-                try { __instance.gameObject.transform.Find(ScreenEffect).transform.localScale *= 5; } catch { continue; }
+                try
+                {
+                    Transform T = __instance.gameObject.transform.Find(ScreenEffect);
+                    T.transform.localScale *= 5;
+                    for (int i = 0; i < T.childCount; i++)
+                    {
+                        T.GetChild(i).transform.localScale /= 5;
+                    }
+                }
+                catch { continue; }
 
             Object.FindObjectOfType<FlashImage>().transform.localScale *= 5;
 

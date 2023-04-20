@@ -31,7 +31,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
             __instance.cam.depth++;
 
             __instance.cam.stereoTargetEye = StereoTargetEyeMask.Both;
-            __instance.hudCamera.stereoTargetEye = StereoTargetEyeMask.Both;
             XRSettings.gameViewRenderMode = GameViewRenderMode.RightEye;
 
             if (PostProcessV2_Handler.Instance != null)
@@ -39,9 +38,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
 
             GameObject.Find("Virtual Camera").SetActive(false);
         }
-        [HarmonyPostfix] [HarmonyPatch(typeof(CameraController), "Start")] static void MainCameraTweaks(CameraController __instance)
+        [HarmonyPrefix] [HarmonyPatch(typeof(CameraController), nameof(CameraController.Update))] static bool DisableCC(CameraController __instance)
         {
-            __instance.enabled = false; // disable mouselook
+            // do nothing
+            return false;
         }
     }
 }

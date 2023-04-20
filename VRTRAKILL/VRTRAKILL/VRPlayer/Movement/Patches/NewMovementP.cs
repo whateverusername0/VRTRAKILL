@@ -10,7 +10,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
     {
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Start))] static void Start(NewMovement __instance)
         {
-            __instance.pushForce = __instance.pushForce / 2;
             __instance.jumpPower = __instance.jumpPower / 2;
             __instance.wallJumpPower = __instance.wallJumpPower / 2;
         }
