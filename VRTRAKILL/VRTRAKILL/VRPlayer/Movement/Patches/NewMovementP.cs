@@ -1,12 +1,20 @@
 ﻿using HarmonyLib;
 using UnityEngine.InputSystem;
 using UnityEngine;
+using ULTRAKILL.Cheats;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 {
     // big ass "rewrite" (kind of) of the NewMovement class to support vr inputs
     [HarmonyPatch(typeof(NewMovement))] static class NewMovementP
     {
+        [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Start))] static void Start(NewMovement __instance)
+        {
+            __instance.pushForce = __instance.pushForce / 2;
+            __instance.jumpPower = __instance.jumpPower / 2;
+            __instance.wallJumpPower = __instance.wallJumpPower / 2;
+        }
+
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Update))] static bool Update(NewMovement __instance)
         {
             Vector2 vector = Vector2.zero;
@@ -397,7 +405,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 
                     if (!__instance.asscon.majorEnabled || !__instance.asscon.infiniteStamina) __instance.boostCharge -= 100f;
 
-                    if (__instance.dodgeDirection == __instance.transform.forward) __instance.cc.dodgeDirection = 0;
+                    if (__instance.dodgeDirection == __instance.transform.forward) __instance.cc.dodgeDirection = 0; // what the fuck, hakita?
                     else if (__instance.dodgeDirection == __instance.transform.forward * -1f) __instance.cc.dodgeDirection = 1;
                     else __instance.cc.dodgeDirection = 2;
 
@@ -536,7 +544,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 
             float num2 = 2.75f;
             __instance.movementDirection2 = new Vector3(__instance.dodgeDirection.x * __instance.walkSpeed * Time.deltaTime * num2,
-                                                y, __instance.dodgeDirection.z * __instance.walkSpeed * Time.deltaTime * num2);
+                                                        y,
+                                                        __instance.dodgeDirection.z * __instance.walkSpeed * Time.deltaTime * num2);
             if (!__instance.slideEnding || (__instance.gc.onGround && !__instance.jumping))
                 __instance.rb.velocity = __instance.movementDirection2 * 3f;
 
