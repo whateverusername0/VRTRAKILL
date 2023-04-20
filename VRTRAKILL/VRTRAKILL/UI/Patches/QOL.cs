@@ -1,14 +1,31 @@
-﻿using UnityEngine.UI;
+﻿using UnityEngine;
+using UnityEngine.UI;
 using HarmonyLib;
 
 namespace Plugin.VRTRAKILL.UI.Patches
 {
     [HarmonyPatch] static class QOL
     {
-        [HarmonyPrefix] [HarmonyPatch(typeof(CanvasController), "Awake")] static void RemoveEyeSore(CanvasController __instance)
+        [HarmonyPrefix] [HarmonyPatch(typeof(CanvasController), "Awake")] static void TweakUI(CanvasController __instance)
         {
-            string[] EyeSore = { "HurtScreen", "BlackScreen", "ParryFlash" }; // to be changed to a new ui system
-            foreach (string Sore in EyeSore) __instance.gameObject.transform.Find(Sore).GetComponent<Image>().enabled = false;
+            // Stretches screen effects goatse style so it's not a fucking square in the middle of the hud
+            string[] ScreenEffects =
+            {
+                "HurtScreen", "BlackScreen", "ParryFlash",
+                "UnderwaterOverlay",
+            };
+            foreach (string ScreenEffect in ScreenEffects)
+                try { __instance.gameObject.transform.Find(ScreenEffect).transform.localScale *= 5; } catch { continue; }
+
+            Object.FindObjectOfType<FlashImage>().transform.localScale *= 5;
+
+            // Disable useless stuffs
+            string[] ScreenEffectsToDisable =
+            {
+                "PowerUpVignette",
+            };
+            foreach (string ScreenEffectToDisable in ScreenEffectsToDisable)
+                try { __instance.gameObject.transform.Find(ScreenEffectToDisable).GetComponent<Image>().enabled = false; } catch { continue; }
         }
     }
 }
