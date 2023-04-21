@@ -28,6 +28,7 @@ Since you cannot use keyboard to swap weapons with VR (if you do you're a weirdo
 - It should support all headsets that SteamVR supports, oh well.
 
 ## Installing VRTRAKILL in less than 11 steps
+VRTRAKILL Installation tutorial [here](https://www.youtube.com/watch?v=FcTysn8jwFQ) (@guesty5060 you're welcome)
 1. Begin doing ULTRAKILL shenanigans:  
   1.1 Locate ULTRAKILL in your Steam library (or wherever you store it)  
   1.2 RMB -> Manage -> Browse local files  
