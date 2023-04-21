@@ -175,6 +175,7 @@
     <Compile Include="Helpers\Libraries\WindowsInput\Native\XButton.cs" />
     <Compile Include="Helpers\Libraries\WindowsInput\WindowsInputDeviceStateAdaptor.cs" />
     <Compile Include="Helpers\Libraries\WindowsInput\WindowsInputMessageDispatcher.cs" />
+    <Compile Include="Helpers\Misc.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VRTRAKILL\Config\Input\Keybinds.cs" />

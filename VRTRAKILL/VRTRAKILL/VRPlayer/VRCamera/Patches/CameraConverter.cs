@@ -10,19 +10,19 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
         // ty huskvr you pretty
         public static GameObject Container;
 
-        [HarmonyPrefix] [HarmonyPatch(typeof(NewMovement), "Start")] static void Containerize(NewMovement __instance)
+        [HarmonyPrefix] [HarmonyPatch(typeof(NewMovement), nameof(NewMovement.Start))] static void Containerize(NewMovement __instance)
         {
             Container = new GameObject("Main Camera Rig");
             Container.transform.parent = Vars.MainCamera.transform.parent;
             Container.transform.localPosition = Vector3.zero;
             Container.transform.localRotation = Vars.MainCamera.transform.rotation;
 
-            Container.AddComponent<VRCameraController>();
+            if(Helpers.Misc.HasComponent<VRCameraController>(__instance.gameObject)) Container.AddComponent<VRCameraController>();
 
             Vars.MainCamera.transform.parent = Container.transform;
         }
 
-        [HarmonyPrefix] [HarmonyPatch(typeof(CameraController), "Start")] static void ConvertCameras(CameraController __instance)
+        [HarmonyPrefix] [HarmonyPatch(typeof(CameraController), nameof(CameraController.Start))] static void ConvertCameras(CameraController __instance)
         {
             // MainCamera
             while (__instance.cam == null) {}
@@ -38,7 +38,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
 
             GameObject.Find("Virtual Camera").SetActive(false);
         }
-        [HarmonyPrefix] [HarmonyPatch(typeof(CameraController), nameof(CameraController.Update))] static bool DisableCC(CameraController __instance)
+        [HarmonyPrefix] [HarmonyPatch(typeof(CameraController), nameof(CameraController.Update))] static bool IgnoreCC(CameraController __instance)
         {
             // do nothing
             return false;
