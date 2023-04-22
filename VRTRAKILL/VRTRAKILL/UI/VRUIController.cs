@@ -20,7 +20,8 @@ namespace Plugin.VRTRAKILL.UI
             UICamera.gameObject.AddComponent<GazeUIInteraction>();
 
             foreach (Canvas C in Object.FindObjectsOfType<Canvas>())
-                UICanvas.ConvertCanvas(C);
+                if (!Helpers.Misc.HasComponent<UICanvas>(C.gameObject))
+                    UICanvas.ConvertCanvas(C);
         }
     }
 }
