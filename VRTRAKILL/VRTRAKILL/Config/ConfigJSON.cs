@@ -6,7 +6,7 @@ namespace Plugin.VRTRAKILL.Config
     internal class ConfigJSON
     {
         public Input.VRSettings VRSettings => new Input.VRSettings();
-        public Input.Keybinds LegacyInputs => new Input.Keybinds();
+        public Input.Keybinds Inputs => new Input.Keybinds();
 
         public static ConfigJSON Deserialize()
         {
