@@ -6,7 +6,7 @@ namespace Plugin.VRTRAKILL.UI.Patches
 {
     [HarmonyPatch] static class QOL
     {
-        [HarmonyPrefix] [HarmonyPatch(typeof(CanvasController), "Awake")] static void TweakUI(CanvasController __instance)
+        [HarmonyPrefix] [HarmonyPatch(typeof(CanvasController), "Awake")] static void ResizeCanvases(CanvasController __instance)
         {
             // Stretches screen effects goatse style so it's not a fucking square in the middle of the hud
             string[] ScreenEffects =
@@ -20,13 +20,11 @@ namespace Plugin.VRTRAKILL.UI.Patches
                     Transform T = __instance.gameObject.transform.Find(ScreenEffect);
                     T.transform.localScale *= 5;
                     for (int i = 0; i < T.childCount; i++)
-                    {
                         T.GetChild(i).transform.localScale /= 5;
-                    }
                 }
                 catch { continue; }
 
-            Object.FindObjectOfType<FlashImage>().transform.localScale *= 5;
+            try { Object.FindObjectOfType<FlashImage>().transform.localScale *= 5; } catch {}
 
             // Disable useless stuffs
             string[] ScreenEffectsToDisable =
