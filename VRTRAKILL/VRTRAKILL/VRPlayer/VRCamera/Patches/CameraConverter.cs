@@ -17,16 +17,15 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
             Container.transform.localPosition = Vector3.zero;
             Container.transform.localRotation = Vars.MainCamera.transform.rotation;
 
-            if(Helpers.Misc.HasComponent<VRCameraController>(__instance.gameObject)) Container.AddComponent<VRCameraController>();
+            Container.AddComponent<VRCameraController>();
 
             Vars.MainCamera.transform.parent = Container.transform;
         }
 
         [HarmonyPrefix] [HarmonyPatch(typeof(CameraController), nameof(CameraController.Start))] static void ConvertCameras(CameraController __instance)
         {
-            // MainCamera
             while (__instance.cam == null) {}
-            __instance.gameObject.AddComponent<SteamVR_CameraHelper>();
+            __instance.gameObject.AddComponent<SteamVR_CameraHelper>(); // dunno if this is needed
 
             __instance.cam.depth++;
 
