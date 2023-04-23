@@ -10,25 +10,27 @@ This mod exists because [HuskVR](https://github.com/TeamDoodz/HuskVR) is not bei
 ##### Scroll all the way down to see requirements & installing process.
 
 ## Features
-### README is almost always outdated, better check releases for features
-### Full-sized VR support
-WIP LOL. For now you can only interact with objects by looking at them with your camera. Full controller support WIP
-
-### VR Weapon Wheelie thing!!
-Since you cannot use keyboard to swap weapons with VR (if you do you're a weirdo) I made a **COOL WEAPON WHEELIE THING!!!**  
-(Waiting for PITR to release new weapon wheel, too lazy to do it now lol) For now you can bind weapon scroll to vertical joystick axis movement.
+##### README is almost always outdated, better check releases for features
+### What works right now:
+- Camera, HUD
+- Full movement (jump, dash, slide, slam storage, rocket ride, etc.)
+- Shooting & punching (using your camera - it shoots at the point you're looking at)
+- Weapon swap, weapon scroll (using joystick)
+- Interacting with UI (some of the menus are broken - will be fixed in the future)
 
 ## Requirements
-- A copy of ULTRAKILL (any kind)
+- A copy of the latest version of ULTRAKILL (any kind)
 - A (preferably) working VR compatible PC  
 - A PCVR headset w/ SteamVR installed
 ### Tested 100% working devices:
-- Oculus Quest (+ ALVR) (+ Virtual Desktop)  
+- Oculus Quest 1/2 (+ ALVR) (+ Virtual Desktop)  
 - HTC Vive (unsure. somebody else was trying it)  
-- It should support all headsets that SteamVR supports, oh well.
+- In theory it supports ALL devices that are supported by SteamVR.
 
 ## Installing VRTRAKILL in less than 11 steps
 VRTRAKILL Installation tutorial [here](https://www.youtube.com/watch?v=FcTysn8jwFQ) (@guesty5060 you're welcome)
+
+The text version:
 1. Begin doing ULTRAKILL shenanigans:  
   1.1 Locate ULTRAKILL in your Steam library (or wherever you store it)  
   1.2 RMB -> Manage -> Browse local files  
@@ -40,7 +42,7 @@ VRTRAKILL Installation tutorial [here](https://www.youtube.com/watch?v=FcTysn8jw
   4.2 Properties -> Shortcut -> Include in VR Library
 5. Open SteamVR
 6. Select your VR-ed ULTRAKILL
-7. Run it once and exit (for now)  
-8. Go to BepInEx/plugins/VRTRAKILL and edit VRTRAKILL_Config.json  
+7. Run it once, wait for the error message to appear in the console and then exit
+8. Go to BepInEx/plugins/VRTRAKILL, open VRTRAKILL_Config.json and copy your settings keybinds there  
 9. Run VR-ed ULTRAKILL again  
 10. Begin ULTRAKILLing in VR
