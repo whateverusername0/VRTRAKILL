@@ -1,19 +1,8 @@
 ﻿using UnityEngine;
 using Valve.VR;
 
-namespace Plugin.VRTRAKILL.VRPlayer.Arms
+namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 {
-    public enum ControllerType
-    {
-        Left = 1,
-        Right = 2
-    }
-    public enum WeaponType
-    {
-        Fist = 1,
-        Gun = 2
-    }
-
     // lol the name
     internal class ControllerController : MonoBehaviour
     {

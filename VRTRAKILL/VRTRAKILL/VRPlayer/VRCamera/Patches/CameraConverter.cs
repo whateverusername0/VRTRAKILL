@@ -24,16 +24,14 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
 
         [HarmonyPrefix] [HarmonyPatch(typeof(CameraController), nameof(CameraController.Start))] static void ConvertCameras(CameraController __instance)
         {
-            while (__instance.cam == null) {}
-            __instance.gameObject.AddComponent<SteamVR_CameraHelper>(); // dunno if this is needed
+            while (__instance.cam == null && __instance.hudCamera == null) {}
 
-            __instance.cam.depth++;
+            __instance.cam.depth++; __instance.hudCamera.depth++;
 
             __instance.cam.stereoTargetEye = StereoTargetEyeMask.Both;
-            XRSettings.gameViewRenderMode = GameViewRenderMode.RightEye;
+            __instance.hudCamera.stereoTargetEye = StereoTargetEyeMask.Both;
 
-            if (PostProcessV2_Handler.Instance != null)
-                PostProcessV2_Handler.Instance.mainCam = __instance.cam;
+            XRSettings.gameViewRenderMode = GameViewRenderMode.RightEye;
 
             GameObject.Find("Virtual Camera").SetActive(false);
         }

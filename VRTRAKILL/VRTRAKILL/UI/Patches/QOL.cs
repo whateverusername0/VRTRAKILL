@@ -34,5 +34,10 @@ namespace Plugin.VRTRAKILL.UI.Patches
             foreach (string ScreenEffectToDisable in ScreenEffectsToDisable)
                 try { __instance.gameObject.transform.Find(ScreenEffectToDisable).GetComponent<Image>().enabled = false; } catch { continue; }
         }
+        [HarmonyPrefix] [HarmonyPatch(typeof(FinalRank), nameof(FinalRank.Start))] static void FixFinalRank(FinalRank __instance)
+        {
+            __instance.transform.parent.localScale = new Vector3(0.003f, 0.002f, 0.001f);
+            __instance.transform.parent.localPosition = new Vector3(0f, -0.2f, 2.2f);
+        }
     }
 }
