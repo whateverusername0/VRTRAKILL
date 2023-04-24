@@ -1,7 +1,6 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 using UnityEngine.XR;
-using Valve.VR;
 
 namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
 {
@@ -26,14 +25,15 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
         {
             while (__instance.cam == null && __instance.hudCamera == null) {}
 
-            __instance.cam.depth++; __instance.hudCamera.depth++;
-
             __instance.cam.stereoTargetEye = StereoTargetEyeMask.Both;
             __instance.hudCamera.stereoTargetEye = StereoTargetEyeMask.Both;
 
+            __instance.cam.depth++;
+            __instance.hudCamera.depth++;
+
             XRSettings.gameViewRenderMode = GameViewRenderMode.RightEye;
 
-            GameObject.Find("Virtual Camera").SetActive(false);
+            GameObject.Destroy(GameObject.Find("Virtual Camera"));
         }
         [HarmonyPrefix] [HarmonyPatch(typeof(CameraController), nameof(CameraController.Update))] static bool IgnoreCC(CameraController __instance)
         {
