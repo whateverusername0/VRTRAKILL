@@ -10,7 +10,7 @@ namespace Plugin
     {
         public const string PLUGIN_GUID = "com.whateverusername0.vrtrakill",
                             PLUGIN_NAME = "VRTRAKILL",
-                            PLUGIN_VERSION = "0.7";
+                            PLUGIN_VERSION = "0.8";
 
         public static string GameExePath = Process.GetCurrentProcess().MainModule.FileName,
                              GamePath = Path.GetDirectoryName(GameExePath),
@@ -26,7 +26,7 @@ namespace Plugin
 
             VRTRAKILL.Config.ConfigMaster.Init();
 
-            VRTRAKILL.UI.VRUIController.Init();
+            VRTRAKILL.UI.VRUIConverter.Init();
 
             InitializeSteamVR();
         }
