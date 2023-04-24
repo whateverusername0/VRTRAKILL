@@ -7,6 +7,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
     {
         [HarmonyPostfix] [HarmonyPatch(nameof(FistControl.Start))] static void ConvertArms(FistControl __instance)
         {
+            __instance.transform.localPosition = Vector3.zero;
             __instance.gameObject.AddComponent<VRArmsController>();
             Helpers.Misc.RecursiveChangeLayer(__instance.gameObject, 0);
         }
