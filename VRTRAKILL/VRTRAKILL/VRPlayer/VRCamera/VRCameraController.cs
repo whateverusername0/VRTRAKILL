@@ -13,7 +13,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
                                  Vars.MainCamera.transform.rotation.eulerAngles.y,
                                  NewMovement.Instance.transform.rotation.eulerAngles.z);
 
-            /* Vars.VRCameraContainer */ this.transform.rotation = Quaternion.Euler(0f, Input.VRInputVars.TurnOffset, 0f);
+            transform.rotation = Quaternion.Euler(0f, Input.VRInputVars.TurnOffset, 0f);
         }
     }
 }
