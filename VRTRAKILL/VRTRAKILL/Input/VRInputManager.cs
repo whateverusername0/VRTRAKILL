@@ -8,6 +8,8 @@ namespace Plugin.VRTRAKILL.Input
 {
     static class VRInputManager
     {
+        private static InputSimulator InpSim => new InputSimulator();
+
         private static bool
             Jump = false,
             Dash = false,
@@ -137,13 +139,15 @@ namespace Plugin.VRTRAKILL.Input
 
         private static void TriggerKey(WindowsInput.Native.VirtualKeyCode KeyCode, bool Started, bool Ended)
         {
-            InputSimulator InpSim = new InputSimulator();
             if (Started) InpSim.Keyboard.KeyDown(KeyCode);
             else if (Ended) InpSim.Keyboard.KeyUp(KeyCode);
         }
+        private static void MousePress(WindowsInput.Native.MouseFlag MF, bool Started, bool Ended)
+        {
+
+        }
         private static void MouseScroll(int Amount)
         {
-            InputSimulator InpSim = new InputSimulator();
             InpSim.Mouse.VerticalScroll(Amount);
         }
         public static void Trigger(this InputActionState state, bool started, bool cancelled)
