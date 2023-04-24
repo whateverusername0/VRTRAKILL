@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Plugin.VRTRAKILL.UI
 {
-    // "borrowed" from huskvr
+    // mostly "borrowed" from huskvr
     internal class UICanvas : MonoBehaviour
     {
         private Vector3 LastCamFwd = Vector3.zero;
@@ -14,13 +13,13 @@ namespace Plugin.VRTRAKILL.UI
 
         public void UpdatePos()
         {
-            LastCamFwd = VRUIController.UICamera.transform.forward * Distance;
-            transform.rotation = VRUIController.UICamera.transform.rotation;
+            LastCamFwd = VRUIConverter.UICamera.transform.forward * Distance;
+            transform.rotation = VRUIConverter.UICamera.transform.rotation;
         }
         public void ResetPos()
         {
             LastCamFwd = new Vector3(LastCamFwd.x, 0f, LastCamFwd.z);
-            transform.LookAt(VRUIController.UICamera.transform);
+            transform.LookAt(VRUIConverter.UICamera.transform);
             transform.forward = new Vector3(-transform.forward.x, 0f, -transform.forward.z);
         }
 
@@ -32,13 +31,32 @@ namespace Plugin.VRTRAKILL.UI
         private void Update()
         {
             if (Vars.NotAMenu) UpdatePos(); else ResetPos();
-            transform.position = VRUIController.UICamera.transform.position + LastCamFwd;
+            transform.position = VRUIConverter.UICamera.transform.position + LastCamFwd;
         }
 
-        public static void ConvertCanvas(Canvas C)
+        public static void RecursiveConvertCanvas(GameObject GO = null)
+        {
+            if (GO != null)
+            {
+                try { ConvertCanvas(GO.GetComponent<Canvas>()); } catch {}
+
+                if (GO.transform.childCount > 0)
+                    for (int i = 0; i < GO.transform.childCount; i++)
+                        RecursiveConvertCanvas(GO.transform.GetChild(i).gameObject);
+            }
+            else
+            {
+                foreach (Canvas C in Object.FindObjectsOfType<Canvas>())
+                    if (!Helpers.Misc.HasComponent<UICanvas>(C.gameObject))
+                        UICanvas.ConvertCanvas(C);
+            }
+        }
+
+        private static void ConvertCanvas(Canvas C)
         {
             if (C.renderMode != RenderMode.ScreenSpaceOverlay) return;
-            C.worldCamera = VRUIController.UICamera;
+
+            C.worldCamera = VRUIConverter.UICamera;
             C.renderMode = RenderMode.WorldSpace;
             C.gameObject.layer = 5; // ui
             C.gameObject.AddComponent<UICanvas>();
