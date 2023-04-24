@@ -33,7 +33,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
 
             XRSettings.gameViewRenderMode = GameViewRenderMode.RightEye;
 
-            GameObject.Destroy(GameObject.Find("Virtual Camera"));
+            // for some particular reason destroying it is a bad idea.
+            GameObject.Find("Virtual Camera").SetActive(false);
         }
         [HarmonyPrefix] [HarmonyPatch(typeof(CameraController), nameof(CameraController.Update))] static bool IgnoreCC(CameraController __instance)
         {
