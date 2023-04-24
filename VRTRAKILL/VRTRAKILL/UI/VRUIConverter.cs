@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 namespace Plugin.VRTRAKILL.UI
 {
     // "borrowed" from huskvr
-    internal class VRUIController
+    internal class VRUIConverter
     {
         public static Camera UICamera { get; private set; }
 
@@ -21,7 +21,7 @@ namespace Plugin.VRTRAKILL.UI
 
             foreach (Canvas C in Object.FindObjectsOfType<Canvas>())
                 if (!Helpers.Misc.HasComponent<UICanvas>(C.gameObject))
-                    UICanvas.ConvertCanvas(C);
+                    UICanvas.RecursiveConvertCanvas();
         }
     }
 }
