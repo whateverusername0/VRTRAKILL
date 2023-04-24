@@ -20,6 +20,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 
         private void Update()
         {
+            // dunno if this is necessary, not removing it doe
             transform.position = new Vector3(transform.position.x, transform.position.y * 2, transform.position.z);
         }
     }
