@@ -21,8 +21,8 @@ namespace Plugin.VRTRAKILL.Config
                 Plugin.PLogger.LogError("Unable to find VRTRAKILL_Config.json, without it you literally cannot use the mod.\n" +
                                         "Generating a new one. Please quit the game and fill it out, ty.");
                 Serialize(new ConfigJSON());
+                return null;
             }
-            return null;
         }
         public static void Serialize(ConfigJSON Config)
         {
