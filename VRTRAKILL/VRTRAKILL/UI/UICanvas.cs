@@ -7,13 +7,6 @@ namespace Plugin.VRTRAKILL.UI
     // "borrowed" from huskvr
     internal class UICanvas : MonoBehaviour
     {
-        public static bool ShouldUpdatePos =>
-               ! SceneManager.GetActiveScene().name.StartsWith("Main Menu")
-            && !(OptionsManager.Instance != null && OptionsManager.Instance.paused)
-            && !(SpawnMenu.Instance != null && SpawnMenu.Instance.gameObject.activeInHierarchy)
-            && !(FinalRank.Instance != null && FinalRank.Instance.gameObject.activeInHierarchy);
-            //&& alter menu active
-
         private Vector3 LastCamFwd = Vector3.zero;
 
         private const float Distance = 72f;
@@ -38,7 +31,7 @@ namespace Plugin.VRTRAKILL.UI
         }
         private void Update()
         {
-            if (ShouldUpdatePos) UpdatePos(); else ResetPos();
+            if (Vars.NotAMenu) UpdatePos(); else ResetPos();
             transform.position = VRUIController.UICamera.transform.position + LastCamFwd;
         }
 
