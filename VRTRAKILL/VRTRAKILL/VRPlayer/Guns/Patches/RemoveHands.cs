@@ -6,9 +6,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
     // Removes hands from revolver & shotgun
     [HarmonyPatch] static class RemoveHands
     {
-        [HarmonyPrefix] [HarmonyPatch(typeof(Revolver), nameof(Revolver.Start))] static void RemoveRevolverHand(Revolver __instance)
+        [HarmonyPostfix] [HarmonyPatch(typeof(Revolver), nameof(Revolver.Start))] static void RemoveRevolverHand(Revolver __instance)
         {
-            string[] GameObjects = { "Revolver", "MinosRevolver, PistolNew" };
+            string[] GameObjects = { "Revolver", "MinosRevolver", "PistolNew" };
             foreach (string GO in GameObjects)
                 try
                 {
@@ -18,7 +18,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                 }
                 catch (NullReferenceException) { Plugin.PLogger.LogWarning($"{GO} is null"); }
         }
-        [HarmonyPrefix] [HarmonyPatch(typeof(Shotgun), nameof(Shotgun.Start))] static void RemoveShotgunHand(Shotgun __instance)
+        [HarmonyPostfix] [HarmonyPatch(typeof(Shotgun), nameof(Shotgun.Start))] static void RemoveShotgunHand(Shotgun __instance)
         {
             try
             {
