@@ -34,6 +34,29 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
             RightHand.poseAction = SteamVR_Actions._default.RightPose;
             RightHand.inputSource = SteamVR_Input_Sources.RightHand;
 
+            if (Vars.NotAMenu)
+            {
+                try
+                {
+                    // Left Hand Model
+                    GameObject LHMGO = new GameObject("Model"); LHMGO.transform.parent = LHGO.transform;
+                    SteamVR_RenderModel LHMGORM = LHMGO.AddComponent<SteamVR_RenderModel>();
+                    LHMGORM.createComponents = true;
+
+                    // Right Hand Model
+                    GameObject RHMGO = new GameObject("Model"); RHMGO.transform.parent = RHGO.transform;
+                    SteamVR_RenderModel RHMGORM = RHMGO.AddComponent<SteamVR_RenderModel>();
+                    RHMGORM.createComponents = true;
+                }
+                catch {}
+            }
+            else try
+                {
+                    foreach(SteamVR_RenderModel GO in GameObject.FindObjectsOfType<SteamVR_RenderModel>())
+                        GameObject.Destroy(GO);
+                }
+                catch {}
+
             __instance.gameObject.SetActive(true);
         }
     }

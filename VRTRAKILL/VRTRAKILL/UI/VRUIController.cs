@@ -17,7 +17,7 @@ namespace Plugin.VRTRAKILL.UI
             UICamera.cullingMask = LayerMask.GetMask(new string[] { "UI" });
             UICamera.clearFlags = CameraClearFlags.Depth;
             UICamera.depth = 1f;
-            UICamera.gameObject.AddComponent<GazeUIInteraction>();
+            UICamera.gameObject.AddComponent<Helpers.GazeUIInteraction>();
 
             foreach (Canvas C in Object.FindObjectsOfType<Canvas>())
                 if (!Helpers.Misc.HasComponent<UICanvas>(C.gameObject))
