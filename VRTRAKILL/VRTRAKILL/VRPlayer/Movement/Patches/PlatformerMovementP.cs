@@ -83,8 +83,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                     __instance.boostLeft = 100f;
                     __instance.boost = true;
                     __instance.anim.Play("Dash", -1, 0f);
-                    __instance.dodgeDirection = __instance.movementDirection;
-                    if (__instance.dodgeDirection == Vector3.zero) __instance.dodgeDirection = __instance.playerModel.forward;
+                    __instance.dodgeDirection = __instance.movementDirection / 2; // / 2
+                    if (__instance.dodgeDirection == Vector3.zero) __instance.dodgeDirection = __instance.playerModel.forward / 2; // / 2
 
                     Quaternion identity = Quaternion.identity;
                     identity.SetLookRotation(__instance.dodgeDirection * -1f);

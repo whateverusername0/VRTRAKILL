@@ -249,7 +249,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 
                     if (!GameStateManager.Instance.PlayerInputLocked && MonoSingleton<InputManager>.Instance.InputSource.Jump.WasPerformedThisFrame
                         && !__instance.jumpCooldown && __instance.currentWallJumps < 3 && (bool)__instance.wc && __instance.wc.CheckForCols())
-                        Traverse.Create(__instance).Method("WallJump").GetValue();
+                            __instance.WallJump();
                 }
                 else if (__instance.scrapeParticle != null)
                 {
@@ -259,13 +259,13 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
             }
             if (MonoSingleton<InputManager>.Instance.InputSource.Slide.WasPerformedThisFrame && __instance.gc.onGround && __instance.activated
                 && (!__instance.slowMode || __instance.crouching) && !GameStateManager.Instance.PlayerInputLocked && !__instance.sliding)
-                Traverse.Create(__instance).Method("StartSlide").GetValue();
+                    __instance.StartSlide();
 
             RaycastHit val5 = default(RaycastHit);
             if (MonoSingleton<InputManager>.Instance.InputSource.Slide.WasPerformedThisFrame && !__instance.gc.onGround && !__instance.sliding && !__instance.jumping
                 && __instance.activated && !__instance.slowMode && !GameStateManager.Instance.PlayerInputLocked
                 && Physics.Raycast(__instance.gc.transform.position + __instance.transform.up, __instance.transform.up * -1f, out val5, 2f, (int)__instance.lmask))
-                Traverse.Create(__instance).Method("StartSlide").GetValue();
+                    __instance.StartSlide();
             if ((MonoSingleton<InputManager>.Instance.InputSource.Slide.WasCanceledThisFrame || (__instance.slowMode && !__instance.crouching)) && __instance.sliding) __instance.StopSlide();
 
             if (__instance.sliding && __instance.activated)
@@ -394,9 +394,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 
                     __instance.boostLeft = 100f;
                     __instance.boost = true;
-                    __instance.dodgeDirection = __instance.movementDirection;
+                    __instance.dodgeDirection = __instance.movementDirection / 2;
 
-                    if (__instance.dodgeDirection == Vector3.zero) __instance.dodgeDirection = __instance.transform.forward;
+                    if (__instance.dodgeDirection == Vector3.zero) __instance.dodgeDirection = __instance.transform.forward / 2;
 
                     Quaternion identity = Quaternion.identity;
                     identity.SetLookRotation(__instance.dodgeDirection * -1f);
@@ -455,9 +455,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
             Vector3 vector3 = __instance.hudOriginalPos - __instance.cc.transform.InverseTransformDirection(__instance.rb.velocity) / 1000f;
             float num3 = Vector3.Distance(vector3, __instance.screenHud.transform.localPosition);
             __instance.screenHud.transform.localPosition = Vector3.MoveTowards(__instance.screenHud.transform.localPosition, vector3, Time.deltaTime * 15f * num3);
+
             Vector3 vector4 = Vector3.ClampMagnitude(__instance.camOriginalPos - __instance.cc.transform.InverseTransformDirection(__instance.rb.velocity) / 350f * -1f, 0.2f);
             float num4 = Vector3.Distance(vector4, __instance.hudCam.transform.localPosition);
             __instance.hudCam.transform.localPosition = Vector3.MoveTowards(__instance.hudCam.transform.localPosition, vector4, Time.deltaTime * 25f * num4);
+
             int rankIndex = MonoSingleton<StyleHUD>.Instance.rankIndex;
             if (rankIndex == 7 || __instance.difficulty <= 1)
             {
