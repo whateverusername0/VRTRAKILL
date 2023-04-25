@@ -181,14 +181,18 @@
     <Compile Include="VRTRAKILL\Config\Input\Keybinds.cs" />
     <Compile Include="VRTRAKILL\UI\Patches\HUDPosP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\ArmsP.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\Arms\VRArmsController.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Arms\Feedbacker\Armature.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Arms\Feedbacker\FeedbackerController.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Arms\PunchP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\ControllerController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\Patches\ControllerAdder.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\RightArmController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\LeftArmController.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Guns\Boomstick\TransformP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\GunsP.cs" />
     <Compile Include="VRTRAKILL\Input\VRInputManager.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\RemoveHands.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Guns\Pistol\TransformP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\VRGunsController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Movement\Patches\ClimbStepP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Movement\Patches\FlightNoclipP.cs" />
@@ -291,17 +295,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\Managed\" />
-    <Folder Include="VRTRAKILL\VRPlayer\Arms\Feedbacker\" />
     <Folder Include="VRTRAKILL\VRPlayer\Arms\GrapplingHook\" />
     <Folder Include="VRTRAKILL\VRPlayer\Arms\Knuckleblaster\" />
     <Folder Include="VRTRAKILL\VRPlayer\Arms\Sandboxer\" />
-    <Folder Include="VRTRAKILL\VRPlayer\Guns\Nailgun\Alternative\" />
-    <Folder Include="VRTRAKILL\VRPlayer\Guns\Nailgun\Default\" />
-    <Folder Include="VRTRAKILL\VRPlayer\Guns\Railcannon\Default\" />
-    <Folder Include="VRTRAKILL\VRPlayer\Guns\Revolver\Alternative\" />
-    <Folder Include="VRTRAKILL\VRPlayer\Guns\Revolver\Default\" />
-    <Folder Include="VRTRAKILL\VRPlayer\Guns\RocketLauncher\Default\" />
-    <Folder Include="VRTRAKILL\VRPlayer\Guns\Shotgun\Default\" />
+    <Folder Include="VRTRAKILL\VRPlayer\Guns\Nailgun\" />
+    <Folder Include="VRTRAKILL\VRPlayer\Guns\Railgun\" />
+    <Folder Include="VRTRAKILL\VRPlayer\Guns\RocketLauncher\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
