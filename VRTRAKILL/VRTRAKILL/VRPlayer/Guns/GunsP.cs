@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using System;
 using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Guns
@@ -6,7 +7,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns
     [HarmonyPatch] static class GunsP
     {
         [HarmonyPrefix] [HarmonyPatch(typeof(RotateToFaceFrustumTarget), nameof(RotateToFaceFrustumTarget.Update))]
-        static bool DisableRotation(RotateToFaceFrustumTarget __instance)
+        static bool DisableFrustumRotation(RotateToFaceFrustumTarget __instance)
         {
             __instance.enabled = false;
             __instance.gameObject.AddComponent<VRGunsController>();
@@ -17,11 +18,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns
         {
             __instance.transform.localPosition = Vector3.zero;
             Helpers.Misc.RecursiveChangeLayer(__instance.gameObject, 0);
-        }
-        [HarmonyPrefix] [HarmonyPatch(typeof(WeaponPos), nameof(WeaponPos.Start))] static void ResetWeaponPos(WeaponPos __instance)
-        {
-            __instance.transform.localPosition = new Vector3(-0.5f, -0.5f, -0.5f);
-            __instance.defaultPos = new Vector3(-0.5f, 0, -0.5f);
         }
 
         // Note to self:
