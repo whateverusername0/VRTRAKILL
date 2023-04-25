@@ -1,11 +1,10 @@
 ﻿using HarmonyLib;
 using UnityEngine.InputSystem;
 using UnityEngine;
-using ULTRAKILL.Cheats;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 {
-    // big ass "rewrite" (kind of) of the NewMovement class to support vr inputs
+    // change move vector to joystick axis, fix dash, jump, etc.
     [HarmonyPatch(typeof(NewMovement))] static class NewMovementP
     {
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Start))] static void Start(NewMovement __instance)

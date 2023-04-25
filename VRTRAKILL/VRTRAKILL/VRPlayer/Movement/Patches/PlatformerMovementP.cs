@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 {
+    // change move vector to joystick axis, fix dash, jump, etc.
     [HarmonyPatch(typeof(PlatformerMovement))] static class PlatformerMovementP
     {
-        // change movement vector to vr one
         [HarmonyPrefix] [HarmonyPatch(nameof(PlatformerMovement.Update))] static bool Update(PlatformerMovement __instance)
         {
             if (MonoSingleton<OptionsManager>.Instance.paused) return false;
@@ -83,8 +83,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                     __instance.boostLeft = 100f;
                     __instance.boost = true;
                     __instance.anim.Play("Dash", -1, 0f);
-                    __instance.dodgeDirection = __instance.movementDirection / 2; // / 2
-                    if (__instance.dodgeDirection == Vector3.zero) __instance.dodgeDirection = __instance.playerModel.forward / 2; // / 2
+                    __instance.dodgeDirection = __instance.movementDirection / 2;
+                    if (__instance.dodgeDirection == Vector3.zero) __instance.dodgeDirection = __instance.playerModel.forward / 2;
 
                     Quaternion identity = Quaternion.identity;
                     identity.SetLookRotation(__instance.dodgeDirection * -1f);

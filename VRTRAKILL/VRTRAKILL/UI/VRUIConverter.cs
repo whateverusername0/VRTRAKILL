@@ -22,6 +22,9 @@ namespace Plugin.VRTRAKILL.UI
             foreach (Canvas C in Object.FindObjectsOfType<Canvas>())
                 if (!Helpers.Misc.HasComponent<UICanvas>(C.gameObject))
                     UICanvas.RecursiveConvertCanvas();
+
+            // player hud needs a willy wonka golden ticket to get converted (fuck you)
+            UICanvas.RecursiveConvertCanvas(HudController.Instance.gameObject);
         }
     }
 }
