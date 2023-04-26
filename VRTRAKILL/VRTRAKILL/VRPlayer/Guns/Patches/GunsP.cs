@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-namespace Plugin.VRTRAKILL.VRPlayer.Guns
+namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 {
     [HarmonyPatch] static class GunsP
     {
@@ -19,17 +19,5 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns
             __instance.transform.localPosition = Vector3.zero;
             Helpers.Misc.RecursiveChangeLayer(__instance.gameObject, 0);
         }
-
-        // Note to self:
-        // revolver is too big, make it small (like size 0.25 or smh)
-        // other guns are fine (leave at 0.5)
-        // rocket launcher is too small (leave size untouched)
-
-        // revolver is not aligned as other guns, align it manually
-        // other guns can have their y val unchanged
-
-        // arms animations are to be redone (esp red one)
-
-        // guns are in priority!!
     }
 }
