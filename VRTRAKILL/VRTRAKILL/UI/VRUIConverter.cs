@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 namespace Plugin.VRTRAKILL.UI
 {
     // "borrowed" from huskvr
-    internal class VRUIConverter
+    [HarmonyLib.HarmonyPatch] internal class VRUIConverter
     {
         public static Camera UICamera { get; private set; }
 
@@ -15,16 +15,12 @@ namespace Plugin.VRTRAKILL.UI
         {
             UICamera = new GameObject("UI Camera").AddComponent<Camera>();
             UICamera.cullingMask = LayerMask.GetMask(new string[] { "UI" });
-            UICamera.clearFlags = CameraClearFlags.Depth;
-            UICamera.depth = 1f;
+            UICamera.clearFlags = CameraClearFlags.Depth; UICamera.depth = 1f;
             UICamera.gameObject.AddComponent<Helpers.GazeUIInteraction>();
 
             foreach (Canvas C in Object.FindObjectsOfType<Canvas>())
                 if (!Helpers.Misc.HasComponent<UICanvas>(C.gameObject))
                     UICanvas.RecursiveConvertCanvas();
-
-            // player hud needs a willy wonka golden ticket to get converted (fuck you)
-            UICanvas.RecursiveConvertCanvas(HudController.Instance.gameObject);
         }
     }
 }

@@ -40,10 +40,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Feedbacker
 
             Armature.UpperArm.transform.localRotation = new Quaternion(0, 0, 0, 0);
 
-            Armature.Hand.position = Controllers.LeftArmController.Instance.Position;
-            Armature.Hand.rotation = Controllers.LeftArmController.Instance.Rotation;
+            Armature.Hand.position = Vars.LeftController.transform.position;
+            Armature.Hand.rotation = Vars.LeftController.transform.rotation;
 
-            if (PunchZoneT != null) PunchZoneT.position = Controllers.LeftArmController.Instance.Position;
+            if (PunchZoneT != null) PunchZoneT.position = Vars.LeftController.transform.position;
 
             StartCoroutine(CalculateVelocity());
         }

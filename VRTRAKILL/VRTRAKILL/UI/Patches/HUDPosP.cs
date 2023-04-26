@@ -5,7 +5,7 @@ namespace Plugin.VRTRAKILL.UI.Patches
 {
     [HarmonyPatch(typeof(HUDPos))] static class HUDPosP
     {
-        [HarmonyPrefix] [HarmonyPatch("Start")] static void FixPos(HUDPos __instance)
+        [HarmonyPostfix] [HarmonyPatch(nameof(HUDPos.Start))] static void FixPos(HUDPos __instance)
         {
             // HuskVR you pretty
             if (__instance.gameObject.name == "GunCanvas")
