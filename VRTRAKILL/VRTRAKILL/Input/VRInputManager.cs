@@ -86,14 +86,35 @@ namespace Plugin.VRTRAKILL.Input
         { if (newState != Dash) { Dash = newState; TriggerKey(ConfigMaster.Dash, Dash, !Dash); } }
 
         private static void LHShootH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != Punch) { Punch = newState; InputManager.Instance.InputSource.Punch.Trigger(Punch, !Punch); } }
+        {
+            if (newState != Punch)
+            {
+                Punch = newState;
+                if (Vars.IsAMenu) LMBPress(Punch, !Punch);
+                else InputManager.Instance.InputSource.Punch.Trigger(Punch, !Punch);
+            }
+        }
         private static void LHAltShootH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != SwapHand) { SwapHand = newState; TriggerKey(ConfigMaster.SwapHand, SwapHand, !SwapHand); } }
 
         private static void RHShootH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != RHPrimaryFire) { RHPrimaryFire = newState; InputManager.Instance.InputSource.Fire1.Trigger(RHPrimaryFire, !RHPrimaryFire); } }
+        {
+            if (newState != RHPrimaryFire)
+            {
+                RHPrimaryFire = newState;
+                if (Vars.IsSandboxArmActive) LMBPress(RHPrimaryFire, !RHPrimaryFire);
+                else InputManager.Instance.InputSource.Fire1.Trigger(RHPrimaryFire, !RHPrimaryFire);
+            }
+        }
         private static void RHAltShootH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != RHAltFire) { RHAltFire = newState; InputManager.Instance.InputSource.Fire2.Trigger(RHAltFire, !RHAltFire); } }
+        {
+            if (newState != RHAltFire)
+            {
+                RHAltFire = newState;
+                if (Vars.IsSandboxArmActive) RMBPress(RHAltFire, !RHAltFire);
+                else InputManager.Instance.InputSource.Fire2.Trigger(RHAltFire, !RHAltFire);
+            }
+        }
         private static void IterateWeaponH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
         {
             // crutch, wait for weapon wheel to come out
@@ -142,14 +163,22 @@ namespace Plugin.VRTRAKILL.Input
             if (Started) InpSim.Keyboard.KeyDown(KeyCode);
             else if (Ended) InpSim.Keyboard.KeyUp(KeyCode);
         }
-        private static void MousePress(WindowsInput.Native.MouseFlag MF, bool Started, bool Ended)
-        {
 
+        private static void LMBPress(bool Started, bool Ended)
+        {
+            if (Started) InpSim.Mouse.LeftButtonDown();
+            else if (Ended) InpSim.Mouse.LeftButtonUp();
+        }
+        private static void RMBPress(bool Started, bool Ended)
+        {
+            if (Started) InpSim.Mouse.RightButtonDown();
+            else if (Ended) InpSim.Mouse.RightButtonUp();
         }
         private static void MouseScroll(int Amount)
         {
             InpSim.Mouse.VerticalScroll(Amount);
         }
+
         public static void Trigger(this InputActionState state, bool started, bool cancelled)
         {
             if (started)
