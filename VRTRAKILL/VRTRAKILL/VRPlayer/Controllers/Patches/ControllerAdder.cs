@@ -6,7 +6,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
 {
     [HarmonyPatch(typeof(NewMovement))] internal class ControllerAdder
     {
-        [HarmonyPostfix] [HarmonyPatch(nameof(NewMovement.Start))] public static void AddDebugHands(NewMovement __instance)
+        [HarmonyPostfix] [HarmonyPatch(nameof(NewMovement.Start))] public static void AddHands(NewMovement __instance)
         {
             __instance.gameObject.SetActive(false);
 
@@ -34,9 +34,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
             RightHand.poseAction = SteamVR_Actions._default.RightPose;
             RightHand.inputSource = SteamVR_Input_Sources.RightHand;
 
-            if (Vars.NotAMenu) // add !
-            {
-                try
+            if (!Vars.IsAMenu) try // remove ! 
                 {
                     // Left Hand Model
                     GameObject LHMGO = new GameObject("Model"); LHMGO.transform.parent = LHGO.transform;
@@ -48,7 +46,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
                     SteamVR_RenderModel RHMGORM = RHMGO.AddComponent<SteamVR_RenderModel>();
                     RHMGORM.createComponents = true;
                 } catch {}
-            }
             else try
                 {
                     for (int i = 0; i < Vars.VRCameraContainer.transform.childCount; i++)
