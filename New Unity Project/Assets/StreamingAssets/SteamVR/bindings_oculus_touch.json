@@ -67,7 +67,7 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/default/in/swaphand"
+                     "output" : "/actions/default/in/whiplash"
                   }
                },
                "mode" : "button",
@@ -196,7 +196,7 @@
    },
    "category" : "steamvr_input",
    "controller_type" : "oculus_touch",
-   "description" : "Default bindings for VRTRAKILL",
+   "description" : "Default bindings for VRTRAKILL (oculus touch)",
    "interaction_profile" : "",
    "name" : "VRTRAKILL Defaults",
    "options" : {},
