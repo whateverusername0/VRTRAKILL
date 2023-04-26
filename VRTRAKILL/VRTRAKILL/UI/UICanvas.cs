@@ -30,7 +30,7 @@ namespace Plugin.VRTRAKILL.UI
         }
         private void Update()
         {
-            if (Vars.NotAMenu) UpdatePos(); else ResetPos();
+            if (!Vars.IsAMenu) UpdatePos(); else ResetPos();
             transform.position = VRUIConverter.UICamera.transform.position + LastCamFwd;
         }
 
@@ -48,7 +48,7 @@ namespace Plugin.VRTRAKILL.UI
             {
                 foreach (Canvas C in Object.FindObjectsOfType<Canvas>())
                     if (!Helpers.Misc.HasComponent<UICanvas>(C.gameObject))
-                        UICanvas.ConvertCanvas(C);
+                        ConvertCanvas(C);
             }
         }
 
