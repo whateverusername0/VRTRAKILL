@@ -185,13 +185,14 @@
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Feedbacker\FeedbackerController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\PunchP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\ControllerController.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Controllers\LeftArmController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\Patches\ControllerAdder.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\RightArmController.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\Controllers\LeftArmController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Boomstick\TransformP.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\Guns\GunsP.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\GunsP.cs" />
     <Compile Include="VRTRAKILL\Input\VRInputManager.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\RemoveHands.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\AimingP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Pistol\TransformP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\VRGunsController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Movement\Patches\ClimbStepP.cs" />
