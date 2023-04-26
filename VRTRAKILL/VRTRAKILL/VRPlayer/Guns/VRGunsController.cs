@@ -1,5 +1,4 @@
-﻿using Plugin.VRTRAKILL.VRPlayer.Controllers;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Guns
 {
@@ -12,8 +11,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns
 
         private void Update()
         {
-            transform.position = RightArmController.Instance.Position;
-            transform.rotation = RightArmController.Instance.Rotation;
+            transform.position = Vars.RightController.transform.position;
+            transform.rotation = Vars.RightController.transform.rotation;
         }
     }
 }
