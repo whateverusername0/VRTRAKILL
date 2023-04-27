@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using System;
 using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
