@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>  
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -145,6 +145,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\InverseKinematics\IKManager.cs" />
+    <Compile Include="Helpers\InverseKinematics\Joint.cs" />
     <Compile Include="Helpers\Libraries\Mono.Reflection\BackingFieldResolver.cs" />
     <Compile Include="Helpers\Libraries\Mono.Reflection\ByteBuffer.cs" />
     <Compile Include="Helpers\Libraries\Mono.Reflection\Disassembler.cs" />
@@ -189,10 +191,12 @@
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\Patches\ControllerAdder.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\RightArmController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Boomstick\TransformP.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Guns\Nailgoon\TransformP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\GunsP.cs" />
     <Compile Include="VRTRAKILL\Input\VRInputManager.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\RemoveHands.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\AimingP.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Guns\Pistol\ArmP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Pistol\TransformP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\VRGunsController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Movement\Patches\ClimbStepP.cs" />
@@ -299,7 +303,6 @@
     <Folder Include="VRTRAKILL\VRPlayer\Arms\GrapplingHook\" />
     <Folder Include="VRTRAKILL\VRPlayer\Arms\Knuckleblaster\" />
     <Folder Include="VRTRAKILL\VRPlayer\Arms\Sandboxer\" />
-    <Folder Include="VRTRAKILL\VRPlayer\Guns\Nailgoon\" />
     <Folder Include="VRTRAKILL\VRPlayer\Guns\Railgun\" />
     <Folder Include="VRTRAKILL\VRPlayer\Guns\RocketThrower\" />
   </ItemGroup>
