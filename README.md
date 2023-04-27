@@ -11,15 +11,15 @@ This mod exists because [HuskVR](https://github.com/TeamDoodz/HuskVR) is not bei
 ### What works right now:
 - Camera, ***Classic*** HUD (modern hud is broken)
 - Full movement (jump, dash, slide, slam storage, rocket ride, etc.)
-- Shooting & punching (using your camera - it shoots at the point you're looking at)
+- Semi-full controller tracking (aiming / shooting)
+- Punching using your camera
 - Weapon swap, weapon scroll (using joystick)
 - Interacting with UI (some of the menus are broken - will be fixed in the future)
 ### What is planned/being worked on:
 - Getting modern HUD up and working
-- Full controller tracking (aiming, autoaim support)
 - Full arm movement/tracking (punch irl to punch ingame)
 - Haptics (controller rumble)
-- Movement by irl movement (jump, dash, slide) (would be funny to watch from the side)
+- Movement by irl movement (jump, dash, slide) (would be funny to watch from the side) (ridiculous)
 
 ## Requirements
 - A copy of the latest version of ULTRAKILL (any kind)
