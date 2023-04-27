@@ -4,6 +4,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
 {
     internal class VRCameraController : MonoBehaviour
     {
+        private void Start ()
+        {
+            transform.position -= new Vector3(0, 0.5f, 0);
+        }
+
         private void Update()
         {
             // Smooth turn
