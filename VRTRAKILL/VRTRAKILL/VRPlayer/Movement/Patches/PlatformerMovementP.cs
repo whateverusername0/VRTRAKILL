@@ -7,11 +7,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
     // change move vector to joystick axis, fix dash, jump, etc.
     [HarmonyPatch(typeof(PlatformerMovement))] static class PlatformerMovementP
     {
-        [HarmonyPostfix] [HarmonyPatch(nameof(PlatformerMovement.Start))] static void Start(PlatformerMovement __instance)
-        {
-            __instance.walkSpeed /= 2;
-        }
-
+        // change movement vector to vr one
         [HarmonyPrefix] [HarmonyPatch(nameof(PlatformerMovement.Update))] static bool Update(PlatformerMovement __instance)
         {
             if (MonoSingleton<OptionsManager>.Instance.paused) return false;
@@ -88,8 +84,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                     __instance.boostLeft = 100f;
                     __instance.boost = true;
                     __instance.anim.Play("Dash", -1, 0f);
-                    __instance.dodgeDirection = __instance.movementDirection;
-                    if (__instance.dodgeDirection == Vector3.zero) __instance.dodgeDirection = __instance.playerModel.forward;
+
+                    __instance.dodgeDirection = __instance.movementDirection / 2;
+                    if (__instance.dodgeDirection == Vector3.zero) __instance.dodgeDirection = __instance.playerModel.forward / 2;
 
                     Quaternion identity = Quaternion.identity;
                     identity.SetLookRotation(__instance.dodgeDirection * -1f);
@@ -128,7 +125,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
             {
                 Quaternion quaternion = Quaternion.LookRotation(__instance.movementDirection);
                 if (__instance.boost)
-                quaternion = Quaternion.LookRotation(__instance.dodgeDirection);
+                    quaternion = Quaternion.LookRotation(__instance.dodgeDirection);
                 __instance.playerModel.rotation =
                     Quaternion.RotateTowards(__instance.playerModel.rotation, quaternion,
                     (Quaternion.Angle(__instance.playerModel.rotation, quaternion) + 20f) * 35f * __instance.movementDirection.magnitude * Time.deltaTime);
@@ -167,7 +164,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 
                     float num2 = 2.5f;
                     if (__instance.sliding || Physics.Raycast(__instance.transform.position + Vector3.up * 0.625f, Vector3.up, 2.5f, LayerMaskDefaults.Get(LMD.Environment)))
-                    num2 = 0.625f;
+                        num2 = 0.625f;
 
                     Vector3 vector3 = __instance.transform.position + Vector3.up * num2;
                     __instance.platformerCamera.RotateAround(vector3, Vector3.left, __instance.rotationX);
@@ -176,7 +173,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                     RaycastHit raycastHit2;
                     if (Physics.SphereCast(vector3, 0.25f, __instance.platformerCamera.position - vector3, out raycastHit2,
                         Vector3.Distance(vector3, __instance.platformerCamera.position), LayerMaskDefaults.Get(LMD.Environment)))
-                    __instance.platformerCamera.position = raycastHit2.point + 0.5f * raycastHit2.normal;
+                        __instance.platformerCamera.position = raycastHit2.point + 0.5f * raycastHit2.normal;
                 }
             }
 
@@ -200,7 +197,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
             if (__instance.invincible && __instance.extraHits < 3)
             {
                 if (__instance.blinkTimer > 0f)
-                __instance.blinkTimer = Mathf.MoveTowards(__instance.blinkTimer, 0f, Time.deltaTime);
+                    __instance.blinkTimer = Mathf.MoveTowards(__instance.blinkTimer, 0f, Time.deltaTime);
                 else
                 {
                     __instance.blinkTimer = 0.05f;

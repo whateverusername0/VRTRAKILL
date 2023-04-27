@@ -7,11 +7,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
     // change move vector to joystick axis, fix dash, jump, etc.
     [HarmonyPatch(typeof(NewMovement))] static class NewMovementP
     {
-        [HarmonyPostfix] [HarmonyPatch(nameof(NewMovement.Start))] static void Start(NewMovement __instance)
+        [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Start))] static void Start(NewMovement __instance)
         {
-            __instance.walkSpeed /= 2; // appareantly this has been the root of all my problems
-            //__instance.jumpPower = __instance.jumpPower / 2;
-            //__instance.wallJumpPower = __instance.wallJumpPower / 2;
+            __instance.jumpPower = __instance.jumpPower / 2;
+            __instance.wallJumpPower = __instance.wallJumpPower / 2;
         }
 
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Update))] static bool Update(NewMovement __instance)
@@ -394,9 +393,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 
                     __instance.boostLeft = 100f;
                     __instance.boost = true;
-                    __instance.dodgeDirection = __instance.movementDirection;
 
-                    if (__instance.dodgeDirection == Vector3.zero) __instance.dodgeDirection = __instance.transform.forward;
+                    __instance.dodgeDirection = __instance.movementDirection / 2;
+                    if (__instance.dodgeDirection == Vector3.zero) __instance.dodgeDirection = __instance.transform.forward / 2;
 
                     Quaternion identity = Quaternion.identity;
                     identity.SetLookRotation(__instance.dodgeDirection * -1f);
@@ -455,11 +454,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
             Vector3 vector3 = __instance.hudOriginalPos - __instance.cc.transform.InverseTransformDirection(__instance.rb.velocity) / 1000f;
             float num3 = Vector3.Distance(vector3, __instance.screenHud.transform.localPosition);
             __instance.screenHud.transform.localPosition = Vector3.MoveTowards(__instance.screenHud.transform.localPosition, vector3, Time.deltaTime * 15f * num3);
-
             Vector3 vector4 = Vector3.ClampMagnitude(__instance.camOriginalPos - __instance.cc.transform.InverseTransformDirection(__instance.rb.velocity) / 350f * -1f, 0.2f);
             float num4 = Vector3.Distance(vector4, __instance.hudCam.transform.localPosition);
             __instance.hudCam.transform.localPosition = Vector3.MoveTowards(__instance.hudCam.transform.localPosition, vector4, Time.deltaTime * 25f * num4);
-
             int rankIndex = MonoSingleton<StyleHUD>.Instance.rankIndex;
             if (rankIndex == 7 || __instance.difficulty <= 1)
             {
@@ -482,7 +479,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
             return false;
         }
 
-        [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Dodge))] static bool Dash (NewMovement __instance)
+        [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Dodge))] static bool Dash(NewMovement __instance)
         {
             if (__instance.sliding)
             {
