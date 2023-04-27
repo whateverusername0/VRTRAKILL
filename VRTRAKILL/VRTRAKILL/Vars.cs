@@ -6,7 +6,8 @@ namespace Plugin.VRTRAKILL
     internal class Vars
     {
         public static bool IsAMenu =>
-               SceneManager.GetActiveScene().name.StartsWith("Main Menu")
+            // holy shit those new scene names are disgusting
+               (GameObject.Find("Main Menu State") != null && GameObject.Find("Main Menu State").activeSelf == true)
             || (OptionsManager.Instance != null && OptionsManager.Instance.paused)
             || (SpawnMenu.Instance != null && SpawnMenu.Instance.gameObject.activeInHierarchy)
             || (FinalRank.Instance != null && FinalRank.Instance.gameObject.activeInHierarchy);
