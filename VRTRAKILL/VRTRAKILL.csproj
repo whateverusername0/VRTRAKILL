@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>  
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -299,9 +299,9 @@
     <Folder Include="VRTRAKILL\VRPlayer\Arms\GrapplingHook\" />
     <Folder Include="VRTRAKILL\VRPlayer\Arms\Knuckleblaster\" />
     <Folder Include="VRTRAKILL\VRPlayer\Arms\Sandboxer\" />
-    <Folder Include="VRTRAKILL\VRPlayer\Guns\Nailgun\" />
+    <Folder Include="VRTRAKILL\VRPlayer\Guns\Nailgoon\" />
     <Folder Include="VRTRAKILL\VRPlayer\Guns\Railgun\" />
-    <Folder Include="VRTRAKILL\VRPlayer\Guns\RocketLauncher\" />
+    <Folder Include="VRTRAKILL\VRPlayer\Guns\RocketThrower\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
