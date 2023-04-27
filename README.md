@@ -46,7 +46,7 @@ The text version:
 5. Select your VR-ed ULTRAKILL  
 6. Run it once, wait for the error message to appear in the console and then exit  
 7. Go to BepInEx/plugins, open VRTRAKILL_Config.json and copy the keybinds from your ULTRAKILL options there  
-  7.1 If your config file is mostly empty, copy in the [default config file from here](https://github.com/whateverusername0/VRTRAKILL/blob/patch-1/GithubStuff/VRTRAKILL_Config.json). Make sure to remove the " 0.x" so it actually gets read by the mod  
+  7.1 If your config file is mostly empty, copy in the [default config file from here](https://github.com/whateverusername0/VRTRAKILL/tree/master/GithubStuff). Make sure to remove the " 0.x" so it actually gets read by the mod  
 8. Run VR-ed ULTRAKILL again  
 9. Begin ULTRAKILLing in VR  
 
