@@ -8,7 +8,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
     {
         [HarmonyPostfix] [HarmonyPatch(typeof(Revolver), nameof(Revolver.Start))] static void RemoveRevolverHand(Revolver __instance)
         {
-            string[] GameObjects = { "Revolver", "MinosRevolver", "PistolNew" };
+            string[] GameObjects = { "Revolver_Rerigged_Standard" }; // update
             foreach (string GO in GameObjects)
                 try
                 {
