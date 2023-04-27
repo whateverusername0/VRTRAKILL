@@ -34,21 +34,21 @@ This mod exists because [HuskVR](https://github.com/TeamDoodz/HuskVR) is not bei
 VRTRAKILL Installation tutorial [here](https://www.youtube.com/watch?v=FcTysn8jwFQ) (@guesty5060 you're welcome)
 
 The text version:
-1. Begin doing ULTRAKILL shenanigans:  
-  1.1 Locate ULTRAKILL in your Steam library (or wherever you store it)  
+1. Make a copy of ultrakill so you can safely mod that version without affecting your normal game:  
+  1.1 Locate Ultrakill in your Steam library (or wherever you store it)  
   1.2 RMB -> Manage -> Browse local files  
-  1.3 Copy your ULTRAKILL to a new whatever folder and rename it however you like (also a cool practice to separate original from vr one)  
-2. Get & Install [latest stable at the momemt BepInEx 5.4.21](https://github.com/BepInEx/BepInEx/releases/tag/v5.4.21) using their guide, make sure to run BepInEx'ed ULTRAKILL atleast once so it can generate needed folders & files  
-3. Download one of the releases and merge both folders
-4. Begin doing Steam scrindonguloges:  
-  4.1 ADD A GAME (at the bottom left in library) -> Add a non-steam game -> select your VR-ed ULTRAKILL.exe  
-  4.2 Properties -> Shortcut -> Include in VR Library
-5. Open SteamVR
-6. Select your VR-ed ULTRAKILL
-7. Run it once, wait for the error message to appear in the console and then exit
-8. Go to BepInEx/plugins/VRTRAKILL, open VRTRAKILL_Config.json and copy the keybinds from your ULTRAKILL options there  
-9. Run VR-ed ULTRAKILL again  
-10. Begin ULTRAKILLing in VR
+  1.3 Make a copy of the ULTRAKILL folder and put it somewhere
+1. Get & Install [latest stable (at the moment) BepInEx 5.4.21](https://github.com/BepInEx/BepInEx/releases/tag/v5.4.21) (get the x64 version) into the new ultrakill folder using [their guide](https://github.com/BepInEx/BepInEx/wiki/Installation). Make sure to run BepInEx'ed Ultrakill at least once so it can generate needed folders & files  
+1. Add the new ultrakill folder as a 'non-steam game' to steam so it can be run with steamVR:  
+  1.1 ADD A GAME (at the bottom left in library) -> Add a non-steam game -> select your VR-ed ULTRAKILL.exe  
+  1.2 Right click on the new VR-ed Ultrakill in your steam library -> Properties -> Shortcut -> Include in VR Library
+1. Open SteamVR
+1. Select your VR-ed Ultrakill
+1. Run it once, wait for the error message to appear in the console and then exit
+1. Go to BepInEx/plugins, open VRTRAKILL_Config.json and copy the keybinds from your ULTRAKILL options there
+  1.1 If your config file is mostly empty, copy in the [default config file from here](https://github.com/whateverusername0/VRTRAKILL/blob/patch-1/GithubStuff/VRTRAKILL_Config.json)
+1. Run VR-ed Ultrakill again  
+1. Begin ultrakilling in VR
 
 ## Build VRTRAKILL from source
 Building from source video tutorial [here](https://www.youtube.com/watch?v=h1rS-p7aFFo) (@jackietanuki you're welcome)
