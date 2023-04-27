@@ -7,6 +7,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
     // change move vector to joystick axis, fix dash, jump, etc.
     [HarmonyPatch(typeof(PlatformerMovement))] static class PlatformerMovementP
     {
+        [HarmonyPostfix] [HarmonyPatch(nameof(PlatformerMovement.Start))] static void Start(PlatformerMovement __instance)
+        {
+            __instance.walkSpeed /= 2;
+        }
+
         [HarmonyPrefix] [HarmonyPatch(nameof(PlatformerMovement.Update))] static bool Update(PlatformerMovement __instance)
         {
             if (MonoSingleton<OptionsManager>.Instance.paused) return false;
@@ -83,8 +88,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                     __instance.boostLeft = 100f;
                     __instance.boost = true;
                     __instance.anim.Play("Dash", -1, 0f);
-                    __instance.dodgeDirection = __instance.movementDirection / 2;
-                    if (__instance.dodgeDirection == Vector3.zero) __instance.dodgeDirection = __instance.playerModel.forward / 2;
+                    __instance.dodgeDirection = __instance.movementDirection;
+                    if (__instance.dodgeDirection == Vector3.zero) __instance.dodgeDirection = __instance.playerModel.forward;
 
                     Quaternion identity = Quaternion.identity;
                     identity.SetLookRotation(__instance.dodgeDirection * -1f);
