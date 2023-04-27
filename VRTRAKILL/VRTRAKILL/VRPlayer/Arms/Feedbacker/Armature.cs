@@ -4,17 +4,17 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Feedbacker
 {
     internal class Armature
     {
-        public static Transform Root => GameObject.Find("Arm2").transform;
-        public static Transform RArmature => Root.GetChild(0);
-        public static Transform UpperArm => RArmature.GetChild(0);
-        public static Transform Forearm => UpperArm.GetChild(0);
+        public Transform Root { get; set; }
+        public Transform RArmature => Root.GetChild(0);
+        public Transform UpperArm  => RArmature.GetChild(0);
+        public Transform Forearm   => UpperArm.GetChild(0);
 
-        public static Transform Hand => Forearm.GetChild(0);
-        public static Finger FIndex => new Finger(Hand.GetChild(0));
-        public static Finger FLittle => new Finger(Hand.GetChild(1));
-        public static Finger FMiddle => new Finger(Hand.GetChild(2));
-        public static Finger FRing => new Finger(Hand.GetChild(3));
-        public static Finger FThumb => new Finger(Hand.GetChild(4), true);
+        public Transform Hand => Forearm.GetChild(0);
+        public Finger FIndex  => new Finger(Hand.GetChild(0));
+        public Finger FLittle => new Finger(Hand.GetChild(1));
+        public Finger FMiddle => new Finger(Hand.GetChild(2));
+        public Finger FRing   => new Finger(Hand.GetChild(3));
+        public Finger FThumb  => new Finger(Hand.GetChild(4), true);
 
         public class Finger : Transform
         {
@@ -31,6 +31,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Feedbacker
                 else Tip = Bridge.GetChild(0);
                 TipEnd = Tip.GetChild(0);
             }
+        }
+
+        public Armature(Transform R)
+        {
+            Root = R;
         }
     }
 }
