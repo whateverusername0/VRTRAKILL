@@ -13,9 +13,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement
 
         private void Update()
         {
-            float DistanceFromFloor = Vector3.Dot(Vars.VRCameraContainer.transform.localPosition, Vector3.up);
+            //float DistanceFromFloor = Vector3.Dot(Vars.VRCameraContainer.transform.localPosition, Vector3.up);
 
-            CC.height = Mathf.Max(CC.radius, DistanceFromFloor);
+            //CC.height = Mathf.Max(CC.radius, DistanceFromFloor);
             //CC.center = Vars.VRCameraContainer.transform.localPosition - 0.5f * DistanceFromFloor * Vector3.up;
         }
     }
