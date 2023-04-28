@@ -27,6 +27,7 @@ If applicable, add screenshots / videos to help explain your problem.
 
 **Other info:**
  - Headset: [e.g. Oculus Quest 1/2, HTC Vive, Valve Index]
+ - Intermediate software (if using Quest) [e.g. Virtual Desktop, ALVR, Oculus Link]
  - VRTRAKILL Version [e.g. 0.8]
 
 **Additional context**
