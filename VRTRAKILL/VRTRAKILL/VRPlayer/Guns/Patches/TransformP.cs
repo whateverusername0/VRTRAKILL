@@ -71,7 +71,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             static Vector3 Position = new Vector3(-.15f, .2f, -1.05f);
             static Vector3 Scale = new Vector3(-.35f, .35f, .35f);
 
-            [HarmonyPostfix] [HarmonyPatch(nameof(Sandbox.Arm.SandboxArm.Awake))] static void Retransform(Sandbox.Arm.SandboxArm __instance)
+            [HarmonyPostfix] [HarmonyPatch(nameof(Sandbox.Arm.SandboxArm.OnEnable))] static void Retransform(Sandbox.Arm.SandboxArm __instance)
             {
                 __instance.transform.localPosition = Position;
                 __instance.transform.localScale = Scale;
