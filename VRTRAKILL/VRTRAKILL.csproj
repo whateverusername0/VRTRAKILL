@@ -181,7 +181,8 @@
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VRTRAKILL\Config\Input\Keybinds.cs" />
-    <Compile Include="VRTRAKILL\UI\Patches\HUDPosP.cs" />
+    <Compile Include="VRTRAKILL\Config\Settings\VRSettings.cs" />
+    <Compile Include="VRTRAKILL\UI\ModernUI\HudPosP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\ArmsP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Feedbacker\Armature.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Feedbacker\FeedbackerController.cs" />
@@ -190,14 +191,11 @@
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\LeftArmController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\Patches\ControllerAdder.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\RightArmController.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\Guns\Boomstick\TransformP.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\Guns\Nailgoon\TransformP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\GunsP.cs" />
     <Compile Include="VRTRAKILL\Input\VRInputManager.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\RemoveHands.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\RemoveArms.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\AimingP.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\Guns\Pistol\ArmP.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\Guns\Pistol\TransformP.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\TransformP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\VRGunsController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Movement\Patches\ClimbStepP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Movement\Patches\FlightNoclipP.cs" />
@@ -210,13 +208,13 @@
     <Compile Include="VRTRAKILL\Config\ConfigJSON.cs" />
     <Compile Include="VRTRAKILL\Config\ConfigMaster.cs" />
     <Compile Include="VRTRAKILL\Config\InputMap.cs" />
-    <Compile Include="VRTRAKILL\Config\Input\VRSettings.cs" />
+    <Compile Include="VRTRAKILL\Config\Input\VRInputSettings.cs" />
     <Compile Include="VRTRAKILL\Input\VRInputVars.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\CameraConverter.cs" />
     <Compile Include="Helpers\GazeUIInteraction.cs" />
-    <Compile Include="VRTRAKILL\UI\Patches\QOL.cs" />
+    <Compile Include="VRTRAKILL\UI\Patches\Tweaks.cs" />
     <Compile Include="VRTRAKILL\UI\UICanvas.cs" />
-    <Compile Include="VRTRAKILL\UI\VRUIConverter.cs" />
+    <Compile Include="VRTRAKILL\UI\UIConverter.cs" />
     <Compile Include="VRTRAKILL\Vars.cs" />
     <Compile Include="VRTRAKILL\WeaponWheelie\Patches\LockTurnWhenActive.cs" />
   </ItemGroup>
@@ -303,8 +301,6 @@
     <Folder Include="VRTRAKILL\VRPlayer\Arms\GrapplingHook\" />
     <Folder Include="VRTRAKILL\VRPlayer\Arms\Knuckleblaster\" />
     <Folder Include="VRTRAKILL\VRPlayer\Arms\Sandboxer\" />
-    <Folder Include="VRTRAKILL\VRPlayer\Guns\Railgun\" />
-    <Folder Include="VRTRAKILL\VRPlayer\Guns\RocketThrower\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
