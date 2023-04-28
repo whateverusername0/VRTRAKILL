@@ -5,8 +5,16 @@ namespace Plugin.VRTRAKILL.Config
 {
     internal class ConfigJSON
     {
-        public Input.VRSettings VRSettings => new Input.VRSettings();
-        public Input.Keybinds Inputs => new Input.Keybinds();
+        public Settings.VRSettings VRSettings { get; set; }
+        public Input.VRInputSettings VRInputSettings { get; set; }
+        public Input.Keybinds Inputs { get; set; }
+
+        public ConfigJSON()
+        {
+            VRSettings = new Settings.VRSettings();
+            VRInputSettings = new Input.VRInputSettings();
+            Inputs = new Input.Keybinds();
+        }
 
         public static ConfigJSON Deserialize()
         {
@@ -19,9 +27,8 @@ namespace Plugin.VRTRAKILL.Config
             catch (FileNotFoundException)
             {
                 Plugin.PLogger.LogError("Unable to find VRTRAKILL_Config.json, without it you literally cannot use the mod.\n" +
-                                        "Generating a new one. Please quit the game and fill it out, ty.");
-                Serialize(new ConfigJSON());
-                return null;
+                                        "Generating a new one. Please quit the game and fill it out, ty. Starting up using default settings.");
+                Serialize(new ConfigJSON()); return new ConfigJSON();
             }
         }
         public static void Serialize(ConfigJSON Config)

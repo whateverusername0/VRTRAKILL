@@ -28,8 +28,7 @@ namespace Plugin.VRTRAKILL.Config
 
         public static void Init()
         {
-            ConfigJSON Config = ConfigJSON.Deserialize();
-            Input.Keybinds Keybinds = Config.Inputs; ConvertJSONToKeys(Keybinds);
+            Input.Keybinds Keybinds = Vars.Config.Inputs; ConvertJSONToKeys(Keybinds);
         }
 
         private static void ConvertJSONToKeys(Input.Keybinds Config)
