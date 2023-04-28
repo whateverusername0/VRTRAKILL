@@ -1,7 +1,5 @@
-﻿using System.IO;
-using System.Diagnostics;
-using BepInEx;
-using BepInEx.Logging;
+﻿using System.IO; using System.Diagnostics;
+using BepInEx; using BepInEx.Logging;
 using Valve.VR;
 
 namespace Plugin
@@ -26,7 +24,7 @@ namespace Plugin
 
             VRTRAKILL.Config.ConfigMaster.Init();
 
-            VRTRAKILL.UI.VRUIConverter.Init();
+            VRTRAKILL.UI.UIConverter.Init();
 
             InitializeSteamVR();
         }
