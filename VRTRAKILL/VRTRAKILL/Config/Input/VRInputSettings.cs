@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Plugin.VRTRAKILL.Config.Input
+﻿namespace Plugin.VRTRAKILL.Config.Input
 {
     internal class VRInputSettings
     {

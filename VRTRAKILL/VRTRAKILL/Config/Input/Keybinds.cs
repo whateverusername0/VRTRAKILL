@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.IO;
-
-namespace Plugin.VRTRAKILL.Config.Input
+﻿namespace Plugin.VRTRAKILL.Config.Input
 {
     internal class Keybinds
     {
@@ -15,7 +12,7 @@ namespace Plugin.VRTRAKILL.Config.Input
         public string DashKey => "LeftShift";
 
         public string LastWeaponUsedKey => "Q";
-        public string ChangeWeaponVariationKey => "F";
+        public string ChangeWeaponVariationKey => "E";
         public string IterateWeaponKey => "MouseScroll";
         public string SwapHandKey => "G";
         public string WhiplashKey => "R";
