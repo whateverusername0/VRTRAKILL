@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Plugin.VRTRAKILL
 {
     internal class Vars
     {
+        public static Config.ConfigJSON Config = VRTRAKILL.Config.ConfigJSON.Deserialize();
+
         public static bool IsAMenu =>
             // holy shit those new scene names are disgusting
                (GameObject.Find("Main Menu State") != null && GameObject.Find("Main Menu State").activeSelf == true)
