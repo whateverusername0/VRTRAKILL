@@ -4,11 +4,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement
 {
     internal class VRPlayerController : MonoBehaviour
     {
-        CapsuleCollider CC;
+        //CapsuleCollider CC;
         private void Start()
         {
             // Update player's height
-            CC = GetComponent<CapsuleCollider>();
+            //CC = GetComponent<CapsuleCollider>();
         }
 
         private void Update()
