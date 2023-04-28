@@ -6,13 +6,13 @@ namespace Plugin.VRTRAKILL.UI.Patches
 {
     [HarmonyPatch] static class Tweaks
     {
-        [HarmonyPrefix] [HarmonyPatch(typeof(CanvasController), "Awake")] static void ResizeCanvases(CanvasController __instance)
+        [HarmonyPrefix] [HarmonyPatch(typeof(CanvasController), nameof(CanvasController.Awake))] static void ResizeCanvases(CanvasController __instance)
         {
-            // Stretches screen effects goatse style so it's not a fucking square in the middle of the hud
+            // stretches screen effects goatse style so it's not a fucking square in the middle of the hud
             string[] ScreenEffects =
             {
                 "HurtScreen", "BlackScreen", "ParryFlash",
-                "UnderwaterOverlay",
+                "UnderwaterOverlay", "Black", "White" // leviathan specific
             };
             foreach (string ScreenEffect in ScreenEffects)
                 try
@@ -24,9 +24,10 @@ namespace Plugin.VRTRAKILL.UI.Patches
                 }
                 catch { continue; }
 
+            // prime bosses specific
             try { Object.FindObjectOfType<FlashImage>().transform.localScale *= 5; } catch {}
 
-            // Disable useless stuffs
+            // disable useless stuffs
             string[] ScreenEffectsToDisable =
             {
                 "PowerUpVignette",
@@ -37,11 +38,7 @@ namespace Plugin.VRTRAKILL.UI.Patches
         [HarmonyPrefix] [HarmonyPatch(typeof(Crosshair), nameof(Crosshair.Start))] static void SetCrosshair(Crosshair __instance)
         {
             if (Vars.Config.VRSettings.EnableDefaultCrosshair == false)
-                __instance.enabled = false;
-        }
-        [HarmonyPrefix] [HarmonyPatch(typeof(FinalRank), nameof(FinalRank.Start))] static void TweakRankScreenTransform(FinalRank __instance)
-        {
-            // Placeholder
+                __instance.gameObject.SetActive(false);
         }
     }
 }
