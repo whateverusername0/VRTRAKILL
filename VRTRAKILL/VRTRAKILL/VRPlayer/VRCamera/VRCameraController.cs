@@ -6,7 +6,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
     {
         private void Start ()
         {
-            transform.position -= new Vector3(0, 0.5f, 0);
+            transform.position -= new Vector3(0, 1f, 0);
         }
 
         private void Update()
