@@ -34,7 +34,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
             RightHand.poseAction = SteamVR_Actions._default.RightPose;
             RightHand.inputSource = SteamVR_Input_Sources.RightHand;
 
-            if (!Vars.IsAMenu) try // remove ! 
+            if (Vars.IsAMenu) try
                 {
                     // Left Hand Model
                     GameObject LHMGO = new GameObject("Model"); LHMGO.transform.parent = LHGO.transform;
