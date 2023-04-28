@@ -4,7 +4,7 @@ using HarmonyLib;
 
 namespace Plugin.VRTRAKILL.UI.Patches
 {
-    [HarmonyPatch] static class QOL
+    [HarmonyPatch] static class Tweaks
     {
         [HarmonyPrefix] [HarmonyPatch(typeof(CanvasController), "Awake")] static void ResizeCanvases(CanvasController __instance)
         {
@@ -34,10 +34,14 @@ namespace Plugin.VRTRAKILL.UI.Patches
             foreach (string ScreenEffectToDisable in ScreenEffectsToDisable)
                 try { __instance.gameObject.transform.Find(ScreenEffectToDisable).GetComponent<Image>().enabled = false; } catch { continue; }
         }
+        [HarmonyPrefix] [HarmonyPatch(typeof(Crosshair), nameof(Crosshair.Start))] static void SetCrosshair(Crosshair __instance)
+        {
+            if (Vars.Config.VRSettings.EnableDefaultCrosshair == false)
+                __instance.enabled = false;
+        }
         [HarmonyPrefix] [HarmonyPatch(typeof(FinalRank), nameof(FinalRank.Start))] static void TweakRankScreenTransform(FinalRank __instance)
         {
-            __instance.transform.parent.localScale = new Vector3(0.003f, 0.002f, 0.001f);
-            __instance.transform.parent.localPosition = new Vector3(0f, -0.2f, 2.2f);
+            // Placeholder
         }
     }
 }
