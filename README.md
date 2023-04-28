@@ -42,7 +42,7 @@ The text version:
 4. Open SteamVR  
 5. Select your VR-ed ULTRAKILL  
 6. Run it once, wait for the error message to appear in the console and then exit  
-7. Go to BepInEx/plugins, open VRTRAKILL_Config.json and copy the keybinds from your ULTRAKILL options there  
+7. Go to BepInEx/plugins, open VRTRAKILL_Config.json and **make sure you have the same keybinds both in config and in ultrakill**  
   7.1 If you have config related problems, copy the already generated default config file [from here](https://github.com/whateverusername0/VRTRAKILL/tree/master/GithubStuff). Make sure to remove the " 0.x" so it actually gets read by the mod  
 8. Run VR-ed ULTRAKILL again  
 9. Begin ULTRAKILLing in VR  
