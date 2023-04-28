@@ -74,8 +74,8 @@ namespace Plugin.VRTRAKILL.Input
         { VRInputVars.MoveVector = axis; }
         private static void TurnH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
         {
-            if (axis.x > 0 + VRSettings.Deadzone) VRInputVars.TurnOffset += VRSettings.SmoothTurningSpeed * Time.deltaTime;
-            if (axis.x < 0 - VRSettings.Deadzone) VRInputVars.TurnOffset -= VRSettings.SmoothTurningSpeed * Time.deltaTime;
+            if (axis.x > 0 + Vars.Config.VRInputSettings.Deadzone) VRInputVars.TurnOffset += Vars.Config.VRInputSettings.SmoothTurningSpeed * Time.deltaTime;
+            if (axis.x < 0 - Vars.Config.VRInputSettings.Deadzone) VRInputVars.TurnOffset -= Vars.Config.VRInputSettings.SmoothTurningSpeed * Time.deltaTime;
         }
 
         private static void JumpH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
@@ -118,8 +118,8 @@ namespace Plugin.VRTRAKILL.Input
         private static void IterateWeaponH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
         {
             // crutch, wait for weapon wheel to come out
-            if (axis.y > 0 + VRSettings.Deadzone * 1.5f) MouseScroll(-1);
-            if (axis.y < 0 - VRSettings.Deadzone * 1.5f) MouseScroll(1);
+            if (axis.y > 0 + Vars.Config.VRInputSettings.Deadzone * 1.5f) MouseScroll(-1);
+            if (axis.y < 0 - Vars.Config.VRInputSettings.Deadzone * 1.5f) MouseScroll(1);
         }
         private static void ChangeWeaponVariationH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != ChangeWeaponVariation) { ChangeWeaponVariation = newState; TriggerKey(ConfigMaster.ChangeWeaponVariation, ChangeWeaponVariation, !ChangeWeaponVariation); } }
