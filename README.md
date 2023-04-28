@@ -1,9 +1,10 @@
 # VRTRAKILL
-![](/GithubStuff/thypunishmentisdeath.gif) ![](/GithubStuff/youcantescape.gif)  
-[Full minos fight](https://www.youtube.com/watch?v=yrofGYf_xTI) | [Full sisyphus fight](https://www.youtube.com/watch?v=DhcVx6yBEaM)  
+![](/GithubStuff/thypunishmentisdeath.gif) ![](/GithubStuff/youcantescape.gif) ![](/GithubStuff/+execution.gif)  
+[Full minos fight (0.3)](https://www.youtube.com/watch?v=yrofGYf_xTI) | [Full sisyphus fight (0.5)](https://www.youtube.com/watch?v=DhcVx6yBEaM) | [Cybergrind tomfoolery (0.8)](https://youtu.be/n2aAljuvpMo)  
 
 ULTRAKILLing in VR is now a thing.  
 This mod exists because [HuskVR](https://github.com/TeamDoodz/HuskVR) is not being updated for like 7 months, so I was like "Fine, I'll do it myself"  
+Also it does not require any other mods to function  
 
 ##### Scroll all the way down to see requirements & installing process.
 
@@ -25,10 +26,6 @@ This mod exists because [HuskVR](https://github.com/TeamDoodz/HuskVR) is not bei
 - A copy of the latest version of ULTRAKILL (any kind)
 - A (preferably) working VR compatible PC
 - A PCVR headset w/ SteamVR installed
-### Tested 100% working devices:
-- Oculus Quest 1/2/Pro (+ ALVR, Virtual Desktop, Oculus Link)
-- HTC Vive (unsure. somebody else was trying it)  
-- In theory it supports ALL devices that are supported by SteamVR.
 
 ## Installing VRTRAKILL in less than 10 steps
 VRTRAKILL Installation tutorial [here](https://www.youtube.com/watch?v=FcTysn8jwFQ) (@guesty5060 you're welcome)
@@ -46,7 +43,7 @@ The text version:
 5. Select your VR-ed ULTRAKILL  
 6. Run it once, wait for the error message to appear in the console and then exit  
 7. Go to BepInEx/plugins, open VRTRAKILL_Config.json and copy the keybinds from your ULTRAKILL options there  
-  7.1 If your config file is mostly empty, copy in the [default config file from here](https://github.com/whateverusername0/VRTRAKILL/tree/master/GithubStuff). Make sure to remove the " 0.x" so it actually gets read by the mod  
+  7.1 If you have config related problems, copy the already generated default config file [from here](https://github.com/whateverusername0/VRTRAKILL/tree/master/GithubStuff). Make sure to remove the " 0.x" so it actually gets read by the mod  
 8. Run VR-ed ULTRAKILL again  
 9. Begin ULTRAKILLing in VR  
 
