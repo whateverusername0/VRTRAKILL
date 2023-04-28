@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Plugin.VRTRAKILL.VRPlayer.Arms
 {
     // basically a rewrite of punching to fit in the new punching system
-    [HarmonyPatch(typeof(Punch))] internal class PunchP
+    /*[HarmonyPatch(typeof(Punch))]*/ internal class PunchP
     {
         [HarmonyPostfix] [HarmonyPatch(nameof(Punch.Start))] static void ReparentPunchZone(Punch __instance)
         {
@@ -24,12 +24,12 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
             }
         }
 
-        /* [HarmonyPrefix] [HarmonyPatch(nameof(Punch.Update))] */ static bool Update(Punch __instance)
+        [HarmonyPrefix] [HarmonyPatch(nameof(Punch.Update))] static bool Update(Punch __instance)
         {
             if (MonoSingleton<OptionsManager>.Instance.paused) return false;
 
-            if (Feedbacker.FeedbackerController.Instance.Speed >= 2 // detect fist speed instead of a button press
-                && __instance.ready && !__instance.shopping
+            if (//Feedbacker.FeedbackerController.Instance.Speed >= 2 // detect fist speed instead of a button press
+                /*&&*/ __instance.ready && !__instance.shopping
                 && __instance.fc.fistCooldown <= 0f && __instance.fc.activated
                 && !GameStateManager.Instance.PlayerInputLocked)
             {
