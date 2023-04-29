@@ -1,3 +1,5 @@
+### I'm in need of Valve Index and HTC Vive controller bindings. If somebody is reading this and has one of those controllers, please, create a default binding for them and make a pull request with it. It'll really help me and other people using the mod.
+
 # VRTRAKILL
 ![](/GithubStuff/thypunishmentisdeath.gif) ![](/GithubStuff/youcantescape.gif) ![](/GithubStuff/+execution.gif)  
 [Full minos fight (0.3)](https://www.youtube.com/watch?v=yrofGYf_xTI) | [Full sisyphus fight (0.5)](https://www.youtube.com/watch?v=DhcVx6yBEaM) | [Cybergrind tomfoolery (0.8)](https://youtu.be/n2aAljuvpMo)  
