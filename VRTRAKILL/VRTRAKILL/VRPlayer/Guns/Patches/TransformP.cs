@@ -66,16 +66,41 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                 __instance.gameObject.GetComponent<WeaponPos>().defaultScale = Scale;
             }
         }
-        // note: figure out how to cancel animator goofing around with scale
+        
         [HarmonyPatch(typeof(Sandbox.Arm.SandboxArm))] static class SandboxArmT
         {
-            static Vector3 Position = new Vector3(-.15f, .2f, -1.05f);
+            static Vector3 MovePosition    = new Vector3(-.15f, .2f, -1.05f),
+                           DestroyPosition = new Vector3(0, 0, 0),
+                           AlterPosition   = new Vector3(0, 0, 0),
+                           BuildPosition   = new Vector3(0, 0, 0),
+                           PlacePosition   = new Vector3(0, 0, 0);
             static Vector3 Scale = new Vector3(-.35f, .35f, .35f);
 
             [HarmonyPostfix] [HarmonyPatch(nameof(Sandbox.Arm.SandboxArm.OnEnable))] static void Retransform(Sandbox.Arm.SandboxArm __instance)
             {
-                __instance.transform.localPosition = Position;
-                //__instance.transform.localScale = Scale;
+                switch (__instance.currentMode.Name)
+                {
+                    case "Move":
+                        __instance.transform.localPosition = MovePosition;
+                        __instance.transform.localScale = Scale;
+                        break;
+                    case "Destroy":
+                        __instance.transform.localPosition = DestroyPosition;
+                        __instance.transform.localScale = Scale;
+                        break;
+                    case "Alter":
+                        __instance.transform.localPosition = AlterPosition;
+                        __instance.transform.localScale = Scale;
+                        break;
+                    case "Build":
+                        __instance.transform.localPosition = BuildPosition;
+                        __instance.transform.localScale = Scale;
+                        break;
+                    case "Place":
+                        __instance.transform.localPosition = PlacePosition;
+                        __instance.transform.localScale = Scale;
+                        break;
+                }
             }
         }
     }
