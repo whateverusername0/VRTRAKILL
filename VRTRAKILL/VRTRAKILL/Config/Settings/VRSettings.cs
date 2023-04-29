@@ -4,7 +4,7 @@ namespace Plugin.VRTRAKILL.Config.Settings
 {
     internal class VRSettings
     {
-        public bool EnableDefaultCrosshair => false; // placeholder
-        public bool DrawControllerLines => false; // draws helping lines, placeholder
+        public bool EnableDefaultCrosshair { get; set; } = false; // placeholder
+        public bool DrawControllerLines { get; set; } = false; // draws helping lines, placeholder
     }
 }

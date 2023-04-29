@@ -66,6 +66,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                 __instance.gameObject.GetComponent<WeaponPos>().defaultScale = Scale;
             }
         }
+        // note: figure out how to cancel animator goofing around with scale
         [HarmonyPatch(typeof(Sandbox.Arm.SandboxArm))] static class SandboxArmT
         {
             static Vector3 Position = new Vector3(-.15f, .2f, -1.05f);
@@ -74,7 +75,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             [HarmonyPostfix] [HarmonyPatch(nameof(Sandbox.Arm.SandboxArm.OnEnable))] static void Retransform(Sandbox.Arm.SandboxArm __instance)
             {
                 __instance.transform.localPosition = Position;
-                __instance.transform.localScale = Scale;
+                //__instance.transform.localScale = Scale;
             }
         }
     }

@@ -1,7 +1,7 @@
 {
    "action_manifest_version" : 0,
    "alias_info" : {},
-   "app_key" : "application.generated.unity.newunityproject.exe",
+   "app_key" : "steam.app.3063601311",
    "bindings" : {
       "/actions/buggy" : {
          "chords" : [],
@@ -37,7 +37,16 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/default/in/jumpslam"
+                     "output" : "/actions/default/in/shoot"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/left/input/trigger"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/jump"
                   },
                   "position" : {
                      "output" : "/actions/default/in/movement"
@@ -54,15 +63,6 @@
                },
                "mode" : "button",
                "path" : "/user/hand/left/input/grip"
-            },
-            {
-               "inputs" : {
-                  "click" : {
-                     "output" : "/actions/default/in/shoot"
-                  }
-               },
-               "mode" : "button",
-               "path" : "/user/hand/left/input/trigger"
             },
             {
                "inputs" : {
@@ -93,6 +93,9 @@
             },
             {
                "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/slide"
+                  },
                   "position" : {
                      "output" : "/actions/default/in/turn"
                   }
@@ -128,11 +131,7 @@
                "path" : "/user/hand/right/input/y"
             },
             {
-               "inputs" : {
-                  "click" : {
-                     "output" : "/actions/default/in/pause"
-                  }
-               },
+               "inputs" : {},
                "mode" : "button",
                "path" : "/user/hand/left/input/system"
             },
@@ -143,6 +142,9 @@
                   },
                   "double" : {
                      "output" : "/actions/default/in/escape"
+                  },
+                  "held" : {
+                     "output" : "/actions/default/in/openweaponwheel"
                   }
                },
                "mode" : "button",
@@ -156,24 +158,6 @@
                },
                "mode" : "button",
                "path" : "/user/hand/right/input/a"
-            },
-            {
-               "inputs" : {
-                  "click" : {
-                     "output" : "/actions/default/in/jump"
-                  }
-               },
-               "mode" : "button",
-               "path" : "/user/hand/left/input/joystick"
-            },
-            {
-               "inputs" : {
-                  "click" : {
-                     "output" : "/actions/default/in/slide"
-                  }
-               },
-               "mode" : "button",
-               "path" : "/user/hand/right/input/joystick"
             },
             {
                "inputs" : {
@@ -196,7 +180,7 @@
    },
    "category" : "steamvr_input",
    "controller_type" : "oculus_touch",
-   "description" : "Default bindings for VRTRAKILL (oculus touch)",
+   "description" : "Default bindings for VRTRAKILL",
    "interaction_profile" : "",
    "name" : "VRTRAKILL Defaults",
    "options" : {},

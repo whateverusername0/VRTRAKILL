@@ -44,11 +44,12 @@
     {
       "name": "/actions/default/in/IterateWeapon",
       "type": "vector2",
-      "requirement": "optional"
+      "requirement": "suggested"
     },
     {
       "name": "/actions/default/in/SwapHand",
-      "type": "boolean"
+      "type": "boolean",
+      "requirement": "optional"
     },
     {
       "name": "/actions/default/in/Slot1",
@@ -106,7 +107,8 @@
     },
     {
       "name": "/actions/default/in/Punch",
-      "type": "boolean"
+      "type": "boolean",
+      "requirement": "optional"
     },
     {
       "name": "/actions/default/in/ActivateCheatMenu",

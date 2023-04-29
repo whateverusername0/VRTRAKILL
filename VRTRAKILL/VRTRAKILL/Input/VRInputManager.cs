@@ -50,6 +50,7 @@ namespace Plugin.VRTRAKILL.Input
             SteamVR_Actions._default.AltShoot.AddOnUpdateListener(RHAltShootH, SteamVR_Input_Sources.RightHand);
             SteamVR_Actions._default.IterateWeapon.AddOnUpdateListener(IterateWeaponH, SteamVR_Input_Sources.Any);
             SteamVR_Actions._default.ChangeWeaponVariation.AddOnUpdateListener(ChangeWeaponVariationH, SteamVR_Input_Sources.Any);
+            // Weapon quick switch, open weapon wheel
             SteamVR_Actions._default.OpenWeaponWheel.AddOnUpdateListener(OpenWeaponWheelH, SteamVR_Input_Sources.Any);
 
             SteamVR_Actions._default.Slot0.AddOnUpdateListener(Slot0H, SteamVR_Input_Sources.Any);
@@ -74,6 +75,8 @@ namespace Plugin.VRTRAKILL.Input
         { VRInputVars.MoveVector = axis; }
         private static void TurnH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
         {
+            VRInputVars.TurnVector = axis;
+            if (WeaponWheel.Instance.enabled) return;
             if (axis.x > 0 + Vars.Config.VRInputSettings.Deadzone) VRInputVars.TurnOffset += Vars.Config.VRInputSettings.SmoothTurningSpeed * Time.deltaTime;
             if (axis.x < 0 - Vars.Config.VRInputSettings.Deadzone) VRInputVars.TurnOffset -= Vars.Config.VRInputSettings.SmoothTurningSpeed * Time.deltaTime;
         }
@@ -85,6 +88,7 @@ namespace Plugin.VRTRAKILL.Input
         private static void DashH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != Dash) { Dash = newState; TriggerKey(ConfigMaster.Dash, Dash, !Dash); } }
 
+        // Left controllers Shoot and AltShoot handle Punching and Hand swapping
         private static void LHShootH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         {
             if (newState != Punch)
@@ -97,6 +101,7 @@ namespace Plugin.VRTRAKILL.Input
         private static void LHAltShootH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != SwapHand) { SwapHand = newState; TriggerKey(ConfigMaster.SwapHand, SwapHand, !SwapHand); } }
 
+        // Right controllers Shoot and AltShoot handle Weapon shooting and Alternative fire
         private static void RHShootH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         {
             if (newState != RHPrimaryFire)
@@ -115,17 +120,18 @@ namespace Plugin.VRTRAKILL.Input
                 else InputManager.Instance.InputSource.Fire2.Trigger(RHAltFire, !RHAltFire);
             }
         }
+
         private static void IterateWeaponH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
         {
-            // crutch, wait for weapon wheel to come out
+            if (WeaponWheel.Instance.enabled) return;
             if (axis.y > 0 + Vars.Config.VRInputSettings.Deadzone * 1.5f) MouseScroll(-1);
             if (axis.y < 0 - Vars.Config.VRInputSettings.Deadzone * 1.5f) MouseScroll(1);
         }
         private static void ChangeWeaponVariationH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != ChangeWeaponVariation) { ChangeWeaponVariation = newState; TriggerKey(ConfigMaster.ChangeWeaponVariation, ChangeWeaponVariation, !ChangeWeaponVariation); } }
+        // Handles quick swapping (ex. from pistol to railcannon, etc.) and weapon wheel
         private static void OpenWeaponWheelH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         {
-            // waiting for the new wheel to come out... for now it just triggers the last gun used
             if (newState != OpenWeaponWheel) { OpenWeaponWheel = newState; TriggerKey(ConfigMaster.LastWeaponUsed, OpenWeaponWheel, !OpenWeaponWheel); }
         }
 
@@ -158,12 +164,14 @@ namespace Plugin.VRTRAKILL.Input
         private static void EscapeH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != Escape) { Escape = newState; TriggerKey(ConfigMaster.Escape, Escape, !Escape); } }
 
+        // Simulate keyboard input
         private static void TriggerKey(WindowsInput.Native.VirtualKeyCode KeyCode, bool Started, bool Ended)
         {
             if (Started) InpSim.Keyboard.KeyDown(KeyCode);
             else if (Ended) InpSim.Keyboard.KeyUp(KeyCode);
         }
 
+        // Simulate mouse input
         private static void LMBPress(bool Started, bool Ended)
         {
             if (Started) InpSim.Mouse.LeftButtonDown();
@@ -179,6 +187,7 @@ namespace Plugin.VRTRAKILL.Input
             InpSim.Mouse.VerticalScroll(Amount);
         }
 
+        // Unity.InputSystem input trigger
         public static void Trigger(this InputActionState state, bool started, bool cancelled)
         {
             if (started)

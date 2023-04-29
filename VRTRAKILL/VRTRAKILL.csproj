@@ -182,9 +182,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VRTRAKILL\Config\Input\Keybinds.cs" />
     <Compile Include="VRTRAKILL\Config\Settings\VRSettings.cs" />
-    <Compile Include="VRTRAKILL\UI\ModernUI\FinishCanvas.cs" />
-    <Compile Include="VRTRAKILL\UI\ModernUI\GunCanvas.cs" />
-    <Compile Include="VRTRAKILL\UI\ModernUI\StyleCanvas.cs" />
+    <Compile Include="VRTRAKILL\UI\ModernUI\TransformP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\ArmsP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Feedbacker\Armature.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Feedbacker\FeedbackerController.cs" />
@@ -194,11 +192,13 @@
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\LeftArmController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\Patches\ControllerAdder.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\RightArmController.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\DoubleWieldP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\GunsP.cs" />
     <Compile Include="VRTRAKILL\Input\VRInputManager.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\RemoveArms.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\AimingP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\TransformP.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\WeaponWheelP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\VRGunsController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Movement\Patches\ClimbStepP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Movement\Patches\FlightNoclipP.cs" />
@@ -219,16 +219,17 @@
     <Compile Include="VRTRAKILL\UI\UICanvas.cs" />
     <Compile Include="VRTRAKILL\UI\UIConverter.cs" />
     <Compile Include="VRTRAKILL\Vars.cs" />
-    <Compile Include="VRTRAKILL\WeaponWheelie\Patches\LockTurnWhenActive.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CopyToGameRoot\ULTRAKILL\BepInEx\config\BepInEx.cfg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="CopyToGameRoot\ULTRAKILL\BepInEx\patchers\classdata.tpk">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="CopyToGameRoot\ULTRAKILL\BepInEx\patchers\classdata.tpk" />
+    <None Include="CopyToGameRoot\ULTRAKILL\BepInEx\patchers\classdata.tpk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\actions.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -238,7 +239,9 @@
     <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\bindings_knuckles.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\bindings_logitech_stylus.json" />
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\bindings_logitech_stylus.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\bindings_oculus_touch.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -252,7 +255,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\binding_index_hmd.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\binding_index_hmd.json" />
     <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\binding_rift.json">
@@ -273,10 +276,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\patchers\AssetsTools.NET.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\patchers\VRPatcher.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\patchers\VRPatcher.dll" />
     <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\plugins\VRTRAKILL\Newtonsoft.Json.dll">

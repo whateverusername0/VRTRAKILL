@@ -4,15 +4,15 @@ namespace Plugin.VRTRAKILL
 {
     internal class Vars
     {
-        public static Config.ConfigJSON Config => VRTRAKILL.Config.ConfigJSON.Deserialize();
+        public static Config.ConfigJSON Config = VRTRAKILL.Config.ConfigJSON.Deserialize();
 
         public static bool IsAMenu =>
-            // holy shit those new scene names are disgusting
                (GameObject.Find("Main Menu State") != null && GameObject.Find("Main Menu State").activeSelf == true)
             || (OptionsManager.Instance != null && OptionsManager.Instance.paused)
-            || (SpawnMenu.Instance != null && SpawnMenu.Instance.gameObject.activeInHierarchy)
-            || (FinalRank.Instance != null && FinalRank.Instance.gameObject.activeInHierarchy);
-        //&& alter menu active
+            || (SpawnMenu.Instance != null && SpawnMenu.Instance.enabled)
+            || (WeaponWheel.Instance != null && WeaponWheel.Instance.enabled)
+            || (FinalRank.Instance != null && FinalRank.Instance.enabled)
+            || (MenuEsc.current != null);
         public static bool IsSandboxArmActive =>
                Sandbox.Arm.SandboxArm.Instance != null
             && Sandbox.Arm.SandboxArm.Instance.gameObject.activeInHierarchy;

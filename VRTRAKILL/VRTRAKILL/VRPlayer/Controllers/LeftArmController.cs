@@ -15,12 +15,12 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 
         public void Update()
         {
-            //if (Vars.Config.VRSettings.DrawControllerLines)
-            //{
-            //    Debug.DrawLine(Offset.transform.position,
-            //                   Offset.transform.position + Offset.transform.forward,
-            //                   Color.white, 0, false);
-            //}
+            if (Vars.Config.VRSettings.DrawControllerLines)
+            {
+                Debug.DrawLine(Offset.transform.position,
+                               Offset.transform.position + Offset.transform.forward,
+                               Color.white, 0, false);
+            }
         }
     }
 }
