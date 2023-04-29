@@ -8,8 +8,6 @@ ULTRAKILLing in VR is now a thing.
 This mod exists because [HuskVR](https://github.com/TeamDoodz/HuskVR) is not being updated for like 7 months, so I was like "Fine, I'll do it myself"  
 Also it does not require any other mods to function  
 
-##### Scroll all the way down to see requirements & installing process.
-
 ## Features
 ### What works right now:
 - Camera, ***Classic*** HUD (modern hud is broken)
