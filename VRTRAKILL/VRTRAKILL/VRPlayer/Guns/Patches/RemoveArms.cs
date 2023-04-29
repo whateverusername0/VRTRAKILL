@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using Sandbox.Arm;
 using System;
 using UnityEngine;
 
@@ -24,16 +25,16 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             }
             catch (NullReferenceException) { Plugin.PLogger.LogWarning($"Revolver is null???"); }
         }
-        [HarmonyPrefix] [HarmonyPostfix]
-        [HarmonyPatch(typeof(Sandbox.Arm.SandboxArm), nameof(Sandbox.Arm.SandboxArm.Update))]
-        [HarmonyPatch(typeof(Sandbox.Arm.SandboxArm), nameof(Sandbox.Arm.SandboxArm.FixedUpdate))]
-        static void RemoveSandboxArm(Sandbox.Arm.SandboxArm __instance)
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(SandboxArm), nameof(SandboxArm.Update))]
+        [HarmonyPatch(typeof(SandboxArm), nameof(SandboxArm.FixedUpdate))]
+        static void RemoveSandboxArm(SandboxArm __instance)
         {
             try
             {
                 ArmT = __instance.transform;
                 Arms.Feedbacker.Armature Arm = new Arms.Feedbacker.Armature(ArmT);
-                Arm.RArmature.localScale = new Vector3(1, 1, 1);
+                Arm.RArmature.localScale = new Vector3(0.01f, 0.01f, 0.01f);
                 Arm.Hand.localScale = new Vector3(100, 100, 100);
             }
             catch (NullReferenceException) { Plugin.PLogger.LogWarning($"Sandbox arm is null???"); }
