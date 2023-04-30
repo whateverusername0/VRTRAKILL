@@ -137,9 +137,6 @@
             },
             {
                "inputs" : {
-                  "click" : {
-                     "output" : "/actions/default/in/openweaponwheel"
-                  },
                   "double" : {
                      "output" : "/actions/default/in/escape"
                   },
