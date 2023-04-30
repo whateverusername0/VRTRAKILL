@@ -28,7 +28,7 @@ namespace Plugin.VRTRAKILL.UI
         {
             if (GO != null)
             {
-                try { ConvertCanvas(GO.GetComponent<Canvas>()); } catch { }
+                try { ConvertCanvas(GO.GetComponent<Canvas>()); } catch {}
 
                 if (GO.transform.childCount > 0)
                     for (int i = 0; i < GO.transform.childCount; i++)
@@ -38,17 +38,20 @@ namespace Plugin.VRTRAKILL.UI
             {
                 foreach (Canvas C in Object.FindObjectsOfType<Canvas>())
                     if (!Helpers.Misc.HasComponent<UICanvas>(C.gameObject))
-                        ConvertCanvas(C);
+                        try { ConvertCanvas(C); } catch {}
             }
         }
-        private static void ConvertCanvas(Canvas C)
+        public static void ConvertCanvas(Canvas C, bool Force = false, bool DontAddComponent = false)
         {
-            if (C.renderMode != RenderMode.ScreenSpaceOverlay) return;
+            if (!Force)
+            {
+                if (C.renderMode != RenderMode.ScreenSpaceOverlay) return;
+            }
 
             C.worldCamera = UIConverter.UICamera;
             C.renderMode = RenderMode.WorldSpace;
             C.gameObject.layer = 5; // ui
-            C.gameObject.AddComponent<UICanvas>();
+            if (!DontAddComponent) C.gameObject.AddComponent<UICanvas>();
 
             foreach (Transform Child in C.transform) ConvertElement(Child);
         }
