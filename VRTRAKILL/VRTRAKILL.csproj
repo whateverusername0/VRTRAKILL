@@ -182,7 +182,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VRTRAKILL\Config\Input\Keybinds.cs" />
     <Compile Include="VRTRAKILL\Config\Settings\VRSettings.cs" />
-    <Compile Include="VRTRAKILL\UI\ModernUI\TransformP.cs" />
+    <Compile Include="VRTRAKILL\UI\HUD\TransformP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\ArmsP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Feedbacker\Armature.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Feedbacker\FeedbackerController.cs" />
@@ -234,7 +234,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\bindings_holographic_controller.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\bindings_knuckles.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -257,7 +257,9 @@
     <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\binding_index_hmd.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\binding_index_hmd.json" />
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\binding_index_hmd.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\binding_rift.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
