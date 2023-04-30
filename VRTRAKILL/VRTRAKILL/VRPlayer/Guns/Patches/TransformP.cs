@@ -46,7 +46,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         }
         [HarmonyPatch(typeof(Railcannon))] static class RailcannonT
         {
-            static Vector3 Position = new Vector3(-.25f, .25f, 0);
+            static Vector3 Position = new Vector3(-.25f, .25f, -.25f);
             static Vector3 Scale = new Vector3(.4f, .4f, .4f);
 
             [HarmonyPostfix] [HarmonyPatch(nameof(Railcannon.Start))] static void Retransform(Railcannon __instance)
