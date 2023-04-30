@@ -34,7 +34,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
             RightHand.poseAction = SteamVR_Actions._default.RightPose;
             RightHand.inputSource = SteamVR_Input_Sources.RightHand;
 
-            if (Vars.IsAMenu) try
+            if (Vars.IsMainMenu) try
                 {
                     // Left Hand Model
                     GameObject LHMGO = new GameObject("Model"); LHMGO.transform.parent = LHGO.transform;
@@ -51,8 +51,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
                     for (int i = 0; i < Vars.VRCameraContainer.transform.childCount; i++)
                     {
                         // painful to look at
-                        if (Helpers.Misc.HasComponent<SteamVR_RenderModel>(Vars.VRCameraContainer.transform.GetChild(i).transform.GetChild(0).gameObject))
-                            GameObject.Destroy(Vars.VRCameraContainer.gameObject.GetComponent<SteamVR_RenderModel>());
+                        if (Helpers.Misc.HasComponent<SteamVR_RenderModel>(Vars.VRCameraContainer.transform.GetChild(i).GetChild(0).gameObject))
+                            GameObject.Destroy(Vars.VRCameraContainer.transform.GetChild(i).GetChild(0).GetComponent<SteamVR_RenderModel>());
                     } 
                 } catch {}
 
