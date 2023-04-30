@@ -26,7 +26,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 
             gameObject.transform.localScale = Vector3.one;
 
-            // no more.
             if (componentsInChildren == null || componentsInChildren.Length == 0)
                 gameObject.transform.localPosition = Vector3.zero;
             else if (componentsInChildren.Length % 2 == 0)
