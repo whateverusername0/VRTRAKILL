@@ -5,9 +5,9 @@ namespace Plugin.VRTRAKILL.Config
 {
     internal class ConfigJSON
     {
-        public Settings.VRSettings VRSettings { get; set; }
-        public Input.VRInputSettings VRInputSettings { get; set; }
-        public Input.Keybinds Inputs { get; set; }
+        [JsonProperty("VR Settings")] public Settings.VRSettings VRSettings { get; set; }
+        [JsonProperty("VR Input Settings")] public Input.VRInputSettings VRInputSettings { get; set; }
+        [JsonProperty("Keybinds")] public Input.Keybinds Inputs { get; set; }
 
         public ConfigJSON()
         {
