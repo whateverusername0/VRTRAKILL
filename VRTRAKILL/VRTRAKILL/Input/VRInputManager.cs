@@ -76,7 +76,6 @@ namespace Plugin.VRTRAKILL.Input
         private static void TurnH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
         {
             VRInputVars.TurnVector = axis;
-            if (WeaponWheel.Instance.enabled) return;
             if (axis.x > 0 + Vars.Config.VRInputSettings.Deadzone) VRInputVars.TurnOffset += Vars.Config.VRInputSettings.SmoothTurningSpeed * Time.deltaTime;
             if (axis.x < 0 - Vars.Config.VRInputSettings.Deadzone) VRInputVars.TurnOffset -= Vars.Config.VRInputSettings.SmoothTurningSpeed * Time.deltaTime;
         }
@@ -123,7 +122,7 @@ namespace Plugin.VRTRAKILL.Input
 
         private static void IterateWeaponH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
         {
-            if (WeaponWheel.Instance.enabled) return;
+            if (Vars.IsWeaponWheelPresent) return;
             if (axis.y > 0 + Vars.Config.VRInputSettings.Deadzone * 1.5f) MouseScroll(-1);
             if (axis.y < 0 - Vars.Config.VRInputSettings.Deadzone * 1.5f) MouseScroll(1);
         }
