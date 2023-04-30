@@ -8,9 +8,6 @@ namespace Plugin.VRTRAKILL.Config
         public static string ConfigPath = $"{Plugin.GamePath}\\BepInEx\\plugins\\VRTRAKILL_Config.json";
 
         public static VirtualKeyCode
-            WalkForward, WalkBackward,
-            WalkLeft, WalkRight,
-
             Jump, Slide, Dash,
 
             LastWeaponUsed,
@@ -35,11 +32,6 @@ namespace Plugin.VRTRAKILL.Config
         {
             try
             {
-                InputMap.Keys.TryGetValue(Config.WalkForwardKey, out WalkForward);
-                InputMap.Keys.TryGetValue(Config.WalkBackwardKey, out WalkBackward);
-                InputMap.Keys.TryGetValue(Config.WalkLeftKey, out WalkLeft);
-                InputMap.Keys.TryGetValue(Config.WalkRightKey, out WalkRight);
-
                 InputMap.Keys.TryGetValue(Config.JumpKey, out Jump);
                 InputMap.Keys.TryGetValue(Config.SlideKey, out Slide);
                 InputMap.Keys.TryGetValue(Config.DashKey, out Dash);
