@@ -35,7 +35,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                 ArmT = __instance.transform;
                 Arms.Feedbacker.Armature Arm = new Arms.Feedbacker.Armature(ArmT);
                 Arm.RArmature.localScale = new Vector3(0.01f, 0.01f, 0.01f);
-                Arm.Hand.localScale = new Vector3(100, 100, 100);
+                Arm.Hand.localScale = new Vector3(1, 1, 1);
             }
             catch (NullReferenceException) { Plugin.PLogger.LogWarning($"Sandbox arm is null???"); }
         }
