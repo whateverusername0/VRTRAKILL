@@ -6,16 +6,24 @@ namespace Plugin.VRTRAKILL
     {
         public static Config.ConfigJSON Config = VRTRAKILL.Config.ConfigJSON.Deserialize();
 
+        public static bool IsMainMenu => GameObject.Find("Main Menu State") != null && GameObject.Find("Main Menu State").activeSelf == true;
+        public static bool IsPaused => OptionsManager.Instance != null && OptionsManager.Instance.paused;
+        public static bool IsSpawnMenuPresent => SpawnMenu.Instance != null && SpawnMenu.Instance.isActiveAndEnabled;
+        public static bool IsWeaponWheelPresent => WeaponWheel.Instance != null && WeaponWheel.Instance.isActiveAndEnabled;
+        public static bool IsRankingScreenPresent => FinalRank.Instance != null && FinalRank.Instance.isActiveAndEnabled;
+        public static bool IsAlterMenuPresent => false; //MenuEsc.current.name == "Sandbox Alter Menu"; // figure out how to detect this
+
         public static bool IsAMenu =>
-               (GameObject.Find("Main Menu State") != null && GameObject.Find("Main Menu State").activeSelf == true)
-            || (OptionsManager.Instance != null && OptionsManager.Instance.paused)
-            || (SpawnMenu.Instance != null && SpawnMenu.Instance.enabled)
-            || (WeaponWheel.Instance != null && WeaponWheel.Instance.enabled)
-            || (FinalRank.Instance != null && FinalRank.Instance.enabled)
-            || (MenuEsc.current != null);
+               IsMainMenu
+            || IsPaused
+            || IsSpawnMenuPresent
+            || IsWeaponWheelPresent
+            || IsRankingScreenPresent
+            || IsAlterMenuPresent;
+
         public static bool IsSandboxArmActive =>
                Sandbox.Arm.SandboxArm.Instance != null
-            && Sandbox.Arm.SandboxArm.Instance.gameObject.activeInHierarchy;
+            && Sandbox.Arm.SandboxArm.Instance.isActiveAndEnabled;
 
         public static GameObject VRCameraContainer
         { get { return VRPlayer.VRCamera.Patches.CameraConverter.Container; } }
