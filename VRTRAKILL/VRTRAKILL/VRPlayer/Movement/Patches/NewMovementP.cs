@@ -9,7 +9,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
     {
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Start))] static void Start(NewMovement __instance)
         {
-            if (!Vars.Config.VRSettings.DoNotOverrideJumpPower)
+            if (!Vars.Config.VRSettings.DoNotOverrideMoveValues)
             {
                 __instance.jumpPower = __instance.jumpPower / 2;
                 __instance.wallJumpPower = __instance.wallJumpPower / 2;
@@ -397,8 +397,16 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                     __instance.boostLeft = 100f;
                     __instance.boost = true;
 
-                    __instance.dodgeDirection = __instance.movementDirection / 2;
-                    if (__instance.dodgeDirection == Vector3.zero) __instance.dodgeDirection = __instance.transform.forward / 2;
+                    if (!Vars.Config.VRSettings.DoNotOverrideMoveValues)
+                    {
+                        __instance.dodgeDirection = __instance.movementDirection / 2;
+                        if (__instance.dodgeDirection == Vector3.zero) __instance.dodgeDirection = __instance.transform.forward / 2;
+                    }
+                    else
+                    {
+                        __instance.dodgeDirection = __instance.movementDirection;
+                        if (__instance.dodgeDirection == Vector3.zero) __instance.dodgeDirection = __instance.transform.forward;
+                    }
 
                     Quaternion identity = Quaternion.identity;
                     identity.SetLookRotation(__instance.dodgeDirection * -1f);
