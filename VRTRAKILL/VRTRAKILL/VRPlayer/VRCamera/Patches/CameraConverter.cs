@@ -23,7 +23,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
 
             if (Vars.Config.VRSettings.CreateDesktopCam)
             {
-                DesktopCam = new GameObject("DesktopView").AddComponent<Camera>();
+                DesktopCam = new GameObject("Desktop View").AddComponent<Camera>();
                 DesktopCam.depth = 69; //69 so it dosn't fight with other cameras (haha funny number)
                 DesktopCam.stereoTargetEye = StereoTargetEyeMask.None;
                 DesktopCam.transform.parent = Vars.MainCamera.transform;
@@ -36,7 +36,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
 
             __instance.cam.stereoTargetEye = StereoTargetEyeMask.Both;
             __instance.hudCamera.stereoTargetEye = StereoTargetEyeMask.Both;
-            __instance.cam.cameraType = CameraType.VR;
 
             __instance.cam.depth++;
             __instance.hudCamera.depth++;
