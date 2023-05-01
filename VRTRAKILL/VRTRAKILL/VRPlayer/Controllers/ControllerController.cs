@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using System.Collections;
 using System.Collections.Generic;
 using Valve.VR;
 
@@ -16,31 +15,31 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         PointerEventData PED = new PointerEventData(EventSystem.current);
         List<RaycastResult> RCResults = new List<RaycastResult>();
 
-        private void SetLines()
+        private void SetLRLines()
         {
-            Offset.transform.parent = this.transform;
-            Offset.transform.localPosition = new Vector3(0, 0, 1);
-            Offset.transform.localRotation = Quaternion.Euler(45, 0, 0);
-
-            Color C  = new Color(1, 1, 1, 0.4f),
-                  C2 = new Color(1, 1, 1, 0.1f);
+            Color C  = new Color(1, 1, 1, Vars.Config.VRSettings.CLInitTransparency),
+                  C2 = new Color(1, 1, 1, Vars.Config.VRSettings.CLEndTransparency);
 
             LR.endWidth = 0.001f;
             LR.startWidth = 0.02f;
-            LR.startColor = C2;
-            LR.endColor = C;
+            LR.startColor = C;
+            LR.endColor = C2;
 
             LR.SetPosition(0, transform.GetChild(0).GetChild(2).position);
             LR.SetPosition(1, Offset.transform.position);
         }
 
-        private void Start()
+        public void Start()
         {
-            LR = gameObject.AddComponent<LineRenderer>();
+            Offset.transform.parent = this.transform;
+            Offset.transform.localPosition = Vector3.zero;
+            Offset.transform.localRotation = Quaternion.Euler(45, 0, 0);
+
+            LR = gameObject.AddComponent<LineRenderer>(); LR.transform.parent = Offset.transform;
             LR.material = new Material(Shader.Find("GUI/Text Shader"));
-            SetLines();
+            SetLRLines();
         }
-        private void Update()
+        public void Update()
         {
             PED.position = Offset.transform.position;
             EventSystem.current.RaycastAll(PED, RCResults);
@@ -48,7 +47,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
             if (Vars.IsAMenu || Vars.Config.VRSettings.DrawControllerLines)
             {
                 LR.enabled = true;
-                SetLines();
+                SetLRLines();
             } else LR.enabled = false;
         }
 
