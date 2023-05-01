@@ -10,14 +10,14 @@ namespace Plugin.VRTRAKILL.UI.HUD
             __instance.transform.parent = HUDOptions.Instance.transform;
 
             // GunCanvas forces itself no matter what type of hud you set, so we have two options:
-            // Remove Standard HUD, or remove Classic HUD. Needless to say-
+            // Remove Standard HUD or Classic HU-
             if (__instance.gameObject.name == "GunCanvas") __instance.GetComponent<Canvas>().enabled = false;
 
             UIConverter.ConvertCanvas(__instance.GetComponent<Canvas>(), Force: true, DontAddComponent: true);
 
-            __instance.defaultPos = new Vector3(396, 48, -314);
-            __instance.defaultRot = new Vector3(0, 48, 0);
-            __instance.transform.localScale = new Vector3(.5f, .65f, .65f);
+            __instance.defaultPos = new Vector3(396, 48, -286);
+            __instance.defaultRot = new Vector3(0, 64, 0);
+            __instance.transform.localScale = new Vector3(.65f, .65f, .65f);
         }
         [HarmonyPostfix] [HarmonyPatch(typeof(FinalRank), nameof(FinalRank.Start))] static void ReparentFR(FinalRank __instance)
         {
