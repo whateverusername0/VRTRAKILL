@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Plugin.Helpers;
+using Plugin.VRTRAKILL.VRPlayer.Controllers;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -17,7 +19,7 @@ namespace Plugin.VRTRAKILL.UI
             UICamera = new GameObject("UI Camera").AddComponent<Camera>();
             UICamera.cullingMask = LayerMask.GetMask(new string[] { "UI" });
             UICamera.clearFlags = CameraClearFlags.Depth; UICamera.depth = 1f;
-            UICamera.gameObject.AddComponent<Helpers.GazeUIInteraction>();
+            UICamera.gameObject.AddComponent<GazeUIInteraction>();
 
             foreach (Canvas C in Object.FindObjectsOfType<Canvas>())
                 if (!Helpers.Misc.HasComponent<UICanvas>(C.gameObject))
