@@ -1,6 +1,4 @@
 ﻿using HarmonyLib;
-using System.Collections;
-using ULTRAKILL.Cheats;
 using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Arms
@@ -28,8 +26,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
         {
             if (MonoSingleton<OptionsManager>.Instance.paused) return false;
 
-            if (//Feedbacker.FeedbackerController.Instance.Speed >= 2 // detect fist speed instead of a button press
-                /*&&*/ __instance.ready && !__instance.shopping
+            if (Feedbacker.FeedbackerController.Instance.Speed >= 2 // detect fist speed instead of a button press
+                && __instance.ready && !__instance.shopping
                 && __instance.fc.fistCooldown <= 0f && __instance.fc.activated
                 && !GameStateManager.Instance.PlayerInputLocked)
             {
