@@ -215,7 +215,7 @@
     <Compile Include="VRTRAKILL\Config\Input\VRInputSettings.cs" />
     <Compile Include="VRTRAKILL\Input\VRInputVars.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\CameraConverter.cs" />
-    <Compile Include="Helpers\GazeUIInteraction.cs" />
+    <Compile Include="VRTRAKILL\UI\UIInteraction.cs" />
     <Compile Include="VRTRAKILL\UI\Patches\Tweaks.cs" />
     <Compile Include="VRTRAKILL\UI\UICanvas.cs" />
     <Compile Include="VRTRAKILL\UI\UIConverter.cs" />
