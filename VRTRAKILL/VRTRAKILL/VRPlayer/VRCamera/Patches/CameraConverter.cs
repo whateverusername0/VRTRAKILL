@@ -15,6 +15,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
             Container.transform.parent = Vars.MainCamera.transform.parent;
             Container.transform.localPosition = Vector3.zero;
             Container.transform.localRotation = Vars.MainCamera.transform.rotation;
+            Vars.MainCamera.cameraType = CameraType.VR;// makes the eye view better
 
             Container.AddComponent<VRCameraController>();
 
