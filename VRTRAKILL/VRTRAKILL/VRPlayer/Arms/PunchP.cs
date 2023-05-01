@@ -14,8 +14,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
             {
                 // note to self: punch is broken, need to fix it while considering animation shit and other things
                 case FistType.Standard:
-                    //__instance.gameObject.AddComponent<Feedbacker.FeedbackerController>();
-                    //Feedbacker.FeedbackerController.Instance.PunchZoneT = PunchZone;
+                    __instance.gameObject.AddComponent<Feedbacker.FeedbackerController>();
+                    Feedbacker.FeedbackerController.Instance.PunchZoneT = PunchZone;
                     break;
                 case FistType.Heavy: break;
                 case FistType.Spear: break; // wtf is this?
@@ -26,7 +26,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
         {
             if (MonoSingleton<OptionsManager>.Instance.paused) return false;
 
-            if (Feedbacker.FeedbackerController.Instance.Speed >= 2 // detect fist speed instead of a button press
+            if (Vars.LCC.Speed >= 1 // detect fist speed instead of a button press
                 && __instance.ready && !__instance.shopping
                 && __instance.fc.fistCooldown <= 0f && __instance.fc.activated
                 && !GameStateManager.Instance.PlayerInputLocked)

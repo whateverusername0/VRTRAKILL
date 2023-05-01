@@ -39,8 +39,12 @@ namespace Plugin.VRTRAKILL
 
         public static GameObject LeftController
             => VRPlayer.Controllers.LeftArmController.Instance.Offset;
+        public static VRPlayer.Controllers.LeftArmController LCC
+            => VRPlayer.Controllers.LeftArmController.Instance;
         public static GameObject RightController
             => VRPlayer.Controllers.RightArmController.Instance.Offset;
+        public static VRPlayer.Controllers.RightArmController RCC
+            => VRPlayer.Controllers.RightArmController.Instance;
 
         private static Camera _MainCamera; public static Camera MainCamera
         {
