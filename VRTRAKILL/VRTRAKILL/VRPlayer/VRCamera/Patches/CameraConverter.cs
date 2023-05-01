@@ -8,6 +8,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
     {
         // ty huskvr you pretty
         public static GameObject Container;
+        public static Camera DesktopCam;
 
         [HarmonyPrefix] [HarmonyPatch(typeof(NewMovement), nameof(NewMovement.Start))] static void Containerize(NewMovement __instance)
         {
@@ -15,11 +16,18 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
             Container.transform.parent = Vars.MainCamera.transform.parent;
             Container.transform.localPosition = Vector3.zero;
             Container.transform.localRotation = Vars.MainCamera.transform.rotation;
-            Vars.MainCamera.cameraType = CameraType.VR;// makes the eye view better
 
             Container.AddComponent<VRCameraController>();
 
             Vars.MainCamera.transform.parent = Container.transform;
+
+            if (Vars.Config.VRSettings.CreateDesktopCam)
+            {
+                DesktopCam = new GameObject("DesktopView").AddComponent<Camera>();
+                DesktopCam.depth = 69; //69 so it dosn't fight with other cameras (haha funny number)
+                DesktopCam.stereoTargetEye = StereoTargetEyeMask.None;
+                DesktopCam.transform.parent = Vars.MainCamera.transform;
+            }
         }
 
         [HarmonyPrefix] [HarmonyPatch(typeof(CameraController), nameof(CameraController.Start))] static void ConvertCameras(CameraController __instance)
@@ -28,6 +36,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
 
             __instance.cam.stereoTargetEye = StereoTargetEyeMask.Both;
             __instance.hudCamera.stereoTargetEye = StereoTargetEyeMask.Both;
+            __instance.cam.cameraType = CameraType.VR;
 
             __instance.cam.depth++;
             __instance.hudCamera.depth++;
