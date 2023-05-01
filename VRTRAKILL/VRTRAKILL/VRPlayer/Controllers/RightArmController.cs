@@ -18,7 +18,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
             if (Vars.Config.VRSettings.DrawControllerLines)
             {
                 Debug.DrawLine(Offset.transform.position,
-                               Offset.transform.position + Offset.transform.forward,
+                               Offset.transform.position + Offset.transform.forward * 100,
                                Color.white, 0, false);
             }
         }
