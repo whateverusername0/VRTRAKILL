@@ -13,14 +13,14 @@ Also it does not require any other mods to function
 - Camera, ***Classic*** HUD (modern hud is broken)
 - Full movement (jump, dash, slide, slam storage, rocket ride, etc.)
 - Semi-full controller tracking (aiming / shooting)
-- Punching using your camera
-- Weapon swap, weapon scroll (using joystick)
+- Punching using camera and controller buttons
+- Weapon swap, weapon scroll using joystick
 - Interacting with UI (some of the menus are broken - will be fixed in the future)
-### What is planned/being worked on:
-- Getting modern HUD up and working
-- Full arm movement/tracking (punch irl to punch ingame)
-- Haptics (controller rumble)
-- Movement by irl movement (jump, dash, slide) (would be funny to watch from the side) (ridiculous)
+### Planned stuff:
+**0.8.x**: Haptics (controller rumble)  
+**0.9**: Full arm movement/tracking (punch irl to punch ingame)  
+**1.0**: VR body (arms, legs, etc.)  
+**1.x**: Movement by irl movement (jump, dash, slide) (ridiculous)
 
 ## Requirements
 - A copy of the latest version of ULTRAKILL (any kind)
@@ -35,7 +35,7 @@ The text version:
   1.1 Locate ULTRAKILL in your Steam library (or wherever you store it)  
   1.2 RMB -> Manage -> Browse local files  
   1.3 Make a copy of the ULTRAKILL folder and put it somewhere  
-2. Get & Install [latest stable (at the moment) BepInEx 5.4.21](https://github.com/BepInEx/BepInEx/releases/tag/v5.4.21) (get the x64 version) into the new ultrakill folder using [their guide](https://github.com/BepInEx/BepInEx/wiki/Installation). Make sure to run BepInEx'ed ULTRAKILL at least once so it can generate needed folders & files  
+2. Get & Install [latest stable (at the moment) BepInEx 5.4.21](https://github.com/BepInEx/BepInEx/releases/tag/v5.4.21) (get the x64 version) into the new ULTRAKILL folder using [their guide](https://github.com/BepInEx/BepInEx/wiki/Installation). Make sure to run BepInEx'ed ULTRAKILL at least once so it can generate needed folders & files  
 3. Add the new ULTRAKILL folder as a 'non-steam game' to steam so it can be run with SteamVR:  
   3.1 ADD A GAME (at the bottom left in library) -> Add a non-steam game -> select your VR-ed ULTRAKILL.exe  
   3.2 Right click on the new VR-ed ULTRAKILL in your steam library -> Properties -> Shortcut -> Include in VR Library  
@@ -44,7 +44,6 @@ The text version:
 6. Run it once, wait for the error message to appear in the console and then exit  
 7. Go to BepInEx/plugins, open VRTRAKILL_Config.json and **make sure you have the same keybinds both in config and in ultrakill**  
 8. Run VR-ed ULTRAKILL again  
-9. Begin ULTRAKILLing in VR  
 
 ## Build VRTRAKILL from source
 Building from source video tutorial [here](https://www.youtube.com/watch?v=h1rS-p7aFFo) (@jackietanuki you're welcome)
