@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 namespace Plugin.VRTRAKILL.UI
 {
@@ -9,7 +8,7 @@ namespace Plugin.VRTRAKILL.UI
         private Vector3 LastCamFwd = Vector3.zero;
 
         private const float Distance = 72f;
-        private static float Scale = 0.0625f;
+        private static float Scale = Vars.Config.VRSettings.UISize;
 
         public void UpdatePos()
         {
