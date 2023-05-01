@@ -4,10 +4,10 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.XR;
 
-namespace Plugin.Helpers
+namespace Plugin.VRTRAKILL.UI
 {
     // "borrowed" from huskvr, ty you pretty
-    internal class GazeUIInteraction : MonoBehaviour
+    internal class UIInteraction : MonoBehaviour
     {
         // Prevents loop over the same selectable
         Selectable ExcludedSelectable;
