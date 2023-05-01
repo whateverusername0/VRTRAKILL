@@ -6,7 +6,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns
     {
         private void Start()
         {
-            GetComponent<WalkingBob>().enabled = false; // disable weapon bobbing when moving
+            GetComponent<WalkingBob>().enabled = false;
         }
 
         private void Update()
