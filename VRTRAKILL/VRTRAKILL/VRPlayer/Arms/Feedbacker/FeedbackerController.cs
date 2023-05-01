@@ -5,8 +5,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Feedbacker
 {
     internal class FeedbackerController : MonoSingleton<FeedbackerController>
     {
-        
-        // placeholder
+        Transform PunchZoneT;
 
         void Start()
         {
