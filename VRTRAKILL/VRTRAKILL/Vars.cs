@@ -11,22 +11,30 @@ namespace Plugin.VRTRAKILL
             => GameObject.Find("Main Menu State") != null && GameObject.Find("Main Menu State").activeSelf == true;
         public static bool IsPaused
             => OptionsManager.Instance != null && OptionsManager.Instance.paused;
-        public static bool IsSpawnMenuPresent
-            => SpawnMenu.Instance != null && SpawnMenu.Instance.isActiveAndEnabled;
-        public static bool IsWeaponWheelPresent
-            => WeaponWheel.Instance != null && WeaponWheel.Instance.isActiveAndEnabled;
         public static bool IsRankingScreenPresent
             => FinalRank.Instance != null && FinalRank.Instance.isActiveAndEnabled;
+        public static bool IsWeaponWheelPresent
+            => WeaponWheel.Instance != null && WeaponWheel.Instance.isActiveAndEnabled;
+
+        public static bool IsSpawnMenuPresent
+            => SpawnMenu.Instance != null && SpawnMenu.Instance.isActiveAndEnabled;
         public static bool IsAlterMenuPresent
-            => false; //MenuEsc.current.name == "Sandbox Alter Menu"; // figure out how to detect this
+            => GameObject.Find("Sandbox Alter Menu") != null
+            && GameObject.Find("Sandbox Alter Menu").GetComponent<MenuEsc>().isActiveAndEnabled;
+        public static bool IsTeleportMenuPresent
+            => GameObject.Find("Cheats Teleport") != null
+            && GameObject.Find("Cheats Teleport").GetComponent<MenuEsc>().isActiveAndEnabled;
 
         public static bool IsAMenu
             => IsMainMenu
             || IsPaused
-            || IsSpawnMenuPresent
-            || IsWeaponWheelPresent
             || IsRankingScreenPresent
-            || IsAlterMenuPresent;
+
+            || IsWeaponWheelPresent
+
+            || IsSpawnMenuPresent
+            || IsAlterMenuPresent
+            || IsTeleportMenuPresent;
 
         public static bool IsSandboxArmActive
             => Sandbox.Arm.SandboxArm.Instance != null
@@ -51,5 +59,7 @@ namespace Plugin.VRTRAKILL
             get { if (_MainCamera == null) { _MainCamera = GameObject.Find("Main Camera").gameObject.GetComponent<Camera>(); return _MainCamera; }
                   else return _MainCamera; }
         }
+        public static Camera VRUICamera
+            => UI.UIConverter.UICamera;
     }
 }
