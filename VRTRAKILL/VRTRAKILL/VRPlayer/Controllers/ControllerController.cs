@@ -15,6 +15,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         PointerEventData PED = new PointerEventData(EventSystem.current);
         List<RaycastResult> RCResults = new List<RaycastResult>();
 
+        // gives out an oob / oor error when not in main menu.
         private void SetLRLines()
         {
             Color C  = new Color(1, 1, 1, Vars.Config.VRSettings.CLInitTransparency),
@@ -35,20 +36,20 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
             Offset.transform.localPosition = Vector3.zero;
             Offset.transform.localRotation = Quaternion.Euler(45, 0, 0);
 
-            LR = gameObject.AddComponent<LineRenderer>(); LR.transform.parent = Offset.transform;
+            LR = Offset.AddComponent<LineRenderer>();
             LR.material = new Material(Shader.Find("GUI/Text Shader"));
-            SetLRLines();
+            //SetLRLines();
         }
         public void Update()
         {
             PED.position = Offset.transform.position;
             EventSystem.current.RaycastAll(PED, RCResults);
 
-            if (Vars.IsAMenu || Vars.Config.VRSettings.DrawControllerLines)
+            if (Vars.IsAMenu /*|| Vars.Config.VRSettings.DrawControllerLines*/)
             {
-                LR.enabled = true;
-                SetLRLines();
-            } else LR.enabled = false;
+                //LR.enabled = true;
+                //SetLRLines();
+            } //else LR.enabled = false;
         }
 
         public static void onTransformUpdatedH(SteamVR_Behaviour_Pose fromAction, SteamVR_Input_Sources fromSource)
