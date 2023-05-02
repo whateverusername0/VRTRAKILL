@@ -16,7 +16,7 @@ namespace Plugin.VRTRAKILL.UI.HUD
             UIConverter.ConvertCanvas(__instance.GetComponent<Canvas>(), Force: true, DontAddComponent: true);
 
             __instance.defaultPos = new Vector3(396, 48, -286);
-            __instance.defaultRot = new Vector3(0, 64, 0);
+            __instance.defaultRot = new Vector3(0, 56, 0);
             __instance.transform.localScale = new Vector3(.65f, .65f, .65f);
         }
         [HarmonyPostfix] [HarmonyPatch(typeof(FinalRank), nameof(FinalRank.Start))] static void ReparentFR(FinalRank __instance)
