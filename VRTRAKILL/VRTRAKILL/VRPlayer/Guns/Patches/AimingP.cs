@@ -119,6 +119,33 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 
             return false;
         }
+        // Coin toss
+        [HarmonyPrefix] [HarmonyPatch(typeof(Revolver), nameof(Revolver.ThrowCoin))] static bool RevolverCoin(Revolver __instance)
+        {
+            if (__instance.punch == null || !__instance.punch.gameObject.activeInHierarchy)
+                __instance.punch = MonoSingleton<FistControl>.Instance.currentPunch;
+
+            if ((bool)__instance.punch) __instance.punch.CoinFlip();
+
+            GameObject obj = Object.Instantiate(__instance.coin,
+                                                Vars.RightController.transform.position + Vars.RightController.transform.up * -0.5f,
+                                                Vars.RightController.transform.rotation);
+
+            obj.GetComponent<Coin>().sourceWeapon = __instance.gc.currentWeapon;
+
+            MonoSingleton<RumbleManager>.Instance.SetVibration("rumble.coin_toss");
+
+            Vector3 zero = Vector3.zero;
+            obj.GetComponent<Rigidbody>().AddForce(Vars.RightController.transform.forward * 20f + Vector3.up * 15f
+                                                   + (MonoSingleton<NewMovement>.Instance.ridingRocket
+                                                      ? MonoSingleton<NewMovement>.Instance.ridingRocket.rb.velocity
+                                                      : MonoSingleton<NewMovement>.Instance.rb.velocity) + zero,
+                                                   ForceMode.VelocityChange);
+            __instance.pierceCharge = 0f;
+            __instance.pierceReady = false;
+
+            return false;
+        }
 
         // Shotgun
         // Normal fire
