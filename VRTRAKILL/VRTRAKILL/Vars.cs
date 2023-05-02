@@ -43,7 +43,7 @@ namespace Plugin.VRTRAKILL
         public static GameObject VRCameraContainer
             => VRPlayer.VRCamera.Patches.CameraConverter.Container;
         public static Camera DesktopCamera
-            => VRPlayer.VRCamera.Patches.CameraConverter.DesktopCam;
+            => VRPlayer.VRCamera.Patches.CameraConverter.DesktopWorldCam;
 
         public static GameObject LeftController
             => VRPlayer.Controllers.LeftArmController.Instance.Offset;
