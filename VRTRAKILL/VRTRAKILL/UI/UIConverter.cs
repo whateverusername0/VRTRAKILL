@@ -14,7 +14,7 @@ namespace Plugin.VRTRAKILL.UI
 
         private static void SceneChanged(Scene S)
         {
-            UICamera = new GameObject("VRUI Camera").AddComponent<Camera>();
+            UICamera = new GameObject("UI Camera").AddComponent<Camera>();
             UICamera.cullingMask = LayerMask.GetMask(new string[] { "UI" });
             UICamera.clearFlags = CameraClearFlags.Depth; UICamera.depth = 1f;
             UICamera.gameObject.AddComponent<UIInteraction>();
@@ -48,7 +48,7 @@ namespace Plugin.VRTRAKILL.UI
                 if (C.renderMode != RenderMode.ScreenSpaceOverlay) return;
             }
 
-            C.worldCamera = UIConverter.UICamera;
+            C.worldCamera = UICamera;
             C.renderMode = RenderMode.WorldSpace;
             C.gameObject.layer = 5; // ui
             if (!DontAddComponent) C.gameObject.AddComponent<UICanvas>();
