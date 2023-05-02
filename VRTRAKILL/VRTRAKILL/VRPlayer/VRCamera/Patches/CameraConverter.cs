@@ -8,7 +8,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
     {
         // ty huskvr you pretty
         public static GameObject Container;
-        public static Camera DesktopCam, DesktopUICam;
+        public static Camera DesktopWorldCam, DesktopUICam;
 
         [HarmonyPrefix] [HarmonyPatch(typeof(NewMovement), nameof(NewMovement.Start))] static void Containerize(NewMovement __instance)
         {
@@ -21,22 +21,26 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
 
             Vars.MainCamera.transform.parent = Container.transform;
 
-            if (Vars.Config.VRSettings.CreateDesktopCam)
+            if (Vars.Config.VRSettings.DV.EnableDV)
             {
-                GameObject DesktopView = new GameObject("Desktop View");
-                DesktopView.transform.parent = Container.transform;
-                DesktopView.transform.localPosition = Vector3.zero;
+                DesktopWorldCam = new GameObject("Desktop World Camera").AddComponent<Camera>();
+                DesktopWorldCam.transform.parent = Vars.MainCamera.transform;
+                DesktopWorldCam.transform.localPosition = Vector3.zero;
+                DesktopWorldCam.nearClipPlane = 0.1f;
+                DesktopWorldCam.depth = 69;
+                DesktopWorldCam.fieldOfView = Vars.Config.VRSettings.DV.WorldCamFOV;
+                DesktopWorldCam.clearFlags = Vars.MainCamera.clearFlags;
+                DesktopWorldCam.cullingMask = Vars.MainCamera.cullingMask;
+                DesktopWorldCam.stereoTargetEye = StereoTargetEyeMask.None;
 
-                DesktopCam = new GameObject("Main Camera").AddComponent<Camera>();
-                DesktopCam.transform.parent = DesktopView.transform; DesktopCam.transform.localPosition = Vector3.zero;
-                DesktopCam.nearClipPlane = 0.1f; DesktopCam.depth = 69;
-                DesktopCam.clearFlags = Vars.MainCamera.clearFlags; DesktopCam.cullingMask = Vars.MainCamera.cullingMask;
-                DesktopCam.stereoTargetEye = StereoTargetEyeMask.None;
-
-                DesktopUICam = new GameObject("UI Camera").AddComponent<Camera>();
-                DesktopUICam.transform.parent = DesktopView.transform; DesktopUICam.transform.localPosition = Vector3.zero;
-                DesktopUICam.nearClipPlane = 0.1f; DesktopUICam.depth = 70;
-                DesktopUICam.clearFlags = Vars.VRUICamera.clearFlags; DesktopUICam.cullingMask = Vars.VRUICamera.cullingMask;
+                DesktopUICam = new GameObject("Desktop UI Camera").AddComponent<Camera>();
+                DesktopUICam.transform.parent = Vars.VRUICamera.transform;
+                DesktopUICam.transform.localPosition = Vector3.zero;
+                DesktopUICam.nearClipPlane = 0.1f;
+                DesktopUICam.depth = 69;
+                DesktopUICam.fieldOfView = Vars.Config.VRSettings.DV.UICamFOV;
+                DesktopUICam.clearFlags = Vars.VRUICamera.clearFlags;
+                DesktopUICam.cullingMask = Vars.VRUICamera.cullingMask;
                 DesktopUICam.stereoTargetEye = StereoTargetEyeMask.None;
             }
         }

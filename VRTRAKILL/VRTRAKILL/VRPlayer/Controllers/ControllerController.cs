@@ -18,8 +18,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         // gives out an oob / oor error when not in main menu.
         private void SetLRLines()
         {
-            Color C  = new Color(1, 1, 1, Vars.Config.VRSettings.CLInitTransparency),
-                  C2 = new Color(1, 1, 1, Vars.Config.VRSettings.CLEndTransparency);
+            Color C  = new Color(1, 1, 1, Vars.Config.VRSettings.CL.LInitTransparency),
+                  C2 = new Color(1, 1, 1, Vars.Config.VRSettings.CL.LEndTransparency);
 
             LR.endWidth = 0.001f;
             LR.startWidth = 0.02f;
