@@ -87,8 +87,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 
                     if (!Vars.Config.VRSettings.DoNotOverrideMoveValues)
                     {
-                        __instance.dodgeDirection = __instance.movementDirection / 2;
-                        if (__instance.dodgeDirection == Vector3.zero) __instance.dodgeDirection = __instance.playerModel.forward / 2;
+                        __instance.dodgeDirection = __instance.movementDirection / 1.5f;
+                        if (__instance.dodgeDirection == Vector3.zero) __instance.dodgeDirection = __instance.playerModel.forward / 1.5f;
                     }
                     else
                     {
