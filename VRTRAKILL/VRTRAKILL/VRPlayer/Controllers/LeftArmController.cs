@@ -6,6 +6,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
     internal class LeftArmController : MonoSingleton<LeftArmController>
     {
         public GameObject Offset;
+
+
         private Vector3 _PreviousPosition;
         private Vector3 _CurrentVelocity;
         public float Speed = 0;
