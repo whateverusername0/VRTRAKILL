@@ -34,6 +34,9 @@ namespace Plugin.VRTRAKILL.UI.Patches
             };
             foreach (string ScreenEffectToDisable in ScreenEffectsToDisable)
                 try { __instance.gameObject.transform.Find(ScreenEffectToDisable).GetComponent<Image>().enabled = false; } catch { continue; }
+
+            // Relayer stupid skybox in minos corpse level
+            try { GameObject.Find("CityFromAbove").layer = 0; } catch {}
         }
         [HarmonyPrefix] [HarmonyPatch(typeof(Crosshair), nameof(Crosshair.Start))] static void SetCrosshair(Crosshair __instance)
         {
