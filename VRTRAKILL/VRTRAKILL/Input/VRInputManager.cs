@@ -2,7 +2,6 @@
 using Valve.VR;
 using WindowsInput;
 using Plugin.VRTRAKILL.Config;
-using Plugin.VRTRAKILL.Config.Input;
 
 namespace Plugin.VRTRAKILL.Input
 {
@@ -32,7 +31,7 @@ namespace Plugin.VRTRAKILL.Input
             Slot4 = false, Slot5 = false, Slot6 = false,
             Slot7 = false, Slot8 = false, Slot9 = false;
 
-        private static bool Escape;
+        private static bool Escape = false;
 
         public static void Init()
         {
@@ -43,16 +42,21 @@ namespace Plugin.VRTRAKILL.Input
             SteamVR_Actions._default.Slide.AddOnUpdateListener(SlideH, SteamVR_Input_Sources.Any);
             SteamVR_Actions._default.Dash.AddOnUpdateListener(DashH, SteamVR_Input_Sources.Any);
 
-            // Weapons
-            SteamVR_Actions._default.Shoot.AddOnUpdateListener(LHShootH, SteamVR_Input_Sources.LeftHand);
-            SteamVR_Actions._default.AltShoot.AddOnUpdateListener(LHAltShootH, SteamVR_Input_Sources.LeftHand);
-            SteamVR_Actions._default.Shoot.AddOnUpdateListener(RHShootH, SteamVR_Input_Sources.RightHand);
-            SteamVR_Actions._default.AltShoot.AddOnUpdateListener(RHAltShootH, SteamVR_Input_Sources.RightHand);
+            // Arms
+            SteamVR_Actions._default.Punch.AddOnUpdateListener(PunchH, SteamVR_Input_Sources.Any);
+            SteamVR_Actions._default.SwapHand.AddOnUpdateListener(SwapHandH, SteamVR_Input_Sources.Any);
+            SteamVR_Actions._default.Whiplash.AddOnUpdateListener(WhiplashH, SteamVR_Input_Sources.Any);
+
+            // Guns
+            SteamVR_Actions._default.Shoot.AddOnUpdateListener(RHShootH, SteamVR_Input_Sources.Any);
+            SteamVR_Actions._default.AltShoot.AddOnUpdateListener(RHAltShootH, SteamVR_Input_Sources.Any);
             SteamVR_Actions._default.IterateWeapon.AddOnUpdateListener(IterateWeaponH, SteamVR_Input_Sources.Any);
             SteamVR_Actions._default.ChangeWeaponVariation.AddOnUpdateListener(ChangeWeaponVariationH, SteamVR_Input_Sources.Any);
             // Weapon quick switch, open weapon wheel
             SteamVR_Actions._default.OpenWeaponWheel.AddOnUpdateListener(OpenWeaponWheelH, SteamVR_Input_Sources.Any);
+            SteamVR_Actions._default.WeaponWheelScroll.AddOnUpdateListener(WeaponWheelScrollH, SteamVR_Input_Sources.Any);
 
+            // Slots
             SteamVR_Actions._default.Slot0.AddOnUpdateListener(Slot0H, SteamVR_Input_Sources.Any);
             SteamVR_Actions._default.Slot1.AddOnUpdateListener(Slot1H, SteamVR_Input_Sources.Any);
             SteamVR_Actions._default.Slot2.AddOnUpdateListener(Slot2H, SteamVR_Input_Sources.Any);
@@ -65,21 +69,22 @@ namespace Plugin.VRTRAKILL.Input
             SteamVR_Actions._default.Slot8.AddOnUpdateListener(Slot8H, SteamVR_Input_Sources.Any);
             SteamVR_Actions._default.Slot9.AddOnUpdateListener(Slot9H, SteamVR_Input_Sources.Any);
 
-            SteamVR_Actions._default.SwapHand.AddOnUpdateListener(SwapHandH, SteamVR_Input_Sources.Any);
-            SteamVR_Actions._default.Whiplash.AddOnUpdateListener(WhiplashH, SteamVR_Input_Sources.Any);
-
+            // Go back, pause, etc.
             SteamVR_Actions._default.Escape.AddOnUpdateListener(EscapeH, SteamVR_Input_Sources.Any);
         }
 
+        // Movemint
         private static void MovementH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
         { VRInputVars.MoveVector = axis; }
         private static void TurnH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
         {
             VRInputVars.TurnVector = axis;
-            if (axis.x > 0 + Vars.Config.VRInputSettings.Deadzone) VRInputVars.TurnOffset += Vars.Config.VRInputSettings.SmoothTurningSpeed * Time.deltaTime;
+            if (axis.x > 0 + Vars.Config.VRInputSettings.Deadzone)
+                if (Vars.Config.VRInputSettings.SnapTurning)
+                    VRInputVars.TurnOffset += Vars.Config.VRInputSettings.SnapTurningAngles;
+                else VRInputVars.TurnOffset += Vars.Config.VRInputSettings.SmoothTurningSpeed * Time.deltaTime;
             if (axis.x < 0 - Vars.Config.VRInputSettings.Deadzone) VRInputVars.TurnOffset -= Vars.Config.VRInputSettings.SmoothTurningSpeed * Time.deltaTime;
         }
-
         private static void JumpH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != Jump) { Jump = newState; TriggerKey(ConfigMaster.Jump, Jump, !Jump); } }
         private static void SlideH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
@@ -87,8 +92,8 @@ namespace Plugin.VRTRAKILL.Input
         private static void DashH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != Dash) { Dash = newState; TriggerKey(ConfigMaster.Dash, Dash, !Dash); } }
 
-        // Left controllers Shoot and AltShoot handle Punching and Hand swapping
-        private static void LHShootH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
+        // Fisting
+        private static void PunchH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         {
             if (newState != Punch)
             {
@@ -97,10 +102,12 @@ namespace Plugin.VRTRAKILL.Input
                 else InputManager.Instance.InputSource.Punch.Trigger(Punch, !Punch);
             }
         }
-        private static void LHAltShootH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
+        private static void SwapHandH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != SwapHand) { SwapHand = newState; TriggerKey(ConfigMaster.SwapHand, SwapHand, !SwapHand); } }
+        private static void WhiplashH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
+        { if (newState != Whiplash) { Whiplash = newState; TriggerKey(ConfigMaster.Whiplash, Whiplash, !Whiplash); } }
 
-        // Right controllers Shoot and AltShoot handle Weapon shooting and Alternative fire
+        // Shooting
         private static void RHShootH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         {
             if (newState != RHPrimaryFire)
@@ -120,6 +127,7 @@ namespace Plugin.VRTRAKILL.Input
             }
         }
 
+        // Weapon scroll
         private static void IterateWeaponH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
         {
             if (Vars.IsWeaponWheelPresent) return;
@@ -128,17 +136,15 @@ namespace Plugin.VRTRAKILL.Input
         }
         private static void ChangeWeaponVariationH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != ChangeWeaponVariation) { ChangeWeaponVariation = newState; TriggerKey(ConfigMaster.ChangeWeaponVariation, ChangeWeaponVariation, !ChangeWeaponVariation); } }
-        // Handles quick swapping (ex. from pistol to railcannon, etc.) and weapon wheel
+
+        // Quick swap & Weapon wheel
         private static void OpenWeaponWheelH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         {
             if (newState != OpenWeaponWheel) { OpenWeaponWheel = newState; TriggerKey(ConfigMaster.LastWeaponUsed, OpenWeaponWheel, !OpenWeaponWheel); }
         }
-
-        private static void SwapHandH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != SwapHand) { SwapHand = newState; TriggerKey(ConfigMaster.SwapHand, SwapHand, !SwapHand); } }
-        private static void WhiplashH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != Whiplash) { Whiplash = newState; TriggerKey(ConfigMaster.Whiplash, Whiplash, !Whiplash); } }
-
+        private static void WeaponWheelScrollH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
+        { VRInputVars.WWVector = axis; }
+        // Slots
         private static void Slot0H(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != Slot0) { Slot0 = newState; TriggerKey(ConfigMaster.Slot0, Slot0, !Slot0); } }
         private static void Slot1H(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
@@ -160,6 +166,7 @@ namespace Plugin.VRTRAKILL.Input
         private static void Slot9H(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != Slot9) { Slot9 = newState; TriggerKey(ConfigMaster.Slot9, Slot9, !Slot9); } }
 
+        // Go back, pause, etc.
         private static void EscapeH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != Escape) { Escape = newState; TriggerKey(ConfigMaster.Escape, Escape, !Escape); } }
 
