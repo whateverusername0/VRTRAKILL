@@ -56,7 +56,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
             if (!MonoSingleton<InputManager>.Instance.PerformingCheatMenuCombo()
                 && MonoSingleton<InputManager>.Instance.InputSource.Fire1.WasPerformedThisFrame && __instance.shopping)
             {
-                //__instance.anim.SetTrigger("ShopTap");
+                __instance.anim.SetTrigger("ShopTap");
             }
 
             if (__instance.returnToOrigRot)
@@ -86,12 +86,12 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
             {
                 if (!__instance.heldItem.noHoldingAnimation && __instance.fc.forceNoHold <= 0)
                 {
-                    //__instance.anim.SetBool("SemiHolding", value: false);
-                    //__instance.anim.SetBool("Holding", value: true);
+                    __instance.anim.SetBool("SemiHolding", value: false);
+                    __instance.anim.SetBool("Holding", value: true);
                 }
                 else
                 {
-                    //__instance.anim.SetBool("SemiHolding", value: true);
+                    __instance.anim.SetBool("SemiHolding", value: true);
                 }
             }
             return false;
@@ -102,8 +102,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
             if (__instance.ready)
             {
                 __instance.ready = false;
-                //__instance.anim.SetFloat("PunchRandomizer", Random.Range(0f, 1f));
-                //__instance.anim.SetTrigger("Punch");
+                __instance.anim.SetFloat("PunchRandomizer", Random.Range(0f, 1f));
+                __instance.anim.SetTrigger("Punch");
                 __instance.aud.pitch = Random.Range(0.9f, 1.1f);
                 __instance.aud.Play();
                 __instance.tr.widthMultiplier = 0.5f;
