@@ -209,14 +209,6 @@ namespace Valve.VR
             }
         }
         
-        public virtual SteamVR_Action_Boolean ActivateCheatMenu
-        {
-            get
-            {
-                return SteamVR_Actions.default_ActivateCheatMenu;
-            }
-        }
-        
         public virtual SteamVR_Action_Pose LeftPose
         {
             get
@@ -230,6 +222,14 @@ namespace Valve.VR
             get
             {
                 return SteamVR_Actions.default_RightPose;
+            }
+        }
+        
+        public virtual SteamVR_Action_Vector2 WeaponWheelScroll
+        {
+            get
+            {
+                return SteamVR_Actions.default_WeaponWheelScroll;
             }
         }
         
