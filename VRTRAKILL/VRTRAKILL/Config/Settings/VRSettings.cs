@@ -18,7 +18,7 @@ namespace Plugin.VRTRAKILL.Config.Settings
 
         [JsonProperty("Desktop View")] public DesktopView DV { get; set; } public class DesktopView
         {
-            [JsonProperty("Enable Desktop View (for recording, etc.)")] public bool EnableDV { get; set; } = false;
+            [JsonProperty("Enable Desktop View (for recording, etc.)")] public bool EnableDV { get; set; } = true;
             [JsonProperty("World View FOV")] public float WorldCamFOV { get; set; } = 90;
             [JsonProperty("UI View FOV")] public float UICamFOV { get; set; } = 45;
         }
