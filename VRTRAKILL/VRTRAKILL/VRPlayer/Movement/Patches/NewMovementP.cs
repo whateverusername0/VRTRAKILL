@@ -11,8 +11,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
         {
             if (!Vars.Config.VRSettings.DoNotOverrideMoveValues)
             {
-                __instance.jumpPower = __instance.jumpPower / 2;
-                __instance.wallJumpPower = __instance.wallJumpPower / 2;
+                __instance.jumpPower = __instance.jumpPower / 1.5f;
+                __instance.wallJumpPower = __instance.wallJumpPower / 1.5f;
             }
         }
 
