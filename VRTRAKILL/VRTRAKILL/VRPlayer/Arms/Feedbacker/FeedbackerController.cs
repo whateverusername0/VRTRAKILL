@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Arms.Feedbacker
 {
@@ -21,11 +20,12 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Feedbacker
         {
             UpdateTransform();
         }
+
         // Override Animator shenanigans
         void LateUpdate()
         {
             Arm.UpperArm.localScale /= 100; Arm.Hand.localScale *= 100;
-            UpdateTransform();
+            //UpdateTransform();
         }
     }
 }
