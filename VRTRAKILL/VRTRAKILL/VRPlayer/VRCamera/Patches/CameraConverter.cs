@@ -26,10 +26,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
                 DesktopWorldCam = new GameObject("Desktop World Camera").AddComponent<Camera>();
                 DesktopWorldCam.transform.parent = Vars.MainCamera.transform;
                 DesktopWorldCam.transform.localPosition = Vector3.zero;
-                DesktopWorldCam.nearClipPlane = 0.1f;
+                DesktopWorldCam.nearClipPlane = 0.1f; DesktopWorldCam.farClipPlane = Vars.MainCamera.farClipPlane;
                 DesktopWorldCam.depth = 69;
                 DesktopWorldCam.stereoTargetEye = StereoTargetEyeMask.None;
-                DesktopWorldCam.cullingMask = Vars.MainCamera.cullingMask & Vars.VRUICamera.cullingMask;
+                DesktopWorldCam.cullingMask = Vars.MainCamera.cullingMask;
                 DesktopWorldCam.clearFlags = Vars.MainCamera.clearFlags;
                 DesktopWorldCam.fieldOfView = Vars.Config.VRSettings.DV.WorldCamFOV;
 
