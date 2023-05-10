@@ -20,7 +20,6 @@ Also it does not require any other mods to function
 **0.8.x**: Haptics (controller rumble)  
 **0.9**: Full arm movement/tracking (punch irl to punch ingame)  
 **1.0**: VR body (arms, legs, etc.)  
-**1.x**: Movement by irl movement (jump, dash, slide) (ridiculous)
 
 ## Requirements
 - A copy of the latest version of ULTRAKILL (any kind)
