@@ -12,7 +12,16 @@
       },
       "/actions/default" : {
          "chords" : [],
-         "haptics" : [],
+         "haptics" : [
+            {
+               "output" : "/actions/default/out/haptic",
+               "path" : "/user/hand/left/output/haptic"
+            },
+            {
+               "output" : "/actions/default/out/haptic",
+               "path" : "/user/hand/right/output/haptic"
+            }
+         ],
          "poses" : [
             {
                "output" : "/actions/default/in/leftpose",
@@ -110,6 +119,9 @@
                   },
                   "double" : {
                      "output" : "/actions/default/in/escape"
+                  },
+                  "held" : {
+                     "output" : "/actions/default/in/openweaponwheel"
                   }
                },
                "mode" : "button",

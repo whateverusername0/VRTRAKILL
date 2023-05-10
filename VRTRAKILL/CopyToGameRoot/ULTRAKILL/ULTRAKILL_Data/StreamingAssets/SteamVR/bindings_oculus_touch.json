@@ -1,7 +1,7 @@
 {
    "action_manifest_version" : 0,
    "alias_info" : {},
-   "app_key" : "steam.app.3063601311",
+   "app_key" : "application.generated.unity.newunityproject.exe",
    "bindings" : {
       "/actions/buggy" : {
          "chords" : [],
@@ -37,15 +37,6 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/default/in/shoot"
-                  }
-               },
-               "mode" : "button",
-               "path" : "/user/hand/left/input/trigger"
-            },
-            {
-               "inputs" : {
-                  "click" : {
                      "output" : "/actions/default/in/jump"
                   },
                   "position" : {
@@ -58,11 +49,20 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/default/in/altshoot"
+                     "output" : "/actions/default/in/swaphand"
                   }
                },
                "mode" : "button",
                "path" : "/user/hand/left/input/grip"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/punch"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/left/input/trigger"
             },
             {
                "inputs" : {
@@ -131,11 +131,6 @@
                "path" : "/user/hand/right/input/y"
             },
             {
-               "inputs" : {},
-               "mode" : "button",
-               "path" : "/user/hand/left/input/system"
-            },
-            {
                "inputs" : {
                   "double" : {
                      "output" : "/actions/default/in/escape"
@@ -164,6 +159,15 @@
                },
                "mode" : "joystick",
                "path" : "/user/hand/right/input/joystick"
+            },
+            {
+               "inputs" : {
+                  "position" : {
+                     "output" : "/actions/default/in/weaponwheelscroll"
+                  }
+               },
+               "mode" : "joystick",
+               "path" : "/user/hand/left/input/joystick"
             }
          ]
       },
@@ -177,7 +181,7 @@
    },
    "category" : "steamvr_input",
    "controller_type" : "oculus_touch",
-   "description" : "Default bindings for VRTRAKILL",
+   "description" : "Default bindings for VRTRAKILL (oculus touch)",
    "interaction_profile" : "",
    "name" : "VRTRAKILL Defaults",
    "options" : {},

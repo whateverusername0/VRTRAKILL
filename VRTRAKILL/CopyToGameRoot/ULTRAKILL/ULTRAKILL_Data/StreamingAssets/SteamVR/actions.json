@@ -3,7 +3,7 @@
     {
       "name": "/actions/default/in/Movement",
       "type": "vector2",
-      "requirement": "mandatory"
+      "requirement": "suggested"
     },
     {
       "name": "/actions/default/in/Turn",
@@ -44,11 +44,12 @@
     {
       "name": "/actions/default/in/IterateWeapon",
       "type": "vector2",
-      "requirement": "optional"
+      "requirement": "suggested"
     },
     {
       "name": "/actions/default/in/SwapHand",
-      "type": "boolean"
+      "type": "boolean",
+      "requirement": "optional"
     },
     {
       "name": "/actions/default/in/Slot1",
@@ -106,11 +107,8 @@
     },
     {
       "name": "/actions/default/in/Punch",
-      "type": "boolean"
-    },
-    {
-      "name": "/actions/default/in/ActivateCheatMenu",
-      "type": "boolean"
+      "type": "boolean",
+      "requirement": "suggested"
     },
     {
       "name": "/actions/default/in/LeftPose",
@@ -121,6 +119,10 @@
       "name": "/actions/default/in/RightPose",
       "type": "pose",
       "requirement": "mandatory"
+    },
+    {
+      "name": "/actions/default/in/WeaponWheelScroll",
+      "type": "vector2"
     },
     {
       "name": "/actions/default/out/Haptic",
@@ -199,9 +201,9 @@
       "/actions/Default/in/Dash": "Dash",
       "/actions/default/in/Escape": "Escape (Pause, etc.)",
       "/actions/default/in/Slide": "Slide (or Slam)",
-      "/actions/default/in/OpenWeaponWheel": "Open Weapon Wheel",
+      "/actions/default/in/OpenWeaponWheel": "(Press) Quick Swap / (Hold) Open Weapon Wheel",
       "/actions/default/in/ChangeWeaponVariation": "Change Weapon Variation",
-      "/actions/default/in/IterateWeapon": "Change Weapon (Scroll)",
+      "/actions/default/in/IterateWeapon": "Weapon Scroll",
       "/actions/default/in/SwapHand": "Change Hand",
       "/actions/default/in/Slot1": "Weapon Slot 1",
       "/actions/default/in/Slot2": "Weapon Slot 2",
@@ -216,12 +218,14 @@
       "/actions/default/in/Whiplash": "Whiplash",
       "/actions/default/in/AltShoot": "Alternative Shoot",
       "/actions/default/in/Shoot": "Shoot",
-      "/actions/default/in/Movement": "Movement",
+      "/actions/default/in/Movement": "Move",
       "/actions/default/in/Turn": "Turning",
       "/actions/default/in/Jump": "Jump",
       "/actions/default/in/Dash": "Dash",
       "/actions/default/in/Punch": "Punch",
-      "/actions/default/in/ActivateCheatMenu": "Activate Cheat Menu"
+      "/actions/default/in/LeftPose": "Left Controller",
+      "/actions/default/in/RightPose": "Right Controller",
+      "/actions/default/in/WeaponWheelScroll": "Weapon Wheel Scroll"
     }
   ]
 }
