@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Plugin.VRTRAKILL.Input;
 
 namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
 {
     internal class VRCameraController : MonoSingleton<VRCameraController>
     {
-        private void Start ()
+        private void Start()
         {
             // Height prevention
             transform.position -= new Vector3(0, 1f, 0);
@@ -22,11 +23,21 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
 
             if (Vars.Config.VRInputSettings.SnapTurning)
                 StartCoroutine(SnapTurn());
-            else transform.rotation = Quaternion.Euler(0f, Input.VRInputVars.TurnOffset, 0f);
+            else SmoothTurn();
+        }
+        private void SmoothTurn()
+        {
+            if (VRInputVars.TurnVector.x > 0 + Vars.Config.VRInputSettings.Deadzone) VRInputVars.TurnOffset += Vars.Config.VRInputSettings.SmoothTurningSpeed * Time.deltaTime;
+            if (VRInputVars.TurnVector.x < 0 - Vars.Config.VRInputSettings.Deadzone) VRInputVars.TurnOffset -= Vars.Config.VRInputSettings.SmoothTurningSpeed * Time.deltaTime;
+
+            transform.rotation = Quaternion.Euler(0f, VRInputVars.TurnOffset, 0f);
         }
         private IEnumerator SnapTurn()
         {
-            transform.rotation = Quaternion.Euler(0f, Input.VRInputVars.TurnOffset, 0f);
+            if (VRInputVars.TurnVector.x > 0 + Vars.Config.VRInputSettings.Deadzone) VRInputVars.TurnOffset += Vars.Config.VRInputSettings.SnapTurningAngles;
+            if (VRInputVars.TurnVector.x < 0 - Vars.Config.VRInputSettings.Deadzone) VRInputVars.TurnOffset -= Vars.Config.VRInputSettings.SnapTurningAngles;
+
+            transform.rotation = Quaternion.Euler(0f, VRInputVars.TurnOffset, 0f);
             yield return new WaitForSeconds(0.5f);
         }
     }

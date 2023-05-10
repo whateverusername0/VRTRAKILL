@@ -77,14 +77,7 @@ namespace Plugin.VRTRAKILL.Input
         private static void MovementH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
         { VRInputVars.MoveVector = axis; }
         private static void TurnH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
-        {
-            VRInputVars.TurnVector = axis;
-            if (axis.x > 0 + Vars.Config.VRInputSettings.Deadzone)
-                if (Vars.Config.VRInputSettings.SnapTurning)
-                    VRInputVars.TurnOffset += Vars.Config.VRInputSettings.SnapTurningAngles;
-                else VRInputVars.TurnOffset += Vars.Config.VRInputSettings.SmoothTurningSpeed * Time.deltaTime;
-            if (axis.x < 0 - Vars.Config.VRInputSettings.Deadzone) VRInputVars.TurnOffset -= Vars.Config.VRInputSettings.SmoothTurningSpeed * Time.deltaTime;
-        }
+        { VRInputVars.TurnVector = axis; }
         private static void JumpH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != Jump) { Jump = newState; TriggerKey(ConfigMaster.Jump, Jump, !Jump); } }
         private static void SlideH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
@@ -187,6 +180,11 @@ namespace Plugin.VRTRAKILL.Input
         {
             if (Started) InpSim.Mouse.RightButtonDown();
             else if (Ended) InpSim.Mouse.RightButtonUp();
+        }
+        private static void MMBPress(bool Started, bool Ended)
+        {
+            if (Started) InpSim.Mouse.XButtonDown((int)MouseButton.MiddleButton);
+            else if (Ended) InpSim.Mouse.XButtonUp((int)MouseButton.MiddleButton);
         }
         private static void MouseScroll(int Amount)
         {
