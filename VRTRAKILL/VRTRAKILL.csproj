@@ -187,6 +187,7 @@
     <Compile Include="VRTRAKILL\VRPlayer\Arms\ArmsP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Feedbacker\Armature.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Feedbacker\FeedbackerController.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Arms\ItemsP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\PunchP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\ControllerController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\ControllerHaptics.cs" />
