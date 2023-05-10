@@ -14,7 +14,6 @@ namespace Plugin.VRTRAKILL.UI
         {
             LastCamFwd = UIConverter.UICamera.transform.forward * Distance;
             transform.rotation = UIConverter.UICamera.transform.rotation;
-            transform.position = UIConverter.UICamera.transform.position + LastCamFwd; //
         }
         private void ResetPos()
         {
@@ -31,13 +30,8 @@ namespace Plugin.VRTRAKILL.UI
         }
         public void Update()
         {
-            if (!Vars.IsAMenu)
-            {
-                UpdatePos();
-                //transform.position = UIConverter.UICamera.transform.position + LastCamFwd;
-            }
-            else ResetPos();
-            
+            if (!Vars.IsAMenu) UpdatePos(); else ResetPos();
+            transform.position = UIConverter.UICamera.transform.position + LastCamFwd;
         }
     }
 }
