@@ -306,7 +306,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\Managed\" />
     <Folder Include="VRTRAKILL\VRPlayer\Arms\GrapplingHook\" />
     <Folder Include="VRTRAKILL\VRPlayer\Arms\Knuckleblaster\" />
     <Folder Include="VRTRAKILL\VRPlayer\Arms\Sandboxer\" />
