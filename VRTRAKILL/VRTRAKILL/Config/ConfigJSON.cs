@@ -26,9 +26,17 @@ namespace Plugin.VRTRAKILL.Config
             }
             catch (FileNotFoundException)
             {
-                Plugin.PLogger.LogError("Unable to find VRTRAKILL_Config.json, without it you literally cannot use the mod.\n" +
-                                        "Generating a new one. Please quit the game and fill it out, ty. Starting up using default settings.");
+                Plugin.PLogger.LogError("Unable to find VRTRAKILL_Config.json.\n" +
+                                        "Generating a new one. Please quit the game and fill it out.\n" +
+                                        "Starting up using default settings.");
                 Serialize(new ConfigJSON()); return new ConfigJSON();
+            }
+            catch (JsonException)
+            {
+                Plugin.PLogger.LogError("Something went wrong when trying to read VRTRAKILL_Config.json\n" +
+                                        "Please fix any typos, formatting errors, etc. Perhaps regenerate config.\n" +
+                                        "Starting up using default settings.");
+                return new ConfigJSON();
             }
         }
         public static void Serialize(ConfigJSON Config)
