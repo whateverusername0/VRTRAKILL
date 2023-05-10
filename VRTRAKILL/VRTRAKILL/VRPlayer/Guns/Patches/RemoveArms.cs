@@ -12,8 +12,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         // ( Animator reverting my scaledefs is a meanie thing to do :C )
         static Transform ArmT;
 
-        [HarmonyPrefix] [HarmonyPostfix]
-        [HarmonyPatch(typeof(Revolver), nameof(Revolver.LateUpdate))]
+        [HarmonyPrefix] [HarmonyPostfix] [HarmonyPatch(typeof(Revolver), nameof(Revolver.LateUpdate))]
         static void RemoveRevolverArm(Revolver __instance)
         {
             try
@@ -25,7 +24,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             }
             catch (NullReferenceException) { Plugin.PLogger.LogWarning($"Revolver is null???"); }
         }
-        [HarmonyPostfix]
+        [HarmonyPrefix] [HarmonyPostfix]
         [HarmonyPatch(typeof(SandboxArm), nameof(SandboxArm.Update))]
         [HarmonyPatch(typeof(SandboxArm), nameof(SandboxArm.FixedUpdate))]
         static void RemoveSandboxArm(SandboxArm __instance)
