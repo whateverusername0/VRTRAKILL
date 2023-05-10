@@ -36,8 +36,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
             Offset.transform.localPosition = Vector3.zero;
             Offset.transform.localRotation = Quaternion.Euler(45, 0, 0);
 
-            LR = Offset.AddComponent<LineRenderer>();
-            LR.material = new Material(Shader.Find("GUI/Text Shader"));
+            //LR = Offset.AddComponent<LineRenderer>();
+            //LR.material = new Material(Shader.Find("GUI/Text Shader"));
             //SetLRLines();
         }
         public void Update()
