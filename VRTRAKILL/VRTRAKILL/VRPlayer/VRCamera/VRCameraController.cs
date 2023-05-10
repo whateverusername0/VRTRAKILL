@@ -10,6 +10,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
         {
             // Height prevention
             transform.position -= new Vector3(0, 1f, 0);
+
+            if (Vars.Config.VRInputSettings.SnapTurning)
+                StartCoroutine(SnapTurn());
+            else StartCoroutine(SmoothTurn());
         }
 
         private void Update()
@@ -21,24 +25,26 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
                                  Vars.MainCamera.transform.rotation.eulerAngles.y,
                                  NewMovement.Instance.transform.rotation.eulerAngles.z);
 
-            if (Vars.Config.VRInputSettings.SnapTurning)
-                StartCoroutine(SnapTurn());
-            else SmoothTurn();
-        }
-        private void SmoothTurn()
-        {
-            if (VRInputVars.TurnVector.x > 0 + Vars.Config.VRInputSettings.Deadzone) VRInputVars.TurnOffset += Vars.Config.VRInputSettings.SmoothTurningSpeed * Time.deltaTime;
-            if (VRInputVars.TurnVector.x < 0 - Vars.Config.VRInputSettings.Deadzone) VRInputVars.TurnOffset -= Vars.Config.VRInputSettings.SmoothTurningSpeed * Time.deltaTime;
-
             transform.rotation = Quaternion.Euler(0f, VRInputVars.TurnOffset, 0f);
+        }
+
+        private IEnumerator SmoothTurn()
+        {
+            while(true)
+            {
+                if (VRInputVars.TurnVector.x > 0 + Vars.Config.VRInputSettings.Deadzone) VRInputVars.TurnOffset += Vars.Config.VRInputSettings.SmoothTurningSpeed * Time.deltaTime;
+                if (VRInputVars.TurnVector.x < 0 - Vars.Config.VRInputSettings.Deadzone) VRInputVars.TurnOffset -= Vars.Config.VRInputSettings.SmoothTurningSpeed * Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
         }
         private IEnumerator SnapTurn()
         {
-            if (VRInputVars.TurnVector.x > 0 + Vars.Config.VRInputSettings.Deadzone) VRInputVars.TurnOffset += Vars.Config.VRInputSettings.SnapTurningAngles;
-            if (VRInputVars.TurnVector.x < 0 - Vars.Config.VRInputSettings.Deadzone) VRInputVars.TurnOffset -= Vars.Config.VRInputSettings.SnapTurningAngles;
-
-            transform.rotation = Quaternion.Euler(0f, VRInputVars.TurnOffset, 0f);
-            yield return new WaitForSeconds(0.5f);
+            while(true)
+            {
+                if (VRInputVars.TurnVector.x > 0 + Vars.Config.VRInputSettings.Deadzone) VRInputVars.TurnOffset += Vars.Config.VRInputSettings.SnapTurningAngles;
+                if (VRInputVars.TurnVector.x < 0 - Vars.Config.VRInputSettings.Deadzone) VRInputVars.TurnOffset -= Vars.Config.VRInputSettings.SnapTurningAngles;
+                yield return new WaitForSeconds(0.2f);
+            }
         }
     }
 }
