@@ -16,7 +16,7 @@ namespace Plugin
 
         internal static ManualLogSource PLogger { get; private set; }
 
-        private void Awake()
+        public void Awake()
         {
             PLogger = Logger;
 
