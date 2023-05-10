@@ -32,7 +32,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
                 case "rumble.coin_toss":
                 case "rumble.whiplash.throw":
                 case "rumble.whiplash.pull":
-                    return SteamVR_Input_Sources.LeftHand;
+                    if (Vars.Config.VRInputSettings.LeftHandMode) return SteamVR_Input_Sources.RightHand;
+                    else return SteamVR_Input_Sources.LeftHand;
 
                 case "rumble.gun.fire":
                 case "rumble.gun.fire_strong":
@@ -44,7 +45,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
                 case "rumble.gun.sawblade":
                 case "rumble.gun.revolver_charge":
                 case "rumble.magnet_released":
-                    return SteamVR_Input_Sources.RightHand;
+                    if (Vars.Config.VRInputSettings.LeftHandMode) return SteamVR_Input_Sources.LeftHand;
+                    else return SteamVR_Input_Sources.RightHand;
 
                 default:
                     Debug.LogError("No intensity found for key: " + Key);
