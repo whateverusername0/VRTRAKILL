@@ -572,5 +572,136 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 
             return false;
         }
+
+        // Dying thingamajig fix
+        [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.GetHurt))] static bool GetHurt(int damage, bool invincible, float scoreLossMultiplier, bool explosion, bool instablack, NewMovement __instance)
+        {
+            if (!__instance.dead && (!invincible || __instance.gameObject.layer != 15) && damage > 0)
+            {
+                if (explosion)
+                {
+                    __instance.exploded = true;
+                }
+                if (__instance.asscon.majorEnabled)
+                {
+                    damage = Mathf.RoundToInt((float)damage * __instance.asscon.damageTaken);
+                }
+                if (invincible)
+                {
+                    __instance.gameObject.layer = 15;
+                }
+                if (damage >= 50)
+                {
+                    __instance.currentColor.a = 0.8f;
+                }
+                else
+                {
+                    __instance.currentColor.a = 0.5f;
+                }
+                __instance.hurting = true;
+                __instance.cc.CameraShake((float)(damage / 20));
+                __instance.hurtAud.pitch = Random.Range(0.8f, 1f);
+                __instance.hurtAud.PlayOneShot(__instance.hurtAud.clip);
+                if (__instance.hp - damage > 0)
+                {
+                    __instance.hp -= damage;
+                }
+                else
+                {
+                    __instance.hp = 0;
+                }
+                if (invincible && scoreLossMultiplier != 0f && __instance.difficulty >= 2 && (!__instance.asscon.majorEnabled || !__instance.asscon.disableHardDamage) && __instance.hp <= 100)
+                {
+                    float num = 0.35f;
+                    if (__instance.difficulty >= 4)
+                    {
+                        num = 0.5f;
+                    }
+                    if (__instance.antiHp + (float)damage * num < 99f)
+                    {
+                        __instance.antiHp += (float)damage * num;
+                    }
+                    else
+                    {
+                        __instance.antiHp = 99f;
+                    }
+                    if (__instance.antiHpCooldown == 0f)
+                    {
+                        __instance.antiHpCooldown += 1f;
+                    }
+                    if (__instance.difficulty >= 3)
+                    {
+                        __instance.antiHpCooldown += 1f;
+                    }
+                    __instance.antiHpFlash.Flash(1f);
+                    __instance.antiHpCooldown += (float)(damage / 20);
+                }
+                if (__instance.shud == null)
+                {
+                    __instance.shud = MonoSingleton<StyleHUD>.Instance;
+                }
+                if (scoreLossMultiplier > 0.5f)
+                {
+                    __instance.shud.RemovePoints(0);
+                    __instance.shud.DescendRank();
+                }
+                else
+                {
+                    __instance.shud.RemovePoints(Mathf.RoundToInt((float)damage));
+                }
+                StatsManager instance = MonoSingleton<StatsManager>.Instance;
+                if (damage <= 200)
+                {
+                    instance.stylePoints -= Mathf.RoundToInt((float)(damage * 5) * scoreLossMultiplier);
+                }
+                else
+                {
+                    instance.stylePoints -= Mathf.RoundToInt(1000f * scoreLossMultiplier);
+                }
+                instance.tookDamage = true;
+                if (__instance.hp == 0)
+                {
+                    if (!__instance.endlessMode)
+                    {
+                        __instance.blackScreen.gameObject.SetActive(true);
+                        MonoSingleton<TimeController>.Instance.controlPitch = false;
+                        if (instablack)
+                        {
+                            __instance.blackColor.a = 1f;
+                        }
+                        __instance.screenHud.SetActive(false);
+                    }
+                    else
+                    {
+                        __instance.GetComponentInChildren<FinalCyberRank>().GameOver();
+                        CrowdReactions instance2 = MonoSingleton<CrowdReactions>.Instance;
+                        if (instance2 != null)
+                        {
+                            instance2.React(instance2.aww);
+                        }
+                    }
+                    //__instance.rb.constraints = RigidbodyConstraints.None;
+                    if (MonoSingleton<PowerUpMeter>.Instance)
+                    {
+                        MonoSingleton<PowerUpMeter>.Instance.juice = 0f;
+                    }
+                    __instance.cc.enabled = false;
+                    if (__instance.gunc == null)
+                    {
+                        __instance.gunc = __instance.GetComponentInChildren<GunControl>();
+                    }
+                    __instance.gunc.NoWeapon();
+                    //__instance.rb.constraints = RigidbodyConstraints.None;
+                    __instance.dead = true;
+                    __instance.activated = false;
+                    if (__instance.punch == null)
+                    {
+                        __instance.punch = __instance.GetComponentInChildren<FistControl>();
+                    }
+                    __instance.punch.NoFist();
+                }
+            }
+            return false;
+        }
     }
 }
