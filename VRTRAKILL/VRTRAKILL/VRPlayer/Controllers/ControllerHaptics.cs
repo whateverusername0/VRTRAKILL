@@ -10,7 +10,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
     {
         static SteamVR_Action_Vibration HapticAction = SteamVR_Actions._default.Haptic;
 
-        [HarmonyPostfix] [HarmonyPatch(nameof(RumbleManager.Update))] static void Update(RumbleManager __instance)
+        // I can't believe it worked first try without any corrections.
+        [HarmonyPrefix] [HarmonyPatch(nameof(RumbleManager.Update))] static bool Update(RumbleManager __instance)
         {
             List<string> list = new List<string>();
             foreach (KeyValuePair<string, PendingVibration> keyValuePair in __instance.pendingVibrations)
@@ -38,11 +39,14 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 
             if (Vars.Config.VRInputSettings.Hands.EnableCH)
                 Vibrate(1, Num, Num, Source);
+
+            return false;
         }
-        [HarmonyPostfix][HarmonyPatch(nameof(RumbleManager.OnDisable))] static void OnDisable()
+        [HarmonyPrefix][HarmonyPatch(nameof(RumbleManager.OnDisable))] static bool OnDisable()
         {
             // Dunno if this is needed, not removing it doe
             Vibrate(1, 0, 0, 0);
+            return false;
         }
 
         // Number 7:
