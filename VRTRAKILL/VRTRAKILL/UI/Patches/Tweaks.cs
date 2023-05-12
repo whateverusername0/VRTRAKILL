@@ -40,7 +40,7 @@ namespace Plugin.VRTRAKILL.UI.Patches
         }
         [HarmonyPrefix] [HarmonyPatch(typeof(Crosshair), nameof(Crosshair.Start))] static void SetCrosshair(Crosshair __instance)
         {
-            if (Vars.Config.VRSettings.EnableDefaultCrosshair == false)
+            if (Vars.Config.VRSettings.VRUI.EnableDefaultCrosshair == false)
                 __instance.gameObject.SetActive(false);
         }
     }
