@@ -9,20 +9,21 @@ namespace Plugin.VRTRAKILL.UI.HUD
         {
             __instance.transform.parent = HUDOptions.Instance.transform;
 
-            // GunCanvas forces itself no matter what type of hud you set, so we have two options:
-            // Remove Standard HUD or Classic HU-
-            if (__instance.gameObject.name == "GunCanvas") __instance.GetComponent<Canvas>().enabled = false;
+            if (!Vars.Config.VRSettings.VRUI.EnableStandardHUD) __instance.GetComponent<Canvas>().enabled = false;
 
             UIConverter.ConvertCanvas(__instance.GetComponent<Canvas>(), Force: true, DontAddComponent: true);
 
-            switch(__instance.gameObject.name)
+            switch (__instance.gameObject.name)
             {
                 case "GunCanvas":
+                    __instance.defaultPos = new Vector3(-520, -240, 460); __instance.transform.localPosition = new Vector3(-520, -240, 460);
+                    __instance.defaultRot = new Vector3(355, 315, 1.5f); __instance.transform.localEulerAngles = new Vector3(355, 315, 1.5f);
+                    __instance.transform.localScale = new Vector3(.5f, .5f, .5f);
                     break;
                 case "StyleCanvas":
-                    __instance.defaultPos = new Vector3(396, 48, -286);
-                    __instance.defaultRot = new Vector3(0, 56, 0);
-                    __instance.transform.localScale = new Vector3(.65f, .65f, .65f);
+                    __instance.defaultPos = new Vector3(324, 48, -286); __instance.transform.localPosition = new Vector3(324, 48, -286);
+                    __instance.defaultRot = new Vector3(0, 56, 0); __instance.transform.localEulerAngles = new Vector3(0, 56, 0);
+                    __instance.transform.localScale = new Vector3(.5f, .5f, .5f);
                     break;
             }
         }
