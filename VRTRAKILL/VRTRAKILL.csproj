@@ -189,6 +189,7 @@
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Feedbacker\Armature.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Feedbacker\FeedbackerController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\ItemsP.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Arms\Knuckleblaster\Armature.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\PunchP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\ControllerController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\ControllerHaptics.cs" />
@@ -309,7 +310,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="VRTRAKILL\VRPlayer\Arms\GrapplingHook\" />
-    <Folder Include="VRTRAKILL\VRPlayer\Arms\Knuckleblaster\" />
     <Folder Include="VRTRAKILL\VRPlayer\Arms\Sandboxer\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
