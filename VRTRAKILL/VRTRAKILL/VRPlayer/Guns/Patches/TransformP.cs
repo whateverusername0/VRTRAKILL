@@ -69,11 +69,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         
         [HarmonyPatch(typeof(Sandbox.Arm.SandboxArm))] static class SandboxArmT
         {
-            static Vector3 MovePosition    = new Vector3(-.15f, .2f, -1.05f),
-                           DestroyPosition = new Vector3(.05f, -.075f, -.8f),
-                           AlterPosition   = new Vector3(.05f, -.075f, -.8f),
-                           BuildPosition   = new Vector3(0, .25f, -1.2f),
-                           PlacePosition   = new Vector3(0, .25f, -1.2f);
+            static Vector3 MovePosition    = new Vector3(0, -.1f, -.25f),
+                           DestroyPosition = new Vector3(0, -.15f, -.2f),
+                           AlterPosition   = new Vector3(0, -.15f, -.2f),
+                           BuildPosition   = new Vector3(0, -.1f, -.3f),
+                           PlacePosition   = new Vector3(0, -.1f, -.3f);
             static Vector3 Scale = new Vector3(-.35f, .35f, .35f);
 
             [HarmonyPostfix] [HarmonyPatch(nameof(Sandbox.Arm.SandboxArm.OnEnable))] static void Retransform(Sandbox.Arm.SandboxArm __instance)
