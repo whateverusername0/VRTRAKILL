@@ -38,7 +38,7 @@ namespace Plugin.VRTRAKILL
 
         public static bool IsSandboxArmActive
             => Sandbox.Arm.SandboxArm.Instance != null
-            && Sandbox.Arm.SandboxArm.Instance.isActiveAndEnabled;
+            && Sandbox.Arm.SandboxArm.Instance.gameObject.activeInHierarchy;
 
         public static GameObject VRCameraContainer
             => VRPlayer.VRCamera.Patches.CameraConverter.Container;
