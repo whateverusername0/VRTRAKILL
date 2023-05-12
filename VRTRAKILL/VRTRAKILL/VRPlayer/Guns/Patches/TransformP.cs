@@ -11,13 +11,13 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         {
             static Vector3 Position = new Vector3(0, -.1f, .6f),
                            AltPosition = new Vector3(0, -.075f, .575f);
-            static Vector3 Scale = new Vector3(.1f, .1f, .1f);
+            static Vector3 Scale = new Vector3(.1f, .1f, .1f),
+                           AltScale = new Vector3(.1f, .1f, .1f);
 
             [HarmonyPostfix] [HarmonyPatch(nameof(Revolver.Start))] static void Retransform(Revolver __instance)
             {
-                if (__instance.altVersion == true) __instance.wpos.defaultPos = AltPosition;
-                else __instance.wpos.defaultPos = Position;
-                __instance.wpos.defaultScale = Scale;
+                if (__instance.altVersion == true) { __instance.wpos.defaultPos = AltPosition; __instance.wpos.defaultScale = AltScale; }
+                else { __instance.wpos.defaultPos = Position; __instance.wpos.defaultScale = Scale; }
             }
         }
         [HarmonyPatch(typeof(Shotgun))] static class ShotgunT
