@@ -3,8 +3,7 @@ using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Arms
 {
-    // basically a rewrite of punching to fit in the new punching system
-    /*[HarmonyPatch(typeof(Punch))]*/ internal class PunchP
+    [HarmonyPatch(typeof(Punch))] internal class PunchP
     {
         [HarmonyPostfix] [HarmonyPatch(nameof(Punch.Start))] static void ReparentPunchZone(Punch __instance)
         {
@@ -14,15 +13,20 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
             {
                 // note to self: punch is broken, need to fix it while considering animation shit and other things
                 case FistType.Standard:
-                    __instance.gameObject.AddComponent<Feedbacker.FeedbackerController>();
-                    Feedbacker.FeedbackerController.Instance.PunchZoneT = PunchZone;
+                    __instance.gameObject.AddComponent<ArmRemover>();
+                    //__instance.gameObject.AddComponent<Feedbacker.FeedbackerController>();
+                    //Feedbacker.FeedbackerController.Instance.PunchZoneT = PunchZone;
                     break;
-                case FistType.Heavy: break;
-                case FistType.Spear: break; // wtf is this?
+                case FistType.Heavy:
+                    __instance.gameObject.AddComponent<ArmRemover>();
+                    break;
+                case FistType.Spear:
+                    __instance.gameObject.AddComponent<ArmRemover>();
+                    break; // wtf is this?
             }
         }
 
-        [HarmonyPrefix] [HarmonyPatch(nameof(Punch.Update))] static bool Update(Punch __instance)
+        /* [HarmonyPrefix] [HarmonyPatch(nameof(Punch.Update))] */ static bool Update(Punch __instance)
         {
             if (MonoSingleton<OptionsManager>.Instance.paused) return false;
 
