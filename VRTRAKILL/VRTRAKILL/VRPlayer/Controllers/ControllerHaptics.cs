@@ -32,7 +32,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
                 case "rumble.coin_toss":
                 case "rumble.whiplash.throw":
                 case "rumble.whiplash.pull":
-                    if (Vars.Config.VRInputSettings.LeftHandMode) return SteamVR_Input_Sources.RightHand;
+                    if (Vars.Config.VRInputSettings.Hands.LeftHandMode) return SteamVR_Input_Sources.RightHand;
                     else return SteamVR_Input_Sources.LeftHand;
 
                 case "rumble.gun.fire":
@@ -45,7 +45,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
                 case "rumble.gun.sawblade":
                 case "rumble.gun.revolver_charge":
                 case "rumble.magnet_released":
-                    if (Vars.Config.VRInputSettings.LeftHandMode) return SteamVR_Input_Sources.LeftHand;
+                    if (Vars.Config.VRInputSettings.Hands.LeftHandMode) return SteamVR_Input_Sources.LeftHand;
                     else return SteamVR_Input_Sources.RightHand;
 
                 default:
