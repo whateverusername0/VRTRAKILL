@@ -6,26 +6,14 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Feedbacker
     {
         public Transform PunchZoneT; public Armature Arm;
 
-        private void UpdateTransform()
+        public void Start()
+        {
+
+        }
+        public void Update()
         {
             Arm.Hand.position = Vars.LeftController.transform.position;
             Arm.Hand.rotation = Vars.LeftController.transform.rotation;
-        }
-
-        void Start()
-        {
-
-        }
-        void Update()
-        {
-            UpdateTransform();
-        }
-
-        // Override Animator shenanigans
-        void LateUpdate()
-        {
-            Arm.UpperArm.localScale /= 100; Arm.Hand.localScale *= 100;
-            //UpdateTransform();
         }
     }
 }
