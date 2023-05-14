@@ -6,8 +6,8 @@ namespace Plugin.VRTRAKILL.UI.HUD
     {
         public void Update()
         {
-            if (Vars.IsAMenu) gameObject.SetActive(false);
-            else if (!Vars.IsAMenu && !gameObject.activeSelf) gameObject.SetActive(true);
+            if (Vars.IsAMenu) gameObject.GetComponent<Canvas>().enabled = false;
+            else gameObject.GetComponent<Canvas>().enabled = true;
         }
     }
 }
