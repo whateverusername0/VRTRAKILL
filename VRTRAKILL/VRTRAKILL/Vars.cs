@@ -30,8 +30,6 @@ namespace Plugin.VRTRAKILL
             || IsPaused
             || IsRankingScreenPresent
 
-            || IsWeaponWheelPresent
-
             || IsSpawnMenuPresent
             || IsAlterMenuPresent
             || IsTeleportMenuPresent;
