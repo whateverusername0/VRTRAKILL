@@ -42,9 +42,12 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 
             return false;
         }
-        [HarmonyPrefix][HarmonyPatch(nameof(RumbleManager.OnDisable))] static bool OnDisable()
+        [HarmonyPrefix]
+        [HarmonyPatch(nameof(RumbleManager.OnDisable))]
+        [HarmonyPatch(nameof(RumbleManager.StopVibration))]
+        [HarmonyPatch(nameof(RumbleManager.StopAllVibrations))]
+        static bool DisableRumble()
         {
-            // Dunno if this is needed, not removing it doe
             Vibrate(1, 0, 0, 0);
             return false;
         }
