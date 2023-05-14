@@ -212,6 +212,8 @@
     <Compile Include="VRTRAKILL\VRPlayer\Movement\Patches\PlatformerMovementP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Movement\VRPlayerController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Patches\PlayerP.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\DesktopCamera.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\DesktopUICamera.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\VRCameraController.cs" />
     <Compile Include="VRTRAKILL\Config\ConfigJSON.cs" />
     <Compile Include="VRTRAKILL\Config\ConfigMaster.cs" />

@@ -25,26 +25,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
             if (Vars.Config.VRSettings.DV.EnableDV)
             {
                 DesktopWorldCam = new GameObject("Desktop World Camera").AddComponent<Camera>();
-                DesktopWorldCam.transform.parent = Vars.MainCamera.transform;
-                DesktopWorldCam.transform.localPosition = Vector3.zero;
-                DesktopWorldCam.nearClipPlane = Vars.MainCamera.nearClipPlane;
-                DesktopWorldCam.farClipPlane = Vars.MainCamera.farClipPlane;
-                DesktopWorldCam.depth = 69;
-                DesktopWorldCam.stereoTargetEye = StereoTargetEyeMask.None;
-                DesktopWorldCam.backgroundColor = Vars.MainCamera.backgroundColor;
-                DesktopWorldCam.cullingMask = Vars.MainCamera.cullingMask;
-                DesktopWorldCam.clearFlags = Vars.MainCamera.clearFlags;
-                DesktopWorldCam.fieldOfView = Vars.Config.VRSettings.DV.WorldCamFOV;
+                DesktopWorldCam.gameObject.AddComponent<DesktopCamera>();
 
                 DesktopUICam = new GameObject("Desktop UI Camera").AddComponent<Camera>();
-                DesktopUICam.transform.parent = Vars.VRUICamera.transform;
-                DesktopUICam.transform.localPosition = Vector3.zero;
-                DesktopUICam.nearClipPlane = 0.1f;
-                DesktopUICam.depth = 70;
-                DesktopUICam.stereoTargetEye = StereoTargetEyeMask.None;
-                DesktopUICam.cullingMask = Vars.VRUICamera.cullingMask;
-                DesktopUICam.clearFlags = Vars.VRUICamera.clearFlags;
-                DesktopUICam.fieldOfView = Vars.Config.VRSettings.DV.UICamFOV;
+                DesktopUICam.gameObject.AddComponent<DesktopUICamera>();
             }
         }
 
