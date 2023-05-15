@@ -6,7 +6,7 @@ namespace Plugin.VRTRAKILL.Config.Settings
     {
         [JsonProperty("VR UI Settings")] public VRUISettings VRUI { get; set; } public class VRUISettings
         {
-            [JsonProperty("Enable default crosshair")] public bool EnableDefaultCrosshair { get; set; } = false;
+            [JsonProperty("Crosshair distance")] public float CrosshairDistance { get; set; } = 16;
             [JsonProperty("HUD Size (from 0 to 0.1)")] public float UISize { get; set; } = 0.0625f;
             [JsonProperty("Enable standard HUD")] public bool EnableStandardHUD { get; set; } = false;
         }
