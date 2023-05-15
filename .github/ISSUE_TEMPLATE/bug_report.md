@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: Bug report
-title: "[BUG] BugNameHere"
+title: "[BUG] NameHere"
 labels: bug
 assignees: whateverusername0
 
@@ -13,8 +13,7 @@ A clear and concise description of what the bug is.
 **Steps to Reproduce**
 1. Do this
 2. Do that
-3. Scrindonguloge there
-4. See error
+3. See error
 
 **Expected behavior**
 What you expected to happen.
