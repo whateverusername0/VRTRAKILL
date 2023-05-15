@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using HarmonyLib;
+using Plugin.Helpers;
 
 namespace Plugin.VRTRAKILL.UI.Patches
 {
@@ -40,8 +41,21 @@ namespace Plugin.VRTRAKILL.UI.Patches
         }
         [HarmonyPrefix] [HarmonyPatch(typeof(Crosshair), nameof(Crosshair.Start))] static void SetCrosshair(Crosshair __instance)
         {
-            if (Vars.Config.VRSettings.VRUI.EnableDefaultCrosshair == false)
-                __instance.gameObject.SetActive(false);
+            __instance.transform.parent = null;
+
+            // set controller
+            CrosshairController CHC = __instance.gameObject.AddComponent<CrosshairController>();
+            if (Vars.Config.VRInputSettings.Hands.LeftHandMode) CHC.Hand = 0; else CHC.Hand = 1;
+
+            // add canvas and get jiggy
+            Canvas C = __instance.gameObject.AddComponent<Canvas>();
+            C.worldCamera = Vars.VRUICamera;
+            C.renderMode = RenderMode.WorldSpace;
+
+            __instance.gameObject.layer = 0; // important
+
+            if (__instance.gameObject.HasComponent<UICanvas>())
+                Object.Destroy(__instance.gameObject.GetComponent<UICanvas>());
         }
     }
 }
