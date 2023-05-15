@@ -38,7 +38,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
             __instance.currentIntensity = Num;
 
             if (Vars.Config.VRInputSettings.Hands.EnableCH)
-                Vibrate(1, Num, Num, Source);
+                if (list.Count > 0)
+                    Vibrate(1, Num, Num, Source);
 
             return false;
         }

@@ -45,7 +45,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
             PED.position = Offset.transform.position;
             EventSystem.current.RaycastAll(PED, RCResults);
 
-            if (Vars.IsAMenu || Vars.IsWeaponWheelPresent /*|| Vars.Config.VRSettings.DrawControllerLines*/)
+            if (Vars.IsAMenu || Vars.IsWeaponWheelPresent)
             {
                 //LR.enabled = true;
                 //SetLRLines();
