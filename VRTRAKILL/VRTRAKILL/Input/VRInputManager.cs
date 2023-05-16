@@ -7,6 +7,7 @@ namespace Plugin.VRTRAKILL.Input
 {
     static class VRInputManager
     {
+        // simulate keyboard presses (windows only)
         private static InputSimulator InpSim => new InputSimulator();
 
         private static bool
