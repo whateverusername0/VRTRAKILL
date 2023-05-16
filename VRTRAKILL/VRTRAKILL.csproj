@@ -183,6 +183,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VRTRAKILL\Config\Input\Keybinds.cs" />
     <Compile Include="VRTRAKILL\Config\Settings\VRSettings.cs" />
+    <Compile Include="VRTRAKILL\Patches\DiscordIntegration.cs" />
     <Compile Include="VRTRAKILL\UI\HUD\HideWhenMenuActive.cs" />
     <Compile Include="VRTRAKILL\UI\HUD\TransformP.cs" />
     <Compile Include="VRTRAKILL\UI\Patches\CrosshairController.cs" />
