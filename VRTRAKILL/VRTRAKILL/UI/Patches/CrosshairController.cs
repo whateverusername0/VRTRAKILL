@@ -11,7 +11,7 @@ namespace Plugin.VRTRAKILL.UI.Patches
             if (Hand == 0)
             {
                 transform.position = Vars.LeftController.transform.position
-                                   + (Vars.RightController.transform.forward * Vars.Config.VRSettings.VRUI.CrosshairDistance);
+                                   + (Vars.LeftController.transform.forward * Vars.Config.VRSettings.VRUI.CrosshairDistance);
                 transform.rotation = Vars.LeftController.transform.rotation;
             }
             if (Hand == 1)

@@ -50,6 +50,7 @@ namespace Plugin.VRTRAKILL.UI.Patches
             Canvas C = __instance.gameObject.AddComponent<Canvas>();
             C.worldCamera = Vars.VRUICamera;
             C.renderMode = RenderMode.WorldSpace;
+            __instance.gameObject.layer = 0;
 
             if (__instance.gameObject.HasComponent<UICanvas>())
                 Object.Destroy(__instance.gameObject.GetComponent<UICanvas>());
