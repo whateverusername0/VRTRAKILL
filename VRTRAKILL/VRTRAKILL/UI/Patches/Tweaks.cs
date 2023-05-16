@@ -41,11 +41,16 @@ namespace Plugin.VRTRAKILL.UI.Patches
         }
         [HarmonyPrefix] [HarmonyPatch(typeof(Crosshair), nameof(Crosshair.Start))] static void SetCrosshair(Crosshair __instance)
         {
-            __instance.transform.parent = null;
+            // I decided to just leave it as it is because I lost my sanity figuring out
+            // why the fuck would it not work in the UI layer. :(
+            __instance.transform.localPosition = new Vector3(__instance.transform.localPosition.x,
+                                                             __instance.transform.localPosition.y,
+                                                             __instance.transform.localPosition.z + Vars.Config.VRSettings.VRUI.CrosshairDistance);
 
             // set controller
-            CrosshairController CHC = __instance.gameObject.AddComponent<CrosshairController>();
-            if (Vars.Config.VRInputSettings.Hands.LeftHandMode) CHC.Hand = 0; else CHC.Hand = 1;
+            if (Vars.Config.VRInputSettings.Hands.LeftHandMode)
+                __instance.transform.parent = Vars.LeftController.transform;
+            else __instance.transform.parent = Vars.RightController.transform;
 
             Canvas C = __instance.gameObject.AddComponent<Canvas>();
             C.worldCamera = Vars.VRUICamera;
