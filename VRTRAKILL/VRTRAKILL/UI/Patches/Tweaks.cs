@@ -47,12 +47,9 @@ namespace Plugin.VRTRAKILL.UI.Patches
             CrosshairController CHC = __instance.gameObject.AddComponent<CrosshairController>();
             if (Vars.Config.VRInputSettings.Hands.LeftHandMode) CHC.Hand = 0; else CHC.Hand = 1;
 
-            // add canvas and get jiggy
             Canvas C = __instance.gameObject.AddComponent<Canvas>();
             C.worldCamera = Vars.VRUICamera;
             C.renderMode = RenderMode.WorldSpace;
-
-            __instance.gameObject.layer = 0; // important
 
             if (__instance.gameObject.HasComponent<UICanvas>())
                 Object.Destroy(__instance.gameObject.GetComponent<UICanvas>());
