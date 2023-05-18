@@ -52,6 +52,9 @@ namespace Plugin.VRTRAKILL
         public static VRPlayer.Controllers.GunController RCC
             => VRPlayer.Controllers.GunController.Instance;
 
+        public static Crosshair LocalCrosshair
+            => UI.Patches.CrosshairP.CrosshairRef;
+
         private static Camera _MainCamera; public static Camera MainCamera
         {
             get { if (_MainCamera == null) { _MainCamera = GameObject.Find("Main Camera").gameObject.GetComponent<Camera>(); return _MainCamera; }
