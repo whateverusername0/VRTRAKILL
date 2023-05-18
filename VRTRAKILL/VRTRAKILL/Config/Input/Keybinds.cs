@@ -2,7 +2,7 @@
 
 namespace Plugin.VRTRAKILL.Config.Input
 {
-    internal class Keybinds
+    public class Keybinds
     {
         [JsonProperty("Jump")] public string JumpKey { get; set; } = "Spacebar";
         [JsonProperty("Slide")] public string SlideKey { get; set; } = "LeftControl";

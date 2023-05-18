@@ -2,7 +2,7 @@
 
 namespace Plugin.VRTRAKILL.Config.Input
 {
-    internal class VRInputSettings
+    public class VRInputSettings
     {
         [JsonProperty("Joystick deadzone (from 0 to 1)")] public float Deadzone { get; set; } = 0.4f;
         [JsonProperty("Snap turning")] public bool SnapTurning { get; set; } = false;

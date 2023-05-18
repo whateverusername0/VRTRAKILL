@@ -2,7 +2,7 @@
 
 namespace Plugin.VRTRAKILL.Config.Settings
 {
-    internal class VRSettings
+    public class VRSettings
     {
         [JsonProperty("VR UI Settings")] public VRUISettings VRUI { get; set; } public class VRUISettings
         {
