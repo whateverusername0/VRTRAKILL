@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 {
-    internal class LeftArmController : MonoSingleton<LeftArmController>
+    internal class ArmController : MonoSingleton<ArmController>
     {
         public GameObject Offset;
 

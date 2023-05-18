@@ -15,7 +15,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
             LHGO.transform.parent = Vars.VRCameraContainer.transform;
 
             LHGO.AddComponent<ControllerController>();
-            LHGO.AddComponent<LeftArmController>();
+            LHGO.AddComponent<ArmController>();
 
             SteamVR_Behaviour_Pose LeftHand = LHGO.AddComponent<SteamVR_Behaviour_Pose>();
             LeftHand.onTransformUpdatedEvent += ControllerController.onTransformUpdatedH;
@@ -27,7 +27,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
             RHGO.transform.parent = Vars.VRCameraContainer.transform;
 
             RHGO.AddComponent<ControllerController>();
-            RHGO.AddComponent<RightArmController>();
+            RHGO.AddComponent<GunController>();
 
             SteamVR_Behaviour_Pose RightHand = RHGO.AddComponent<SteamVR_Behaviour_Pose>();
             RightHand.onTransformUpdatedEvent += ControllerController.onTransformUpdatedH;

@@ -2,7 +2,7 @@
 
 namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 {
-    internal class RightArmController : MonoSingleton<RightArmController>
+    internal class GunController : MonoSingleton<GunController>
     {
         public GameObject Offset;
 
