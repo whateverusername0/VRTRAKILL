@@ -2,13 +2,14 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using UnityEngine.XR;
 
 namespace Plugin.VRTRAKILL.UI
 {
     // "borrowed" from huskvr, ty you pretty
     internal class UIInteraction : MonoBehaviour
     {
+        Camera Cam;
+
         // Prevents loop over the same selectable
         Selectable ExcludedSelectable;
         Selectable CurrentSelectable;
@@ -19,13 +20,16 @@ namespace Plugin.VRTRAKILL.UI
 
         PointerEventData PointerEvent;
 
-        private void Start()
-        => PointerEvent = new PointerEventData(EventSystem.current) { button = PointerEventData.InputButton.Left };
+        public void Start()
+        {
+            Cam = GetComponent<Camera>();
+            PointerEvent = new PointerEventData(EventSystem.current) { button = PointerEventData.InputButton.Left };
+        }
 
-        void Update()
+        public void Update()
         {
             // Set pointer position
-            PointerEvent.position = new Vector2(XRSettings.eyeTextureWidth / 2, XRSettings.eyeTextureHeight / 2);
+            PointerEvent.Reset(); PointerEvent.position = new Vector2(Cam.pixelWidth / 2, Cam.pixelHeight / 2);
 
             List<RaycastResult> RaycastResults = new List<RaycastResult>();
             EventSystem.current.RaycastAll(PointerEvent, RaycastResults);
@@ -72,7 +76,7 @@ namespace Plugin.VRTRAKILL.UI
             }
         }
 
-        void Select(Selectable S, Selectable Exclude = null)
+        private void Select(Selectable S, Selectable Exclude = null)
         {
             ExcludedSelectable = Exclude;
 

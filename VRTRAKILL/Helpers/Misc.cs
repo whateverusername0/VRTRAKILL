@@ -14,5 +14,11 @@ namespace Plugin.Helpers
                 for (int i = 0; i < GM.transform.childCount; i++)
                     try { RecursiveChangeLayer(GM.transform.GetChild(i).gameObject, LM); } catch {}
         }
+
+        public static RaycastHit ForwardRaycast(this Transform T, float Length, int Layer = 0)
+        {
+            Physics.Raycast(new Ray(T.position, T.forward), out RaycastHit Hit, Length, Layer);
+            return Hit;
+        }
     }
 }

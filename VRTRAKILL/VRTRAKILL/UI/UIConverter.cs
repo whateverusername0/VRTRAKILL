@@ -52,7 +52,7 @@ namespace Plugin.VRTRAKILL.UI
 
             C.worldCamera = UICamera;
             C.renderMode = RenderMode.WorldSpace;
-            C.gameObject.layer = 5; // ui
+            C.gameObject.layer = (int)Vars.Layers.UI;
             if (!DontAddComponent) C.gameObject.AddComponent<UICanvas>();
 
             foreach (Transform Child in C.transform) ConvertElement(Child);

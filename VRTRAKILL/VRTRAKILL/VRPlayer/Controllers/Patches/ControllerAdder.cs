@@ -12,6 +12,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
 
             // Left Hand
             GameObject LHGO = new GameObject("Left Controller");
+            LHGO.layer = (int)Vars.Layers.IgnoreRaycast;
             LHGO.transform.parent = Vars.VRCameraContainer.transform;
 
             LHGO.AddComponent<ControllerController>();
@@ -24,6 +25,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
 
             // Right Hand
             GameObject RHGO = new GameObject("Right Controller");
+            RHGO.layer = (int)Vars.Layers.IgnoreRaycast;
             RHGO.transform.parent = Vars.VRCameraContainer.transform;
 
             RHGO.AddComponent<ControllerController>();
