@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
-using System.Collections;
-using System.Collections.Generic;
 using Valve.VR;
+using Plugin.Helpers;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 {
@@ -10,7 +8,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
     internal class ControllerController : MonoBehaviour
     {
         public GameObject Offset = new GameObject("Offset");
-        private GameObject Pointer; LineRenderer LR;
+        private GameObject Pointer;
+        LineRenderer LR; Vector3 EndPosition;
         public float DefaultLength => Vars.Config.VRSettings.VRUI.CrosshairDistance;
 
         private RaycastHit CreateRaycast(float Length)
@@ -23,6 +22,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         {
             Pointer = new GameObject("Canvas Pointer");
             Pointer.transform.parent = Offset.transform;
+            Pointer.AddComponent<UI.UIInteraction>();
 
             Camera PointerCamera = Pointer.AddComponent<Camera>();
             PointerCamera.stereoTargetEye = StereoTargetEyeMask.None;
@@ -47,7 +47,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
             LR.startWidth = 0.02f; LR.endWidth = 0.001f;
             LR.startColor = C1; LR.endColor = C2;
         }
-        private void UpdateControllerLines()
+
+        private void DrawControllerLines()
         {
             if (Vars.IsAMenu) LR.enabled = true;
             else LR.enabled = false;
@@ -55,12 +56,12 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
             if (LR.enabled)
             {
                 LR.SetPosition(0, transform.position);
-                LR.SetPosition(1, Offset.transform.position);
+                LR.SetPosition(1, EndPosition);
             }
         }
-        private void UpdateCrosshair()
+        private void UpdateCrosshairPosition()
         {
-
+            Vars.LocalCrosshair.transform.position = EndPosition;
         }
 
         public void Start()
@@ -77,10 +78,16 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         }
         public void Update()
         {
-            UpdateControllerLines();
-            UpdateCrosshair();
+            float TargetLength = DefaultLength;
 
+            RaycastHit Hit = CreateRaycast(TargetLength);
+            EndPosition = transform.position + (transform.forward * TargetLength);
 
+            if (Hit.collider != null) EndPosition = Hit.point;
+
+            DrawControllerLines();
+            if (gameObject.HasComponent<GunController>())
+                UpdateCrosshairPosition();
         }
 
         public static void onTransformUpdatedH(SteamVR_Behaviour_Pose fromAction, SteamVR_Input_Sources fromSource)
