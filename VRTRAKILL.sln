@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VRPatcher", "VRPatcher\VRPa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VRTRAKILL", "VRTRAKILL\VRTRAKILL.csproj", "{3FBB1FC9-B424-404C-B0C5-1A8AFFF14F5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VRTRAKILL.ConfMan", "VRTRAKILL.ConfMan\VRTRAKILL.ConfMan.csproj", "{D37B8807-C4E1-4FB7-964D-07659EB3F152}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
