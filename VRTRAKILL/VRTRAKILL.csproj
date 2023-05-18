@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?> 
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -185,6 +185,7 @@
     <Compile Include="VRTRAKILL\Config\Settings\VRSettings.cs" />
     <Compile Include="VRTRAKILL\UI\HUD\HideWhenMenuActive.cs" />
     <Compile Include="VRTRAKILL\UI\HUD\TransformP.cs" />
+    <Compile Include="VRTRAKILL\UI\Patches\CrosshairP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\ArmRemover.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\ArmsP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Feedbacker\Armature.cs" />
@@ -222,7 +223,7 @@
     <Compile Include="VRTRAKILL\Input\VRInputVars.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\CameraConverter.cs" />
     <Compile Include="VRTRAKILL\UI\UIInteraction.cs" />
-    <Compile Include="VRTRAKILL\UI\Patches\Tweaks.cs" />
+    <Compile Include="VRTRAKILL\UI\Patches\CanvasControllerP.cs" />
     <Compile Include="VRTRAKILL\UI\UICanvas.cs" />
     <Compile Include="VRTRAKILL\UI\UIConverter.cs" />
     <Compile Include="VRTRAKILL\Vars.cs" />
