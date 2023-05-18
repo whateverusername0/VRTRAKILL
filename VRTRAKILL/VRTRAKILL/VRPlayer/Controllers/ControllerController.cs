@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Collections;
 using System.Collections.Generic;
 using Valve.VR;
 
@@ -9,25 +10,57 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
     internal class ControllerController : MonoBehaviour
     {
         public GameObject Offset = new GameObject("Offset");
+        private GameObject Pointer; LineRenderer LR;
+        public float DefaultLength => Vars.Config.VRSettings.VRUI.CrosshairDistance;
 
-        LineRenderer LR;
-
-        PointerEventData PED = new PointerEventData(EventSystem.current);
-        List<RaycastResult> RCResults = new List<RaycastResult>();
-
-        // gives out an oob / oor error when not in main menu.
-        private void SetLRLines()
+        private RaycastHit CreateRaycast(float Length)
         {
-            Color C  = new Color(1, 1, 1, Vars.Config.VRSettings.CL.LInitTransparency),
+            Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit Hit, DefaultLength * 10);
+            return Hit;
+        }
+
+        private void SetupControllerPointer()
+        {
+            Pointer = new GameObject("Canvas Pointer");
+            Pointer.transform.parent = Offset.transform;
+
+            Camera PointerCamera = Pointer.AddComponent<Camera>();
+            PointerCamera.stereoTargetEye = StereoTargetEyeMask.None;
+            PointerCamera.clearFlags = CameraClearFlags.Nothing;
+            PointerCamera.cullingMask = 0; // Nothing
+            PointerCamera.nearClipPlane = .01f;
+            PointerCamera.fieldOfView = 1; // haha, ha, 1!
+            PointerCamera.enabled = false;
+        }
+        private void SetupControllerLines()
+        {
+            LR = Pointer.AddComponent<LineRenderer>();
+            LR.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+            LR.receiveShadows = false;
+            LR.allowOcclusionWhenDynamic = false;
+            LR.useWorldSpace = true;
+            LR.material = new Material(Shader.Find("GUI/Text Shader"));
+
+            Color C1 = new Color(1, 1, 1, Vars.Config.VRSettings.CL.LInitTransparency),
                   C2 = new Color(1, 1, 1, Vars.Config.VRSettings.CL.LEndTransparency);
 
-            LR.endWidth = 0.001f;
-            LR.startWidth = 0.02f;
-            LR.startColor = C;
-            LR.endColor = C2;
+            LR.startWidth = 0.02f; LR.endWidth = 0.001f;
+            LR.startColor = C1; LR.endColor = C2;
+        }
+        private void UpdateControllerLines()
+        {
+            if (Vars.IsAMenu) LR.enabled = true;
+            else LR.enabled = false;
 
-            LR.SetPosition(0, transform.GetChild(0).GetChild(2).position);
-            LR.SetPosition(1, Offset.transform.position);
+            if (LR.enabled)
+            {
+                LR.SetPosition(0, transform.position);
+                LR.SetPosition(1, Offset.transform.position);
+            }
+        }
+        private void UpdateCrosshair()
+        {
+
         }
 
         public void Start()
@@ -36,20 +69,18 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
             Offset.transform.localPosition = Vector3.zero;
             Offset.transform.localRotation = Quaternion.Euler(45, 0, 0);
 
-            //LR = Offset.AddComponent<LineRenderer>();
-            //LR.material = new Material(Shader.Find("GUI/Text Shader"));
-            //SetLRLines();
+            if (Vars.Config.VRSettings.CL.DrawControllerLines)
+            {
+                SetupControllerPointer();
+                SetupControllerLines();
+            }
         }
         public void Update()
         {
-            PED.position = Offset.transform.position;
-            EventSystem.current.RaycastAll(PED, RCResults);
+            UpdateControllerLines();
+            UpdateCrosshair();
 
-            if (Vars.IsAMenu || Vars.IsWeaponWheelPresent)
-            {
-                //LR.enabled = true;
-                //SetLRLines();
-            } //else LR.enabled = false;
+
         }
 
         public static void onTransformUpdatedH(SteamVR_Behaviour_Pose fromAction, SteamVR_Input_Sources fromSource)
