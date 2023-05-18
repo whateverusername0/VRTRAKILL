@@ -107,8 +107,8 @@ namespace Plugin.VRTRAKILL.Input
             if (newState != RHPrimaryFire)
             {
                 RHPrimaryFire = newState;
-                if (Vars.IsSandboxArmActive) LMBPress(RHPrimaryFire, !RHPrimaryFire);
-                else InputManager.Instance.InputSource.Fire1.Trigger(RHPrimaryFire, !RHPrimaryFire);
+                /* if (Vars.IsSandboxArmActive) LMBPress(RHPrimaryFire, !RHPrimaryFire);
+                else */ InputManager.Instance.InputSource.Fire1.Trigger(RHPrimaryFire, !RHPrimaryFire);
             }
         }
         private static void RHAltShootH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
@@ -116,8 +116,8 @@ namespace Plugin.VRTRAKILL.Input
             if (newState != RHAltFire)
             {
                 RHAltFire = newState;
-                if (Vars.IsSandboxArmActive) RMBPress(RHAltFire, !RHAltFire);
-                else InputManager.Instance.InputSource.Fire2.Trigger(RHAltFire, !RHAltFire);
+                /* if (Vars.IsSandboxArmActive) RMBPress(RHAltFire, !RHAltFire);
+                else */ InputManager.Instance.InputSource.Fire2.Trigger(RHAltFire, !RHAltFire);
             }
         }
 
