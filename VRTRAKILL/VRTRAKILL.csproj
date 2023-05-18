@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?> 
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -194,9 +194,9 @@
     <Compile Include="VRTRAKILL\VRPlayer\Arms\PunchP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\ControllerController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\ControllerHaptics.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\Controllers\LeftArmController.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Controllers\ArmController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\Patches\ControllerAdder.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\Controllers\RightArmController.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Controllers\GunController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\DoubleWieldP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\GunsP.cs" />
     <Compile Include="VRTRAKILL\Input\VRInputManager.cs" />
