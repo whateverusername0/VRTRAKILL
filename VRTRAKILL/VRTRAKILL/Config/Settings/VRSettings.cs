@@ -6,16 +6,16 @@ namespace Plugin.VRTRAKILL.Config.Settings
     {
         [JsonProperty("VR UI Settings")] public VRUISettings VRUI { get; set; } public class VRUISettings
         {
-            [JsonProperty("Crosshair distance")] public float CrosshairDistance { get; set; } = 16;
+            [JsonProperty("Crosshair distance")] public float CrosshairDistance { get; set; } = 8;
             [JsonProperty("HUD Size (from 0 to 0.1)")] public float UISize { get; set; } = 0.0625f;
             [JsonProperty("Enable standard HUD")] public bool EnableStandardHUD { get; set; } = false;
         }
 
         [JsonProperty("Do not override movement values")] public bool DoNotOverrideMoveValues { get; set; } = false;
 
-        [JsonProperty("Controller Lines (unused)")] public ControllerLines CL { get; set; } public class ControllerLines
+        [JsonProperty("Controller Lines (Controller pointer)")] public ControllerLines CL { get; set; } public class ControllerLines
         {
-            [JsonProperty("Draw controller lines")] public bool DrawControllerLines { get; set; } = false;
+            [JsonProperty("Draw controller lines (Replaces Gaze interaction!!!)")] public bool DrawControllerLines { get; set; } = false;
             [JsonProperty("Controller line initial transparency (from 0 to 1)")] public float LInitTransparency { get; set; } = 0.4f;
             [JsonProperty("Controller line end transparency (from 0 to 1)")] public float LEndTransparency { get; set; } = 0.1f;
         }
