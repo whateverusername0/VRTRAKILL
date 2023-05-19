@@ -10,9 +10,9 @@ namespace Plugin.VRTRAKILL.UI.CrossHair
 
         public void LateUpdate()
         {
-            RaycastHit Hit = transform.parent.ForwardRaycast(DefaultLength, (int)Vars.Layers.Default);
+            RaycastHit Hit = transform.parent.ForwardRaycast(DefaultLength);
             EndPosition = transform.parent.position + (transform.parent.forward * DefaultLength);
-            if (Hit.collider != null) EndPosition = Hit.point;
+            if (Hit.collider != null && Hit.transform.gameObject.layer != (int)Vars.Layers.IgnoreRaycast) EndPosition = Hit.point;
 
             transform.position = EndPosition;
         }
