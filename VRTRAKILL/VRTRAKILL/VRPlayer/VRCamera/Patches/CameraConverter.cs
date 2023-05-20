@@ -36,10 +36,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
         {
             while (__instance.cam == null && __instance.hudCamera == null) {}
 
+            __instance.cam.nearClipPlane = .01f;
             __instance.cam.stereoTargetEye = StereoTargetEyeMask.Both;
-            __instance.hudCamera.stereoTargetEye = StereoTargetEyeMask.Both;
-
             __instance.cam.depth++;
+
+            __instance.hudCamera.stereoTargetEye = StereoTargetEyeMask.Both;
             __instance.hudCamera.depth++;
 
             XRSettings.gameViewRenderMode = GameViewRenderMode.RightEye;
@@ -47,7 +48,12 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
             // for some particular reason destroying it is a bad idea.
             GameObject.Find("Virtual Camera").SetActive(false);
         }
-        [HarmonyPrefix] [HarmonyPatch(typeof(CameraController), nameof(CameraController.Update))] static bool IgnoreCC(CameraController __instance)
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(CameraController), nameof(CameraController.Update))]
+        [HarmonyPatch(typeof(CameraFrustumTargeter), nameof(CameraFrustumTargeter.Update))]
+        [HarmonyPatch(typeof(CameraFrustumTargeter), nameof(CameraFrustumTargeter.LateUpdate))]
+        static bool DoNothing()
         {
             // do nothing
             return false;
