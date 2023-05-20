@@ -21,6 +21,7 @@ namespace Plugin.VRTRAKILL.UI.Patches
             if (__instance.gameObject.HasComponent<UICanvas>())
                 Object.Destroy(__instance.gameObject.GetComponent<UICanvas>());
 
+            __instance.transform.localScale /= 2; // to fit in player's size (shitcode, but it works!!)
             __instance.transform.localPosition += new Vector3(0, 0, .05f);
             __instance.transform.localEulerAngles = Vector3.zero;
             __instance.gameObject.AddComponent<CrossHair.CrosshairController>();
