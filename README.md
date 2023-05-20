@@ -1,6 +1,11 @@
-### I'm in need of Valve Index and HTC Vive controller bindings. If somebody is reading this and has one of those controllers, please, create a default binding for them and make a pull request with it. It'll really help me and other people using the mod.
+##### I'm in need of Valve Index and HTC Vive controller bindings. If somebody is reading this and has one of those controllers, please, create a default binding for them and make a pull request with it. It'll really help me and other people using the mod.
 
 # VRTRAKILL
+[![](https://img.shields.io/github/downloads/whateverusername0/VRTRAKILL/total)](https://github.com/whateverusername0/VRTRAKILL/releases)
+[![](https://img.shields.io/github/downloads/whateverusername0/VRTRAKILL/latest/total)](https://github.com/whateverusername0/VRTRAKILL/releases)
+[![](https://img.shields.io/github/v/release/whateverusername0/VRTRAKILL)](https://github.com/whateverusername0/VRTRAKILL/releases/latest)
+[![](https://img.shields.io/discord/1105714562931638326)](https://discord.gg/TTUw5Aevce)
+
 ![](/GithubStuff/thypunishmentisdeath.gif) ![](/GithubStuff/youcantescape.gif) ![](/GithubStuff/+execution.gif)  
 [Full minos fight (0.3)](https://www.youtube.com/watch?v=yrofGYf_xTI) | [Full sisyphus fight (0.5)](https://www.youtube.com/watch?v=DhcVx6yBEaM) | [Cybergrind tomfoolery (0.8)](https://youtu.be/n2aAljuvpMo)  
 
@@ -10,7 +15,7 @@ Also it does not require any other mods to function
 
 ## Features
 ### What works right now:
-- Camera, Standard & Classic HUD
+- Camera, HUD, Crosshair
 - Full movement (jump, dash, slide, slam storage, rocket ride, etc.)
 - Semi-full controller tracking (aiming / shooting)
 - Controller haptics (vibrations) (Rumble-based)
