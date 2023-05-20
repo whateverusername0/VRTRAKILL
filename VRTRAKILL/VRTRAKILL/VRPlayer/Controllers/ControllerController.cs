@@ -81,8 +81,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 
         public static Vector3 ControllerOffset = new Vector3(0, 1.4f, 0);
         public static void onTransformUpdatedH(SteamVR_Behaviour_Pose fromAction, SteamVR_Input_Sources fromSource)
-        {
-            fromAction.transform.position += ControllerOffset;
-        }
+        => fromAction.transform.position += ControllerOffset;
     }
 }
