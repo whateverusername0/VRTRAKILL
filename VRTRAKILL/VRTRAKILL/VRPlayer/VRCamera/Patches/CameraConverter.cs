@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.XR;
 
+using Valve.VR;
 namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
 {
     [HarmonyPatch] static class CameraConverter
@@ -14,7 +15,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
         {
             Container = new GameObject("Main Camera Rig");
             Container.transform.parent = Vars.MainCamera.transform.parent;
-            Container.transform.localPosition = Vector3.zero;
+
+            // making the world bigger by making the rig bigger and lowering it down to the ground
+            // real player's (v1's) size does not get affected = profit!!
+            Container.transform.localScale = new Vector3(2, 2, 2);
+            Container.transform.localPosition = new Vector3(0, -4, 0);
             Container.transform.localRotation = Vars.MainCamera.transform.rotation;
 
             Container.AddComponent<VRCameraController>();
