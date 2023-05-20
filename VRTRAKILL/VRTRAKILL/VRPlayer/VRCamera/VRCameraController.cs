@@ -6,17 +6,14 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
 {
     internal class VRCameraController : MonoSingleton<VRCameraController>
     {
-        private void Start()
+        public void Start()
         {
-            // Height prevention
-            transform.position -= new Vector3(0, 1f, 0);
-
             if (Vars.Config.VRInputSettings.SnapTurning)
                 StartCoroutine(SnapTurn());
             else StartCoroutine(SmoothTurn());
         }
 
-        private void Update()
+        public void Update()
         {
             // Follow MC rotation
             if (NewMovement.Instance.dead) return;
