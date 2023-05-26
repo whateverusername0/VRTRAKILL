@@ -16,10 +16,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
             Container = new GameObject("Main Camera Rig");
             Container.transform.parent = Vars.MainCamera.transform.parent;
 
-            // making the world bigger by making the rig bigger and lowering it down to the ground
-            // real player's (v1's) size does not get affected = profit!!
-            Container.transform.localScale = new Vector3(2, 2, 2);
-            Container.transform.localPosition = new Vector3(0, -4, 0);
+            Container.transform.localPosition = new Vector3(0, -4.3f, 0);
             Container.transform.localRotation = Vars.MainCamera.transform.rotation;
 
             Container.AddComponent<VRCameraController>();
@@ -36,6 +33,12 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
                 DesktopUICam.gameObject.AddComponent<DesktopUICamera>();
             }
         }
+        [HarmonyPostfix] [HarmonyPatch(typeof(NewMovement), nameof(NewMovement.Start))] static void ScaleObjects(NewMovement __instance)
+        {
+            // this should've been bigger, but i've changed my mind a thousand years ago and it works
+            // this mod is officially considered my opus magnum spaghetti code and dumpster fire
+            Container.transform.localScale = new Vector3(2, 2, 2);
+        }
 
         [HarmonyPrefix] [HarmonyPatch(typeof(CameraController), nameof(CameraController.Start))] static void ConvertCameras(CameraController __instance)
         {
@@ -44,7 +47,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
             __instance.cam.nearClipPlane = .01f;
             __instance.cam.stereoTargetEye = StereoTargetEyeMask.Both;
             __instance.cam.depth++;
-
+            
             __instance.hudCamera.stereoTargetEye = StereoTargetEyeMask.Both;
             __instance.hudCamera.depth++;
 
@@ -53,7 +56,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
             // for some particular reason destroying it is a bad idea.
             GameObject.Find("Virtual Camera").SetActive(false);
         }
-
+        [HarmonyPostfix] [HarmonyPatch(typeof(CameraController), nameof(CameraController.Start))] static void AddSVRCam(CameraController __instance)
+        {
+            __instance.gameObject.AddComponent<SteamVR_Camera>();
+        }
         [HarmonyPrefix]
         [HarmonyPatch(typeof(CameraController), nameof(CameraController.Update))]
         [HarmonyPatch(typeof(CameraFrustumTargeter), nameof(CameraFrustumTargeter.Update))]
