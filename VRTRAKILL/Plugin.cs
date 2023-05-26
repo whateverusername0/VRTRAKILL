@@ -8,7 +8,7 @@ namespace Plugin
     {
         public const string PLUGIN_GUID = "com.whateverusername0.vrtrakill",
                             PLUGIN_NAME = "VRTRAKILL",
-                            PLUGIN_VERSION = "0.8.4";
+                            PLUGIN_VERSION = "0.8.6";
 
         public static string GameExePath = Process.GetCurrentProcess().MainModule.FileName,
                              GamePath = Path.GetDirectoryName(GameExePath),
