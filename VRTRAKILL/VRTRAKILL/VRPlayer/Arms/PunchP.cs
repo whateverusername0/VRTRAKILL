@@ -11,11 +11,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
 
             switch(__instance.type)
             {
-                // note to self: punch is broken, need to fix it while considering animation shit and other things
                 case FistType.Standard:
                     __instance.gameObject.AddComponent<ArmRemover>();
-                    //__instance.gameObject.AddComponent<Feedbacker.FeedbackerController>();
-                    //Feedbacker.FeedbackerController.Instance.PunchZoneT = PunchZone;
+                    Feedbacker.FeedbackerController FBC = __instance.gameObject.AddComponent<Feedbacker.FeedbackerController>();
+                    FBC.Arm = new Feedbacker.Armature(__instance.transform.GetChild(0));
                     break;
                 case FistType.Heavy:
                     __instance.gameObject.AddComponent<ArmRemover>();
