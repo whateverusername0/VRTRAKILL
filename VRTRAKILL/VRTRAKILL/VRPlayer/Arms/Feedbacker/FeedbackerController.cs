@@ -4,16 +4,25 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Feedbacker
 {
     internal class FeedbackerController : MonoSingleton<FeedbackerController>
     {
-        public Transform PunchZoneT; public Armature Arm;
+        public Armature Arm;
+        public Vector3 OffsetPosition = new Vector3(0, 0, 0), TotalPos = Vector3.zero;
+        public Quaternion OffsetRotation = Quaternion.Euler(0, 180, 0);
 
         public void Start()
         {
-
+            Arm.Hand.position = OffsetPosition;
+            Arm.Hand.rotation = OffsetRotation;
         }
-        public void Update()
+
+        public void LateUpdate()
         {
-            Arm.Hand.position = Vars.LeftController.transform.position;
-            Arm.Hand.rotation = Vars.LeftController.transform.rotation;
+            TotalPos = Vars.LeftController.transform.position + OffsetPosition;
+
+            Arm.Root.position = TotalPos;
+            //Arm.Root.rotation = Vars.LeftController.transform.rotation;
+
+            //Arm.Hand.position = TotalPos;
+            Arm.Hand.rotation = Vars.LeftController.transform.rotation * OffsetRotation;
         }
     }
 }
