@@ -183,6 +183,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VRTRAKILL\Config\Input\Keybinds.cs" />
     <Compile Include="VRTRAKILL\Config\Settings\VRSettings.cs" />
+    <Compile Include="VRTRAKILL\Patches\SteamVRP.cs" />
     <Compile Include="VRTRAKILL\UI\CrossHair\CrosshairController.cs" />
     <Compile Include="VRTRAKILL\UI\HUD\HideWhenMenuActive.cs" />
     <Compile Include="VRTRAKILL\UI\HUD\TransformP.cs" />
@@ -312,9 +313,9 @@
     <Content Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\Plugins\x86_64\OVRPlugin.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="DementiaDiary.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="VRTRAKILL\Patches\" />
     <Folder Include="VRTRAKILL\VRPlayer\Arms\GrapplingHook\" />
     <Folder Include="VRTRAKILL\VRPlayer\Arms\Sandboxer\" />
   </ItemGroup>
