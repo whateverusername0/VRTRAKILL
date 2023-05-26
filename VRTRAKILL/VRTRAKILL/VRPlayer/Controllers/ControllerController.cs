@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-using Valve.VR;
 using Plugin.Helpers;
+using Valve.VR;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 {
@@ -79,7 +79,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
                 DrawControllerLines();
         }
 
-        public static Vector3 ControllerOffset = new Vector3(0, 1.4f, 0);
+        public static Vector3 ControllerOffset = new Vector3(0, 2.85f, 0);
         public static void onTransformUpdatedH(SteamVR_Behaviour_Pose fromAction, SteamVR_Input_Sources fromSource)
         => fromAction.transform.position += ControllerOffset;
     }
