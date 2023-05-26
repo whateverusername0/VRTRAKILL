@@ -1,0 +1,4 @@
+﻿This is a list that i can look into so that i don't have to search for something in every file.
+(More of a like dementia diary) (Yeah, that's the name now)
+
+1. I UPSCALED CONTROLLER *MODELS* AND CAMERA RIG EXPLICITLY!! (in ControllerAdder & CameraConverter)
