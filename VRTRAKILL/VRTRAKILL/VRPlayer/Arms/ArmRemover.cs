@@ -27,9 +27,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                 switch(GetComponent<Punch>().type)
                 {
                     case FistType.Standard:
-                        //Armature = transform.GetChild(0);
-                        //FBArm = new Feedbacker.Armature(Armature);
-                        //ArmSize = new Vector3(.01f, .01f, .01f); HandSize = new Vector3(100, 100, 100);
+                        Armature = transform.GetChild(0);
+                        FBArm = new Feedbacker.Armature(Armature);
+                        ArmSize = new Vector3(.01f, .01f, .01f); HandSize = new Vector3(35, 35, 35);
                         break;
                     case FistType.Heavy:
                         break;
