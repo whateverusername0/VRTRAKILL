@@ -6,7 +6,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement
     internal class VRPlayerController : MonoBehaviour
     {
         CapsuleCollider CC;
-        private void Start()
+        public void Start()
         {
             CC = GetComponent<CapsuleCollider>();
             UpdateCenter();
