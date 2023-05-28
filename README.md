@@ -1,5 +1,3 @@
-##### I'm in need of Valve Index and HTC Vive controller bindings. If somebody is reading this and has one of those controllers, please, create a default binding for them and make a pull request with it. It'll really help me and other people using the mod.
-
 # VRTRAKILL
 [![](https://img.shields.io/github/downloads/whateverusername0/VRTRAKILL/total)](https://github.com/whateverusername0/VRTRAKILL/releases)
 [![](https://img.shields.io/github/downloads/whateverusername0/VRTRAKILL/latest/total)](https://github.com/whateverusername0/VRTRAKILL/releases)
