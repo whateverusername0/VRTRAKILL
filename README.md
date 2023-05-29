@@ -1,5 +1,3 @@
-##### I'm in need of Valve Index and HTC Vive controller bindings. If somebody is reading this and has one of those controllers, please, create a default binding for them and make a pull request with it. It'll really help me and other people using the mod.
-
 # VRTRAKILL
 [![](https://img.shields.io/github/downloads/whateverusername0/VRTRAKILL/total)](https://github.com/whateverusername0/VRTRAKILL/releases)
 [![](https://img.shields.io/github/downloads/whateverusername0/VRTRAKILL/latest/total)](https://github.com/whateverusername0/VRTRAKILL/releases)
@@ -24,6 +22,7 @@ Also it does not require any other mods to function
 - UI Interaction (some of menus might be broken)
 ### Planned stuff:
 **0.9**: Full arm movement/tracking (punch irl to punch ingame)  
+**0.9.x**: Hand gestures (thumbs up, point, etc.)  
 **1.0**: VR body (arms, legs, etc.)  
 
 ## Requirements
