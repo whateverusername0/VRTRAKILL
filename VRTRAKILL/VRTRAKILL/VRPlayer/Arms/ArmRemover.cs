@@ -24,14 +24,18 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
             }
             else if (gameObject.HasComponent<Punch>())
             {
-                switch(GetComponent<Punch>().type)
+                ArmSize = new Vector3(.01f, .01f, .01f);
+                switch (GetComponent<Punch>().type)
                 {
                     case FistType.Standard:
                         Armature = transform.GetChild(0);
                         FBArm = new Feedbacker.Armature(Armature);
-                        ArmSize = new Vector3(.01f, .01f, .01f); HandSize = new Vector3(35, 35, 35);
+                        HandSize = new Vector3(35, 35, 35);
                         break;
                     case FistType.Heavy:
+                        Armature = transform.GetChild(0);
+
+                        HandSize = new Vector3(100, 100, 100);
                         break;
                     case FistType.Spear:
                         break;
@@ -40,11 +44,15 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
         }
         public void LateUpdate()
         {
-            try
+            if (FBArm != null)
             {
                 FBArm.RArmature.localScale = ArmSize;
                 FBArm.Hand.localScale = HandSize;
-            } catch {}
+            }
+            else if (KBArm != null)
+            {
+
+            }
         }
     }
 }
