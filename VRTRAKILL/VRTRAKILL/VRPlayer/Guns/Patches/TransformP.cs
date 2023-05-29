@@ -70,10 +70,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         [HarmonyPatch(typeof(Sandbox.Arm.SandboxArm))] static class SandboxArmT
         {
             static Vector3 MovePosition    = new Vector3(0, -.1f, -.25f),
-                           DestroyPosition = new Vector3(0, -.15f, -.2f),
                            AlterPosition   = new Vector3(0, -.15f, -.2f),
                            BuildPosition   = new Vector3(0, -.1f, -.3f),
                            PlacePosition   = new Vector3(0, -.1f, -.3f);
+            static Vector3 OffsetRotation = new Vector3(0, 0, 90);
             static Vector3 Scale = new Vector3(-.35f, .35f, .35f);
 
             [HarmonyPostfix] [HarmonyPatch(nameof(Sandbox.Arm.SandboxArm.OnEnable))] static void Retransform(Sandbox.Arm.SandboxArm __instance)
@@ -82,22 +82,19 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                 {
                     case "Move":
                         __instance.transform.localPosition = MovePosition;
+                        __instance.transform.rotation = Vars.RightController.transform.rotation * Quaternion.Euler(-OffsetRotation);
                         __instance.transform.localScale = Scale;
                         break;
                     case "Destroy":
-                        __instance.transform.localPosition = DestroyPosition;
-                        __instance.transform.localScale = Scale;
-                        break;
                     case "Alter":
                         __instance.transform.localPosition = AlterPosition;
+                        __instance.transform.rotation = Vars.RightController.transform.rotation * Quaternion.Euler(-OffsetRotation);
                         __instance.transform.localScale = Scale;
                         break;
                     case "Build":
-                        __instance.transform.localPosition = BuildPosition;
-                        __instance.transform.localScale = Scale;
-                        break;
                     case "Place":
                         __instance.transform.localPosition = PlacePosition;
+                        __instance.transform.rotation = Vars.RightController.transform.rotation * Quaternion.Euler(OffsetRotation);
                         __instance.transform.localScale = Scale;
                         break;
                 }
