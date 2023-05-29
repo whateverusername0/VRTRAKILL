@@ -29,18 +29,32 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
         {
             while(true)
             {
-                if (VRInputVars.TurnVector.x > 0 + Vars.Config.VRInputSettings.Deadzone) VRInputVars.TurnOffset += Vars.Config.VRInputSettings.SmoothTurningSpeed * Time.deltaTime;
-                if (VRInputVars.TurnVector.x < 0 - Vars.Config.VRInputSettings.Deadzone) VRInputVars.TurnOffset -= Vars.Config.VRInputSettings.SmoothTurningSpeed * Time.deltaTime;
+                if (VRInputVars.TurnVector.x > 0 + Vars.Config.VRInputSettings.Deadzone)
+                    VRInputVars.TurnOffset += Vars.Config.VRInputSettings.SmoothTurningSpeed * Time.deltaTime;
+                if (VRInputVars.TurnVector.x < 0 - Vars.Config.VRInputSettings.Deadzone)
+                    VRInputVars.TurnOffset -= Vars.Config.VRInputSettings.SmoothTurningSpeed * Time.deltaTime;
                 yield return new WaitForEndOfFrame();
             }
         }
+        
         private IEnumerator SnapTurn()
         {
-            while(true)
+            bool IsTurning;
+            while (true)
             {
-                if (VRInputVars.TurnVector.x > 0 + Vars.Config.VRInputSettings.Deadzone) VRInputVars.TurnOffset += Vars.Config.VRInputSettings.SnapTurningAngles;
-                if (VRInputVars.TurnVector.x < 0 - Vars.Config.VRInputSettings.Deadzone) VRInputVars.TurnOffset -= Vars.Config.VRInputSettings.SnapTurningAngles;
-                yield return new WaitForSeconds(0.2f);
+                if (VRInputVars.TurnVector.x > 0 + Vars.Config.VRInputSettings.Deadzone
+                     || VRInputVars.TurnVector.x < 0 - Vars.Config.VRInputSettings.Deadzone) IsTurning = true;
+                else IsTurning = false;
+
+                while (IsTurning)
+                {
+                    if (VRInputVars.TurnVector.x > 0 + Vars.Config.VRInputSettings.Deadzone)
+                        VRInputVars.TurnOffset += Vars.Config.VRInputSettings.SnapTurningAngles;
+                    else if (VRInputVars.TurnVector.x < 0 - Vars.Config.VRInputSettings.Deadzone)
+                        VRInputVars.TurnOffset -= Vars.Config.VRInputSettings.SnapTurningAngles;
+                    yield return new WaitForSeconds(.2f);
+                }
+                yield return new WaitForEndOfFrame();
             }
         }
     }
