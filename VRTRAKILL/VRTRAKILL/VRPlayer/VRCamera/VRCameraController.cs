@@ -43,7 +43,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
             while (true)
             {
                 if (VRInputVars.TurnVector.x > 0 + Vars.Config.VRInputSettings.Deadzone
-                     || VRInputVars.TurnVector.x < 0 - Vars.Config.VRInputSettings.Deadzone) IsTurning = true;
+                    || VRInputVars.TurnVector.x < 0 - Vars.Config.VRInputSettings.Deadzone) IsTurning = true;
                 else IsTurning = false;
 
                 while (IsTurning)
@@ -52,9 +52,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
                         VRInputVars.TurnOffset += Vars.Config.VRInputSettings.SnapTurningAngles;
                     else if (VRInputVars.TurnVector.x < 0 - Vars.Config.VRInputSettings.Deadzone)
                         VRInputVars.TurnOffset -= Vars.Config.VRInputSettings.SnapTurningAngles;
-                    yield return new WaitForSeconds(.2f);
+
+                    // alternative to wait for seconds but you can actually cancel it
+                    for (float i = .2f; i <= 0; i -= Time.deltaTime) continue;
+                    //yield return new WaitForSeconds(.2f);
                 }
-                yield return new WaitForEndOfFrame();
             }
         }
     }
