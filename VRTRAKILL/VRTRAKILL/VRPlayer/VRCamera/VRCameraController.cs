@@ -55,7 +55,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
 
                     // alternative to wait for seconds but you can actually cancel it
                     for (float i = .2f; i <= 0; i -= Time.deltaTime) continue;
-                    //yield return new WaitForSeconds(.2f);
                 }
             }
         }

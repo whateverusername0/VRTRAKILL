@@ -12,6 +12,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Feedbacker
         {
 
         }
+
         public void Update() { LateUpdate(); }
         public void LateUpdate()
         {
