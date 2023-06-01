@@ -45,8 +45,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 
         private void DrawControllerLines()
         {
-            // It's broken AGAIN!! :(
-            if (Vars.IsAMenu) LR.enabled = true;
+            if (Vars.IsAMenu || Vars.IsPlayerUsingShop) LR.enabled = true;
             else LR.enabled = false;
 
             if (LR.enabled)
