@@ -41,6 +41,8 @@ namespace Plugin.VRTRAKILL
             => FinalRank.Instance != null && FinalRank.Instance.isActiveAndEnabled;
         public static bool IsWeaponWheelPresent
             => WeaponWheel.Instance != null && WeaponWheel.Instance.isActiveAndEnabled;
+        public static bool IsPlayerUsingShop
+            => FistControl.Instance != null && FistControl.Instance.shopping;
 
         public static bool IsSpawnMenuPresent
             => SpawnMenu.Instance != null && SpawnMenu.Instance.isActiveAndEnabled;
