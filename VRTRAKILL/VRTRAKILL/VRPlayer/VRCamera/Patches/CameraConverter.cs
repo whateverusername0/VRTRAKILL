@@ -46,6 +46,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
 
             __instance.cam.nearClipPlane = .01f;
             __instance.cam.stereoTargetEye = StereoTargetEyeMask.Both;
+            // some binary magic (that i don't understand) to enable another layer
+            __instance.cam.cullingMask |= 1 << (int)Vars.Layers.AlwaysOnTop;
             __instance.cam.depth++;
             
             __instance.hudCamera.stereoTargetEye = StereoTargetEyeMask.Both;
