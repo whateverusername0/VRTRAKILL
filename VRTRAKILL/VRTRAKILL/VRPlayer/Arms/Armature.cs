@@ -64,7 +64,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                 TipEnd = Tip.GetChild(0);
             }
         }
-        public Armature(Transform T, ArmType? Type = null)
+        public Armature(Transform T, ArmType? Type = null, bool IsSandboxer = false)
         {
             GameObjectT = T;
 
@@ -72,7 +72,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
             {
                 case ArmType.Feedbacker:
                     {
-                        Root = GameObjectT.GetChild(0).GetChild(0);
+                        if (IsSandboxer) Root = GameObjectT.GetChild(0);
+                        else Root = GameObjectT.GetChild(0).GetChild(0);
                         Clavicle = Root;
                         // UpperArm
                         Wrist = UpperArm.GetChild(0);
@@ -107,7 +108,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                         // UpperArm
                         Wrist = Clavicle.GetChild(1);
 
-                        Hand = Wrist.GetChild(2);
+                        Hand = Wrist.GetChild(0);
                         FIndex = new Finger(Hand.GetChild(0));
                         FPinkie = new Finger(Hand.GetChild(1));
                         FMiddle = new Finger(Hand.GetChild(2));
