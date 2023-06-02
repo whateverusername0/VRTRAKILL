@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 
-namespace Plugin.VRTRAKILL.VRPlayer.Arms
+namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
 {
     [HarmonyPatch] internal class ItemsP
     {

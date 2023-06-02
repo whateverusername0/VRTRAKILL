@@ -1,30 +1,10 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 
-namespace Plugin.VRTRAKILL.VRPlayer.Arms
+namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
 {
     [HarmonyPatch(typeof(Punch))] internal class PunchP
     {
-        [HarmonyPostfix] [HarmonyPatch(nameof(Punch.Start))] static void ReparentPunchZone(Punch __instance)
-        {
-            Transform PunchZone = __instance.transform.Find("PunchZone");
-
-            switch(__instance.type)
-            {
-                case FistType.Standard:
-                    __instance.gameObject.AddComponent<ArmRemover>();
-                    Feedbacker.FeedbackerController FBC = __instance.gameObject.AddComponent<Feedbacker.FeedbackerController>();
-                    FBC.Arm = new Feedbacker.Armature(__instance.transform.GetChild(0));
-                    break;
-                case FistType.Heavy:
-                    __instance.gameObject.AddComponent<ArmRemover>();
-                    break;
-                case FistType.Spear:
-                    __instance.gameObject.AddComponent<ArmRemover>();
-                    break; // wtf is this?
-            }
-        }
-
         /* [HarmonyPrefix] [HarmonyPatch(nameof(Punch.Update))] */ static bool Update(Punch __instance)
         {
             if (MonoSingleton<OptionsManager>.Instance.paused) return false;
