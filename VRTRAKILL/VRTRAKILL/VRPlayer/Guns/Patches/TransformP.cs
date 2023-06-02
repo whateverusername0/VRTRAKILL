@@ -73,7 +73,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                            AlterPosition   = new Vector3(0, -.15f, -.2f),
                            BuildPosition   = new Vector3(0, -.1f, -.3f),
                            PlacePosition   = new Vector3(0, -.1f, -.3f);
-            static Vector3 OffsetRotation = new Vector3(0, 0, 45),
+            static Vector3 OffsetRotation = new Vector3(0, 0, 0),
                            PlaceOffsetRotation = new Vector3(0, 0, 90);
             static Vector3 Scale = new Vector3(-.35f, .35f, .35f);
 
