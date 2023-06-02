@@ -73,7 +73,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                            AlterPosition   = new Vector3(0, -.15f, -.2f),
                            BuildPosition   = new Vector3(0, -.1f, -.3f),
                            PlacePosition   = new Vector3(0, -.1f, -.3f);
-            static Vector3 OffsetRotation = new Vector3(0, 0, 90);
+            static Vector3 OffsetRotation = new Vector3(0, 0, 45),
+                           PlaceOffsetRotation = new Vector3(0, 0, 90);
             static Vector3 Scale = new Vector3(-.35f, .35f, .35f);
 
             [HarmonyPostfix] [HarmonyPatch(nameof(Sandbox.Arm.SandboxArm.OnEnable))] static void Retransform(Sandbox.Arm.SandboxArm __instance)
@@ -94,7 +95,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                     case "Build":
                     case "Place":
                         __instance.transform.localPosition = PlacePosition;
-                        __instance.transform.rotation = Vars.RightController.transform.rotation * Quaternion.Euler(OffsetRotation);
+                        __instance.transform.rotation = Vars.RightController.transform.rotation * Quaternion.Euler(PlaceOffsetRotation);
                         __instance.transform.localScale = Scale;
                         break;
                 }
