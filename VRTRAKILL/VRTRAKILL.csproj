@@ -191,7 +191,6 @@
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Armature.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\ArmRemover.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\ArmsP.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\ItemsP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\PunchP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\VRArmsController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\ControllerController.cs" />
