@@ -10,20 +10,15 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         static bool DisableFrustumRotation(RotateToFaceFrustumTarget __instance)
         {
             __instance.enabled = false;
+            __instance.GetComponent<WalkingBob>().enabled = false;
             __instance.gameObject.AddComponent<VRGunsController>();
             return false;
         }
 
+        // idk if this is needed, but i'm not removing it
         [HarmonyPostfix] [HarmonyPatch(typeof(GunControl), nameof(GunControl.Start))] static void ChangeGCLayers(GunControl __instance)
-        {
-            __instance.transform.localPosition = Vector3.zero;
-            Helpers.Misc.RecursiveChangeLayer(__instance.gameObject, 0);
-        }
-        // Original method resets weapons' layers, so it changes it back to Default
+        { __instance.transform.localPosition = Vector3.zero; }
         [HarmonyPostfix] [HarmonyPatch(typeof(GunSetter), nameof(GunSetter.ResetWeapons))] static void ChangeGSLayers(GunSetter __instance)
-        {
-            __instance.transform.localPosition = Vector3.zero;
-            Helpers.Misc.RecursiveChangeLayer(__instance.gameObject, 0);
-        }
+        { __instance.transform.localPosition = Vector3.zero; }
     }
 }
