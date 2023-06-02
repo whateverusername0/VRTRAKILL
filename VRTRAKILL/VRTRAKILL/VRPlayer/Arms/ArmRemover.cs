@@ -43,6 +43,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                 HandSize = new Vector3(35, 35, 35);
             }
         }
+        public void Update() { LateUpdate(); }
         public void LateUpdate()
         {
             if (Arm != null)
@@ -50,6 +51,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                 Arm.Root.localScale = ArmSize;
                 Arm.Hand.localScale = HandSize;
             }
+            if (gameObject.HasComponent<HookArm>())
+                Arm.Wrist.GetChild(1).localScale = HandSize;
         }
     }
 }
