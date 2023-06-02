@@ -30,7 +30,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                         HandSize = new Vector3(35, 35, 35);
                         break;
                     case FistType.Heavy:
-                        HandSize = new Vector3(100, 100, 100);
+                        HandSize = new Vector3(35, 35, 35);
                         break;
                     case FistType.Spear: // unused in the game for now (i think??)
                         Destroy(GetComponent<ArmRemover>());
@@ -39,8 +39,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
             }
             else if (gameObject.HasComponent<HookArm>())
             {
-                Arm = new Armature(transform, ArmType.Whiplash);
-                ArmSize = new Vector3(.01f, .01f, .01f); HandSize = new Vector3(100, 100, 100);
+                ArmSize = new Vector3(.01f, .01f, .01f);
+                HandSize = new Vector3(35, 35, 35);
             }
         }
         public void LateUpdate()
