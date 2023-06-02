@@ -35,9 +35,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
 
         [HarmonyPostfix] [HarmonyPatch(typeof(HookArm), nameof(HookArm.Start))] static void ConvertWhiplash(HookArm __instance)
         {
-            Armature A; ArmRemover AR = __instance.gameObject.AddComponent<ArmRemover>();
+            Armature A = new Armature(__instance.transform, ArmType.Whiplash);
+            ArmRemover AR = __instance.gameObject.AddComponent<ArmRemover>();
             VRArmsController VRAC = __instance.gameObject.AddComponent<VRArmsController>();
-            A = new Armature(__instance.transform, ArmType.Whiplash);
             AR.Arm = A; VRAC.Arm = A;
         }
     }
