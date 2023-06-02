@@ -5,21 +5,19 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
 {
     internal class ArmRemover : MonoBehaviour
     {
-        //Transform Armature;
         public Armature Arm;
-
         Vector3 ArmSize, HandSize;
         public void Start()
         {
             if (gameObject.HasComponent<Revolver>())
             {
-                Arm = new Armature(transform.GetChild(0), ArmType.Feedbacker); // * special case * //
+                Arm = new Armature(transform, ArmType.Feedbacker); // * special case * //
                 ArmSize = new Vector3(1, 1, 1);
                 HandSize = new Vector3(100, 100, 100);
             }
             else if (gameObject.HasComponent<Sandbox.Arm.SandboxArm>())
             {
-                Arm = new Armature(transform, ArmType.Feedbacker); // * special case * //
+                Arm = new Armature(transform, ArmType.Feedbacker, IsSandboxer: true); // * special case * //
                 ArmSize = new Vector3(1, 1, 1);
                 HandSize = new Vector3(100, 100, 100);
             }
