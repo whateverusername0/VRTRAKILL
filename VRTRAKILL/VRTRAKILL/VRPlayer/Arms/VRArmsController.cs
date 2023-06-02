@@ -5,12 +5,30 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
     internal class VRArmsController : MonoBehaviour
     {
         public Armature Arm;
-        public Vector3 OffsetPosition = new Vector3(0, 0, 0), TotalPos = Vector3.zero;
-        public Quaternion OffsetRotation = Quaternion.Euler(-45, 180, 0);
+        public Vector3 OffsetPosition, TotalPos = Vector3.zero;
+        public Quaternion OffsetRotation;
 
         public void Start()
         {
+            switch (Arm.Type)
+            {
+                case ArmType.Feedbacker:
+                    OffsetPosition = new Vector3(0, 0, 0);
+                    OffsetRotation = Quaternion.Euler(-45, 180, 0);
+                    break;
+                case ArmType.Knuckleblaster:
+                    OffsetPosition = new Vector3(0, 0, 0);
+                    OffsetRotation = Quaternion.Euler(-45, 180, 0);
+                    break;
+                case ArmType.Whiplash:
+                    OffsetPosition = new Vector3(0, 0, 0);
+                    OffsetRotation = Quaternion.Euler(-45, 180, 0);
+                    break;
 
+                case ArmType.Spear:
+                default:
+                    Destroy(GetComponent<VRArmsController>()); break;
+            }
         }
 
         public void Update() { LateUpdate(); }
