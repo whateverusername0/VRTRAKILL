@@ -43,6 +43,8 @@ namespace Plugin.VRTRAKILL
             => WeaponWheel.Instance != null && WeaponWheel.Instance.isActiveAndEnabled;
         public static bool IsPlayerUsingShop
             => FistControl.Instance != null && FistControl.Instance.shopping;
+        public static bool IsIntro
+            => GameObject.Find("Intro") != null && GameObject.Find("Intro").GetComponent<IntroTextController>().enabled;
 
         public static bool IsSpawnMenuPresent
             => SpawnMenu.Instance != null && SpawnMenu.Instance.isActiveAndEnabled;
@@ -57,6 +59,7 @@ namespace Plugin.VRTRAKILL
             => IsMainMenu
             || IsPaused
             || IsRankingScreenPresent
+            || IsIntro
 
             || IsSpawnMenuPresent
             || IsAlterMenuPresent
