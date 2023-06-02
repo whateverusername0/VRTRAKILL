@@ -15,11 +15,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
     internal class Armature
     {
         // Simplifying things 101
-        public ArmType? Type
+        private ArmType? _Type; public ArmType? Type
         {
             get
             {
-                if (Type == null)
+                if (_Type == null)
                 {
                     if (GameObjectT.gameObject.GetComponent<Punch>().type == FistType.Standard)
                         return ArmType.Feedbacker;
@@ -29,9 +29,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                         return ArmType.Whiplash;
                     else return null;
                 }
-                else return Type;
+                else return _Type;
             }
-            set { Type = value; }
+            set { _Type = value; }
         }
 
         public Transform GameObjectT { get; }
