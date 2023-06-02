@@ -314,8 +314,6 @@
     </Content>
     <Content Include="DementiaDiary.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="VRTRAKILL\VRPlayer\Arms\Sandboxer\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
