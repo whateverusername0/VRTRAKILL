@@ -5,22 +5,23 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
 {
     internal class ArmRemover : MonoBehaviour
     {
-        Transform Armature;
-        Feedbacker.Armature FBArm; Knuckleblaster.Armature KBArm;
+        //Transform Armature;
+        public Armature Arm;
+
         Vector3 ArmSize, HandSize;
         public void Start()
         {
             if (gameObject.HasComponent<Revolver>())
             {
-                Armature = transform.GetChild(0);
-                FBArm = new Feedbacker.Armature(Armature);
-                ArmSize = new Vector3(1, 1, 1); HandSize = new Vector3(100, 100, 100);
+                Arm = new Armature(transform.GetChild(0), ArmType.Feedbacker); // * special case * //
+                ArmSize = new Vector3(1, 1, 1);
+                HandSize = new Vector3(100, 100, 100);
             }
             else if (gameObject.HasComponent<Sandbox.Arm.SandboxArm>())
             {
-                Armature = transform;
-                FBArm = new Feedbacker.Armature(Armature);
-                ArmSize = new Vector3(1, 1, 1); HandSize = new Vector3(100, 100, 100);
+                Arm = new Armature(transform, ArmType.Feedbacker); // * special case * //
+                ArmSize = new Vector3(1, 1, 1);
+                HandSize = new Vector3(100, 100, 100);
             }
             else if (gameObject.HasComponent<Punch>())
             {
@@ -28,30 +29,28 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                 switch (GetComponent<Punch>().type)
                 {
                     case FistType.Standard:
-                        Armature = transform.GetChild(0);
-                        FBArm = new Feedbacker.Armature(Armature);
                         HandSize = new Vector3(35, 35, 35);
                         break;
                     case FistType.Heavy:
-                        Armature = transform.GetChild(0);
-
                         HandSize = new Vector3(100, 100, 100);
                         break;
-                    case FistType.Spear:
+                    case FistType.Spear: // unused in the game for now (i think??)
+                        Destroy(GetComponent<ArmRemover>());
                         break;
                 }
+            }
+            else if (gameObject.HasComponent<HookArm>())
+            {
+                Arm = new Armature(transform, ArmType.Whiplash);
+                ArmSize = new Vector3(.01f, .01f, .01f); HandSize = new Vector3(100, 100, 100);
             }
         }
         public void LateUpdate()
         {
-            if (FBArm != null)
+            if (Arm != null)
             {
-                FBArm.RArmature.localScale = ArmSize;
-                FBArm.Hand.localScale = HandSize;
-            }
-            else if (KBArm != null)
-            {
-
+                Arm.Root.localScale = ArmSize;
+                Arm.Hand.localScale = HandSize;
             }
         }
     }
