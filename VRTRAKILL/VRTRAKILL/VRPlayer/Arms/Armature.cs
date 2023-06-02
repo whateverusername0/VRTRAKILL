@@ -1,169 +1,51 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Plugin.Helpers;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Arms
 {
+    public enum ArmType
+    {
+        Feedbacker,
+        Knuckleblaster,
+        Spear,
+        Whiplash
+    }
+
     internal class Armature
     {
         // Simplifying things 101
-        private enum ArmType
-        {
-            Feedbacker,
-            Knuckleblaster,
-            Whiplash
-        }
-        private ArmType? Type
+        public ArmType? Type
         {
             get
             {
-                if (GameObjectT.gameObject.GetComponent<Punch>().type == FistType.Standard)
-                    return ArmType.Feedbacker;
-                else if (GameObjectT.gameObject.GetComponent<Punch>().type == FistType.Heavy)
-                    return ArmType.Knuckleblaster;
-                else if (GameObjectT.gameObject.HasComponent<HookArm>())
-                    return ArmType.Whiplash;
-                else return null;
+                if (Type == null)
+                {
+                    if (GameObjectT.gameObject.GetComponent<Punch>().type == FistType.Standard)
+                        return ArmType.Feedbacker;
+                    else if (GameObjectT.gameObject.GetComponent<Punch>().type == FistType.Heavy)
+                        return ArmType.Knuckleblaster;
+                    else if (GameObjectT.gameObject.HasComponent<HookArm>())
+                        return ArmType.Whiplash;
+                    else return null;
+                }
+                else return Type;
             }
+            set { Type = value; }
         }
 
         public Transform GameObjectT { get; }
-        public Transform Root
-        {
-            get
-            {
-                switch (Type)
-                {
-                    case ArmType.Feedbacker:
-                        return GameObjectT.GetChild(0).GetChild(0);
-                    case ArmType.Knuckleblaster:
-                        return GameObjectT.GetChild(1);
-                    case ArmType.Whiplash:
-                        return GameObjectT.GetChild(0).GetChild(1);
-                    default: return null;
-                }
-            }
-        }
-        public Transform Clavicle
-        {
-            get
-            {
-                switch (Type)
-                {
-                    case ArmType.Feedbacker:
-                        return Root;
-                    case ArmType.Knuckleblaster:
-                    case ArmType.Whiplash:
-                        return Root.GetChild(1);
-                    default: return null;
-                }
-            }
-        }
-        public Transform UpperArm => Clavicle.GetChild(0);
-        public Transform Wrist
-        {
-            get
-            {
-                switch (Type)
-                {
-                    case ArmType.Feedbacker:
-                        return UpperArm.GetChild(0);
-                    case ArmType.Knuckleblaster:
-                    case ArmType.Whiplash:
-                        return Clavicle.GetChild(1);
-                    default: return null;
-                }
-            }
-        }
+        public Transform Root { get; }
+        public Transform Clavicle { get; }
+        public Transform UpperArm => Clavicle.GetChild(0); // * special case * //
+        public Transform Wrist { get; }
 
-        public Transform Hand
-        {
-            get
-            {
-                switch (Type)
-                {
-                    case ArmType.Feedbacker:
-                        return Wrist.GetChild(0);
-                    case ArmType.Knuckleblaster:
-                        return Wrist.GetChild(0);
-                    case ArmType.Whiplash:
-                        return Wrist.GetChild(2);
-                    default: return null;
-                }
-            }
-        }
-        public Finger FIndex
-        {
-            get
-            {
-                switch (Type)
-                {
-                    case ArmType.Feedbacker:
-                    case ArmType.Whiplash:
-                        return new Finger(Hand.GetChild(0));
-                    case ArmType.Knuckleblaster:
-                        return new Finger(Hand.GetChild(4), true);
-                    default: return null;
-                }
-            }
-        }
-        public Finger FPinkie
-        {
-            get
-            {
-                switch (Type)
-                {
-                    case ArmType.Feedbacker:
-                    case ArmType.Whiplash:
-                        return new Finger(Hand.GetChild(1));
-                    case ArmType.Knuckleblaster:
-                        return new Finger(Hand.GetChild(5), true);
-                    default: return null;
-                }
-            }
-        }
-        public Finger FMiddle
-        {
-            get
-            {
-                switch (Type)
-                {
-                    case ArmType.Feedbacker:
-                    case ArmType.Whiplash:
-                        return new Finger(Hand.GetChild(2));
-                    case ArmType.Knuckleblaster:
-                    default: return null;
-                }
-            }
-        }
-        public Finger FRing
-        {
-            get
-            {
-                switch (Type)
-                {
-                    case ArmType.Feedbacker:
-                    case ArmType.Whiplash:
-                        return new Finger(Hand.GetChild(3));
-                    case ArmType.Knuckleblaster:
-                    default: return null;
-                }
-            }
-        }
-        public Finger FThumb
-        {
-            get
-            {
-                switch (Type)
-                {
-                    case ArmType.Feedbacker:
-                    case ArmType.Whiplash:
-                        return new Finger(Hand.GetChild(4), true);
-                    case ArmType.Knuckleblaster:
-                        return new Finger(Hand.GetChild(6), true);
-                    default: return null;
-                }
-            }
-        }
+        public Transform Hand { get; }
+        public Finger FIndex { get; }
+        public Finger FPinkie { get; }
+        public Finger FMiddle { get; }
+        public Finger FRing { get; }
+        public Finger FThumb { get; }
 
         public class Finger : Transform
         {
@@ -181,6 +63,61 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                 TipEnd = Tip.GetChild(0);
             }
         }
-        public Armature(Transform T) { GameObjectT = T; }
+        public Armature(Transform T, ArmType? Type = null)
+        {
+            GameObjectT = T;
+
+            switch (Type)
+            {
+                case ArmType.Feedbacker:
+                    {
+                        Root = GameObjectT.GetChild(0).GetChild(0);
+                        Clavicle = Root;
+                        // UpperArm
+                        Wrist = UpperArm.GetChild(0);
+
+                        Hand = Wrist.GetChild(0);
+                        FIndex = new Finger(Hand.GetChild(0));
+                        FPinkie = new Finger(Hand.GetChild(1));
+                        FMiddle = new Finger(Hand.GetChild(2));
+                        FRing = new Finger(Hand.GetChild(3));
+                        FThumb = new Finger(Hand.GetChild(4), true);
+                        break;
+                    }
+                case ArmType.Knuckleblaster:
+                    {
+                        Root = GameObjectT.GetChild(1);
+                        Clavicle = Root.GetChild(1);
+                        // UpperArm
+                        Wrist = Clavicle.GetChild(1);
+
+                        Hand = Wrist.GetChild(0);
+                        FIndex = new Finger(Hand.GetChild(4), true);
+                        FPinkie = new Finger(Hand.GetChild(5), true);
+                        // FMiddle
+                        // FRing
+                        FThumb = new Finger(Hand.GetChild(6), true);
+                        break;
+                    }
+                case ArmType.Whiplash:
+                    {
+                        Root = GameObjectT.GetChild(0).GetChild(1);
+                        Clavicle = Root.GetChild(1);
+                        // UpperArm
+                        Wrist = Clavicle.GetChild(1);
+
+                        Hand = Wrist.GetChild(2);
+                        FIndex = new Finger(Hand.GetChild(0));
+                        FPinkie = new Finger(Hand.GetChild(1));
+                        FMiddle = new Finger(Hand.GetChild(2));
+                        FRing = new Finger(Hand.GetChild(3));
+                        FThumb = new Finger(Hand.GetChild(4), true);
+                        break;
+                    }
+                case ArmType.Spear:
+                default:
+                    throw new NullReferenceException();
+            }
+        }
     }
 }
