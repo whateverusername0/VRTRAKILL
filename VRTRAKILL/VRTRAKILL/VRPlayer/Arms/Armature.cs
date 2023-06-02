@@ -38,6 +38,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
         public Transform Root { get; }
         public Transform Clavicle { get; }
         public Transform UpperArm => Clavicle.GetChild(0); // * special case * //
+        public Transform LowerArm => UpperArm.GetChild(0);
         public Transform Wrist { get; }
 
         public Transform Hand { get; }
