@@ -16,19 +16,17 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
 
         [HarmonyPostfix] [HarmonyPatch(typeof(Punch), nameof(Punch.Start))] static void ConvertArms(Punch __instance)
         {
-            ArmRemover AR = __instance.gameObject.AddComponent<ArmRemover>();
+            Armature A; ArmRemover AR = __instance.gameObject.AddComponent<ArmRemover>();
             VRArmsController VRAC = __instance.gameObject.AddComponent<VRArmsController>();
             switch (__instance.type)
             {
                 case FistType.Standard:
-                    Vars.FeedbackerArmature = new Feedbacker.Armature(__instance.transform);
-                    AR.FBArm = Vars.FeedbackerArmature;
-                    Feedbacker.FeedbackerController FBC = __instance.gameObject.AddComponent<Feedbacker.FeedbackerController>();
-                    FBC.Arm = Vars.FeedbackerArmature;
+                    A = new Armature(__instance.transform, ArmType.Feedbacker);
+                    AR.Arm = A; VRAC.Arm = A;
                     break;
                 case FistType.Heavy:
-                    Vars.KnuckleblasterArmature = new Knuckleblaster.Armature(__instance.transform);
-                    AR.KBArm = Vars.KnuckleblasterArmature;
+                    A = new Armature(__instance.transform, ArmType.Knuckleblaster);
+                    AR.Arm = A; VRAC.Arm = A;
                     break;
                 case FistType.Spear:
                     break; // wtf is this?
@@ -37,8 +35,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
 
         [HarmonyPostfix] [HarmonyPatch(typeof(HookArm), nameof(HookArm.Start))] static void ConvertWhiplash(HookArm __instance)
         {
-            ArmRemover AR = __instance.gameObject.AddComponent<ArmRemover>();
-
+            Armature A; ArmRemover AR = __instance.gameObject.AddComponent<ArmRemover>();
+            VRArmsController VRAC = __instance.gameObject.AddComponent<VRArmsController>();
+            A = new Armature(__instance.transform, ArmType.Whiplash);
+            AR.Arm = A; VRAC.Arm = A;
         }
     }
 }
