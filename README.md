@@ -22,7 +22,7 @@ Also it does not require any other mods to function
 - UI Interaction (some of menus might be broken)
 ### Planned stuff:
 **0.9**: Full arm movement/tracking (punch irl to punch ingame)  
-**0.9.x**: Hand gestures (thumbs up, point, etc.)  
+**0.10**: Hand gestures (thumbs up, point, etc.)  
 **1.0**: VR body (arms, legs, etc.)  
 
 ## Requirements
