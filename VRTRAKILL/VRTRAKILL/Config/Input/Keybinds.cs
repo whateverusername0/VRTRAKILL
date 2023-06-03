@@ -4,6 +4,10 @@ namespace Plugin.VRTRAKILL.Config.Input
 {
     public class Keybinds
     {
+        [JsonProperty("Fire")] public string ShootKey { get; set; } = "MouseLeft";
+        [JsonProperty("Alternative Fire")] public string AltShootKey { get; set; } = "MouseRight";
+        [JsonProperty("Punch")] public string PunchKey { get; set; } = "F";
+
         [JsonProperty("Jump")] public string JumpKey { get; set; } = "Spacebar";
         [JsonProperty("Slide")] public string SlideKey { get; set; } = "LeftControl";
         [JsonProperty("Dash")] public string DashKey { get; set; } = "LeftShift";

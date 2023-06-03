@@ -1,11 +1,12 @@
-﻿using WindowsInput.Native;
+﻿using WindowsInput;
+using WindowsInput.Native;
 using System.Collections.Generic;
 
 namespace Plugin.VRTRAKILL.Config
 {
     internal class InputMap
     {
-        public static readonly Dictionary<string, VirtualKeyCode> Keys = new Dictionary<string, VirtualKeyCode>
+        public static readonly Dictionary<string, VirtualKeyCode?> Keys = new Dictionary<string, VirtualKeyCode?>
         {
             #region SpecialKeys
             { "Backspace",     VirtualKeyCode.BACK },
@@ -101,6 +102,7 @@ namespace Plugin.VRTRAKILL.Config
             { "F10",           VirtualKeyCode.F10 },
             { "F11",           VirtualKeyCode.F11 },
             { "F12",           VirtualKeyCode.F12 },
+            { "F25",           (VirtualKeyCode)69696969 },
 
             { "f1",            VirtualKeyCode.F1 },
             { "f2",            VirtualKeyCode.F2 },
@@ -114,6 +116,7 @@ namespace Plugin.VRTRAKILL.Config
             { "f10",           VirtualKeyCode.F10 },
             { "f11",           VirtualKeyCode.F11 },
             { "f12",           VirtualKeyCode.F12 },
+            { "f25",           (VirtualKeyCode)69696969 },
             #endregion
 
             #region Numpad
@@ -197,11 +200,54 @@ namespace Plugin.VRTRAKILL.Config
             #endregion
 
             // Empty keys
-            { "", 0 }, { "Empty", 0 }, { "empty", 0 }, { "Null", 0 }, { "null", 0 }
+            { "", null }, { " ", null }, { "Empty", null }, { "empty", null }, { "Null", null }, { "null", null }
         };
-        public static readonly List<string> MouseKeys = new List<string>
+        public static readonly Dictionary<string, MouseButton?> MouseKeys = new Dictionary<string, MouseButton?>
         {
-            "MouseScroll", "mousescroll", "Scroll", "scroll"
+            #region Left mouse button
+            { "MouseLeft",  MouseButton.LeftButton},
+            { "mouseleft",  MouseButton.LeftButton},
+            { "LMB",  MouseButton.LeftButton},
+            { "lmb",  MouseButton.LeftButton},
+            #endregion
+
+            #region Right mouse bottun
+            { "MouseRight",  MouseButton.RightButton},
+            { "mouseright",  MouseButton.LeftButton},
+            { "RMB",  MouseButton.RightButton},
+            { "rmb",  MouseButton.RightButton},
+            #endregion
+
+            #region Middle mouse button
+            { "MouseMiddle",  MouseButton.MiddleButton},
+            { "mousemiddle",  MouseButton.MiddleButton},
+            { "MMB",  MouseButton.MiddleButton},
+            { "mmb",  MouseButton.MiddleButton},
+            #endregion
+
+            #region Mouse 4
+            { "Mouse4",  (MouseButton)3 },
+            { "mouse4",  (MouseButton)3 },
+            { "M4",  (MouseButton)3 },
+            { "m4",  (MouseButton)3 },
+            #endregion
+
+            #region Mouse 5
+            { "Mouse5",  (MouseButton)4 },
+            { "mouse5",  (MouseButton)3 },
+            { "M5",  (MouseButton)4 },
+            { "m5",  (MouseButton)4 },
+            #endregion
+
+            #region Scroll
+            { "MouseScroll",    (MouseButton)10 },
+            { "mousescroll",    (MouseButton)10 },
+            { "Scroll",         (MouseButton)10 },
+            { "scroll",         (MouseButton)10 },
+            #endregion
+
+            // Empty keys
+            { "", null }, { " ", null }, { "Empty", null }, { "empty", null }, { "Null", null }, { "null", null }
         };
     }
 }
