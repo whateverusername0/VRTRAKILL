@@ -192,6 +192,7 @@
     <Compile Include="VRTRAKILL\VRPlayer\Arms\ArmRemover.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\ArmsP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\PunchP.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\SandboxArmP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\VRArmsController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\ControllerController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\ControllerHaptics.cs" />
@@ -200,7 +201,7 @@
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\GunController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\DoubleWieldP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\GunsP.cs" />
-    <Compile Include="VRTRAKILL\Input\VRInputManager.cs" />
+    <Compile Include="VRTRAKILL\Input\VRActionsManager.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\RemoveArms.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\AimingP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\TransformP.cs" />
