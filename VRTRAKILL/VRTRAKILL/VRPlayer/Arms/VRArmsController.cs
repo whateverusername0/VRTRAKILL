@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Plugin.Helpers;
+using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Arms
 {
@@ -35,6 +36,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
             Arm.Root.localPosition = OffsetPosition;
             Arm.Hand.rotation = Vars.LeftController.transform.rotation * OffsetRotation;
 
+            if (gameObject.HasComponent<HookArm>())
+                Arm.Wrist.GetChild(1).rotation = Vars.LeftController.transform.rotation * OffsetRotation;
             if (HookOffsetPosition != null) {  }
         }
     }
