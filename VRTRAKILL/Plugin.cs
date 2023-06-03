@@ -38,7 +38,7 @@ namespace Plugin
             SteamVR_Actions.PreInitialize();
             SteamVR.Initialize();
 
-            VRTRAKILL.Input.VRInputManager.Init();
+            VRTRAKILL.Input.VRActionsManager.Init();
         }
     }
 }
