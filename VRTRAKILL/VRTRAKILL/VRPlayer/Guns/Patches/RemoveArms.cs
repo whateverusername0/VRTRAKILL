@@ -1,7 +1,6 @@
 ﻿using HarmonyLib;
 using Sandbox.Arm;
 using System;
-using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 {
@@ -10,7 +9,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
     {
         // Hack to leave hand only (it just makes other hitngs too small that you're unable to see them)
         // ( Animator reverting my scaledefs is a meanie thing to do :C )
-        static Transform ArmT;
 
         [HarmonyPostfix] [HarmonyPatch(typeof(Revolver), nameof(Revolver.Start))]
         static void RemoveRevolverArm(Revolver __instance)

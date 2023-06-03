@@ -21,7 +21,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
             Vector2 vector = Vector2.zero;
             if (__instance.activated)
             {
-                vector = Input.VRInputVars.MoveVector;
+                vector = Input.VRInputVars.MoveVector / .2f;
 
                 __instance.cc.movementHor = vector.x;
                 __instance.cc.movementVer = vector.y;

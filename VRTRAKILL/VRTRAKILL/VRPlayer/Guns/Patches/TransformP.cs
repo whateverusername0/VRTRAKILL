@@ -9,10 +9,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         // This took a LOT of time to get those offsets right and my eyes hurt a bit
         [HarmonyPatch(typeof(Revolver))] static class RevolverT
         {
-            static Vector3 Position = new Vector3(0, -.1f, .6f),
-                           AltPosition = new Vector3(0, -.075f, .575f);
+            static Vector3 Position = new Vector3(.05f, -.1f, .6f),
+                           AltPosition = new Vector3(.05f, -.075f, .575f);
             static Vector3 Scale = new Vector3(.1f, .1f, .1f),
-                           AltScale = new Vector3(.1f, .1f, .1f);
+                           AltScale = new Vector3(.105f, .105f, .105f);
 
             [HarmonyPostfix] [HarmonyPatch(nameof(Revolver.Start))] static void Retransform(Revolver __instance)
             {
