@@ -20,8 +20,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                     OffsetPosition = new Vector3(0, -.0175f, -.0175f); break;
                 case ArmType.Whiplash:
                     OffsetPosition = new Vector3(.145f, .08f, .05f);
-                    HookOffsetPosition = new Vector3(0, 0, 0);
-                    break;
+                    HookOffsetPosition = new Vector3(0, 0, 0); break;
 
                 case ArmType.Spear:
                 default: Destroy(GetComponent<VRArmsController>()); break;
@@ -31,14 +30,22 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
         public void Update() { LateUpdate(); }
         public void LateUpdate()
         {
+            // Update positions & rotations of the main gameobject + hand rotation (because animator stuff)
             Arm.GameObjectT.position = Vars.LeftController.transform.position;
             Arm.GameObjectT.rotation = Vars.LeftController.transform.rotation;
             Arm.Root.localPosition = OffsetPosition;
             Arm.Hand.rotation = Vars.LeftController.transform.rotation * OffsetRotation;
 
+            // Whiplash specific stuff
             if (gameObject.HasComponent<HookArm>())
                 Arm.Wrist.GetChild(1).rotation = Vars.LeftController.transform.rotation * OffsetRotation;
-            if (HookOffsetPosition != null) {  }
+            if (HookOffsetPosition != null)
+            {  }
+
+            // Thingamajig to disable other arms while grapplehooking
+            if (HookArm.Instance.state != 0 && !gameObject.HasComponent<HookArm>())
+                Arm.GameObjectT.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
+            else Arm.GameObjectT.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
         }
     }
 }
