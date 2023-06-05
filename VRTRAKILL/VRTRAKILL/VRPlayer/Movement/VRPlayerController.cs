@@ -13,13 +13,14 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement
         }
         private IEnumerator UpdateCenter()
         {
-            // Updates ingame player center to match irl player position
-            float DistanceFromFloor = Vector3.Dot(Vars.VRCameraContainer.transform.localPosition, Vector3.up);
-            CC.center = Vars.VRCameraContainer.transform.localPosition - 0.5f * DistanceFromFloor * Vector3.up;
+            while (true)
+            {
+                // Updates ingame player center to match irl player position
+                float DistanceFromFloor = Vector3.Dot(Vars.VRCameraContainer.transform.localPosition, Vector3.up);
+                CC.center = Vars.VRCameraContainer.transform.localPosition - 0.5f * DistanceFromFloor * Vector3.up;
 
-            yield return new WaitForSeconds(0.5f);
-
-            UpdateCenter();
+                yield return new WaitForSeconds(0.5f);
+            }
         }
     }
 }
