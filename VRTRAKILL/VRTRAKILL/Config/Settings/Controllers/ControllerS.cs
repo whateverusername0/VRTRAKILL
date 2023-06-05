@@ -4,6 +4,7 @@ namespace Plugin.VRTRAKILL.Config.Settings.Controllers
 {
     public class ControllerS
     {
+        [JsonProperty("Use controller-based UI interaction (broken)")] public bool UseControllerUIInteraction { get; set; }
         [JsonProperty("Controller Lines")] public ControllerLines CLines { get; set; }
         [JsonProperty("Hands")] public HandSettings HandS { get; set; }
 
