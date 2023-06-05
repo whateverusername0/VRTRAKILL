@@ -9,7 +9,7 @@ namespace Plugin.VRTRAKILL.UI.HUD
         {
             __instance.transform.parent = HUDOptions.Instance.transform;
 
-            if (!Vars.Config.VRSettings.VRUI.EnableStandardHUD) __instance.GetComponent<Canvas>().enabled = false;
+            if (!Vars.Config.View.VRUI.EnableStandardHUD) __instance.GetComponent<Canvas>().enabled = false;
 
             UIConverter.ConvertCanvas(__instance.GetComponent<Canvas>(), Force: true, DontAddComponent: true);
             __instance.gameObject.AddComponent<HideWhenMenuActive>();

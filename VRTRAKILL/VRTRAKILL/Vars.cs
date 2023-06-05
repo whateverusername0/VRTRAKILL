@@ -65,10 +65,6 @@ namespace Plugin.VRTRAKILL
             || IsAlterMenuPresent
             || IsTeleportMenuPresent;
 
-        public static bool IsSandboxArmActive
-            => Sandbox.Arm.SandboxArm.Instance != null
-            && Sandbox.Arm.SandboxArm.Instance.currentMode != null;
-
         public static GameObject VRCameraContainer
             => VRPlayer.VRCamera.Patches.CameraConverter.Container;
         public static Camera DesktopCamera

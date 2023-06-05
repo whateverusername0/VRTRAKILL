@@ -181,8 +181,16 @@
     <Compile Include="Helpers\Misc.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VRTRAKILL\Config\Input\Keybinds.cs" />
-    <Compile Include="VRTRAKILL\Config\Settings\VRSettings.cs" />
+    <Compile Include="VRTRAKILL\Config\Settings\Controllers\ControllerLines.cs" />
+    <Compile Include="VRTRAKILL\Config\Settings\Controllers\HandSettings.cs" />
+    <Compile Include="VRTRAKILL\Config\Settings\Controllers\ControllerS.cs" />
+    <Compile Include="VRTRAKILL\Config\Settings\Game.cs" />
+    <Compile Include="VRTRAKILL\Config\Settings\Input\InputSettings.cs" />
+    <Compile Include="VRTRAKILL\Config\Settings\Input\Keybinds.cs" />
+    <Compile Include="VRTRAKILL\Config\Settings\Input\InputS.cs" />
+    <Compile Include="VRTRAKILL\Config\Settings\View\DesktopView.cs" />
+    <Compile Include="VRTRAKILL\Config\Settings\View\ViewS.cs" />
+    <Compile Include="VRTRAKILL\Config\Settings\View\UI.cs" />
     <Compile Include="VRTRAKILL\Patches\SteamVRP.cs" />
     <Compile Include="VRTRAKILL\UI\CrossHair\CrosshairController.cs" />
     <Compile Include="VRTRAKILL\UI\HUD\HideWhenMenuActive.cs" />
@@ -220,7 +228,6 @@
     <Compile Include="VRTRAKILL\Config\ConfigJSON.cs" />
     <Compile Include="VRTRAKILL\Config\ConfigMaster.cs" />
     <Compile Include="VRTRAKILL\Config\InputMap.cs" />
-    <Compile Include="VRTRAKILL\Config\Input\VRInputSettings.cs" />
     <Compile Include="VRTRAKILL\Input\VRInputVars.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\CameraConverter.cs" />
     <Compile Include="VRTRAKILL\UI\UIInteraction.cs" />

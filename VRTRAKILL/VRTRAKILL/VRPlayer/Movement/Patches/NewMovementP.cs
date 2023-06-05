@@ -9,7 +9,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
     {
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Start))] static void Start(NewMovement __instance)
         {
-            if (!Vars.Config.VRSettings.DoNotOverrideMoveValues)
+            if (!Vars.Config.Game.DoNotOverrideMoveValues)
             {
                 __instance.jumpPower = __instance.jumpPower / 1.5f;
                 __instance.wallJumpPower = __instance.wallJumpPower / 1.5f;
@@ -397,7 +397,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                     __instance.boostLeft = 100f;
                     __instance.boost = true;
 
-                    if (!Vars.Config.VRSettings.DoNotOverrideMoveValues)
+                    if (!Vars.Config.Game.DoNotOverrideMoveValues)
                     {
                         __instance.dodgeDirection = __instance.movementDirection / 1.5f;
                         if (__instance.dodgeDirection == Vector3.zero) __instance.dodgeDirection = __instance.transform.forward / 1.5f;

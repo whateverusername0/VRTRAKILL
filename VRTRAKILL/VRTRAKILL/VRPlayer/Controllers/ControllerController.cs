@@ -10,7 +10,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         public GameObject Offset = new GameObject("Offset");
         private GameObject Pointer;
         LineRenderer LR; Vector3 EndPosition;
-        public float DefaultLength => Vars.Config.VRSettings.VRUI.CrosshairDistance;
+        public float DefaultLength => Vars.Config.View.VRUI.CrosshairDistance;
 
         private void SetupControllerPointer()
         {
@@ -36,8 +36,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
             LR.useWorldSpace = true;
             LR.material = new Material(Shader.Find("GUI/Text Shader"));
 
-            Color C1 = new Color(1, 1, 1, Vars.Config.VRSettings.CL.LInitTransparency),
-                  C2 = new Color(1, 1, 1, Vars.Config.VRSettings.CL.LEndTransparency);
+            Color C1 = new Color(1, 1, 1, Vars.Config.Controllers.CLines.LInitTransparency),
+                  C2 = new Color(1, 1, 1, Vars.Config.Controllers.CLines.LEndTransparency);
 
             LR.startWidth = 0.02f; LR.endWidth = 0.001f;
             LR.startColor = C1; LR.endColor = C2;
@@ -62,7 +62,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
             Offset.transform.localPosition = Vector3.zero;
             Offset.transform.localRotation = Quaternion.Euler(45, 0, 0);
 
-            if (Vars.Config.VRSettings.CL.DrawControllerLines)
+            if (Vars.Config.Controllers.CLines.DrawControllerLines)
             {
                 SetupControllerPointer();
                 SetupControllerLines();
@@ -74,7 +74,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
             EndPosition = transform.position + (Offset.transform.forward * DefaultLength);
             if (Hit.collider != null) EndPosition = Hit.point;
 
-            if (Vars.Config.VRSettings.CL.DrawControllerLines)
+            if (Vars.Config.Controllers.CLines.DrawControllerLines)
                 DrawControllerLines();
         }
 

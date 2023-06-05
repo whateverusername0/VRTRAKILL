@@ -8,7 +8,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
     {
         public void Start()
         {
-            if (Vars.Config.VRInputSettings.SnapTurning)
+            if (Vars.Config.Input.InputSettings.SnapTurning)
                 StartCoroutine(SnapTurn());
             else StartCoroutine(SmoothTurn());
         }
@@ -29,10 +29,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
         {
             while(true)
             {
-                if (VRInputVars.TurnVector.x > 0 + Vars.Config.VRInputSettings.Deadzone)
-                    VRInputVars.TurnOffset += Vars.Config.VRInputSettings.SmoothTurningSpeed * Time.deltaTime;
-                if (VRInputVars.TurnVector.x < 0 - Vars.Config.VRInputSettings.Deadzone)
-                    VRInputVars.TurnOffset -= Vars.Config.VRInputSettings.SmoothTurningSpeed * Time.deltaTime;
+                if (VRInputVars.TurnVector.x > 0 + Vars.Config.Input.InputSettings.Deadzone)
+                    VRInputVars.TurnOffset += Vars.Config.Input.InputSettings.SmoothTurningSpeed * Time.deltaTime;
+                if (VRInputVars.TurnVector.x < 0 - Vars.Config.Input.InputSettings.Deadzone)
+                    VRInputVars.TurnOffset -= Vars.Config.Input.InputSettings.SmoothTurningSpeed * Time.deltaTime;
                 yield return new WaitForEndOfFrame();
             }
         }
@@ -42,16 +42,16 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
             bool IsTurning;
             while (true)
             {
-                if (VRInputVars.TurnVector.x > 0 + Vars.Config.VRInputSettings.Deadzone
-                    || VRInputVars.TurnVector.x < 0 - Vars.Config.VRInputSettings.Deadzone) IsTurning = true;
+                if (VRInputVars.TurnVector.x > 0 + Vars.Config.Input.InputSettings.Deadzone
+                    || VRInputVars.TurnVector.x < 0 - Vars.Config.Input.InputSettings.Deadzone) IsTurning = true;
                 else IsTurning = false;
 
                 while (IsTurning)
                 {
-                    if (VRInputVars.TurnVector.x > 0 + Vars.Config.VRInputSettings.Deadzone)
-                        VRInputVars.TurnOffset += Vars.Config.VRInputSettings.SnapTurningAngles;
-                    else if (VRInputVars.TurnVector.x < 0 - Vars.Config.VRInputSettings.Deadzone)
-                        VRInputVars.TurnOffset -= Vars.Config.VRInputSettings.SnapTurningAngles;
+                    if (VRInputVars.TurnVector.x > 0 + Vars.Config.Input.InputSettings.Deadzone)
+                        VRInputVars.TurnOffset += Vars.Config.Input.InputSettings.SnapTurningAngles;
+                    else if (VRInputVars.TurnVector.x < 0 - Vars.Config.Input.InputSettings.Deadzone)
+                        VRInputVars.TurnOffset -= Vars.Config.Input.InputSettings.SnapTurningAngles;
 
                     // alternative to wait for seconds but you can actually cancel it
                     for (float i = .2f; i <= 0; i -= Time.deltaTime) continue;

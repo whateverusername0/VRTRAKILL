@@ -1,6 +1,6 @@
 ﻿using System.IO; using System.Diagnostics;
 using BepInEx; using BepInEx.Logging;
-using Valve.VR;
+using Valve.VR; using HarmonyLib;
 
 namespace Plugin
 {
@@ -24,10 +24,13 @@ namespace Plugin
         {
             PLogger = Logger;
 
-            new HarmonyLib.Harmony(PLUGIN_GUID).PatchAll();
+            // Patching
+            Harmony H = new Harmony(PLUGIN_GUID);
+
+
+            new Harmony(PLUGIN_GUID).PatchAll();
 
             VRTRAKILL.Config.ConfigMaster.Init();
-
             VRTRAKILL.UI.UIConverter.Init();
 
             InitializeSteamVR();

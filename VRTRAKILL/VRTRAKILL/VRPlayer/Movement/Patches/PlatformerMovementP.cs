@@ -85,7 +85,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                     __instance.boost = true;
                     __instance.anim.Play("Dash", -1, 0f);
 
-                    if (!Vars.Config.VRSettings.DoNotOverrideMoveValues)
+                    if (!Vars.Config.Game.DoNotOverrideMoveValues)
                     {
                         __instance.dodgeDirection = __instance.movementDirection / 1.5f;
                         if (__instance.dodgeDirection == Vector3.zero) __instance.dodgeDirection = __instance.playerModel.forward / 1.5f;

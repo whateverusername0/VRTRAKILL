@@ -5,7 +5,7 @@ namespace Plugin.VRTRAKILL.UI.CrossHair
 {
     internal class CrosshairController : MonoBehaviour
     {
-        public float DefaultLength => Vars.Config.VRSettings.VRUI.CrosshairDistance;
+        public float DefaultLength => Vars.Config.View.VRUI.CrosshairDistance;
         Vector3 EndPosition = Vector3.zero;
 
         public void LateUpdate()

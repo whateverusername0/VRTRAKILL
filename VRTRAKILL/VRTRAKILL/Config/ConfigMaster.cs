@@ -45,10 +45,10 @@ namespace Plugin.VRTRAKILL.Config
 
         public static void Init()
         {
-            Input.Keybinds Keybinds = Vars.Config.Inputs; ConvertJSONToKeys(Keybinds);
+            Settings.Input.Keybinds Keybinds = Vars.Config.Input.Keybinds; ConvertJSONToKeys(Keybinds);
         }
 
-        private static void ConvertJSONToKeys(Input.Keybinds Config)
+        private static void ConvertJSONToKeys(Settings.Input.Keybinds Config)
         {
             try
             {

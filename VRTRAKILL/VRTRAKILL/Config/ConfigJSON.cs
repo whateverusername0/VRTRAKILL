@@ -5,15 +5,17 @@ namespace Plugin.VRTRAKILL.Config
 {
     public class ConfigJSON
     {
-        [JsonProperty("VR Settings")] public Settings.VRSettings VRSettings { get; set; }
-        [JsonProperty("VR Input Settings")] public Input.VRInputSettings VRInputSettings { get; set; }
-        [JsonProperty("Keybinds")] public Input.Keybinds Inputs { get; set; }
+        [JsonProperty("Game Settings")] public Settings.Game Game { get; set; }
+        [JsonProperty("Input Settings")] public Settings.Input.InputS Input { get; set; }
+        [JsonProperty("Controller Settings")] public Settings.Controllers.ControllerS Controllers { get; set; }
+        [JsonProperty("View Settings")] public Settings.View.ViewS View { get; set; }
 
         public ConfigJSON()
         {
-            VRSettings = new Settings.VRSettings();
-            VRInputSettings = new Input.VRInputSettings();
-            Inputs = new Input.Keybinds();
+            Game = new Settings.Game();
+            Input = new Settings.Input.InputS();
+            Controllers = new Settings.Controllers.ControllerS();
+            View = new Settings.View.ViewS();
         }
 
         public static ConfigJSON Deserialize()

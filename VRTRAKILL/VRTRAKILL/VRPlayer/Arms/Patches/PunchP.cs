@@ -22,25 +22,17 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
             }
 
             if (__instance.holdingInput && MonoSingleton<InputManager>.Instance.InputSource.Punch.WasCanceledThisFrame)
-            {
                 __instance.holdingInput = false;
-            }
 
             float layerWeight = __instance.anim.GetLayerWeight(1);
             if (__instance.shopping && layerWeight < 1f)
-            {
                 __instance.anim.SetLayerWeight(1, Mathf.MoveTowards(layerWeight, 1f, Time.deltaTime / 10f + 5f * Time.deltaTime * (1f - layerWeight)));
-            }
             else if (!__instance.shopping && layerWeight > 0f)
-            {
                 __instance.anim.SetLayerWeight(1, Mathf.MoveTowards(layerWeight, 0f, Time.deltaTime / 10f + 5f * Time.deltaTime * layerWeight));
-            }
 
             if (!MonoSingleton<InputManager>.Instance.PerformingCheatMenuCombo()
                 && MonoSingleton<InputManager>.Instance.InputSource.Fire1.WasPerformedThisFrame && __instance.shopping)
-            {
                 __instance.anim.SetTrigger("ShopTap");
-            }
 
             if (__instance.returnToOrigRot)
             {
@@ -51,19 +43,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
                                                                Quaternion.identity) * 5f + 5f)
                                                                * Time.deltaTime * 5f);
                 if (__instance.transform.parent.localRotation == Quaternion.identity)
-                {
                     __instance.returnToOrigRot = false;
-                }
             }
 
-            if (__instance.fc.shopping && !__instance.shopping)
-            {
-                __instance.ShopMode();
-            }
-            else if (!__instance.fc.shopping && __instance.shopping)
-            {
-                __instance.StopShop();
-            }
+            if (__instance.fc.shopping && !__instance.shopping) __instance.ShopMode();
+            else if (!__instance.fc.shopping && __instance.shopping) __instance.StopShop();
 
             if (__instance.holding && (bool)__instance.heldItem)
             {
@@ -72,10 +56,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
                     __instance.anim.SetBool("SemiHolding", value: false);
                     __instance.anim.SetBool("Holding", value: true);
                 }
-                else
-                {
-                    __instance.anim.SetBool("SemiHolding", value: true);
-                }
+                else __instance.anim.SetBool("SemiHolding", value: true);
             }
             return false;
         }

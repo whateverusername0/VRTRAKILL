@@ -37,7 +37,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
             if (MonoSingleton<OptionsManager>.Instance && MonoSingleton<OptionsManager>.Instance.paused) Num = 0f;
             __instance.currentIntensity = Num;
 
-            if (Vars.Config.VRInputSettings.Hands.EnableCH)
+            if (Vars.Config.Input.InputSettings.EnableCH)
                 if (list.Count > 0)
                     Vibrate(1, Num, Num, Source);
 
@@ -74,7 +74,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
                 case "rumble.coin_toss":
                 case "rumble.whiplash.throw":
                 case "rumble.whiplash.pull":
-                    if (Vars.Config.VRInputSettings.Hands.LeftHandMode) return SteamVR_Input_Sources.RightHand;
+                    if (Vars.Config.Controllers.HandS.LeftHandMode) return SteamVR_Input_Sources.RightHand;
                     else return SteamVR_Input_Sources.LeftHand;
 
                 case "rumble.gun.fire":
@@ -87,7 +87,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
                 case "rumble.gun.sawblade":
                 case "rumble.gun.revolver_charge":
                 case "rumble.magnet_released":
-                    if (Vars.Config.VRInputSettings.Hands.LeftHandMode) return SteamVR_Input_Sources.LeftHand;
+                    if (Vars.Config.Controllers.HandS.LeftHandMode) return SteamVR_Input_Sources.LeftHand;
                     else return SteamVR_Input_Sources.RightHand;
 
                 default:
