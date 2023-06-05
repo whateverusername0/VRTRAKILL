@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Plugin.VRTRAKILL.UI.HUD
+namespace Plugin.VRTRAKILL.UI
 {
     internal class HideWhenMenuActive : MonoBehaviour
     {

@@ -1,9 +1,9 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 
-namespace Plugin.VRTRAKILL.UI.HUD
+namespace Plugin.VRTRAKILL.UI.Patches
 {
-    [HarmonyPatch] internal class TransformP
+    [HarmonyPatch] internal class HudP
     {
         [HarmonyPrefix] [HarmonyPatch(typeof(HUDPos), nameof(HUDPos.Start))] static void ReparentHUD(HUDPos __instance)
         {
