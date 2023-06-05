@@ -21,9 +21,10 @@ Also it does not require any other mods to function
 - Weapon swap, weapon scroll using joystick, weapon wheel
 - UI Interaction (some of menus might be broken)
 ### Planned stuff:
-**0.9**: Full arm movement/tracking (punch irl to punch ingame)  
-**0.10**: Hand gestures (thumbs up, point, etc.)  
-**1.0**: VR body (arms, legs, etc.)  
+**0.x (0.10)**: Full arm movement/tracking (punch irl to punch ingame)  
+**0.x (0.11)**: Hand gestures (thumbs up, point, etc.)  
+**0.x (0.12)**: VR body (arms, legs, etc.)  
+**1.0**: Full release (when i think that nothing more can be done)
 
 ## Requirements
 - A copy of the latest version of ULTRAKILL (any kind)
