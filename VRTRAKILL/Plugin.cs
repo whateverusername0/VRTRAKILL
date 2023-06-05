@@ -32,11 +32,11 @@ namespace Plugin
                 new Patcher(new HarmonyLib.Harmony($"{PLUGIN_GUID}.base"), 
                             _Namespaces: new string[]
                             {
-                                "Plugin.Helpers.Patches",
+                                nameof(Helpers.Patches),
 
-                                "Plugin.VRTRAKILL.VRPlayer.VRCamera",
-                                "Plugin.VRTRAKILL.UI",
-                                "Plugin.VRTRAKILL.VRPlayer.Movement"
+                                nameof(VRTRAKILL.VRPlayer.VRCamera),
+                                nameof(VRTRAKILL.UI),
+                                nameof(VRTRAKILL.VRPlayer.Movement)
                             });
             MainPatcher.PatchAll();
 
