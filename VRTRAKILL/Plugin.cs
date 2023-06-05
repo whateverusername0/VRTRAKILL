@@ -32,11 +32,11 @@ namespace Plugin
                 new Patcher(new HarmonyLib.Harmony($"{PLUGIN_GUID}.base"), 
                             _Namespaces: new string[]
                             {
-                                nameof(Helpers.Patches),
+                                typeof(Helpers.Patches.A).Namespace,
 
-                                nameof(VRTRAKILL.VRPlayer.VRCamera),
-                                nameof(VRTRAKILL.UI),
-                                nameof(VRTRAKILL.VRPlayer.Movement)
+                                typeof(VRTRAKILL.VRPlayer.VRCamera.Patches.A).Namespace,
+                                typeof(VRTRAKILL.UI.Patches.A).Namespace,
+                                typeof(VRTRAKILL.VRPlayer.Movement.Patches.A).Namespace
                             });
             MainPatcher.PatchAll();
 
@@ -51,21 +51,21 @@ namespace Plugin
             {
                 GunsPatcher = 
                     new Patcher(new HarmonyLib.Harmony($"{PLUGIN_GUID}.guns"),
-                                nameof(VRTRAKILL.VRPlayer.Guns.Patches));
+                                typeof(VRTRAKILL.VRPlayer.Guns.Patches.A).Namespace);
                 GunsPatcher.PatchAll();
             }
             if (Vars.Config.Input.InputSettings.EnableMovementPunching)
             {
                 ArmsPatcher =
                     new Patcher(new HarmonyLib.Harmony($"{PLUGIN_GUID}.arms"),
-                                nameof(VRTRAKILL.VRPlayer.Arms.Patches));
+                                typeof(VRTRAKILL.VRPlayer.Arms.Patches.A).Namespace);
                 ArmsPatcher.PatchAll();
             }
             if (Vars.Config.Controllers.HandS.EnableVRIK)
             {
                 IKPatcher =
                     new Patcher(new HarmonyLib.Harmony($"{PLUGIN_GUID}.vrik"),
-                                nameof(VRTRAKILL.VRPlayer.Arms.VRIKPatches));
+                                typeof(VRTRAKILL.VRPlayer.Arms.VRIKPatches.A).Namespace);
                 IKPatcher.PatchAll();
             }
 
