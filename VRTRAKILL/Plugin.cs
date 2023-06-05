@@ -1,6 +1,8 @@
 ﻿using System.IO; using System.Diagnostics;
 using BepInEx; using BepInEx.Logging;
-using Valve.VR; using HarmonyLib;
+using Valve.VR;
+
+using Plugin.Helpers; using Plugin.VRTRAKILL;
 
 namespace Plugin
 {
@@ -18,17 +20,54 @@ namespace Plugin
                              GamePath = Path.GetDirectoryName(GameExePath),
                              HMDModel = string.Empty;
 
+        public static Patcher MainPatcher, HapticsPatcher, GunsPatcher, ArmsPatcher, IKPatcher;
+
         internal static ManualLogSource PLogger { get; private set; }
 
         public void Awake()
         {
             PLogger = Logger;
 
-            // Patching
-            Harmony H = new Harmony(PLUGIN_GUID);
+            MainPatcher =
+                new Patcher(new HarmonyLib.Harmony($"{PLUGIN_GUID}.base"), 
+                            _Namespaces: new string[]
+                            {
+                                "Plugin.Helpers.Patches",
 
+                                "Plugin.VRTRAKILL.VRPlayer.VRCamera",
+                                "Plugin.VRTRAKILL.UI",
+                                "Plugin.VRTRAKILL.VRPlayer.Movement"
+                            });
+            MainPatcher.PatchAll();
 
-            new Harmony(PLUGIN_GUID).PatchAll();
+            if (Vars.Config.Input.InputSettings.EnableControllerHaptics)
+            {
+                HapticsPatcher = 
+                    new Patcher(new HarmonyLib.Harmony($"{PLUGIN_GUID}.haptics"),
+                                typeof(VRTRAKILL.VRPlayer.Controllers.Patches.ControllerHaptics));
+                HapticsPatcher.PatchAll();
+            }
+            if (Vars.Config.Input.InputSettings.EnableControllerShooting)
+            {
+                GunsPatcher = 
+                    new Patcher(new HarmonyLib.Harmony($"{PLUGIN_GUID}.guns"),
+                                nameof(VRTRAKILL.VRPlayer.Guns.Patches));
+                GunsPatcher.PatchAll();
+            }
+            if (Vars.Config.Input.InputSettings.EnableMovementPunching)
+            {
+                ArmsPatcher =
+                    new Patcher(new HarmonyLib.Harmony($"{PLUGIN_GUID}.arms"),
+                                nameof(VRTRAKILL.VRPlayer.Arms.Patches));
+                ArmsPatcher.PatchAll();
+            }
+            if (Vars.Config.Controllers.HandS.EnableVRIK)
+            {
+                IKPatcher =
+                    new Patcher(new HarmonyLib.Harmony($"{PLUGIN_GUID}.vrik"),
+                                nameof(VRTRAKILL.VRPlayer.Arms.VRIKPatches));
+                IKPatcher.PatchAll();
+            }
 
             VRTRAKILL.Config.ConfigMaster.Init();
             VRTRAKILL.UI.UIConverter.Init();
