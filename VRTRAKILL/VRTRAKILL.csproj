@@ -195,8 +195,8 @@
     <Compile Include="VRTRAKILL\Config\Settings\View\UI.cs" />
     <Compile Include="Helpers\Patches\SteamVRP.cs" />
     <Compile Include="VRTRAKILL\UI\CrossHair\CrosshairController.cs" />
-    <Compile Include="VRTRAKILL\UI\HUD\HideWhenMenuActive.cs" />
-    <Compile Include="VRTRAKILL\UI\HUD\TransformP.cs" />
+    <Compile Include="VRTRAKILL\UI\HideWhenMenuActive.cs" />
+    <Compile Include="VRTRAKILL\UI\Patches\HudP.cs" />
     <Compile Include="VRTRAKILL\UI\Patches\A.cs" />
     <Compile Include="VRTRAKILL\UI\Patches\CrosshairP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Armature.cs" />
