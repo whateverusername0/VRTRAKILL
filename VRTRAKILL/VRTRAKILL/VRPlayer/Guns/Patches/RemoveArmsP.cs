@@ -18,7 +18,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         }
         [HarmonyPostfix] [HarmonyPatch(typeof(SandboxArm), nameof(SandboxArm.Awake))] static void RemoveSandboxArm(SandboxArm __instance)
         {
-            try { __instance.gameObject.AddComponent<Arms.ArmRemover>(); }
+            try
+            {
+                __instance.gameObject.AddComponent<Arms.ArmRemover>();
+            }
             catch (NullReferenceException) { Plugin.PLogger.LogWarning($"Sandbox arm is null???"); }
         }
 

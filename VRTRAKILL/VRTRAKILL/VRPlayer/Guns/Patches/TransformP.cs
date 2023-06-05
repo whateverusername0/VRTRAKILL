@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using UnityEngine;
+using Plugin.Helpers;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 {
@@ -10,9 +11,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         [HarmonyPatch(typeof(Revolver))] static class RevolverT
         {
             static Vector3 Position = new Vector3(.05f, -.1f, .6f),
-                           AltPosition = new Vector3(.05f, -.075f, .575f);
+                           AltPosition = new Vector3(.05f, -.075f, .6f);
             static Vector3 Scale = new Vector3(.1f, .1f, .1f),
-                           AltScale = new Vector3(.105f, .105f, .105f);
+                           AltScale = new Vector3(.1f, .1f, .1f);
 
             [HarmonyPostfix] [HarmonyPatch(nameof(Revolver.Start))] static void Retransform(Revolver __instance)
             {
@@ -69,36 +70,14 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         
         [HarmonyPatch(typeof(Sandbox.Arm.SandboxArm))] static class SandboxArmT
         {
-            static Vector3 MovePosition    = new Vector3(0, -.1f, -.25f),
-                           AlterPosition   = new Vector3(0, -.15f, -.2f),
-                           BuildPosition   = new Vector3(0, -.1f, -.3f),
-                           PlacePosition   = new Vector3(0, -.1f, -.3f);
-            static Vector3 OffsetRotation = new Vector3(0, 0, 0),
-                           PlaceOffsetRotation = new Vector3(0, 0, 90);
-            static Vector3 Scale = new Vector3(-.35f, .35f, .35f);
+            static Vector3 Scale = new Vector3(-.3f, .3f, .3f);
 
-            [HarmonyPostfix] [HarmonyPatch(nameof(Sandbox.Arm.SandboxArm.OnEnable))] static void Retransform(Sandbox.Arm.SandboxArm __instance)
+            [HarmonyPostfix] [HarmonyPatch(nameof(Sandbox.Arm.SandboxArm.Awake))] static void Retransform(Sandbox.Arm.SandboxArm __instance)
             {
-                switch (__instance.currentMode.Name)
-                {
-                    case "Move":
-                        __instance.transform.localPosition = MovePosition;
-                        __instance.transform.rotation = Vars.RightController.transform.rotation * Quaternion.Euler(-OffsetRotation);
-                        __instance.transform.localScale = Scale;
-                        break;
-                    case "Destroy":
-                    case "Alter":
-                        __instance.transform.localPosition = AlterPosition;
-                        __instance.transform.rotation = Vars.RightController.transform.rotation * Quaternion.Euler(-OffsetRotation);
-                        __instance.transform.localScale = Scale;
-                        break;
-                    case "Build":
-                    case "Place":
-                        __instance.transform.localPosition = PlacePosition;
-                        __instance.transform.rotation = Vars.RightController.transform.rotation * Quaternion.Euler(PlaceOffsetRotation);
-                        __instance.transform.localScale = Scale;
-                        break;
-                }
+                Arms.VRArmsController FBC = __instance.gameObject.AddComponent<Arms.VRArmsController>();
+                Arms.Armature A = new Arms.Armature(__instance.transform, Arms.ArmType.Feedbacker, IsSandboxer: true);
+                FBC.Arm = A; FBC.IsSandboxer = true; FBC.OffsetPosition = new Vector3(0, -.25f, -.5f);
+                __instance.transform.localScale = Scale;
             }
         }
 
