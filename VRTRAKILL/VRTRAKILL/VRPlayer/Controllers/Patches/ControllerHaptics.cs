@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 
-namespace Plugin.VRTRAKILL.VRPlayer.Controllers
+namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
 {
     [HarmonyPatch(typeof(RumbleManager))] internal class ControllerHaptics
     {
@@ -37,9 +37,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
             if (MonoSingleton<OptionsManager>.Instance && MonoSingleton<OptionsManager>.Instance.paused) Num = 0f;
             __instance.currentIntensity = Num;
 
-            if (Vars.Config.Input.InputSettings.EnableCH)
-                if (list.Count > 0)
-                    Vibrate(1, Num, Num, Source);
+            if (list.Count > 0) Vibrate(1, Num, Num, Source);
 
             return false;
         }
