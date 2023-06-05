@@ -2,7 +2,7 @@
 using UnityEngine;
 using Valve.VR;
 
-namespace Plugin.VRTRAKILL.Patches
+namespace Plugin.Helpers.Patches
 {
     [HarmonyPatch] internal class SteamVRP
     {
