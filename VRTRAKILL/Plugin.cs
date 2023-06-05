@@ -28,53 +28,35 @@ namespace Plugin
         {
             PLogger = Logger;
 
-            MainPatcher =
-                new Patcher(new HarmonyLib.Harmony($"{PLUGIN_GUID}.base"), 
-                            _Namespaces: new string[]
-                            {
-                                typeof(Helpers.Patches.A).Namespace,
-
-                                typeof(VRTRAKILL.VRPlayer.VRCamera.Patches.A).Namespace,
-                                typeof(VRTRAKILL.UI.Patches.A).Namespace,
-                                typeof(VRTRAKILL.VRPlayer.Movement.Patches.A).Namespace
-                            });
-            MainPatcher.PatchAll();
-
-            if (Vars.Config.Input.InputSettings.EnableControllerHaptics)
-            {
-                HapticsPatcher = 
-                    new Patcher(new HarmonyLib.Harmony($"{PLUGIN_GUID}.haptics"),
-                                typeof(VRTRAKILL.VRPlayer.Controllers.Patches.ControllerHaptics));
-                HapticsPatcher.PatchAll();
-            }
-            if (Vars.Config.Input.InputSettings.EnableControllerShooting)
-            {
-                GunsPatcher = 
-                    new Patcher(new HarmonyLib.Harmony($"{PLUGIN_GUID}.guns"),
-                                typeof(VRTRAKILL.VRPlayer.Guns.Patches.A).Namespace);
-                GunsPatcher.PatchAll();
-            }
-            if (Vars.Config.Input.InputSettings.EnableMovementPunching)
-            {
-                ArmsPatcher =
-                    new Patcher(new HarmonyLib.Harmony($"{PLUGIN_GUID}.arms"),
-                                typeof(VRTRAKILL.VRPlayer.Arms.Patches.A).Namespace);
-                ArmsPatcher.PatchAll();
-            }
-            if (Vars.Config.Controllers.HandS.EnableVRIK)
-            {
-                IKPatcher =
-                    new Patcher(new HarmonyLib.Harmony($"{PLUGIN_GUID}.vrik"),
-                                typeof(VRTRAKILL.VRPlayer.Arms.VRIKPatches.A).Namespace);
-                IKPatcher.PatchAll();
-            }
-
             VRTRAKILL.Config.ConfigMaster.Init();
+            PatchStuff();
+            //new HarmonyLib.Harmony(PLUGIN_GUID).PatchAll();
             VRTRAKILL.UI.UIConverter.Init();
 
             InitializeSteamVR();
         }
+        private void PatchStuff()
+        {
+            System.Collections.Generic.List<string> Namespaces = new System.Collections.Generic.List<string>
+            {
+                typeof(Helpers.Patches.A).Namespace,
 
+                typeof(VRTRAKILL.VRPlayer.VRCamera.Patches.A).Namespace,
+                typeof(VRTRAKILL.UI.Patches.A).Namespace,
+                typeof(VRTRAKILL.VRPlayer.Movement.Patches.A).Namespace,
+            };
+            if (Vars.Config.Input.InputSettings.EnableControllerHaptics)
+                Namespaces.Add(typeof(VRTRAKILL.VRPlayer.Controllers.Patches.A).Namespace);
+            if (Vars.Config.Input.InputSettings.EnableControllerShooting)
+                Namespaces.Add(typeof(VRTRAKILL.VRPlayer.Guns.Patches.A).Namespace);
+            if (Vars.Config.Input.InputSettings.EnableMovementPunching)
+                Namespaces.Add(typeof(VRTRAKILL.VRPlayer.Arms.Patches.A).Namespace);
+            if (Vars.Config.Controllers.HandS.EnableVRIK)
+                Namespaces.Add(typeof(VRTRAKILL.VRPlayer.Arms.VRIKPatches.A).Namespace);
+
+            MainPatcher = new Patcher(new HarmonyLib.Harmony($"{PLUGIN_GUID}.base"), _Namespaces: Namespaces.ToArray());
+            MainPatcher.PatchAll();
+        }
         private void InitializeSteamVR()
         {
             SteamVR_Actions.PreInitialize();
