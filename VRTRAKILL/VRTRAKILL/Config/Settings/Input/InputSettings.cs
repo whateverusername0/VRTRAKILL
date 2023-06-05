@@ -8,8 +8,8 @@ namespace Plugin.VRTRAKILL.Config.Settings.Input
         [JsonProperty("Snap turning")] public bool SnapTurning { get; set; } = false;
         [JsonProperty("Snap turning angles")] public float SnapTurningAngles { get; set; } = 45;
         [JsonProperty("Smooth turning speed")] public float SmoothTurningSpeed { get; set; } = 300;
-        [JsonProperty("Enable Controller Haptics (Vibration)")] public bool EnableCH { get; set; } = true;
-        [JsonProperty("Controller-based shooting (unused)")] public bool ControllerShooty { get; set; } = true;
-        [JsonProperty("Movement-based punching (unused)")] public bool PunchIrl { get; set; } = true;
+        [JsonProperty("Enable Controller Haptics (Vibration)")] public bool EnableControllerHaptics { get; set; } = true;
+        [JsonProperty("Enable controller-based shooting")] public bool EnableControllerShooting { get; set; } = true;
+        [JsonProperty("Enable movement-based punching")] public bool EnableMovementPunching { get; set; } = true;
     }
 }
