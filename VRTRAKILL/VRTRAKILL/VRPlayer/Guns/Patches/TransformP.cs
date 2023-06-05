@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 {
-    [HarmonyPatch] internal static class TransformP
+    [HarmonyPatch] internal class TransformP
     {
         // Applies offset to guns' transforms
         // This took a LOT of time to get those offsets right and my eyes hurt a bit

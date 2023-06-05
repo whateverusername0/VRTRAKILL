@@ -15,7 +15,7 @@ namespace Plugin.VRTRAKILL.UI
         private static void SceneChanged(Scene S)
         {
             UICamera = new GameObject("UI Camera").AddComponent<Camera>();
-            UICamera.cullingMask = (int)Vars.Layers.UI;
+            UICamera.cullingMask = LayerMask.GetMask("UI");
             UICamera.clearFlags = CameraClearFlags.Depth; UICamera.depth = 1f;
 
             if (!Vars.Config.Controllers.UseControllerUIInteraction)

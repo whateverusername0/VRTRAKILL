@@ -4,7 +4,7 @@ using Sandbox.Arm;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
 {
-    [HarmonyPatch(typeof(SandboxArm))] internal static class SandboxArmP
+    [HarmonyPatch(typeof(SandboxArm))] internal class SandboxArmP
     {
         [HarmonyPrefix] [HarmonyPatch(nameof(SandboxArm.Update))] static bool Update(SandboxArm __instance)
         {

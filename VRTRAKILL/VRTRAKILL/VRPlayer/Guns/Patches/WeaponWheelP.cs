@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 {
-    [HarmonyPatch(typeof(WeaponWheel))] internal static class WeaponWheelP
+    [HarmonyPatch(typeof(WeaponWheel))] internal class WeaponWheelP
     {
         [HarmonyPrefix] [HarmonyPatch(nameof(WeaponWheel.Update))] static bool WeaponWheelTurnInteraction(WeaponWheel __instance)
         {

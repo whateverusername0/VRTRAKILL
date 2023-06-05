@@ -5,9 +5,9 @@ using Valve.VR;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
 {
-    [HarmonyPatch(typeof(RumbleManager))] internal static class ControllerHaptics
+    [HarmonyPatch(typeof(RumbleManager))] internal class ControllerHaptics
     {
-        static SteamVR_Action_Vibration HapticAction = SteamVR_Actions._default.Haptic;
+        static readonly SteamVR_Action_Vibration HapticAction = SteamVR_Actions._default.Haptic;
 
         // I can't believe it worked first try without any corrections.
         [HarmonyPrefix] [HarmonyPatch(nameof(RumbleManager.Update))] static bool Update(RumbleManager __instance)
