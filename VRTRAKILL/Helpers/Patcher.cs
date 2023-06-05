@@ -101,9 +101,10 @@ namespace Plugin.Helpers
         {
             // this looks like something YandereDev would do but it works
             if (Namespace != null) PatchAll(Namespace);
-            if (Namespaces != null) PatchAll(Namespaces);
-            if (Type != null) PatchAll(Type);
-            if (Types != null) PatchAll(Types);
+            else if (Namespaces != null) PatchAll(Namespaces);
+            else if (Type != null) PatchAll(Type);
+            else if (Types != null) PatchAll(Types);
+            else Harmony.PatchAll();
         }
         public void PatchAll(string _Namespace)
         {
