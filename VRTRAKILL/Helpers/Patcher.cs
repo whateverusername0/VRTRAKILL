@@ -13,7 +13,7 @@ namespace Plugin.Helpers
     public class Patcher
     {
         public Harmony Harmony { get; set; }
-        public Assembly ASS { get; private set; }
+        public Assembly ASS { get; private set; } = Assembly.GetCallingAssembly();
         public string Namespace { get; private set; } public Type Type { get; private set; }
         public string[] Namespaces { get; private set; } public Type[] Types { get; private set; }
 
@@ -21,12 +21,6 @@ namespace Plugin.Helpers
         public Patcher(Harmony _Harmony)
         {
             Harmony = _Harmony;
-            ASS = Assembly.GetCallingAssembly();
-        }
-        public Patcher(Harmony _Harmony, Assembly _ASS)
-        {
-            Harmony = _Harmony;
-            ASS = _ASS;
         }
         public Patcher(Harmony _Harmony, string _Namespace)
         {
@@ -48,34 +42,58 @@ namespace Plugin.Helpers
             Harmony = _Harmony;
             Types = _Types;
         }
+        public Patcher(Harmony _Harmony, Assembly _ASS)
+        {
+            Harmony = _Harmony;
+            ASS = _ASS;
+        }
+        public Patcher(Harmony _Harmony, Assembly _ASS, string _Namespace)
+        {
+            Harmony = _Harmony;
+            ASS = _ASS;
+            Namespace = _Namespace;
+        }
+        public Patcher(Harmony _Harmony, Assembly _ASS, string[] _Namespaces)
+        {
+            Harmony = _Harmony;
+            ASS = _ASS;
+            Namespaces = _Namespaces;
+        }
+        public Patcher(Harmony _Harmony, Assembly _ASS, Type _Type)
+        {
+            Harmony = _Harmony;
+            ASS = _ASS;
+            Type = _Type;
+        }
+        public Patcher(Harmony _Harmony, Assembly _ASS, Type[] _Types)
+        {
+            Harmony = _Harmony;
+            ASS = _ASS;
+            Types = _Types;
+        }
 
         private List<Type> GetPatches(string _Namespace = null)
         {
             IEnumerable<Type> Q;
-            if (Namespace == null)
+            if (_Namespace == null)
             {
                 Q = from T in ASS.GetTypes()
-                    where T.IsClass && T.IsDefined(typeof(HarmonyPatch), true)
+                    where T.IsDefined(typeof(HarmonyPatch), false)
                     select T;
             }
             else
             {
                 Q = from T in ASS.GetTypes()
-                    where T.IsClass && T.Namespace == _Namespace && T.IsDefined(typeof(HarmonyPatch), true)
+                    where T.Namespace == _Namespace && T.IsDefined(typeof(HarmonyPatch), false)
                     select T;
             }
-            return Q.ToList<Type>();
+            return Q.ToList();
         }
         private List<Type> GetPatches(string[] _Namespaces)
         {
             List<Type> QL = new List<Type>();
             foreach (string _Namespace in _Namespaces)
-            {
-                IEnumerable<Type> Q = from T in ASS.GetTypes()
-                                      where T.IsClass && T.Namespace == _Namespace && T.IsDefined(typeof(HarmonyPatch), true)
-                                      select T;
-                QL.AddRange(Q.ToList<Type>());
-            }
+                QL.AddRange(GetPatches(_Namespace));
             return QL;
         }
 
@@ -89,13 +107,13 @@ namespace Plugin.Helpers
         }
         public void PatchAll(string _Namespace)
         {
-            IEnumerable<Type> Q = GetPatches(Namespace);
-            foreach (Type T in Q) Harmony.PatchAll(T);
+            IEnumerable<Type> Q = GetPatches(_Namespace);
+            foreach (Type T in Q) try { Harmony.PatchAll(T); } catch { Plugin.PLogger.LogError($"Nullref with type {T}"); }
         }
         public void PatchAll(string[] _Namespaces)
         {
-            IEnumerable<Type> Q = GetPatches(Namespaces);
-            foreach (Type T in Q) Harmony.PatchAll(T);
+            IEnumerable<Type> Q = GetPatches(_Namespaces);
+            foreach (Type T in Q) try { Harmony.PatchAll(T); } catch { Plugin.PLogger.LogError($"Nullref with type {T}"); }
         }
         public void PatchAll(Type _T)
         => Harmony.PatchAll(_T);
