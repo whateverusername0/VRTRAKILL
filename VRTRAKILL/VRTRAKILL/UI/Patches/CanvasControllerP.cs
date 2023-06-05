@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using HarmonyLib;
-using Plugin.Helpers;
 
 namespace Plugin.VRTRAKILL.UI.Patches
 {

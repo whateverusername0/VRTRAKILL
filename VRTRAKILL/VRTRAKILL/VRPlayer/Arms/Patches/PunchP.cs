@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
 {
-    [HarmonyPatch(typeof(Punch))] internal class PunchP
+    [HarmonyPatch(typeof(Punch))] internal static class PunchP
     {
         /* [HarmonyPrefix] [HarmonyPatch(nameof(Punch.Update))] */ static bool Update(Punch __instance)
         {

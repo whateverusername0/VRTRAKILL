@@ -1,11 +1,10 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 using Sandbox.Arm;
-using UnityEngine.InputSystem.HID;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
 {
-    [HarmonyPatch(typeof(SandboxArm))] internal class SandboxArmP
+    [HarmonyPatch(typeof(SandboxArm))] internal static class SandboxArmP
     {
         [HarmonyPrefix] [HarmonyPatch(nameof(SandboxArm.Update))] static bool Update(SandboxArm __instance)
         {

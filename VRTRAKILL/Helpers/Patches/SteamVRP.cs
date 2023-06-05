@@ -4,7 +4,7 @@ using Valve.VR;
 
 namespace Plugin.Helpers.Patches
 {
-    [HarmonyPatch] internal class SteamVRP
+    [HarmonyPatch] internal static class SteamVRP
     {
         [HarmonyPrefix] [HarmonyPatch(typeof(SteamVR_Camera), nameof(SteamVR_Camera.Expand))]
         static bool SVRCExpand(SteamVR_Camera __instance, Transform ____ears, Transform ____head)

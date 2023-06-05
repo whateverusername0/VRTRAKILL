@@ -4,7 +4,7 @@ using Valve.VR;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
 {
-    [HarmonyPatch(typeof(NewMovement))] internal class ControllerAdder
+    [HarmonyPatch(typeof(NewMovement))] internal static class ControllerAdder
     {
         [HarmonyPostfix] [HarmonyPatch(nameof(NewMovement.Start))] public static void AddHands(NewMovement __instance)
         {

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 {
-    [HarmonyPatch] internal class AimingP
+    [HarmonyPatch] internal static class AimingP
     {
         // Replaces all guns shooting raycasts directions with controller directions
 

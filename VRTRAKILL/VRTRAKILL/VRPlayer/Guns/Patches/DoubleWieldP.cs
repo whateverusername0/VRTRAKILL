@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 {
     // Dual wielding has this funny bug where it makes third, fourth guns far far away and it looks cool but no
-    [HarmonyPatch(typeof(DualWieldPickup))] internal class DoubleWieldP
+    [HarmonyPatch(typeof(DualWieldPickup))] internal static class DoubleWieldP
     {
         [HarmonyPrefix] [HarmonyPatch(nameof(DualWieldPickup.PickedUp))] static bool FixTransform(DualWieldPickup __instance)
         {

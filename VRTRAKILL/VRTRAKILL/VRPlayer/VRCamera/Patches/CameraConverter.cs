@@ -5,7 +5,7 @@ using UnityEngine.XR;
 using Valve.VR;
 namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
 {
-    [HarmonyPatch] static class CameraConverter
+    [HarmonyPatch] internal static class CameraConverter
     {
         // ty huskvr you pretty
         public static GameObject Container;

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 {
-    [HarmonyPatch] static class GunsP
+    [HarmonyPatch] internal static class GunsP
     {
         // Disables FRT (update method will no longer be called) and adds vrgunscontroller
         [HarmonyPrefix] [HarmonyPatch(typeof(RotateToFaceFrustumTarget), nameof(RotateToFaceFrustumTarget.Update))]

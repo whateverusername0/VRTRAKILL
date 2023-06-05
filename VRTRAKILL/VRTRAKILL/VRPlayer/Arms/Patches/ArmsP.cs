@@ -1,9 +1,8 @@
 ﻿using HarmonyLib;
-using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
 {
-    [HarmonyPatch] internal class ArmsP
+    [HarmonyPatch] internal static class ArmsP
     {
         [HarmonyPostfix] [HarmonyPatch(typeof(Punch), nameof(Punch.Start))] static void ConvertArms(Punch __instance)
         {

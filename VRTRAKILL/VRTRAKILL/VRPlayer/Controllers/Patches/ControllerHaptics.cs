@@ -1,12 +1,11 @@
 ﻿using HarmonyLib;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
 {
-    [HarmonyPatch(typeof(RumbleManager))] internal class ControllerHaptics
+    [HarmonyPatch(typeof(RumbleManager))] internal static class ControllerHaptics
     {
         static SteamVR_Action_Vibration HapticAction = SteamVR_Actions._default.Haptic;
 
