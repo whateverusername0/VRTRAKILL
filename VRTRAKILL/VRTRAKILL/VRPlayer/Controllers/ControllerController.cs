@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Plugin.Helpers;
 using Valve.VR;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Controllers
@@ -15,7 +14,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         private void SetupControllerPointer()
         {
             Pointer = new GameObject("Canvas Pointer");
-            Pointer.layer = (int)Vars.Layers.IgnoreRaycast;
+            Pointer.layer = (int)Vars.Layers.UI;
             Pointer.transform.parent = Offset.transform;
             Pointer.AddComponent<UI.UIInteraction>();
 
@@ -50,7 +49,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 
             if (LR.enabled)
             {
-                LR.SetPosition(0, transform.position);
+                LR.SetPosition(0, Offset.transform.position);
                 LR.SetPosition(1, EndPosition);
             }
         }
@@ -62,20 +61,18 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
             Offset.transform.localPosition = Vector3.zero;
             Offset.transform.localRotation = Quaternion.Euler(45, 0, 0);
 
-            if (Vars.Config.Controllers.CLines.DrawControllerLines)
-            {
-                SetupControllerPointer();
-                SetupControllerLines();
-            }
+            if (Vars.Config.Controllers.UseControllerUIInteraction) SetupControllerPointer();
+            if (Vars.Config.Controllers.CLines.DrawControllerLines) SetupControllerLines();
         }
         public void Update()
         {
-            RaycastHit Hit = transform.ForwardRaycast(DefaultLength);
-            EndPosition = transform.position + (Offset.transform.forward * DefaultLength);
-            if (Hit.collider != null) EndPosition = Hit.point;
+            RaycastHit Hit;
+            bool Raycast = Physics.Raycast(Offset.transform.position, Offset.transform.forward,
+                                           out Hit, float.PositiveInfinity, (int)Vars.Layers.UI);
+            EndPosition = Offset.transform.position + (Offset.transform.forward * DefaultLength);
+            if (Raycast) EndPosition = Hit.point;
 
-            if (Vars.Config.Controllers.CLines.DrawControllerLines)
-                DrawControllerLines();
+            if (Vars.Config.Controllers.CLines.DrawControllerLines) DrawControllerLines();
         }
 
         public static Vector3 ControllerOffset = new Vector3(0, 2.85f, 0);
