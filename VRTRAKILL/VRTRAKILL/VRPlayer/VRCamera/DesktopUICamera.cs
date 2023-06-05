@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
+namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
 {
     internal class DesktopUICamera : MonoBehaviour
     {
