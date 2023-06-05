@@ -179,6 +179,7 @@
     <Compile Include="Helpers\Libraries\WindowsInput\WindowsInputDeviceStateAdaptor.cs" />
     <Compile Include="Helpers\Libraries\WindowsInput\WindowsInputMessageDispatcher.cs" />
     <Compile Include="Helpers\Misc.cs" />
+    <Compile Include="Helpers\Patcher.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VRTRAKILL\Config\Settings\Controllers\ControllerLines.cs" />
@@ -191,7 +192,7 @@
     <Compile Include="VRTRAKILL\Config\Settings\View\DesktopView.cs" />
     <Compile Include="VRTRAKILL\Config\Settings\View\ViewS.cs" />
     <Compile Include="VRTRAKILL\Config\Settings\View\UI.cs" />
-    <Compile Include="VRTRAKILL\Patches\SteamVRP.cs" />
+    <Compile Include="Helpers\Patches\SteamVRP.cs" />
     <Compile Include="VRTRAKILL\UI\CrossHair\CrosshairController.cs" />
     <Compile Include="VRTRAKILL\UI\HUD\HideWhenMenuActive.cs" />
     <Compile Include="VRTRAKILL\UI\HUD\TransformP.cs" />
@@ -202,8 +203,9 @@
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\PunchP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\SandboxArmP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\VRArmsController.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Arms\VRIKPatches\Placeholder.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\ControllerController.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\Controllers\ControllerHaptics.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Controllers\Patches\ControllerHaptics.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\ArmController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\Patches\ControllerAdder.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\GunController.cs" />
@@ -222,8 +224,8 @@
     <Compile Include="VRTRAKILL\VRPlayer\Movement\Patches\PlatformerMovementP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Movement\VRPlayerController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Patches\PlayerP.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\DesktopCamera.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\DesktopUICamera.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRCamera\DesktopCamera.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRCamera\DesktopUICamera.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\VRCameraController.cs" />
     <Compile Include="VRTRAKILL\Config\ConfigJSON.cs" />
     <Compile Include="VRTRAKILL\Config\ConfigMaster.cs" />
