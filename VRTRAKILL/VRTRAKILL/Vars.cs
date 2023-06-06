@@ -66,9 +66,9 @@ namespace Plugin.VRTRAKILL
             || IsTeleportMenuPresent;
 
         public static GameObject VRCameraContainer
-            => VRPlayer.VRCamera.Patches.CameraConverter.Container;
+            => VRPlayer.VRCamera.Patches.CameraConverterP.Container;
         public static Camera DesktopCamera
-            => VRPlayer.VRCamera.Patches.CameraConverter.DesktopWorldCam;
+            => VRPlayer.VRCamera.Patches.CameraConverterP.DesktopWorldCam;
 
         public static GameObject LeftController
             => VRPlayer.Controllers.ArmController.Instance.Offset;
