@@ -232,13 +232,14 @@
     <Compile Include="VRTRAKILL\VRPlayer\Patches\PlayerP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\DesktopCamera.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\DesktopUICamera.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\4SCameraP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\VRCameraController.cs" />
     <Compile Include="VRTRAKILL\Config\ConfigJSON.cs" />
     <Compile Include="VRTRAKILL\Config\ConfigMaster.cs" />
     <Compile Include="VRTRAKILL\Config\InputMap.cs" />
     <Compile Include="VRTRAKILL\Input\VRInputVars.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\CameraConverter.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\CameraConverterP.cs" />
     <Compile Include="VRTRAKILL\UI\UIInteraction.cs" />
     <Compile Include="VRTRAKILL\UI\Patches\CanvasControllerP.cs" />
     <Compile Include="VRTRAKILL\UI\UICanvas.cs" />
