@@ -9,5 +9,6 @@ namespace Plugin.VRTRAKILL.Config.Settings.Input
         [JsonProperty("Snap turning angles")] public float SnapTurningAngles { get; set; } = 45;
         [JsonProperty("Smooth turning speed")] public float SmoothTurningSpeed { get; set; } = 300;
         [JsonProperty("Enable Controller Haptics (Vibration)")] public bool EnableControllerHaptics { get; set; } = true;
+        [JsonProperty("Enable hand gestures (unused)")] public bool EnableHandGestures { get; set; } = true;
     }
 }
