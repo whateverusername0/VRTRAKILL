@@ -5,7 +5,7 @@ namespace Plugin.VRTRAKILL.Config
 {
     public class ConfigJSON
     {
-        [JsonProperty("Game Settings")] public Settings.Game Game { get; set; }
+        [JsonProperty("Gameplay Settings")] public Settings.Game Game { get; set; }
         [JsonProperty("Input Settings")] public Settings.Input.InputS Input { get; set; }
         [JsonProperty("Controller Settings")] public Settings.Controllers.ControllerS Controllers { get; set; }
         [JsonProperty("View Settings")] public Settings.View.ViewS View { get; set; }
