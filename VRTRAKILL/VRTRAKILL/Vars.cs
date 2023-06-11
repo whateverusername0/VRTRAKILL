@@ -31,7 +31,7 @@ namespace Plugin.VRTRAKILL
         }
 
         public static Config.ConfigJSON Config
-            => VRTRAKILL.Config.ConfigJSON.Deserialize();
+            => VRTRAKILL.Config.ConfigJSON.GetConfig();
 
         public static bool IsMainMenu
             => GameObject.Find("Main Menu State") != null && GameObject.Find("Main Menu State").activeSelf == true;

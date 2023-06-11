@@ -10,12 +10,20 @@ namespace Plugin.VRTRAKILL.Config
         [JsonProperty("Controller Settings")] public Settings.Controllers.ControllerS Controllers { get; set; }
         [JsonProperty("View Settings")] public Settings.View.ViewS View { get; set; }
 
+        public static ConfigJSON Instance { get; private set; }
+
         public ConfigJSON()
         {
             Game = new Settings.Game();
             Input = new Settings.Input.InputS();
             Controllers = new Settings.Controllers.ControllerS();
             View = new Settings.View.ViewS();
+        }
+
+        public static ConfigJSON GetConfig()
+        {
+            if (Instance != null) return Instance;
+            else { Instance = Deserialize(); return Instance; }
         }
 
         public static ConfigJSON Deserialize()
