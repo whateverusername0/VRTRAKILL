@@ -209,7 +209,7 @@
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\Whiplash\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\Whiplash\HookArmP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\VRArmsController.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\Arms\VRIKPatches\A.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Arms\VRIK\Patches\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\ControllerController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\Patches\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\Patches\ControllerHaptics.cs" />
@@ -334,6 +334,8 @@
     </Content>
     <Content Include="DementiaDiary.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="VRTRAKILL\VRPlayer\Arms\Gestures\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
