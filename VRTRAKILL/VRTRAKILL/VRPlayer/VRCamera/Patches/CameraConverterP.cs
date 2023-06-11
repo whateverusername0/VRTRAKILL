@@ -33,7 +33,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
                 DesktopUICam.gameObject.AddComponent<DesktopUICamera>();
             }
         }
-        [HarmonyPostfix] [HarmonyPatch(typeof(NewMovement), nameof(NewMovement.Start))] static void ScaleObjects(NewMovement __instance)
+        [HarmonyPostfix] [HarmonyPatch(typeof(NewMovement), nameof(NewMovement.Start))] static void ScaleObjects()
         {
             // this should've been bigger, but i've changed my mind a thousand years ago and it works
             // this mod is officially considered my opus magnum spaghetti code and dumpster fire
@@ -59,17 +59,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
             GameObject.Find("Virtual Camera").SetActive(false);
         }
         [HarmonyPostfix] [HarmonyPatch(typeof(CameraController), nameof(CameraController.Start))] static void AddSVRCam(CameraController __instance)
-        {
-            __instance.gameObject.AddComponent<SteamVR_Camera>();
-        }
-        [HarmonyPrefix]
-        [HarmonyPatch(typeof(CameraController), nameof(CameraController.Update))]
-        [HarmonyPatch(typeof(CameraFrustumTargeter), nameof(CameraFrustumTargeter.Update))]
-        [HarmonyPatch(typeof(CameraFrustumTargeter), nameof(CameraFrustumTargeter.LateUpdate))]
-        static bool DoNothing()
-        {
-            // do nothing
-            return false;
-        }
+        { __instance.gameObject.AddComponent<SteamVR_Camera>(); }
     }
 }
