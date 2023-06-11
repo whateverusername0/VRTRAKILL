@@ -206,6 +206,8 @@
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\ArmsP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\PunchP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\SandboxArmP.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\Whiplash\A.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\Whiplash\HookArmP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\VRArmsController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\VRIKPatches\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\ControllerController.cs" />
