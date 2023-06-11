@@ -6,7 +6,7 @@ namespace Plugin.VRTRAKILL.Config
 {
     internal class ConfigMaster
     {
-        public static string ConfigPath = $"{Plugin.GamePath}\\BepInEx\\plugins\\VRTRAKILL_Config.json";
+        public static string ConfigPath = $"{Plugin.PluginPath}\\VRTRAKILL_Config.json";
 
         public static VirtualKeyCode?
             KShoot = null, KAltShoot = null, KPunch = null ,
