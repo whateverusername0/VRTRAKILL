@@ -24,7 +24,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
         [HarmonyPrefix] [HarmonyPatch(typeof(CameraController), nameof(CameraController.Start))] static void FirstPerson4SCam(CameraController __instance)
         {
             if (__instance.platformerCamera && Vars.Config.Game.EnableFP4SCam)
-            { Container.transform.localPosition = new Vector3(0, 0, 0); }
+                Container.transform.localPosition = new Vector3(0, 0, 0);
         }
     }
 }
