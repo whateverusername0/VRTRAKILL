@@ -48,10 +48,12 @@ namespace Plugin
             };
             if (Vars.Config.Input.InputSettings.EnableControllerHaptics)
                 Namespaces.Add(typeof(VRTRAKILL.VRPlayer.Controllers.Patches.A).Namespace);
-            if (Vars.Config.Input.InputSettings.EnableControllerShooting)
+            if (Vars.Config.Game.CBS.EnableControllerShooting)
                 Namespaces.Add(typeof(VRTRAKILL.VRPlayer.Guns.Patches.A).Namespace);
-            if (Vars.Config.Input.InputSettings.EnableMovementPunching)
+            if (Vars.Config.Game.MBP.EnableMovementPunching)
                 Namespaces.Add(typeof(VRTRAKILL.VRPlayer.Arms.Patches.A).Namespace);
+            if (!Vars.Config.Game.MBP.DisableControllerAiming)
+                Namespaces.Add(typeof(VRTRAKILL.VRPlayer.Arms.Patches.Whiplash.A).Namespace);
             if (Vars.Config.Controllers.HandS.EnableVRIK)
                 Namespaces.Add(typeof(VRTRAKILL.VRPlayer.Arms.VRIKPatches.A).Namespace);
 
