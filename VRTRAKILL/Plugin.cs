@@ -3,6 +3,7 @@ using BepInEx; using BepInEx.Logging;
 using Valve.VR;
 
 using Plugin.Helpers; using Plugin.VRTRAKILL;
+using System.Reflection;
 
 namespace Plugin
 {
@@ -16,8 +17,9 @@ namespace Plugin
                             PLUGIN_NAME = "VRTRAKILL",
                             PLUGIN_VERSION = "0.9";
 
-        public static string GameExePath = Process.GetCurrentProcess().MainModule.FileName,
-                             GamePath = Path.GetDirectoryName(GameExePath),
+        public static string PluginPath = Assembly.GetExecutingAssembly().CodeBase,
+                             FullGamePath = Process.GetCurrentProcess().MainModule.FileName,
+                             GamePath = Path.GetDirectoryName(FullGamePath),
                              HMDModel = string.Empty;
 
         public static Patcher MainPatcher, HapticsPatcher, GunsPatcher, ArmsPatcher, IKPatcher;
@@ -30,7 +32,6 @@ namespace Plugin
 
             VRTRAKILL.Config.ConfigMaster.Init();
             PatchStuff();
-            //new HarmonyLib.Harmony(PLUGIN_GUID).PatchAll();
             VRTRAKILL.UI.UIConverter.Init();
 
             InitializeSteamVR();
