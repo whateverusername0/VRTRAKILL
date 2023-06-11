@@ -181,6 +181,7 @@
     <Compile Include="Helpers\Misc.cs" />
     <Compile Include="Helpers\Patcher.cs" />
     <Compile Include="Helpers\Patches\A.cs" />
+    <Compile Include="Helpers\Patches\HelpersP.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VRTRAKILL\Config\Settings\Controllers\ControllerLines.cs" />
