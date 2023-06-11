@@ -9,7 +9,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
         Vector3 ArmSize, HandSize;
         public void Start()
         {
-            if (gameObject.HasComponent<Revolver>())
+            if (gameObject.HasComponent<Revolver>() || gameObject.HasComponent<FishingRodWeapon>())
             {
                 Arm = new Armature(transform, ArmType.Feedbacker); // * special case * //
                 ArmSize = new Vector3(1, 1, 1);

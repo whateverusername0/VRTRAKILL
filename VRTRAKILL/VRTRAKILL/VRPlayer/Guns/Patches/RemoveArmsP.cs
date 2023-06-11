@@ -10,21 +10,16 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         // Hack to leave hand only (it just makes other hitngs too small that you're unable to see them)
         // ( Animator reverting my scaledefs is a meanie thing to do :C )
 
-        [HarmonyPostfix] [HarmonyPatch(typeof(Revolver), nameof(Revolver.Start))]
-        static void RemoveRevolverArm(Revolver __instance)
+        [HarmonyPostfix] [HarmonyPatch(typeof(Revolver), nameof(Revolver.Start))] static void RemoveRevolverArm(Revolver __instance)
         {
             try { __instance.gameObject.AddComponent<Arms.ArmRemover>(); }
             catch (NullReferenceException) { Plugin.PLogger.LogWarning($"Revolver is null???"); }
         }
         [HarmonyPostfix] [HarmonyPatch(typeof(SandboxArm), nameof(SandboxArm.Awake))] static void RemoveSandboxArm(SandboxArm __instance)
         {
-            try
-            {
-                __instance.gameObject.AddComponent<Arms.ArmRemover>();
-            }
+            try { __instance.gameObject.AddComponent<Arms.ArmRemover>(); }
             catch (NullReferenceException) { Plugin.PLogger.LogWarning($"Sandbox arm is null???"); }
         }
-
         [HarmonyPostfix] [HarmonyPatch(typeof(Shotgun), nameof(Shotgun.Start))] static void RemoveShotgunArm(Shotgun __instance)
         {
             try
@@ -34,6 +29,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                 .gameObject.SetActive(false);
             }
             catch (NullReferenceException) { Plugin.PLogger.LogWarning("Shotgun is null???"); }
+        }
+        [HarmonyPostfix] [HarmonyPatch(typeof(FishingRodWeapon), nameof(FishingRodWeapon.Awake))] static void RemoveFRArm(FishingRodWeapon __instance)
+        {
+            try { __instance.gameObject.AddComponent<Arms.ArmRemover>(); }
+            catch (NullReferenceException) { Plugin.PLogger.LogWarning("Fishing rod is null???"); }
         }
     }
 }
