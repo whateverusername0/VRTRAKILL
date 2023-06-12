@@ -11,14 +11,14 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
         {
             if (MonoSingleton<OptionsManager>.Instance.paused) return false;
 
-            if (Vars.LCC.Speed >= .5f // detect fist speed instead of a button press
+            if (Vars.LCC.Speed >= 5f // detect fist speed instead of a button press
                 && __instance.ready && !__instance.shopping
-                && __instance.fc.fistCooldown <= 0f && __instance.fc.activated
+                && /* __instance.fc.fistCooldown <= 0f && */ __instance.fc.activated
                 && !GameStateManager.Instance.PlayerInputLocked)
             {
                 // no more scalable cooldown
                 //__instance.fc.weightCooldown += __instance.cooldownCost * 0.25f + __instance.fc.weightCooldown * __instance.cooldownCost * 0.1f;
-                __instance.fc.fistCooldown += .1f; //__instance.fc.weightCooldown;
+                //__instance.fc.fistCooldown += .1f; //__instance.fc.weightCooldown;
                 __instance.PunchStart();
                 __instance.holdingInput = true;
             }
@@ -63,8 +63,12 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
             return false;
         }
         // replace cc w/ lc
+        static float LastVolume;
         [HarmonyPrefix] [HarmonyPatch(nameof(Punch.ActiveStart))] static bool ActiveStart(Punch __instance)
         {
+            if (LastVolume != __instance.aud.volume && __instance.aud.volume != 0) LastVolume = __instance.aud.volume;
+            __instance.aud.volume = 0;
+
             if (__instance.ignoreDoublePunch) { __instance.ignoreDoublePunch = false; return false; }
             __instance.returnToOrigRot = false;
             __instance.hitSomething = false;
@@ -136,10 +140,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
                                                                          1f, 1, QueryTriggerInteraction.Collide))
                     {
                         float num = Vector3.Distance(Vars.LeftController.transform.position + Vars.LeftController.transform.forward, collider3.transform.position);
-                        Magnet magnet;
                         if (num >= 6f && num <= 12f
                             && Mathf.Abs((Vars.LeftController.transform.position + Vars.LeftController.transform.forward).y - collider3.transform.position.y)
-                                          <= 3f && collider3.TryGetComponent(out magnet) && magnet.sawblades.Count > 0)
+                                          <= 3f && collider3.TryGetComponent(out Magnet magnet) && magnet.sawblades.Count > 0)
                         {
                             float num2 = float.PositiveInfinity; int num3 = -1;
                             for (int j = magnet.sawblades.Count - 1; j >= 0; j--)
@@ -157,8 +160,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
                                     { num3 = j; num2 = num4; flag = true; }
                                 }
                             }
-                            Nail nail2;
-                            if (flag && magnet.sawblades[num3].TryGetComponent(out nail2))
+                            if (flag && magnet.sawblades[num3].TryGetComponent(out Nail nail2))
                             {
                                 nail2.transform.position = Vars.LeftController.transform.position + __instance.cc.transform.forward;
                                 if (nail2.stopped)
@@ -167,8 +169,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
                                     nail2.rb.velocity = (Punch.GetParryLookTarget() - nail2.transform.position).normalized * nail2.originalVelocity.magnitude;
                                 }
                                 else nail2.rb.velocity = (Punch.GetParryLookTarget() - nail2.transform.position).normalized * nail2.rb.velocity.magnitude;
-                                     nail2.punched = true;
-                                if (nail2.magnets.Count <= 0) break; 
+                                nail2.punched = true;
+                                if (nail2.magnets.Count <= 0) break;
                                 Magnet targetMagnet = nail2.GetTargetMagnet();
                                 if (Vector3.Distance(nail2.transform.position + nail2.rb.velocity.normalized, targetMagnet.transform.position)
                                                      > Vector3.Distance(nail2.transform.position, targetMagnet.transform.position))
@@ -242,8 +244,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
                     __instance.currentDustParticle.transform.forward = __instance.hit.normal;
                     Breakable component2 = __instance.hit.transform.gameObject.GetComponent<Breakable>();
                     if (component2 != null && !component2.precisionOnly && (component2.weak || __instance.type == FistType.Heavy)) component2.Break();
-                    Bleeder bleeder;
-                    if (__instance.hit.collider.gameObject.TryGetComponent<Bleeder>(out bleeder))
+                    if (__instance.hit.collider.gameObject.TryGetComponent<Bleeder>(out Bleeder bleeder))
                     {
                         if (__instance.type == FistType.Standard) bleeder.GetHit(__instance.hit.point, GoreType.Body);
                         else bleeder.GetHit(__instance.hit.point, GoreType.Head);
