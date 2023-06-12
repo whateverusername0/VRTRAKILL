@@ -11,14 +11,14 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
         {
             if (MonoSingleton<OptionsManager>.Instance.paused) return false;
 
-            if (Vars.LCC.Speed >= 1 // detect fist speed instead of a button press
+            if (Vars.LCC.Speed >= .5f // detect fist speed instead of a button press
                 && __instance.ready && !__instance.shopping
                 && __instance.fc.fistCooldown <= 0f && __instance.fc.activated
                 && !GameStateManager.Instance.PlayerInputLocked)
             {
                 // no more scalable cooldown
                 //__instance.fc.weightCooldown += __instance.cooldownCost * 0.25f + __instance.fc.weightCooldown * __instance.cooldownCost * 0.1f;
-                __instance.fc.fistCooldown += .5f; //__instance.fc.weightCooldown;
+                __instance.fc.fistCooldown += .1f; //__instance.fc.weightCooldown;
                 __instance.PunchStart();
                 __instance.holdingInput = true;
             }
@@ -188,9 +188,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
             }
             else if (Physics.Raycast(Vars.LeftController.transform.position, Vars.LeftController.transform.forward,
                                      out __instance.hit, 4f, __instance.deflectionLayerMask)
-                 || Physics.BoxCast(Vars.LeftController.transform.position, Vector3.one * 0.3f,
-                                    Vars.LeftController.transform.forward, out __instance.hit,
-                                    Vars.LeftController.transform.rotation, 4f, __instance.deflectionLayerMask))
+                  || Physics.BoxCast(Vars.LeftController.transform.position, Vector3.one * 0.3f,
+                                     Vars.LeftController.transform.forward, out __instance.hit,
+                                     Vars.LeftController.transform.rotation, 4f, __instance.deflectionLayerMask))
             {
                 MassSpear component = __instance.hit.transform.gameObject.GetComponent<MassSpear>();
                 if (component != null && component.hitPlayer)
