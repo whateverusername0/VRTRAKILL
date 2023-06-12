@@ -5,13 +5,13 @@ using UnityEngine.XR;
 using Valve.VR;
 namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
 {
-    [HarmonyPatch] internal static class CameraConverterP
+    [HarmonyPatch] internal class CameraConverterP
     {
         // ty huskvr you pretty
         public static GameObject Container;
         public static Camera DesktopWorldCam, DesktopUICam;
 
-        [HarmonyPrefix] [HarmonyPatch(typeof(NewMovement), nameof(NewMovement.Start))] static void Containerize(NewMovement __instance)
+        [HarmonyPrefix] [HarmonyPatch(typeof(NewMovement), nameof(NewMovement.Start))] static void Containerize()
         {
             Container = new GameObject("Main Camera Rig");
             Container.transform.parent = Vars.MainCamera.transform.parent;
