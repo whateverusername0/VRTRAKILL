@@ -202,6 +202,7 @@
     <Compile Include="VRTRAKILL\UI\Patches\CrosshairP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Armature.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\ArmRemover.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Arms\Gestures\GesturesController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\ArmsP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\PunchP.cs" />
@@ -210,6 +211,7 @@
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\Whiplash\HookArmP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\VRArmsController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\VRIK\Patches\A.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Arms\VRIK\VRIKController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\ControllerController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\Patches\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\Patches\ControllerHaptics.cs" />
@@ -235,7 +237,7 @@
     <Compile Include="VRTRAKILL\VRPlayer\Patches\PlayerP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\DesktopCamera.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\DesktopUICamera.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\4SCameraP.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\CrashBandicootCam.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\VRCameraController.cs" />
     <Compile Include="VRTRAKILL\Config\ConfigJSON.cs" />
@@ -335,7 +337,7 @@
     <Content Include="DementiaDiary.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="VRTRAKILL\VRPlayer\Arms\Gestures\" />
+    <Folder Include="Resources\Gestures\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
