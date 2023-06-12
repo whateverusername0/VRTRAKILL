@@ -17,11 +17,19 @@ namespace Plugin.VRTRAKILL.Config.Settings
             [JsonProperty("Enable movement-based punching")] public bool EnableMovementPunching { get; set; } = true;
             [JsonProperty("WHIPLASH: Disable controller aiming (enable camera aim)")] public bool DisableControllerAiming { get; set; } = false;
         }
+        [JsonProperty("Hand Gestures (unused)")] public HandGestures HG { get; set; } public class HandGestures
+        {
+            [JsonProperty("Enable hand gestures")] public bool EnableHandGestures { get; set; } = true;
+            [JsonProperty("Replace pointing gesture with a middle finger")] public bool EnableMiddleFinger { get; set; } = false;
+        }
 
         public Game()
         {
             CBS = new ControllerBasedShooting();
             MBP = new MovementBasedPunching();
+            HG = new HandGestures();
+
+            if (!MBP.EnableMovementPunching) HG.EnableHandGestures = false;
         }
     }
 }
