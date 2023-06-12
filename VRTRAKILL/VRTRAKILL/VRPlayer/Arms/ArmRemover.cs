@@ -23,14 +23,14 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
             }
             else if (gameObject.HasComponent<Punch>())
             {
-                ArmSize = new Vector3(.01f, .01f, .01f);
+                ArmSize = new Vector3(.001f, .001f, .001f);
                 switch (GetComponent<Punch>().type)
                 {
                     case FistType.Standard:
-                        HandSize = new Vector3(35, 35, 35);
+                        HandSize = new Vector3(350, 350, 350);
                         break;
                     case FistType.Heavy:
-                        HandSize = new Vector3(35, 35, 35);
+                        HandSize = new Vector3(350, 350, 350);
                         break;
                     case FistType.Spear: // unused in the game for now (i think??)
                         Destroy(GetComponent<ArmRemover>());
