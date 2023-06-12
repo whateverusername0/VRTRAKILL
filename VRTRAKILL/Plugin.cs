@@ -17,7 +17,7 @@ namespace Plugin
                             PLUGIN_NAME = "VRTRAKILL",
                             PLUGIN_VERSION = "0.9";
 
-        public static string PluginPath = Assembly.GetExecutingAssembly().CodeBase,
+        public static string PluginPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
                              FullGamePath = Process.GetCurrentProcess().MainModule.FileName,
                              GamePath = Path.GetDirectoryName(FullGamePath),
                              HMDModel = string.Empty;
