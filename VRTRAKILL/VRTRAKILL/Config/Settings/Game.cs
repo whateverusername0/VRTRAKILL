@@ -5,7 +5,7 @@ namespace Plugin.VRTRAKILL.Config.Settings
     public class Game
     {
         [JsonProperty("Do not override movement values")] public bool DoNotOverrideMoveValues { get; set; } = false;
-        [JsonProperty("Enable first-person 4-S camera")] public bool EnableFP4SCam { get; set; } = true;
+        [JsonProperty("Enable first-person 4-S camera (broken)")] public bool EnableFP4SCam { get; set; } = false;
 
         [JsonProperty("Controller-based shooting")] public ControllerBasedShooting CBS { get; set; } public class ControllerBasedShooting
         {
@@ -15,6 +15,7 @@ namespace Plugin.VRTRAKILL.Config.Settings
         [JsonProperty("Movement-based punching")] public MovementBasedPunching MBP { get; set; } public class MovementBasedPunching
         {
             [JsonProperty("Enable movement-based punching")] public bool EnableMovementPunching { get; set; } = true;
+            [JsonProperty("Required speed to punch (default: 7.5f)")] public float PunchingSpeed { get; set; } = 7.5f;
             [JsonProperty("WHIPLASH: Disable controller aiming (enable camera aim)")] public bool DisableControllerAiming { get; set; } = false;
         }
         [JsonProperty("Hand Gestures (unused)")] public HandGestures HG { get; set; } public class HandGestures
