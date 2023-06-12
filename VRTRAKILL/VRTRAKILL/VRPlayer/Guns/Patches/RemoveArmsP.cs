@@ -25,14 +25,19 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             try
             {
                 __instance.gameObject.transform.Find("Shotgun_New")
-                .gameObject.transform.Find("RightArm")
-                .gameObject.SetActive(false);
+                    .gameObject.transform.Find("RightArm")
+                    .gameObject.SetActive(false);
             }
             catch (NullReferenceException) { Plugin.PLogger.LogWarning("Shotgun is null???"); }
         }
         [HarmonyPostfix] [HarmonyPatch(typeof(FishingRodWeapon), nameof(FishingRodWeapon.Awake))] static void RemoveFRArm(FishingRodWeapon __instance)
         {
-            try { __instance.gameObject.AddComponent<Arms.ArmRemover>(); }
+            try
+            {
+                __instance.gameObject.transform.Find("MinosRevolver")
+                    .gameObject.transform.Find("RightArm")
+                    .gameObject.SetActive(false);
+            }
             catch (NullReferenceException) { Plugin.PLogger.LogWarning("Fishing rod is null???"); }
         }
     }

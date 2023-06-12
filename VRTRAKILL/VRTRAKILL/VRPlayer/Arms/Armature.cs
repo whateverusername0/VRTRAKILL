@@ -22,11 +22,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                 if (_Type == null)
                 {
                     if (GameObjectT.gameObject.GetComponent<Punch>().type == FistType.Standard)
-                        return ArmType.Feedbacker;
+                    { _Type = ArmType.Feedbacker; return ArmType.Feedbacker; }
                     else if (GameObjectT.gameObject.GetComponent<Punch>().type == FistType.Heavy)
-                        return ArmType.Knuckleblaster;
+                    { _Type = ArmType.Knuckleblaster; return ArmType.Knuckleblaster; }
                     else if (GameObjectT.gameObject.HasComponent<HookArm>())
-                        return ArmType.Whiplash;
+                    { _Type = ArmType.Whiplash; return ArmType.Whiplash; }
                     else return null;
                 }
                 else return _Type;
@@ -117,8 +117,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                         break;
                     }
                 case ArmType.Spear:
-                default:
-                    throw new NullReferenceException();
+                default: throw new NullReferenceException();
             }
         }
     }

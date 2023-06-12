@@ -81,6 +81,20 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             }
         }
 
+        [HarmonyPatch(typeof(FishingRodWeapon))] static class FishingRodWeaponT
+        {
+            static Vector3 Position = new Vector3(0, .25f, .3f);
+            static Vector3 Rotation = new Vector3(10, 90, 20);
+            static Vector3 Scale = new Vector3(.1f, .1f, .14f);
+
+            [HarmonyPostfix] [HarmonyPatch(nameof(FishingRodWeapon.Awake))] static void Retransform(FishingRodWeapon __instance)
+            {
+                __instance.gameObject.GetComponent<WeaponPos>().defaultPos = Position;
+                __instance.gameObject.GetComponent<WeaponPos>().defaultRot = Rotation;
+                __instance.gameObject.GetComponent<WeaponPos>().defaultScale = Scale;
+            }
+        }
+
         // Exclude middlepos (or middlepos big gun fix)
         [HarmonyPatch(typeof(WeaponPos), nameof(WeaponPos.CheckPosition))] static bool ExcludeMiddlePos(WeaponPos __instance)
         {

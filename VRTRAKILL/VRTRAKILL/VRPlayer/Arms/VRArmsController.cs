@@ -6,7 +6,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
     internal class VRArmsController : MonoBehaviour
     {
         public Armature Arm; public bool IsSandboxer = false;
-        public Vector3 OffsetPosition;
+        public Vector3 OffsetPosition = new Vector3(.145f, .09f, .04f); // hack to fix whiplash
         public Quaternion OffsetRotation = Quaternion.Euler(-90, 180, 0);
         public Vector3? HookOffsetPosition = null;
 
@@ -17,9 +17,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                 case ArmType.Feedbacker:
                     OffsetPosition = new Vector3(0, -.25f, -.5f); break;
                 case ArmType.Knuckleblaster:
-                    OffsetPosition = new Vector3(0, 0, -.0175f); break;
+                    OffsetPosition = new Vector3(0, -.01f, -.035f); break;
                 case ArmType.Whiplash:
-                    OffsetPosition = new Vector3(.145f, .08f, .05f);
+                    OffsetPosition = new Vector3(.145f, .09f, .04f);
                     HookOffsetPosition = new Vector3(0, 0, 0); break;
 
                 case ArmType.Spear:

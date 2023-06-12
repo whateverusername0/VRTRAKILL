@@ -31,7 +31,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 
                         RevolverBeam component2 = gameObject2.GetComponent<RevolverBeam>();
                         component2.sourceWeapon = __instance.gc.currentWeapon;
-                        component2.alternateStartPoint = Vars.RightController.transform.position; //__instance.gunBarrel.transform.position;
+                        component2.alternateStartPoint = Vars.RightController.transform.position;
                         component2.gunVariation = __instance.gunVariation;
 
                         if (__instance.anim.GetCurrentAnimatorStateInfo(0).IsName("PickUp"))
@@ -61,7 +61,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 
                         RevolverBeam component = gameObject.GetComponent<RevolverBeam>();
                         component.sourceWeapon = __instance.gc.currentWeapon;
-                        component.alternateStartPoint = Vars.RightController.transform.position; //__instance.gunBarrel.transform.position;
+                        component.alternateStartPoint = Vars.RightController.transform.position;
                         component.gunVariation = __instance.gunVariation;
 
                         if (__instance.gunVariation == 2)

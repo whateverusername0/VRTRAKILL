@@ -4,9 +4,9 @@ using Sandbox.Arm;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
 {
-    [HarmonyPatch(typeof(SandboxArm))] internal class SandboxArmP
+    [HarmonyPatch] internal class SandboxArmP
     {
-        [HarmonyPrefix] [HarmonyPatch(nameof(SandboxArm.Update))] static bool Update(SandboxArm __instance)
+        [HarmonyPrefix] [HarmonyPatch(typeof(SandboxArm), nameof(SandboxArm.Update))] static bool Update(SandboxArm __instance)
         {
             if (Time.timeScale == 0f)
             {
@@ -51,5 +51,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
             __instance.currentMode?.Update();
             return false;
         }
+        //[HarmonyPrefix] [HarmonyPatch(typeof(MoveMode), nameof(MoveMode.Update))] static bool Move(MoveMode __instance)
+        //{
+        //
+        //    return false;
+        //}
     }
 }

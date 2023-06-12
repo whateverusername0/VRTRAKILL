@@ -7,7 +7,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
     [HarmonyPatch] internal class CrashBandicootCam
     {
         public static GameObject Container;
-        [HarmonyPrefix] [HarmonyPatch(typeof(CameraController), nameof(CameraController.Start))] static void ConvertCamera(CameraController __instance)
+        /*[HarmonyPrefix] [HarmonyPatch(typeof(CameraController), nameof(CameraController.Start))]*/ static void ConvertCamera(CameraController __instance)
         {
             // Since the game doesn't want me to use (move/rotate/etc.) it's own camera
             // I'm making a new one (out of spite)
@@ -18,6 +18,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
                 Container.AddComponent<VRCameraController>();
 
                 Camera NewCam = Object.Instantiate(__instance.gameObject.GetComponent<Camera>(), Container.transform);
+                Object.Destroy(NewCam.gameObject.GetComponent<CameraController>());
                 NewCam.gameObject.name = "VRCamera";
                 NewCam.cameraType |= CameraType.VR;
                 NewCam.stereoTargetEye = StereoTargetEyeMask.Both;

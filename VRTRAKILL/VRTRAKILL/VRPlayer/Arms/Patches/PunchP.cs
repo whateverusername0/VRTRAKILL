@@ -6,17 +6,15 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
 {
     [HarmonyPatch(typeof(Punch))] internal class PunchP
     {
-        // replace dynamic cooldown w/ static one
         [HarmonyPrefix] [HarmonyPatch(nameof(Punch.Update))] static bool Update(Punch __instance)
         {
             if (MonoSingleton<OptionsManager>.Instance.paused) return false;
 
-            if (Vars.LCC.Speed >= 5f // detect fist speed instead of a button press
+            if (Vars.LCC.Speed >= Vars.Config.Game.MBP.PunchingSpeed // detect fist speed instead of a button press
                 && __instance.ready && !__instance.shopping
                 && /* __instance.fc.fistCooldown <= 0f && */ __instance.fc.activated
                 && !GameStateManager.Instance.PlayerInputLocked)
             {
-                // no more scalable cooldown
                 //__instance.fc.weightCooldown += __instance.cooldownCost * 0.25f + __instance.fc.weightCooldown * __instance.cooldownCost * 0.1f;
                 //__instance.fc.fistCooldown += .1f; //__instance.fc.weightCooldown;
                 __instance.PunchStart();
@@ -62,11 +60,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
             }
             return false;
         }
-        // replace cc w/ lc
-        static float LastVolume;
         [HarmonyPrefix] [HarmonyPatch(nameof(Punch.ActiveStart))] static bool ActiveStart(Punch __instance)
         {
-            if (LastVolume != __instance.aud.volume && __instance.aud.volume != 0) LastVolume = __instance.aud.volume;
             __instance.aud.volume = 0;
 
             if (__instance.ignoreDoublePunch) { __instance.ignoreDoublePunch = false; return false; }
