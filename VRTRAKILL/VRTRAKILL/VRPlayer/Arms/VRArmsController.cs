@@ -51,11 +51,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                 // Whiplash specific stuff
                 if (gameObject.HasComponent<HookArm>())
                     Arm.Wrist.GetChild(1).rotation = Vars.LeftController.transform.rotation * OffsetRotation;
-                if (HookOffsetPosition != null)
-                { }
+                if (HookOffsetPosition != null) {  }
 
                 // Thingamajig to disable other arms while grapplehooking
-                if (HookArm.Instance.state != 0 && !gameObject.HasComponent<HookArm>())
+                if (HookArm.Instance.model.activeSelf && !gameObject.HasComponent<HookArm>())
                     Arm.GameObjectT.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
                 else Arm.GameObjectT.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
             } catch {} // do nothing because i know that it 100% works :) (it gives out too many errors which zipbomb your storage)
