@@ -1,5 +1,5 @@
 # VRTRAKILL
-[Installation](https://github.com/whateverusername0/VRTRAKILL/README.md#installing-vrtrakill-in-less-than-10-steps) | [Common problems](https://github.com/whateverusername0/VRTRAKILL/README.md#common-issues) | [Default controller bindings](https://github.com/whateverusername0/VRTRAKILL/README.md#default-controller-bindings)
+[Installation](https://github.com/whateverusername0/VRTRAKILL#installing-vrtrakill-in-less-than-10-steps) | [Common problems](https://github.com/whateverusername0/VRTRAKILL#common-issues) | [Default controller bindings](https://github.com/whateverusername0/VRTRAKILL#default-controller-bindings)
 
 [![](https://img.shields.io/github/downloads/whateverusername0/VRTRAKILL/total)](https://github.com/whateverusername0/VRTRAKILL/releases)
 [![](https://img.shields.io/github/downloads/whateverusername0/VRTRAKILL/latest/total)](https://github.com/whateverusername0/VRTRAKILL/releases)
