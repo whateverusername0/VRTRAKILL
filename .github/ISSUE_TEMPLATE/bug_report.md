@@ -7,7 +7,7 @@ assignees: whateverusername0
 
 ---
 
-Before reporting anything, see [Common problems](https://github.com/whateverusername0/VRTRAKILL/edit/master/README.md#common-issues)  
+Before reporting anything, see [Common problems](https://github.com/whateverusername0/VRTRAKILL#common-issues)  
 Also expect meanie things to be said (https://github.com/whateverusername0/VRTRAKILL/issues/48) (lol)
 
 **Describe the bug**
