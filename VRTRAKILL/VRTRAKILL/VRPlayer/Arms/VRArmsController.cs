@@ -12,18 +12,21 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
 
         public void Start()
         {
-            switch (Arm.Type)
+            if (OffsetPosition == null || OffsetPosition == new Vector3(.145f, .09f, .04f))
             {
-                case ArmType.Feedbacker:
-                    OffsetPosition = new Vector3(0, -.25f, -.5f); break;
-                case ArmType.Knuckleblaster:
-                    OffsetPosition = new Vector3(0, -.01f, -.035f); break;
-                case ArmType.Whiplash:
-                    OffsetPosition = new Vector3(.145f, .09f, .04f);
-                    HookOffsetPosition = new Vector3(0, 0, 0); break;
+                switch (Arm.Type)
+                {
+                    case ArmType.Feedbacker:
+                        OffsetPosition = new Vector3(0, -.25f, -.5f); break;
+                    case ArmType.Knuckleblaster:
+                        OffsetPosition = new Vector3(0, -.01f, -.035f); break;
+                    case ArmType.Whiplash:
+                        OffsetPosition = new Vector3(.145f, .09f, .04f);
+                        HookOffsetPosition = new Vector3(0, 0, 0); break;
 
-                case ArmType.Spear:
-                default: Destroy(GetComponent<VRArmsController>()); break;
+                    case ArmType.Spear:
+                    default: Destroy(GetComponent<VRArmsController>()); break;
+                }
             }
         }
 
@@ -33,7 +36,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
             try
             {
                 // Update positions & rotations of the main gameobject + hand rotation (because animator stuff)
-                if (IsSandboxer)
+                if (IsSandboxer || gameObject.HasComponent<Revolver>())
                 {
                     Arm.GameObjectT.position = Vars.DominantHand.transform.position;
                     Arm.GameObjectT.rotation = Vars.DominantHand.transform.rotation;
@@ -54,7 +57,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                 if (HookOffsetPosition != null) {  }
 
                 // Thingamajig to disable other arms while grapplehooking
-                if (HookArm.Instance.model.activeSelf && !gameObject.HasComponent<HookArm>())
+                if (HookArm.Instance.model.activeSelf && !gameObject.HasComponent<HookArm>()
+                    && !IsSandboxer && !gameObject.HasComponent<Revolver>())
                     Arm.GameObjectT.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
                 else Arm.GameObjectT.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
             } catch {} // do nothing because i know that it 100% works :) (it gives out too many errors which zipbomb your storage)
