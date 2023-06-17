@@ -17,8 +17,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 
             [HarmonyPostfix] [HarmonyPatch(nameof(Revolver.Start))] static void Retransform(Revolver __instance)
             {
-                if (__instance.altVersion == true) { __instance.wpos.defaultPos = AltPosition; __instance.wpos.defaultScale = AltScale; }
-                else { __instance.wpos.defaultPos = Position; __instance.wpos.defaultScale = Scale; }
+                Arms.VRArmsController FBC = __instance.gameObject.AddComponent<Arms.VRArmsController>();
+                Arms.Armature A = new Arms.Armature(__instance.transform, Arms.ArmType.Feedbacker); FBC.Arm = A;
+                if (__instance.altVersion == true) { FBC.OffsetPosition = AltPosition; __instance.wpos.defaultScale = AltScale; }
+                else { FBC.OffsetPosition = Position; __instance.wpos.defaultScale = Scale; }
             }
         }
         [HarmonyPatch(typeof(Shotgun))] static class ShotgunT
