@@ -42,6 +42,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                 ArmSize = new Vector3(.01f, .01f, .01f);
                 HandSize = new Vector3(35, 35, 35);
             }
+
+            if (Vars.Config.Controllers.HandS.LeftHandMode)
+                HandSize.Scale(new Vector3(-1, 1, -1));
         }
         public void Update() { LateUpdate(); }
         public void LateUpdate()

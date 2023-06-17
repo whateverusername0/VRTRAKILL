@@ -36,11 +36,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches.Whiplash
                         MonoSingleton<FistControl>.Instance.transform.localRotation = Quaternion.identity;
                     }
                     __instance.lr.enabled = true;
-                    __instance.hookPoint = Vars.LeftController.transform.position;
+                    __instance.hookPoint = Vars.NonDominantHand.transform.position;
                     __instance.previousHookPoint = __instance.hookPoint;
                     if (__instance.targeter.CurrentTarget && __instance.targeter.IsAutoAimed)
-                        __instance.throwDirection = (__instance.targeter.CurrentTarget.bounds.center - Vars.LeftController.transform.position).normalized; 
-                    else __instance.throwDirection = Vars.LeftController.transform.forward; 
+                        __instance.throwDirection = (__instance.targeter.CurrentTarget.bounds.center - Vars.NonDominantHand.transform.position).normalized; 
+                    else __instance.throwDirection = Vars.NonDominantHand.transform.forward; 
                     __instance.returning = false;
                     if (__instance.caughtObjects.Count > 0)
                     {
@@ -86,7 +86,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches.Whiplash
                     __instance.lr.SetPosition(i, Vector3.Lerp(__instance.hand.position,
                                                               __instance.hookPoint,
                                                               (float)i / (float)__instance.lr.positionCount)
-                                                              + Vars.LeftController.transform.up * d *
+                                                              + Vars.NonDominantHand.transform.up * d *
                                                               __instance.throwWarp * (1f / (float)i));
                 }
                 __instance.lr.SetPosition(__instance.lr.positionCount - 1, __instance.hookPoint);

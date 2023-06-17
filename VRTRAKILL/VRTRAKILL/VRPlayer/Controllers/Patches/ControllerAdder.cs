@@ -13,9 +13,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
             // Left Hand
             GameObject LHGO = new GameObject("Left Controller") { layer = (int)Vars.Layers.IgnoreRaycast };
             LHGO.transform.parent = Vars.VRCameraContainer.transform;
-
             LHGO.AddComponent<ControllerController>();
-            LHGO.AddComponent<ArmController>();
 
             SteamVR_Behaviour_Pose LeftHand = LHGO.AddComponent<SteamVR_Behaviour_Pose>();
             LeftHand.onTransformUpdatedEvent += ControllerController.onTransformUpdatedH;
@@ -25,38 +23,35 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
             // Right Hand
             GameObject RHGO = new GameObject("Right Controller") { layer = (int)Vars.Layers.IgnoreRaycast };
             RHGO.transform.parent = Vars.VRCameraContainer.transform;
-
             RHGO.AddComponent<ControllerController>();
-            RHGO.AddComponent<GunController>();
 
             SteamVR_Behaviour_Pose RightHand = RHGO.AddComponent<SteamVR_Behaviour_Pose>();
             RightHand.onTransformUpdatedEvent += ControllerController.onTransformUpdatedH;
             RightHand.poseAction = SteamVR_Actions._default.RightPose;
             RightHand.inputSource = SteamVR_Input_Sources.RightHand;
 
-            if (Vars.IsMainMenu) try
-                {
-                    // Left Hand Model
-                    GameObject LHMGO = new GameObject("Model"); LHMGO.transform.parent = LHGO.transform;
-                    LHMGO.transform.localScale *= 2;
-                    SteamVR_RenderModel LHMGORM = LHMGO.AddComponent<SteamVR_RenderModel>();
-                    LHMGORM.createComponents = true;
+            // Left Hand Model
+            GameObject LHMGO = new GameObject("Model"); LHMGO.transform.parent = LHGO.transform;
+            LHMGO.transform.localScale *= 2;
+            SteamVR_RenderModel LHMGORM = LHMGO.AddComponent<SteamVR_RenderModel>();
+            LHMGORM.createComponents = true;
 
-                    // Right Hand Model
-                    GameObject RHMGO = new GameObject("Model"); RHMGO.transform.parent = RHGO.transform;
-                    RHMGO.transform.localScale *= 2;
-                    SteamVR_RenderModel RHMGORM = RHMGO.AddComponent<SteamVR_RenderModel>();
-                    RHMGORM.createComponents = true;
-                } catch {}
-            else try
-                {
-                    for (int i = 0; i < Vars.VRCameraContainer.transform.childCount; i++)
-                    {
-                        // painful to look at
-                        if (Helpers.Misc.HasComponent<SteamVR_RenderModel>(Vars.VRCameraContainer.transform.GetChild(i).GetChild(0).gameObject))
-                            GameObject.Destroy(Vars.VRCameraContainer.transform.GetChild(i).GetChild(0).GetComponent<SteamVR_RenderModel>());
-                    } 
-                } catch {}
+            // Right Hand Model
+            GameObject RHMGO = new GameObject("Model"); RHMGO.transform.parent = RHGO.transform;
+            RHMGO.transform.localScale *= 2;
+            SteamVR_RenderModel RHMGORM = RHMGO.AddComponent<SteamVR_RenderModel>();
+            RHMGORM.createComponents = true;
+
+            if (Vars.Config.Controllers.HandS.LeftHandMode)
+            {
+                RHGO.AddComponent<ArmController>();
+                LHGO.AddComponent<GunController>();
+            }
+            else
+            {
+                LHGO.AddComponent<ArmController>();
+                RHGO.AddComponent<GunController>();
+            }
 
             __instance.gameObject.SetActive(true);
         }

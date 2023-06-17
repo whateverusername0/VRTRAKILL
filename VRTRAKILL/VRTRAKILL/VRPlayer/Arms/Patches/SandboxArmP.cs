@@ -41,8 +41,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
             if (__instance.currentMode != null && __instance.currentMode.Raycast)
             {
                 __instance.hitSomething =
-                    Physics.Raycast(Vars.RightController.transform.position,
-                                    Vars.RightController.transform.forward,
+                    Physics.Raycast(Vars.DominantHand.transform.position,
+                                    Vars.DominantHand.transform.forward,
                                     out __instance.hit,
                                     75f,
                                     __instance.raycastLayers);

@@ -6,8 +6,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns
     {
         public void Update()
         {
-            transform.position = Vars.RightController.transform.position;
-            transform.rotation = Vars.RightController.transform.rotation;
+            transform.position = Vars.DominantHand.transform.position;
+            transform.rotation = Vars.DominantHand.transform.rotation;
         }
     }
 }

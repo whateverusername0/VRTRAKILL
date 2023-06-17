@@ -23,15 +23,15 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                     {
                         GameObject gameObject2 =
                             Object.Instantiate(__instance.revolverBeam,
-                                               Vars.RightController.transform.position,
-                                               Vars.RightController.transform.rotation);
+                                               Vars.DominantHand.transform.position,
+                                               Vars.DominantHand.transform.rotation);
 
                         if ((bool)__instance.targeter.CurrentTarget && __instance.targeter.IsAutoAimed)
                             gameObject2.transform.LookAt(__instance.targeter.CurrentTarget.bounds.center);
 
                         RevolverBeam component2 = gameObject2.GetComponent<RevolverBeam>();
                         component2.sourceWeapon = __instance.gc.currentWeapon;
-                        component2.alternateStartPoint = Vars.RightController.transform.position;
+                        component2.alternateStartPoint = Vars.DominantHand.transform.position;
                         component2.gunVariation = __instance.gunVariation;
 
                         if (__instance.anim.GetCurrentAnimatorStateInfo(0).IsName("PickUp"))
@@ -53,15 +53,15 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                     {
                         GameObject gameObject =
                             Object.Instantiate(__instance.revolverBeamSuper,
-                                               Vars.RightController.transform.position,
-                                               Vars.RightController.transform.rotation);
+                                               Vars.DominantHand.transform.position,
+                                               Vars.DominantHand.transform.rotation);
 
                         if ((bool)__instance.targeter.CurrentTarget && __instance.targeter.IsAutoAimed)
                             gameObject.transform.LookAt(__instance.targeter.CurrentTarget.bounds.center);
 
                         RevolverBeam component = gameObject.GetComponent<RevolverBeam>();
                         component.sourceWeapon = __instance.gc.currentWeapon;
-                        component.alternateStartPoint = Vars.RightController.transform.position;
+                        component.alternateStartPoint = Vars.DominantHand.transform.position;
                         component.gunVariation = __instance.gunVariation;
 
                         if (__instance.gunVariation == 2)
@@ -127,16 +127,21 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 
             if ((bool)__instance.punch) __instance.punch.CoinFlip();
 
-            GameObject obj = Object.Instantiate(__instance.coin,
-                                                Vars.RightController.transform.position + Vars.RightController.transform.up * -0.5f,
-                                                Vars.RightController.transform.rotation);
+            GameObject obj;
+            if (Vars.Config.Game.MBP.EnableMovementPunching && Vars.Config.Game.MBP.EnableHandCoinThrow)
+                obj = Object.Instantiate(__instance.coin,
+                                         Vars.NonDominantHand.transform.position + Vars.NonDominantHand.transform.up * -.5f,
+                                         Vars.NonDominantHand.transform.rotation);
+            else obj = Object.Instantiate(__instance.coin,
+                                          Vars.DominantHand.transform.position + Vars.DominantHand.transform.up * -0.5f,
+                                          Vars.DominantHand.transform.rotation);
 
             obj.GetComponent<Coin>().sourceWeapon = __instance.gc.currentWeapon;
 
             MonoSingleton<RumbleManager>.Instance.SetVibration("rumble.coin_toss");
 
             Vector3 zero = Vector3.zero;
-            obj.GetComponent<Rigidbody>().AddForce(Vars.RightController.transform.forward * 20f + Vector3.up * 15f
+            obj.GetComponent<Rigidbody>().AddForce(Vars.DominantHand.transform.forward * 20f + Vector3.up * 15f
                                                    + (MonoSingleton<NewMovement>.Instance.ridingRocket
                                                       ? MonoSingleton<NewMovement>.Instance.ridingRocket.rb.velocity
                                                       : MonoSingleton<NewMovement>.Instance.rb.velocity) + zero,
@@ -176,12 +181,12 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                 }
             }
             MonoSingleton<CameraController>.Instance.StopShake();
-            Vector3 direction = Vars.RightController.transform.forward;
+            Vector3 direction = Vars.DominantHand.transform.forward;
             if (__instance.targeter.CurrentTarget && __instance.targeter.IsAutoAimed)
             {
-                direction = __instance.targeter.CurrentTarget.bounds.center - Vars.RightController.transform.position;
+                direction = __instance.targeter.CurrentTarget.bounds.center - Vars.DominantHand.transform.position;
             }
-            __instance.rhits = Physics.RaycastAll(Vars.RightController.transform.position, direction, 4f, __instance.shotgunZoneLayerMask);
+            __instance.rhits = Physics.RaycastAll(Vars.DominantHand.transform.position, direction, 4f, __instance.shotgunZoneLayerMask);
             if (__instance.rhits.Length != 0)
             {
                 foreach (RaycastHit raycastHit in __instance.rhits)
@@ -211,7 +216,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             {
                 for (int j = 0; j < num; j++)
                 {
-                    GameObject gameObject = Object.Instantiate<GameObject>(__instance.bullet, Vars.RightController.transform.position, Vars.RightController.transform.rotation);
+                    GameObject gameObject = Object.Instantiate<GameObject>(__instance.bullet, Vars.DominantHand.transform.position, Vars.DominantHand.transform.rotation);
                     Projectile component = gameObject.GetComponent<Projectile>();
                     component.weaponType = "shotgun" + __instance.variation;
                     component.sourceWeapon = __instance.gc.currentWeapon;
@@ -250,13 +255,13 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             }
             else
             {
-                Vector3 position = Vars.RightController.transform.position + Vars.RightController.transform.forward;
+                Vector3 position = Vars.DominantHand.transform.position + Vars.DominantHand.transform.forward;
                 RaycastHit raycastHit2;
-                if (Physics.Raycast(Vars.RightController.transform.position, Vars.RightController.transform.forward, out raycastHit2, 1f, LayerMaskDefaults.Get(LMD.Environment)))
+                if (Physics.Raycast(Vars.DominantHand.transform.position, Vars.DominantHand.transform.forward, out raycastHit2, 1f, LayerMaskDefaults.Get(LMD.Environment)))
                 {
-                    position = raycastHit2.point - Vars.RightController.transform.forward * 0.1f;
+                    position = raycastHit2.point - Vars.DominantHand.transform.forward * 0.1f;
                 }
-                GameObject gameObject2 = Object.Instantiate<GameObject>(__instance.explosion, position, Vars.RightController.transform.rotation);
+                GameObject gameObject2 = Object.Instantiate<GameObject>(__instance.explosion, position, Vars.DominantHand.transform.rotation);
                 if (__instance.targeter.CurrentTarget && __instance.targeter.IsAutoAimed)
                 {
                     gameObject2.transform.LookAt(__instance.targeter.CurrentTarget.bounds.center);
@@ -334,10 +339,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                 {
                     __instance.grenadeForce = Mathf.MoveTowards(__instance.grenadeForce, 60f, Time.deltaTime * 60f);
                 }
-                __instance.grenadeVector = new Vector3(Vars.RightController.transform.forward.x, Vars.RightController.transform.forward.y, Vars.RightController.transform.forward.z);
+                __instance.grenadeVector = new Vector3(Vars.DominantHand.transform.forward.x, Vars.DominantHand.transform.forward.y, Vars.DominantHand.transform.forward.z);
                 if (__instance.targeter.CurrentTarget && __instance.targeter.IsAutoAimed)
                 {
-                    __instance.grenadeVector = Vector3.Normalize(__instance.targeter.CurrentTarget.bounds.center - Vars.RightController.transform.position);
+                    __instance.grenadeVector = Vector3.Normalize(__instance.targeter.CurrentTarget.bounds.center - Vars.DominantHand.transform.position);
                 }
                 __instance.grenadeVector += new Vector3(0f, __instance.grenadeForce * 0.002f, 0f);
                 __instance.transform.localPosition = new Vector3(__instance.wpos.currentDefault.x + Random.Range(__instance.grenadeForce / 3000f * -1f, __instance.grenadeForce / 3000f), __instance.wpos.currentDefault.y + Random.Range(__instance.grenadeForce / 3000f * -1f, __instance.grenadeForce / 3000f), __instance.wpos.currentDefault.z + Random.Range(__instance.grenadeForce / 3000f * -1f, __instance.grenadeForce / 3000f));
@@ -386,7 +391,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             __instance.transform.localPosition = __instance.wpos.currentDefault;
             foreach (Transform transform in __instance.shootPoints)
             {
-                GameObject gameObject = Object.Instantiate<GameObject>(__instance.grenade, Vars.RightController.transform.position + Vars.RightController.transform.forward * 0.5f, Random.rotation);
+                GameObject gameObject = Object.Instantiate<GameObject>(__instance.grenade, Vars.DominantHand.transform.position + Vars.DominantHand.transform.forward * 0.5f, Random.rotation);
                 gameObject.GetComponentInChildren<Grenade>().sourceWeapon = __instance.gc.currentWeapon;
                 gameObject.GetComponent<Collider>();
                 gameObject.GetComponent<Rigidbody>().AddForce(__instance.grenadeVector * (__instance.grenadeForce + 10f), ForceMode.VelocityChange);
@@ -504,24 +509,24 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             GameObject gameObject2;
             if (__instance.burnOut)
             {
-                gameObject2 = Object.Instantiate<GameObject>(__instance.heatedNail, Vars.RightController.transform.position + Vars.RightController.transform.forward, __instance.transform.rotation);
+                gameObject2 = Object.Instantiate<GameObject>(__instance.heatedNail, Vars.DominantHand.transform.position + Vars.DominantHand.transform.forward, __instance.transform.rotation);
             }
             else
             {
-                gameObject2 = Object.Instantiate<GameObject>(__instance.nail, Vars.RightController.transform.position + Vars.RightController.transform.forward, __instance.transform.rotation);
+                gameObject2 = Object.Instantiate<GameObject>(__instance.nail, Vars.DominantHand.transform.position + Vars.DominantHand.transform.forward, __instance.transform.rotation);
             }
             if (__instance.altVersion && __instance.variation == 0 && __instance.heatSinks >= 1f)
             {
                 __instance.heatUp = Mathf.MoveTowards(__instance.heatUp, 1f, 0.125f);
             }
-            gameObject2.transform.forward = Vars.RightController.transform.forward;
-            if (Physics.Raycast(Vars.RightController.transform.position, Vars.RightController.transform.forward, 1f, LayerMaskDefaults.Get(LMD.Environment)))
+            gameObject2.transform.forward = Vars.DominantHand.transform.forward;
+            if (Physics.Raycast(Vars.DominantHand.transform.position, Vars.DominantHand.transform.forward, 1f, LayerMaskDefaults.Get(LMD.Environment)))
             {
-                gameObject2.transform.position = Vars.RightController.transform.position;
+                gameObject2.transform.position = Vars.DominantHand.transform.position;
             }
             if (__instance.targeter.CurrentTarget && __instance.targeter.IsAutoAimed)
             {
-                gameObject2.transform.position = Vars.RightController.transform.position + (__instance.targeter.CurrentTarget.bounds.center - Vars.RightController.transform.position).normalized;
+                gameObject2.transform.position = Vars.DominantHand.transform.position + (__instance.targeter.CurrentTarget.bounds.center - Vars.DominantHand.transform.position).normalized;
                 gameObject2.transform.LookAt(__instance.targeter.CurrentTarget.bounds.center);
             }
             gameObject2.transform.Rotate(Random.Range(-__instance.currentSpread / 3f, __instance.currentSpread / 3f), Random.Range(-__instance.currentSpread / 3f, __instance.currentSpread / 3f), Random.Range(-__instance.currentSpread / 3f, __instance.currentSpread / 3f));
@@ -581,15 +586,15 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             }
             Object.Instantiate<GameObject>(__instance.muzzleFlash2, __instance.shootPoints[__instance.barrelNum].transform);
             __instance.currentSpread = 0f;
-            GameObject gameObject = Object.Instantiate<GameObject>(__instance.heatedNail, Vars.RightController.transform.position + Vars.RightController.transform.forward, __instance.transform.rotation);
-            gameObject.transform.forward = Vars.RightController.transform.forward;
-            if (Physics.Raycast(Vars.RightController.transform.position, Vars.RightController.transform.forward, 1f, LayerMaskDefaults.Get(LMD.Environment)))
+            GameObject gameObject = Object.Instantiate<GameObject>(__instance.heatedNail, Vars.DominantHand.transform.position + Vars.DominantHand.transform.forward, __instance.transform.rotation);
+            gameObject.transform.forward = Vars.DominantHand.transform.forward;
+            if (Physics.Raycast(Vars.DominantHand.transform.position, Vars.DominantHand.transform.forward, 1f, LayerMaskDefaults.Get(LMD.Environment)))
             {
-                gameObject.transform.position = Vars.RightController.transform.position;
+                gameObject.transform.position = Vars.DominantHand.transform.position;
             }
             if (__instance.targeter.CurrentTarget && __instance.targeter.IsAutoAimed)
             {
-                gameObject.transform.position = Vars.RightController.transform.position + (__instance.targeter.CurrentTarget.bounds.center - Vars.RightController.transform.position).normalized;
+                gameObject.transform.position = Vars.DominantHand.transform.position + (__instance.targeter.CurrentTarget.bounds.center - Vars.DominantHand.transform.position).normalized;
                 gameObject.transform.LookAt(__instance.targeter.CurrentTarget.bounds.center);
             }
             Rigidbody rigidbody;
@@ -615,7 +620,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         // Railgun (railing enemies in ultrakill :O)
         [HarmonyPrefix] [HarmonyPatch(typeof(Railcannon), nameof(Railcannon.Shoot))] static bool RailgunA(Railcannon __instance)
         {
-            GameObject gameObject = Object.Instantiate<GameObject>(__instance.beam, Vars.RightController.transform.position, Vars.RightController.transform.rotation);
+            GameObject gameObject = Object.Instantiate<GameObject>(__instance.beam, Vars.DominantHand.transform.position, Vars.DominantHand.transform.rotation);
             if (__instance.targeter.CurrentTarget && __instance.targeter.IsAutoAimed)
             {
                 gameObject.transform.LookAt(__instance.targeter.CurrentTarget.bounds.center);
@@ -655,10 +660,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                 __instance.chargeSound.Stop();
                 __instance.cbCharge = 0f;
             }
-            Object.Instantiate<GameObject>(__instance.muzzleFlash, __instance.shootPoint.position, Vars.RightController.transform.rotation);
+            Object.Instantiate<GameObject>(__instance.muzzleFlash, __instance.shootPoint.position, Vars.DominantHand.transform.rotation);
             __instance.anim.SetTrigger("Fire");
             __instance.cooldown = __instance.rateOfFire;
-            GameObject gameObject = Object.Instantiate<GameObject>(__instance.rocket, Vars.RightController.transform.position, Vars.RightController.transform.rotation);
+            GameObject gameObject = Object.Instantiate<GameObject>(__instance.rocket, Vars.DominantHand.transform.position, Vars.DominantHand.transform.rotation);
             if (MonoSingleton<CameraFrustumTargeter>.Instance.CurrentTarget && MonoSingleton<CameraFrustumTargeter>.Instance.IsAutoAimed)
             {
                 gameObject.transform.LookAt(MonoSingleton<CameraFrustumTargeter>.Instance.CurrentTarget.bounds.center);
@@ -681,10 +686,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                 __instance.aud.pitch = Random.Range(0.6f, 0.8f);
                 __instance.aud.Play();
             }
-            Object.Instantiate<GameObject>(__instance.muzzleFlash, __instance.shootPoint.position, Vars.RightController.transform.rotation);
+            Object.Instantiate<GameObject>(__instance.muzzleFlash, __instance.shootPoint.position, Vars.DominantHand.transform.rotation);
             __instance.anim.SetTrigger("Fire");
             __instance.cooldown = __instance.rateOfFire;
-            Rigidbody rigidbody = Object.Instantiate<Rigidbody>(__instance.cannonBall, Vars.RightController.transform.position + Vars.RightController.transform.forward, Vars.RightController.transform.rotation);
+            Rigidbody rigidbody = Object.Instantiate<Rigidbody>(__instance.cannonBall, Vars.DominantHand.transform.position + Vars.DominantHand.transform.forward, Vars.DominantHand.transform.rotation);
             if (MonoSingleton<CameraFrustumTargeter>.Instance.CurrentTarget && MonoSingleton<CameraFrustumTargeter>.Instance.IsAutoAimed)
             {
                 rigidbody.transform.LookAt(MonoSingleton<CameraFrustumTargeter>.Instance.CurrentTarget.bounds.center);

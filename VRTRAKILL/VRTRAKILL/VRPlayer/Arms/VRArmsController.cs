@@ -35,22 +35,22 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                 // Update positions & rotations of the main gameobject + hand rotation (because animator stuff)
                 if (IsSandboxer)
                 {
-                    Arm.GameObjectT.position = Vars.RightController.transform.position;
-                    Arm.GameObjectT.rotation = Vars.RightController.transform.rotation;
+                    Arm.GameObjectT.position = Vars.DominantHand.transform.position;
+                    Arm.GameObjectT.rotation = Vars.DominantHand.transform.rotation;
                     Arm.Root.localPosition = OffsetPosition;
-                    Arm.Hand.rotation = Vars.RightController.transform.rotation * OffsetRotation;
+                    Arm.Hand.rotation = Vars.DominantHand.transform.rotation * OffsetRotation;
                 }
                 else
                 {
-                    Arm.GameObjectT.position = Vars.LeftController.transform.position;
-                    Arm.GameObjectT.rotation = Vars.LeftController.transform.rotation;
+                    Arm.GameObjectT.position = Vars.NonDominantHand.transform.position;
+                    Arm.GameObjectT.rotation = Vars.NonDominantHand.transform.rotation;
                     Arm.Root.localPosition = OffsetPosition;
-                    Arm.Hand.rotation = Vars.LeftController.transform.rotation * OffsetRotation;
+                    Arm.Hand.rotation = Vars.NonDominantHand.transform.rotation * OffsetRotation;
                 }
 
                 // Whiplash specific stuff
                 if (gameObject.HasComponent<HookArm>())
-                    Arm.Wrist.GetChild(1).rotation = Vars.LeftController.transform.rotation * OffsetRotation;
+                    Arm.Wrist.GetChild(1).rotation = Vars.NonDominantHand.transform.rotation * OffsetRotation;
                 if (HookOffsetPosition != null) {  }
 
                 // Thingamajig to disable other arms while grapplehooking
