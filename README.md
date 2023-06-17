@@ -1,4 +1,6 @@
 # VRTRAKILL
+[Installation](https://github.com/whateverusername0/VRTRAKILL#installing-vrtrakill-in-less-than-10-steps) | [Common problems](https://github.com/whateverusername0/VRTRAKILL#common-issues) | [Default controller bindings](https://github.com/whateverusername0/VRTRAKILL#default-controller-bindings)
+
 [![](https://img.shields.io/github/downloads/whateverusername0/VRTRAKILL/total)](https://github.com/whateverusername0/VRTRAKILL/releases)
 [![](https://img.shields.io/github/downloads/whateverusername0/VRTRAKILL/latest/total)](https://github.com/whateverusername0/VRTRAKILL/releases)
 [![](https://img.shields.io/github/v/release/whateverusername0/VRTRAKILL)](https://github.com/whateverusername0/VRTRAKILL/releases/latest)
@@ -15,15 +17,13 @@ Also it does not require any other mods to function
 ### What works right now:
 - Camera, HUD, Crosshair
 - Full movement (jump, dash, slide, slam storage, rocket ride, etc.)
-- Semi-full controller tracking (aiming / shooting)
-- Controller haptics (vibrations) (Rumble-based)
-- Punching using camera and controller buttons
+- Full controller tracking (aiming / shooting, punching)
+- Controller haptics (vibrations) (Rumble-based) (kinda broken)
 - Weapon swap, weapon scroll using joystick, weapon wheel
-- UI Interaction (some of menus might be broken)
+- UI Interaction (some of the menus might be broken)
 ### Planned stuff:
-**0.x (0.10)**: Full arm movement/tracking (punch irl to punch ingame)  
-**0.x (0.11)**: Hand gestures (thumbs up, point, etc.)  
-**0.x (0.12)**: VR body (arms, legs, etc.)  
+**0.x**: Hand gestures (thumbs up, point, etc.)  
+**0.x**: VR body (arms, legs, etc.)  
 **1.0**: Full release (when i think that nothing more can be done)
 
 ## Requirements
@@ -63,3 +63,19 @@ The text version:
 7. Open the solution folder in file explorer and go to /bin
 8. Copy the built dll to CopyToGameFolder/ULTRAKILL/BepInEx/plugins/VRTRAKILL
 9. Enjoy
+
+## Common issues:
+1. Your gun is too big (or "twice the size of your head"):  
+  - Solution: If you have SteamVR world size tweaked - disable it. If you set your weapon position to the middle - set it to the right. Else open an issue, because this shouldn't be happening :(  
+2. On Valve Index you move too slowly and can't jump normally:  
+  - Solution: In config there's an option "Do not override movement values". Enable it and launch the game again and see if it worked.
+3. Awful/missing HTC Vive, Index, etc. controller bindings:
+  - Since I don't have those controllers you gotta make your own. It's pretty simple, there's no cryptic words in actions' names :)
+  - Also if you wanna help you can always send me your controller bindings via discord or whatever and I'll set them as defaults so no more people have to suffer.
+
+## Default controller bindings:
+### Oculus Touch (proudly made in MSPaint):
+![](GithubStuff/DCB_Touch.png)
+
+### HTC Vive - Missing
+### Valve Index - Missing
