@@ -10,17 +10,19 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         // This took a LOT of time to get those offsets right and my eyes hurt a bit
         [HarmonyPatch(typeof(Revolver))] static class RevolverT
         {
-            static Vector3 Position = new Vector3(.05f, -.1f, .6f),
-                           AltPosition = new Vector3(.05f, -.075f, .6f);
-            static Vector3 Scale = new Vector3(.1f, .1f, .1f),
-                           AltScale = new Vector3(.1f, .1f, .1f);
+            static Vector3 Position = new Vector3(-2, -1, 11),
+                           AltPosition = new Vector3(-1.5f, 0, 9.75f),
+                           Scale = new Vector3(.1f, .1f, .1f);
 
             [HarmonyPostfix] [HarmonyPatch(nameof(Revolver.Start))] static void Retransform(Revolver __instance)
             {
                 Arms.VRArmsController FBC = __instance.gameObject.AddComponent<Arms.VRArmsController>();
                 Arms.Armature A = new Arms.Armature(__instance.transform, Arms.ArmType.Feedbacker); FBC.Arm = A;
-                if (__instance.altVersion == true) { FBC.OffsetPosition = AltPosition; __instance.wpos.defaultScale = AltScale; }
-                else { FBC.OffsetPosition = Position; __instance.wpos.defaultScale = Scale; }
+                if (Vars.Config.Controllers.HandS.LeftHandMode) FBC.OffsetRotation = Quaternion.Euler(0, 90, 90);
+                else FBC.OffsetRotation = Quaternion.Euler(0, -90, -90);
+                if (__instance.altVersion == true) FBC.OffsetPosition = AltPosition;
+                else FBC.OffsetPosition = Position;
+                __instance.wpos.defaultScale = Scale;
             }
         }
         [HarmonyPatch(typeof(Shotgun))] static class ShotgunT
