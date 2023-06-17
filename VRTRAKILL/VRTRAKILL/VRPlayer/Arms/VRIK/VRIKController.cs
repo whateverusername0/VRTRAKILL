@@ -2,8 +2,8 @@
 
 namespace Plugin.VRTRAKILL.VRPlayer.Arms.VRIK
 {
-    internal class VRIKController : MonoSingleton<VRIKController>
+    internal class VRIKController : MonoBehaviour
     {
-
+        public Armature Arm;
     }
 }

@@ -26,5 +26,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Gestures
                 default: Destroy(GetComponent<GesturesController>()); break;
             }
         }
+
+        // Since I don't know how to use the animator and import custom assets, i'm gonna set everything manually
+        public void LateUpdate()
+        {
+
+        }
     }
 }
