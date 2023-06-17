@@ -6,6 +6,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
     // lol the name
     internal class ControllerController : MonoBehaviour
     {
+        private SteamVR_RenderModel[] SVRRM;
         public GameObject Offset = new GameObject("Offset");
         private GameObject Pointer;
         LineRenderer LR; Vector3 EndPosition;
@@ -66,6 +67,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 
         public void Start()
         {
+            SVRRM = GetComponentsInChildren<SteamVR_RenderModel>();
             Offset.layer = (int)Vars.Layers.IgnoreRaycast;
             Offset.transform.parent = this.transform;
             Offset.transform.localPosition = Vector3.zero;
@@ -76,9 +78,12 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         }
         public void Update()
         {
-            RaycastHit Hit;
+            if (Vars.IsMainMenu || Vars.IsIntro || Vars.IsRankingScreenPresent)
+                foreach (SteamVR_RenderModel SVRRRM in SVRRM) try { SVRRRM.gameObject.SetActive(true); } catch {}
+            else foreach (SteamVR_RenderModel SVRRRM in SVRRM) try { SVRRRM.gameObject.SetActive(false); } catch {}
+
             bool Raycast = Physics.Raycast(Offset.transform.position, Offset.transform.forward,
-                                           out Hit, float.PositiveInfinity, (int)Vars.Layers.UI);
+                                           out RaycastHit Hit, float.PositiveInfinity, (int)Vars.Layers.UI);
             EndPosition = Offset.transform.position + (Offset.transform.forward * DefaultLength);
             if (Raycast) EndPosition = Hit.point;
 
