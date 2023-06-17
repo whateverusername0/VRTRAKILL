@@ -17,6 +17,7 @@ namespace Plugin.VRTRAKILL.Config.Settings
             [JsonProperty("Enable movement-based punching")] public bool EnableMovementPunching { get; set; } = true;
             [JsonProperty("Required speed to punch (default: 7.5f)")] public float PunchingSpeed { get; set; } = 7.5f;
             [JsonProperty("WHIPLASH: Disable controller aiming (enable camera aim)")] public bool DisableControllerAiming { get; set; } = false;
+            [JsonProperty("Enable coin throwing from hand (not from the gun)")] public bool EnableHandCoinThrow { get; set; } = true;
         }
         [JsonProperty("Hand Gestures (unused)")] public HandGestures HG { get; set; } public class HandGestures
         {
