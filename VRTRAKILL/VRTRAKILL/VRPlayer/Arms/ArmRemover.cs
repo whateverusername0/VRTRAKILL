@@ -6,9 +6,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
     internal class ArmRemover : MonoBehaviour
     {
         public Armature Arm;
-        Vector3 ArmSize, HandSize;
+        Vector3 ArmSize, HandSize, GOSize;
         public void Start()
         {
+            GOSize = transform.localScale;
             if (gameObject.HasComponent<Revolver>() || gameObject.HasComponent<FishingRodWeapon>())
             {
                 Arm = new Armature(transform, ArmType.Feedbacker); // * special case * //
@@ -44,13 +45,14 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
             }
 
             if (Vars.Config.Controllers.HandS.LeftHandMode)
-                HandSize.Scale(new Vector3(-1, 1, -1));
+                GOSize = new Vector3(GOSize.x * -1, GOSize.y, GOSize.z);
         }
         public void Update() { LateUpdate(); }
         public void LateUpdate()
         {
             if (Arm != null)
             {
+                Arm.GameObjectT.localScale = GOSize;
                 Arm.Root.localScale = ArmSize;
                 Arm.Hand.localScale = HandSize;
             }
