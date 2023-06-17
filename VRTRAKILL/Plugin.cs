@@ -15,7 +15,7 @@ namespace Plugin
     {
         public const string PLUGIN_GUID = "com.whateverusername0.vrtrakill",
                             PLUGIN_NAME = "VRTRAKILL",
-                            PLUGIN_VERSION = "0.9";
+                            PLUGIN_VERSION = "0.11";
 
         public static string PluginPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
                              FullGamePath = Process.GetCurrentProcess().MainModule.FileName,
