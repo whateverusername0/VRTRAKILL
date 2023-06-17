@@ -11,8 +11,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
         {
             if (!Vars.Config.Game.DoNotOverrideMoveValues)
             {
-                __instance.jumpPower = __instance.jumpPower / 1.5f;
-                __instance.wallJumpPower = __instance.wallJumpPower / 1.5f;
+                __instance.jumpPower = __instance.jumpPower / 2;
+                __instance.wallJumpPower = __instance.wallJumpPower / 2;
             }
         }
 
@@ -21,7 +21,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
             Vector2 vector = Vector2.zero;
             if (__instance.activated)
             {
-                vector = Input.VRInputVars.MoveVector / .2f;
+                vector = Input.VRInputVars.MoveVector / 2;
 
                 __instance.cc.movementHor = vector.x;
                 __instance.cc.movementVer = vector.y;

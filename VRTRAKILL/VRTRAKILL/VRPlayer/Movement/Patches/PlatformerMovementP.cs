@@ -15,7 +15,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
             Vector2 vector = Vector2.zero;
             if (__instance.activated)
             {
-                vector = Input.VRInputVars.MoveVector / .2f;
+                vector = Input.VRInputVars.MoveVector / 2;
                 __instance.movementDirection = Vector3.ClampMagnitude(vector.x * Vector3.right + vector.y * Vector3.forward, 1f);
                 __instance.movementDirection = Quaternion.Euler(0f, __instance.platformerCamera.rotation.eulerAngles.y, 0f) * __instance.movementDirection;
             }
