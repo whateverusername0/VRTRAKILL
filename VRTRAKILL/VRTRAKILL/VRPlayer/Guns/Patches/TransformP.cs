@@ -96,7 +96,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         }
 
         // Exclude middlepos (or middlepos big gun fix)
-        [HarmonyPatch(typeof(WeaponPos), nameof(WeaponPos.CheckPosition))] static bool ExcludeMiddlePos(WeaponPos __instance)
+        [HarmonyPrefix] [HarmonyPatch(typeof(WeaponPos), nameof(WeaponPos.CheckPosition))] static bool ExcludeMiddlePos(WeaponPos __instance)
         {
             if (!__instance.ready)
             {

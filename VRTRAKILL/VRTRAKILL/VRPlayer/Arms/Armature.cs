@@ -51,23 +51,20 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
         public class Finger : Transform
         {
             public Transform Base { get; set; }
-            public Transform Bridge { get; }
+            public Transform Bridge => Base.GetChild(0);
             public Transform Tip { get; }
-            public Transform TipEnd { get; }
+            public Transform TipEnd => Tip.GetChild(0);
 
             public Finger(Transform BaseD, bool IsThumb = false)
             {
                 Base = BaseD;
-                Bridge = Base.GetChild(0);
                 if (IsThumb) Tip = Base.GetChild(0);
                 else Tip = Bridge.GetChild(0);
-                TipEnd = Tip.GetChild(0);
             }
         }
         public Armature(Transform T, ArmType? Type = null, bool IsSandboxer = false)
         {
-            GameObjectT = T;
-
+            GameObjectT = T; _Type = Type;
             switch (Type)
             {
                 case ArmType.Feedbacker:
