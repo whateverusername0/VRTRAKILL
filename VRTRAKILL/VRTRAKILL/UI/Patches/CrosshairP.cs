@@ -9,9 +9,7 @@ namespace Plugin.VRTRAKILL.UI.Patches
         [HarmonyPrefix] [HarmonyPatch(nameof(Crosshair.Start))] static void SetCrosshair(Crosshair __instance)
         {
             // set controller
-            if (Vars.Config.Controllers.HandS.LeftHandMode)
-                __instance.transform.parent = Vars.LeftController.transform;
-            else __instance.transform.parent = Vars.RightController.transform;
+            __instance.transform.parent = Vars.DominantHand.transform;
 
             Canvas C = __instance.gameObject.AddComponent<Canvas>();
             C.worldCamera = Vars.VRUICamera;
