@@ -14,8 +14,15 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             __instance.shootReady = false;
             __instance.shootCharge = 0f;
 
+            Vector3 AltShootPos;
             if (__instance.altVersion)
+            {
                 MonoSingleton<WeaponCharges>.Instance.revaltpickupcharges[__instance.gunVariation] = 2f;
+                AltShootPos = Vars.DominantHand.transform.position + (Vars.DominantHand.transform.forward * 1.25f) + new Vector3(0, .25f, 0);
+            }
+            else
+                AltShootPos = Vars.DominantHand.transform.position + Vars.DominantHand.transform.forward + new Vector3(0, .15f, 0);
+
 
             switch (shotType)
             {
@@ -25,13 +32,14 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                             Object.Instantiate(__instance.revolverBeam,
                                                Vars.DominantHand.transform.position,
                                                Vars.DominantHand.transform.rotation);
+                        gameObject2.transform.localScale *= .5f;
 
                         if ((bool)__instance.targeter.CurrentTarget && __instance.targeter.IsAutoAimed)
                             gameObject2.transform.LookAt(__instance.targeter.CurrentTarget.bounds.center);
 
                         RevolverBeam component2 = gameObject2.GetComponent<RevolverBeam>();
                         component2.sourceWeapon = __instance.gc.currentWeapon;
-                        component2.alternateStartPoint = Vars.DominantHand.transform.position;
+                        component2.alternateStartPoint = AltShootPos;
                         component2.gunVariation = __instance.gunVariation;
 
                         if (__instance.anim.GetCurrentAnimatorStateInfo(0).IsName("PickUp"))
@@ -55,13 +63,14 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                             Object.Instantiate(__instance.revolverBeamSuper,
                                                Vars.DominantHand.transform.position,
                                                Vars.DominantHand.transform.rotation);
+                        gameObject.transform.localScale *= .5f;
 
                         if ((bool)__instance.targeter.CurrentTarget && __instance.targeter.IsAutoAimed)
                             gameObject.transform.LookAt(__instance.targeter.CurrentTarget.bounds.center);
 
                         RevolverBeam component = gameObject.GetComponent<RevolverBeam>();
                         component.sourceWeapon = __instance.gc.currentWeapon;
-                        component.alternateStartPoint = Vars.DominantHand.transform.position;
+                        component.alternateStartPoint = AltShootPos;
                         component.gunVariation = __instance.gunVariation;
 
                         if (__instance.gunVariation == 2)
