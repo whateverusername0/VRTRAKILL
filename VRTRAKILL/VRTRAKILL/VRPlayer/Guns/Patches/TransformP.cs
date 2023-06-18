@@ -77,7 +77,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         
         [HarmonyPatch(typeof(Sandbox.Arm.SandboxArm))] static class SandboxArmT
         {
-            static Vector3 Scale = new Vector3(-.3f, .3f, .3f);
+            static Vector3 Scale = new Vector3(-.275f, .275f, .275f);
 
             [HarmonyPostfix] [HarmonyPatch(nameof(Sandbox.Arm.SandboxArm.Awake))] static void Retransform(Sandbox.Arm.SandboxArm __instance)
             {
