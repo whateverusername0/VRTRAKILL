@@ -15,14 +15,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             __instance.shootCharge = 0f;
 
             Vector3 AltShootPos;
-            if (__instance.altVersion)
-            {
-                MonoSingleton<WeaponCharges>.Instance.revaltpickupcharges[__instance.gunVariation] = 2f;
-                AltShootPos = Vars.DominantHand.transform.position + (Vars.DominantHand.transform.forward * 1.25f) + new Vector3(0, .25f, 0);
-            }
-            else
-                AltShootPos = Vars.DominantHand.transform.position + Vars.DominantHand.transform.forward + new Vector3(0, .15f, 0);
-
+            if (__instance.altVersion) { MonoSingleton<WeaponCharges>.Instance.revaltpickupcharges[__instance.gunVariation] = 2f; }
+            AltShootPos = Vars.DominantHand.transform.position + (Vars.DominantHand.transform.forward * 1.25f) + new Vector3(0, .035f, 0);
 
             switch (shotType)
             {
