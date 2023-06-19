@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Arms
 {
-    internal class VRArmsController : MonoBehaviour
+    internal class VRArmsController : MonoSingleton<VRArmsController>
     {
         public Armature Arm; public bool IsSandboxer = false;
         public Vector3 OffsetPosition = new Vector3(.145f, .09f, .04f); // hack to fix whiplash

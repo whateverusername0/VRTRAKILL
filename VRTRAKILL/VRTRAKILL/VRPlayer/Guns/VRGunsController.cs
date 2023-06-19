@@ -2,7 +2,7 @@
 
 namespace Plugin.VRTRAKILL.VRPlayer.Guns
 {
-    internal class VRGunsController : MonoBehaviour
+    internal class VRGunsController : MonoSingleton<VRGunsController>
     {
         public void Update()
         {
