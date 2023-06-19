@@ -10,6 +10,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
         public Quaternion OffsetRotation = Quaternion.Euler(-90, 180, 0);
         public Vector3? HookOffsetPosition = null;
 
+        public Vector3 LastPosition, Velocity;
+
         public void Start()
         {
             if (OffsetPosition == null || OffsetPosition == new Vector3(.145f, .09f, .04f))
@@ -28,9 +30,18 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                     default: Destroy(GetComponent<VRArmsController>()); break;
                 }
             }
+
+            LastPosition = transform.position;
         }
 
-        public void Update() { LateUpdate(); }
+        public void Update()
+        {
+            if (LastPosition != transform.position)
+            {
+                Velocity = ((transform.position - LastPosition) / Time.deltaTime).normalized;
+                LastPosition = transform.position;
+            }
+        }
         public void LateUpdate()
         {
             try
