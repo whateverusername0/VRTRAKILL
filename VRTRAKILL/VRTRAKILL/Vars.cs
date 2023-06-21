@@ -34,7 +34,9 @@ namespace Plugin.VRTRAKILL
             => VRTRAKILL.Config.ConfigJSON.GetConfig();
 
         public static bool IsMainMenu
-            => GameObject.Find("Main Menu State") != null && GameObject.Find("Main Menu State").activeSelf == true;
+            => GameObject.Find("Main Menu State") != null
+            && GameObject.Find("Main Menu State") != null
+            && GameObject.Find("Main Menu State").activeSelf == true;
         public static bool IsPaused
             => OptionsManager.Instance != null && OptionsManager.Instance.paused;
         public static bool IsRankingScreenPresent
@@ -44,7 +46,9 @@ namespace Plugin.VRTRAKILL
         public static bool IsPlayerUsingShop
             => FistControl.Instance != null && FistControl.Instance.shopping;
         public static bool IsIntro
-            => GameObject.Find("Intro") != null && GameObject.Find("Intro").GetComponent<IntroTextController>().enabled;
+            => GameObject.Find("Intro") != null
+            && GameObject.Find("Intro").GetComponent<IntroTextController>() != null
+            && GameObject.Find("Intro").GetComponent<IntroTextController>().enabled;
 
         public static bool IsSpawnMenuPresent
             => SpawnMenu.Instance != null && SpawnMenu.Instance.isActiveAndEnabled;
