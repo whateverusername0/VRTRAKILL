@@ -5,12 +5,14 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
 {
     internal class VRArmsController : MonoSingleton<VRArmsController>
     {
-        public Armature Arm; public bool IsSandboxer = false;
+        public Armature Arm; 
         public Vector3 OffsetPosition = new Vector3(.145f, .09f, .04f); // hack to fix whiplash
         public Quaternion OffsetRotation = Quaternion.Euler(-90, 180, 0);
         public Vector3? HookOffsetPosition = null;
 
         public Vector3 LastPosition, Velocity;
+
+        public bool IsSandboxer = false, IsRevolver = false;
 
         public void Start()
         {
@@ -47,12 +49,23 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
             try
             {
                 // Update positions & rotations of the main gameobject + hand rotation (because animator stuff)
-                if (IsSandboxer || gameObject.HasComponent<Revolver>())
+                if (IsSandboxer)
                 {
                     Arm.GameObjectT.position = Vars.DominantHand.transform.position;
                     Arm.GameObjectT.rotation = Vars.DominantHand.transform.rotation;
                     Arm.Root.localPosition = OffsetPosition;
                     Arm.Hand.rotation = Vars.DominantHand.transform.rotation * OffsetRotation;
+                }
+                else if (IsRevolver)
+                {
+                    Arm.GameObjectT.position = Vars.DominantHand.transform.position;
+                    Arm.GameObjectT.rotation = Quaternion.Euler(new Vector3(Vars.DominantHand.transform.rotation.x * Arm.GameObjectT.rotation.x,
+                                                                            Vars.DominantHand.transform.rotation.y,
+                                                                            Vars.DominantHand.transform.rotation.z));
+                    Arm.Root.localPosition = OffsetPosition;
+                    Arm.Hand.rotation = Quaternion.Euler(new Vector3(Vars.DominantHand.transform.rotation.x * Arm.Hand.rotation.x,
+                                                                     Vars.DominantHand.transform.rotation.y,
+                                                                     Vars.DominantHand.transform.rotation.z)) * OffsetRotation;
                 }
                 else
                 {
