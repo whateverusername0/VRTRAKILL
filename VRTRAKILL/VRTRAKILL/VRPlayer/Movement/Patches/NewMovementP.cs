@@ -7,13 +7,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
     // change move vector to joystick axis, fix dash, jump, etc.
     [HarmonyPatch(typeof(NewMovement))] internal static class NewMovementP
     {
-        static float Markiplier = 1;
-
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Start))] static void Start(NewMovement __instance)
         {
-            if (!Vars.Config.Game.DoNotOverrideMoveValues) Markiplier = 1.85f;
-            __instance.jumpPower /= Markiplier;
-            __instance.wallJumpPower /= Markiplier;
+            
+            __instance.jumpPower *= Vars.Config.Game.MovementMultiplier;
+            __instance.wallJumpPower *= Vars.Config.Game.MovementMultiplier;
         }
 
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Update))] static bool Update(NewMovement __instance)
@@ -21,7 +19,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
             Vector2 vector = Vector2.zero;
             if (__instance.activated)
             {
-                vector = Input.VRInputVars.MoveVector / Markiplier;
+                vector = Input.VRInputVars.MoveVector * Vars.Config.Game.MovementMultiplier;
 
                 __instance.cc.movementHor = vector.x;
                 __instance.cc.movementVer = vector.y;
@@ -397,16 +395,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                     __instance.boostLeft = 100f;
                     __instance.boost = true;
 
-                    if (!Vars.Config.Game.DoNotOverrideMoveValues)
-                    {
-                        __instance.dodgeDirection = __instance.movementDirection / 1.5f;
-                        if (__instance.dodgeDirection == Vector3.zero) __instance.dodgeDirection = __instance.transform.forward / 1.5f;
-                    }
-                    else
-                    {
-                        __instance.dodgeDirection = __instance.movementDirection;
-                        if (__instance.dodgeDirection == Vector3.zero) __instance.dodgeDirection = __instance.transform.forward;
-                    }
+                    __instance.dodgeDirection = __instance.movementDirection * Vars.Config.Game.MovementMultiplier;
+                    if (__instance.dodgeDirection == Vector3.zero)
+                        __instance.dodgeDirection = __instance.transform.forward * Vars.Config.Game.MovementMultiplier;
 
                     Quaternion identity = Quaternion.identity;
                     identity.SetLookRotation(__instance.dodgeDirection * -1f);
