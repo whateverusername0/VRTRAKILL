@@ -6,6 +6,14 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
 {
     [HarmonyPatch(typeof(Punch))] internal class PunchP
     {
+        static Vector3 Thing
+        {
+            get
+            {
+                if (Vars.Config.Game.MBP.EnablePunchingVelocity) return Thing;
+                else return Vars.NonDominantHand.transform.forward;
+            }
+        }
         [HarmonyPrefix] [HarmonyPatch(nameof(Punch.Update))] static bool Update(Punch __instance)
         {
             if (MonoSingleton<OptionsManager>.Instance.paused) return false;
@@ -82,12 +90,12 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
                     }
                 }
                 if ((!Physics.Raycast(Vars.NonDominantHand.transform.position,
-                                      VRArmsController.Instance.Velocity,
+                                      Thing,
                                       out __instance.hit, 4f,
                                       __instance.deflectionLayerMask)
                     && !Physics.BoxCast(Vars.NonDominantHand.transform.position,
                                         Vector3.one * 0.3f,
-                                        VRArmsController.Instance.Velocity,
+                                        Thing,
                                         out __instance.hit,
                                         Vars.NonDominantHand.transform.rotation, 4f,
                                         __instance.deflectionLayerMask))
@@ -108,7 +116,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
                         }
                     }
                 }
-                Collider[] array3 = Physics.OverlapSphere(Vars.NonDominantHand.transform.position + VRArmsController.Instance.Velocity * 3f,
+                Collider[] array3 = Physics.OverlapSphere(Vars.NonDominantHand.transform.position + Thing * 3f,
                                                           3f, __instance.deflectionLayerMask, QueryTriggerInteraction.Collide);
                 bool flag = false;
                 foreach (Collider collider2 in array3)
@@ -130,12 +138,12 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
                 }
                 if (!flag)
                 {
-                    foreach (Collider collider3 in Physics.OverlapSphere(Vars.NonDominantHand.transform.position + VRArmsController.Instance.Velocity,
+                    foreach (Collider collider3 in Physics.OverlapSphere(Vars.NonDominantHand.transform.position + Thing,
                                                                          1f, 1, QueryTriggerInteraction.Collide))
                     {
-                        float num = Vector3.Distance(Vars.NonDominantHand.transform.position + VRArmsController.Instance.Velocity, collider3.transform.position);
+                        float num = Vector3.Distance(Vars.NonDominantHand.transform.position + Thing, collider3.transform.position);
                         if (num >= 6f && num <= 12f
-                            && Mathf.Abs((Vars.NonDominantHand.transform.position + VRArmsController.Instance.Velocity).y - collider3.transform.position.y)
+                            && Mathf.Abs((Vars.NonDominantHand.transform.position + Thing).y - collider3.transform.position.y)
                                           <= 3f && collider3.TryGetComponent(out Magnet magnet) && magnet.sawblades.Count > 0)
                         {
                             float num2 = float.PositiveInfinity; int num3 = -1;
@@ -182,10 +190,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
                     __instance.hitSomething = true;
                 }
             }
-            else if (Physics.Raycast(Vars.NonDominantHand.transform.position, VRArmsController.Instance.Velocity,
+            else if (Physics.Raycast(Vars.NonDominantHand.transform.position, Thing,
                                      out __instance.hit, 4f, __instance.deflectionLayerMask)
                   || Physics.BoxCast(Vars.NonDominantHand.transform.position, Vector3.one * 0.3f,
-                                     VRArmsController.Instance.Velocity, out __instance.hit,
+                                     Thing, out __instance.hit,
                                      Vars.NonDominantHand.transform.rotation, 4f, __instance.deflectionLayerMask))
             {
                 MassSpear component = __instance.hit.transform.gameObject.GetComponent<MassSpear>();
@@ -206,9 +214,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
                 foreach (Collider collider4 in array4) __instance.PunchSuccess(Vars.NonDominantHand.transform.position, collider4.transform);
                 __instance.hitSomething = true;
             }
-            else if (Physics.Raycast(Vars.NonDominantHand.transform.position, VRArmsController.Instance.Velocity,
+            else if (Physics.Raycast(Vars.NonDominantHand.transform.position, Thing,
                                      out __instance.hit, 4f, __instance.ignoreEnemyTrigger, QueryTriggerInteraction.Collide)
-                 || Physics.SphereCast(Vars.NonDominantHand.transform.position, 1f, VRArmsController.Instance.Velocity,
+                 || Physics.SphereCast(Vars.NonDominantHand.transform.position, 1f, Thing,
                                        out __instance.hit, 4f, __instance.ignoreEnemyTrigger, QueryTriggerInteraction.Collide))
             {
                 bool flag3 = false;
@@ -226,7 +234,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
                     __instance.AltHit(collider5.transform);
                 }
             }
-            else if (Physics.Raycast(Vars.NonDominantHand.transform.position, VRArmsController.Instance.Velocity, out __instance.hit, 4f, __instance.environmentMask))
+            else if (Physics.Raycast(Vars.NonDominantHand.transform.position, Thing, out __instance.hit, 4f, __instance.environmentMask))
             {
                 __instance.AltHit(__instance.hit.transform);
                 if (!__instance.hitSomething && (__instance.hit.transform.gameObject.layer == 8 || __instance.hit.transform.gameObject.layer == 24))
@@ -266,9 +274,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
             {
                 __instance.holdingInput = false;
                 __instance.anim.SetTrigger("PunchBlast");
-                Vector3 position = Vars.NonDominantHand.transform.position + VRArmsController.Instance.Velocity * 2f;
-                if (Physics.Raycast(Vars.NonDominantHand.transform.position, VRArmsController.Instance.Velocity, out var hitInfo,
-                                    2f, LayerMaskDefaults.Get(LMD.EnvironmentAndBigEnemies))) position = hitInfo.point - VRArmsController.Instance.Velocity * 0.1f;
+                Vector3 position = Vars.NonDominantHand.transform.position + Vars.NonDominantHand.transform.forward * 2f;
+                if (Physics.Raycast(Vars.NonDominantHand.transform.position, Vars.NonDominantHand.transform.forward, out var hitInfo,
+                                    2f, LayerMaskDefaults.Get(LMD.EnvironmentAndBigEnemies))) position = hitInfo.point - Thing * 0.1f;
 
                 Object.Instantiate(__instance.blastWave, position, Vars.NonDominantHand.transform.rotation);
             }
