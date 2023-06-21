@@ -8,7 +8,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
         public Armature Arm; 
         public Vector3 OffsetPosition = new Vector3(.145f, .09f, .04f); // hack to fix whiplash
         public Quaternion OffsetRotation = Quaternion.Euler(-90, 180, 0);
-        public Vector3? HookOffsetPosition = null;
 
         public Vector3 LastPosition, Velocity;
 
@@ -25,8 +24,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                     case ArmType.Knuckleblaster:
                         OffsetPosition = new Vector3(0, -.01f, -.035f); break;
                     case ArmType.Whiplash:
-                        OffsetPosition = new Vector3(.145f, .09f, .04f);
-                        HookOffsetPosition = new Vector3(0, 0, 0); break;
+                        OffsetPosition = new Vector3(.145f, .09f, .04f); break;
 
                     case ArmType.Spear:
                     default: Destroy(GetComponent<VRArmsController>()); break;
@@ -36,11 +34,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
             LastPosition = transform.position;
         }
 
-        public void Update()
+        public void FixedUpdate()
         {
             if (LastPosition != transform.position)
             {
-                Velocity = ((transform.position - LastPosition) / Time.deltaTime).normalized;
+                Velocity = (transform.position - LastPosition).normalized;
                 LastPosition = transform.position;
             }
         }
@@ -58,14 +56,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                 }
                 else if (IsRevolver)
                 {
-                    Arm.GameObjectT.position = Vars.DominantHand.transform.position;
-                    Arm.GameObjectT.rotation = Quaternion.Euler(new Vector3(Vars.DominantHand.transform.rotation.x * Arm.GameObjectT.rotation.x,
-                                                                            Vars.DominantHand.transform.rotation.y,
-                                                                            Vars.DominantHand.transform.rotation.z));
-                    Arm.Root.localPosition = OffsetPosition;
-                    Arm.Hand.rotation = Quaternion.Euler(new Vector3(Vars.DominantHand.transform.rotation.x * Arm.Hand.rotation.x,
-                                                                     Vars.DominantHand.transform.rotation.y,
-                                                                     Vars.DominantHand.transform.rotation.z)) * OffsetRotation;
+                    if (GetComponent<Revolver>().anim.GetBool("Spinning"))
+                        Arm.Hand.rotation = Vars.DominantHand.transform.rotation * OffsetRotation;
                 }
                 else
                 {
@@ -78,7 +70,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                 // Whiplash specific stuff
                 if (gameObject.HasComponent<HookArm>())
                     Arm.Wrist.GetChild(1).rotation = Vars.NonDominantHand.transform.rotation * OffsetRotation;
-                if (HookOffsetPosition != null) {  }
 
                 // Thingamajig to disable other arms while grapplehooking
                 if (HookArm.Instance.model.activeSelf && !gameObject.HasComponent<HookArm>()
