@@ -75,8 +75,12 @@ The text version:
   - Also if you wanna help you can always send me your controller bindings via discord or whatever and I'll set them as defaults so no more people have to suffer.
 
 ## Default controller bindings:
-### Oculus Touch (proudly made in MSPaint):
+### Oculus Touch (proudly made in MSPaint by me):
 ![](GithubStuff/DCB_Touch.png)
 
-### HTC Vive - Missing
-### Valve Index - Missing
+### HTC Vive - Missing :(
+
+### Valve Index - Missing :(
+
+### Windows Mixed Reality (made by ![Scruq445](https://github.com/Scruq445)):
+![](GithubStuff/DCB_WMR.jpeg)
