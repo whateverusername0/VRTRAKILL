@@ -18,7 +18,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             [HarmonyPostfix] [HarmonyPatch(nameof(Revolver.Start))] static void Retransform(Revolver __instance)
             {
                 Arms.VRArmsController FBC = __instance.gameObject.AddComponent<Arms.VRArmsController>();
-                Arms.Armature A = new Arms.Armature(__instance.transform, Arms.ArmType.Feedbacker); FBC.Arm = A;
+                Arms.Armature A = new Arms.Armature(__instance.transform, Arms.ArmType.Feedbacker);
+                FBC.Arm = A; FBC.IsRevolver = true;
 
                 if (Vars.Config.Controllers.HandS.LeftHandMode) FBC.OffsetRotation = Quaternion.Euler(0, 90, 90);
                 else if (!__instance.altVersion) FBC.OffsetRotation = Quaternion.Euler(0, 273, 268);
