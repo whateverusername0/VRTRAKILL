@@ -69,13 +69,18 @@ The text version:
   - Solution: If you have SteamVR world size tweaked - disable it. If you set your weapon position to the middle - set it to the right. Else open an issue, because this shouldn't be happening :(  
 2. On Valve Index you move too slowly and can't jump normally:  
   - Solution: In config there's an option "Do not override movement values". Enable it and launch the game again and see if it worked.
+  - Solution 2 (applies to **all** devices): Try to lower the refresh rate of your headset.
 3. Awful/missing HTC Vive, Index, etc. controller bindings:
   - Since I don't have those controllers you gotta make your own. It's pretty simple, there's no cryptic words in actions' names :)
   - Also if you wanna help you can always send me your controller bindings via discord or whatever and I'll set them as defaults so no more people have to suffer.
 
 ## Default controller bindings:
-### Oculus Touch (proudly made in MSPaint):
+### Oculus Touch (proudly made in MSPaint by me):
 ![](GithubStuff/DCB_Touch.png)
 
-### HTC Vive - Missing
-### Valve Index - Missing
+### HTC Vive - Missing :(
+
+### Valve Index - Missing :(
+
+### Windows Mixed Reality (made by ![Scruq445](https://github.com/Scruq445)):
+![](GithubStuff/DCB_WMR.jpeg)
