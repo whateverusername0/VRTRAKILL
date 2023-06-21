@@ -7,13 +7,13 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
     // change move vector to joystick axis, fix dash, jump, etc.
     [HarmonyPatch(typeof(NewMovement))] internal static class NewMovementP
     {
+        static float Markiplier = 1;
+
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Start))] static void Start(NewMovement __instance)
         {
-            if (!Vars.Config.Game.DoNotOverrideMoveValues)
-            {
-                __instance.jumpPower /= 1.75f;
-                __instance.wallJumpPower /= 1.75f;
-            }
+            if (!Vars.Config.Game.DoNotOverrideMoveValues) Markiplier = 1.85f;
+            __instance.jumpPower /= Markiplier;
+            __instance.wallJumpPower /= Markiplier;
         }
 
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Update))] static bool Update(NewMovement __instance)
@@ -21,7 +21,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
             Vector2 vector = Vector2.zero;
             if (__instance.activated)
             {
-                vector = Input.VRInputVars.MoveVector / 1.65f;
+                vector = Input.VRInputVars.MoveVector / Markiplier;
 
                 __instance.cc.movementHor = vector.x;
                 __instance.cc.movementVer = vector.y;
