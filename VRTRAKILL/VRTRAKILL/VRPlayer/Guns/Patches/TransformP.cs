@@ -10,23 +10,20 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         // This took a LOT of time to get those offsets right and my eyes hurt a bit
         [HarmonyPatch(typeof(Revolver))] static class RevolverT
         {
-            static Vector3 Position = new Vector3(-1.5f, -1, 10.75f),
-                           AltPosition = new Vector3(-1.5f, -.75f, 9.5f),
+            static Vector3 Position = new Vector3(.05f, -.1f, .6f),
+                           AltPosition = new Vector3(.05f, -.075f, .5f),
                            Scale = new Vector3(.1f, .1f, .1f),
-                           AltScale = new Vector3(.085f, .085f, .085f);
+                           AltScale = new Vector3(.085f, .085f, .085f),
+                           OffsetRotation = new Vector3(0, -90, -90);
 
             [HarmonyPostfix] [HarmonyPatch(nameof(Revolver.Start))] static void Retransform(Revolver __instance)
             {
                 Arms.VRArmsController FBC = __instance.gameObject.AddComponent<Arms.VRArmsController>();
                 Arms.Armature A = new Arms.Armature(__instance.transform, Arms.ArmType.Feedbacker);
-                FBC.Arm = A; FBC.IsRevolver = true;
+                FBC.Arm = A; FBC.IsRevolver = true; FBC.OffsetRotation = Quaternion.Euler(OffsetRotation);
 
-                if (Vars.Config.Controllers.HandS.LeftHandMode) FBC.OffsetRotation = Quaternion.Euler(0, 90, 90);
-                else if (!__instance.altVersion) FBC.OffsetRotation = Quaternion.Euler(0, 273, 268);
-                else FBC.OffsetRotation = Quaternion.Euler(0, 270, 268);
-
-                if (__instance.altVersion == true) { FBC.OffsetPosition = AltPosition; __instance.wpos.defaultScale = AltScale; }
-                else { FBC.OffsetPosition = Position; __instance.wpos.defaultScale = Scale; }
+                if (__instance.altVersion == true) { __instance.wpos.defaultPos = AltPosition; __instance.wpos.defaultScale = AltScale; }
+                else { __instance.wpos.defaultPos = Position; __instance.wpos.defaultScale = Scale; }
             }
         }
         [HarmonyPatch(typeof(Shotgun))] static class ShotgunT
