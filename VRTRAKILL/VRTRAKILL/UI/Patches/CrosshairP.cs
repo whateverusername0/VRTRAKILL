@@ -12,17 +12,17 @@ namespace Plugin.VRTRAKILL.UI.Patches
             __instance.transform.parent = Vars.DominantHand.transform;
 
             Canvas C = __instance.gameObject.AddComponent<Canvas>();
-            C.worldCamera = Vars.VRUICamera;
+            C.worldCamera = Vars.UICamera;
             C.renderMode = RenderMode.WorldSpace;
             __instance.gameObject.layer = (int)Vars.Layers.Default;
 
-            if (__instance.gameObject.HasComponent<UICanvas>())
-                Object.Destroy(__instance.gameObject.GetComponent<UICanvas>());
+            if (__instance.gameObject.HasComponent<VRUIController>())
+                Object.Destroy(__instance.gameObject.GetComponent<VRUIController>());
 
             __instance.transform.localScale /= 2; // to fit in player's size (shitcode, but it works!!)
             __instance.transform.localPosition += new Vector3(0, 0, .05f);
             __instance.transform.localEulerAngles = Vector3.zero;
-            __instance.gameObject.AddComponent<CrossHair.CrosshairController>();
+            __instance.gameObject.AddComponent<CrosshairController>();
         }
     }
 }
