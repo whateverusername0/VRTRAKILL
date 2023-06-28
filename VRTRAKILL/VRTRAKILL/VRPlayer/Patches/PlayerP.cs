@@ -6,11 +6,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.Patches
     
     [HarmonyPatch(typeof(NewMovement))] internal class PlayerP
     {
-        // before the patch the player was like TWICE as tall, now it's height is controlled by VRPlayerController
+        // this is some unnecessary shit but i'll still leave it here so that people looking at the code
+        // without looking at this comment would think it has actual weight (lolol)
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Start))] static void SetupVRController(NewMovement __instance)
-        {
-            __instance.gameObject.AddComponent<Movement.VRPlayerController>();
-        }
+        { __instance.gameObject.AddComponent<Movement.VRPlayerController>(); }
 
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Respawn))] static bool RespawnFix(NewMovement __instance)
         {
