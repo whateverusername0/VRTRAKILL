@@ -195,12 +195,12 @@
     <Compile Include="VRTRAKILL\Config\Settings\View\ViewS.cs" />
     <Compile Include="VRTRAKILL\Config\Settings\View\UI.cs" />
     <Compile Include="Helpers\Patches\SteamVRP.cs" />
-    <Compile Include="VRTRAKILL\UI\CrossHair\CrosshairController.cs" />
+    <Compile Include="VRTRAKILL\UI\CrosshairController.cs" />
     <Compile Include="VRTRAKILL\UI\HideWhenMenuActive.cs" />
     <Compile Include="VRTRAKILL\UI\Patches\HudP.cs" />
     <Compile Include="VRTRAKILL\UI\Patches\A.cs" />
     <Compile Include="VRTRAKILL\UI\Patches\CrosshairP.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\Arms\Armature.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRIK\Armature.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\ArmRemover.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Gestures\GesturesController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\A.cs" />
@@ -210,8 +210,11 @@
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\Whiplash\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\Whiplash\HookArmP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\VRArmsController.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\Arms\VRIK\Patches\A.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\Arms\VRIK\VRIKController.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRIK\Leggature.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRIK\MetaRig.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRIK\Patches\A.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRIK\Patches\VRIKP.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRIK\VRIKController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\ControllerController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\Patches\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\Patches\ControllerHaptics.cs" />
@@ -247,8 +250,8 @@
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\CameraConverterP.cs" />
     <Compile Include="VRTRAKILL\UI\UIInteraction.cs" />
     <Compile Include="VRTRAKILL\UI\Patches\CanvasControllerP.cs" />
-    <Compile Include="VRTRAKILL\UI\UICanvas.cs" />
-    <Compile Include="VRTRAKILL\UI\UIConverter.cs" />
+    <Compile Include="VRTRAKILL\UI\VRUIController.cs" />
+    <Compile Include="VRTRAKILL\UI\SceneWorker.cs" />
     <Compile Include="VRTRAKILL\Vars.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,7 @@
-﻿This is a list that i can look into so that i don't have to search for something in every file.
+﻿This is a list that contains all of my thoughts and something i need to remember
 (More of a like dementia diary) (Yeah, that's the name now)
 
 1. I UPSCALED CONTROLLER *MODELS* AND CAMERA RIG EXPLICITLY!! (in ControllerAdder & CameraConverter)
+
+2. i wanna bring back autoaim
+3. i wanna refactor the entire codebase because it smells :(
