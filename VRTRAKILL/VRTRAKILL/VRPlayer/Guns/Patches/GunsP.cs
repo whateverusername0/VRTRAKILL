@@ -16,9 +16,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         }
 
         // idk if this is needed, but i'm not removing it
-        [HarmonyPostfix] [HarmonyPatch(typeof(GunControl), nameof(GunControl.Start))] static void ChangeGCLayers(GunControl __instance)
+        [HarmonyPostfix] [HarmonyPatch(typeof(GunControl), nameof(GunControl.Start))] static void RLPGC(GunControl __instance)
         { __instance.transform.localPosition = Vector3.zero; }
-        [HarmonyPostfix] [HarmonyPatch(typeof(GunSetter), nameof(GunSetter.ResetWeapons))] static void ChangeGSLayers(GunSetter __instance)
+        [HarmonyPostfix] [HarmonyPatch(typeof(GunSetter), nameof(GunSetter.ResetWeapons))] static void RLPGS(GunSetter __instance)
         { __instance.transform.localPosition = Vector3.zero; }
     }
 }
