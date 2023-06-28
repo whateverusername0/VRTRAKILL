@@ -32,7 +32,7 @@ namespace Plugin
 
             VRTRAKILL.Config.ConfigMaster.Init();
             PatchStuff();
-            VRTRAKILL.UI.UIConverter.Init();
+            VRTRAKILL.UI.SceneWorker.Init();
 
             InitializeSteamVR();
         }
@@ -55,7 +55,7 @@ namespace Plugin
             if (!Vars.Config.Game.MBP.DisableControllerAiming)
                 Namespaces.Add(typeof(VRTRAKILL.VRPlayer.Arms.Patches.Whiplash.A).Namespace);
             if (Vars.Config.Controllers.HandS.EnableVRIK)
-                Namespaces.Add(typeof(VRTRAKILL.VRPlayer.Arms.VRIK.Patches.A).Namespace);
+                Namespaces.Add(typeof(VRTRAKILL.VRPlayer.VRIK.Patches.A).Namespace);
 
             MainPatcher = new Patcher(new HarmonyLib.Harmony($"{PLUGIN_GUID}.base"), _Namespaces: Namespaces.ToArray());
             MainPatcher.PatchAll();
