@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Arms
 {
-    internal class VRArmsController : MonoSingleton<VRArmsController>
+    internal class VRArmsController : MonoBehaviour
     {
-        public Armature Arm; 
+        public VRIK.Armature Arm; public bool UseVRIK;
         public Vector3 OffsetPosition = new Vector3(.145f, .09f, .04f); // hack to fix whiplash
         public Quaternion OffsetRotation = Quaternion.Euler(-90, 180, 0);
 
@@ -19,14 +19,14 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
             {
                 switch (Arm.Type)
                 {
-                    case ArmType.Feedbacker:
+                    case VRIK.ArmType.Feedbacker:
                         OffsetPosition = new Vector3(0, -.25f, -.5f); break;
-                    case ArmType.Knuckleblaster:
+                    case VRIK.ArmType.Knuckleblaster:
                         OffsetPosition = new Vector3(0, -.01f, -.035f); break;
-                    case ArmType.Whiplash:
+                    case VRIK.ArmType.Whiplash:
                         OffsetPosition = new Vector3(.145f, .09f, .04f); break;
 
-                    case ArmType.Spear:
+                    case VRIK.ArmType.Spear:
                     default: Destroy(GetComponent<VRArmsController>()); break;
                 }
             }
@@ -77,6 +77,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                     Arm.GameObjectT.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
                 else Arm.GameObjectT.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
             } catch {} // do nothing because i know that it 100% works :) (it gives out too many errors which zipbomb your storage)
+        }
+        private void MoveHands()
+        {
+
         }
     }
 }
