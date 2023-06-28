@@ -3,7 +3,7 @@
 namespace Plugin.VRTRAKILL.UI
 {
     // "borrowed" from huskvr
-    internal class UICanvas : MonoBehaviour
+    internal class VRUIController : MonoBehaviour
     {
         private Vector3 LastCamFwd = Vector3.zero;
 
@@ -12,13 +12,13 @@ namespace Plugin.VRTRAKILL.UI
 
         private void UpdatePos()
         {
-            LastCamFwd = UIConverter.UICamera.transform.forward * Distance;
-            transform.rotation = UIConverter.UICamera.transform.rotation;
+            LastCamFwd = SceneWorker.UICamera.transform.forward * Distance;
+            transform.rotation = SceneWorker.UICamera.transform.rotation;
         }
         private void ResetPos()
         {
             LastCamFwd = new Vector3(LastCamFwd.x, 0f, LastCamFwd.z);
-            transform.LookAt(UIConverter.UICamera.transform);
+            transform.LookAt(SceneWorker.UICamera.transform);
             transform.forward = new Vector3(-transform.forward.x, 0f, -transform.forward.z);
         }
 
@@ -31,7 +31,7 @@ namespace Plugin.VRTRAKILL.UI
         public void Update()
         {
             if (!Vars.IsAMenu && !Vars.IsWeaponWheelPresent) UpdatePos(); else ResetPos();
-            transform.position = UIConverter.UICamera.transform.position + LastCamFwd;
+            transform.position = SceneWorker.UICamera.transform.position + LastCamFwd;
         }
     }
 }

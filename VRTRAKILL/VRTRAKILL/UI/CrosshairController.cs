@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Plugin.Helpers;
 
-namespace Plugin.VRTRAKILL.UI.CrossHair
+namespace Plugin.VRTRAKILL.UI
 {
     internal class CrosshairController : MonoBehaviour
     {

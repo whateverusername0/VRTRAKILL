@@ -1,29 +1,32 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Plugin.Helpers;
 
 namespace Plugin.VRTRAKILL.UI
 {
     // mostly "borrowed" from huskvr
-    internal class UIConverter
+    internal class SceneWorker
     {
         public static Camera UICamera { get; private set; }
 
-        public static void Init()
-        => SceneManager.activeSceneChanged += (x, y) => SceneChanged(y);
+        public static void Init() => SceneManager.activeSceneChanged += (x, y) => SceneChanged(y);
 
         private static void SceneChanged(Scene S)
         {
             UICamera = new GameObject("UI Camera").AddComponent<Camera>();
-            UICamera.cullingMask = LayerMask.GetMask("UI");
+            UICamera.transform.parent = Vars.VRCameraContainer.transform;
+            UICamera.cullingMask = (int)Vars.Layers.CustomUI;
             UICamera.clearFlags = CameraClearFlags.Depth; UICamera.depth = 1f;
 
             if (!Vars.Config.Controllers.UseControllerUIInteraction)
                 UICamera.gameObject.AddComponent<UIInteraction>();
 
-            foreach (Canvas C in Object.FindObjectsOfType<Canvas>())
-                if (!Helpers.Misc.HasComponent<UICanvas>(C.gameObject))
-                    RecursiveConvertCanvas();
+            Vars.UICamera = UICamera;
+
+            if (!MonoSingleton<CanvasController>.Instance.gameObject.HasComponent<VRUIController>())
+                MonoSingleton<CanvasController>.Instance.gameObject.AddComponent<VRUIController>();
+            RecursiveConvertCanvas();
         }
 
         public static void RecursiveConvertCanvas(GameObject GO = null)
@@ -39,21 +42,15 @@ namespace Plugin.VRTRAKILL.UI
             else
             {
                 foreach (Canvas C in Object.FindObjectsOfType<Canvas>())
-                    if (!Helpers.Misc.HasComponent<UICanvas>(C.gameObject))
+                    if (C.gameObject.layer != (int)Vars.Layers.CustomUI)
                         try { ConvertCanvas(C); } catch {}
             }
         }
-        public static void ConvertCanvas(Canvas C, bool Force = false, bool DontAddComponent = false)
+        public static void ConvertCanvas(Canvas C)
         {
-            if (!Force)
-            {
-                if (C.renderMode != RenderMode.ScreenSpaceOverlay) return;
-            }
-
             C.worldCamera = UICamera;
             C.renderMode = RenderMode.WorldSpace;
-            C.gameObject.layer = (int)Vars.Layers.UI;
-            if (!DontAddComponent) C.gameObject.AddComponent<UICanvas>();
+            C.gameObject.layer = (int)Vars.Layers.CustomUI;
 
             foreach (Transform Child in C.transform) ConvertElement(Child);
         }
