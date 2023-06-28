@@ -73,6 +73,8 @@ The text version:
 3. Awful/missing HTC Vive, Index, etc. controller bindings:
   - Since I don't have those controllers you gotta make your own. It's pretty simple, there's no cryptic words in actions' names :)
   - Also if you wanna help you can always send me your controller bindings via discord or whatever and I'll set them as defaults so no more people have to suffer.
+4. Literally any other problem, or recommendations to fixing them yourself:
+  - If you have other mods enabled (like ultraballing, middle finger or sniper rifle), try disabling/removing them and see if things work.
 
 ## Default controller bindings:
 ### Oculus Touch (proudly made in MSPaint by me):
