@@ -2,7 +2,7 @@
 using UnityEngine;
 using Plugin.Helpers;
 
-namespace Plugin.VRTRAKILL.VRPlayer.Arms
+namespace Plugin.VRTRAKILL.VRPlayer.VRIK
 {
     public enum ArmType
     {
