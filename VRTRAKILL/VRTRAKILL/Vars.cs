@@ -2,7 +2,7 @@
 
 namespace Plugin.VRTRAKILL
 {
-    internal class Vars
+    static class Vars
     {
         public enum Layers
         {
@@ -27,11 +27,14 @@ namespace Plugin.VRTRAKILL
             Armor = 26,
             GibLit = 27,
             VirtualRender = 28,
-            SandboxGrabba = 29
+            SandboxGrabba = 29,
+
+            CustomUI = 30
         }
 
-        public static Config.ConfigJSON Config
-            => VRTRAKILL.Config.ConfigJSON.GetConfig();
+        public static Config.ConfigJSON Config => VRTRAKILL.Config.ConfigJSON.GetConfig();
+
+        #region Menu detector stuff
 
         public static bool IsMainMenu
             => GameObject.Find("Main Menu State") != null
@@ -59,6 +62,8 @@ namespace Plugin.VRTRAKILL
             => GameObject.Find("Cheats Teleport") != null
             && GameObject.Find("Cheats Teleport").GetComponent<MenuEsc>().isActiveAndEnabled;
 
+        #endregion
+
         public static bool IsAMenu
             => IsMainMenu
             || IsPaused
@@ -69,26 +74,39 @@ namespace Plugin.VRTRAKILL
             || IsAlterMenuPresent
             || IsTeleportMenuPresent;
 
-        public static GameObject VRCameraContainer
-            => VRPlayer.VRCamera.Patches.CameraConverterP.Container;
-        public static Camera DesktopCamera
-            => VRPlayer.VRCamera.Patches.CameraConverterP.DesktopWorldCam;
-
-        public static GameObject NonDominantHand
-            => VRPlayer.Controllers.ArmController.Instance.Offset;
-        public static VRPlayer.Controllers.ArmController NDHC
-            => VRPlayer.Controllers.ArmController.Instance;
-        public static GameObject DominantHand
-            => VRPlayer.Controllers.GunController.Instance.Offset;
-        public static VRPlayer.Controllers.GunController DHC
-            => VRPlayer.Controllers.GunController.Instance;
-
+        public static GameObject VRCameraContainer { get; set; }
         private static Camera _MainCamera; public static Camera MainCamera
         {
-            get { if (_MainCamera == null) { _MainCamera = GameObject.Find("Main Camera").gameObject.GetComponent<Camera>(); return _MainCamera; }
-                  else return _MainCamera; }
+            get
+            {
+                if (_MainCamera == null) { _MainCamera = GameObject.Find("Main Camera").gameObject.GetComponent<Camera>(); return _MainCamera; }
+                else return _MainCamera;
+            }
         }
-        public static Camera VRUICamera
-            => UI.UIConverter.UICamera;
+        public static Camera UICamera { get; set; }
+        public static Camera DesktopCamera { get; set; }
+        public static Camera DesktopUICamera { get; set; }
+
+        public static GameObject NonDominantHand => VRPlayer.Controllers.ArmController.Instance.Offset;
+        public static VRPlayer.Controllers.ArmController NDHC => VRPlayer.Controllers.ArmController.Instance;
+        public static GameObject DominantHand => VRPlayer.Controllers.GunController.Instance.Offset;
+        public static VRPlayer.Controllers.GunController DHC => VRPlayer.Controllers.GunController.Instance;
+
+        #region Arms
+
+        public static VRPlayer.VRIK.Armature FeedbackerArm { get; set; }
+        public static VRPlayer.VRIK.Armature KnuckleblasterArm { get; set; }
+        public static VRPlayer.VRIK.Armature SpearArm { get; set; }
+        public static VRPlayer.VRIK.Armature WhiplashArm { get; set; }
+        public static VRPlayer.VRIK.Armature SandboxerArm { get; set; }
+
+        #endregion
+
+        #region Player skins
+
+        public static VRPlayer.VRIK.MetaRig V1 { get; set; }
+        public static VRPlayer.VRIK.MetaRig V2 { get; set; }
+
+        #endregion
     }
 }
