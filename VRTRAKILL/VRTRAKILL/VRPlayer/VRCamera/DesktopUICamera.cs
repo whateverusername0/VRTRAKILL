@@ -8,13 +8,13 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
         public void Start() { C = gameObject.GetComponent<Camera>(); }
         public void Update()
         {
-            transform.parent = Vars.VRUICamera.transform;
+            transform.parent = Vars.UICamera.transform;
             transform.localPosition = Vector3.zero;
             C.nearClipPlane = 0.1f;
             C.depth = 70;
             C.stereoTargetEye = StereoTargetEyeMask.None;
-            C.cullingMask = Vars.VRUICamera.cullingMask;
-            C.clearFlags = Vars.VRUICamera.clearFlags;
+            C.cullingMask = Vars.UICamera.cullingMask;
+            C.clearFlags = Vars.UICamera.clearFlags;
             C.fieldOfView = Vars.Config.View.DV.UICamFOV;
         }
     }

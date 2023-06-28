@@ -20,6 +20,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
             Container.transform.localRotation = Vars.MainCamera.transform.rotation;
 
             Container.AddComponent<VRCameraController>();
+            Vars.VRCameraContainer = Container;
 
             Vars.MainCamera.transform.parent = Container.transform;
 
@@ -28,9 +29,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
             {
                 DesktopWorldCam = new GameObject("Desktop World Camera").AddComponent<Camera>();
                 DesktopWorldCam.gameObject.AddComponent<DesktopCamera>();
+                Vars.DesktopCamera = DesktopWorldCam;
 
                 DesktopUICam = new GameObject("Desktop UI Camera").AddComponent<Camera>();
                 DesktopUICam.gameObject.AddComponent<DesktopUICamera>();
+                Vars.DesktopUICamera = DesktopUICam;
             }
         }
         [HarmonyPostfix] [HarmonyPatch(typeof(NewMovement), nameof(NewMovement.Start))] static void ScaleObjects()

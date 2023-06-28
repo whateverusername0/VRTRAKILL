@@ -20,7 +20,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
             Object.Destroy(ControllerClone.GetComponentInChildren<SteamVR_RenderModel>());
 
             // Create a real pointer with the camera for ui interaction
-            GameObject RealPointer = new GameObject("Real Canvas Pointer") { layer = (int)Vars.Layers.UI };
+            GameObject RealPointer = new GameObject("Real Canvas Pointer") { layer = (int)Vars.Layers.CustomUI };
             RealPointer.transform.parent = ControllerClone.transform.GetChild(1);
 
             Camera PointerCamera = RealPointer.AddComponent<Camera>();
@@ -83,7 +83,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
             else foreach (SteamVR_RenderModel SVRRRM in SVRRM) try { SVRRRM.gameObject.SetActive(false); } catch {}
 
             bool Raycast = Physics.Raycast(Offset.transform.position, Offset.transform.forward,
-                                           out RaycastHit Hit, float.PositiveInfinity, (int)Vars.Layers.UI);
+                                           out RaycastHit Hit, float.PositiveInfinity, (int)Vars.Layers.CustomUI);
             EndPosition = Offset.transform.position + (Offset.transform.forward * DefaultLength);
             if (Raycast) EndPosition = Hit.point;
 
