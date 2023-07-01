@@ -25,12 +25,17 @@ namespace Plugin.VRTRAKILL.Config.Settings
             [JsonProperty("Enable hand gestures")] public bool EnableHandGestures { get; set; } = true;
             [JsonProperty("Replace pointing gesture with a middle finger")] public bool EnableMiddleFinger { get; set; } = false;
         }
+        [JsonProperty("VR Body")] public VRBody VRB { get; set; } public class VRBody
+        {
+            [JsonProperty("Enable VRIK")] public bool EnableVRIK { get; set; } = true;
+        }
 
         public Game()
         {
             CBS = new ControllerBasedShooting();
             MBP = new MovementBasedPunching();
             HG = new HandGestures();
+            VRB = new VRBody();
 
             if (!MBP.EnableMovementPunching) HG.EnableHandGestures = false;
         }
