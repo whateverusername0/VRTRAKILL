@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace Plugin.VRTRAKILL.VRPlayer.Movement
+namespace Plugin.VRTRAKILL.VRPlayer
 {
     internal class VRPlayerController : MonoBehaviour
     {

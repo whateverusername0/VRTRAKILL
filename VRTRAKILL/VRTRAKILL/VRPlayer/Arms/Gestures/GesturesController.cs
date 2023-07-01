@@ -4,7 +4,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Gestures
 {
     internal class GesturesController : MonoBehaviour
     {
-        public Armature Arm;
+        public VRIK.Armature Arm;
 
         public bool
             Punch = false,
@@ -16,13 +16,13 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Gestures
         {
             switch (Arm.Type)
             {
-                case ArmType.Feedbacker:
+                case VRIK.ArmType.Feedbacker:
                     break;
-                case ArmType.Knuckleblaster:
+                case VRIK.ArmType.Knuckleblaster:
                     break;
 
-                case ArmType.Whiplash:
-                case ArmType.Spear:
+                case VRIK.ArmType.Whiplash:
+                case VRIK.ArmType.Spear:
                 default: Destroy(GetComponent<GesturesController>()); break;
             }
         }
