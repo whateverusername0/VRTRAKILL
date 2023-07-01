@@ -10,7 +10,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK.Patches
             if (!__instance.gameObject.HasComponent<VRIKController>())
             {
                 __instance.gameObject.AddComponent<VRIKController>();
-                MonoSingleton<VRIKController>.Instance.Rig = MetaRig.CreateV1Preset(__instance.gameObject);
+                MonoSingleton<VRIKController>.Instance.Rig = MetaRig.CreateV1Preset(Vars.VRCameraContainer);
             }
         }
     }
