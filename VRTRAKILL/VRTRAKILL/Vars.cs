@@ -27,9 +27,7 @@ namespace Plugin.VRTRAKILL
             Armor = 26,
             GibLit = 27,
             VirtualRender = 28,
-            SandboxGrabba = 29,
-
-            CustomUI = 30
+            SandboxGrabba = 29
         }
 
         public static Config.ConfigJSON Config => VRTRAKILL.Config.ConfigJSON.GetConfig();
@@ -52,6 +50,9 @@ namespace Plugin.VRTRAKILL
             => GameObject.Find("Intro") != null
             && GameObject.Find("Intro").GetComponent<IntroTextController>() != null
             && GameObject.Find("Intro").GetComponent<IntroTextController>().enabled;
+        public static bool IsActEndPresent
+            => GameObject.Find("Act End Message") != null
+            && GameObject.Find("Act End Message").activeInHierarchy;
 
         public static bool IsSpawnMenuPresent
             => SpawnMenu.Instance != null && SpawnMenu.Instance.isActiveAndEnabled;
@@ -72,9 +73,10 @@ namespace Plugin.VRTRAKILL
 
             || IsSpawnMenuPresent
             || IsAlterMenuPresent
-            || IsTeleportMenuPresent;
+            || IsTeleportMenuPresent
+            || IsActEndPresent;
 
-        public static GameObject VRCameraContainer { get; set; }
+        public static GameObject VRCameraContainer => VRPlayer.VRCamera.Patches.CameraConverterP.Container;
         private static Camera _MainCamera; public static Camera MainCamera
         {
             get
@@ -83,9 +85,9 @@ namespace Plugin.VRTRAKILL
                 else return _MainCamera;
             }
         }
-        public static Camera UICamera { get; set; }
-        public static Camera DesktopCamera { get; set; }
-        public static Camera DesktopUICamera { get; set; }
+        public static Camera UICamera => UI.UIConverter.UICamera;
+        public static Camera DesktopCamera => VRPlayer.VRCamera.Patches.CameraConverterP.DesktopWorldCam;
+        public static Camera DesktopUICamera => VRPlayer.VRCamera.Patches.CameraConverterP.DesktopUICam;
 
         public static GameObject NonDominantHand => VRPlayer.Controllers.ArmController.Instance.Offset;
         public static VRPlayer.Controllers.ArmController NDHC => VRPlayer.Controllers.ArmController.Instance;
@@ -104,8 +106,8 @@ namespace Plugin.VRTRAKILL
 
         #region Player skins
 
-        public static VRPlayer.VRIK.MetaRig V1 { get; set; }
-        public static VRPlayer.VRIK.MetaRig V2 { get; set; }
+        public static VRPlayer.VRIK.MetaRig V1Rig { get; set; }
+        public static VRPlayer.VRIK.MetaRig V2Rig { get; set; }
 
         #endregion
     }
