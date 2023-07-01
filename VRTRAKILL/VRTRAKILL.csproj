@@ -146,8 +146,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\InverseKinematics\IKManager.cs" />
-    <Compile Include="Helpers\InverseKinematics\Joint.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Patches\A.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRIK\IKArm.cs" />
     <Compile Include="Helpers\Libraries\Mono.Reflection\BackingFieldResolver.cs" />
     <Compile Include="Helpers\Libraries\Mono.Reflection\ByteBuffer.cs" />
     <Compile Include="Helpers\Libraries\Mono.Reflection\Disassembler.cs" />
@@ -197,9 +197,13 @@
     <Compile Include="Helpers\Patches\SteamVRP.cs" />
     <Compile Include="VRTRAKILL\UI\CrosshairController.cs" />
     <Compile Include="VRTRAKILL\UI\HideWhenMenuActive.cs" />
-    <Compile Include="VRTRAKILL\UI\Patches\HudP.cs" />
     <Compile Include="VRTRAKILL\UI\Patches\A.cs" />
+    <Compile Include="VRTRAKILL\UI\Patches\CanvasControllerP.cs" />
     <Compile Include="VRTRAKILL\UI\Patches\CrosshairP.cs" />
+    <Compile Include="VRTRAKILL\UI\Patches\HudP.cs" />
+    <Compile Include="VRTRAKILL\UI\UICanvas.cs" />
+    <Compile Include="VRTRAKILL\UI\UIConverter.cs" />
+    <Compile Include="VRTRAKILL\UI\UIInteraction.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRIK\Armature.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\ArmRemover.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Gestures\GesturesController.cs" />
@@ -236,7 +240,7 @@
     <Compile Include="VRTRAKILL\VRPlayer\Movement\Patches\GrenadeP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Movement\Patches\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Movement\Patches\PlatformerMovementP.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\Movement\VRPlayerController.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRPlayerController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Patches\PlayerP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\DesktopCamera.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\DesktopUICamera.cs" />
@@ -248,10 +252,6 @@
     <Compile Include="VRTRAKILL\Config\InputMap.cs" />
     <Compile Include="VRTRAKILL\Input\VRInputVars.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\CameraConverterP.cs" />
-    <Compile Include="VRTRAKILL\UI\UIInteraction.cs" />
-    <Compile Include="VRTRAKILL\UI\Patches\CanvasControllerP.cs" />
-    <Compile Include="VRTRAKILL\UI\VRUIController.cs" />
-    <Compile Include="VRTRAKILL\UI\SceneWorker.cs" />
     <Compile Include="VRTRAKILL\Vars.cs" />
   </ItemGroup>
   <ItemGroup>
