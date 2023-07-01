@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using Plugin.Helpers;
+﻿using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.VRIK
 {
@@ -48,6 +46,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
         public static Armature FeedbackerPreset(Transform T)
         {
             Armature A = new Armature();
+            A.Type = ArmType.Feedbacker;
             A.GameObjectT = T;
             A.Root = T.GetChild(0).GetChild(0);
             A.Clavicle = A.Root;
@@ -64,6 +63,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
         public static Armature MRFeedbackerPreset(Transform T)
         {
             Armature A = new Armature();
+            A.Type = ArmType.Feedbacker;
             A.GameObjectT = T;
             A.Clavicle = A.GameObjectT;
             A.Hand = A.LowerArm.GetChild(0);
@@ -74,6 +74,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
         public static Armature KnuckleblasterPreset(Transform T)
         {
             Armature A = new Armature();
+            A.Type = ArmType.Knuckleblaster;
             A.GameObjectT = T;
             A.Root = T.GetChild(1);
             A.Clavicle = A.Root.GetChild(1);
@@ -88,12 +89,14 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
         public static Armature SpearPreset(Transform T)
         {
             Armature A = new Armature();
+            A.Type = ArmType.Spear;
             A.GameObjectT = T;
             return A;
         }
         public static Armature WhiplashPreset(Transform T)
         {
             Armature A = new Armature();
+            A.Type = ArmType.Whiplash;
             A.GameObjectT = T;
             A.Root = T.GetChild(0).GetChild(1);
             A.Clavicle = A.Root.GetChild(1);
@@ -110,6 +113,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
         public static Armature SandboxerPreset(Transform T)
         {
             Armature A = new Armature();
+            A.Type = ArmType.Sandboxer;
             A.GameObjectT = T;
             A.Root = T.GetChild(0);
             A.Clavicle = A.Root;
