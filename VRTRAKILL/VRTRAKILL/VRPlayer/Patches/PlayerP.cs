@@ -6,11 +6,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.Patches
     
     [HarmonyPatch(typeof(NewMovement))] internal class PlayerP
     {
-        // this is some unnecessary shit but i'll still leave it here so that people looking at the code
-        // without looking at this comment would think it has actual weight (lolol)
-        [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Start))] static void SetupVRController(NewMovement __instance)
-        { __instance.gameObject.AddComponent<VRPlayerController>(); }
-
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Respawn))] static bool RespawnFix(NewMovement __instance)
         {
             if (__instance.sliding) __instance.StopSlide();

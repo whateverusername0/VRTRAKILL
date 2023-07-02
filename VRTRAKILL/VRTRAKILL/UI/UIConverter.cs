@@ -9,10 +9,7 @@ namespace Plugin.VRTRAKILL.UI
     {
         public static Camera UICamera { get; private set; }
 
-        public static void Init()
-        => SceneManager.activeSceneChanged += (x, y) => SceneChanged(y);
-
-        private static void SceneChanged(Scene S)
+        public static void ConvertAllCanvases()
         {
             UICamera = new GameObject("UI Camera").AddComponent<Camera>();
             UICamera.cullingMask = 1 << (int)Vars.Layers.UI;
@@ -26,7 +23,7 @@ namespace Plugin.VRTRAKILL.UI
                     RecursiveConvertCanvas();
         }
 
-        public static void RecursiveConvertCanvas(GameObject GO = null)
+        private static void RecursiveConvertCanvas(GameObject GO = null)
         {
             if (GO != null)
             {

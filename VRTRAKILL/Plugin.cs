@@ -35,7 +35,7 @@ namespace Plugin
 
             VRTRAKILL.Config.ConfigMaster.Init();
             PatchStuff();
-            VRTRAKILL.UI.UIConverter.Init();
+            SceneWorker.Init();
 
             InitializeSteamVR();
         }

@@ -8,7 +8,6 @@ namespace Plugin.VRTRAKILL.UI.Patches
     {
         [HarmonyPrefix] [HarmonyPatch(nameof(Crosshair.Start))] static void SetCrosshair(Crosshair __instance)
         {
-            // set controller
             __instance.transform.parent = Vars.DominantHand.transform;
 
             Canvas C = __instance.gameObject.AddComponent<Canvas>();
@@ -19,10 +18,10 @@ namespace Plugin.VRTRAKILL.UI.Patches
             if (__instance.gameObject.HasComponent<UICanvas>())
                 Object.Destroy(__instance.gameObject.GetComponent<UICanvas>());
 
-            __instance.transform.localScale /= 2; // to fit in player's size (shitcode, but it works!!)
+            __instance.transform.localScale /= 2;
             __instance.transform.localPosition += new Vector3(0, 0, .05f);
             __instance.transform.localEulerAngles = Vector3.zero;
-            //__instance.gameObject.AddComponent<CrosshairController>();
+            __instance.gameObject.AddComponent<CrosshairController>();
         }
     }
 }
