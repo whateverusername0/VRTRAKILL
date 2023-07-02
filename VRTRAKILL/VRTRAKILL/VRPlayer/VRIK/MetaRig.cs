@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Plugin.Helpers;
 
 namespace Plugin.VRTRAKILL.VRPlayer.VRIK
 {
@@ -18,11 +19,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
         public Leggature LeftLeg { get; set; }
         public Leggature RightLeg { get; set; }
 
-        public static MetaRig V1Preset(Transform T)
+        public static MetaRig V1CustomPreset(Transform T)
         {
             MetaRig MR = new MetaRig();
-            MR.GameObjectT = T; // v1_combined
-            MR.Root = T.GetChild(0).GetChild(0); // spine
+            MR.GameObjectT = T; // V1Rig
+            MR.Root = T.GetChild(1).GetChild(0); // spine
             MR.Body = MR.Root.GetChild(0); // spine.001
             MR.Abdomen = MR.Body.GetChild(0); // spine.002
             MR.Chest = MR.Abdomen.GetChild(0); // spine.003
@@ -33,11 +34,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
             MR.RightArm = Armature.MRFeedbackerPreset(MR.Chest.GetChild(1)); // shoulder.R
             return MR;
         }
-        public static MetaRig CreateV1Preset(GameObject Parent)
+        public static MetaRig CreateV1CustomPreset(GameObject Parent)
         {
-            GameObject V1mdlGO = GameObject.Find("v1_combined");
+            GameObject V1mdlGO = PlatformerMovement.Instance.transform.Find("v1_combined").gameObject; //Misc.ForceFindGameObject("v1_combined");
             GameObject V1mdlGOC = GameObject.Instantiate(V1mdlGO, Parent.transform);
-            return V1Preset(V1mdlGOC.transform);
+            return V1CustomPreset(V1mdlGOC.transform);
         }
     }
 }
