@@ -109,12 +109,12 @@ namespace Plugin.Helpers
         public void PatchAll(string _Namespace)
         {
             IEnumerable<Type> Q = GetPatches(_Namespace);
-            foreach (Type T in Q) try { Harmony.PatchAll(T); } catch { Plugin.PLogger.LogError($"Nullref with type {T}"); }
+            foreach (Type T in Q) try { Harmony.PatchAll(T); } catch { Plugin.PLog.LogError($"Nullref with type {T}"); }
         }
         public void PatchAll(string[] _Namespaces)
         {
             IEnumerable<Type> Q = GetPatches(_Namespaces);
-            foreach (Type T in Q) try { Harmony.PatchAll(T); } catch { Plugin.PLogger.LogError($"Nullref with type {T}"); }
+            foreach (Type T in Q) try { Harmony.PatchAll(T); } catch { Plugin.PLog.LogError($"Nullref with type {T}"); }
         }
         public void PatchAll(Type _T)
         => Harmony.PatchAll(_T);

@@ -27,11 +27,11 @@ namespace Plugin
                              GamePath = Path.GetDirectoryName(FullGamePath),
                              HMDModel = string.Empty;
 
-        internal static ManualLogSource PLogger { get; private set; }
+        internal static ManualLogSource PLog { get; private set; }
 
         public void Awake()
         {
-            PLogger = Logger;
+            PLog = Logger;
 
             VRTRAKILL.Config.ConfigMaster.Init();
             PatchStuff();
