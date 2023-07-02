@@ -2,7 +2,7 @@
 
 namespace Plugin.VRTRAKILL.VRPlayer.VRIK
 {
-    internal class VRIKController : MonoSingleton<VRIKController>
+    internal class VRigController : MonoSingleton<VRigController>
     {
         public MetaRig Rig;
 
@@ -15,10 +15,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
         public void Start()
         {
             // For now remove unnecessary stuff
-            Rig.LeftArm.GameObjectT.localScale = Vector3.zero;
-            Rig.RightArm.GameObjectT.localScale = Vector3.zero;
-            Rig.LeftLeg.GameObjectT.localScale = Vector3.zero;
-            Rig.RightLeg.GameObjectT.localScale = Vector3.zero;
+            Rig.LeftArm.GameObjectT.localScale /= 100;
+            Rig.RightArm.GameObjectT.localScale /= 100;
+            Rig.LeftLeg.GameObjectT.localScale /= 100;
+            Rig.RightLeg.GameObjectT.localScale /= 100;
         }
 
         public void LateUpdate()
