@@ -112,6 +112,10 @@
       <HintPath>Libraries\Unity\UnityEngine.AnimationModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule">
+      <HintPath>Libraries\Unity\UnityEngine.AssetBundleModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEngine.AudioModule">
       <HintPath>Libraries\Unity\UnityEngine.AudioModule.dll</HintPath>
       <Private>False</Private>
@@ -146,16 +150,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="VRTRAKILL\Assets\AssetLoader.cs" />
+    <Compile Include="VRTRAKILL\Assets\Vars.cs" />
     <Compile Include="VRTRAKILL\SceneWorker.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Patches\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRIK\IKArm.cs" />
-    <Compile Include="Helpers\Libraries\Mono.Reflection\BackingFieldResolver.cs" />
-    <Compile Include="Helpers\Libraries\Mono.Reflection\ByteBuffer.cs" />
-    <Compile Include="Helpers\Libraries\Mono.Reflection\Disassembler.cs" />
-    <Compile Include="Helpers\Libraries\Mono.Reflection\ILPattern.cs" />
-    <Compile Include="Helpers\Libraries\Mono.Reflection\Image.cs" />
-    <Compile Include="Helpers\Libraries\Mono.Reflection\Instruction.cs" />
-    <Compile Include="Helpers\Libraries\Mono.Reflection\MethodBodyReader.cs" />
     <Compile Include="Helpers\Libraries\WindowsInput\IInputDeviceStateAdaptor.cs" />
     <Compile Include="Helpers\Libraries\WindowsInput\IInputMessageDispatcher.cs" />
     <Compile Include="Helpers\Libraries\WindowsInput\IInputSimulator.cs" />
@@ -264,6 +263,12 @@
     <None Include="CopyToGameRoot\ULTRAKILL\BepInEx\patchers\classdata.tpk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\plugins\VRTRAKILL\AssetBundles\Rigs\mdl_v1rigged">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\plugins\VRTRAKILL\AssetBundles\Rigs\mdl_v1rigged.manifest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\actions.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

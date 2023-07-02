@@ -14,16 +14,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 
         private void SetupControllerPointer()
         {
-            GameObject ControllerClone = Instantiate(gameObject);
-            // prevent zipbombing the entire thing
-            Object.Destroy(ControllerClone.GetComponent<ControllerController>());
-            Object.Destroy(ControllerClone.GetComponentInChildren<SteamVR_RenderModel>());
-
             // Create a real pointer with the camera for ui interaction
-            GameObject RealPointer = new GameObject("Real Canvas Pointer") { layer = (int)Vars.Layers.UI };
-            RealPointer.transform.parent = ControllerClone.transform.GetChild(1);
+            Pointer = new GameObject("Real Canvas Pointer") { layer = (int)Vars.Layers.UI };
+            Pointer.transform.parent = Offset.transform;
 
-            Camera PointerCamera = RealPointer.AddComponent<Camera>();
+            Camera PointerCamera = Pointer.AddComponent<Camera>();
             PointerCamera.stereoTargetEye = StereoTargetEyeMask.None;
             PointerCamera.clearFlags = CameraClearFlags.Nothing;
             PointerCamera.cullingMask = -1; // Nothing
@@ -31,14 +26,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
             PointerCamera.fieldOfView = 1; // haha, ha, 1!
             PointerCamera.enabled = false;
 
-            RealPointer.AddComponent<UI.UIInteraction>();
+            Pointer.AddComponent<UI.UIInteraction>();
         }
         private void SetupControllerLines()
         {
-            // Then create a fake pointer w/ the line renderer
-            Pointer = new GameObject("Canvas Pointer") { layer = (int)Vars.Layers.Default };
-            Pointer.transform.parent = Offset.transform;
-
             LR = Pointer.AddComponent<LineRenderer>();
             LR.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             LR.receiveShadows = false;
@@ -78,7 +69,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         }
         public void Update()
         {
-            if (Vars.IsMainMenu || Vars.IsIntro || Vars.IsRankingScreenPresent)
+            if ((Vars.IsMainMenu || Vars.IsIntro || Vars.IsRankingScreenPresent)
+            && !Vars.Config.Game.VRB.EnableVRIK)
                 foreach (SteamVR_RenderModel SVRRRM in SVRRM) try { SVRRRM.gameObject.SetActive(true); } catch {}
             else foreach (SteamVR_RenderModel SVRRRM in SVRRM) try { SVRRRM.gameObject.SetActive(false); } catch {}
 

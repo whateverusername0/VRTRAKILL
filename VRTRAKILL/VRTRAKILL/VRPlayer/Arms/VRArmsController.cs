@@ -27,11 +27,17 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                 switch (Arm.Type)
                 {
                     case VRIK.ArmType.Feedbacker:
-                        OffsetPosition = new Vector3(0, -.25f, -.5f); break;
+                        OffsetPosition = new Vector3(0, -.25f, -.5f);
+                        VRIKArmScale = new Vector3(.325f, .325f, .325f);
+                        break;
                     case VRIK.ArmType.Knuckleblaster:
-                        OffsetPosition = new Vector3(0, -.01f, -.035f); break;
+                        OffsetPosition = new Vector3(0, -.01f, -.035f);
+                        VRIKArmScale = new Vector3(.325f, .325f, .325f);
+                        break;
                     case VRIK.ArmType.Whiplash:
-                        OffsetPosition = new Vector3(.145f, .09f, .04f); break;
+                        OffsetPosition = new Vector3(.145f, .09f, .04f);
+                        VRIKArmScale = new Vector3(.325f, .325f, .325f);
+                        break;
 
                     case VRIK.ArmType.Spear:
                     default: Destroy(GetComponent<VRArmsController>()); break;
@@ -40,10 +46,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
 
             LastPosition = transform.position;
 
-            if (Vars.Config.Game.VRB.EnableVRIK && VRIK.VRigController.Instance.Rig != null)
+            if (Vars.Config.Game.VRB.EnableVRIK && VRIK.VRigController.Instance.Rig != null && !IsRevolver)
             {
-                UseVRIK = true;
-
                 VRIK.IKArm IKArm = Arm.Wrist_End.gameObject.AddComponent<VRIK.IKArm>();
                 IKArm.ChainLength = 3;
                 IKArm.Target = Arm.Hand;
@@ -61,15 +65,14 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
         }
         public void LateUpdate()
         {
-            if (UseVRIK)
-            {
-                Arm.Root.localScale = VRIKArmScale;
-                if (IsSandboxer || IsRevolver) Arm.Root.position = VRIK.VRigController.Instance.Rig.RightArm.Root.position;
-                else Arm.Root.position = VRIK.VRigController.Instance.Rig.LeftArm.Root.position;
-            }
-
             try
             {
+                if (UseVRIK)
+                {
+                    if (IsSandboxer || IsRevolver) Arm.GameObjectT.position = VRIK.VRigController.Instance.Rig.RightArm.Clavicle.position;
+                    else Arm.GameObjectT.position = VRIK.VRigController.Instance.Rig.LeftArm.Clavicle.position;
+                }
+
                 // Update positions & rotations of the main gameobject + hand rotation (because animator stuff)
                 if (IsSandboxer) MoveSandboxer();
                 else if (IsRevolver) HandleRevolver();
@@ -82,14 +85,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
 
         private void MoveSandboxer()
         {
-            if (!UseVRIK)
-            {
-                Arm.GameObjectT.position = Vars.DominantHand.transform.position;
-                Arm.GameObjectT.rotation = Vars.DominantHand.transform.rotation;
-            }
+            if (UseVRIK) Arm.Clavicle.position = VRIK.VRigController.Instance.Rig.RightArm.GameObjectT.position;
+            else Arm.Clavicle.localPosition = OffsetPosition;
             Arm.Hand.position = Vars.DominantHand.transform.position;
             Arm.Hand.rotation = Vars.DominantHand.transform.rotation * OffsetRotation;
-            Arm.Root.localPosition = OffsetPosition;
         }
         private void HandleRevolver()
         {
@@ -98,12 +97,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
         }
         private void MoveHand()
         {
-            if (!UseVRIK)
-            {
-                Arm.GameObjectT.position = Vars.NonDominantHand.transform.position;
-                Arm.GameObjectT.rotation = Vars.NonDominantHand.transform.rotation;
-            }
-            Arm.Root.localPosition = OffsetPosition;
+            if (UseVRIK) Arm.Clavicle.position = VRIK.VRigController.Instance.Rig.LeftArm.GameObjectT.position;
+            else Arm.Clavicle.localPosition = OffsetPosition;
             Arm.Hand.position = Vars.NonDominantHand.transform.position;
             Arm.Hand.rotation = Vars.NonDominantHand.transform.rotation * OffsetRotation;
         }

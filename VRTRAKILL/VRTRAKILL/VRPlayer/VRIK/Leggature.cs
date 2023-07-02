@@ -11,7 +11,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
         public Transform Heel { get; set; }
         public Transform Toe { get; set; }
 
-        public static Leggature V1Preset(Transform T)
+        public static Leggature MRV1Preset(Transform T)
         {
             Leggature L = new Leggature();
             L.GameObjectT = T;

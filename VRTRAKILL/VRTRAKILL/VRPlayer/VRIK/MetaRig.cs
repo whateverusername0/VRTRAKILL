@@ -23,22 +23,24 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
         {
             MetaRig MR = new MetaRig();
             MR.GameObjectT = T; // V1Rig
-            MR.Root = T.GetChild(1).GetChild(0); // spine
-            MR.Body = MR.Root.GetChild(0); // spine.001
-            MR.Abdomen = MR.Body.GetChild(0); // spine.002
-            MR.Chest = MR.Abdomen.GetChild(0); // spine.003
-            MR.Neck = MR.Chest.GetChild(2); // spine.004
-            MR.Head = MR.Neck.GetChild(0); // spine.005
+            MR.Root = T.GetChild(1).GetChild(0); // Root
+            MR.Body = MR.Root.GetChild(2); // Spine
+            MR.Abdomen = MR.Body.GetChild(0); // Abdomen
+            MR.Chest = MR.Abdomen.GetChild(0); // Chest
+            MR.Neck = MR.Chest.GetChild(1); // Neck
+            MR.Head = MR.Neck.GetChild(0); // NeckHead
 
-            MR.LeftArm = Armature.MRFeedbackerPreset(MR.Chest.GetChild(0)); // shoulder.L
-            MR.RightArm = Armature.MRFeedbackerPreset(MR.Chest.GetChild(1)); // shoulder.R
+            MR.LeftArm = Armature.MRFeedbackerPreset(MR.Chest.GetChild(0)); // LeftShoulder
+            MR.RightArm = Armature.MRFeedbackerPreset(MR.Chest.GetChild(2)); // RightShoulder
+
+            MR.LeftLeg = Leggature.MRV1Preset(MR.Root.GetChild(0));
+            MR.RightLeg = Leggature.MRV1Preset(MR.Root.GetChild(1));
             return MR;
         }
         public static MetaRig CreateV1CustomPreset(GameObject Parent)
         {
-            GameObject V1mdlGO = PlatformerMovement.Instance.transform.Find("v1_combined").gameObject; //Misc.ForceFindGameObject("v1_combined");
-            GameObject V1mdlGOC = GameObject.Instantiate(V1mdlGO, Parent.transform);
-            return V1CustomPreset(V1mdlGOC.transform);
+            GameObject V1mdlGO = Object.Instantiate(Assets.Vars.V1Rig, Parent.transform, true);
+            return V1CustomPreset(V1mdlGO.transform);
         }
     }
 }

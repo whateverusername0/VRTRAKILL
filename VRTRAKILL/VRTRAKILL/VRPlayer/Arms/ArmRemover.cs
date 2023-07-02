@@ -12,13 +12,13 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
             GOSize = transform.localScale;
             if (gameObject.HasComponent<Revolver>() || gameObject.HasComponent<FishingRodWeapon>())
             {
-                Arm = VRIK.Armature.FeedbackerPreset(transform);
+                Arm = Arm ?? VRIK.Armature.FeedbackerPreset(transform);
                 ArmSize = new Vector3(1, 1, 1);
                 HandSize = new Vector3(100, 100, 100);
             }
             else if (gameObject.HasComponent<Sandbox.Arm.SandboxArm>())
             {
-                Arm = VRIK.Armature.SandboxerPreset(transform);
+                Arm = Arm ?? VRIK.Armature.SandboxerPreset(transform);
                 ArmSize = new Vector3(1, 1, 1);
                 HandSize = new Vector3(100, 100, 100);
             }
@@ -47,7 +47,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
             if (Vars.Config.Controllers.HandS.LeftHandMode)
                 GOSize = new Vector3(GOSize.x * -1, GOSize.y, GOSize.z);
         }
-        public void Update() { LateUpdate(); }
+        
         public void LateUpdate()
         {
             if (Arm != null)

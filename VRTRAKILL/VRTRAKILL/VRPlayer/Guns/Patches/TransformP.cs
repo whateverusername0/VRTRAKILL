@@ -1,6 +1,5 @@
 ﻿using HarmonyLib;
 using UnityEngine;
-using Plugin.Helpers;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 {
@@ -29,7 +28,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         [HarmonyPatch(typeof(Shotgun))] static class ShotgunT
         {
             static Vector3 Position = new Vector3(0, .2f, .28f);
-            static Vector3 Scale = new Vector3(.1125f, .1125f, .1125f);
+            static Vector3 Scale = new Vector3(.1f, .1f, .1f); // .1125
 
             [HarmonyPostfix] [HarmonyPatch(nameof(Shotgun.Start))] static void Retransform(Shotgun __instance)
             {
@@ -41,7 +40,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         {
             static Vector3 Position = new Vector3(-.2f, .2125f, -.05f),
                            AltPosition = new Vector3(-.25f, .35f, .075f);
-            static Vector3 Scale = new Vector3(.5f, .5f, .5f);
+            static Vector3 Scale = new Vector3(.35f, .35f, .35f);
 
             [HarmonyPostfix] [HarmonyPatch(nameof(Nailgun.Start))] static void Retransform(Nailgun __instance)
             {
@@ -53,7 +52,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         [HarmonyPatch(typeof(Railcannon))] static class RailcannonT
         {
             static Vector3 Position = new Vector3(-.25f, .25f, -.25f);
-            static Vector3 Scale = new Vector3(.4f, .4f, .4f);
+            static Vector3 Scale = new Vector3(.35f, .35f, .35f);
 
             [HarmonyPostfix] [HarmonyPatch(nameof(Railcannon.Start))] static void Retransform(Railcannon __instance)
             {
@@ -64,7 +63,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         [HarmonyPatch(typeof(RocketLauncher))] static class RocketLauncherT
         {
             static Vector3 Position = new Vector3(-.3f, .3f, -.1f);
-            static Vector3 Scale = new Vector3(.75f, .75f, .75f);
+            static Vector3 Scale = new Vector3(.65f, .65f, .65f);
 
             [HarmonyPostfix] [HarmonyPatch(nameof(RocketLauncher.Start))] static void Retransform(RocketLauncher __instance)
             {

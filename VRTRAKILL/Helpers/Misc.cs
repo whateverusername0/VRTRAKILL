@@ -14,12 +14,12 @@ namespace Plugin.Helpers
             return null;
         }
 
-        public static void RecursiveChangeLayer(this GameObject GM, LayerMask LM)
+        public static void RecursiveChangeLayer(this GameObject GM, int Layer)
         {
-            GM.layer = LM;
+            GM.layer = Layer;
             if (GM.transform.childCount > 0)
                 for (int i = 0; i < GM.transform.childCount; i++)
-                    try { RecursiveChangeLayer(GM.transform.GetChild(i).gameObject, LM); } catch {}
+                    try { RecursiveChangeLayer(GM.transform.GetChild(i).gameObject, Layer); } catch {}
         }
 
         public static RaycastHit ForwardRaycast(this Transform T, float Length, int? Layer = null)

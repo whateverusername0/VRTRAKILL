@@ -23,6 +23,7 @@ namespace Plugin
                             PLUGIN_VERSION = "0.12";
 
         public static string PluginPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                             AssetsPath = Path.GetDirectoryName($"{PluginPath}\\AssetBundles\\"),
                              FullGamePath = Process.GetCurrentProcess().MainModule.FileName,
                              GamePath = Path.GetDirectoryName(FullGamePath),
                              HMDModel = string.Empty;
