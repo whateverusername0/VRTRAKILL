@@ -19,7 +19,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
         public Transform Clavicle { get; set; }
         public Transform UpperArm => Clavicle.GetChild(0); // * special case * //
         public Transform LowerArm => UpperArm.GetChild(0); // * special case * //
-        public Transform Wrist { get; set; }
+        public Transform Wrist { get; set; } public Transform Wrist_End { get; set; }
 
         public Transform Hand { get; set; }
         public Finger FIndex { get; set; }
@@ -53,6 +53,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
             A.Wrist = A.UpperArm.GetChild(0);
 
             A.Hand = A.Wrist.GetChild(0);
+            A.Wrist_End = CreateEndFromChild(A.Wrist, A.Hand);
+
             A.FIndex = new Finger(A.Hand.GetChild(0));
             A.FPinkie = new Finger(A.Hand.GetChild(1));
             A.FMiddle = new Finger(A.Hand.GetChild(2));
@@ -66,7 +68,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
             A.Type = ArmType.Feedbacker;
             A.GameObjectT = T;
             A.Clavicle = A.GameObjectT;
+
             A.Hand = A.LowerArm.GetChild(0);
+            A.Wrist_End = CreateEndFromChild(A.LowerArm, A.Hand);
+
             A.FIndex = new Finger(A.Hand.GetChild(0));
             A.FThumb = new Finger(A.Hand.GetChild(1), IsThumb: true);
             return A;
@@ -81,6 +86,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
             A.Wrist = A.Clavicle.GetChild(1);
 
             A.Hand = A.Wrist.GetChild(0);
+            A.Wrist_End = CreateEndFromChild(A.Wrist, A.Hand);
+
             A.FIndex = new Finger(A.Hand.GetChild(4), true);
             A.FPinkie = new Finger(A.Hand.GetChild(5), true);
             A.FThumb = new Finger(A.Hand.GetChild(6), true);
@@ -103,6 +110,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
             A.Wrist = A.Clavicle.GetChild(1);
 
             A.Hand = A.Wrist.GetChild(0);
+            A.Wrist_End = CreateEndFromChild(A.Wrist, A.Hand);
+
             A.FIndex = new Finger(A.Hand.GetChild(0));
             A.FPinkie = new Finger(A.Hand.GetChild(1));
             A.FMiddle = new Finger(A.Hand.GetChild(2));
@@ -120,12 +129,23 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
             A.Wrist = A.UpperArm.GetChild(0);
 
             A.Hand = A.Wrist.GetChild(0);
+            A.Wrist_End = CreateEndFromChild(A.Wrist, A.Hand);
+
             A.FIndex = new Finger(A.Hand.GetChild(0));
             A.FPinkie = new Finger(A.Hand.GetChild(1));
             A.FMiddle = new Finger(A.Hand.GetChild(2));
             A.FRing = new Finger(A.Hand.GetChild(3));
             A.FThumb = new Finger(A.Hand.GetChild(4), true);
             return A;
+        }
+
+        private static Transform CreateEndFromChild(Transform Parent, Transform CopyPositionFrom)
+        {
+            GameObject GO = new GameObject($"{Parent.gameObject.name}_End");
+            GO.transform.parent = Parent;
+            GO.transform.localPosition = CopyPositionFrom.localPosition;
+            GO.transform.localRotation = CopyPositionFrom.localRotation;
+            return GO.transform;
         }
     }
 }
