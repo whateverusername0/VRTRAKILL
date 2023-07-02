@@ -17,6 +17,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
         // vrik stuff
         public bool UseVRIK = false;
         public Vector3 VRIKShoulderPosition = Vector3.zero;
+        public Quaternion VRIKShoulderRotation = Quaternion.Euler(Vector3.zero);
         public Vector3 VRIKArmScale = new Vector3(.325f, .325f, .325f);
 
         public void Start()
@@ -39,22 +40,16 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
 
             LastPosition = transform.position;
 
-            if (Vars.Config.Game.VRB.EnableVRIK)
+            if (Vars.Config.Game.VRB.EnableVRIK && VRIK.VRigController.Instance.Rig != null)
             {
                 UseVRIK = true;
 
-                VRIK.IKArm IKArm = Arm.Hand.gameObject.AddComponent<VRIK.IKArm>();
+                VRIK.IKArm IKArm = Arm.Wrist_End.gameObject.AddComponent<VRIK.IKArm>();
                 IKArm.ChainLength = 3;
-
-                if (IsRevolver) IKArm.Target = Vars.DominantHand.transform;
-                else IKArm.Target = Vars.NonDominantHand.transform;
+                IKArm.Target = Arm.Hand;
 
                 GetComponent<ArmRemover>().enabled = false;
             }
-        }
-        public void Update()
-        {
-            
         }
         public void FixedUpdate()
         {
@@ -69,6 +64,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
             if (UseVRIK)
             {
                 Arm.Root.localScale = VRIKArmScale;
+                if (IsSandboxer || IsRevolver) Arm.Root.position = VRIK.VRigController.Instance.Rig.RightArm.Root.position;
+                else Arm.Root.position = VRIK.VRigController.Instance.Rig.LeftArm.Root.position;
             }
 
             try
