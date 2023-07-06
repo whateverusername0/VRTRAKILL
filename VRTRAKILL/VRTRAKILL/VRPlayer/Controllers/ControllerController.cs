@@ -7,7 +7,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
     internal class ControllerController : MonoBehaviour
     {
         private SteamVR_RenderModel[] SVRRM;
-        public GameObject Offset = new GameObject("Offset");
+        public GameObject GunOffset = new GameObject("Gun Offset") { layer = (int)Vars.Layers.IgnoreRaycast };
+        public GameObject UIOffset = new GameObject("UI Offset") { layer = (int)Vars.Layers.IgnoreRaycast };
+
         private GameObject Pointer;
         LineRenderer LR; Vector3 EndPosition;
         public float DefaultLength => Vars.Config.View.VRUI.CrosshairDistance;
@@ -15,8 +17,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         private void SetupControllerPointer()
         {
             // Create a real pointer with the camera for ui interaction
-            Pointer = new GameObject("Real Canvas Pointer") { layer = (int)Vars.Layers.UI };
-            Pointer.transform.parent = Offset.transform;
+            Pointer = new GameObject("Canvas Pointer") { layer = (int)Vars.Layers.UI };
+            Pointer.transform.parent = UIOffset.transform;
 
             Camera PointerCamera = Pointer.AddComponent<Camera>();
             PointerCamera.stereoTargetEye = StereoTargetEyeMask.None;
@@ -51,7 +53,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 
             if (LR.enabled)
             {
-                LR.SetPosition(0, Offset.transform.position);
+                LR.SetPosition(0, GunOffset.transform.position);
                 LR.SetPosition(1, EndPosition);
             }
         }
@@ -59,10 +61,12 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         public void Start()
         {
             SVRRM = GetComponentsInChildren<SteamVR_RenderModel>();
-            Offset.layer = (int)Vars.Layers.IgnoreRaycast;
-            Offset.transform.parent = this.transform;
-            Offset.transform.localPosition = Vector3.zero;
-            Offset.transform.localRotation = Quaternion.Euler(45, 0, 0);
+            GunOffset.transform.parent = transform;
+            GunOffset.transform.localPosition = Vector3.zero;
+            GunOffset.transform.localRotation = Quaternion.Euler(45, 0, 0);
+            UIOffset.transform.parent = transform;
+            UIOffset.transform.localPosition = Vector3.zero;
+            UIOffset.transform.localRotation = Quaternion.Euler(90, 0, 0);
 
             if (Vars.Config.Controllers.UseControllerUIInteraction) SetupControllerPointer();
             if (Vars.Config.Controllers.CLines.DrawControllerLines) SetupControllerLines();
@@ -74,9 +78,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
                 foreach (SteamVR_RenderModel SVRRRM in SVRRM) try { SVRRRM.gameObject.SetActive(true); } catch {}
             else foreach (SteamVR_RenderModel SVRRRM in SVRRM) try { SVRRRM.gameObject.SetActive(false); } catch {}
 
-            bool Raycast = Physics.Raycast(Offset.transform.position, Offset.transform.forward,
+            bool Raycast = Physics.Raycast(UIOffset.transform.position, UIOffset.transform.forward,
                                            out RaycastHit Hit, float.PositiveInfinity, (int)Vars.Layers.UI);
-            EndPosition = Offset.transform.position + (Offset.transform.forward * DefaultLength);
+            EndPosition = UIOffset.transform.position + (UIOffset.transform.forward * DefaultLength);
             if (Raycast) EndPosition = Hit.point;
 
             if (Vars.Config.Controllers.CLines.DrawControllerLines) DrawControllerLines();

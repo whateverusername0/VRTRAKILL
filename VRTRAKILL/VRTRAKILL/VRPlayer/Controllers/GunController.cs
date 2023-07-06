@@ -4,16 +4,12 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 {
     internal class GunController : MonoSingleton<GunController>
     {
-        public GameObject Offset;
+        public GameObject GunOffset, UIOffset;
 
         public void Start()
         {
-            Offset = gameObject.GetComponent<ControllerController>().Offset;
-        }
-
-        public void Update()
-        {
-
+            GunOffset = gameObject.GetComponent<ControllerController>().GunOffset;
+            UIOffset = gameObject.GetComponent<ControllerController>().UIOffset;
         }
     }
 }

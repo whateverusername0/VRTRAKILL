@@ -8,7 +8,7 @@ namespace Plugin.VRTRAKILL.UI.Patches
     {
         [HarmonyPrefix] [HarmonyPatch(nameof(Crosshair.Start))] static void SetCrosshair(Crosshair __instance)
         {
-            __instance.transform.parent = Vars.DominantHand.transform;
+            __instance.transform.parent = VRPlayer.Controllers.GunController.Instance.UIOffset.transform;
 
             Canvas C = __instance.gameObject.AddComponent<Canvas>();
             C.worldCamera = Vars.UICamera;

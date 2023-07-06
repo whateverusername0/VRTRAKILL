@@ -89,9 +89,9 @@ namespace Plugin.VRTRAKILL
         public static Camera DesktopCamera => VRPlayer.VRCamera.Patches.CameraConverterP.DesktopWorldCam;
         public static Camera DesktopUICamera => VRPlayer.VRCamera.Patches.CameraConverterP.DesktopUICam;
 
-        public static GameObject NonDominantHand => VRPlayer.Controllers.ArmController.Instance.Offset;
+        public static GameObject NonDominantHand => VRPlayer.Controllers.ArmController.Instance.GunOffset;
         public static VRPlayer.Controllers.ArmController NDHC => VRPlayer.Controllers.ArmController.Instance;
-        public static GameObject DominantHand => VRPlayer.Controllers.GunController.Instance.Offset;
+        public static GameObject DominantHand => VRPlayer.Controllers.GunController.Instance.GunOffset;
         public static VRPlayer.Controllers.GunController DHC => VRPlayer.Controllers.GunController.Instance;
 
         #region Arms
