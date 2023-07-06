@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Plugin.VRTRAKILL.VRPlayer.VRIK.Armature;
 
 namespace Plugin.VRTRAKILL
 {
@@ -96,18 +97,11 @@ namespace Plugin.VRTRAKILL
 
         #region Arms
 
-        public static VRPlayer.VRIK.Armature FeedbackerArm { get; set; }
-        public static VRPlayer.VRIK.Armature KnuckleblasterArm { get; set; }
-        public static VRPlayer.VRIK.Armature SpearArm { get; set; }
-        public static VRPlayer.VRIK.Armature WhiplashArm { get; set; }
-        public static VRPlayer.VRIK.Armature SandboxerArm { get; set; }
-
-        #endregion
-
-        #region Player skins
-
-        public static VRPlayer.VRIK.MetaRig V1Rig { get; set; }
-        public static VRPlayer.VRIK.MetaRig V2Rig { get; set; }
+        public static Armature FeedbackerArm { get; set; }
+        public static Armature KnuckleblasterArm { get; set; }
+        public static Armature SpearArm { get; set; }
+        public static Armature WhiplashArm { get; set; }
+        public static Armature SandboxerArm { get; set; }
 
         #endregion
     }
