@@ -15,10 +15,7 @@ namespace VRPatcher
         // code successfully borrowed from https://github.com/Raicuparta/two-forks-vr/blob/main/TwoForksVrPatcher/Patcher.cs
 
         public static IEnumerable<string> TargetDLLs { get; } = new[] { "Assembly-CSharp.dll" };
-
-        public static void Patch(AssemblyDefinition assembly)
-        {
-        }
+        public static void Patch(AssemblyDefinition assembly) {}
 
         public static void Initialize()
         {
@@ -31,7 +28,7 @@ namespace VRPatcher
                    DataPath = Path.Combine(GamePath, $"{GameName}_Data/"),
 
                    GameManagersPath = Path.Combine(DataPath, $"globalgamemanagers"),
-                   GameManagersBackupPath = CreateGameManagersBackup(GameManagersPath),
+                   GameManagersBackupPath = CreateGMBackup(GameManagersPath),
 
                    ClassDataPath = Path.Combine(PatcherPath, "classdata.tpk");
 
@@ -40,17 +37,17 @@ namespace VRPatcher
             Console.WriteLine("Epic conversion from ULTRAKILL to VRTRAKILL is complete.");
         }
 
-        private static string CreateGameManagersBackup(string GameManagersPath)
+        private static string CreateGMBackup(string GameManagersPath)
         {
             Console.WriteLine($"Backing up '{GameManagersPath}'...");
             string BackupPath = GameManagersPath + ".bak";
             if (File.Exists(BackupPath))
-            {
                 Console.WriteLine($"Backup already exists.");
-                return BackupPath;
+            else
+            {
+                File.Copy(GameManagersPath, BackupPath);
+                Console.WriteLine($"Created backup in '{BackupPath}'");
             }
-            File.Copy(GameManagersPath, BackupPath);
-            Console.WriteLine($"Created backup in '{BackupPath}'");
             return BackupPath;
         }
 
@@ -60,9 +57,11 @@ namespace VRPatcher
 
             AssetsManager AM = new AssetsManager();
             AM.LoadClassPackage(ClassDataPath);
+
             AssetsFileInstance GGM = AM.LoadAssetsFile(GameManagersBackupPath, false);
             AssetsFile GGMFile = GGM.file;
             AssetsFileTable GGMTable = GGM.table;
+
             AM.LoadClassDatabaseFromPackage(GGMFile.typeTree.unityVersion);
 
             List<AssetsReplacer> Replacers = new List<AssetsReplacer>();
@@ -77,8 +76,8 @@ namespace VRPatcher
             Replacers.Add(new AssetsReplacerFromMemory(0, BuildSettings.index, (int)BuildSettings.curFileType, 0xffff,
                                                        BuildSettingsBase.WriteToByteArray()));
 
-            using (var writer = new AssetsFileWriter(File.OpenWrite(GameManagersPath)))
-                GGMFile.Write(writer, 0, Replacers, 0);
+            using (AssetsFileWriter W = new AssetsFileWriter(File.OpenWrite(GameManagersPath)))
+                GGMFile.Write(W, 0, Replacers, 0);
         }
 
         private static AssetTypeValueField StringField(string str, AssetTypeTemplateField template)
