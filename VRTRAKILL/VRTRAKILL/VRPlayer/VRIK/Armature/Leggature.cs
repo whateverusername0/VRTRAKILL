@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Plugin.VRTRAKILL.VRPlayer.VRIK
+namespace Plugin.VRTRAKILL.VRPlayer.VRIK.Armature
 {
     internal class Leggature
     {
