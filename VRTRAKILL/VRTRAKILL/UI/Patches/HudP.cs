@@ -9,7 +9,8 @@ namespace Plugin.VRTRAKILL.UI.Patches
         {
             __instance.transform.parent = HUDOptions.Instance.transform;
 
-            if (!Vars.Config.View.VRUI.EnableStandardHUD) __instance.GetComponent<Canvas>().enabled = false;
+            if (!Vars.Config.View.VRUI.EnableStandardHUD && __instance.gameObject.name == "GunCanvas")
+                __instance.gameObject.SetActive(false);
 
             UIConverter.ConvertCanvas(__instance.GetComponent<Canvas>(), Force: true, DontAddComponent: true);
             __instance.gameObject.AddComponent<HideWhenMenuActive>();
