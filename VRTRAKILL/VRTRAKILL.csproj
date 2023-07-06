@@ -204,7 +204,7 @@
     <Compile Include="VRTRAKILL\UI\UICanvas.cs" />
     <Compile Include="VRTRAKILL\UI\UIConverter.cs" />
     <Compile Include="VRTRAKILL\UI\UIInteraction.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\VRIK\Armature.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRIK\Armature\Armature.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\ArmRemover.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Gestures\GesturesController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\A.cs" />
@@ -214,7 +214,7 @@
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\Whiplash\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\Whiplash\HookArmP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\VRArmsController.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\VRIK\Leggature.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRIK\Armature\Leggature.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRIK\MetaRig.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRIK\Patches\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRIK\Patches\VRIKP.cs" />
