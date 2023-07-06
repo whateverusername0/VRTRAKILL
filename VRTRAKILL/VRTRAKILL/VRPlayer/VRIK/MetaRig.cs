@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using Plugin.Helpers;
+using Plugin.VRTRAKILL.VRPlayer.VRIK.Armature;
 
 namespace Plugin.VRTRAKILL.VRPlayer.VRIK
 {
@@ -13,8 +13,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
         public Transform Neck { get; set; }
         public Transform Head { get; set; }
 
-        public Armature LeftArm { get; set; }
-        public Armature RightArm { get; set; }
+        public Armature.Armature LeftArm { get; set; }
+        public Armature.Armature RightArm { get; set; }
 
         public Leggature LeftLeg { get; set; }
         public Leggature RightLeg { get; set; }
@@ -30,8 +30,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
             MR.Neck = MR.Chest.GetChild(1); // Neck
             MR.Head = MR.Neck.GetChild(0); // NeckHead
 
-            MR.LeftArm = Armature.MRFeedbackerPreset(MR.Chest.GetChild(0)); // LeftShoulder
-            MR.RightArm = Armature.MRFeedbackerPreset(MR.Chest.GetChild(2)); // RightShoulder
+            MR.LeftArm = Armature.Armature.MRFeedbackerPreset(MR.Chest.GetChild(0)); // LeftShoulder
+            MR.RightArm = Armature.Armature.MRFeedbackerPreset(MR.Chest.GetChild(2)); // RightShoulder
 
             MR.LeftLeg = Leggature.MRV1Preset(MR.Root.GetChild(0));
             MR.RightLeg = Leggature.MRV1Preset(MR.Root.GetChild(1));

@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using UnityEngine;
+using Plugin.VRTRAKILL.VRPlayer.VRIK.Armature;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 {
@@ -18,7 +19,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             [HarmonyPostfix] [HarmonyPatch(nameof(Revolver.Start))] static void Retransform(Revolver __instance)
             {
                 Arms.VRArmsController FBC = __instance.gameObject.AddComponent<Arms.VRArmsController>();
-                VRIK.Armature A = VRIK.Armature.FeedbackerPreset(__instance.transform);
+                Armature A = Armature.FeedbackerPreset(__instance.transform);
                 FBC.Arm = A; FBC.IsRevolver = true; FBC.OffsetRotation = Quaternion.Euler(OffsetRotation);
 
                 if (__instance.altVersion == true) { __instance.wpos.defaultPos = AltPosition; __instance.wpos.defaultScale = AltScale; }
@@ -79,7 +80,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             [HarmonyPostfix] [HarmonyPatch(nameof(Sandbox.Arm.SandboxArm.Awake))] static void Retransform(Sandbox.Arm.SandboxArm __instance)
             {
                 Arms.VRArmsController FBC = __instance.gameObject.AddComponent<Arms.VRArmsController>();
-                VRIK.Armature A = VRIK.Armature.SandboxerPreset(__instance.transform);
+                Armature A = Armature.SandboxerPreset(__instance.transform);
                 FBC.Arm = A; FBC.IsSandboxer = true; FBC.OffsetPosition = new Vector3(0, -.25f, -.5f);
                 __instance.transform.localScale = Scale;
             }

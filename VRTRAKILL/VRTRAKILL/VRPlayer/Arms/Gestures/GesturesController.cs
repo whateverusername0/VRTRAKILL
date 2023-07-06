@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
+using Plugin.VRTRAKILL.VRPlayer.VRIK.Armature;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Arms.Gestures
 {
     internal class GesturesController : MonoBehaviour
     {
-        public VRIK.Armature Arm;
+        public Armature Arm;
 
         public bool
             Punch = false,
@@ -16,13 +17,13 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Gestures
         {
             switch (Arm.Type)
             {
-                case VRIK.ArmType.Feedbacker:
+                case ArmType.Feedbacker:
                     break;
-                case VRIK.ArmType.Knuckleblaster:
+                case ArmType.Knuckleblaster:
                     break;
 
-                case VRIK.ArmType.Whiplash:
-                case VRIK.ArmType.Spear:
+                case ArmType.Whiplash:
+                case ArmType.Spear:
                 default: Destroy(GetComponent<GesturesController>()); break;
             }
         }

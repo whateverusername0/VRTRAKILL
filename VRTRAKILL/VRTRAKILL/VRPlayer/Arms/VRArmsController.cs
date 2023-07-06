@@ -1,12 +1,13 @@
 ﻿using Plugin.Helpers;
 using UnityEngine;
+using Plugin.VRTRAKILL.VRPlayer.VRIK.Armature;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Arms
 {
     internal class VRArmsController : MonoBehaviour
     {
         // basic stuff
-        public VRIK.Armature Arm;
+        public Armature Arm;
         public Vector3 OffsetPosition = new Vector3(.145f, .09f, .04f); // pre set to fix whiplash
         public Quaternion OffsetRotation = Quaternion.Euler(-90, 180, 0);
         public bool IsSandboxer = false, IsRevolver = false;
@@ -26,20 +27,20 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
             {
                 switch (Arm.Type)
                 {
-                    case VRIK.ArmType.Feedbacker:
+                    case ArmType.Feedbacker:
                         OffsetPosition = new Vector3(0, -.25f, -.5f);
                         VRIKArmScale = new Vector3(.325f, .325f, .325f);
                         break;
-                    case VRIK.ArmType.Knuckleblaster:
+                    case ArmType.Knuckleblaster:
                         OffsetPosition = new Vector3(0, -.01f, -.035f);
                         VRIKArmScale = new Vector3(.325f, .325f, .325f);
                         break;
-                    case VRIK.ArmType.Whiplash:
+                    case ArmType.Whiplash:
                         OffsetPosition = new Vector3(.145f, .09f, .04f);
                         VRIKArmScale = new Vector3(.325f, .325f, .325f);
                         break;
 
-                    case VRIK.ArmType.Spear:
+                    case ArmType.Spear:
                     default: Destroy(GetComponent<VRArmsController>()); break;
                 }
             }
@@ -57,6 +58,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
         }
         public void FixedUpdate()
         {
+            // velocity based punching
             if (LastPosition != transform.position)
             {
                 Velocity = (transform.position - LastPosition).normalized;
@@ -69,23 +71,23 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
             {
                 if (UseVRIK)
                 {
-                    if (IsSandboxer || IsRevolver) Arm.GameObjectT.position = VRIK.VRigController.Instance.Rig.RightArm.Clavicle.position;
-                    else Arm.GameObjectT.position = VRIK.VRigController.Instance.Rig.LeftArm.Clavicle.position;
+                    if (IsSandboxer || IsRevolver) Arm.GameObjecT.position = VRIK.VRigController.Instance.Rig.RightArm.Clavicle.position;
+                    else Arm.GameObjecT.position = VRIK.VRigController.Instance.Rig.LeftArm.Clavicle.position;
                 }
 
-                // Update positions & rotations of the main gameobject + hand rotation (because animator stuff)
+                // override positions & rotations of the main gameobject + hand rotation
                 if (IsSandboxer) MoveSandboxer();
                 else if (IsRevolver) HandleRevolver();
                 else MoveHand();
 
                 HandleWhiplash();
 
-            } catch {} // do nothing because i know that it 100% works :) (it gives out too many errors which zipbomb your storage)
+            } catch {} // it gives out too many errors which zipbomb your storage
         }
 
         private void MoveSandboxer()
         {
-            if (UseVRIK) Arm.Clavicle.position = VRIK.VRigController.Instance.Rig.RightArm.GameObjectT.position;
+            if (UseVRIK) Arm.Clavicle.position = VRIK.VRigController.Instance.Rig.RightArm.GameObjecT.position;
             else Arm.Clavicle.localPosition = OffsetPosition;
             Arm.Hand.position = Vars.DominantHand.transform.position;
             Arm.Hand.rotation = Vars.DominantHand.transform.rotation * OffsetRotation;
@@ -97,7 +99,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
         }
         private void MoveHand()
         {
-            if (UseVRIK) Arm.Clavicle.position = VRIK.VRigController.Instance.Rig.LeftArm.GameObjectT.position;
+            if (UseVRIK) Arm.Clavicle.position = VRIK.VRigController.Instance.Rig.LeftArm.GameObjecT.position;
             else Arm.Clavicle.localPosition = OffsetPosition;
             Arm.Hand.position = Vars.NonDominantHand.transform.position;
             Arm.Hand.rotation = Vars.NonDominantHand.transform.rotation * OffsetRotation;
@@ -110,8 +112,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
             // Thingamajig to disable other arms while grapplehooking
             if (HookArm.Instance.model.activeSelf && !gameObject.HasComponent<HookArm>()
                 && !IsSandboxer && !gameObject.HasComponent<Revolver>())
-                Arm.GameObjectT.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
-            else Arm.GameObjectT.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
+                Arm.GameObjecT.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
+            else Arm.GameObjecT.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
         }
     }
 }
