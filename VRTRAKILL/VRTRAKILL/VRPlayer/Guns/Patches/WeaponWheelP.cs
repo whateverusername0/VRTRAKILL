@@ -17,7 +17,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                 return false;
             }
 
-            __instance.direction = Vector2.ClampMagnitude(__instance.direction + Input.VRInputVars.WWVector, 1f);
+            __instance.direction = Vector2.ClampMagnitude(__instance.direction + Input.InputVars.WWVector, 1f);
             float num = Mathf.Repeat(Mathf.Atan2(__instance.direction.x, __instance.direction.y) * 57.29578f + 90f, 360f); // wtf is that magic number??
             __instance.selectedSegment = ((__instance.direction.sqrMagnitude > 0f)
                                          ? ((int)(num / (360f / (float)__instance.segmentCount)))

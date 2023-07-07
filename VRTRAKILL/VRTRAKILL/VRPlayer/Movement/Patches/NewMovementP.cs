@@ -19,7 +19,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
             Vector2 vector = Vector2.zero;
             if (__instance.activated)
             {
-                vector = Input.VRInputVars.MoveVector * Vars.Config.Game.MovementMultiplier;
+                vector = Input.InputVars.MoveVector * Vars.Config.Game.MovementMultiplier;
 
                 __instance.cc.movementHor = vector.x;
                 __instance.cc.movementVer = vector.y;
@@ -532,7 +532,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                     vector += vector2;
                 }
 
-                __instance.movementDirection = Vector3.ClampMagnitude(Input.VRInputVars.MoveVector.x * __instance.transform.right, 1f) * 5f;
+                __instance.movementDirection = Vector3.ClampMagnitude(Input.InputVars.MoveVector.x * __instance.transform.right, 1f) * 5f;
                 if (!MonoSingleton<HookArm>.Instance || !MonoSingleton<HookArm>.Instance.beingPulled)
                     __instance.rb.velocity = vector + __instance.pushForce + __instance.movementDirection;
                 else __instance.StopSlide();

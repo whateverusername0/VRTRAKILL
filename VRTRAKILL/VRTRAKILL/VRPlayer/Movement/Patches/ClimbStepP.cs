@@ -12,7 +12,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
             if (__instance.cooldown <= 0f) __instance.cooldown = 0f;
             else __instance.cooldown -= Time.deltaTime;
 
-            Vector2 vector = Input.VRInputVars.MoveVector;
+            Vector2 vector = Input.InputVars.MoveVector;
             __instance.movementDirection = Vector3.ClampMagnitude(vector.x * __instance.transform.right + vector.y * __instance.transform.forward, 1f);
 
             return false;

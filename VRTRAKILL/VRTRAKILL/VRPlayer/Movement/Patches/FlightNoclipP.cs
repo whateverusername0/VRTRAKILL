@@ -13,7 +13,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
             if (MonoSingleton<InputManager>.Instance.InputSource.Dodge.IsPressed) d = 2.5f;
 
             Vector3 a = Vector3.zero;
-            Vector2 vector = Vector2.ClampMagnitude(Input.VRInputVars.MoveVector, 1f);
+            Vector2 vector = Vector2.ClampMagnitude(Input.InputVars.MoveVector, 1f);
 
             a += __instance.camera.right * vector.x;
             a += __instance.camera.forward * vector.y;
@@ -34,7 +34,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
         {
             float d = 1f;
             if (MonoSingleton<InputManager>.Instance.InputSource.Dodge.IsPressed) d = 2.5f;
-            Vector2 vector = Vector2.ClampMagnitude(Input.VRInputVars.MoveVector, 1f);
+            Vector2 vector = Vector2.ClampMagnitude(Input.InputVars.MoveVector, 1f);
             __instance.transform.position = __instance.transform.position + __instance.camera.right * vector.x * 40f * Time.deltaTime * d;
             __instance.transform.position = __instance.transform.position + __instance.camera.forward * vector.y * 40f * Time.deltaTime * d;
 

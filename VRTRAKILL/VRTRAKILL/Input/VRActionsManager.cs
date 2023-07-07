@@ -77,9 +77,9 @@ namespace Plugin.VRTRAKILL.Input
 
         // Movemint
         private static void MovementH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
-        { VRInputVars.MoveVector = axis; }
+        { InputVars.MoveVector = axis; }
         private static void TurnH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
-        { VRInputVars.TurnVector = axis; }
+        { InputVars.TurnVector = axis; }
         private static void JumpH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != Jump) { Jump = newState; TriggerKey(Jump, !Jump, ConfigMaster.KJump, ConfigMaster.MJump); } }
         private static void SlideH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
@@ -115,7 +115,7 @@ namespace Plugin.VRTRAKILL.Input
         private static void OpenWeaponWheelH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != OpenWeaponWheel) { OpenWeaponWheel = newState; TriggerKey(OpenWeaponWheel, !OpenWeaponWheel, ConfigMaster.KLastWeaponUsed, ConfigMaster.MLastWeaponUsed); } }
         private static void WeaponWheelScrollH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
-        { VRInputVars.WWVector = axis; }
+        { InputVars.WWVector = axis; }
         // Slots
         private static void Slot0H(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != Slot0) { Slot0 = newState; TriggerKey(Slot0, !Slot0, ConfigMaster.KSlot0, ConfigMaster.MSlot0); } }
