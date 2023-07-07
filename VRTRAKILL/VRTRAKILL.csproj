@@ -152,6 +152,7 @@
   <ItemGroup>
     <Compile Include="VRTRAKILL\Assets\AssetLoader.cs" />
     <Compile Include="VRTRAKILL\Assets\Vars.cs" />
+    <Compile Include="VRTRAKILL\Config\ConfigVars.cs" />
     <Compile Include="VRTRAKILL\SceneWorker.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Patches\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRIK\IKArm.cs" />
@@ -249,7 +250,7 @@
     <Compile Include="VRTRAKILL\Config\ConfigJSON.cs" />
     <Compile Include="VRTRAKILL\Config\ConfigMaster.cs" />
     <Compile Include="VRTRAKILL\Config\InputMap.cs" />
-    <Compile Include="VRTRAKILL\Input\VRInputVars.cs" />
+    <Compile Include="VRTRAKILL\Input\InputVars.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\CameraConverterP.cs" />
     <Compile Include="VRTRAKILL\Vars.cs" />
   </ItemGroup>
