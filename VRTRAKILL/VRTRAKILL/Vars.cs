@@ -97,11 +97,11 @@ namespace Plugin.VRTRAKILL
 
         #region Arms
 
-        public static Armature FeedbackerArm { get; set; }
-        public static Armature KnuckleblasterArm { get; set; }
-        public static Armature SpearArm { get; set; }
-        public static Armature WhiplashArm { get; set; }
-        public static Armature SandboxerArm { get; set; }
+        public static Arm FeedbackerArm { get; set; }
+        public static Arm KnuckleblasterArm { get; set; }
+        public static Arm SpearArm { get; set; }
+        public static Arm WhiplashArm { get; set; }
+        public static Arm SandboxerArm { get; set; }
 
         #endregion
     }
