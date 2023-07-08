@@ -25,17 +25,20 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
         public Leg LeftLeg { get; set; }
         public Leg RightLeg { get; set; }
 
+        public Transform LForearm_Pole { get; set; }
+        public Transform RForearm_Pole { get; set; }
+
         public static MetaRig V1CustomPreset(Transform T)
         {
             MetaRig MR = new MetaRig
             {
                 GameObjectT = T, // V1
-                Root = T.GetChild(1).GetChild(0) // Root
+                Root = T.GetChild(1) // Armature
             };
-            MR.Body = MR.Root.GetChild(2); // Spine
+            MR.Body = MR.Root.GetChild(0).GetChild(0).GetChild(0); // Spine
             MR.Abdomen = MR.Body.GetChild(0); // Abdomen
             MR.Chest = MR.Abdomen.GetChild(0); // Chest
-            MR.Neck = MR.Chest.GetChild(1); // Neck
+            MR.Neck = MR.Chest.GetChild(2); // Neck
             MR.Head = MR.Neck.GetChild(0); // NeckHead
 
             MR.LShoulder = MR.Chest.GetChild(0); // LeftShoulder
@@ -43,12 +46,12 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
             MR.LKnuckleblaster = Arm.MRKnuckleblasterPreset(MR.LShoulder.GetChild(1));
             MR.LWhiplash = Arm.MRWhiplashPreset(MR.LShoulder.GetChild(2));
 
-            MR.RShoulder = MR.Chest.GetChild(2); // RightShoulder
+            MR.RShoulder = MR.Chest.GetChild(1); // RightShoulder
             MR.RFeedbacker = Arm.MRFeedbackerPreset(MR.RShoulder.GetChild(0));
             MR.RSandboxer = Arm.MRKnuckleblasterPreset(MR.RShoulder.GetChild(1));
 
-            MR.LeftLeg = Leg.MRPreset(MR.Root.GetChild(0));
-            MR.RightLeg = Leg.MRPreset(MR.Root.GetChild(1));
+            MR.LeftLeg = Leg.MRPreset(MR.Root.GetChild(0).GetChild(0).GetChild(1));
+            MR.RightLeg = Leg.MRPreset(MR.Root.GetChild(0).GetChild(0).GetChild(2));
             return MR;
         }
         public static MetaRig CreateV1CustomPreset(GameObject Parent)
