@@ -155,6 +155,8 @@
     <Compile Include="VRTRAKILL\Config\ConfigVars.cs" />
     <Compile Include="VRTRAKILL\SceneWorker.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Patches\A.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRIK\Armature\Finger.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRIK\Armature\Hand.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRIK\IKArm.cs" />
     <Compile Include="Helpers\Libraries\WindowsInput\IInputDeviceStateAdaptor.cs" />
     <Compile Include="Helpers\Libraries\WindowsInput\IInputMessageDispatcher.cs" />
@@ -205,7 +207,7 @@
     <Compile Include="VRTRAKILL\UI\UICanvas.cs" />
     <Compile Include="VRTRAKILL\UI\UIConverter.cs" />
     <Compile Include="VRTRAKILL\UI\UIInteraction.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\VRIK\Armature\Armature.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRIK\Armature\Arm.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\ArmRemover.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Gestures\GesturesController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\A.cs" />
@@ -215,7 +217,7 @@
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\Whiplash\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\Whiplash\HookArmP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\VRArmsController.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\VRIK\Armature\Leggature.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRIK\Armature\Leg.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRIK\MetaRig.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRIK\Patches\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRIK\Patches\VRIKP.cs" />
@@ -264,11 +266,11 @@
     <None Include="CopyToGameRoot\ULTRAKILL\BepInEx\patchers\classdata.tpk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\plugins\VRTRAKILL\AssetBundles\Rigs\mdl_v1rigged">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\plugins\VRTRAKILL\vrtrakillassetbundle">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\plugins\VRTRAKILL\AssetBundles\Rigs\mdl_v1rigged.manifest">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\plugins\VRTRAKILL\vrtrakillassetbundle.manifest">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\actions.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
