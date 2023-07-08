@@ -1,0 +1,44 @@
+ManifestFileVersion: 0
+CRC: 2925286200
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: bc0b9c1060b33fa6f1b32bbabaedc209
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 889f56699e1f09aa0ce745c3af23d519
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 137
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/AssetsBundles/Arms/Feedbacker/Feedbacker.prefab
+- Assets/AssetsBundles/Animations/InAir.anim
+- Assets/AssetsBundles/V2/V2.prefab
+- Assets/AssetsBundles/Arms/Sandboxer/Sandboxer.prefab
+- Assets/AssetsBundles/Arms/Feedbacker/Hand_Nailgun.prefab
+- Assets/AssetsBundles/Arms/Feedbacker/Hand_Shotgun.prefab
+- Assets/AssetsBundles/Arms/Feedbacker/Hand_Railgun.prefab
+- Assets/AssetsBundles/V1/V1.prefab
+- Assets/AssetsBundles/Arms/Whiplash/Whiplash.prefab
+- Assets/AssetsBundles/Animations/Run.anim
+- Assets/AssetsBundles/Arms/Feedbacker/Hand_Sawblade.prefab
+- Assets/AssetsBundles/Animations/Idle.anim
+- Assets/AssetsBundles/Animations/Jump.anim
+- Assets/AssetsBundles/Arms/Knuckleblaster/Knuckleblaster.prefab
+Dependencies: []
