@@ -6,20 +6,20 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
 {
     internal class ArmRemover : MonoBehaviour
     {
-        public Armature Arm;
+        public Arm Arm;
         Vector3 ArmSize, HandSize;
 
         public void Start()
         {
             if (gameObject.HasComponent<Revolver>() || gameObject.HasComponent<FishingRodWeapon>())
             {
-                Arm = Arm ?? Armature.FeedbackerPreset(transform);
+                Arm = Arm ?? Arm.FeedbackerPreset(transform);
                 ArmSize = new Vector3(1, 1, 1);
                 HandSize = new Vector3(100, 100, 100);
             }
             else if (gameObject.HasComponent<Sandbox.Arm.SandboxArm>())
             {
-                Arm = Arm ?? Armature.SandboxerPreset(transform);
+                Arm = Arm ?? Arm.SandboxerPreset(transform);
                 ArmSize = new Vector3(1, 1, 1);
                 HandSize = new Vector3(100, 100, 100);
             }
@@ -54,10 +54,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
             {
                 Arm.GameObjecT.localScale = transform.localScale;
                 Arm.Root.localScale = ArmSize;
-                Arm.Hand.localScale = HandSize;
+                Arm.Hand.Root.localScale = HandSize;
             }
             if (gameObject.HasComponent<HookArm>())
-                Arm.Wrist.GetChild(1).localScale = HandSize;
+                Arm.Forearm.GetChild(1).localScale = HandSize;
         }
     }
 }

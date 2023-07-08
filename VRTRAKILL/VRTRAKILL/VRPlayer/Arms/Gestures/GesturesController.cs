@@ -5,7 +5,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Gestures
 {
     internal class GesturesController : MonoBehaviour
     {
-        public Armature Arm;
+        public Arm Arm;
 
         public bool
             Punch = false,
