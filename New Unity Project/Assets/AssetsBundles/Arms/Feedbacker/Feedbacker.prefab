@@ -262,7 +262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 81774723824982928}
   m_Layer: 0
-  m_Name: Upper Arm
+  m_Name: UpperArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
