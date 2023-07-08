@@ -30,35 +30,35 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
             Rig.Body.localPosition = new Vector3(0, -.005f, -.0005f);
 
             // remember last GOs scales
-            LastNDArmScale = Rig.LeftArm.GameObjecT.localScale;
-            LastDArmScale = Rig.RightArm.GameObjecT.localScale;
-            LastDHandScale = Rig.RightArm.Hand.localScale;
+            LastNDArmScale = Rig.LFeedbacker.GameObjecT.localScale;
+            LastDArmScale = Rig.RFeedbacker.GameObjecT.localScale;
+            LastDHandScale = Rig.RFeedbacker.Hand.Root.localScale;
 
             // for now don't use these GOs
-            Rig.LeftLeg.GameObjectT.localScale = Vector3.zero;
-            Rig.RightLeg.GameObjectT.localScale = Vector3.zero;
+            Rig.LeftLeg.GameObjecT.localScale = Vector3.zero;
+            Rig.RightLeg.GameObjecT.localScale = Vector3.zero;
             Rig.Head.GetChild(0).transform.localScale = Vector3.zero;
 
             // left handed mode support
             if (Vars.Config.Controllers.HandS.LeftHandMode)
             {
-                Vector3 TempLAPos = Rig.LeftArm.GameObjecT.localPosition,
-                        TempRAPos = Rig.RightArm.GameObjecT.localPosition;
-                Rig.LeftArm.GameObjecT.localPosition = TempRAPos;
-                Rig.RightArm.GameObjecT.localPosition = TempLAPos;
+                Vector3 TempLAPos = Rig.LFeedbacker.GameObjecT.localPosition,
+                        TempRAPos = Rig.RFeedbacker.GameObjecT.localPosition;
+                Rig.LFeedbacker.GameObjecT.localPosition = TempRAPos;
+                Rig.RFeedbacker.GameObjecT.localPosition = TempLAPos;
 
-                Rig.LeftArm.GameObjecT.localScale = new Vector3(Rig.LeftArm.GameObjecT.localScale.x * -1,
-                                                                 Rig.LeftArm.GameObjecT.localScale.y,
-                                                                 Rig.LeftArm.GameObjecT.localScale.z);
-                Rig.RightArm.GameObjecT.localScale = new Vector3(Rig.RightArm.GameObjecT.localScale.x * -1,
-                                                                  Rig.RightArm.GameObjecT.localScale.y,
-                                                                  Rig.RightArm.GameObjecT.localScale.z);
+                Rig.LFeedbacker.GameObjecT.localScale = new Vector3(Rig.LFeedbacker.GameObjecT.localScale.x * -1,
+                                                                 Rig.LFeedbacker.GameObjecT.localScale.y,
+                                                                 Rig.LFeedbacker.GameObjecT.localScale.z);
+                Rig.RFeedbacker.GameObjecT.localScale = new Vector3(Rig.RFeedbacker.GameObjecT.localScale.x * -1,
+                                                                  Rig.RFeedbacker.GameObjecT.localScale.y,
+                                                                  Rig.RFeedbacker.GameObjecT.localScale.z);
             }
 
             // add vrik
-            IKArm LIKArm = Rig.LeftArm.Hand.gameObject.AddComponent<IKArm>();
+            IKArm LIKArm = Rig.LFeedbacker.Hand.Root.gameObject.AddComponent<IKArm>();
             LIKArm.ChainLength = 3; LIKArm.Target = Vars.NonDominantHand.transform;
-            IKArm RIKArm = Rig.RightArm.Hand.gameObject.AddComponent<IKArm>();
+            IKArm RIKArm = Rig.RFeedbacker.Hand.Root.gameObject.AddComponent<IKArm>();
             RIKArm.ChainLength = 3; RIKArm.Target = Vars.DominantHand.transform;
         }
         
@@ -89,16 +89,16 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
         // arm stuffs
         private void ScaleMRArmsIfNecessary()
         {
-            if (Vars.IsMainMenu) Rig.LeftArm.GameObjecT.localScale = LastNDArmScale;
-            else Rig.LeftArm.GameObjecT.localScale = Vector3.zero;
+            if (Vars.IsMainMenu) Rig.LFeedbacker.GameObjecT.localScale = LastNDArmScale;
+            else Rig.LFeedbacker.GameObjecT.localScale = Vector3.zero;
 
             if (Sandbox.Arm.SandboxArm.Instance != null && Sandbox.Arm.SandboxArm.Instance.isActiveAndEnabled)
-                Rig.RightArm.GameObjecT.localScale = Vector3.zero;
-            else Rig.RightArm.GameObjecT.localScale = LastDArmScale;
+                Rig.RFeedbacker.GameObjecT.localScale = Vector3.zero;
+            else Rig.RFeedbacker.GameObjecT.localScale = LastDArmScale;
 
             foreach (Revolver R in FindObjectsOfType<Revolver>())
-                if (R.isActiveAndEnabled && R.gameObject.activeInHierarchy) Rig.RightArm.Hand.localScale = Vector3.zero;
-                else Rig.RightArm.Hand.localScale = LastDHandScale;
+                if (R.isActiveAndEnabled && R.gameObject.activeInHierarchy) Rig.RFeedbacker.Hand.Root.localScale = Vector3.zero;
+                else Rig.RFeedbacker.Hand.Root.localScale = LastDHandScale;
         }
     }
 }
