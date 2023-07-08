@@ -12,7 +12,7 @@ namespace Plugin.VRTRAKILL
         private static void SceneChanged(Scene S)
         {
             UI.UIConverter.ConvertAllCanvases();
-            Assets.AssetLoader.LoadCustomAssets();
+            Assets.AssetLoader.LoadAllCustomAssets();
         }
     }
 }
