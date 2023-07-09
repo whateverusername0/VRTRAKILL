@@ -148,7 +148,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK.Armature
                 A.Clavicle = A.Root.GetChild(0);
                 A.UpperArm = A.Clavicle.GetChild(0);
                 A.Forearm = A.UpperArm.GetChild(0);
-                A.Hand = Hand.FeedbackerPreset(A.Forearm.GetChild(0));
+                A.Hand = Hand.MRFeedbackerPreset(A.Forearm.GetChild(0));
                 return A;
             }
             catch (System.Exception E)
@@ -182,7 +182,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK.Armature
             A.Clavicle = A.Root.GetChild(0);
             A.UpperArm = A.Clavicle.GetChild(0);
             A.Forearm = A.UpperArm.GetChild(0);
-            A.Hand = Hand.FeedbackerPreset(A.Forearm.GetChild(0));
+            A.Hand = Hand.MRFeedbackerPreset(A.Forearm.GetChild(0));
             return A;
         }
         public static Arm MRSpearPreset(Transform GameObjectT)

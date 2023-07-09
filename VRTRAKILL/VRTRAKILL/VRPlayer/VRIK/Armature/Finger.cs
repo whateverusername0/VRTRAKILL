@@ -7,7 +7,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK.Armature
         public Transform Root { get; set; }
         public Transform Bridge => Root.GetChild(0);
         public Transform Tip { get; }
-        public Transform TipEnd => Tip.GetChild(0);
 
         public Finger(Transform RooT, bool IsThumb = false)
         {

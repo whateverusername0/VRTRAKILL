@@ -79,6 +79,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 
             [HarmonyPostfix] [HarmonyPatch(nameof(Sandbox.Arm.SandboxArm.Awake))] static void Retransform(Sandbox.Arm.SandboxArm __instance)
             {
+                //retransform
                 Arms.VRArmsController FBC = __instance.gameObject.AddComponent<Arms.VRArmsController>();
                 Arm A = Arm.SandboxerPreset(__instance.transform);
                 FBC.Arm = A; FBC.IsSandboxer = true; FBC.OffsetPosition = new Vector3(0, -.25f, -.5f);

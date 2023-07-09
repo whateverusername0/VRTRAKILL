@@ -1,10 +1,7 @@
 ManifestFileVersion: 0
-CRC: 2610287717
+CRC: 1740995315
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
       Name: vrtrakillassetbundle
-      Dependencies: {}
-    Info_1:
-      Name: common
       Dependencies: {}

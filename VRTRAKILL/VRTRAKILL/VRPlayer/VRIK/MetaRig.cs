@@ -35,7 +35,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
                 GameObjectT = T, // V1
                 Root = T.GetChild(1) // Armature
             };
-            MR.Body = MR.Root.GetChild(0).GetChild(0).GetChild(0); // Spine
+            MR.Body = MR.Root.GetChild(0).GetChild(0).GetChild(0); // Body
             MR.Abdomen = MR.Body.GetChild(0); // Abdomen
             MR.Chest = MR.Abdomen.GetChild(0); // Chest
             MR.Neck = MR.Chest.GetChild(2); // Neck
@@ -52,11 +52,14 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
 
             MR.LeftLeg = Leg.MRPreset(MR.Root.GetChild(0).GetChild(0).GetChild(1));
             MR.RightLeg = Leg.MRPreset(MR.Root.GetChild(0).GetChild(0).GetChild(2));
+
+            MR.LForearm_Pole = MR.Body.GetChild(1);
+            MR.RForearm_Pole = MR.Body.GetChild(2);
             return MR;
         }
         public static MetaRig CreateV1CustomPreset(GameObject Parent)
         {
-            GameObject V1mdlGO = Object.Instantiate(Assets.Vars.V1Rig, Parent.transform, false);
+            GameObject V1mdlGO = Object.Instantiate(Assets.Vars.V1Rig, Parent.transform, true);
             return V1CustomPreset(V1mdlGO.transform);
         }
     }

@@ -5,8 +5,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 {
     internal class ArmController : MonoSingleton<ArmController>
     {
-        public GameObject GunOffset, UIOffset;
-
+        public ControllerController CC;
+        public GameObject GunOffset;
 
         private Vector3 _PreviousPosition;
         private Vector3 _CurrentVelocity;
@@ -24,8 +24,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 
         public void Start()
         {
-            GunOffset = gameObject.GetComponent<ControllerController>().GunOffset;
-            UIOffset = gameObject.GetComponent<ControllerController>().UIOffset;
+            CC = gameObject.GetComponent<ControllerController>();
+            GunOffset = CC.GunOffset;
+            CC.ArmOffset.transform.localPosition = new Vector3(0, .1f, -.25f);
         }
 
         public void Update()

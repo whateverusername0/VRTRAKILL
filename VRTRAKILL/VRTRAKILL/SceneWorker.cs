@@ -11,8 +11,17 @@ namespace Plugin.VRTRAKILL
 
         private static void SceneChanged(Scene S)
         {
+            GloballyEnableOffscreenRendering();
+
+            Config.ConfigJSON.Instance = null; // reload config
             UI.UIConverter.ConvertAllCanvases();
             Assets.AssetLoader.LoadAllCustomAssets();
+        }
+
+        private static void GloballyEnableOffscreenRendering()
+        {
+            foreach (SkinnedMeshRenderer R in Object.FindObjectsOfType<SkinnedMeshRenderer>())
+                R.updateWhenOffscreen = true;
         }
     }
 }

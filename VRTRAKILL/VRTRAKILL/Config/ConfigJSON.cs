@@ -10,7 +10,7 @@ namespace Plugin.VRTRAKILL.Config
         [JsonProperty("Controller Settings")] public Settings.Controllers.ControllerS Controllers { get; set; }
         [JsonProperty("View Settings")] public Settings.View.ViewS View { get; set; }
 
-        public static ConfigJSON Instance { get; private set; }
+        public static ConfigJSON Instance { get; set; }
 
         public ConfigJSON()
         {
