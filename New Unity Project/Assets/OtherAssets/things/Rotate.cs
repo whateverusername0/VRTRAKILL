@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Rotate : MonoBehaviour
 {
-    public Transform P1;
-    public Transform P2;
+    public Transform Forward;
+    public Transform Backward;
 
     void Update()
     {
-        transform.forward = P2.position - P1.position;
+        transform.forward = Forward.position.normalized;
+        Backward.position = transform.forward * -1;
     }
 }
