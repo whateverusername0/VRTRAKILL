@@ -10,7 +10,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         public GameObject GunOffset = new GameObject("Gun Offset") { layer = (int)Vars.Layers.IgnoreRaycast };
         public GameObject ArmOffset = new GameObject("Arm Offset") { layer = (int)Vars.Layers.IgnoreRaycast };
 
-        private GameObject Pointer;
+        GameObject Pointer;
         LineRenderer LR; Vector3 EndPosition;
         public float DefaultLength => Vars.Config.View.VRUI.CrosshairDistance;
 
@@ -94,5 +94,12 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         public static Vector3 ControllerOffset = new Vector3(0, 2.85f, 0);
         public static void onTransformUpdatedH(SteamVR_Behaviour_Pose fromAction, SteamVR_Input_Sources fromSource)
         => fromAction.transform.position += ControllerOffset;
+
+        Vector3 LastPosition;
+        public void LateUpdate()
+        {
+            LastPosition = transform.position;
+            if (Vars.IsPaused) transform.position = LastPosition;
+        }
     }
 }
