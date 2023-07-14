@@ -19,7 +19,7 @@ namespace Plugin.VRTRAKILL.UI.Patches
                 Object.Destroy(__instance.gameObject.GetComponent<UICanvas>());
 
             __instance.transform.localScale /= 2;
-            __instance.transform.localPosition += new Vector3(-.2f, -2.75f, 8);
+            //__instance.transform.localPosition += new Vector3(0, 0, 0);
             __instance.transform.localEulerAngles = Vector3.zero;
             __instance.gameObject.AddComponent<CrosshairController>();
         }
