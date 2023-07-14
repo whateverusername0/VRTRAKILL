@@ -104,6 +104,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
         // ~Update is called once per frame~ sike lmao
         public void LateUpdate()
         {
+            if (Vars.IsPaused) return;
             ResolveIK();
         }
 

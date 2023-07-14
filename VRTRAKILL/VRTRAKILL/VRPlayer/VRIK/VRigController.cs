@@ -44,7 +44,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
             // for now don't use these GOs
             Rig.LeftLeg.GameObjecT.localScale = Vector3.zero;
             Rig.RightLeg.GameObjecT.localScale = Vector3.zero;
-            Rig.Head.localScale = Vector3.zero;
 
             // left handed mode support
             if (Vars.Config.Controllers.HandS.LeftHandMode)
@@ -89,9 +88,17 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
         {
             if (Rig == null) return;
 
+            FreezeIfPaused();
+
             HandleBodyRotation();
             HandleHeadRotation();
             HandleArms();
+        }
+
+        private void FreezeIfPaused()
+        {
+            if (Vars.IsPaused) Rig.Head.localScale = Vector3.one;
+            else Rig.Head.localScale = Vector3.zero;
         }
 
         private void HandleBodyRotation()
@@ -109,7 +116,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
             Rig.Head.position = Vars.MainCamera.transform.position;
             Rig.Head.rotation = Vars.MainCamera.transform.rotation;
         }
-
         private void HandleArms()
         {
             // main menu
@@ -129,6 +135,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
                 Rig.RFeedbacker.Hand.Root.localScale = Vector3.zero;
                 Rig.RSandboxer.Hand.Root.localScale = Vector3.zero;
             }
+
             // sandbox arm
             Sandbox.Arm.SandboxArm[] Things = FindObjectsOfType<Sandbox.Arm.SandboxArm>();
             if (Things.Length != 0 && Sandbox.Arm.SandboxArm.Instance != null && Sandbox.Arm.SandboxArm.Instance.currentMode != null)
@@ -162,6 +169,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
                         case FistType.Spear:
                         default: break;
                     }
+            // whiplash
             if (HookArm.Instance != null && HookArm.Instance.enabled && HookArm.Instance.model.activeSelf)
             {
                 Rig.LFeedbacker.GameObjecT.localScale = Vector3.zero;
