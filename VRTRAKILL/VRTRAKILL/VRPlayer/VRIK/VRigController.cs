@@ -13,6 +13,13 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
                        LArmScale = new Vector3(0.125f, 0.125f, 0.125f),
                        RArmScale = new Vector3(-0.0125f, 0.0125f, 0.0125f);
 
+        private IKArm AddArmIK(GameObject GO, Transform Target, int ChainLen, Transform Pole = null)
+        {
+            IKArm IK = GO.AddComponent<IKArm>();
+            IK.Target = Target; IK.ChainLength = ChainLen; IK.Pole = Pole;
+            return IK;
+        }
+
         public void Awake()
         {
             if (_Instance != null && _Instance != this) Destroy(this.gameObject);
@@ -61,27 +68,16 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
                                                                     Rig.RFeedbacker.GameObjecT.localScale.z);
             }
 
-            // add vrik (pain and boilerplate)
-            IKArm LFIK = Rig.LFeedbacker.Hand.Root.gameObject.AddComponent<IKArm>();
-            LFIK.Target = ArmController.Instance.CC.ArmOffset.transform;
-            LFIK.ChainLength = 3; LFIK.Pole = Rig.LForearm_Pole;
+            // left arm IKs
+            AddArmIK(Rig.LFeedbacker.Hand.Root.gameObject, ArmController.Instance.CC.ArmOffset.transform, 3, Rig.LForearm_Pole);
+            AddArmIK(Rig.LKnuckleblaster.Hand.Root.gameObject, ArmController.Instance.CC.ArmOffset.transform, 3, Rig.LForearm_Pole);
+            AddArmIK(Rig.LWhiplash.Hand.Root.gameObject, ArmController.Instance.CC.ArmOffset.transform, 3, Rig.LForearm_Pole);
+            // right arm IKs
+            AddArmIK(Rig.RFeedbacker.Hand.Root.gameObject, GunController.Instance.CC.ArmOffset.transform, 3, Rig.RForearm_Pole);
+            AddArmIK(Rig.RSandboxer.Hand.Root.gameObject, GunController.Instance.CC.ArmOffset.transform, 3, Rig.RForearm_Pole);
 
-            IKArm LKIK = Rig.LKnuckleblaster.Hand.Root.gameObject.AddComponent<IKArm>();
-            LKIK.Target = ArmController.Instance.CC.ArmOffset.transform;
-            LKIK.ChainLength = 3; LKIK.Pole = Rig.LForearm_Pole;
-
-            IKArm LWIK = Rig.LWhiplash.Hand.Root.gameObject.AddComponent<IKArm>();
-            LWIK.Target = ArmController.Instance.CC.ArmOffset.transform;
-            LWIK.ChainLength = 3; LWIK.Pole = Rig.LForearm_Pole;
-
-
-            IKArm RFIK = Rig.RFeedbacker.Hand.Root.gameObject.AddComponent<IKArm>();
-            RFIK.Target = GunController.Instance.CC.ArmOffset.transform;
-            RFIK.ChainLength = 3; RFIK.Pole = Rig.RForearm_Pole;
-
-            IKArm RSIK = Rig.RSandboxer.Hand.Root.gameObject.AddComponent<IKArm>();
-            RSIK.Target = GunController.Instance.CC.ArmOffset.transform;
-            RSIK.ChainLength = 3; RSIK.Pole = Rig.RForearm_Pole;
+            // leg IKs
+            // tbd
         }
         
         public void LateUpdate()
