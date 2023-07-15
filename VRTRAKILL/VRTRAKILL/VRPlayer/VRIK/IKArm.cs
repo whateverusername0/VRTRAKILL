@@ -2,6 +2,7 @@
 
 namespace Plugin.VRTRAKILL.VRPlayer.VRIK
 {
+    // code from.. uh.. i frogot.
     internal class IKArm : MonoBehaviour
     {
         /// <summary>
