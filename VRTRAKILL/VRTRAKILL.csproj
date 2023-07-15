@@ -154,6 +154,7 @@
     <Compile Include="VRTRAKILL\Assets\Vars.cs" />
     <Compile Include="VRTRAKILL\Config\ConfigVars.cs" />
     <Compile Include="VRTRAKILL\SceneWorker.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\AddHandsP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Patches\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRIK\Armature\Finger.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRIK\Armature\Hand.cs" />
@@ -218,6 +219,7 @@
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\Whiplash\HookArmP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\VRArmsController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRIK\Armature\Leg.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRIK\IKFoot.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRIK\MetaRig.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRIK\Patches\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRIK\Patches\VRIKP.cs" />
