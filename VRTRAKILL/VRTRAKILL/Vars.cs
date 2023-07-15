@@ -68,7 +68,6 @@ namespace Plugin.VRTRAKILL
 
         public static bool IsAMenu
             => IsMainMenu
-            || IsPaused
             || IsRankingScreenPresent
             || IsIntro
 

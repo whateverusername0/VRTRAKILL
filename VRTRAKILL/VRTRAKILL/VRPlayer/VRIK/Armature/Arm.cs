@@ -22,8 +22,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK.Armature
 
         public Hand Hand { get; set; }
 
-        public Transform Pole_RForearm { get; set; }
-        public Transform Pole_LForearm { get; set; }
+        public Transform Pole { get; set; }
 
         public static Arm FeedbackerPreset(Transform GameObjectT)
         {
@@ -149,6 +148,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK.Armature
                 A.UpperArm = A.Clavicle.GetChild(0);
                 A.Forearm = A.UpperArm.GetChild(0);
                 A.Hand = Hand.MRFeedbackerPreset(A.Forearm.GetChild(0));
+                A.Pole = A.Forearm.GetChild(1);
                 return A;
             }
             catch (System.Exception E)
@@ -169,6 +169,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK.Armature
             A.UpperArm = A.Clavicle.GetChild(0);
             A.Forearm = A.UpperArm.GetChild(0);
             A.Hand = Hand.MRKnuckleblasterPreset(A.Forearm.GetChild(0));
+            A.Pole = A.Forearm.GetChild(1);
             return A;
         }
         public static Arm MRWhiplashPreset(Transform GameObjectT)
@@ -183,6 +184,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK.Armature
             A.UpperArm = A.Clavicle.GetChild(0);
             A.Forearm = A.UpperArm.GetChild(0);
             A.Hand = Hand.MRFeedbackerPreset(A.Forearm.GetChild(0));
+            A.Pole = A.Forearm.GetChild(1);
             return A;
         }
         public static Arm MRSpearPreset(Transform GameObjectT)
@@ -206,6 +208,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK.Armature
             A.UpperArm = A.Clavicle.GetChild(0);
             A.Forearm = A.UpperArm.GetChild(0);
             A.Hand = Hand.FeedbackerPreset(A.Forearm.GetChild(0));
+            A.Pole = A.Forearm.GetChild(1);
             return A;
         }
     }

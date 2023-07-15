@@ -4,7 +4,7 @@ namespace Plugin.VRTRAKILL.UI
 {
     internal class HideWhenMenuActive : MonoBehaviour
     {
-        private bool ShouldHide => Vars.IsAMenu || NewMovement.Instance.dead;
+        private bool ShouldHide => Vars.IsAMenu || Vars.IsPaused || NewMovement.Instance.dead;
 
         public void Update()
         {

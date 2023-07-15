@@ -11,7 +11,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         {
             CC = gameObject.GetComponent<ControllerController>();
             GunOffset = CC.GunOffset;
-            CC.ArmOffset.transform.localPosition = new Vector3(.075f, .1f, -.3f); // 0.075 0.1 -0.3
         }
+
+        public void Update() => CC.ArmOffset.transform.localPosition = new Vector3(.075f, .125f, -.35f);
     }
 }

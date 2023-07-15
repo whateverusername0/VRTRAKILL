@@ -8,7 +8,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Patches
     {
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Start))] static void AddVRPC(NewMovement __instance)
         {
-            __instance.gameObject.AddComponent<VRPlayerController>();
+            //__instance.gameObject.AddComponent<VRPlayerController>();
         }
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Respawn))] static bool RespawnFix(NewMovement __instance)
         {

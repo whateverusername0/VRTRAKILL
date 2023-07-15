@@ -13,7 +13,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
                        LArmScale = new Vector3(0.125f, 0.125f, 0.125f),
                        RArmScale = new Vector3(-0.0125f, 0.0125f, 0.0125f);
 
-        private IKArm AddArmIK(GameObject GO, Transform Target, int ChainLen, Transform Pole = null)
+        private IKArm AddArmIK(GameObject GO, Transform Target, int ChainLen = 3, Transform Pole = null)
         {
             IKArm IK = GO.AddComponent<IKArm>();
             IK.Target = Target; IK.ChainLength = ChainLen; IK.Pole = Pole;
@@ -42,11 +42,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
             Rig.GameObjectT.localPosition = Vector3.zero;
             Rig.GameObjectT.localRotation = Quaternion.Euler(Vector3.zero);
 
-            Rig.LForearm_Pole.localPosition = new Vector3(Rig.LForearm_Pole.localPosition.x, -.002f, Rig.LForearm_Pole.localPosition.z);
-            Rig.RForearm_Pole.localPosition = new Vector3(Rig.RForearm_Pole.localPosition.x, -.002f, Rig.RForearm_Pole.localPosition.z);
-
             Rig.Root.localScale *= 3;
-            Rig.Body.localPosition = new Vector3(0.0003f, -0.0145f, 0.003f);
+            Rig.Body.localPosition = new Vector3(0, -0.0125f, 0.002f);
 
             // for now don't use these GOs
             Rig.LeftLeg.GameObjecT.localScale = Vector3.zero;
@@ -69,12 +66,12 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
             }
 
             // left arm IKs
-            AddArmIK(Rig.LFeedbacker.Hand.Root.gameObject, ArmController.Instance.CC.ArmOffset.transform, 3, Rig.LForearm_Pole);
-            AddArmIK(Rig.LKnuckleblaster.Hand.Root.gameObject, ArmController.Instance.CC.ArmOffset.transform, 3, Rig.LForearm_Pole);
-            AddArmIK(Rig.LWhiplash.Hand.Root.gameObject, ArmController.Instance.CC.ArmOffset.transform, 3, Rig.LForearm_Pole);
+            AddArmIK(Rig.LFeedbacker.Hand.Root.gameObject,     ArmController.Instance.CC.ArmOffset.transform, Pole: Rig.LFeedbacker.Pole);
+            AddArmIK(Rig.LKnuckleblaster.Hand.Root.gameObject, ArmController.Instance.CC.ArmOffset.transform, Pole: Rig.LKnuckleblaster.Pole);
+            AddArmIK(Rig.LWhiplash.Hand.Root.gameObject,       ArmController.Instance.CC.ArmOffset.transform, Pole: Rig.LWhiplash.Pole);
             // right arm IKs
-            AddArmIK(Rig.RFeedbacker.Hand.Root.gameObject, GunController.Instance.CC.ArmOffset.transform, 3, Rig.RForearm_Pole);
-            AddArmIK(Rig.RSandboxer.Hand.Root.gameObject, GunController.Instance.CC.ArmOffset.transform, 3, Rig.RForearm_Pole);
+            AddArmIK(Rig.RFeedbacker.Hand.Root.gameObject,     GunController.Instance.CC.ArmOffset.transform, Pole: Rig.RFeedbacker.Pole);
+            AddArmIK(Rig.RSandboxer.Hand.Root.gameObject,      GunController.Instance.CC.ArmOffset.transform, Pole: Rig.RSandboxer.Pole);
 
             // leg IKs
             // tbd
@@ -93,24 +90,29 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
 
         private void FreezeIfPaused()
         {
-            if (Vars.IsPaused) Rig.Head.localScale = Vector3.one;
+            if (Vars.IsPaused && !Vars.IsAMenu) Rig.Head.localScale = Vector3.one;
             else Rig.Head.localScale = Vector3.zero;
         }
 
         private void HandleBodyRotation()
         {
+            if (Vars.IsPaused && !Vars.IsAMenu) return;
+
             Rig.Root.position = Vars.MainCamera.transform.position;
             if ((Vars.MainCamera.transform.rotation.eulerAngles.y - Rig.Abdomen.rotation.eulerAngles.y) >= Quaternion.Euler(0, 90, 0).y
             || (Vars.MainCamera.transform.rotation.eulerAngles.y - Rig.Abdomen.rotation.eulerAngles.y) <= Quaternion.Euler(0, -90, 0).y)
             {
-                Quaternion Rotation = Quaternion.Lerp(Rig.Abdomen.rotation, Vars.MainCamera.transform.rotation, Time.deltaTime * 5);
+                Quaternion Rotation = Quaternion.Lerp(Rig.Abdomen.rotation, Vars.MainCamera.transform.rotation, Time.deltaTime * 2.5f);
                 Rig.Root.rotation = Quaternion.Euler(0, Rotation.eulerAngles.y, 0);
             }
         }
         private void HandleHeadRotation()
         {
-            Rig.Head.position = Vars.MainCamera.transform.position;
-            Rig.Head.rotation = Vars.MainCamera.transform.rotation;
+            if (!Vars.IsPaused)
+            {
+                Rig.Head.position = Vars.MainCamera.transform.position;
+                Rig.Head.rotation = Vars.MainCamera.transform.rotation * Quaternion.Euler(-45, 0, 0);
+            }
         }
         private void HandleArms()
         {
@@ -133,17 +135,17 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
             }
 
             // sandbox arm
-            Sandbox.Arm.SandboxArm[] Things = FindObjectsOfType<Sandbox.Arm.SandboxArm>();
-            if (Things.Length != 0 && Sandbox.Arm.SandboxArm.Instance != null && Sandbox.Arm.SandboxArm.Instance.currentMode != null)
-            {
-                Rig.RFeedbacker.GameObjecT.localScale = Vector3.zero;
-                Rig.RSandboxer.GameObjecT.localScale = RArmScale;
-            }
-            else
-            {
-                Rig.RFeedbacker.GameObjecT.localScale = RArmScale;
-                Rig.RSandboxer.GameObjecT.localScale = Vector3.zero;
-            }
+            foreach (Sandbox.Arm.SandboxArm SA in Resources.FindObjectsOfTypeAll<Sandbox.Arm.SandboxArm>())
+                if (SA.enabled && SA.gameObject.activeInHierarchy && SA.currentMode != null)
+                {
+                    Rig.RFeedbacker.GameObjecT.localScale = Vector3.zero;
+                    Rig.RSandboxer.GameObjecT.localScale = RArmScale;
+                }
+                else
+                {
+                    Rig.RFeedbacker.GameObjecT.localScale = RArmScale;
+                    Rig.RSandboxer.GameObjecT.localScale = Vector3.zero;
+                }
 
             // arm swap
             foreach (Punch P in FindObjectsOfType<Punch>())

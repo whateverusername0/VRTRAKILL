@@ -60,8 +60,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
 
         private void MoveSandboxer()
         {
-            Arm.GameObjecT.position = Vars.NonDominantHand.transform.position;
-            Arm.GameObjecT.rotation = Vars.NonDominantHand.transform.rotation;
+            Arm.GameObjecT.position = Vars.DominantHand.transform.position;
+            Arm.GameObjecT.rotation = Vars.DominantHand.transform.rotation;
 
             Arm.Root.localPosition = OffsetPosition;
             Arm.Hand.Root.rotation = Vars.DominantHand.transform.rotation * OffsetRotation;

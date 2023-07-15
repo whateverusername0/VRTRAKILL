@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Animations;
 using Valve.VR;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Controllers
@@ -13,6 +14,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         GameObject Pointer;
         LineRenderer LR; Vector3 EndPosition;
         public float DefaultLength => Vars.Config.View.VRUI.CrosshairDistance;
+
+        private PositionConstraint PC;
 
         private void SetupOffsets()
         {
@@ -57,7 +60,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 
         private void DrawControllerLines()
         {
-            if (Vars.IsAMenu || Vars.IsPlayerUsingShop) LR.enabled = true;
+            if (Vars.IsAMenu || Vars.IsPaused || Vars.IsPlayerUsingShop) LR.enabled = true;
             else LR.enabled = false;
 
             if (LR.enabled)
@@ -94,12 +97,5 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         public static Vector3 ControllerOffset = new Vector3(0, 2.85f, 0);
         public static void onTransformUpdatedH(SteamVR_Behaviour_Pose fromAction, SteamVR_Input_Sources fromSource)
         => fromAction.transform.position += ControllerOffset;
-
-        Vector3 LastPosition;
-        public void LateUpdate()
-        {
-            LastPosition = transform.position;
-            if (Vars.IsPaused) transform.position = LastPosition;
-        }
     }
 }

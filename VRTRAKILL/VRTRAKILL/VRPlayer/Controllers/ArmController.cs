@@ -26,11 +26,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         {
             CC = gameObject.GetComponent<ControllerController>();
             GunOffset = CC.GunOffset;
-            CC.ArmOffset.transform.localPosition = new Vector3(0, .1f, -.25f);
         }
 
         public void Update()
         {
+            CC.ArmOffset.transform.localPosition = new Vector3(0, .05f, -.2f);
             StartCoroutine(CalculateVelocity());
         }
     }

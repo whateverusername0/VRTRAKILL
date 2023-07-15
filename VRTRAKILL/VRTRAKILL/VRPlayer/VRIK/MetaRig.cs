@@ -25,9 +25,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
         public Leg LeftLeg { get; set; }
         public Leg RightLeg { get; set; }
 
-        public Transform LForearm_Pole { get; set; }
-        public Transform RForearm_Pole { get; set; }
-
         public static MetaRig V1CustomPreset(Transform T)
         {
             MetaRig MR = new MetaRig
@@ -52,9 +49,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
 
             MR.LeftLeg = Leg.MRPreset(MR.Root.GetChild(0).GetChild(0).GetChild(1));
             MR.RightLeg = Leg.MRPreset(MR.Root.GetChild(0).GetChild(0).GetChild(2));
-
-            MR.LForearm_Pole = MR.Body.GetChild(1);
-            MR.RForearm_Pole = MR.Body.GetChild(2);
             return MR;
         }
         public static MetaRig CreateV1CustomPreset(GameObject Parent)
