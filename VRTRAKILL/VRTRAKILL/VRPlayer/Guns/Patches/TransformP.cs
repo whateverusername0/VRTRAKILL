@@ -22,7 +22,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                 Arm A = Arm.FeedbackerPreset(__instance.transform);
                 FBC.Arm = A; FBC.IsRevolver = true; FBC.OffsetRotation = Quaternion.Euler(OffsetRotation);
 
-                if (__instance.altVersion == true) { __instance.wpos.defaultPos = AltPosition; __instance.wpos.defaultScale = AltScale; }
+                if (__instance.altVersion) { __instance.wpos.defaultPos = AltPosition; __instance.wpos.defaultScale = AltScale; }
                 else { __instance.wpos.defaultPos = Position; __instance.wpos.defaultScale = Scale; }
             }
         }
@@ -41,13 +41,22 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         {
             static Vector3 Position = new Vector3(-.2f, .2125f, -.05f),
                            AltPosition = new Vector3(-.25f, .35f, .075f);
-            static Vector3 Scale = new Vector3(.35f, .35f, .35f);
+            static Vector3 Scale = new Vector3(.4f, .4f, .4f),
+                           AltScale = new Vector3(.35f, .35f, .35f);
 
             [HarmonyPostfix] [HarmonyPatch(nameof(Nailgun.Start))] static void Retransform(Nailgun __instance)
             {
-                if (__instance.altVersion == true) __instance.wpos.defaultPos = AltPosition;
-                else __instance.wpos.defaultPos = Position;
-                __instance.wpos.defaultScale = Scale;
+                if (__instance.altVersion)
+                {
+                    __instance.wpos.defaultPos = AltPosition;
+                    __instance.wpos.defaultScale = AltScale;
+                }
+                else
+                {
+                    __instance.wpos.defaultPos = Position;
+                    __instance.wpos.defaultScale = Scale;
+                }
+                
             }
         }
         [HarmonyPatch(typeof(Railcannon))] static class RailcannonT
