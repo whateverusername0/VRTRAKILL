@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Animations;
 using Valve.VR;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Controllers
@@ -7,15 +6,13 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
     // lol the name
     internal class ControllerController : MonoBehaviour
     {
-        private SteamVR_RenderModel[] SVRRM;
+        private SteamVR_RenderModel SVRRM; private SteamVR_Behaviour_Pose Pose;
         public GameObject GunOffset = new GameObject("Gun Offset") { layer = (int)Vars.Layers.IgnoreRaycast };
         public GameObject ArmOffset = new GameObject("Arm Offset") { layer = (int)Vars.Layers.IgnoreRaycast };
 
         GameObject Pointer;
         LineRenderer LR; Vector3 EndPosition;
         public float DefaultLength => Vars.Config.View.VRUI.CrosshairDistance;
-
-        private PositionConstraint PC;
 
         private void SetupOffsets()
         {
@@ -58,6 +55,13 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
             LR.startColor = C1; LR.endColor = C2;
         }
 
+        private void CPRaycast()
+        {
+            bool Raycast = Physics.Raycast(GunOffset.transform.position, GunOffset.transform.forward,
+                                           out RaycastHit Hit, float.PositiveInfinity, (int)Vars.Layers.UI);
+            EndPosition = GunOffset.transform.position + (GunOffset.transform.forward * DefaultLength);
+            if (Raycast) EndPosition = Hit.point;
+        }
         private void DrawControllerLines()
         {
             if (Vars.IsAMenu || Vars.IsPaused || Vars.IsPlayerUsingShop) LR.enabled = true;
@@ -72,7 +76,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 
         public void Start()
         {
-            SVRRM = GetComponentsInChildren<SteamVR_RenderModel>();
+            SVRRM = GetComponentInChildren<SteamVR_RenderModel>();
+            Pose = GetComponent<SteamVR_Behaviour_Pose>();
 
             SetupOffsets();
 
@@ -81,16 +86,17 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         }
         public void Update()
         {
-            if ((Vars.IsMainMenu || Vars.IsIntro || Vars.IsRankingScreenPresent)
-            && !Vars.Config.Game.VRB.EnableVRIK)
-                foreach (SteamVR_RenderModel SVRRRM in SVRRM) try { SVRRRM.gameObject.SetActive(true); } catch {}
-            else foreach (SteamVR_RenderModel SVRRRM in SVRRM) try { SVRRRM.gameObject.SetActive(false); } catch {}
+            // controller model
+            if ((Vars.IsMainMenu || Vars.IsIntro || Vars.IsRankingScreenPresent) && !Vars.Config.Game.VRB.EnableVRIK)
+                try { SVRRM.gameObject.SetActive(true); } catch {}
+            else try { SVRRM.gameObject.SetActive(false); } catch {}
 
-            bool Raycast = Physics.Raycast(GunOffset.transform.position, GunOffset.transform.forward,
-                                           out RaycastHit Hit, float.PositiveInfinity, (int)Vars.Layers.UI);
-            EndPosition = GunOffset.transform.position + (GunOffset.transform.forward * DefaultLength);
-            if (Raycast) EndPosition = Hit.point;
+            // paused
+            if (Vars.IsPaused && !Vars.IsMainMenu) Pose.enabled = false;
+            else Pose.enabled = true;
 
+            // controller-based ui interaction
+            if (Vars.Config.Controllers.UseControllerUIInteraction) CPRaycast();
             if (Vars.Config.Controllers.CLines.DrawControllerLines) DrawControllerLines();
         }
 
