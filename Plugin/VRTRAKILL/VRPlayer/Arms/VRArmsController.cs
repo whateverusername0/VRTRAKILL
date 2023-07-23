@@ -1,7 +1,6 @@
 ﻿using Plugin.Helpers;
 using UnityEngine;
 using Plugin.VRTRAKILL.VRPlayer.VRIK.Armature;
-using Plugin.VRTRAKILL.VRPlayer.Controllers;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Arms
 {

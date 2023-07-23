@@ -2,7 +2,7 @@
 
 namespace Plugin.VRTRAKILL.Input
 {
-    static class InputVars
+    public static class InputVars
     {
         // retranslated joystick axises
         public static Vector2 MoveVector = Vector2.zero,

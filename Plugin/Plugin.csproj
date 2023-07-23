@@ -210,7 +210,6 @@
     <Compile Include="VRTRAKILL\UI\UIInteraction.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRIK\Armature\Arm.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\ArmRemover.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\Arms\Gestures\GesturesController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\ArmsP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\PunchP.cs" />

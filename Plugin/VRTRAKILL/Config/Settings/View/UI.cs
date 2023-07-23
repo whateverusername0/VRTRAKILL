@@ -2,7 +2,7 @@
 
 namespace Plugin.VRTRAKILL.Config.Settings.View
 {
-    public class UI
+    internal class UI
     {
         [JsonProperty("Enable standard HUD (replaces classic hud)")] public bool EnableStandardHUD { get; set; } = false;
         [JsonProperty("HUD Size (from 0 to 0.1)")] public float UISize { get; set; } = 0.0625f;

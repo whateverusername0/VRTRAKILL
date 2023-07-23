@@ -2,7 +2,7 @@
 
 namespace Plugin.VRTRAKILL.VRPlayer.VRIK.Armature
 {
-    public enum ArmType
+    internal enum ArmType
     {
         Feedbacker,
         Knuckleblaster,

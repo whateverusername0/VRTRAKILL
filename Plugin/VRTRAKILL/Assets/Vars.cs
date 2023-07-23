@@ -2,7 +2,7 @@
 
 namespace Plugin.VRTRAKILL.Assets
 {
-    static class Vars
+    public static class Vars
     {
         public static GameObject V1Rig => AssetLoader.V1Rig;
         public static GameObject V2Rig => AssetLoader.V2Rig;

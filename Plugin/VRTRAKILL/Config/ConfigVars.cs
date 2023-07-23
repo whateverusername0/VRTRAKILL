@@ -3,9 +3,8 @@
 namespace Plugin.VRTRAKILL.Config
 {
     // most used references
-    internal class ConfigVars
+    public static class ConfigVars
     {
-
 
     }
 }

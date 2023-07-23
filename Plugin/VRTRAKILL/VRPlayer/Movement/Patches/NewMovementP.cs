@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 {
     // change move vector to joystick axis, fix dash, jump, etc.
-    [HarmonyPatch(typeof(NewMovement))] internal static class NewMovementP
+    [HarmonyPatch(typeof(NewMovement))] internal class NewMovementP
     {
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Start))] static void Start(NewMovement __instance)
         {

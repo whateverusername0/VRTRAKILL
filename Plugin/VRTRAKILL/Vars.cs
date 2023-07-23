@@ -3,7 +3,7 @@ using Plugin.VRTRAKILL.VRPlayer.VRIK.Armature;
 
 namespace Plugin.VRTRAKILL
 {
-    static class Vars
+    public static class Vars
     {
         public enum Layers
         {

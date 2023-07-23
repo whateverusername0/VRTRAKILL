@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 {
     // rocket riding - change move vector to joystick axis
-    [HarmonyPatch(typeof(Grenade))] internal static class GrenadeP
+    [HarmonyPatch(typeof(Grenade))] internal class GrenadeP
     {
         [HarmonyPrefix] [HarmonyPatch(nameof(Grenade.LateUpdate))] static bool FixRocketRiding(Grenade __instance)
         {

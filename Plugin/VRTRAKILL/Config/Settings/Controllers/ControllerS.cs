@@ -2,7 +2,7 @@
 
 namespace Plugin.VRTRAKILL.Config.Settings.Controllers
 {
-    public class ControllerS
+    internal class ControllerS
     {
         [JsonProperty("Use controller-based UI interaction (broken)")] public bool UseControllerUIInteraction { get; set; }
         [JsonProperty("Controller Lines")] public ControllerLines CLines { get; set; }

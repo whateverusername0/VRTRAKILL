@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Plugin.VRTRAKILL.Config
 {
-    public class ConfigJSON
+    internal class ConfigJSON
     {
         [JsonProperty("Gameplay Settings")] public Settings.Game Game { get; set; }
         [JsonProperty("Input Settings")] public Settings.Input.InputS Input { get; set; }
