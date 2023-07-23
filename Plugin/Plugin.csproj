@@ -348,7 +348,6 @@
     <Content Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\Plugins\x86_64\OVRPlugin.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="DementiaDiary.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Gestures\" />
