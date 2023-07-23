@@ -31,13 +31,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
             if (Rig == null) Rig = MetaRig.CreateV1CustomPreset(Vars.VRCameraContainer);
             Helpers.Misc.RecursiveChangeLayer(Rig.GameObjectT.gameObject, (int)Vars.Layers.AlwaysOnTop);
 
-            // enable all of the stuff because i forgot to do it in the editor
-            Rig.LFeedbacker.GameObjecT.gameObject.SetActive(true);
-            Rig.LKnuckleblaster.GameObjecT.gameObject.SetActive(true);
-            Rig.LWhiplash.GameObjecT.gameObject.SetActive(true);
-            Rig.RFeedbacker.GameObjecT.gameObject.SetActive(true);
-            Rig.RSandboxer.GameObjecT.gameObject.SetActive(true);
-
             // transform shenanigans
             Rig.GameObjectT.localPosition = Vector3.zero;
             Rig.GameObjectT.localRotation = Quaternion.Euler(Vector3.zero);
@@ -81,23 +74,22 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
         {
             if (Rig == null) return;
 
-            FreezeIfPaused();
+            if (Vars.IsPaused && !Vars.IsAMenu)
+            {
+                Rig.Head.localScale = Vector3.one;
+            }
+            else
+            {
+                Rig.Head.localScale = Vector3.zero;
 
-            HandleBodyRotation();
-            HandleHeadRotation();
-            HandleArms();
-        }
-
-        private void FreezeIfPaused()
-        {
-            if (Vars.IsPaused && !Vars.IsAMenu) Rig.Head.localScale = Vector3.one;
-            else Rig.Head.localScale = Vector3.zero;
+                HandleBodyRotation();
+                HandleHeadRotation();
+                HandleArms();
+            }
         }
 
         private void HandleBodyRotation()
         {
-            if (Vars.IsPaused && !Vars.IsAMenu) return;
-
             Rig.Root.position = Vars.MainCamera.transform.position;
             if ((Vars.MainCamera.transform.rotation.eulerAngles.y - Rig.Abdomen.rotation.eulerAngles.y) >= Quaternion.Euler(0, 90, 0).y
             || (Vars.MainCamera.transform.rotation.eulerAngles.y - Rig.Abdomen.rotation.eulerAngles.y) <= Quaternion.Euler(0, -90, 0).y)
@@ -108,11 +100,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
         }
         private void HandleHeadRotation()
         {
-            if (!Vars.IsPaused)
-            {
-                Rig.Head.position = Vars.MainCamera.transform.position;
-                Rig.Head.rotation = Vars.MainCamera.transform.rotation * Quaternion.Euler(-45, 0, 0);
-            }
+            Rig.Head.position = Vars.MainCamera.transform.position;
+            Rig.Head.rotation = Vars.MainCamera.transform.rotation * Quaternion.Euler(-45, 0, 0);
         }
         private void HandleArms()
         {
