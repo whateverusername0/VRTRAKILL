@@ -10,7 +10,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
             Arm A = null;
             ArmRemover AR = __instance.gameObject.AddComponent<ArmRemover>();
             VRArmsController VRAC = __instance.gameObject.AddComponent<VRArmsController>();
-            Gestures.GesturesController GC = __instance.gameObject.AddComponent<Gestures.GesturesController>();
             switch (__instance.type)
             {
                 case FistType.Standard:
