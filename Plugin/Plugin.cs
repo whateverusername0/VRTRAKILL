@@ -18,15 +18,17 @@ namespace Plugin
      * naming and questionable life choices. Amen. */
     [BepInPlugin(PLUGIN_GUID, PLUGIN_NAME, PLUGIN_VERSION)] public class Plugin : BaseUnityPlugin
     {
-        public const string PLUGIN_GUID = "com.whateverusername0.vrtrakill",
-                            PLUGIN_NAME = "VRTRAKILL",
-                            PLUGIN_VERSION = "0.12";
+        public const string
+            PLUGIN_GUID = "com.whateverusername0.vrtrakill",
+            PLUGIN_NAME = "VRTRAKILL",
+            PLUGIN_VERSION = "0.12";
 
-        public static string PluginPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                             AssetsPath = Path.GetDirectoryName($"{PluginPath}\\AssetBundles\\"),
-                             FullGamePath = Process.GetCurrentProcess().MainModule.FileName,
-                             GamePath = Path.GetDirectoryName(FullGamePath),
-                             HMDModel = string.Empty;
+        public static string
+            PluginPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+            AssetsPath = Path.GetDirectoryName($"{PluginPath}\\AssetBundles\\"),
+            FullGamePath = Process.GetCurrentProcess().MainModule.FileName,
+            GamePath = Path.GetDirectoryName(FullGamePath),
+            HMDModel = string.Empty;
 
         internal static ManualLogSource PLog { get; private set; }
 
