@@ -47,6 +47,7 @@ namespace Plugin
             System.Collections.Generic.List<string> Namespaces = new System.Collections.Generic.List<string>
             {
                 typeof(Helpers.Patches.A).Namespace,
+                typeof(VRTRAKILL.Patches).Namespace,
 
                 typeof(VRTRAKILL.VRPlayer.VRCamera.Patches.A).Namespace,
                 typeof(VRTRAKILL.UI.Patches.A).Namespace,
