@@ -85,6 +85,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
                 HandleBodyRotation();
                 HandleHeadRotation();
                 HandleArms();
+                MoveIKPoles();
             }
         }
 
@@ -164,6 +165,15 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
                 Rig.LKnuckleblaster.GameObjecT.localScale = Vector3.zero;
             }
             else Rig.LWhiplash.GameObjecT.localScale = Vector3.zero;
+        }
+        private void MoveIKPoles()
+        {
+            Vector3 Position = Vars.DominantHand.transform.forward * -5;
+            Rig.LFeedbacker.Pole.position = Position;
+            Rig.LKnuckleblaster.Pole.position = Position;
+            Rig.LWhiplash.Pole.position = Position;
+            Rig.RFeedbacker.Pole.position = Position;
+            Rig.RSandboxer.Pole.position = Position;
         }
     }
 }
