@@ -2,7 +2,7 @@
 
 namespace Plugin.VRTRAKILL.VRPlayer.VRIK.Armature
 {
-    internal class Finger
+    public class Finger
     {
         public Transform Root { get; set; }
         public Transform Bridge => Root.GetChild(0);

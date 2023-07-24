@@ -2,7 +2,7 @@
 
 namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 {
-    internal class GunController : MonoSingleton<GunController>
+    public class GunController : MonoSingleton<GunController>
     {
         public ControllerController CC;
         public GameObject GunOffset;

@@ -22,7 +22,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
                 default:
                     break; // wtf is this?
             }
-            AR.Arm = A; VRAC.Arm = A; GC.Arm = A;
+            AR.Arm = A; VRAC.Arm = A;
         }
     }
 }

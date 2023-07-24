@@ -2,7 +2,7 @@
 
 namespace Plugin.VRTRAKILL.Config.Settings.Input
 {
-    internal class Keybinds
+    public class Keybinds
     {
         [JsonProperty("Fire")] public string ShootKey { get; set; } = "MouseLeft";
         [JsonProperty("Alternative Fire")] public string AltShootKey { get; set; } = "MouseRight";

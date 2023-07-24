@@ -2,7 +2,7 @@
 
 namespace Plugin.VRTRAKILL.Config.Settings
 {
-    internal class Game
+    public class Game
     {
         [JsonProperty("Player movement multiplier (speed, jump power, etc.)")] public float MovementMultiplier { get; set; } = .57f;
         [JsonProperty("Enable first-person 4-S camera (broken)")] public bool EnableFP4SCam { get; set; } = false;

@@ -2,7 +2,7 @@
 
 namespace Plugin.VRTRAKILL.VRPlayer.VRIK.Armature
 {
-    internal enum ArmType
+    public enum ArmType
     {
         Feedbacker,
         Knuckleblaster,
@@ -11,7 +11,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK.Armature
         Sandboxer
     }
 
-    internal class Arm
+    public class Arm
     {
         public ArmType Type { get; set; }
         public Transform GameObjecT { get; set; }

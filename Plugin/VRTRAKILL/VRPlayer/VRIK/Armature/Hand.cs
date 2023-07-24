@@ -2,7 +2,7 @@
 
 namespace Plugin.VRTRAKILL.VRPlayer.VRIK.Armature
 {
-    internal class Hand
+    public class Hand
     {
         public ArmType Type { get; set; }
         public Transform Root { get; set; }

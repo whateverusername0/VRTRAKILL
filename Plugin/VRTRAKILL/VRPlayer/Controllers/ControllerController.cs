@@ -4,7 +4,7 @@ using Valve.VR;
 namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 {
     // lol the name
-    internal class ControllerController : MonoBehaviour
+    public class ControllerController : MonoBehaviour
     {
         private SteamVR_RenderModel SVRRM; private SteamVR_Behaviour_Pose Pose;
         public GameObject GunOffset = new GameObject("Gun Offset") { layer = (int)Vars.Layers.IgnoreRaycast };

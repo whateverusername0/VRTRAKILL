@@ -2,7 +2,7 @@
 
 namespace Plugin.VRTRAKILL.Config.Settings.Controllers
 {
-    internal class ControllerLines
+    public class ControllerLines
     {
         [JsonProperty("Draw controller lines")] public bool DrawControllerLines { get; set; } = false;
         [JsonProperty("Initial transparency (from 0 to 1)")] public float LInitTransparency { get; set; } = 0.4f;

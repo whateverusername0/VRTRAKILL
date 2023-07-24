@@ -2,7 +2,7 @@
 
 namespace Plugin.VRTRAKILL.Config.Settings.Input
 {
-    internal class InputS
+    public class InputS
     {
         [JsonProperty("Input")] public InputSettings InputSettings { get; set; }
         [JsonProperty("Keybinds")] public Keybinds Keybinds { get; set; }
