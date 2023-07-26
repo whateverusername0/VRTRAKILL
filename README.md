@@ -39,7 +39,7 @@ The text version:
   1.1 Locate ULTRAKILL in your Steam library (or wherever you store it)  
   1.2 RMB -> Manage -> Browse local files  
   1.3 Make a copy of the ULTRAKILL folder and put it somewhere  
-2. Get & Install [latest stable (at the moment) BepInEx 5.4.21](https://github.com/BepInEx/BepInEx/releases/tag/v5.4.21) that **mathces your CPU architecture** into the new ULTRAKILL folder using [their guide](https://github.com/BepInEx/BepInEx/wiki/Installation). Make sure to run BepInEx'ed ULTRAKILL at least once so it can generate needed folders & files  
+2. Get & Install [latest stable (at the moment) BepInEx 5.4.21](https://github.com/BepInEx/BepInEx/releases/tag/v5.4.21) that **matches your CPU architecture** into the new ULTRAKILL folder using [their guide](https://github.com/BepInEx/BepInEx/wiki/Installation). Make sure to run BepInEx'ed ULTRAKILL at least once so it can generate needed folders & files  
 3. Download one of [releases](https://github.com/whateverusername0/VRTRAKILL/releases), unarchive and merge both ULTRAKILL folders  
 4. Add the modded ULTRAKILL as a 'non-steam game' to steam so it can be run with SteamVR:  
   4.1 ADD A GAME (at the bottom left in library) -> Add a non-steam game -> select your VR-ed ULTRAKILL.exe  
