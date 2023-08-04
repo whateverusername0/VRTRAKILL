@@ -153,6 +153,7 @@
     <Compile Include="VRTRAKILL\Assets\AssetLoader.cs" />
     <Compile Include="VRTRAKILL\Assets\Vars.cs" />
     <Compile Include="VRTRAKILL\Config\ConfigVars.cs" />
+    <Compile Include="VRTRAKILL\Config\NewConfig.cs" />
     <Compile Include="VRTRAKILL\Patches.cs" />
     <Compile Include="VRTRAKILL\SceneWorker.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\AddHandsP.cs" />
