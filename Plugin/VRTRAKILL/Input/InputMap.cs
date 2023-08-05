@@ -2,7 +2,7 @@
 using WindowsInput.Native;
 using System.Collections.Generic;
 
-namespace Plugin.VRTRAKILL.Config
+namespace Plugin.VRTRAKILL.Input
 {
     internal class InputMap
     {
