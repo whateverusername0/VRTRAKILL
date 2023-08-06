@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Plugin.VRTRAKILL.VRPlayer.VRIK.Armature
+namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar.Armature
 {
     public class Hand
     {

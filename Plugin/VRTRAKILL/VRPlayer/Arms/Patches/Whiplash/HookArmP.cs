@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 using UnityEngine;
-using Plugin.VRTRAKILL.VRPlayer.VRIK.Armature;
+using Plugin.VRTRAKILL.VRPlayer.VRAvatar.Armature;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches.Whiplash
 {

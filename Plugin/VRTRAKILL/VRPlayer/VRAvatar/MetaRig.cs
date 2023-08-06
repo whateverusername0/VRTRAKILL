@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using Plugin.VRTRAKILL.VRPlayer.VRIK.Armature;
+using Plugin.VRTRAKILL.VRPlayer.VRAvatar.Armature;
 
-namespace Plugin.VRTRAKILL.VRPlayer.VRIK
+namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
 {
     internal class MetaRig
     {
@@ -80,7 +80,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
         }
         public static MetaRig CreateVCustomPreset(GameObject Parent)
         {
-            GameObject V1mdlGO = Object.Instantiate(Assets.Vars.V1Rig, Parent.transform, true);
+            GameObject V1mdlGO = Object.Instantiate(Assets.Vars.VRig, Parent.transform, true);
             return VCustomPreset(V1mdlGO.transform);
         }
     }

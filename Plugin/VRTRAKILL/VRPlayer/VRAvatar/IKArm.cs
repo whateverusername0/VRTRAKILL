@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Plugin.VRTRAKILL.VRPlayer.VRIK
+namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
 {
     // code from.. uh.. i frogot.
     internal class IKArm : MonoBehaviour

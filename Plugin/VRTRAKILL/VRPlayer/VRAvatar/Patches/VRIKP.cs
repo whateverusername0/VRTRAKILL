@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using Plugin.Helpers;
 
-namespace Plugin.VRTRAKILL.VRPlayer.VRIK.Patches
+namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar.Patches
 {
     [HarmonyPatch] internal class VRIKP
     {
