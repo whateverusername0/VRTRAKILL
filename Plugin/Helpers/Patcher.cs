@@ -14,8 +14,8 @@ namespace Plugin.Helpers
     {
         public Harmony Harmony { get; set; }
         public Assembly ASS { get; private set; } = Assembly.GetCallingAssembly();
-        public string Namespace { get; private set; } public Type Type { get; private set; }
-        public string[] Namespaces { get; private set; } public Type[] Types { get; private set; }
+        public string Namespace { get; set; } public Type Type { get; set; }
+        public string[] Namespaces { get; set; } public Type[] Types { get; set; }
 
         // That's a LOT of constructors that i'm not so proud of
         public Patcher(Harmony _Harmony)
@@ -101,9 +101,9 @@ namespace Plugin.Helpers
         {
             // this looks like something YandereDev would do but it works
             if (Namespace != null) PatchAll(Namespace);
-            else if (Namespaces != null) PatchAll(Namespaces);
+            else if (Namespaces != null && Namespaces.Length > 0) PatchAll(Namespaces);
             else if (Type != null) PatchAll(Type);
-            else if (Types != null) PatchAll(Types);
+            else if (Types != null && Types.Length > 0) PatchAll(Types);
             else Harmony.PatchAll();
         }
         public void PatchAll(string _Namespace)
