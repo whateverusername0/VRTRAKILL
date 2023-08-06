@@ -10,7 +10,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK.Patches
             if (!__instance.gameObject.HasComponent<VRigController>())
             {
                 __instance.gameObject.AddComponent<VRigController>();
-                VRigController.Instance.Rig = MetaRig.CreateV1CustomPreset(Vars.VRCameraContainer);
+                VRigController.Instance.Rig = MetaRig.CreateVCustomPreset(Vars.VRCameraContainer);
                 VRigController.Instance.Rig.Root.localPosition = new UnityEngine.Vector3(0, 0, 0);
             }
         }
