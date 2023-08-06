@@ -14,18 +14,27 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
         public Transform Head { get; set; }
 
         public Transform LShoulder { get; set; }
-        public Arm LFeedbacker { get; set; }
-        public Arm LKnuckleblaster { get; set; }
-        public Arm LWhiplash { get; set; }
+        public Arm _LFeedbacker { get; set; }
+        public Arm _LKnuckleblaster { get; set; }
+        public Arm _LWhiplash { get; set; }
+        public Arm _LSandboxer { get; set; }
 
         public Transform RShoulder { get; set; }
-        public Arm RFeedbacker { get; set; }
-        public Arm RSandboxer { get; set; }
+        public Arm _RFeedbacker { get; set; }
+        public Arm _RKnuckleblaster { get; set; }
+        public Arm _RWhiplash { get; set; }
+        public Arm _RSandboxer { get; set; }
+
+        public Arm Feedbacker { get; set; }
+        public Arm Knuckleblaster { get; set; }
+        public Arm Whiplash { get; set; }
+        public Arm Sandboxer { get; set; }
 
         public Leg LeftLeg { get; set; }
         public Leg RightLeg { get; set; }
 
-        public static MetaRig V1CustomPreset(Transform T)
+        // V stands for Model V (V1, V2), since they have identical armatures.
+        public static MetaRig VCustomPreset(Transform T)
         {
             MetaRig MR = new MetaRig
             {
@@ -39,22 +48,40 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
             MR.Head = MR.Neck.GetChild(0); // NeckHead
 
             MR.LShoulder = MR.Chest.GetChild(0); // LeftShoulder
-            MR.LFeedbacker = Arm.MRFeedbackerPreset(MR.LShoulder.GetChild(0));
-            MR.LKnuckleblaster = Arm.MRKnuckleblasterPreset(MR.LShoulder.GetChild(1));
-            MR.LWhiplash = Arm.MRWhiplashPreset(MR.LShoulder.GetChild(2));
+            MR._LFeedbacker = Arm.MRFeedbackerPreset(MR.LShoulder.GetChild(0));
+            MR._LKnuckleblaster = Arm.MRKnuckleblasterPreset(MR.LShoulder.GetChild(1));
+            MR._LWhiplash = Arm.MRWhiplashPreset(MR.LShoulder.GetChild(2));
+            MR._LSandboxer = Arm.MRSandboxerPreset(MR.LShoulder.GetChild(3));
 
             MR.RShoulder = MR.Chest.GetChild(1); // RightShoulder
-            MR.RFeedbacker = Arm.MRFeedbackerPreset(MR.RShoulder.GetChild(0));
-            MR.RSandboxer = Arm.MRKnuckleblasterPreset(MR.RShoulder.GetChild(1));
+            MR._RFeedbacker = Arm.MRFeedbackerPreset(MR.RShoulder.GetChild(0));
+            MR._RKnuckleblaster = Arm.MRKnuckleblasterPreset(MR.LShoulder.GetChild(1));
+            MR._RWhiplash = Arm.MRWhiplashPreset(MR.LShoulder.GetChild(2));
+            MR._RSandboxer = Arm.MRKnuckleblasterPreset(MR.RShoulder.GetChild(3));
+
+            if (Vars.Config.Controllers.LeftHanded)
+            {
+                MR.Feedbacker = MR._LFeedbacker;
+                MR.Knuckleblaster = MR._LKnuckleblaster;
+                MR.Whiplash = MR._LWhiplash;
+                MR.Sandboxer = MR._LSandboxer;
+            }
+            else
+            {
+                MR.Feedbacker = MR._LFeedbacker;
+                MR.Knuckleblaster = MR._RKnuckleblaster;
+                MR.Whiplash = MR._RWhiplash;
+                MR.Sandboxer = MR._RSandboxer;
+            }
 
             MR.LeftLeg = Leg.MRPreset(MR.Root.GetChild(0).GetChild(0).GetChild(1));
             MR.RightLeg = Leg.MRPreset(MR.Root.GetChild(0).GetChild(0).GetChild(2));
             return MR;
         }
-        public static MetaRig CreateV1CustomPreset(GameObject Parent)
+        public static MetaRig CreateVCustomPreset(GameObject Parent)
         {
             GameObject V1mdlGO = Object.Instantiate(Assets.Vars.V1Rig, Parent.transform, true);
-            return V1CustomPreset(V1mdlGO.transform);
+            return VCustomPreset(V1mdlGO.transform);
         }
     }
 }
