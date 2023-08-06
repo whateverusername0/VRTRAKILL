@@ -4,8 +4,10 @@ namespace Plugin.VRTRAKILL.Assets
 {
     public static class Vars
     {
-        public static GameObject V1Rig => AssetLoader.V1Rig;
-        public static GameObject V2Rig => AssetLoader.V2Rig;
+        public static GameObject VRig => AssetLoader.VRig;
+
+        public static Material[] Skin_V1 => AssetLoader.V1Skin;
+        public static Material[] Skin_V2 => AssetLoader.V2Skin;
 
         public static GameObject HandPose_Shotgun => AssetLoader.HandPose_Shotgun;
         public static GameObject HandPose_Nailgun => AssetLoader.HandPose_Nailgun;
