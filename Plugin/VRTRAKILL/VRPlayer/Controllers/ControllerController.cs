@@ -12,7 +12,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 
         GameObject Pointer;
         LineRenderer LR; Vector3 EndPosition;
-        public float DefaultLength => Vars.Config.View.VRUI.CrosshairDistance;
+        public float DefaultLength => Vars.Config.CBS.CrosshairDistance;
 
         private void SetupOffsets()
         {
@@ -48,8 +48,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
             LR.useWorldSpace = true;
             LR.material = new Material(Shader.Find("GUI/Text Shader"));
 
-            Color C1 = new Color(1, 1, 1, Vars.Config.Controllers.CLines.LInitTransparency),
-                  C2 = new Color(1, 1, 1, Vars.Config.Controllers.CLines.LEndTransparency);
+            Color C1 = new Color(1, 1, 1, Vars.Config.UIInteraction.ControllerLines.StartAlpha),
+                  C2 = new Color(1, 1, 1, Vars.Config.UIInteraction.ControllerLines.EndAlpha);
 
             LR.startWidth = 0.02f; LR.endWidth = 0.001f;
             LR.startColor = C1; LR.endColor = C2;
@@ -81,13 +81,13 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 
             SetupOffsets();
 
-            if (Vars.Config.Controllers.UseControllerUIInteraction) SetupControllerPointer();
-            if (Vars.Config.Controllers.CLines.DrawControllerLines) SetupControllerLines();
+            if (Vars.Config.UIInteraction.ControllerBased) SetupControllerPointer();
+            if (Vars.Config.UIInteraction.ControllerLines.Enabled) SetupControllerLines();
         }
         public void Update()
         {
             // controller model
-            if ((Vars.IsMainMenu || Vars.IsIntro || Vars.IsRankingScreenPresent) && !Vars.Config.Game.VRB.EnableVRIK)
+            if ((Vars.IsMainMenu || Vars.IsIntro || Vars.IsRankingScreenPresent || Vars.IsPaused) && !Vars.Config.EnableVRBody)
                 try { SVRRM.gameObject.SetActive(true); } catch {}
             else try { SVRRM.gameObject.SetActive(false); } catch {}
 
@@ -96,8 +96,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
             else Pose.enabled = true;
 
             // controller-based ui interaction
-            if (Vars.Config.Controllers.UseControllerUIInteraction) CPRaycast();
-            if (Vars.Config.Controllers.CLines.DrawControllerLines) DrawControllerLines();
+            if (Vars.Config.UIInteraction.ControllerBased) CPRaycast();
+            if (Vars.Config.UIInteraction.ControllerLines.Enabled) DrawControllerLines();
         }
 
         public static Vector3 ControllerOffset = new Vector3(0, 2.85f, 0);

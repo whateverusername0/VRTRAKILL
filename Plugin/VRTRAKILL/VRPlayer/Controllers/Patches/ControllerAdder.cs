@@ -42,7 +42,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
             SteamVR_RenderModel RHMGORM = RHMGO.AddComponent<SteamVR_RenderModel>();
             RHMGORM.createComponents = true;
 
-            if (Vars.Config.Controllers.HandS.LeftHandMode)
+            if (Vars.Config.Controllers.LeftHanded)
             {
                 RHGO.AddComponent<ArmController>();
                 LHGO.AddComponent<GunController>();

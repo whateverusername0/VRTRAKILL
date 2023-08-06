@@ -30,15 +30,12 @@ namespace Plugin.VRTRAKILL
             VirtualRender = 28,
             SandboxGrabba = 29
         }
-
-        public static Config.ConfigJSON Config => VRTRAKILL.Config.ConfigJSON.GetConfig();
+        public static Config.NewConfig Config => VRTRAKILL.Config.ConfigJSON.GetConfig().Config;
 
         #region Menu detector stuff
 
         public static bool IsMainMenu
-            => GameObject.Find("Main Menu State") != null
-            && GameObject.Find("Main Menu State") != null
-            && GameObject.Find("Main Menu State").activeSelf == true;
+            => OptionsManager.Instance != null && OptionsManager.Instance.mainMenu;
         public static bool IsPaused
             => OptionsManager.Instance != null && OptionsManager.Instance.paused;
         public static bool IsRankingScreenPresent
@@ -48,9 +45,7 @@ namespace Plugin.VRTRAKILL
         public static bool IsPlayerUsingShop
             => FistControl.Instance != null && FistControl.Instance.shopping;
         public static bool IsIntro
-            => GameObject.Find("Intro") != null
-            && GameObject.Find("Intro").GetComponent<IntroTextController>() != null
-            && GameObject.Find("Intro").GetComponent<IntroTextController>().enabled;
+            => OptionsManager.Instance != null && OptionsManager.Instance.inIntro;
         public static bool IsActEndPresent
             => GameObject.Find("Act End Message") != null
             && GameObject.Find("Act End Message").activeInHierarchy;

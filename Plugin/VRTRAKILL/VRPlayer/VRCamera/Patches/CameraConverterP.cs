@@ -25,7 +25,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
             Vars.UICamera.transform.parent = Container.transform;
 
             // Desktop View
-            if (Vars.Config.View.DV.EnableDV)
+            if (Vars.Config.DesktopView.EnableDV)
             {
                 DesktopWorldCam = new GameObject("Desktop World Camera").AddComponent<Camera>();
                 DesktopWorldCam.gameObject.AddComponent<DesktopCamera>();

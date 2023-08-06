@@ -43,7 +43,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRIK
             Rig.RightLeg.GameObjecT.localScale = Vector3.zero;
 
             // left handed mode support
-            if (Vars.Config.Controllers.HandS.LeftHandMode)
+            if (Vars.Config.Controllers.LeftHanded)
             {
                 Vector3 TempLAPos = Rig.LFeedbacker.GameObjecT.localPosition,
                         TempRAPos = Rig.RFeedbacker.GameObjecT.localPosition;

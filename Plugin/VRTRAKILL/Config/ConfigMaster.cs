@@ -1,6 +1,7 @@
 ﻿using System;
 using WindowsInput;
 using WindowsInput.Native;
+using Plugin.VRTRAKILL.Input;
 
 namespace Plugin.VRTRAKILL.Config
 {
@@ -45,70 +46,71 @@ namespace Plugin.VRTRAKILL.Config
 
         public static void Init()
         {
-            Settings.Input.Keybinds Keybinds = Vars.Config.Input.Keybinds; ConvertJSONToKeys(Keybinds);
+            NewConfig._Keybinds Keybinds = Vars.Config.Keybinds;
+            ConvertJSONToKeys(Keybinds);
         }
 
-        private static void ConvertJSONToKeys(Settings.Input.Keybinds Config)
+        private static void ConvertJSONToKeys(NewConfig._Keybinds Config)
         {
             try
             {
                 // Keyboard values
-                InputMap.Keys.TryGetValue(Config.ShootKey, out KShoot);
-                InputMap.Keys.TryGetValue(Config.AltShootKey, out KAltShoot);
-                InputMap.Keys.TryGetValue(Config.PunchKey, out KPunch);
+                InputMap.Keys.TryGetValue(Config.Shoot, out KShoot);
+                InputMap.Keys.TryGetValue(Config.AltShoot, out KAltShoot);
+                InputMap.Keys.TryGetValue(Config.Punch, out KPunch);
 
-                InputMap.Keys.TryGetValue(Config.JumpKey, out KJump);
-                InputMap.Keys.TryGetValue(Config.SlideKey, out KSlide);
-                InputMap.Keys.TryGetValue(Config.DashKey, out KDash);
+                InputMap.Keys.TryGetValue(Config.Jump, out KJump);
+                InputMap.Keys.TryGetValue(Config.Slide, out KSlide);
+                InputMap.Keys.TryGetValue(Config.Dash, out KDash);
 
-                InputMap.Keys.TryGetValue(Config.LastWeaponUsedKey, out KLastWeaponUsed);
-                InputMap.Keys.TryGetValue(Config.ChangeWeaponVariationKey, out KChangeVariation);
-                InputMap.Keys.TryGetValue(Config.IterateWeaponKey, out KIterateWeapon);
+                InputMap.Keys.TryGetValue(Config.LastWeaponUsed, out KLastWeaponUsed);
+                InputMap.Keys.TryGetValue(Config.ChangeWeaponVariation, out KChangeVariation);
+                InputMap.Keys.TryGetValue(Config.IterateWeapon, out KIterateWeapon);
 
-                InputMap.Keys.TryGetValue(Config.SwapHandKey, out KSwapHand);
-                InputMap.Keys.TryGetValue(Config.WhiplashKey, out KWhiplash);
+                InputMap.Keys.TryGetValue(Config.SwapHand, out KSwapHand);
+                InputMap.Keys.TryGetValue(Config.Whiplash, out KWhiplash);
 
-                InputMap.Keys.TryGetValue(Config.EscapeKey, out KEscape);
+                InputMap.Keys.TryGetValue(Config.Escape, out KEscape);
 
-                InputMap.Keys.TryGetValue(Config.Slot0Key, out KSlot0);
-                InputMap.Keys.TryGetValue(Config.Slot1Key, out KSlot1);
-                InputMap.Keys.TryGetValue(Config.Slot2Key, out KSlot2);
-                InputMap.Keys.TryGetValue(Config.Slot3Key, out KSlot3);
-                InputMap.Keys.TryGetValue(Config.Slot4Key, out KSlot4);
-                InputMap.Keys.TryGetValue(Config.Slot5Key, out KSlot5);
-                InputMap.Keys.TryGetValue(Config.Slot6Key, out KSlot6);
-                InputMap.Keys.TryGetValue(Config.Slot7Key, out KSlot7);
-                InputMap.Keys.TryGetValue(Config.Slot8Key, out KSlot8);
-                InputMap.Keys.TryGetValue(Config.Slot9Key, out KSlot9);
+                InputMap.Keys.TryGetValue(Config.Slot0, out KSlot0);
+                InputMap.Keys.TryGetValue(Config.Slot1, out KSlot1);
+                InputMap.Keys.TryGetValue(Config.Slot2, out KSlot2);
+                InputMap.Keys.TryGetValue(Config.Slot3, out KSlot3);
+                InputMap.Keys.TryGetValue(Config.Slot4, out KSlot4);
+                InputMap.Keys.TryGetValue(Config.Slot5, out KSlot5);
+                InputMap.Keys.TryGetValue(Config.Slot6, out KSlot6);
+                InputMap.Keys.TryGetValue(Config.Slot7, out KSlot7);
+                InputMap.Keys.TryGetValue(Config.Slot8, out KSlot8);
+                InputMap.Keys.TryGetValue(Config.Slot9, out KSlot9);
 
                 // Mouse values
-                InputMap.MouseKeys.TryGetValue(Config.ShootKey, out MShoot);
-                InputMap.MouseKeys.TryGetValue(Config.AltShootKey, out MAltShoot);
-                InputMap.MouseKeys.TryGetValue(Config.PunchKey, out MPunch);
+                InputMap.MouseKeys.TryGetValue(Config.Shoot, out MShoot);
+                InputMap.MouseKeys.TryGetValue(Config.AltShoot, out MAltShoot);
+                InputMap.MouseKeys.TryGetValue(Config.Punch, out MPunch);
 
-                InputMap.MouseKeys.TryGetValue(Config.JumpKey, out MJump);
-                InputMap.MouseKeys.TryGetValue(Config.SlideKey, out MSlide);
-                InputMap.MouseKeys.TryGetValue(Config.DashKey, out MDash);
+                InputMap.MouseKeys.TryGetValue(Config.Jump, out MJump);
+                InputMap.MouseKeys.TryGetValue(Config.Slide, out MSlide);
+                InputMap.MouseKeys.TryGetValue(Config.Dash, out MDash);
 
-                InputMap.MouseKeys.TryGetValue(Config.LastWeaponUsedKey, out MLastWeaponUsed);
-                InputMap.MouseKeys.TryGetValue(Config.ChangeWeaponVariationKey, out MChangeVariation);
-                InputMap.MouseKeys.TryGetValue(Config.IterateWeaponKey, out MIterateWeapon);
+                InputMap.MouseKeys.TryGetValue(Config.LastWeaponUsed, out MLastWeaponUsed);
+                InputMap.MouseKeys.TryGetValue(Config.ChangeWeaponVariation, out MChangeVariation);
+                InputMap.MouseKeys.TryGetValue(Config.IterateWeapon, out MIterateWeapon);
 
-                InputMap.MouseKeys.TryGetValue(Config.SwapHandKey, out MSwapHand);
-                InputMap.MouseKeys.TryGetValue(Config.WhiplashKey, out MWhiplash);
+                InputMap.MouseKeys.TryGetValue(Config.SwapHand, out MSwapHand);
+                InputMap.MouseKeys.TryGetValue(Config.Whiplash, out MWhiplash);
 
-                InputMap.MouseKeys.TryGetValue(Config.EscapeKey, out MEscape);
+                InputMap.MouseKeys.TryGetValue(Config.Escape, out MEscape);
 
-                InputMap.MouseKeys.TryGetValue(Config.Slot0Key, out MSlot0);
-                InputMap.MouseKeys.TryGetValue(Config.Slot1Key, out MSlot1);
-                InputMap.MouseKeys.TryGetValue(Config.Slot2Key, out MSlot2);
-                InputMap.MouseKeys.TryGetValue(Config.Slot3Key, out MSlot3);
-                InputMap.MouseKeys.TryGetValue(Config.Slot4Key, out MSlot4);
-                InputMap.MouseKeys.TryGetValue(Config.Slot5Key, out MSlot5);
-                InputMap.MouseKeys.TryGetValue(Config.Slot6Key, out MSlot6);
-                InputMap.MouseKeys.TryGetValue(Config.Slot7Key, out MSlot7);
-                InputMap.MouseKeys.TryGetValue(Config.Slot8Key, out MSlot8);
-                InputMap.MouseKeys.TryGetValue(Config.Slot9Key, out MSlot9);
+                InputMap.MouseKeys.TryGetValue(Config.Slot0, out MSlot0);
+                InputMap.MouseKeys.TryGetValue(Config.Slot1, out MSlot1);
+                InputMap.MouseKeys.TryGetValue(Config.Slot2, out MSlot2);
+                InputMap.MouseKeys.TryGetValue(Config.Slot3, out MSlot3);
+                InputMap.MouseKeys.TryGetValue(Config.Slot4, out MSlot4);
+                InputMap.MouseKeys.TryGetValue(Config.Slot5, out MSlot5);
+                InputMap.MouseKeys.TryGetValue(Config.Slot6, out MSlot6);
+                InputMap.MouseKeys.TryGetValue(Config.Slot7, out MSlot7);
+                InputMap.MouseKeys.TryGetValue(Config.Slot8, out MSlot8);
+                InputMap.MouseKeys.TryGetValue(Config.Slot9, out MSlot9);
             }
             catch (Exception)
             {

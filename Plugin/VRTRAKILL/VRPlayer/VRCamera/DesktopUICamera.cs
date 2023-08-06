@@ -15,7 +15,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
             C.stereoTargetEye = StereoTargetEyeMask.None;
             C.cullingMask = Vars.UICamera.cullingMask;
             C.clearFlags = Vars.UICamera.clearFlags;
-            C.fieldOfView = Vars.Config.View.DV.UICamFOV;
+            C.fieldOfView = Vars.Config.DesktopView.UICamFOV;
         }
     }
 }

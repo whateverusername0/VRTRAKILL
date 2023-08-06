@@ -5,19 +5,13 @@ namespace Plugin.VRTRAKILL.Config
 {
     public class ConfigJSON
     {
-        [JsonProperty("Gameplay Settings")] public Settings.Game Game { get; set; }
-        [JsonProperty("Input Settings")] public Settings.Input.InputS Input { get; set; }
-        [JsonProperty("Controller Settings")] public Settings.Controllers.ControllerS Controllers { get; set; }
-        [JsonProperty("View Settings")] public Settings.View.ViewS View { get; set; }
+        [JsonProperty("VRTRAKILL Settings")] public NewConfig Config { get; set; }
 
         public static ConfigJSON Instance { get; set; }
 
         public ConfigJSON()
         {
-            Game = new Settings.Game();
-            Input = new Settings.Input.InputS();
-            Controllers = new Settings.Controllers.ControllerS();
-            View = new Settings.View.ViewS();
+            Config = new NewConfig();
         }
 
         public static ConfigJSON GetConfig()
@@ -37,15 +31,16 @@ namespace Plugin.VRTRAKILL.Config
             catch (FileNotFoundException)
             {
                 Plugin.PLog.LogError("Unable to find VRTRAKILL_Config.json.\n" +
-                                        "Generating a new one. Please quit the game and fill it out.\n" +
-                                        "Starting up using default settings.");
+                                     "Generating a new one. Please quit the game and fill it out.\n" +
+                                     "Starting up using default settings.");
                 Serialize(new ConfigJSON()); return new ConfigJSON();
             }
             catch (JsonException)
             {
                 Plugin.PLog.LogError("Something went wrong when trying to read VRTRAKILL_Config.json\n" +
-                                        "Please fix any typos, formatting errors, etc. Perhaps regenerate config.\n" +
-                                        "Starting up using default settings.");
+                                     "Please fix any typos, formatting errors, etc.\n" +
+                                     "Or delete the config and let it generate once more.\n" +
+                                     "Starting up using default settings.");
                 return new ConfigJSON();
             }
         }

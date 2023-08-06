@@ -30,8 +30,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
         }
         // First person stuff
         [HarmonyPrefix] [HarmonyPatch(typeof(PlatformerMovement), nameof(PlatformerMovement.Start))] static void RemoveV1Model(PlatformerMovement __instance)
-        { if (Vars.Config.Game.EnableFP4SCam) __instance.transform.GetChild(0).GetChild(1).gameObject.SetActive(false); }
+        { if (Vars.Config.Misc.Enable4SFPSCam) __instance.transform.GetChild(0).GetChild(1).gameObject.SetActive(false); }
         [HarmonyPrefix] [HarmonyPatch(typeof(CameraController), nameof(CameraController.Start))] static void FirstPersonCamera(CameraController __instance)
-        { if (__instance.platformerCamera && Vars.Config.Game.EnableFP4SCam) Container.transform.localPosition = new Vector3(0, 0, 0); }
+        { if (__instance.platformerCamera && Vars.Config.Misc.Enable4SFPSCam) Container.transform.localPosition = new Vector3(0, 0, 0); }
     }
 }

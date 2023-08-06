@@ -10,8 +10,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Start))] static void Start(NewMovement __instance)
         {
             
-            __instance.jumpPower *= Vars.Config.Game.MovementMultiplier;
-            __instance.wallJumpPower *= Vars.Config.Game.MovementMultiplier;
+            __instance.jumpPower *= Vars.Config.MovementMultiplier;
+            __instance.wallJumpPower *= Vars.Config.MovementMultiplier;
         }
 
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Update))] static bool Update(NewMovement __instance)
@@ -19,7 +19,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
             Vector2 vector = Vector2.zero;
             if (__instance.activated)
             {
-                vector = Input.InputVars.MoveVector * Vars.Config.Game.MovementMultiplier;
+                vector = Input.InputVars.MoveVector * Vars.Config.MovementMultiplier;
 
                 __instance.cc.movementHor = vector.x;
                 __instance.cc.movementVer = vector.y;
@@ -395,9 +395,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                     __instance.boostLeft = 100f;
                     __instance.boost = true;
 
-                    __instance.dodgeDirection = __instance.movementDirection * Vars.Config.Game.MovementMultiplier;
+                    __instance.dodgeDirection = __instance.movementDirection * Vars.Config.MovementMultiplier;
                     if (__instance.dodgeDirection == Vector3.zero)
-                        __instance.dodgeDirection = __instance.transform.forward * Vars.Config.Game.MovementMultiplier;
+                        __instance.dodgeDirection = __instance.transform.forward * Vars.Config.MovementMultiplier;
 
                     Quaternion identity = Quaternion.identity;
                     identity.SetLookRotation(__instance.dodgeDirection * -1f);

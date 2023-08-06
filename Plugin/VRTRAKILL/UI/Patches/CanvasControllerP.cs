@@ -12,7 +12,7 @@ namespace Plugin.VRTRAKILL.UI.Patches
             string[] ScreenEffects =
             {
                 "HurtScreen", "BlackScreen", "ParryFlash",
-                "UnderwaterOverlay", "Black", "White" // leviathan specific
+                "UnderwaterOverlay", "Black", "White"
             };
             foreach (string ScreenEffect in ScreenEffects)
                 try

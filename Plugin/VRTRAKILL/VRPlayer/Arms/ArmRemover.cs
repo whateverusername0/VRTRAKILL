@@ -44,7 +44,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                 HandSize = new Vector3(35, 35, 35);
             }
 
-            if (Vars.Config.Controllers.HandS.LeftHandMode)
+            if (Vars.Config.Controllers.LeftHanded)
                 transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
         }
         

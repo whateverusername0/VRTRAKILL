@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.IO;
 
 #pragma warning disable IDE1006 // Naming Styles
 namespace Plugin.VRTRAKILL.Config
@@ -35,45 +36,53 @@ namespace Plugin.VRTRAKILL.Config
             [JsonProperty("Slot 0")] public string Slot0 { get; set; } = "0";
         }
 
-        [JsonProperty("Controller Settings")] public _ControllerSettings ControllerSettings { get; set; } public class _ControllerSettings
+        [JsonProperty("Movement multiplier")] public float MovementMultiplier { get; set; } = 0.575f;
+        [JsonProperty("Controller Settings")] public _ControllerSettings Controllers { get; set; } public class _ControllerSettings
         {
             [JsonProperty("Deadzone (from 0 to 1)")] public float Deadzone { get; set; } = 0.4f;
-            [JsonProperty("Smooth turning speed")] public float SmoothTurningSpeed { get; set; } = 300;
-            [JsonProperty("Snap turning")] public bool SnapTurning { get; set; } = false;
-            [JsonProperty("Snap turning angles")] public float SnapTurningAngles { get; set; } = 45;
-            [JsonProperty("Enable Controller Haptics (Vibration)")] public bool EnableControllerHaptics { get; set; } = true;
+            [JsonProperty("Smooth turning speed")] public float SmoothSpeed { get; set; } = 300;
+            [JsonProperty("Snap turning")] public bool SnapTurn { get; set; } = false;
+            [JsonProperty("Snap turning angles")] public float SnapAngles { get; set; } = 45;
+
+            [JsonProperty("Draw controllers in the main menu")] public bool DrawControllers { get; set; } = true;
+            [JsonProperty("Enable Controller Rumble")] public bool EnableHaptics { get; set; } = true;
+            [JsonProperty("Left handed? (BROKEN)")] public bool LeftHanded { get; set; } = false;
         }
 
         [JsonProperty("Enable controller-based shooting")] public bool EnableCBS { get; set; } = true;
         [JsonProperty("CBS Settings")] public _CBS CBS { get; set; } public class _CBS
         {
-
+            [JsonProperty("Enable Crosshair")] public bool EnableCrosshair { get; set; } = true;
+            [JsonProperty("Crosshair distance")] public float CrosshairDistance { get; set; } = 8;
         }
 
         [JsonProperty("Enable movement-based punching")] public bool EnableMBP { get; set; } = true;
         [JsonProperty("MBP Settings")] public _MBP MBP { get; set; } public class _MBP
         {
+            [JsonProperty("Velocity-based punching direction?")] public bool ToggleVelocity { get; set; } = false;
             [JsonProperty("Required punching speed")] public float PunchingSpeed { get; set; } = 7.5f;
+            [JsonProperty("Enable coin throwing from the non-dominant hand")] public bool EnableNDHCoinThrow { get; set; } = true;
             [JsonProperty("WHIPLASH: Enable camera-based aiming")] public bool CameraWhiplash { get; set; } = false;
-            [JsonProperty("Enable coin throwing from the non-dominant hand")] public bool EnableNDHandCoinThrow { get; set; } = true;
-            [JsonProperty("Enable velocity-based direction")] public bool EnablePunchingVelocity { get; set; } = false;
         }
 
         [JsonProperty("Enable VRAvatar")] public bool EnableVRBody { get; set; } = true;
         [JsonProperty("VRAvatar Settings")] public _VRBody VRBody { get; set; } public class _VRBody
         {
+            [JsonProperty("Skins *(ONLY ONE MUST BE CHOSEN)*")] public _Skins Skins { get; set; } public class _Skins
+            {
+                [JsonProperty("V1 (Default)")] public bool V1 { get; set; } = true;
+                [JsonProperty("V2 (PLACEHOLDER. NOT IMPLEMENTED YET)")] public bool V2 { get; set; } = false;
+            }
 
+            public _VRBody()
+            {
+                Skins = new _Skins();
+            }
         }
 
-        [JsonProperty("UI")] public _UI UI { get; set; } public class _UI
+        [JsonProperty("UI Interaction Settings")] public _UIInteraction UIInteraction { get; set; } public class _UIInteraction
         {
-            [JsonProperty("Enable standard HUD (replaces classic hud)")] public bool EnableStandardHUD { get; set; } = true;
-            [JsonProperty("HUD Size (from 0 to 0.1)")] public float UISize { get; set; } = 0.0625f;
-            [JsonProperty("Crosshair distance")] public float CrosshairDistance { get; set; } = 8;
-        }
-
-        [JsonProperty("UI Interaction")] public _UIInteraction UIInteraction { get; set; } public class _UIInteraction
-        {
+            [JsonProperty("UI Size (from 0 to 0.1)")] public float UISize { get; set; } = 0.0625f;
             [JsonProperty("Enable UI Pointer")] public bool EnableUIPointer { get; set; } = true;
             [JsonProperty("Controller-based? (BROKEN)")] public bool ControllerBased { get; set; } = false;
 
@@ -95,6 +104,22 @@ namespace Plugin.VRTRAKILL.Config
             [JsonProperty("Enabled")] public bool EnableDV { get; set; } = true;
             [JsonProperty("World view FOV")] public float WorldCamFOV { get; set; } = 90;
             [JsonProperty("UI view FOV")] public float UICamFOV { get; set; } = 90;
+        }
+
+        [JsonProperty("Miscellaneous (or unsorted) Settings")] public _Misc Misc { get; set; } public class _Misc
+        {
+            [JsonProperty("Enable 4S FPS Camera (BROKEN)")] public bool Enable4SFPSCam { get; set; } = false;
+        }
+
+        public NewConfig()
+        {
+            Keybinds = new _Keybinds();
+            Controllers = new _ControllerSettings();
+            CBS = new _CBS();
+            MBP = new _MBP();
+            VRBody = new _VRBody();
+            UIInteraction = new _UIInteraction();
+            DesktopView = new _DesktopView();
         }
     }
 }

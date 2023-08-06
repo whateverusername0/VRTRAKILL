@@ -10,7 +10,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
         {
             get
             {
-                if (Vars.Config.Game.MBP.EnablePunchingVelocity) return Thing;
+                if (Vars.Config.MBP.ToggleVelocity) return Thing;
                 else return Vars.NonDominantHand.transform.forward;
             }
         }
@@ -18,7 +18,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
         {
             if (MonoSingleton<OptionsManager>.Instance.paused) return false;
 
-            if (Vars.NDHC.Speed >= Vars.Config.Game.MBP.PunchingSpeed
+            if (Vars.NDHC.Speed >= Vars.Config.MBP.PunchingSpeed
                 && MonoSingleton<InputManager>.Instance.InputSource.Punch.IsPressed
                 && __instance.ready && !__instance.shopping
                 && /* __instance.fc.fistCooldown <= 0f && */ __instance.fc.activated
