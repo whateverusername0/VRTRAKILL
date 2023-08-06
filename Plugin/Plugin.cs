@@ -54,18 +54,28 @@ namespace Plugin
                 typeof(VRTRAKILL.VRPlayer.Patches.A).Namespace,
                 typeof(VRTRAKILL.VRPlayer.Movement.Patches.A).Namespace,
             };
-            if (Vars.Config.Input.InputSettings.EnableControllerHaptics)
-                Namespaces.Add(typeof(VRTRAKILL.VRPlayer.Controllers.Patches.A).Namespace);
-            if (Vars.Config.Game.CBS.EnableControllerShooting)
+            System.Collections.Generic.List<System.Type> Types = new System.Collections.Generic.List<System.Type>
+            {
+
+            };
+            if (Vars.Config.Controllers.DrawControllers)
+                Types.Add(typeof(VRTRAKILL.VRPlayer.Controllers.Patches.ControllerAdder));
+            if (Vars.Config.Controllers.EnableHaptics)
+                Types.Add(typeof(VRTRAKILL.VRPlayer.Controllers.Patches.ControllerHaptics));
+            if (Vars.Config.EnableCBS)
                 Namespaces.Add(typeof(VRTRAKILL.VRPlayer.Guns.Patches.A).Namespace);
-            if (Vars.Config.Game.MBP.EnableMovementPunching)
+            if (Vars.Config.EnableMBP)
                 Namespaces.Add(typeof(VRTRAKILL.VRPlayer.Arms.Patches.A).Namespace);
-            if (!Vars.Config.Game.MBP.DisableControllerAiming)
+            if (!Vars.Config.MBP.CameraWhiplash)
                 Namespaces.Add(typeof(VRTRAKILL.VRPlayer.Arms.Patches.Whiplash.A).Namespace);
-            if (Vars.Config.Game.VRB.EnableVRIK)
+            if (Vars.Config.EnableVRBody)
                 Namespaces.Add(typeof(VRTRAKILL.VRPlayer.VRIK.Patches.A).Namespace);
 
-            Patcher MainPatcher = new Patcher(new HarmonyLib.Harmony($"{PLUGIN_GUID}.base"), _Namespaces: Namespaces.ToArray());
+            Patcher MainPatcher = new Patcher(new HarmonyLib.Harmony($"{PLUGIN_GUID}.base"))
+            {
+                Namespaces = Namespaces.ToArray(),
+                Types = Types.ToArray()
+            };
             MainPatcher.PatchAll();
         }
         private void InitializeSteamVR()

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?> 
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -156,6 +156,7 @@
     <Compile Include="VRTRAKILL\Config\NewConfig.cs" />
     <Compile Include="VRTRAKILL\Patches.cs" />
     <Compile Include="VRTRAKILL\SceneWorker.cs" />
+    <Compile Include="VRTRAKILL\UI\StandardHUDWorker.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\AddHandsP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Patches\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRIK\Armature\Finger.cs" />
@@ -190,16 +191,8 @@
     <Compile Include="Helpers\Patches\HelpersP.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VRTRAKILL\Config\Settings\Controllers\ControllerLines.cs" />
     <Compile Include="VRTRAKILL\Config\Settings\Controllers\HandSettings.cs" />
     <Compile Include="VRTRAKILL\Config\Settings\Controllers\ControllerS.cs" />
-    <Compile Include="VRTRAKILL\Config\Settings\Game.cs" />
-    <Compile Include="VRTRAKILL\Config\Settings\Input\InputSettings.cs" />
-    <Compile Include="VRTRAKILL\Config\Settings\Input\Keybinds.cs" />
-    <Compile Include="VRTRAKILL\Config\Settings\Input\InputS.cs" />
-    <Compile Include="VRTRAKILL\Config\Settings\View\DesktopView.cs" />
-    <Compile Include="VRTRAKILL\Config\Settings\View\ViewS.cs" />
-    <Compile Include="VRTRAKILL\Config\Settings\View\UI.cs" />
     <Compile Include="Helpers\Patches\SteamVRP.cs" />
     <Compile Include="VRTRAKILL\UI\CrosshairController.cs" />
     <Compile Include="VRTRAKILL\UI\HideWhenMenuActive.cs" />
@@ -226,7 +219,6 @@
     <Compile Include="VRTRAKILL\VRPlayer\VRIK\Patches\VRIKP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRIK\VRigController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\ControllerController.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\Controllers\Patches\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\Patches\ControllerHaptics.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\ArmController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\Patches\ControllerAdder.cs" />
@@ -238,7 +230,6 @@
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\RemoveArmsP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\AimingP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\TransformP.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\WeaponWheelP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\VRGunsController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Movement\Patches\ClimbStepP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Movement\Patches\FlightNoclipP.cs" />
@@ -254,7 +245,7 @@
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\VRCameraController.cs" />
     <Compile Include="VRTRAKILL\Config\ConfigJSON.cs" />
     <Compile Include="VRTRAKILL\Config\ConfigMaster.cs" />
-    <Compile Include="VRTRAKILL\Config\InputMap.cs" />
+    <Compile Include="VRTRAKILL\Input\InputMap.cs" />
     <Compile Include="VRTRAKILL\Input\InputVars.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\CameraConverterP.cs" />
     <Compile Include="VRTRAKILL\Vars.cs" />
