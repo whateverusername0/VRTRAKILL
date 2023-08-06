@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>  
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -159,9 +159,10 @@
     <Compile Include="VRTRAKILL\UI\StandardHUDWorker.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\AddHandsP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Patches\A.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\VRIK\Armature\Finger.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\VRIK\Armature\Hand.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\VRIK\IKArm.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\Armature\Finger.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\Armature\Hand.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\SkinsManager.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\IKArm.cs" />
     <Compile Include="Helpers\Libraries\WindowsInput\IInputDeviceStateAdaptor.cs" />
     <Compile Include="Helpers\Libraries\WindowsInput\IInputMessageDispatcher.cs" />
     <Compile Include="Helpers\Libraries\WindowsInput\IInputSimulator.cs" />
@@ -201,7 +202,7 @@
     <Compile Include="VRTRAKILL\UI\UICanvas.cs" />
     <Compile Include="VRTRAKILL\UI\UIConverter.cs" />
     <Compile Include="VRTRAKILL\UI\UIInteraction.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\VRIK\Armature\Arm.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\Armature\Arm.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\ArmRemover.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\ArmsP.cs" />
@@ -210,12 +211,12 @@
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\Whiplash\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\Whiplash\HookArmP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\VRArmsController.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\VRIK\Armature\Leg.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\VRIK\IKFoot.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\VRIK\MetaRig.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\VRIK\Patches\A.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\VRIK\Patches\VRIKP.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\VRIK\VRigController.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\Armature\Leg.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\IKFoot.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\MetaRig.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\Patches\A.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\Patches\VRIKP.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\VRigController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\ControllerController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\Patches\ControllerHaptics.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Controllers\ArmController.cs" />
@@ -341,8 +342,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Gestures\" />
-    <Folder Include="VRTRAKILL\VRPlayer\VRIK\Arms\" />
-    <Folder Include="VRTRAKILL\VRPlayer\VRIK\Guns\" />
+    <Folder Include="VRTRAKILL\VRPlayer\VRAvatar\Arms\" />
+    <Folder Include="VRTRAKILL\VRPlayer\VRAvatar\Guns\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

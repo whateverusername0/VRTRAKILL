@@ -69,7 +69,7 @@ namespace Plugin
             if (!Vars.Config.MBP.CameraWhiplash)
                 Namespaces.Add(typeof(VRTRAKILL.VRPlayer.Arms.Patches.Whiplash.A).Namespace);
             if (Vars.Config.EnableVRBody)
-                Namespaces.Add(typeof(VRTRAKILL.VRPlayer.VRIK.Patches.A).Namespace);
+                Namespaces.Add(typeof(VRTRAKILL.VRPlayer.VRAvatar.Patches.A).Namespace);
 
             Patcher MainPatcher = new Patcher(new HarmonyLib.Harmony($"{PLUGIN_GUID}.base"))
             {
