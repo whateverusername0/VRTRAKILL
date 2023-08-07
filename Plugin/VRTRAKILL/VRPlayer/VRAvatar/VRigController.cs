@@ -75,7 +75,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
                 HandleBodyRotation();
                 HandleHeadRotation();
                 HandleArms();
-                MoveIKPoles();
+                //MoveIKPoles();
             }
         }
 
