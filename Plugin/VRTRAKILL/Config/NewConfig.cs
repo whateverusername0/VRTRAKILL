@@ -68,6 +68,7 @@ namespace Plugin.VRTRAKILL.Config
         [JsonProperty("Enable VRAvatar")] public bool EnableVRBody { get; set; } = true;
         [JsonProperty("VRAvatar Settings")] public _VRBody VRBody { get; set; } public class _VRBody
         {
+            [JsonProperty("Enable skins")] public bool EnableSkins { get; set; } = false;
             [JsonProperty("Skins *(ONLY ONE MUST BE CHOSEN)*")] public _Skins Skins { get; set; } public class _Skins
             {
                 [JsonProperty("V1 (Default)")] public bool V1 { get; set; } = true;

@@ -10,6 +10,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
 
         public void Awake()
         {
+            if (Vars.Config.VRBody.EnableSkins) Destroy(this);
+
             Rigger = VRigController.Instance;
             SMR_Body = Rigger.Rig.GameObjectT.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>();
 
