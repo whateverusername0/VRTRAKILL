@@ -342,8 +342,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Gestures\" />
-    <Folder Include="VRTRAKILL\VRPlayer\VRAvatar\Arms\" />
-    <Folder Include="VRTRAKILL\VRPlayer\VRAvatar\Guns\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

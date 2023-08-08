@@ -74,7 +74,7 @@ namespace Plugin
             Patcher MainPatcher = new Patcher(new HarmonyLib.Harmony($"{PLUGIN_GUID}.base"))
             {
                 Namespaces = Namespaces.ToArray(),
-                Types = Types.ToArray()
+                Types = Types
             };
             MainPatcher.PatchAll();
         }
