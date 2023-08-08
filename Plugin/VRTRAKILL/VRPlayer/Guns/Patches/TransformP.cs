@@ -39,9 +39,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         }
         [HarmonyPatch(typeof(Nailgun))] static class NailgunT
         {
-            static Vector3 Position = new Vector3(-.2f, .2125f, -.05f),
-                           AltPosition = new Vector3(-.25f, .35f, .075f);
-            static Vector3 Scale = new Vector3(.4f, .4f, .4f),
+            static Vector3 Position = new Vector3(-.2f, .15f, .05f),
+                           AltPosition = new Vector3(-.2f, .25f, .1f);
+            static Vector3 Scale = new Vector3(.4f, .3275f, .4f),
                            AltScale = new Vector3(.35f, .35f, .35f);
 
             [HarmonyPostfix] [HarmonyPatch(nameof(Nailgun.Start))] static void Retransform(Nailgun __instance)
@@ -61,8 +61,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         }
         [HarmonyPatch(typeof(Railcannon))] static class RailcannonT
         {
-            static Vector3 Position = new Vector3(-.25f, .25f, -.25f);
-            static Vector3 Scale = new Vector3(.35f, .35f, .35f);
+            static Vector3 Position = new Vector3(-.2f, .25f, -.175f);
+            static Vector3 Scale = new Vector3(.25f, .25f, .25f);
 
             [HarmonyPostfix] [HarmonyPatch(nameof(Railcannon.Start))] static void Retransform(Railcannon __instance)
             {

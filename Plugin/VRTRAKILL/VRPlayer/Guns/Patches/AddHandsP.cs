@@ -5,69 +5,75 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 {
     [HarmonyPatch] internal class AddHandsP
     {
-        // here small point-perfect numbers MATTER. :(
         [HarmonyPatch(typeof(Shotgun))] static class ShotgunH
         {
-            static Vector3 Position = new Vector3(-18.2475f, 26.3511f, 49.656f),
-                           Rotation = new Vector3(0, 270, 270);
+            static Vector3 Position = new Vector3(-.5f, -.95f, -.45f),
+                           Rotation = new Vector3(0, 180, 0),
+                           Scale    = new Vector3(1500, 1500, 1500);
 
             [HarmonyPostfix] [HarmonyPatch(nameof(Shotgun.Start))] static void AddHand(Shotgun __instance)
             {
-                Assets.Vars.HandPose_Shotgun.transform.position = Vector3.zero;
-
+                Transform Hand = Object.Instantiate(Assets.Vars.HandPose_Shotgun.transform);
                 // Shotgun ******(Clone)/Shotgun_New/GunArmature/MainBone
-                Assets.Vars.HandPose_Shotgun.transform
-                    .SetParent(__instance.transform.GetChild(2).GetChild(0), false);
+                Hand.SetParent(__instance.transform.GetChild(2).GetChild(2).GetChild(0), false);
+                Hand.localPosition = Vector3.zero;
 
-                Assets.Vars.HandPose_Shotgun.transform.localPosition = Position;
-                Assets.Vars.HandPose_Shotgun.transform.localEulerAngles = Rotation;
+                Hand.GetChild(1).GetChild(0).localPosition = Position;
+                Hand.GetChild(1).GetChild(0).localEulerAngles = Rotation;
+                Hand.GetChild(1).GetChild(0).localScale = Scale;
             }
         }
         [HarmonyPatch(typeof(Nailgun))] static class NailgunH
         {
-            static Vector3 Position = new Vector3(-.0004f, -.002f, -.0008f),
-                           Rotation = new Vector3(0, 90, 270),
-                           AltPosition = new Vector3(3, -25, -24), AltHandPosition = new Vector3(-.083f, .699f, .69f),
-                           AltRotation = Vector3.zero;
+            static Vector3 Position    = new Vector3(-.0008f, -.0053f, .0003f),
+                           Rotation    = new Vector3(0, 180, 0),
+                           Scale       = new Vector3(.035f, .035f, .035f),
+                           AltPosition = new Vector3(.001f, -.006f, .002f),
+                           AltRotation = new Vector3(0, 0, 0),
+                           AltScale    = new Vector3(3.5f, 3.5f, 3.5f);
 
             [HarmonyPostfix] [HarmonyPatch(nameof(Nailgun.Start))] static void AddHand(Nailgun __instance)
             {
-                Assets.Vars.HandPose_Nailgun.transform.position = Vector3.zero;
-
                 // Nailgun ******(Clone)/Nailgun New New/Armature/Main
                 // Sawblade Launcher ******(Clone)/Sawblade Launcher/Armature/Base
-                Assets.Vars.HandPose_Nailgun.transform
-                        .SetParent(__instance.transform.GetChild(0).GetChild(0).GetChild(0), false);
-
                 if (__instance.altVersion)
                 {
-                    Assets.Vars.HandPose_Nailgun.transform.localPosition = AltPosition;
-                    Assets.Vars.HandPose_Nailgun.transform.localEulerAngles = AltRotation;
-                    Assets.Vars.HandPose_Nailgun.transform.localScale = new Vector3(35, 35, 35);
+                    Transform Hand = Object.Instantiate(Assets.Vars.HandPose_Sawblade.transform);
+                    Hand.SetParent(__instance.transform.GetChild(0).GetChild(0).GetChild(0), false);
+                    Hand.localPosition = Vector3.zero;
 
-                    Assets.Vars.HandPose_Nailgun.transform.GetChild(1).localPosition = AltHandPosition;
-                    Assets.Vars.HandPose_Nailgun.transform.GetChild(1).localEulerAngles = Vector3.zero;
+                    Hand.GetChild(1).GetChild(0).localPosition = AltPosition;
+                    Hand.GetChild(1).GetChild(0).localEulerAngles = AltRotation;
+                    Hand.GetChild(1).GetChild(0).localScale = AltScale;
                 }
                 else
                 {
-                    Assets.Vars.HandPose_Nailgun.transform
-                        .SetParent(__instance.transform.GetChild(0).GetChild(0).GetChild(0), false);
+                    Transform Hand = Object.Instantiate(Assets.Vars.HandPose_Nailgun.transform);
+                    Hand.SetParent(__instance.transform.GetChild(0).GetChild(0).GetChild(0), false);
+                    Hand.localPosition = Vector3.zero;
 
-                    Assets.Vars.HandPose_Nailgun.transform.localPosition = Position;
-                    Assets.Vars.HandPose_Nailgun.transform.localEulerAngles = Rotation;
-                    Assets.Vars.HandPose_Nailgun.transform.localScale = new Vector3(.3f, -.3f, -.3f);
+                    Hand.localPosition = Position;
+                    Hand.localEulerAngles = Rotation;
+                    Hand.GetChild(1).GetChild(0).localScale = Scale;
                 }
             }
         }
         [HarmonyPatch(typeof(Railcannon))] static class RailgunH
         {
-            static Vector3 Position = new Vector3(),
-                           Rotation = new Vector3();
+            static Vector3 Position = new Vector3(-.1f, -.325f, -.025f),
+                           Rotation = new Vector3(30, 180, 0),
+                           Scale    = new Vector3(350, 350, 350);
 
             [HarmonyPostfix] [HarmonyPatch(nameof(Railcannon.Start))] static void AddHand(Railcannon __instance)
             {
-                // blehh
-                //Assets.Vars.HandPose_Railgun
+                Transform Hand = Object.Instantiate(Assets.Vars.HandPose_Railgun.transform);
+                // Railcannon ******(Clone)/Railgun/Armature/Base
+                Hand.SetParent(__instance.transform.GetChild(0).GetChild(0).GetChild(0), false);
+                Hand.localPosition = Vector3.zero;
+
+                Hand.GetChild(1).GetChild(0).localPosition = Position;
+                Hand.GetChild(1).GetChild(0).localEulerAngles = Rotation;
+                Hand.GetChild(1).GetChild(0).localScale = Scale;
             }
         }
     }
