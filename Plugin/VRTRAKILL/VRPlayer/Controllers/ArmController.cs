@@ -8,6 +8,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         public ControllerController CC;
         public GameObject GunOffset;
 
+        public Vector3 ArmOffset = new Vector3(0, .05f, -.11f);
+
         private Vector3 _PreviousPosition;
         private Vector3 _CurrentVelocity;
         public float Speed = 0;
@@ -30,7 +32,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 
         public void Update()
         {
-            CC.ArmOffset.transform.localPosition = new Vector3(0, .05f, -.2f);
+            CC.ArmOffset.transform.localPosition = ArmOffset;
             StartCoroutine(CalculateVelocity());
         }
     }
