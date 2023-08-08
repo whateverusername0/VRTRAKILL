@@ -56,10 +56,8 @@ namespace Plugin
             };
             System.Collections.Generic.List<System.Type> Types = new System.Collections.Generic.List<System.Type>
             {
-
+                typeof(VRTRAKILL.VRPlayer.Controllers.Patches.ControllerAdder)
             };
-            if (Vars.Config.Controllers.DrawControllers)
-                Types.Add(typeof(VRTRAKILL.VRPlayer.Controllers.Patches.ControllerAdder));
             if (Vars.Config.Controllers.EnableHaptics)
                 Types.Add(typeof(VRTRAKILL.VRPlayer.Controllers.Patches.ControllerHaptics));
             if (Vars.Config.EnableCBS)
@@ -71,12 +69,11 @@ namespace Plugin
             if (Vars.Config.EnableVRBody)
                 Namespaces.Add(typeof(VRTRAKILL.VRPlayer.VRAvatar.Patches.A).Namespace);
 
-            Patcher MainPatcher = new Patcher(new HarmonyLib.Harmony($"{PLUGIN_GUID}.base"))
+            new Patcher(new HarmonyLib.Harmony($"{PLUGIN_GUID}.base"))
             {
                 Namespaces = Namespaces.ToArray(),
-                Types = Types
-            };
-            MainPatcher.PatchAll();
+                Types = Types.ToArray()
+            }.PatchAll();
         }
         private void InitializeSteamVR()
         {
