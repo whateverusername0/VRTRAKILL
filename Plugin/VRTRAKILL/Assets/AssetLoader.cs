@@ -28,20 +28,20 @@ namespace Plugin.VRTRAKILL.Assets
             HandPose_Sawblade = Object.Instantiate(LoadAsset<GameObject>(Assets, "Arms/Feedbacker/Hand_Sawblade.prefab"), new Vector3(2048, 2048, 2048), Quaternion.identity);
             HandPose_Railgun = Object.Instantiate(LoadAsset<GameObject>(Assets, "Arms/Feedbacker/Hand_Railgun.prefab"), new Vector3(2048, 2048, 2048), Quaternion.identity);
 
-            if (V1Skin == null)
-                V1Skin = new Material[]
-                {
-                    Object.Instantiate(LoadAsset<Material>(Assets, "V1/Mat_Body.mat")),
-                    Object.Instantiate(LoadAsset<Material>(Assets, "V1/Mat_Wing.mat")),
-                    Object.Instantiate(LoadAsset<Material>(Assets, "V1/Mat_Arms.mat"))
-                };
-            if (V2Skin == null)
-                V2Skin = new Material[]
-                {
-                    Object.Instantiate(LoadAsset<Material>(Assets, "V2/Mat_Body.mat")),
-                    Object.Instantiate(LoadAsset<Material>(Assets, "V2/Mat_Wing.mat")),
-                    Object.Instantiate(LoadAsset<Material>(Assets, "V2/Mat_Arms.mat"))
-                };
+            //if (V1Skin == null)
+            //    V1Skin = new Material[]
+            //    {
+            //        Object.Instantiate(LoadAsset<Material>(Assets, "V1/Mat_Body.mat")),
+            //        Object.Instantiate(LoadAsset<Material>(Assets, "V1/Mat_Wing.mat")),
+            //        Object.Instantiate(LoadAsset<Material>(Assets, "V1/Mat_Arms.mat"))
+            //    };
+            //if (V2Skin == null)
+            //    V2Skin = new Material[]
+            //    {
+            //        Object.Instantiate(LoadAsset<Material>(Assets, "V2/Mat_Body.mat")),
+            //        Object.Instantiate(LoadAsset<Material>(Assets, "V2/Mat_Wing.mat")),
+            //        Object.Instantiate(LoadAsset<Material>(Assets, "V2/Mat_Arms.mat"))
+            //    };
 
             Assets.Unload(false);
         }
