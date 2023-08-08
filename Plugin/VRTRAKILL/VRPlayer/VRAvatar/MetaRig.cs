@@ -25,13 +25,16 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         public Arm _RWhiplash { get; set; }
         public Arm _RSandboxer { get; set; }
 
-        public Arm Feedbacker { get; set; }
+        public Arm FeedbackerA { get; set; } public Arm FeedbackerB { get; set; }
         public Arm Knuckleblaster { get; set; }
         public Arm Whiplash { get; set; }
         public Arm Sandboxer { get; set; }
 
         public Leg LeftLeg { get; set; }
         public Leg RightLeg { get; set; }
+
+        public Transform IKPole_Left { get; set; }
+        public Transform IKPole_Right { get; set; }
 
         // V stands for Model V (V1, V2), since they have identical armatures.
         public static MetaRig VCustomPreset(Transform T)
@@ -55,27 +58,30 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
 
             MR.RShoulder = MR.Chest.GetChild(1); // RightShoulder
             MR._RFeedbacker = Arm.MRFeedbackerPreset(MR.RShoulder.GetChild(0));
-            MR._RKnuckleblaster = Arm.MRKnuckleblasterPreset(MR.LShoulder.GetChild(1));
-            MR._RWhiplash = Arm.MRWhiplashPreset(MR.LShoulder.GetChild(2));
-            MR._RSandboxer = Arm.MRKnuckleblasterPreset(MR.RShoulder.GetChild(3));
+            MR._RKnuckleblaster = Arm.MRKnuckleblasterPreset(MR.RShoulder.GetChild(1));
+            MR._RWhiplash = Arm.MRWhiplashPreset(MR.RShoulder.GetChild(2));
+            MR._RSandboxer = Arm.MRSandboxerPreset(MR.RShoulder.GetChild(3));
 
             if (Vars.Config.Controllers.LeftHanded)
             {
-                MR.Feedbacker = MR._LFeedbacker;
-                MR.Knuckleblaster = MR._LKnuckleblaster;
-                MR.Whiplash = MR._LWhiplash;
+                MR.FeedbackerA = MR._RFeedbacker; MR.FeedbackerB = MR._LFeedbacker;
+                MR.Knuckleblaster = MR._RKnuckleblaster;
+                MR.Whiplash = MR._RWhiplash;
                 MR.Sandboxer = MR._LSandboxer;
             }
             else
             {
-                MR.Feedbacker = MR._LFeedbacker;
-                MR.Knuckleblaster = MR._RKnuckleblaster;
-                MR.Whiplash = MR._RWhiplash;
+                MR.FeedbackerA = MR._LFeedbacker; MR.FeedbackerB = MR._RFeedbacker;
+                MR.Knuckleblaster = MR._LKnuckleblaster;
+                MR.Whiplash = MR._LWhiplash;
                 MR.Sandboxer = MR._RSandboxer;
             }
 
             MR.LeftLeg = Leg.MRPreset(MR.Root.GetChild(0).GetChild(0).GetChild(1));
             MR.RightLeg = Leg.MRPreset(MR.Root.GetChild(0).GetChild(0).GetChild(2));
+
+            MR.IKPole_Left = MR.Root.GetChild(0).GetChild(1);
+            MR.IKPole_Right = MR.Root.GetChild(0).GetChild(2);
             return MR;
         }
         public static MetaRig CreateVCustomPreset(GameObject Parent)

@@ -10,17 +10,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
 
         public MetaRig Rig;
 
-        private Armature.Arm _ActiveArm; public Armature.Arm ActiveArm
-        {
-            get { return _ActiveArm; }
-            set
-            {
-                _ActiveArm?.GameObjecT.gameObject.SetActive(false);
-                _ActiveArm = value;
-                _ActiveArm.GameObjecT.gameObject.SetActive(true);
-            }
-        }
-
         private IKArm AddArmIK(GameObject GO, Transform Target, int ChainLen = 3, Transform Pole = null)
         {
             IKArm IK = GO.AddComponent<IKArm>();
@@ -46,20 +35,26 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             Rig.Root.localScale *= 3;
             Rig.Body.localPosition = new Vector3(0, -0.0125f, 0.002f);
 
-            Armature.Arm[] Arms =
+            // Arm IKs
+            Armature.Arm[] LArms =
             {
                 Rig._LFeedbacker, Rig._LKnuckleblaster,
                 Rig._LWhiplash, Rig._LSandboxer,
+            };
+            foreach (Armature.Arm Arm in LArms)
+                AddArmIK(Arm.Hand.Root.gameObject, ArmController.Instance.CC.ArmOffset.transform, Pole: Rig.IKPole_Left);
+
+            Armature.Arm[] RArms =
+            {
                 Rig._RFeedbacker, Rig._RKnuckleblaster,
                 Rig._RWhiplash, Rig._RSandboxer,
             };
-            // Arm IKs
-            foreach(Armature.Arm Arm in Arms)
-                AddArmIK(Arm.Hand.Root.gameObject, ArmController.Instance.CC.ArmOffset.transform, Pole: Arm.Pole);
+            foreach (Armature.Arm Arm in RArms)
+                AddArmIK(Arm.Hand.Root.gameObject, GunController.Instance.CC.ArmOffset.transform, Pole: Rig.IKPole_Right);
 
             // Leg IKs TBD
 
-            gameObject.AddComponent<SkinsManager>();
+            //gameObject.AddComponent<SkinsManager>();
         }
         
         public void LateUpdate()
@@ -75,7 +70,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
                 HandleBodyRotation();
                 HandleHeadRotation();
                 HandleArms();
-                //MoveIKPoles();
             }
         }
 
@@ -92,49 +86,62 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         private void HandleHeadRotation()
         {
             Rig.Head.position = Vars.MainCamera.transform.position;
-            Rig.Head.rotation = Vars.MainCamera.transform.rotation * Quaternion.Euler(-45, 0, 0);
+            Rig.Head.rotation = Vars.MainCamera.transform.rotation * Quaternion.Euler(-90, 0, 0);
         }
         private void HandleArms()
         {
-            // main menu
+            // Main Menu
             if (Vars.IsMainMenu)
             {
-                Rig._LFeedbacker.GameObjecT.gameObject.SetActive(true);
-                Rig._RFeedbacker.GameObjecT.gameObject.SetActive(true);
+                Rig.FeedbackerA.GameObjecT.gameObject.SetActive(true);
+                Rig.FeedbackerB.GameObjecT.gameObject.SetActive(true);
                 Rig.Knuckleblaster.GameObjecT.gameObject.SetActive(false);
                 Rig.Whiplash.GameObjecT.gameObject.SetActive(false);
                 Rig.Sandboxer.GameObjecT.gameObject.SetActive(false);
             }
 
-            // Determine which arm to render
-            if (GunControl.Instance.currentWeapon.HasComponent<Sandbox.Arm.SandboxArm>())
-                ActiveArm = Rig.Sandboxer;
-            else switch(FistControl.Instance.currentPunch.type)
+            // Arm to render
+            if (GunControl.Instance != null
+            && GunControl.Instance.currentWeapon != null
+            && GunControl.Instance.currentWeapon.HasComponent<Sandbox.Arm.SandboxArm>())
+            {
+                Rig.FeedbackerB.GameObjecT.gameObject.SetActive(false);
+                Rig.Sandboxer.GameObjecT.gameObject.SetActive(true);
+            }
+            else
+            {
+                Rig.FeedbackerB.GameObjecT.gameObject.SetActive(true);
+                Rig.Sandboxer.GameObjecT.gameObject.SetActive(false);
+            }
+
+            Armature.Arm ActiveArm = null;
+            switch (FistControl.Instance.currentPunch.type)
             {
                 case FistType.Standard:
-                    ActiveArm = Rig.Feedbacker; break;
+                    ActiveArm = Rig.FeedbackerA;
+                    Rig.FeedbackerA.GameObjecT.gameObject.SetActive(true);
+                    Rig.Knuckleblaster.GameObjecT.gameObject.SetActive(false);
+                    break;
                 case FistType.Heavy:
-                    ActiveArm = Rig.Knuckleblaster; break;
+                    ActiveArm = Rig.Knuckleblaster;
+                    Rig.FeedbackerA.GameObjecT.gameObject.SetActive(false);
+                    Rig.Knuckleblaster.GameObjecT.gameObject.SetActive(true);
+                    break;
                 case FistType.Spear:
                 default: break;
             }
-            if (HookArm.Instance != null && HookArm.Instance.enabled && HookArm.Instance.model.activeSelf)
+
+            if (HookArm.Instance != null && HookArm.Instance.enabled
+            && HookArm.Instance.model.activeSelf && !Vars.Config.MBP.CameraWhiplash)
             {
-                Rig.Feedbacker.GameObjecT.gameObject.SetActive(false);
-                Rig.Knuckleblaster.GameObjecT.gameObject.SetActive(false);
+                ActiveArm.GameObjecT.gameObject.SetActive(false);
                 Rig.Whiplash.GameObjecT.gameObject.SetActive(true);
             }
-            else Rig.Whiplash.GameObjecT.gameObject.SetActive(false);
-        }
-        private void MoveIKPoles()
-        {
-            Vector3 Position = Vars.DominantHand.transform.forward * -5;
-            Rig._LFeedbacker.Pole.position = Position;
-            Rig._RFeedbacker.Pole.position = Position;
-
-            Rig.Knuckleblaster.Pole.position = Position;
-            Rig.Whiplash.Pole.position = Position;
-            Rig.Sandboxer.Pole.position = Position;
+            else
+            {
+                ActiveArm.GameObjecT.gameObject.SetActive(true);
+                Rig.Whiplash.GameObjecT.gameObject.SetActive(false);
+            }
         }
     }
 }
