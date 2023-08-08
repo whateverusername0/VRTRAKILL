@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2782180568
+CRC: 1182844237
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b135ff4d973529798227923cabed81a5
+    Hash: a4d024c08c4ce211fc7cee28176d99dc
   TypeTreeHash:
     serializedVersion: 2
     Hash: 889f56699e1f09aa0ce745c3af23d519
@@ -27,18 +27,61 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
+- Assets/AssetsBundles/Arms/Feedbacker/Gestures/Gesture_MF.prefab
 - Assets/AssetsBundles/Arms/Feedbacker/Feedbacker.prefab
 - Assets/AssetsBundles/Animations/InAir.anim
+- Assets/AssetsBundles/Shaders/psx_vertexlit_vertexlit_atlas.shader
+- Assets/AssetsBundles/V2/Mdl_Body.fbx
 - Assets/AssetsBundles/V2/V2.prefab
+- Assets/AssetsBundles/Shaders/psx_unlit_emissive.shader
+- Assets/AssetsBundles/Arms/Knuckleblaster/Mat_LArm.mat
+- Assets/AssetsBundles/Arms/Whiplash/Tex_HookArm.png
+- Assets/AssetsBundles/V1/Tex_Arms.png
+- Assets/AssetsBundles/Arms/Sandboxer/Mdl_LArm.asset
 - Assets/AssetsBundles/Arms/Sandboxer/Sandboxer.prefab
+- Assets/AssetsBundles/Arms/Sandboxer/Mat_LArm.mat
 - Assets/AssetsBundles/Arms/Feedbacker/Hand_Nailgun.prefab
+- Assets/AssetsBundles/Arms/Feedbacker/ArmV2_Diffuse.png
 - Assets/AssetsBundles/Arms/Feedbacker/Hand_Shotgun.prefab
+- Assets/AssetsBundles/Shaders/psx_unlit_unlit.shader
+- Assets/AssetsBundles/V2/Tex_Wing.png
+- Assets/AssetsBundles/Arms/Whiplash/Mat_HookArm.mat
 - Assets/AssetsBundles/Arms/Feedbacker/Hand_Railgun.prefab
 - Assets/AssetsBundles/V1/V1.prefab
+- Assets/AssetsBundles/V1/Mdl_Body.fbx
+- Assets/AssetsBundles/Arms/Whiplash/Whiplash.fbx
+- Assets/AssetsBundles/Arms/Feedbacker/Hand_Template.prefab
+- Assets/AssetsBundles/Arms/Feedbacker/Mat_LArm.mat
+- Assets/AssetsBundles/Arms/Knuckleblaster/Mdl_LArm.fbx
+- Assets/AssetsBundles/Shaders/psx_vertexlit_vertexlit.shader
+- Assets/AssetsBundles/V2/Mat_Wing.mat
+- Assets/AssetsBundles/Shaders/psx_vertexlit_emissive.shader
 - Assets/AssetsBundles/Arms/Whiplash/Whiplash.prefab
 - Assets/AssetsBundles/Animations/Run.anim
+- Assets/AssetsBundles/Shaders/psx_unlit_unlit-customcolors.shader
+- Assets/AssetsBundles/Arms/Sandboxer/Tex_LArm.png
+- Assets/AssetsBundles/V2/Tex_LArm.png
 - Assets/AssetsBundles/Arms/Feedbacker/Hand_Sawblade.prefab
+- Assets/AssetsBundles/Shaders/psx_unlit_ambient.shader
+- Assets/AssetsBundles/V2/Mat_HookArm.mat
+- Assets/AssetsBundles/V2/Tex_RArm.png
+- Assets/AssetsBundles/Arms/Knuckleblaster/Tex_LArm.png
+- Assets/AssetsBundles/V2/Mat_Body.mat
+- Assets/AssetsBundles/V2/Mat_RArm.mat
+- Assets/AssetsBundles/V2/Tex_Body.png
+- Assets/AssetsBundles/V2/Tex_HookArm.png
 - Assets/AssetsBundles/Animations/Idle.anim
+- Assets/AssetsBundles/Arms/Feedbacker/Tex_LArm.png
+- Assets/AssetsBundles/V1/Mat_Arms.mat
+- Assets/AssetsBundles/Arms/Feedbacker/Mdl_LArm.asset
+- Assets/AssetsBundles/Shaders/psx_unlit_nocull.shader
+- Assets/AssetsBundles/V1/Tex_Body_EmissionMap.jpg
+- Assets/AssetsBundles/V1/Mat_Wing.mat
 - Assets/AssetsBundles/Animations/Jump.anim
+- Assets/AssetsBundles/V2/Mat_LArm.mat
+- Assets/AssetsBundles/V1/Mat_Body.mat
 - Assets/AssetsBundles/Arms/Knuckleblaster/Knuckleblaster.prefab
+- Assets/AssetsBundles/V1/Tex_Wing.png
+- Assets/AssetsBundles/V1/Tex_Body.jpg
+- Assets/AssetsBundles/Shaders/psx_unlit_nofog.shader
 Dependencies: []
