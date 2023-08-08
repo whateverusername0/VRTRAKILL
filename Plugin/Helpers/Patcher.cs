@@ -14,8 +14,11 @@ namespace Plugin.Helpers
     {
         public Harmony Harmony { get; set; }
         public Assembly ASS { get; private set; } = Assembly.GetCallingAssembly();
-        public string Namespace { get; set; } public Type Type { get; set; }
-        public string[] Namespaces { get; set; } public List<Type> Types { get; set; } = new List<Type>();
+
+        public string Namespace { get; set; } 
+        public string[] Namespaces { get; set; } 
+        public Type Type { get; set; }
+        public Type[] Types { get; set; }
 
         public Patcher(Harmony _Harmony)
         {
@@ -39,7 +42,7 @@ namespace Plugin.Helpers
         public Patcher(Harmony _Harmony, Type[] _Types)
         {
             Harmony = _Harmony;
-            Types = _Types.ToList();
+            Types = _Types.ToArray();
         }
         public Patcher(Harmony _Harmony, Assembly _ASS)
         {
@@ -68,7 +71,7 @@ namespace Plugin.Helpers
         {
             Harmony = _Harmony;
             ASS = _ASS;
-            Types = _Types.ToList();
+            Types = _Types.ToArray();
         }
 
         private List<Type> GetPatches(string _Namespace = null)
@@ -95,9 +98,9 @@ namespace Plugin.Helpers
                 QL.AddRange(GetPatches(_Namespace));
             return QL;
         }
-        public IEnumerable<Type> GetTypes(string _Namespace)
+        private IEnumerable<Type> GetTypes(string _Namespace)
         { return GetPatches(_Namespace); }
-        public IEnumerable<Type> GetTypes(string[] _Namespaces)
+        private IEnumerable<Type> GetTypes(string[] _Namespaces)
         { return GetPatches(_Namespaces); }
 
         public void PatchAll()
@@ -108,28 +111,28 @@ namespace Plugin.Helpers
                 try { Harmony.PatchAll(); } catch (NullReferenceException) { Plugin.PLog.LogFatal("Could not find any patches(???) wtf?"); }
             else
             {
+                if (Type != null) L.Add(Type);
+                if (Types != null && Types.Length > 0) L.AddRange(Types.ToArray());
                 if (Namespace != null) L.AddRange(GetTypes(Namespace));
                 if (Namespaces != null && Namespaces.Length > 0) L.AddRange(GetTypes(Namespaces));
-                if (Type != null) L.Add(Type);
-                if (Types != null && Types.Count > 0) L.AddRange(Types.ToArray());
-                PatchAll(L.ToArray());
+                Patch(L.ToArray());
             }
         }
         
 
-        public void PatchAll(string _Namespace)
+        public void Patch(string _Namespace)
         {
-            IEnumerable<Type> Q = GetPatches(_Namespace);
+            IEnumerable<Type> Q = GetTypes(_Namespace);
             foreach (Type T in Q) try { Harmony.PatchAll(T); } catch { Plugin.PLog.LogError($"Nullref with type {T}"); }
         }
-        public void PatchAll(string[] _Namespaces)
+        public void Patch(string[] _Namespaces)
         {
-            IEnumerable<Type> Q = GetPatches(_Namespaces);
+            IEnumerable<Type> Q = GetTypes(_Namespaces);
             foreach (Type T in Q) try { Harmony.PatchAll(T); } catch { Plugin.PLog.LogError($"Nullref with type {T}"); }
         }
-        public void PatchAll(Type _T)
+        public void Patch(Type _T)
         => Harmony.PatchAll(_T);
-        public void PatchAll(Type[] _T)
+        public void Patch(Type[] _T)
         { foreach(Type T in _T) Harmony.PatchAll(T); }
 
         public void UnpatchAll()
