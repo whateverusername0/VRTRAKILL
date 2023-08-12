@@ -46,11 +46,11 @@ namespace Plugin.VRTRAKILL.Config
 
         public static void Init()
         {
-            NewConfig._Keybinds Keybinds = Vars.Config.UKKeybinds;
+            NewConfig._UKKeybinds Keybinds = Vars.Config.UKKeybinds;
             ConvertJSONToKeys(Keybinds);
         }
 
-        private static void ConvertJSONToKeys(NewConfig._Keybinds Config)
+        private static void ConvertJSONToKeys(NewConfig._UKKeybinds Config)
         {
             try
             {
@@ -115,7 +115,7 @@ namespace Plugin.VRTRAKILL.Config
             catch (Exception)
             {
                 Plugin.PLog.LogError("Unable to convert keys in config. Perhaps mismatch? Perhaps keys are literally null?" +
-                                        "Check spelling and replace every null key either with \"\", \"Empty\" or assign a value to it.");
+                                     "Check spelling and replace every null key either with \"\", \"Empty\" or assign a value to it.");
             }
         }
     }
