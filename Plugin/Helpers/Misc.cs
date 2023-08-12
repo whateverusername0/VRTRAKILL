@@ -27,5 +27,17 @@ namespace Plugin.Helpers
             if (Layer != null) { Physics.Raycast(new Ray(T.position, T.forward), out RaycastHit Hit, Length, (int)Layer); return Hit; }
             else { Physics.Raycast(new Ray(T.position, T.forward), out RaycastHit Hit, Length); return Hit; }
         }
+
+        public static void CopyCameraValues(Camera CopyTo, Camera CopyFrom)
+        {
+            CopyTo.nearClipPlane = CopyFrom.nearClipPlane;
+            CopyTo.farClipPlane = CopyFrom.farClipPlane;
+            CopyTo.depth = CopyFrom.depth;
+            CopyTo.stereoTargetEye = CopyFrom.stereoTargetEye;
+            CopyTo.backgroundColor = CopyFrom.backgroundColor;
+            CopyTo.cullingMask = CopyFrom.cullingMask;
+            CopyTo.clearFlags = CopyFrom.clearFlags;
+            CopyTo.fieldOfView = CopyFrom.fieldOfView;
+        }
     }
 }
