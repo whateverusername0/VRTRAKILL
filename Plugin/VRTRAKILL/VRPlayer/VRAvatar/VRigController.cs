@@ -17,6 +17,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             return IK;
         }
 
+        public Vector3 HeadOffset = new Vector3(0, -.001f, 0);
+
         public void Awake()
         {
             if (_Instance != null && _Instance != this) Destroy(this.gameObject);
@@ -59,13 +61,14 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         
         public void LateUpdate()
         {
+            
             if (Rig == null) return;
 
-            if (Vars.IsPaused && !Vars.IsAMenu)
-                Rig.Head.localScale = Vector3.one;
+            if (Vars.IsPlayerFrozen) { }
+                //Rig.Head.localScale = Vector3.one;
             else
             {
-                Rig.Head.localScale = Vector3.zero;
+                //Rig.Head.localScale = Vector3.zero;
 
                 HandleBodyRotation();
                 HandleHeadRotation();
