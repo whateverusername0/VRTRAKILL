@@ -9,7 +9,7 @@ namespace Plugin.VRTRAKILL
         // discord :)
         [HarmonyPrefix] [HarmonyPatch(typeof(DiscordController), nameof(DiscordController.SendActivity))]
         static void SendActivity(DiscordController __instance)
-        => __instance.cachedActivity.State += "\nPlaying in VR via VRTRAKILL";
+        => __instance.cachedActivity.State = "Playing in VR via VRTRAKILL";
 
         // weapon wheel controller interaction
         [HarmonyPrefix] [HarmonyPatch(typeof(WeaponWheel) ,nameof(WeaponWheel.Update))] static bool WWUpdate(WeaponWheel __instance)
