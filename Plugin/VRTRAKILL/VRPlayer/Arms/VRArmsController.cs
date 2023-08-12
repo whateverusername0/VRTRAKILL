@@ -43,20 +43,23 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
         }
         public void LateUpdate()
         {
-            if (IsRevolver) HandleRevolver();
-            else
-                switch (Arm.Type)
-                {
-                    case ArmType.Feedbacker:
-                    case ArmType.Knuckleblaster:
-                        MoveHand(); break;
+            try
+            {
+                if (IsRevolver) HandleRevolver();
+                else
+                    switch (Arm.Type)
+                    {
+                        case ArmType.Feedbacker:
+                        case ArmType.Knuckleblaster:
+                            MoveHand(); break;
 
-                    case ArmType.Whiplash: HandleWhiplash(); break;
-                    case ArmType.Sandboxer: MoveSandboxer(); break;
+                        case ArmType.Whiplash: HandleWhiplash(); break;
+                        case ArmType.Sandboxer: MoveSandboxer(); break;
 
-                    case ArmType.Spear:
-                    default: break;
-                }
+                        case ArmType.Spear:
+                        default: break;
+                    }
+            } catch {}
         }
 
         private void MoveSandboxer()
