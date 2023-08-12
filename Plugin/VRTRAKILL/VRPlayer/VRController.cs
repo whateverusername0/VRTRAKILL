@@ -35,7 +35,8 @@ namespace Plugin.VRTRAKILL.VRPlayer
                 else Vars.DesktopCamera.gameObject.SetActive(false);
 
                 if (!Vars.DesktopUICamera.gameObject.activeSelf) Vars.DesktopUICamera.gameObject.SetActive(true);
-                else Vars.DesktopUICamera.gameObject.SetActive(false);
+                else if (Vars.DesktopUICamera.gameObject.activeSelf && !Vars.SpectatorCamera.activeSelf)
+                    Vars.DesktopUICamera.gameObject.SetActive(false);
             }
             if (UnityEngine.Input.GetKeyDown(Vars.Config.VRKeybinds.ToggleSC))
             {
@@ -59,7 +60,8 @@ namespace Plugin.VRTRAKILL.VRPlayer
             if (UnityEngine.Input.GetKeyDown(Vars.Config.VRKeybinds.EnumSCMode))
             {
                 VRCamera.SpectatorCamera.Instance.EnumSCMode();
-                SubtitleController.Instance.DisplaySubtitle($"VR: Switched spectator camera mode to {nameof(VRCamera.SpectatorCamera.Mode)}");
+                SubtitleController.Instance.DisplaySubtitle
+                    ($"VR: Switched spectator camera mode to {System.Enum.GetName(typeof(VRCamera.SpectatorCamera.SCMode), VRCamera.SpectatorCamera.Instance.Mode)}");
             }
 
         }
