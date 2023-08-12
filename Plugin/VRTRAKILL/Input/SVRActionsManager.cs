@@ -6,7 +6,7 @@ using Plugin.VRTRAKILL.Config;
 
 namespace Plugin.VRTRAKILL.Input
 {
-    internal static class VRActionsManager
+    internal static class SVRActionsManager
     {
         // simulate keyboard presses (windows only)
         private static InputSimulator InpSim => new InputSimulator();
