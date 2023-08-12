@@ -35,7 +35,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             Rig.GameObjectT.localRotation = Quaternion.Euler(Vector3.zero);
 
             Rig.Root.localScale *= 3;
-            Rig.Body.localPosition = new Vector3(0, -0.0125f, 0.002f);
+            Rig.Body.localPosition = new Vector3(0, -0.013f, 0.002f);
 
             // Arm IKs
             Armature.Arm[] LArms =
@@ -88,7 +88,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         }
         private void HandleHeadRotation()
         {
-            Rig.Head.position = Vars.MainCamera.transform.position;
+            Rig.Head.position = Vars.MainCamera.transform.position + HeadOffset;
             Rig.Head.rotation = Vars.MainCamera.transform.rotation * Quaternion.Euler(-90, 0, 0);
         }
         private void HandleArms()
