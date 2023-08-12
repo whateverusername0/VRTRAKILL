@@ -651,6 +651,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 
         // Rocket launcher
         // Normal fire
+        [HarmonyPostfix] [HarmonyPatch(typeof(RocketLauncher), nameof(RocketLauncher.Update))] static void RL_VRIK(RocketLauncher __instance)
+        {
+            if (VRAvatar.VRigController.Instance != null)
+                __instance.transform.forward = VRAvatar.VRigController.Instance.Rig.FeedbackerB.GameObjecT.forward;
+        }
         [HarmonyPrefix] [HarmonyPatch(typeof(RocketLauncher), nameof(RocketLauncher.Shoot))] static bool RocketLauncherA(RocketLauncher __instance)
         {
             if (__instance.aud)
@@ -666,7 +671,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             Object.Instantiate<GameObject>(__instance.muzzleFlash, __instance.shootPoint.position, Vars.DominantHand.transform.rotation);
             __instance.anim.SetTrigger("Fire");
             __instance.cooldown = __instance.rateOfFire;
-            GameObject gameObject = Object.Instantiate<GameObject>(__instance.rocket, Vars.DominantHand.transform.position, Vars.DominantHand.transform.rotation);
+            GameObject gameObject = Object.Instantiate<GameObject>(__instance.rocket, Vars.DominantHand.transform.position, __instance.transform.rotation);
             if (MonoSingleton<CameraFrustumTargeter>.Instance.CurrentTarget && MonoSingleton<CameraFrustumTargeter>.Instance.IsAutoAimed)
             {
                 gameObject.transform.LookAt(MonoSingleton<CameraFrustumTargeter>.Instance.CurrentTarget.bounds.center);
