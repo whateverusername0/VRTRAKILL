@@ -4,8 +4,10 @@ using System.Collections.Generic;
 
 namespace Plugin.VRTRAKILL.Input
 {
+    // Converts config strings into keycodes
     internal class InputMap
     {
+        // InputSimulator
         public static readonly Dictionary<string, VirtualKeyCode?> Keys = new Dictionary<string, VirtualKeyCode?>
         {
             #region SpecialKeys
