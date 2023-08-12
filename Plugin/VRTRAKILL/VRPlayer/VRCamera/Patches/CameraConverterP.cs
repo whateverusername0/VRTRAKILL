@@ -29,11 +29,13 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
             DesktopWorldCam.transform.parent = Vars.MainCamera.transform;
             DesktopWorldCam.transform.localPosition = Vector3.zero;
             DesktopWorldCam.gameObject.AddComponent<DesktopCamera>();
+            DesktopWorldCam.gameObject.SetActive(false);
 
             DesktopUICam = new GameObject("Desktop UI Camera").AddComponent<Camera>();
             DesktopUICam.transform.parent = Vars.MainCamera.transform;
             DesktopUICam.transform.localPosition = Vector3.zero;
             DesktopUICam.gameObject.AddComponent<DesktopUICamera>();
+            DesktopUICam.gameObject.SetActive(false);
 
             // Spectator Camera
             GameObject SCContainer = new GameObject("Spectator Camera");
@@ -42,9 +44,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
             SCContainer.AddComponent<SpectatorCamera>();
 
             SpectatorCam = new GameObject("Camera").AddComponent<Camera>();
+            SpectatorCam.stereoTargetEye = StereoTargetEyeMask.None;
             SpectatorCam.transform.parent = SCContainer.transform;
             SpectatorCam.transform.localPosition = Vector3.zero;
             SpectatorCam.transform.localEulerAngles = new Vector3(0, -180, 0);
+            SCContainer.SetActive(false);
         }
         [HarmonyPostfix] [HarmonyPatch(typeof(NewMovement), nameof(NewMovement.Start))] static void ScaleObjects(NewMovement __instance)
         {
