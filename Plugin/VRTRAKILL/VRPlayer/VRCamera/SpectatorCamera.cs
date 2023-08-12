@@ -13,9 +13,14 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
         };
         public SCMode Mode = SCMode.Follow;
 
-        public Vector3 OffsetPos = new Vector3(0, 0, -1);
+        public Vector3 OffsetPos = new Vector3(0, 0, 2);
         public float RAMRotationSpeed = 2;
         public Vector3 RotAngles = new Vector3(20, 0, 0);
+
+        public void Start()
+        {
+            transform.eulerAngles = RotAngles;
+        }
 
         public void Update()
         {
@@ -33,13 +38,13 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
 
         private void Follow()
         {
-            transform.forward =
-                Vector3.Lerp(transform.forward,
-                             new Vector3(Vars.MainCamera.transform.forward.x, Vars.MainCamera.transform.forward.y, 0),
+            transform.eulerAngles =
+                Vector3.Lerp(transform.eulerAngles,
+                             new Vector3(Vars.MainCamera.transform.eulerAngles.x, Vars.MainCamera.transform.eulerAngles.y, 0),
                              Time.deltaTime);
         }
         private void RotateAround()
-        { transform.eulerAngles = RotAngles + new Vector3(0, RAMRotationSpeed * Time.deltaTime, 0); }
+        { transform.eulerAngles += new Vector3(0, RAMRotationSpeed * Time.deltaTime * 2, 0); }
         
         public void EnumSCMode() // ugly
         {
