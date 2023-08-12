@@ -6,27 +6,25 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
 {
     internal class VRArmsController : MonoBehaviour
     {
-        // basic stuff
         public Arm Arm;
         public Vector3 OffsetPosition = new Vector3(.145f, .09f, .04f); // pre set to fix whiplash
         public Quaternion OffsetRotation = Quaternion.Euler(-90, 180, 0);
-        public bool IsSandboxer = false, IsRevolver = false;
+        public bool IsSandboxer, IsRevolver;
 
-        // used for punching
         public Vector3 LastPosition, Velocity;
 
         public void Start()
         {
+            IsSandboxer = gameObject.HasComponent<Sandbox.Arm.SandboxArm>();
+            IsRevolver = gameObject.HasComponent<Revolver>();
+
             if (OffsetPosition == null || OffsetPosition == new Vector3(.145f, .09f, .04f))
             {
                 switch (Arm.Type)
                 {
-                    case ArmType.Feedbacker:
-                        OffsetPosition = new Vector3(0, -.25f, -.5f); break;
-                    case ArmType.Knuckleblaster:
-                        OffsetPosition = new Vector3(0, -.01f, -.025f); break;
-                    case ArmType.Whiplash:
-                        OffsetPosition = new Vector3(.145f, .09f, .04f); break;
+                    case ArmType.Feedbacker:     OffsetPosition = new Vector3(0, -.25f, -.5f);    break;
+                    case ArmType.Knuckleblaster: OffsetPosition = new Vector3(0, -.01f, -.025f);  break;
+                    case ArmType.Whiplash:       OffsetPosition = new Vector3(.145f, .09f, .04f); break;
 
                     case ArmType.Spear:
                     default: Destroy(GetComponent<VRArmsController>()); break;
@@ -45,16 +43,20 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
         }
         public void LateUpdate()
         {
-            try
-            {
-                // override positions & rotations of the main gameobject + hand rotation
-                if (IsSandboxer) MoveSandboxer();
-                else if (IsRevolver) HandleRevolver();
-                else MoveHand();
+            if (IsRevolver) HandleRevolver();
+            else
+                switch (Arm.Type)
+                {
+                    case ArmType.Feedbacker:
+                    case ArmType.Knuckleblaster:
+                        MoveHand(); break;
 
-                HandleWhiplash();
+                    case ArmType.Whiplash: HandleWhiplash(); break;
+                    case ArmType.Sandboxer: MoveSandboxer(); break;
 
-            } catch {} // it gives out too many errors which zipbomb your storage
+                    case ArmType.Spear:
+                    default: break;
+                }
         }
 
         private void MoveSandboxer()
@@ -85,7 +87,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
 
             // Thingamajig to disable other arms while grapplehooking
             if (HookArm.Instance.model.activeSelf && !gameObject.HasComponent<HookArm>()
-                && !IsSandboxer && !gameObject.HasComponent<Revolver>())
+                && !IsSandboxer && !IsRevolver)
                 Arm.GameObjecT.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
             else Arm.GameObjecT.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
         }

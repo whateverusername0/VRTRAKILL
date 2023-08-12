@@ -20,7 +20,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             {
                 Arms.VRArmsController FBC = __instance.gameObject.AddComponent<Arms.VRArmsController>();
                 Arm A = Arm.FeedbackerPreset(__instance.transform);
-                FBC.Arm = A; FBC.IsRevolver = true; FBC.OffsetRotation = Quaternion.Euler(OffsetRotation);
+                FBC.Arm = A; FBC.OffsetRotation = Quaternion.Euler(OffsetRotation);
 
                 if (__instance.altVersion) { __instance.wpos.defaultPos = AltPosition; __instance.wpos.defaultScale = AltScale; }
                 else { __instance.wpos.defaultPos = Position; __instance.wpos.defaultScale = Scale; }
@@ -91,7 +91,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                 //retransform
                 Arms.VRArmsController FBC = __instance.gameObject.AddComponent<Arms.VRArmsController>();
                 Arm A = Arm.SandboxerPreset(__instance.transform);
-                FBC.Arm = A; FBC.IsSandboxer = true; FBC.OffsetPosition = new Vector3(0, -.25f, -.5f);
+                FBC.Arm = A; FBC.OffsetPosition = new Vector3(0, -.25f, -.5f);
                 __instance.transform.localScale = Scale;
             }
         }
@@ -110,59 +110,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             }
         }
 
-        // Exclude middlepos (or middlepos big gun fix)
-        [HarmonyPrefix] [HarmonyPatch(typeof(WeaponPos), nameof(WeaponPos.CheckPosition))] static bool ExcludeMiddlePos(WeaponPos __instance)
+        [HarmonyPrefix] [HarmonyPatch(typeof(WeaponPos), nameof(WeaponPos.Start))] static void Start(WeaponPos __instance)
         {
-            if (!__instance.ready)
-            {
-                __instance.ready = true;
-                __instance.defaultPos = __instance.transform.localPosition;
-                __instance.defaultRot = __instance.transform.localRotation.eulerAngles;
-                __instance.defaultScale = __instance.transform.localScale;
-
-                if (__instance.middleScale == Vector3.zero) __instance.middleScale = __instance.defaultScale;
-                if (__instance.middleRot == Vector3.zero) __instance.middleRot = __instance.defaultRot;
-                //if (__instance.moveOnMiddlePos != null && __instance.moveOnMiddlePos.Length != 0)
-                //{
-                //    for (int i = 0; i < __instance.moveOnMiddlePos.Length; i++)
-                //    {
-                //        __instance.defaultPosValues.Add(__instance.moveOnMiddlePos[i].localPosition);
-                //        __instance.defaultRotValues.Add(__instance.moveOnMiddlePos[i].localEulerAngles);
-                //        if (__instance.middleRotValues[i] == Vector3.zero)
-                //            __instance.middleRotValues[i] = __instance.moveOnMiddlePos[i].localEulerAngles;
-                //    }
-                //}
-            }
-            //if (MonoSingleton<PrefsManager>.Instance.GetInt("weaponHoldPosition", 0) == 1 && (!MonoSingleton<PowerUpMeter>.Instance || MonoSingleton<PowerUpMeter>.Instance.juice <= 0f))
-            //{
-            //    __instance.transform.localPosition = __instance.middlePos;
-            //    __instance.transform.localRotation = Quaternion.Euler(__instance.middleRot);
-            //    __instance.transform.localScale = __instance.middleScale;
-            //    if (__instance.moveOnMiddlePos != null && __instance.moveOnMiddlePos.Length != 0)
-            //    {
-            //        for (int j = 0; j < __instance.moveOnMiddlePos.Length; j++)
-            //        {
-            //            __instance.moveOnMiddlePos[j].localPosition = __instance.middlePosValues[j];
-            //            __instance.moveOnMiddlePos[j].localEulerAngles = __instance.middleRotValues[j];
-            //        }
-            //    }
-            //}
-            //else
-            //{
-                __instance.transform.localPosition = __instance.defaultPos;
-                __instance.transform.localRotation = Quaternion.Euler(__instance.defaultRot);
-                __instance.transform.localScale = __instance.defaultScale;
-                //if (__instance.moveOnMiddlePos != null && __instance.moveOnMiddlePos.Length != 0)
-                //{
-                //    for (int k = 0; k < __instance.moveOnMiddlePos.Length; k++)
-                //    {
-                //        __instance.moveOnMiddlePos[k].localPosition = __instance.defaultPosValues[k];
-                //        __instance.moveOnMiddlePos[k].localEulerAngles = __instance.defaultRotValues[k];
-                //    }
-                //}
-            //}
-            __instance.currentDefault = __instance.transform.localPosition;
-            return false;
+            __instance.middlePos = __instance.defaultPos;
+            __instance.middleRot = __instance.defaultRot;
+            __instance.middleScale = __instance.defaultScale;
         }
     }
 }

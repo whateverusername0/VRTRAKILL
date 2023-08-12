@@ -12,15 +12,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
             VRArmsController VRAC = __instance.gameObject.AddComponent<VRArmsController>();
             switch (__instance.type)
             {
-                case FistType.Standard:
-                    A = Arm.FeedbackerPreset(__instance.transform);
-                    Vars.FeedbackerArm = A; break;
-                case FistType.Heavy:
-                    A = Arm.KnuckleblasterPreset(__instance.transform);
-                    Vars.KnuckleblasterArm = A; break;
+                case FistType.Standard: A = Arm.FeedbackerPreset(__instance.transform); break;
+                case FistType.Heavy: A = Arm.KnuckleblasterPreset(__instance.transform); break;
                 case FistType.Spear:
-                default:
-                    break; // wtf is this?
+                default: break;
             }
             AR.Arm = A; VRAC.Arm = A;
         }
