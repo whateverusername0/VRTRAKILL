@@ -34,13 +34,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
             {
                 // Left Hand Model
                 GameObject LHMGO = new GameObject("Model"); LHMGO.transform.parent = LHGO.transform;
-                LHMGO.transform.localScale *= 2;
                 SteamVR_RenderModel LHMGORM = LHMGO.AddComponent<SteamVR_RenderModel>();
                 LHMGORM.createComponents = true;
 
                 // Right Hand Model
                 GameObject RHMGO = new GameObject("Model"); RHMGO.transform.parent = RHGO.transform;
-                RHMGO.transform.localScale *= 2;
                 SteamVR_RenderModel RHMGORM = RHMGO.AddComponent<SteamVR_RenderModel>();
                 RHMGORM.createComponents = true;
             }
