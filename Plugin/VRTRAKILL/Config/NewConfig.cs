@@ -114,8 +114,8 @@ namespace Plugin.VRTRAKILL.Config
 
             [JsonProperty("Spectator Camera")] public _SpecCam SpectatorCamera { get; set; } public class _SpecCam
             {
-                [JsonProperty("Enabled (repalces dv pov)")] public bool Enabled { get; set; } = false;
-                [JsonProperty("Mode (0: follow, 1: rotate around, 2: fixed)")] public int Mode { get; set; } = 0;
+                [JsonProperty("Enabled (replaces dv pov)")] public bool Enabled { get; set; } = false;
+                [JsonProperty("Mode (0: follow, 1: rotate, 2: fixed)")] public int Mode { get; set; } = 0;
             }
         }
 
