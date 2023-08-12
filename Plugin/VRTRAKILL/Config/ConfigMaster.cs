@@ -46,7 +46,7 @@ namespace Plugin.VRTRAKILL.Config
 
         public static void Init()
         {
-            NewConfig._Keybinds Keybinds = Vars.Config.Keybinds;
+            NewConfig._Keybinds Keybinds = Vars.Config.UKKeybinds;
             ConvertJSONToKeys(Keybinds);
         }
 

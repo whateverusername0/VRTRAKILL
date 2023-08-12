@@ -6,7 +6,7 @@ namespace Plugin.VRTRAKILL.Config
 {
     public class NewConfig
     {
-        [JsonProperty("Keybinds *(HAVE TO MATCH WITH THE GAME)*")] public _Keybinds Keybinds { get; set; } public class _Keybinds
+        [JsonProperty("ULTRAKILL Keybinds")] public _UKKeybinds UKKeybinds { get; set; } public class _UKKeybinds
         {
             [JsonProperty("Fire")] public string Shoot { get; set; } = "MouseLeft";
             [JsonProperty("Alternative Fire")] public string AltShoot { get; set; } = "MouseRight";
@@ -114,7 +114,7 @@ namespace Plugin.VRTRAKILL.Config
 
         public NewConfig()
         {
-            Keybinds = new _Keybinds();
+            UKKeybinds = new _UKKeybinds();
             Controllers = new _ControllerSettings();
             CBS = new _CBS();
             MBP = new _MBP();
