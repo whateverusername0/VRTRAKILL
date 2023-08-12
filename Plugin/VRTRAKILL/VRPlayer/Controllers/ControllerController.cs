@@ -87,7 +87,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         public void Update()
         {
             // controller model
-            if (Vars.Config.Controllers.DrawControllers && Vars.IsPlayerFrozen)
+            if (Vars.Config.Controllers.DrawControllers && Vars.IsMainMenu)
                 try { SVRRM.gameObject.SetActive(true); } catch {}
             else try { SVRRM.gameObject.SetActive(false); } catch {}
 
