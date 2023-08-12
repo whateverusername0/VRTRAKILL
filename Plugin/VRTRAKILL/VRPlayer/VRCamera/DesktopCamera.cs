@@ -8,8 +8,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
         public void Start() { C = gameObject.GetComponent<Camera>(); }
         public void Update()
         {
-            transform.parent = Vars.MainCamera.transform;
-            transform.localPosition = Vector3.zero;
             C.nearClipPlane = Vars.MainCamera.nearClipPlane;
             C.farClipPlane = Vars.MainCamera.farClipPlane;
             C.depth = 69;

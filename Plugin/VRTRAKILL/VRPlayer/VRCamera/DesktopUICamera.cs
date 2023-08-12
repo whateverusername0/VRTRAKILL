@@ -8,8 +8,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
         public void Start() { C = gameObject.GetComponent<Camera>(); }
         public void Update()
         {
-            transform.parent = Vars.UICamera.transform;
-            transform.localPosition = Vector3.zero;
             C.nearClipPlane = 0.1f;
             C.depth = 70;
             C.stereoTargetEye = StereoTargetEyeMask.None;

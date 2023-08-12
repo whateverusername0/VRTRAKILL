@@ -46,11 +46,12 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
             SpectatorCam.transform.localPosition = Vector3.zero;
             SpectatorCam.transform.localEulerAngles = new Vector3(0, -180, 0);
         }
-        [HarmonyPostfix] [HarmonyPatch(typeof(NewMovement), nameof(NewMovement.Start))] static void ScaleObjects()
+        [HarmonyPostfix] [HarmonyPatch(typeof(NewMovement), nameof(NewMovement.Start))] static void ScaleObjects(NewMovement __instance)
         {
             // this should've been bigger, but i've changed my mind a thousand years ago and it works
             // this mod is officially my opus magnum spaghetti code and dumpster fire
             Container.transform.localScale = new Vector3(2, 2, 2);
+            __instance.gameObject.AddComponent<VRController>();
         }
 
         [HarmonyPrefix] [HarmonyPatch(typeof(CameraController), nameof(CameraController.Start))] static void ConvertCameras(CameraController __instance)
