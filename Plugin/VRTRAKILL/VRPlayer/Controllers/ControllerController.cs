@@ -64,7 +64,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         }
         private void DrawControllerLines()
         {
-            if (Vars.IsAMenu || Vars.IsPaused || Vars.IsPlayerUsingShop) LR.enabled = true;
+            if (Vars.IsPlayerFrozen || Vars.IsPlayerUsingShop) LR.enabled = true;
             else LR.enabled = false;
 
             if (LR.enabled)
@@ -87,7 +87,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         public void Update()
         {
             // controller model
-            if ((Vars.IsMainMenu || Vars.IsIntro || Vars.IsRankingScreenPresent || Vars.IsPaused) && !Vars.Config.EnableVRBody)
+            if (Vars.Config.Controllers.DrawControllers && Vars.IsPlayerFrozen)
                 try { SVRRM.gameObject.SetActive(true); } catch {}
             else try { SVRRM.gameObject.SetActive(false); } catch {}
 

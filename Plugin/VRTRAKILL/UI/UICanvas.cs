@@ -30,7 +30,7 @@ namespace Plugin.VRTRAKILL.UI
         }
         public void Update()
         {
-            if (!Vars.IsAMenu && !Vars.IsWeaponWheelPresent && !Vars.IsPaused) UpdatePos(); else ResetPos();
+            if (!Vars.IsPlayerFrozen) UpdatePos(); else ResetPos();
             transform.position = UIConverter.UICamera.transform.position + LastCamFwd;
         }
     }

@@ -11,8 +11,8 @@ namespace Plugin.VRTRAKILL.UI
 
         public void LateUpdate()
         {
-            if (Vars.IsAMenu || Vars.IsPlayerUsingShop)
-                transform.position = Vars.UICamera.transform.forward * Length * .75f;
+            if (Vars.IsPlayerFrozen || Vars.IsPlayerUsingShop)
+                transform.position = Vars.MainCamera.transform.forward * Length * .5f;
             else transform.position = transform.parent.position + (transform.parent.forward * Length) + Offset;
         }
     }

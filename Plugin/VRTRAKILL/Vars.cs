@@ -32,44 +32,22 @@ namespace Plugin.VRTRAKILL
         }
         public static Config.NewConfig Config => VRTRAKILL.Config.ConfigJSON.GetConfig().Config;
 
-        #region Menu detector stuff
+        #region Checks
 
         public static bool IsMainMenu
             => OptionsManager.Instance != null && OptionsManager.Instance.mainMenu;
         public static bool IsPaused
             => OptionsManager.Instance != null && OptionsManager.Instance.paused;
-        public static bool IsRankingScreenPresent
-            => FinalRank.Instance != null && FinalRank.Instance.isActiveAndEnabled;
         public static bool IsWeaponWheelPresent
             => WeaponWheel.Instance != null && WeaponWheel.Instance.isActiveAndEnabled;
         public static bool IsPlayerUsingShop
             => FistControl.Instance != null && FistControl.Instance.shopping;
-        public static bool IsIntro
-            => OptionsManager.Instance != null && OptionsManager.Instance.inIntro;
-        public static bool IsActEndPresent
-            => GameObject.Find("Act End Message") != null
-            && GameObject.Find("Act End Message").activeInHierarchy;
-
-        public static bool IsSpawnMenuPresent
-            => SpawnMenu.Instance != null && SpawnMenu.Instance.isActiveAndEnabled;
-        public static bool IsAlterMenuPresent
-            => GameObject.Find("Sandbox Alter Menu") != null
-            && GameObject.Find("Sandbox Alter Menu").GetComponent<MenuEsc>().isActiveAndEnabled;
-        public static bool IsTeleportMenuPresent
-            => GameObject.Find("Cheats Teleport") != null
-            && GameObject.Find("Cheats Teleport").GetComponent<MenuEsc>().isActiveAndEnabled;
 
         #endregion
 
-        public static bool IsAMenu
-            => IsMainMenu
-            || IsRankingScreenPresent
-            || IsIntro
-
-            || IsSpawnMenuPresent
-            || IsAlterMenuPresent
-            || IsTeleportMenuPresent
-            || IsActEndPresent;
+        public static bool IsPlayerFrozen
+            => (NewMovement.Instance != null && (!NewMovement.Instance.activated || !NewMovement.Instance.enabled))
+            || (CameraController.Instance != null && !CameraController.Instance.activated);
 
         public static GameObject VRCameraContainer => VRPlayer.VRCamera.Patches.CameraConverterP.Container;
         private static Camera _MainCamera; public static Camera MainCamera
@@ -83,20 +61,11 @@ namespace Plugin.VRTRAKILL
         public static Camera UICamera => UI.UIConverter.UICamera;
         public static Camera DesktopCamera => VRPlayer.VRCamera.Patches.CameraConverterP.DesktopWorldCam;
         public static Camera DesktopUICamera => VRPlayer.VRCamera.Patches.CameraConverterP.DesktopUICam;
+        public static GameObject SpectatorCamera => VRPlayer.VRCamera.Patches.CameraConverterP.SpectatorCam.transform.parent.gameObject;
 
         public static GameObject NonDominantHand => VRPlayer.Controllers.ArmController.Instance.GunOffset;
         public static VRPlayer.Controllers.ArmController NDHC => VRPlayer.Controllers.ArmController.Instance;
         public static GameObject DominantHand => VRPlayer.Controllers.GunController.Instance.GunOffset;
         public static VRPlayer.Controllers.GunController DHC => VRPlayer.Controllers.GunController.Instance;
-
-        #region Arms
-
-        public static Arm FeedbackerArm { get; set; }
-        public static Arm KnuckleblasterArm { get; set; }
-        public static Arm SpearArm { get; set; }
-        public static Arm WhiplashArm { get; set; }
-        public static Arm SandboxerArm { get; set; }
-
-        #endregion
     }
 }
