@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1182844237
+CRC: 2831928461
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a4d024c08c4ce211fc7cee28176d99dc
+    Hash: 3554c93fd27d58bc9f69a8d6f5364a9c
   TypeTreeHash:
     serializedVersion: 2
     Hash: 889f56699e1f09aa0ce745c3af23d519
@@ -72,6 +72,7 @@ Assets:
 - Assets/AssetsBundles/V2/Tex_HookArm.png
 - Assets/AssetsBundles/Animations/Idle.anim
 - Assets/AssetsBundles/Arms/Feedbacker/Tex_LArm.png
+- Assets/AssetsBundles/V1/Tex_Wing_EmissionMap.png
 - Assets/AssetsBundles/V1/Mat_Arms.mat
 - Assets/AssetsBundles/Arms/Feedbacker/Mdl_LArm.asset
 - Assets/AssetsBundles/Shaders/psx_unlit_nocull.shader
