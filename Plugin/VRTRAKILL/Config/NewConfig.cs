@@ -35,6 +35,12 @@ namespace Plugin.VRTRAKILL.Config
             [JsonProperty("Slot 9")] public string Slot9 { get; set; } = "9";
             [JsonProperty("Slot 0")] public string Slot0 { get; set; } = "0";
         }
+        [JsonProperty("VRTRAKILL Keybinds")] public _VRKeybinds VRKeybinds { get; set; } public class _VRKeybinds
+        {
+            [JsonProperty("Toggle Desktop View")] public string ToggleDV { get; set; } = "T";
+            [JsonProperty("Toggle Spectator Camera")] public string ToggleSC { get; set; } = "Y";
+            [JsonProperty("Switch Spectator Camera mode")] public string EnumSCMode { get; set; } = "H";
+        }
 
         [JsonProperty("Movement multiplier")] public float MovementMultiplier { get; set; } = 0.575f;
         [JsonProperty("Controller Settings")] public _ControllerSettings Controllers { get; set; } public class _ControllerSettings
@@ -102,9 +108,15 @@ namespace Plugin.VRTRAKILL.Config
 
         [JsonProperty("DesktopView Settings")] public _DesktopView DesktopView { get; set; } public class _DesktopView
         {
-            [JsonProperty("Enabled")] public bool EnableDV { get; set; } = true;
+            [JsonProperty("Enabled")] public bool Enabled { get; set; } = true;
             [JsonProperty("World view FOV")] public float WorldCamFOV { get; set; } = 90;
             [JsonProperty("UI view FOV")] public float UICamFOV { get; set; } = 90;
+
+            [JsonProperty("Spectator Camera")] public _SpecCam SpectatorCamera { get; set; } public class _SpecCam
+            {
+                [JsonProperty("Enabled (repalces dv pov)")] public bool Enabled { get; set; } = false;
+                [JsonProperty("Mode (0: follow, 1: rotate around, 2: fixed)")] public int Mode { get; set; } = 0;
+            }
         }
 
         [JsonProperty("Miscellaneous (or unsorted) Settings")] public _Misc Misc { get; set; } public class _Misc

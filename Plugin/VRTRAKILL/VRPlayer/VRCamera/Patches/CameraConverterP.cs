@@ -9,7 +9,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
     {
         // ty huskvr you pretty
         public static GameObject Container;
-        public static Camera DesktopWorldCam, DesktopUICam;
+        public static Camera DesktopWorldCam, DesktopUICam, SpectatorCam;
 
         [HarmonyPrefix] [HarmonyPatch(typeof(NewMovement), nameof(NewMovement.Start))] static void Containerize()
         {
@@ -24,20 +24,32 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
             Vars.MainCamera.transform.parent = Container.transform;
             Vars.UICamera.transform.parent = Container.transform;
 
-            // Desktop View
-            if (Vars.Config.DesktopView.EnableDV)
-            {
-                DesktopWorldCam = new GameObject("Desktop World Camera").AddComponent<Camera>();
-                DesktopWorldCam.gameObject.AddComponent<DesktopCamera>();
+            // DesktopView
+            DesktopWorldCam = new GameObject("Desktop World Camera").AddComponent<Camera>();
+            DesktopWorldCam.transform.parent = Vars.MainCamera.transform;
+            DesktopWorldCam.transform.localPosition = Vector3.zero;
+            DesktopWorldCam.gameObject.AddComponent<DesktopCamera>();
 
-                DesktopUICam = new GameObject("Desktop UI Camera").AddComponent<Camera>();
-                DesktopUICam.gameObject.AddComponent<DesktopUICamera>();
-            }
+            DesktopUICam = new GameObject("Desktop UI Camera").AddComponent<Camera>();
+            DesktopUICam.transform.parent = Vars.MainCamera.transform;
+            DesktopUICam.transform.localPosition = Vector3.zero;
+            DesktopUICam.gameObject.AddComponent<DesktopUICamera>();
+
+            // Spectator Camera
+            GameObject SCContainer = new GameObject("Spectator Camera");
+            SCContainer.transform.parent = Vars.MainCamera.transform;
+            SCContainer.transform.localPosition = Vector3.zero;
+            SCContainer.AddComponent<SpectatorCamera>();
+
+            SpectatorCam = new GameObject("Camera").AddComponent<Camera>();
+            SpectatorCam.transform.parent = SCContainer.transform;
+            SpectatorCam.transform.localPosition = Vector3.zero;
+            SpectatorCam.transform.localEulerAngles = new Vector3(0, -180, 0);
         }
         [HarmonyPostfix] [HarmonyPatch(typeof(NewMovement), nameof(NewMovement.Start))] static void ScaleObjects()
         {
             // this should've been bigger, but i've changed my mind a thousand years ago and it works
-            // this mod is officially considered my opus magnum spaghetti code and dumpster fire
+            // this mod is officially my opus magnum spaghetti code and dumpster fire
             Container.transform.localScale = new Vector3(2, 2, 2);
         }
 
