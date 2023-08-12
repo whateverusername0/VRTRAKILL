@@ -20,6 +20,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
         public void Update()
         {
             GetComponentInChildren<Camera>().transform.localPosition = OffsetPos;
+            Helpers.Misc.CopyCameraValues(GetComponentInChildren<Camera>(), Vars.DesktopCamera);
 
             switch (Mode)
             {
