@@ -108,14 +108,19 @@ namespace Plugin.VRTRAKILL.Config
 
         [JsonProperty("DesktopView Settings")] public _DesktopView DesktopView { get; set; } public class _DesktopView
         {
-            [JsonProperty("Enabled")] public bool Enabled { get; set; } = true;
+            [JsonProperty("Enabled by default")] public bool Enabled { get; set; } = true;
             [JsonProperty("World view FOV")] public float WorldCamFOV { get; set; } = 90;
             [JsonProperty("UI view FOV")] public float UICamFOV { get; set; } = 90;
 
             [JsonProperty("Spectator Camera")] public _SpecCam SpectatorCamera { get; set; } public class _SpecCam
             {
-                [JsonProperty("Enabled (replaces dv pov)")] public bool Enabled { get; set; } = false;
+                [JsonProperty("Enabled by default (replaces dv pov)")] public bool Enabled { get; set; } = false;
                 [JsonProperty("Mode (0: follow, 1: rotate, 2: fixed)")] public int Mode { get; set; } = 0;
+            }
+
+            public _DesktopView()
+            {
+                SpectatorCamera = new _SpecCam();
             }
         }
 
@@ -127,12 +132,14 @@ namespace Plugin.VRTRAKILL.Config
         public NewConfig()
         {
             UKKeybinds = new _UKKeybinds();
+            VRKeybinds = new _VRKeybinds();
             Controllers = new _ControllerSettings();
             CBS = new _CBS();
             MBP = new _MBP();
             VRBody = new _VRBody();
             UIInteraction = new _UIInteraction();
             DesktopView = new _DesktopView();
+            Misc = new _Misc();
         }
     }
 }
