@@ -40,7 +40,6 @@ namespace Plugin.VRTRAKILL.Config
             [JsonProperty("Toggle Desktop View")] public string ToggleDV { get; set; } = "t";
             [JsonProperty("Toggle Spectator Camera")] public string ToggleSC { get; set; } = "y";
             [JsonProperty("Switch Spectator Camera mode")] public string EnumSCMode { get; set; } = "h";
-            [JsonProperty("Toggle Kinematic Mode (Automatic camera mode switch)")] public string ToggleSCKMode { get; set; } = "k";
         }
 
         [JsonProperty("Movement multiplier")] public float MovementMultiplier { get; set; } = 0.575f;

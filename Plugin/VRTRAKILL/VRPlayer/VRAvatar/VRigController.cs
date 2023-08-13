@@ -9,7 +9,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         private static VRigController _Instance; public static VRigController Instance { get { return _Instance; } }
 
         public MetaRig Rig;
-        public Vector3 HeadOffsetPosition = new Vector3(0, -.15f, 0),
+        public Vector3 HeadOffsetPosition = new Vector3(0, 0, 0),
                        HeadOffsetAngles = new Vector3(-90, 0, 0);
 
         private IKArm AddArmIK(GameObject GO, Transform Target, int ChainLen = 3, Transform Pole = null)

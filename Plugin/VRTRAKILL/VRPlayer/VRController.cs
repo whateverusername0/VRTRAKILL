@@ -44,12 +44,6 @@ namespace Plugin.VRTRAKILL.VRPlayer
                 SubtitleController.Instance.DisplaySubtitle
                     ($"VR: Switched spectator camera mode to {System.Enum.GetName(typeof(SCMode), SpectatorCamera.Instance.Mode)}");
             }
-            if (UnityEngine.Input.GetKeyDown(Vars.Config.VRKeybinds.ToggleSCKMode))
-            {
-                SubtitleController.Instance.DisplaySubtitle("VR: Toggling Kinematic Mode");
-                if (IsSCKMode) { StopCoroutine(KinematicMode()); IsSCKMode = false; }
-                else { StartCoroutine(KinematicMode()); IsSCKMode = true; }
-            }
         }
 
         private void ToggleDesktopView()
@@ -80,16 +74,6 @@ namespace Plugin.VRTRAKILL.VRPlayer
                 if (WasDVActive) { Vars.DesktopCamera.gameObject.SetActive(true); WasDVActive = false; }
                 else Vars.DesktopUICamera.gameObject.SetActive(false);
                 Vars.SpectatorCamera.gameObject.SetActive(false);
-            }
-        }
-
-        private IEnumerator KinematicMode()
-        {
-            while(true)
-            {
-                if (Random.Range(0, 1) == 1) ToggleSpectatorCamera(); else ToggleDesktopView();
-                SpectatorCamera.Instance.Mode = (SCMode)Random.Range(0, System.Enum.GetValues(typeof(SCMode)).Cast<int>().Max());
-                yield return new WaitForSeconds(7.5f);
             }
         }
     }

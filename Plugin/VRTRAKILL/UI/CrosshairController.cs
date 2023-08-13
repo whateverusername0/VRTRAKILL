@@ -15,9 +15,9 @@ namespace Plugin.VRTRAKILL.UI
                 transform.position = Vars.MainCamera.transform.forward * Length * .5f;
             else
             {
-                if (GunControl.Instance != null)
+                if (GunControl.Instance != null && GunControl.Instance.currentWeapon.HasComponent<RocketLauncher>())
                     transform.position = GunControl.Instance.currentWeapon.transform.position
-                                         + (GunControl.Instance.currentWeapon.transform.forward * Length);
+                                         + (GunControl.Instance.currentWeapon.transform.forward * Length) + Offset;
                 else transform.position = transform.parent.position + (transform.parent.forward * Length) + Offset;
             }
         }
