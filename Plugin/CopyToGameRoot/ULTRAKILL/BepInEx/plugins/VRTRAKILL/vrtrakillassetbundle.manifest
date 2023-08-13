@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2831928461
+CRC: 768133530
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 3554c93fd27d58bc9f69a8d6f5364a9c
+    Hash: 39f009fff73446a7d0567d9890d58a3d
   TypeTreeHash:
     serializedVersion: 2
     Hash: 889f56699e1f09aa0ce745c3af23d519
@@ -33,6 +33,7 @@ Assets:
 - Assets/AssetsBundles/Shaders/psx_vertexlit_vertexlit_atlas.shader
 - Assets/AssetsBundles/V2/Mdl_Body.fbx
 - Assets/AssetsBundles/V2/V2.prefab
+- Assets/AssetsBundles/V1/Mdl_Head.fbx
 - Assets/AssetsBundles/Shaders/psx_unlit_emissive.shader
 - Assets/AssetsBundles/Arms/Knuckleblaster/Mat_LArm.mat
 - Assets/AssetsBundles/Arms/Whiplash/Tex_HookArm.png
@@ -85,4 +86,5 @@ Assets:
 - Assets/AssetsBundles/V1/Tex_Wing.png
 - Assets/AssetsBundles/V1/Tex_Body.jpg
 - Assets/AssetsBundles/Shaders/psx_unlit_nofog.shader
+- Assets/AssetsBundles/V1/V1_Head.prefab
 Dependencies: []
