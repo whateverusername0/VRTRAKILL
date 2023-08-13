@@ -84,9 +84,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             MR.IKPole_Right = MR.Root.GetChild(0).GetChild(2);
             return MR;
         }
-        public static MetaRig CreateVCustomPreset(GameObject Parent)
+        public static MetaRig CreateVCustomPreset(GameObject Parent, string Name = null)
         {
             GameObject V1mdlGO = Object.Instantiate(Assets.Vars.VRig, Parent.transform, true);
+            if (Name != null) V1mdlGO.name = Name;
             return VCustomPreset(V1mdlGO.transform);
         }
     }

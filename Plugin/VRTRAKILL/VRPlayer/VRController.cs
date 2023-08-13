@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
+using System.Linq;
+using System.Collections;
+using Plugin.VRTRAKILL.VRPlayer.VRCamera;
 
 namespace Plugin.VRTRAKILL.VRPlayer
 {
     // acts as many things in one
     internal class VRController : MonoSingleton<VRController>
     {
-        private bool WasDVActive;
+        private bool WasDVActive, IsSCKMode = false;
 
         public void Start()
         {
@@ -17,10 +20,10 @@ namespace Plugin.VRTRAKILL.VRPlayer
                 Vars.DesktopUICamera.gameObject.SetActive(true);
             }
 
-            if (VRCamera.SpectatorCamera.Instance != null)
+            if (SpectatorCamera.Instance != null)
                 if (Vars.Config.DesktopView.SpectatorCamera.Mode <= 2 || Vars.Config.DesktopView.SpectatorCamera.Mode >= 0)
-                    VRCamera.SpectatorCamera.Instance.Mode = (VRCamera.SpectatorCamera.SCMode)Vars.Config.DesktopView.SpectatorCamera.Mode;
-                else VRCamera.SpectatorCamera.Instance.Mode = 0;
+                    SpectatorCamera.Instance.Mode = (SCMode)Vars.Config.DesktopView.SpectatorCamera.Mode;
+                else SpectatorCamera.Instance.Mode = 0;
         }
 
         public void Update()
@@ -28,42 +31,66 @@ namespace Plugin.VRTRAKILL.VRPlayer
             if (UnityEngine.Input.GetKeyDown(Vars.Config.VRKeybinds.ToggleDV))
             {
                 SubtitleController.Instance.DisplaySubtitle("VR: Toggling desktop view");
-
-                Vars.SpectatorCamera.SetActive(false);
-
-                if (!Vars.DesktopCamera.gameObject.activeSelf) Vars.DesktopCamera.gameObject.SetActive(true);
-                else Vars.DesktopCamera.gameObject.SetActive(false);
-
-                if (!Vars.DesktopUICamera.gameObject.activeSelf) Vars.DesktopUICamera.gameObject.SetActive(true);
-                else if (Vars.DesktopUICamera.gameObject.activeSelf && !Vars.SpectatorCamera.activeSelf)
-                    Vars.DesktopUICamera.gameObject.SetActive(false);
+                ToggleDesktopView();
             }
             if (UnityEngine.Input.GetKeyDown(Vars.Config.VRKeybinds.ToggleSC))
             {
                 SubtitleController.Instance.DisplaySubtitle("VR: Toggling spectator camera");
-
-                if (!Vars.SpectatorCamera.activeSelf)
-                {
-                    if (Vars.DesktopCamera.gameObject.activeSelf) { WasDVActive = true; Vars.DesktopCamera.gameObject.SetActive(false); }
-                    Vars.SpectatorCamera.SetActive(true);
-
-                    if (!Vars.DesktopUICamera.gameObject.activeSelf)
-                        Vars.DesktopUICamera.gameObject.SetActive(true);
-                }
-                else
-                {
-                    if (WasDVActive) { Vars.DesktopCamera.gameObject.SetActive(true); WasDVActive = false; }
-                    else Vars.DesktopUICamera.gameObject.SetActive(false);
-                    Vars.SpectatorCamera.gameObject.SetActive(false);
-                }
+                ToggleSpectatorCamera();
             }
             if (UnityEngine.Input.GetKeyDown(Vars.Config.VRKeybinds.EnumSCMode))
             {
-                VRCamera.SpectatorCamera.Instance.EnumSCMode();
+                SpectatorCamera.Instance.EnumSCMode();
                 SubtitleController.Instance.DisplaySubtitle
-                    ($"VR: Switched spectator camera mode to {System.Enum.GetName(typeof(VRCamera.SpectatorCamera.SCMode), VRCamera.SpectatorCamera.Instance.Mode)}");
+                    ($"VR: Switched spectator camera mode to {System.Enum.GetName(typeof(SCMode), SpectatorCamera.Instance.Mode)}");
             }
+            if (UnityEngine.Input.GetKeyDown(Vars.Config.VRKeybinds.ToggleSCKMode))
+            {
+                SubtitleController.Instance.DisplaySubtitle("VR: Toggling Kinematic Mode");
+                if (IsSCKMode) { StopCoroutine(KinematicMode()); IsSCKMode = false; }
+                else { StartCoroutine(KinematicMode()); IsSCKMode = true; }
+            }
+        }
 
+        private void ToggleDesktopView()
+        {
+            Vars.SpectatorCamera.SetActive(false);
+
+            if (!Vars.DesktopCamera.gameObject.activeSelf) Vars.DesktopCamera.gameObject.SetActive(true);
+            else Vars.DesktopCamera.gameObject.SetActive(false);
+
+            if (!Vars.DesktopUICamera.gameObject.activeSelf) Vars.DesktopUICamera.gameObject.SetActive(true);
+            else if (Vars.DesktopUICamera.gameObject.activeSelf && !Vars.SpectatorCamera.activeSelf)
+                Vars.DesktopUICamera.gameObject.SetActive(false);
+        }
+        private void ToggleSpectatorCamera()
+        {
+            
+
+            if (!Vars.SpectatorCamera.activeSelf)
+            {
+                if (Vars.DesktopCamera.gameObject.activeSelf) { WasDVActive = true; Vars.DesktopCamera.gameObject.SetActive(false); }
+                Vars.SpectatorCamera.SetActive(true);
+
+                if (!Vars.DesktopUICamera.gameObject.activeSelf)
+                    Vars.DesktopUICamera.gameObject.SetActive(true);
+            }
+            else
+            {
+                if (WasDVActive) { Vars.DesktopCamera.gameObject.SetActive(true); WasDVActive = false; }
+                else Vars.DesktopUICamera.gameObject.SetActive(false);
+                Vars.SpectatorCamera.gameObject.SetActive(false);
+            }
+        }
+
+        private IEnumerator KinematicMode()
+        {
+            while(true)
+            {
+                if (Random.Range(0, 1) == 1) ToggleSpectatorCamera(); else ToggleDesktopView();
+                SpectatorCamera.Instance.Mode = (SCMode)Random.Range(0, System.Enum.GetValues(typeof(SCMode)).Cast<int>().Max());
+                yield return new WaitForSeconds(7.5f);
+            }
         }
     }
 }

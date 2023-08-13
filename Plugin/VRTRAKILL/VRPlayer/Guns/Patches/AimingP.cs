@@ -654,7 +654,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         [HarmonyPostfix] [HarmonyPatch(typeof(RocketLauncher), nameof(RocketLauncher.Update))] static void RL_VRIK(RocketLauncher __instance)
         {
             if (VRAvatar.VRigController.Instance != null)
-                __instance.transform.forward = VRAvatar.VRigController.Instance.Rig.FeedbackerB.GameObjecT.forward;
+            {
+                __instance.transform.position = VRAvatar.VRigController.Instance.Rig.FeedbackerB.Forearm.position;
+                __instance.transform.LookAt(VRAvatar.VRigController.Instance.Rig.FeedbackerB.Hand.Root);
+            }
         }
         [HarmonyPrefix] [HarmonyPatch(typeof(RocketLauncher), nameof(RocketLauncher.Shoot))] static bool RocketLauncherA(RocketLauncher __instance)
         {

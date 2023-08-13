@@ -1,11 +1,36 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Plugin.VRTRAKILL.Input;
+using Valve.VR.InteractionSystem;
+using Valve.VR;
 
 namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
 {
     internal class VRCameraController : MonoSingleton<VRCameraController>
     {
+        private Vector3 LastHeadPos;
+        private bool Faded;
+
+        private int DetectHit(Vector3 Pos)
+        {
+            int Hits = 0;
+            Collider[] Things = Physics.OverlapSphere(Pos, .2f, 1 << (int)Vars.Layers.Environment, QueryTriggerInteraction.Ignore);
+            for (int i = 0; i < Things.Length; i++)
+                    Hits++;
+            return Hits;
+        }
+
+        private void FadeToColor(Color C, float Duration)
+        {
+            SteamVR_Fade.Start(Color.clear, 0f);
+            SteamVR_Fade.Start(C, Duration);
+        }
+        private void FadeFromColor(Color C, float Duration)
+        {
+            SteamVR_Fade.Start(C, 0f);
+            SteamVR_Fade.Start(Color.clear, Duration);
+        }
+
         public void Start()
         {
             if (Vars.Config.Controllers.SnapTurn)
@@ -23,6 +48,15 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
                                  NewMovement.Instance.transform.rotation.eulerAngles.z);
 
             transform.rotation = Quaternion.Euler(0f, InputVars.TurnOffset, 0f);
+
+            if (DetectHit(transform.position) > 0)
+            {
+
+            }
+            else
+            {
+                LastHeadPos = transform.position;
+            }
         }
 
         private IEnumerator SmoothTurn()

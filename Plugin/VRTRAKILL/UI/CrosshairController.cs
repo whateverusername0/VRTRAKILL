@@ -13,7 +13,13 @@ namespace Plugin.VRTRAKILL.UI
         {
             if (Vars.IsPlayerFrozen || Vars.IsPlayerUsingShop)
                 transform.position = Vars.MainCamera.transform.forward * Length * .5f;
-            else transform.position = transform.parent.position + (transform.parent.forward * Length) + Offset;
+            else
+            {
+                if (GunControl.Instance != null)
+                    transform.position = GunControl.Instance.currentWeapon.transform.position
+                                         + (GunControl.Instance.currentWeapon.transform.forward * Length);
+                else transform.position = transform.parent.position + (transform.parent.forward * Length) + Offset;
+            }
         }
     }
 }

@@ -7,7 +7,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
     [HarmonyPatch] internal class TransformP
     {
         // Applies offset to guns' transforms
-        // This took a LOT of time to get those offsets right and my eyes hurt a bit
         [HarmonyPatch(typeof(Revolver))] static class RevolverT
         {
             static Vector3 Position = new Vector3(.05f, -.1f, .6f),
@@ -28,8 +27,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         }
         [HarmonyPatch(typeof(Shotgun))] static class ShotgunT
         {
-            static Vector3 Position = new Vector3(0, .2f, .28f);
-            static Vector3 Scale = new Vector3(.1f, .1f, .1f); // .1125
+            static Vector3 Position = new Vector3(-.02f, .2f, .26f);
+            static Vector3 Scale = new Vector3(.1f, .1f, .1f);
 
             [HarmonyPostfix] [HarmonyPatch(nameof(Shotgun.Start))] static void Retransform(Shotgun __instance)
             {
@@ -39,8 +38,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         }
         [HarmonyPatch(typeof(Nailgun))] static class NailgunT
         {
-            static Vector3 Position = new Vector3(-.2f, .15f, .05f),
-                           AltPosition = new Vector3(-.2f, .25f, .1f);
+            static Vector3 Position = new Vector3(-.165f, .1f, .045f),
+                           AltPosition = new Vector3(-.165f, .2f, .065f);
             static Vector3 Scale = new Vector3(.4f, .3275f, .4f),
                            AltScale = new Vector3(.35f, .35f, .35f);
 
@@ -61,7 +60,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         }
         [HarmonyPatch(typeof(Railcannon))] static class RailcannonT
         {
-            static Vector3 Position = new Vector3(-.2f, .25f, -.175f);
+            static Vector3 Position = new Vector3(-.15f, .15f, -.175f);
             static Vector3 Scale = new Vector3(.25f, .25f, .25f);
 
             [HarmonyPostfix] [HarmonyPatch(nameof(Railcannon.Start))] static void Retransform(Railcannon __instance)
@@ -79,6 +78,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             {
                 __instance.gameObject.GetComponent<WeaponPos>().defaultPos = Position;
                 __instance.gameObject.GetComponent<WeaponPos>().defaultScale = Scale;
+
+                if (VRAvatar.VRigController.Instance != null)
+                    __instance.transform.GetChild(0).localPosition = Vector3.zero;
             }
         }
         

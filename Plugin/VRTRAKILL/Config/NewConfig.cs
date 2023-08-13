@@ -35,11 +35,12 @@ namespace Plugin.VRTRAKILL.Config
             [JsonProperty("Slot 9")] public string Slot9 { get; set; } = "9";
             [JsonProperty("Slot 0")] public string Slot0 { get; set; } = "0";
         }
-        [JsonProperty("VRTRAKILL Keybinds")] public _VRKeybinds VRKeybinds { get; set; } public class _VRKeybinds
+        [JsonProperty("VRTRAKILL Keybinds (LOWERCASE ONLY)")] public _VRKeybinds VRKeybinds { get; set; } public class _VRKeybinds
         {
-            [JsonProperty("Toggle Desktop View")] public string ToggleDV { get; set; } = "T";
-            [JsonProperty("Toggle Spectator Camera")] public string ToggleSC { get; set; } = "Y";
-            [JsonProperty("Switch Spectator Camera mode")] public string EnumSCMode { get; set; } = "H";
+            [JsonProperty("Toggle Desktop View")] public string ToggleDV { get; set; } = "t";
+            [JsonProperty("Toggle Spectator Camera")] public string ToggleSC { get; set; } = "y";
+            [JsonProperty("Switch Spectator Camera mode")] public string EnumSCMode { get; set; } = "h";
+            [JsonProperty("Toggle Kinematic Mode (Automatic camera mode switch)")] public string ToggleSCKMode { get; set; } = "k";
         }
 
         [JsonProperty("Movement multiplier")] public float MovementMultiplier { get; set; } = 0.575f;

@@ -19,18 +19,18 @@ namespace Plugin.VRTRAKILL.UI.Patches
         {
             UIConverter.ConvertCanvas(__instance.GetComponent<Canvas>(), Force: true, DontAddComponent: true);
             __instance.gameObject.AddComponent<HideWhenMenuActive>();
-            
+
+            __instance.transform.localScale = new Vector3(.5f, .35f, .5f);
             switch (__instance.gameObject.name)
             {
                 case "GunCanvas":
                     StandardHUDWorker SHUDW = __instance.transform.parent.gameObject.AddComponent<StandardHUDWorker>();
                     SHUDW.StandardHUD = __instance.gameObject;
-
-                    __instance.transform.localScale = new Vector3(.25f, .25f, .25f);
-                    __instance.defaultPos = new Vector3(-640, -220, 120);
+                    
+                    __instance.defaultPos = new Vector3(-640, -420, 120);
                     __instance.defaultRot = new Vector3(0, -20, 0);
 
-                    __instance.reversePos = new Vector3(640, -220, 120);
+                    __instance.reversePos = new Vector3(640, -420, 120);
                     __instance.reverseRot = new Vector3(0, 20, 0);
                     break;
 
@@ -42,7 +42,6 @@ namespace Plugin.VRTRAKILL.UI.Patches
                     __instance.reverseRot = new Vector3(0, -45, 0);
                     break;
             }
-            __instance.transform.localScale = new Vector3(.5f, .5f, .5f);
         }
         [HarmonyPostfix] [HarmonyPatch(typeof(FinalRank), nameof(FinalRank.Start))] static void ConvertFinalRank(FinalRank __instance)
         {

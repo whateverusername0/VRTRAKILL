@@ -9,6 +9,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         private static VRigController _Instance; public static VRigController Instance { get { return _Instance; } }
 
         public MetaRig Rig;
+        public Vector3 HeadOffsetPosition = new Vector3(0, -.15f, 0),
+                       HeadOffsetAngles = new Vector3(-90, 0, 0);
 
         private IKArm AddArmIK(GameObject GO, Transform Target, int ChainLen = 3, Transform Pole = null)
         {
@@ -16,8 +18,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             IK.Target = Target; IK.ChainLength = ChainLen; IK.Pole = Pole;
             return IK;
         }
-
-        public Vector3 HeadOffset = new Vector3(0, -.001f, 0);
 
         public void Awake()
         {
@@ -27,7 +27,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
 
         public void Start()
         {
-            if (Rig == null) Rig = MetaRig.CreateVCustomPreset(Vars.VRCameraContainer);
+            if (Rig == null) Rig = MetaRig.CreateVCustomPreset(Vars.VRCameraContainer, "VR Avatar");
             Misc.RecursiveChangeLayer(Rig.GameObjectT.gameObject, (int)Vars.Layers.AlwaysOnTop);
 
             // transform shenanigans
@@ -35,7 +35,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             Rig.GameObjectT.localRotation = Quaternion.Euler(Vector3.zero);
 
             Rig.Root.localScale *= 3;
-            Rig.Body.localPosition = new Vector3(0, -0.013f, 0.002f);
+            Rig.Body.localPosition = new Vector3(0, -0.0135f, 0.002f);
 
             // Arm IKs
             Armature.Arm[] LArms =
@@ -64,12 +64,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             
             if (Rig == null) return;
 
-            if (Vars.IsPlayerFrozen) { }
-                //Rig.Head.localScale = Vector3.one;
-            else
+            if (!Vars.IsPlayerFrozen && !Vars.IsMainMenu)
             {
-                //Rig.Head.localScale = Vector3.zero;
-
                 HandleBodyRotation();
                 HandleHeadRotation();
                 HandleArms();
@@ -88,8 +84,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         }
         private void HandleHeadRotation()
         {
-            Rig.Head.position = Vars.MainCamera.transform.position + HeadOffset;
-            Rig.Head.rotation = Vars.MainCamera.transform.rotation * Quaternion.Euler(-90, 0, 0);
+            Rig.Head.position = Vars.MainCamera.transform.position + HeadOffsetPosition;
+            Rig.Head.transform.eulerAngles = Vars.MainCamera.transform.eulerAngles + HeadOffsetAngles;
         }
         private void HandleArms()
         {

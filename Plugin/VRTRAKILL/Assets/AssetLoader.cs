@@ -7,6 +7,7 @@ namespace Plugin.VRTRAKILL.Assets
     {
         // V1 Rig (also usable for V2)
         public static GameObject VRig { get; private set; }
+        //public static GameObject VHead { get; private set; }
 
         // 0 - Body, 1 - Wing, 2 - Hand
         public static Material[] V1Skin { get; private set; }
@@ -22,6 +23,7 @@ namespace Plugin.VRTRAKILL.Assets
         {
             AssetBundle Assets = LoadBundle("vrtrakillassetbundle");
             VRig = Object.Instantiate(LoadAsset<GameObject>(Assets, "V1/V1.prefab"), new Vector3(2048, 2048, 2048), Quaternion.identity);
+            //VHead = Object.Instantiate(LoadAsset<GameObject>(Assets, "V1/V1_Head.prefab"), new Vector3(2048, 2048, 2048), Quaternion.identity);
 
             HandPose_Shotgun = Object.Instantiate(LoadAsset<GameObject>(Assets, "Arms/Feedbacker/Hand_Shotgun.prefab"), new Vector3(2048, 2048, 2048), Quaternion.identity);
             HandPose_Nailgun = Object.Instantiate(LoadAsset<GameObject>(Assets, "Arms/Feedbacker/Hand_Nailgun.prefab"), new Vector3(2048, 2048, 2048), Quaternion.identity);
@@ -48,7 +50,7 @@ namespace Plugin.VRTRAKILL.Assets
 
         public static T LoadAsset<T>(AssetBundle Bundle, string PrefabName, string PathToPrefab = "Assets/AssetsBundles") where T : Object
         {
-            var Asset = Bundle.LoadAsset<T>($"{PathToPrefab}/{PrefabName}");
+            T Asset = Bundle.LoadAsset<T>($"{PathToPrefab}/{PrefabName}");
             if (Asset != null) return Asset;
             else { Plugin.PLog.LogError($"Failed to load {PrefabName}."); return null; }
         }

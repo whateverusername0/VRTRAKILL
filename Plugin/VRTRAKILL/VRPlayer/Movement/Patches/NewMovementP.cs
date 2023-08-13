@@ -532,7 +532,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                     vector += vector2;
                 }
 
-                __instance.movementDirection = Vector3.ClampMagnitude(Input.InputVars.MoveVector.x * __instance.transform.right, 1f) * 5f;
+                __instance.movementDirection = Vector3.ClampMagnitude(Input.InputVars.MoveVector.x * __instance.transform.right, 1f) * 5f / Vars.Config.MovementMultiplier;
                 if (!MonoSingleton<HookArm>.Instance || !MonoSingleton<HookArm>.Instance.beingPulled)
                     __instance.rb.velocity = vector + __instance.pushForce + __instance.movementDirection;
                 else __instance.StopSlide();
