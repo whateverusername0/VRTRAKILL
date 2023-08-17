@@ -80,7 +80,8 @@ The text version:
 ### Oculus Touch (proudly made in MSPaint by me):
 ![](GithubStuff/DCB_Touch.png)
 
-### HTC Vive - Missing :(
+### HTC Vive:
+![](GithubStuff/DCB_Vive.png)
 
 ### Valve Index - Missing :(
 
