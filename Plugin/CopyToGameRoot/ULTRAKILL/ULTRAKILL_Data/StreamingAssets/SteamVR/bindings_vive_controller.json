@@ -45,9 +45,6 @@
             },
             {
                "inputs" : {
-                  "center" : {
-                     "output" : "/actions/default/in/jump"
-                  },
                   "east" : {
                      "output" : "/actions/default/in/dash"
                   },
@@ -122,6 +119,9 @@
                   },
                   "south" : {
                      "output" : "/actions/default/in/slide"
+                  },
+                  "west" : {
+                     "output" : "/actions/default/in/swaphand"
                   }
                },
                "mode" : "dpad",
