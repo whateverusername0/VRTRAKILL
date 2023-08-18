@@ -1,7 +1,7 @@
 {
    "action_manifest_version" : 0,
    "alias_info" : {},
-   "app_key" : "application.generated.unity.newunityproject.exe",
+   "app_key" : "steam.app.0",
    "bindings" : {
       "/actions/buggy" : {
          "chords" : [],
@@ -28,7 +28,7 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/default/in/altshoot"
+                     "output" : "/actions/default/in/jump"
                   }
                },
                "mode" : "button",
@@ -45,14 +45,17 @@
             },
             {
                "inputs" : {
-                  "center" : {
-                     "output" : "/actions/default/in/jump"
+                  "east" : {
+                     "output" : "/actions/default/in/dash"
                   },
                   "north" : {
                      "output" : "/actions/default/in/dash"
                   },
                   "south" : {
-                     "output" : "/actions/default/in/whiplash"
+                     "output" : "/actions/default/in/dash"
+                  },
+                  "west" : {
+                     "output" : "/actions/default/in/dash"
                   }
                },
                "mode" : "dpad",
@@ -63,29 +66,8 @@
             },
             {
                "inputs" : {
-                  "center" : {
-                     "output" : "/actions/default/in/slide"
-                  },
-                  "east" : {
-                     "output" : "/actions/default/in/escape"
-                  },
-                  "north" : {
-                     "output" : "/actions/default/in/openweaponwheel"
-                  },
-                  "south" : {
-                     "output" : "/actions/default/in/changeweaponvariation"
-                  }
-               },
-               "mode" : "dpad",
-               "parameters" : {
-                  "sub_mode" : "click"
-               },
-               "path" : "/user/hand/right/input/trackpad"
-            },
-            {
-               "inputs" : {
                   "click" : {
-                     "output" : "/actions/default/in/shoot"
+                     "output" : "/actions/default/in/punch"
                   }
                },
                "mode" : "button",
@@ -120,12 +102,51 @@
             },
             {
                "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/whiplash"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/left/input/application_menu"
+            },
+            {
+               "inputs" : {
+                  "east" : {
+                     "output" : "/actions/default/in/escape"
+                  },
+                  "north" : {
+                     "output" : "/actions/default/in/openweaponwheel"
+                  },
+                  "south" : {
+                     "output" : "/actions/default/in/slide"
+                  },
+                  "west" : {
+                     "output" : "/actions/default/in/swaphand"
+                  }
+               },
+               "mode" : "dpad",
+               "parameters" : {
+                  "sub_mode" : "click"
+               },
+               "path" : "/user/hand/right/input/trackpad"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/changeweaponvariation"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/application_menu"
+            },
+            {
+               "inputs" : {
                   "position" : {
-                     "output" : "/actions/default/in/iterateweapon"
+                     "output" : "/actions/default/in/weaponwheelscroll"
                   }
                },
                "mode" : "trackpad",
-               "path" : "/user/hand/right/input/trackpad"
+               "path" : "/user/hand/left/input/trackpad"
             }
          ]
       },
@@ -139,7 +160,7 @@
    },
    "category" : "steamvr_input",
    "controller_type" : "vive_controller",
-   "description" : "Default bindings for VRTRAKILL (vive)",
+   "description" : "Default bindings for VRTRAKILL (HTC Vive)",
    "interaction_profile" : "",
    "name" : "VRTRAKILL Defaults",
    "options" : {},
