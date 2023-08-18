@@ -13,6 +13,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
     {
         public SCMode Mode = SCMode.Follow;
 
+        public Camera SPCam;
+
         public Vector3 OffsetPos = new Vector3(0, 1, 3);
         public float RAMRotationSpeed = .2f, FMDuration = 2;
         public Vector3 RotAngles = new Vector3(20, 0, 0);
@@ -20,14 +22,15 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
         public override void OnEnable()
         {
             base.OnEnable();
+            SPCam = GetComponentInChildren<Camera>();
             transform.eulerAngles = RotAngles;
         }
 
         public void Update()
         {
             transform.position = Vars.MainCamera.transform.position;
-            GetComponentInChildren<Camera>().transform.localPosition = OffsetPos;
-            Helpers.Misc.CopyCameraValues(GetComponentInChildren<Camera>(), Vars.DesktopCamera);
+            SPCam.transform.localPosition = OffsetPos;
+            Helpers.Misc.CopyCameraValues(SPCam, Vars.DesktopCamera);
 
             switch (Mode)
             {
