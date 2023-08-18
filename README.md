@@ -7,7 +7,7 @@
 [![](https://img.shields.io/discord/1105714562931638326)](https://discord.gg/TTUw5Aevce)
 
 ![](/GithubStuff/thypunishmentisdeath.gif) ![](/GithubStuff/youcantescape.gif) ![](/GithubStuff/+execution.gif) ![](/GithubStuff/v2warmup.gif)  
-[Full minos fight (0.3)](https://www.youtube.com/watch?v=yrofGYf_xTI) | [Full sisyphus fight (0.5)](https://www.youtube.com/watch?v=DhcVx6yBEaM) | [Cybergrind tomfoolery (0.8)](https://youtu.be/n2aAljuvpMo) | (0.12) (coming soon)  
+[Full minos fight (0.3)](https://www.youtube.com/watch?v=yrofGYf_xTI) | [Full sisyphus fight (0.5)](https://www.youtube.com/watch?v=DhcVx6yBEaM) | [Cybergrind tomfoolery (0.8)](https://youtu.be/n2aAljuvpMo) | [0.12](https://youtu.be/aosvmxn6bNU)
 
 ULTRAKILLing in VR is now a thing.  
 This mod exists because [HuskVR](https://github.com/TeamDoodz/HuskVR) is not being updated for like 7 months, so I was like "Fine, I'll do it myself"  
@@ -22,8 +22,6 @@ Also it does not require any other mods to function
 - Weapon swap, weapon scroll using joystick, weapon wheel
 - UI Interaction (some of the menus might be broken)
 ### Planned stuff:
-~**0.x**: Hand gestures (thumbs up, point, etc.)~  
-**0.12**: VR body (arms, legs, etc.)  
 **1.0**: Full release (when i think that nothing more can be done)
 
 ## Requirements
@@ -82,7 +80,8 @@ The text version:
 ### Oculus Touch (proudly made in MSPaint by me):
 ![](GithubStuff/DCB_Touch.png)
 
-### HTC Vive - Missing :(
+### HTC Vive:
+![](GithubStuff/DCB_Vive.png)
 
 ### Valve Index - Missing :(
 
