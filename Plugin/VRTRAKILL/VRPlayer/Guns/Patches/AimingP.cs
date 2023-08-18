@@ -700,7 +700,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             Object.Instantiate<GameObject>(__instance.muzzleFlash, __instance.shootPoint.position, Vars.DominantHand.transform.rotation);
             __instance.anim.SetTrigger("Fire");
             __instance.cooldown = __instance.rateOfFire;
-            Rigidbody rigidbody = Object.Instantiate<Rigidbody>(__instance.cannonBall, Vars.DominantHand.transform.position + Vars.DominantHand.transform.forward, Vars.DominantHand.transform.rotation);
+            Rigidbody rigidbody = Object.Instantiate<Rigidbody>(__instance.cannonBall, Vars.DominantHand.transform.position + __instance.transform.forward, __instance.transform.rotation);
             if (MonoSingleton<CameraFrustumTargeter>.Instance.CurrentTarget && MonoSingleton<CameraFrustumTargeter>.Instance.IsAutoAimed)
             {
                 rigidbody.transform.LookAt(MonoSingleton<CameraFrustumTargeter>.Instance.CurrentTarget.bounds.center);
