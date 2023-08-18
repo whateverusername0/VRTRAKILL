@@ -8,7 +8,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
     {
         private static VRigController _Instance; public static VRigController Instance { get { return _Instance; } }
 
-        public MetaRig Rig;
+        public MetaRig Rig; public GameObject Head;
         public Vector3 HeadOffsetPosition = new Vector3(0, 0, 0),
                        HeadOffsetAngles = new Vector3(-90, 0, 0);
 
@@ -28,6 +28,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         public void Start()
         {
             if (Rig == null) Rig = MetaRig.CreateVCustomPreset(Vars.VRCameraContainer, "VR Avatar");
+            if (Head == null) Head = Instantiate(Assets.Vars.VHead, Rig.Head.transform);
             Misc.RecursiveChangeLayer(Rig.GameObjectT.gameObject, (int)Vars.Layers.AlwaysOnTop);
 
             // transform shenanigans
@@ -84,8 +85,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         }
         private void HandleHeadRotation()
         {
-            Rig.Head.position = Vars.MainCamera.transform.position + HeadOffsetPosition;
-            Rig.Head.transform.eulerAngles = Vars.MainCamera.transform.eulerAngles + HeadOffsetAngles;
+            Head.transform.GetChild(0).GetChild(0).position = Vars.MainCamera.transform.position + HeadOffsetPosition;
+            Head.transform.GetChild(0).GetChild(0).eulerAngles = Vars.MainCamera.transform.eulerAngles + HeadOffsetAngles;
         }
         private void HandleArms()
         {
