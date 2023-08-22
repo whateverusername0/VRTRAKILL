@@ -81,7 +81,8 @@ The text version:
 ![](GithubStuff/DCB_Touch.png)
 
 ### HTC Vive:
-![](GithubStuff/DCB_Vive.png)
+![](GithubStuff/DCB_Vive.png#gh-dark-mode-only)
+![](GithubStuff/DCB_Vive_light.png#gh-light-mode-only)
 
 ### Valve Index - Missing :(
 
