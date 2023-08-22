@@ -15,19 +15,14 @@ namespace Plugin.VRTRAKILL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "<Pending>")]
         private static void SceneChanged(Scene S)
         {
-            GloballyEnableOffscreenRendering();
+            Misc.EnableOffscreenRendering();
 
             Config.ConfigJSON.Instance = null; // reload config
-            UI.UIConverter.ConvertAllCanvases();
+
             Assets.AssetLoader.LoadAllCustomAssets();
-
             RelayerAssetsStuff();
-        }
 
-        private static void GloballyEnableOffscreenRendering()
-        {
-            foreach (SkinnedMeshRenderer R in Object.FindObjectsOfType<SkinnedMeshRenderer>())
-                R.updateWhenOffscreen = true;
+            UI.UIConverter.ConvertAllCanvases();
         }
         private static void RelayerAssetsStuff()
         {
