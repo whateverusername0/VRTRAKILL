@@ -32,12 +32,13 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
             }
             LastPosition = transform.position;
         }
-        public void FixedUpdate()
+        public void Update()
         {
             // velocity based punching
             if (LastPosition != transform.position)
             {
                 Velocity = (transform.position - LastPosition).normalized;
+                Patches.PunchP._Thing = Velocity;
                 LastPosition = transform.position;
             }
         }
