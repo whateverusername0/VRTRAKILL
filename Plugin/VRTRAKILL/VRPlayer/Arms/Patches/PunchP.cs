@@ -6,11 +6,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
 {
     [HarmonyPatch(typeof(Punch))] internal class PunchP
     {
-        static Vector3 Thing
+        public static Vector3 _Thing; public static Vector3 Thing
         {
             get
             {
-                if (Vars.Config.MBP.ToggleVelocity) return Thing;
+                if (Vars.Config.MBP.ToggleVelocity) return _Thing;
                 else return Vars.NonDominantHand.transform.forward;
             }
         }
