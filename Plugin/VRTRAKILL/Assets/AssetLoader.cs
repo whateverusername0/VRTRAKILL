@@ -15,16 +15,23 @@ namespace Plugin.VRTRAKILL.Assets
         public static GameObject HandPose_Sawblade{ get; private set; }
         public static GameObject HandPose_Railgun { get; private set; }
 
+        public static GameObject UI_GTFOTW { get; private set; }
+
+        private static Vector3 DefaultPos = new Vector3(2048, 2048, 2048);
+        private static Quaternion DefaultRot = Quaternion.identity;
+
         public static void LoadAllCustomAssets()
         {
             AssetBundle Assets = LoadBundle("vrtrakillassetbundle");
-            VRig = Object.Instantiate(LoadAsset<GameObject>(Assets, "V1/V1.prefab"), new Vector3(2048, 2048, 2048), Quaternion.identity);
-            VHead = Object.Instantiate(LoadAsset<GameObject>(Assets, "V1/V1_Head.prefab"), new Vector3(2048, 2048, 2048), Quaternion.identity);
+            VRig = Object.Instantiate(LoadAsset<GameObject>(Assets, "V1/V1.prefab"), DefaultPos, DefaultRot);
+            VHead = Object.Instantiate(LoadAsset<GameObject>(Assets, "V1/V1_Head.prefab"), DefaultPos, DefaultRot);
 
-            HandPose_Shotgun = Object.Instantiate(LoadAsset<GameObject>(Assets, "Arms/Feedbacker/Hand_Shotgun.prefab"), new Vector3(2048, 2048, 2048), Quaternion.identity);
-            HandPose_Nailgun = Object.Instantiate(LoadAsset<GameObject>(Assets, "Arms/Feedbacker/Hand_Nailgun.prefab"), new Vector3(2048, 2048, 2048), Quaternion.identity);
-            HandPose_Sawblade = Object.Instantiate(LoadAsset<GameObject>(Assets, "Arms/Feedbacker/Hand_Sawblade.prefab"), new Vector3(2048, 2048, 2048), Quaternion.identity);
-            HandPose_Railgun = Object.Instantiate(LoadAsset<GameObject>(Assets, "Arms/Feedbacker/Hand_Railgun.prefab"), new Vector3(2048, 2048, 2048), Quaternion.identity);
+            HandPose_Shotgun = Object.Instantiate(LoadAsset<GameObject>(Assets, "Arms/Feedbacker/Hand_Shotgun.prefab"), DefaultPos, DefaultRot);
+            HandPose_Nailgun = Object.Instantiate(LoadAsset<GameObject>(Assets, "Arms/Feedbacker/Hand_Nailgun.prefab"), DefaultPos, DefaultRot);
+            HandPose_Sawblade = Object.Instantiate(LoadAsset<GameObject>(Assets, "Arms/Feedbacker/Hand_Sawblade.prefab"), DefaultPos, DefaultRot);
+            HandPose_Railgun = Object.Instantiate(LoadAsset<GameObject>(Assets, "Arms/Feedbacker/Hand_Railgun.prefab"), DefaultPos, DefaultRot);
+
+            UI_GTFOTW = Object.Instantiate(LoadAsset<GameObject>(Assets, "UI/GetOutOfTheWall.prefab"), DefaultPos, DefaultRot);
 
             Assets.Unload(false);
         }
