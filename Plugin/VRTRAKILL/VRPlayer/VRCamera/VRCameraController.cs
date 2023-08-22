@@ -15,20 +15,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
         {
             int Hits = 0;
             Collider[] Things = Physics.OverlapSphere(Pos, .2f, 1 << (int)Vars.Layers.Environment, QueryTriggerInteraction.Ignore);
-            for (int i = 0; i < Things.Length; i++)
-                    Hits++;
+            for (int i = 0; i < Things.Length; i++) Hits++;
             return Hits;
-        }
-
-        private void FadeToColor(Color C, float Duration)
-        {
-            SteamVR_Fade.Start(Color.clear, 0f);
-            SteamVR_Fade.Start(C, Duration);
-        }
-        private void FadeFromColor(Color C, float Duration)
-        {
-            SteamVR_Fade.Start(C, 0f);
-            SteamVR_Fade.Start(Color.clear, Duration);
         }
 
         public void Start()
