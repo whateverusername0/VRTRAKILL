@@ -32,6 +32,8 @@ namespace Plugin.VRTRAKILL
         }
         public static Config.NewConfig Config => VRTRAKILL.Config.ConfigJSON.GetConfig().Config;
 
+        public static BepInEx.Logging.ManualLogSource Log => Plugin.PLog;
+
         #region Checks
 
         public static bool IsMainMenu

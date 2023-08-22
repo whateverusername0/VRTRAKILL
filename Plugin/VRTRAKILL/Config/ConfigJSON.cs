@@ -30,14 +30,14 @@ namespace Plugin.VRTRAKILL.Config
             }
             catch (FileNotFoundException)
             {
-                Plugin.PLog.LogError("Unable to find VRTRAKILL_Config.json.\n" +
+                Vars.Log.LogError("Unable to find VRTRAKILL_Config.json.\n" +
                                      "Generating a new one. Please quit the game and fill it out.\n" +
                                      "Starting up using default settings.");
                 Serialize(new ConfigJSON()); return new ConfigJSON();
             }
             catch (JsonException)
             {
-                Plugin.PLog.LogError("Something went wrong when trying to read VRTRAKILL_Config.json\n" +
+                Vars.Log.LogError("Something went wrong when trying to read VRTRAKILL_Config.json\n" +
                                      "Please fix any typos, formatting errors, etc.\n" +
                                      "Or delete the config and let it generate once more.\n" +
                                      "Starting up using default settings.");

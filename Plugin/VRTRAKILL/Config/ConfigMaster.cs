@@ -114,8 +114,8 @@ namespace Plugin.VRTRAKILL.Config
             }
             catch (Exception)
             {
-                Plugin.PLog.LogError("Unable to convert keys in config. Perhaps mismatch? Perhaps keys are literally null?" +
-                                     "Check spelling and replace every null key either with \"\", \"Empty\" or assign a value to it.");
+                Vars.Log.LogError("Unable to convert keys in config. Perhaps mismatch? Perhaps keys are literally null?" +
+                                  "Check spelling and replace every null key either with \"\", \"Empty\" or assign a value to it.");
             }
         }
     }

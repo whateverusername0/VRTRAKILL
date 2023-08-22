@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 using System.Collections.Generic;
+using Plugin.VRTRAKILL;
 
 namespace Plugin.Helpers
 {
@@ -108,7 +109,7 @@ namespace Plugin.Helpers
             List<Type> L = new List<Type>();
 
             if (Namespace == null && Namespaces == null && Type == null && Types == null)
-                try { Harmony.PatchAll(); } catch (NullReferenceException) { Plugin.PLog.LogFatal("Could not find any patches(???) wtf?"); }
+                try { Harmony.PatchAll(); } catch (NullReferenceException) { Vars.Log.LogFatal("Could not find any patches(???) wtf?"); }
             else
             {
                 if (Type != null) L.Add(Type);
@@ -123,12 +124,12 @@ namespace Plugin.Helpers
         public void Patch(string _Namespace)
         {
             IEnumerable<Type> Q = GetTypes(_Namespace);
-            foreach (Type T in Q) try { Harmony.PatchAll(T); } catch { Plugin.PLog.LogError($"Nullref with type {T}"); }
+            foreach (Type T in Q) try { Harmony.PatchAll(T); } catch { Vars.Log.LogError($"Nullref with type {T}"); }
         }
         public void Patch(string[] _Namespaces)
         {
             IEnumerable<Type> Q = GetTypes(_Namespaces);
-            foreach (Type T in Q) try { Harmony.PatchAll(T); } catch { Plugin.PLog.LogError($"Nullref with type {T}"); }
+            foreach (Type T in Q) try { Harmony.PatchAll(T); } catch { Vars.Log.LogError($"Nullref with type {T}"); }
         }
         public void Patch(Type _T)
         => Harmony.PatchAll(_T);

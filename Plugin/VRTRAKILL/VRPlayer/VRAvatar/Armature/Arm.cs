@@ -41,7 +41,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar.Armature
             }
             catch (System.Exception E)
             {
-                Plugin.PLog.LogError($"{E.Message}\n{E.Source}");
+                Vars.Log.LogError($"{E.Message}\n{E.Source}");
                 return null;
             }
         }
@@ -64,7 +64,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar.Armature
             }
             catch (System.Exception E)
             {
-                Plugin.PLog.LogError($"{E.Message}\n{E.Source}");
+                Vars.Log.LogError($"{E.Message}\n{E.Source}");
                 return null;
             }
         }
@@ -81,7 +81,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar.Armature
             }
             catch (System.Exception E)
             {
-                Plugin.PLog.LogError($"{E.Message}\n{E.Source}");
+                Vars.Log.LogError($"{E.Message}\n{E.Source}");
                 return null;
             }
         }
@@ -104,7 +104,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar.Armature
             }
             catch (System.Exception E)
             {
-                Plugin.PLog.LogError($"{E.Message}\n{E.Source}");
+                Vars.Log.LogError($"{E.Message}\n{E.Source}");
                 return null;
             }
         }
@@ -127,7 +127,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar.Armature
             }
             catch (System.Exception E)
             {
-                Plugin.PLog.LogError($"{E.Message}\n{E.Source}");
+                Vars.Log.LogError($"{E.Message}\n{E.Source}");
                 return null;
             }
         }
@@ -150,7 +150,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar.Armature
             }
             catch (System.Exception E)
             {
-                Plugin.PLog.LogError($"{E.Message}\n{E.Source}");
+                Vars.Log.LogError($"{E.Message}\n{E.Source}");
                 return null;
             }
         }

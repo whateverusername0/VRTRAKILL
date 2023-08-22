@@ -9,7 +9,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
     {
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Start))] static void Start(NewMovement __instance)
         {
-            
             __instance.jumpPower *= Vars.Config.MovementMultiplier;
             __instance.wallJumpPower *= Vars.Config.MovementMultiplier;
         }
@@ -395,7 +394,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                     __instance.boostLeft = 100f;
                     __instance.boost = true;
 
-                    __instance.dodgeDirection = __instance.movementDirection * Vars.Config.MovementMultiplier;
+                    __instance.dodgeDirection = __instance.movementDirection.normalized * Vars.Config.MovementMultiplier;
                     if (__instance.dodgeDirection == Vector3.zero)
                         __instance.dodgeDirection = __instance.transform.forward * Vars.Config.MovementMultiplier;
 
@@ -532,9 +531,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                     vector += vector2;
                 }
 
-                __instance.movementDirection = Vector3.ClampMagnitude(Input.InputVars.MoveVector.x * __instance.transform.right, 1f) * 5f / Vars.Config.MovementMultiplier;
+                __instance.movementDirection = Vector3.ClampMagnitude(Input.InputVars.MoveVector.x * __instance.transform.right, 1f) * 5f * Vars.Config.MovementMultiplier;
                 if (!MonoSingleton<HookArm>.Instance || !MonoSingleton<HookArm>.Instance.beingPulled)
-                    __instance.rb.velocity = vector + __instance.pushForce + __instance.movementDirection;
+                    __instance.rb.velocity = vector + __instance.pushForce + __instance.movementDirection.normalized;
                 else __instance.StopSlide();
 
                 return false;
