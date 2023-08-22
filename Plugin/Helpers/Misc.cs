@@ -28,6 +28,13 @@ namespace Plugin.Helpers
             else { Physics.Raycast(new Ray(T.position, T.forward), out RaycastHit Hit, Length); return Hit; }
         }
 
+        public static void EnableOffscreenRendering(Transform T = null, SkinnedMeshRenderer SMR = null)
+        {
+            if (T) foreach (SkinnedMeshRenderer _SMR in T.GetComponentsInChildren<SkinnedMeshRenderer>()) _SMR.updateWhenOffscreen = true;
+            else if (SMR) SMR.updateWhenOffscreen = true;
+            else foreach (SkinnedMeshRenderer _SMR in Object.FindObjectsOfType<SkinnedMeshRenderer>()) _SMR.updateWhenOffscreen = true;
+        }
+
         public static void CopyCameraValues(Camera CopyTo, Camera CopyFrom)
         {
             CopyTo.nearClipPlane = CopyFrom.nearClipPlane;
@@ -38,6 +45,14 @@ namespace Plugin.Helpers
             CopyTo.cullingMask = CopyFrom.cullingMask;
             CopyTo.clearFlags = CopyFrom.clearFlags;
             CopyTo.fieldOfView = CopyFrom.fieldOfView;
+        }
+
+        public static int DetectHit(Vector3 Pos, float Radius, int Layer)
+        {
+            int Hits = 0;
+            Collider[] Things = Physics.OverlapSphere(Pos, Radius, 1 << Layer, QueryTriggerInteraction.Ignore);
+            for (int i = 0; i < Things.Length; i++) Hits++;
+            return Hits;
         }
     }
 }
