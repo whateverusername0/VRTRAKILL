@@ -47,7 +47,7 @@ namespace Plugin.Helpers
             CopyTo.fieldOfView = CopyFrom.fieldOfView;
         }
 
-        public static int DetectHit(Vector3 Pos, float Radius, int Layer)
+        public static int DetectCollisions(Vector3 Pos, float Radius, int Layer)
         {
             int Hits = 0;
             Collider[] Things = Physics.OverlapSphere(Pos, Radius, 1 << Layer, QueryTriggerInteraction.Ignore);
