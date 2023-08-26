@@ -10,17 +10,16 @@
 [Full minos fight (0.3)](https://www.youtube.com/watch?v=yrofGYf_xTI) | [Full sisyphus fight (0.5)](https://www.youtube.com/watch?v=DhcVx6yBEaM) | [Cybergrind tomfoolery (0.8)](https://youtu.be/n2aAljuvpMo) | [0.12](https://youtu.be/aosvmxn6bNU)
 
 ULTRAKILLing in VR is now a thing.  
-This mod exists because [HuskVR](https://github.com/TeamDoodz/HuskVR) is not being updated for like 7 months, so I was like "Fine, I'll do it myself"  
-Also it does not require any other mods to function  
+This mod exists because [HuskVR](https://github.com/TeamDoodz/HuskVR) is not being updated for like 7 months, so I was like "Fine, I'll do it myself".  
+Also it does not require any other mods to function.  
 
 ## Features
 ### What works right now:
-- Camera, HUD, Crosshair
+- Camera, HUD, Crosshair, UI Interaction
 - Full movement (jump, dash, slide, slam storage, rocket ride, etc.)
 - Full controller tracking (aiming / shooting, punching)
-- Controller haptics (vibrations) (Rumble-based) (kinda broken)
+- Controller haptics (vibrations) (CRumble-based) (nobody uses it for some reason)
 - Weapon swap, weapon scroll using joystick, weapon wheel
-- UI Interaction (some of the menus might be broken)
 ### Planned stuff:
 **1.0**: Full release (when i think that nothing more can be done)
 
@@ -69,18 +68,18 @@ The text version:
   - Solution: In config there's an option "Do not override movement values". Enable it and launch the game again and see if it worked.
   - Solution 2 (applies to **all** devices): Try to lower the refresh rate of your headset.
 3. Awful/missing HTC Vive, Index, etc. controller bindings:
-  - Since I don't have those controllers you gotta make your own. It's pretty simple, there's no cryptic words in actions' names :)
-  - Also if you wanna help you can always send me your controller bindings via discord or whatever and I'll set them as defaults so no more people have to suffer.
+  - Since I don't have those controllers you gotta make your own. It's pretty simple, there's no cryptic words in actions' names.
+  - Also if you wanna help you can send me your controller bindings via discord or whatever and I'll set them as defaults so no more people have to suffer.
 4. OverflowException when launching the game:
   - Get an already patched version of globalgamemanagers from [releases](https://github.com/whateverusername0/VRTRAKILL/releases) and paste it in your ULTRAKILL_Data folder, after that delete the VRPatcher from BepInEx/patchers
 5. Literally any other problem, or recommendations to fixing them yourself:
   - If you have other mods enabled (like ultraballing, middle finger or sniper rifle), try disabling/removing them and see if things work.
 
 ## Default controller bindings:
-### Oculus Touch (proudly made in MSPaint by me):
+### Oculus Touch (made in MSPaint by me):
 ![](GithubStuff/DCB_Touch.png)
 
-### HTC Vive:
+### HTC Vive (made by ![roklc](https://github.com/roklc)):
 ![](GithubStuff/DCB_Vive.png#gh-dark-mode-only)
 ![](GithubStuff/DCB_Vive_light.png#gh-light-mode-only)
 
