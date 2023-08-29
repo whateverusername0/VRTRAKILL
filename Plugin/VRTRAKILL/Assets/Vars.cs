@@ -11,5 +11,7 @@ namespace Plugin.VRTRAKILL.Assets
         public static GameObject HandPose_Nailgun => AssetLoader.HandPose_Nailgun;
         public static GameObject HandPose_Sawblade => AssetLoader.HandPose_Sawblade;
         public static GameObject HandPose_Railgun => AssetLoader.HandPose_Railgun;
+
+        public static GameObject UI_GTFOTW => AssetLoader.UI_GTFOTW;
     }
 }

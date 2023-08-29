@@ -37,6 +37,12 @@ namespace Plugin.VRTRAKILL.UI.Patches
 
             // Relayer stupid skybox in minos corpse level
             try { GameObject.Find("CityFromAbove").layer = 0; } catch {}
+
+            // Deploy the "GTFOTW"
+            GameObject UI_GTFOTW = Object.Instantiate<GameObject>(Assets.Vars.UI_GTFOTW, Vector3.zero, Quaternion.identity, __instance.transform);
+            UI_GTFOTW.transform.SetSiblingIndex(0);
+            GTFOTW GTFOTW = UI_GTFOTW.AddComponent<GTFOTW>();
+            GTFOTW.DetectorTransform = Vars.MainCamera.transform;
         }
     }
 }
