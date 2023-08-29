@@ -10,7 +10,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         public Transform Body { get; set; }
         public Transform Abdomen { get; set; }
         public Transform Chest { get; set; }
-        public Transform Neck { get; set; }
+        public Transform NeckEnd { get; set; }
         public Transform Head { get; set; }
 
         public Transform LShoulder { get; set; }
@@ -47,8 +47,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             MR.Body = MR.Root.GetChild(0).GetChild(0).GetChild(0); // Body
             MR.Abdomen = MR.Body.GetChild(0); // Abdomen
             MR.Chest = MR.Abdomen.GetChild(0); // Chest
-            MR.Neck = MR.Chest.GetChild(2); // Neck
-            MR.Head = MR.Neck.GetChild(0); // NeckHead
+            MR.NeckEnd = MR.Chest.GetChild(2).GetChild(0).GetChild(0); // Neck
+            MR.Head = MR.Chest.GetChild(3); // V1_Head
 
             MR.LShoulder = MR.Chest.GetChild(0); // LeftShoulder
             MR._LFeedbacker = Arm.MRFeedbackerPreset(MR.LShoulder.GetChild(0));
