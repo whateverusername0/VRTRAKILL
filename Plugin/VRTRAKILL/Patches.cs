@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Plugin.VRTRAKILL
 {
     // contains necessary patches (and not so necessary)
-    [HarmonyPatch] internal class Patches
+    [HarmonyPatch] internal sealed class Patches
     {
         // discord :)
         [HarmonyPrefix] [HarmonyPatch(typeof(DiscordController), nameof(DiscordController.SendActivity))]

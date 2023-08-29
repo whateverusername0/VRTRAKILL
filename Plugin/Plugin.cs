@@ -16,7 +16,7 @@ namespace Plugin
      * welcome to the codebase where all hopes and dreams go die.
      * This is a dumpster fire of spaghetti code, inconsistent
      * naming and questionable life choices. Amen. */
-    [BepInPlugin(PLUGIN_GUID, PLUGIN_NAME, PLUGIN_VERSION)] public class Plugin : BaseUnityPlugin
+    [BepInPlugin(PLUGIN_GUID, PLUGIN_NAME, PLUGIN_VERSION)] public sealed class Plugin : BaseUnityPlugin
     {
         public const string
             PLUGIN_GUID = "com.whateverusername0.vrtrakill",

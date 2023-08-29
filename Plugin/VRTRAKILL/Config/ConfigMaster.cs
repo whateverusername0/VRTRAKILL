@@ -5,7 +5,7 @@ using Plugin.VRTRAKILL.Input;
 
 namespace Plugin.VRTRAKILL.Config
 {
-    internal class ConfigMaster
+    internal sealed class ConfigMaster
     {
         public static string ConfigPath = $"{Plugin.PluginPath}\\VRTRAKILL_Config.json";
 
