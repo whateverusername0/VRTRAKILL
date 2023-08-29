@@ -28,7 +28,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         public void Start()
         {
             if (Rig == null) Rig = MetaRig.CreateVCustomPreset(Vars.VRCameraContainer, "VR Avatar");
-            if (Head == null) Head = Instantiate(Assets.Vars.VHead, Vars.VRCameraContainer.transform);
             Misc.RecursiveChangeLayer(Rig.GameObjectT.gameObject, (int)Layers.AlwaysOnTop);
 
             // transform shenanigans
