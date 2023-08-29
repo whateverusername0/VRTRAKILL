@@ -41,15 +41,16 @@ namespace Plugin.VRTRAKILL.UI
         }
         public static void ConvertCanvas(Canvas C, bool Force = false, bool DontAddComponent = false)
         {
-            if (!Force)
-            {
-                if (C.renderMode != RenderMode.ScreenSpaceOverlay) return;
-            }
+            if (!Force && C.renderMode != RenderMode.ScreenSpaceOverlay) return;
 
             C.worldCamera = UICamera;
             C.renderMode = RenderMode.WorldSpace;
             C.gameObject.layer = (int)Layers.UI;
-            if (!DontAddComponent) C.gameObject.AddComponent<UICanvas>();
+            if (!DontAddComponent)
+            {
+                UICanvas UIC = C.gameObject.AddComponent<UICanvas>();
+                UIC.Target = UICamera;
+            }
 
             foreach (Transform Child in C.transform) ConvertElement(Child);
         }
