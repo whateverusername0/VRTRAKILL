@@ -3,7 +3,7 @@ using Plugin.Util;
 
 namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar.Patches
 {
-    [HarmonyPatch] internal class VRIKP
+    [HarmonyPatch] internal sealed class VRIKP
     {
         [HarmonyPostfix] [HarmonyPatch(typeof(NewMovement), nameof(NewMovement.Start))] static void AttachVRIK(NewMovement __instance)
         {

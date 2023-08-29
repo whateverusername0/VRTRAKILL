@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Plugin.VRTRAKILL.UI.Patches
 {
-    [HarmonyPatch(typeof(Crosshair))] internal class CrosshairP
+    [HarmonyPatch(typeof(Crosshair))] internal sealed class CrosshairP
     {
         [HarmonyPrefix] [HarmonyPatch(nameof(Crosshair.Start))] static void SetCrosshair(Crosshair __instance)
         {

@@ -3,7 +3,7 @@ using Plugin.VRTRAKILL.VRPlayer.VRAvatar.Armature;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
 {
-    [HarmonyPatch] internal class ArmsP
+    [HarmonyPatch] internal sealed class ArmsP
     {
         [HarmonyPostfix] [HarmonyPatch(typeof(Punch), nameof(Punch.Start))] static void ConvertArms(Punch __instance)
         {

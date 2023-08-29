@@ -2,11 +2,10 @@
 using UnityEngine;
 using Sandbox.Arm;
 using ULTRAKILL.Cheats;
-using UnityEngine.InputSystem;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
 {
-    [HarmonyPatch] internal class SandboxArmP
+    [HarmonyPatch] internal sealed class SandboxArmP
     {
         [HarmonyPrefix] [HarmonyPatch(typeof(SandboxArm), nameof(SandboxArm.Update))] static bool Update(SandboxArm __instance)
         {

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Plugin.VRTRAKILL.UI.Patches
 {
-    [HarmonyPatch] internal class HudP
+    [HarmonyPatch] internal sealed class HudP
     {
         [HarmonyPostfix] [HarmonyPatch(typeof(HudController), nameof(HudController.Start))] static void ReparentHUD(HudController __instance)
         {

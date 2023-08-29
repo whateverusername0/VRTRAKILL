@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
 {
-    [HarmonyPatch(typeof(Punch))] internal class PunchP
+    [HarmonyPatch(typeof(Punch))] internal sealed class PunchP
     {
         public static Vector3 _Thing; public static Vector3 Thing
         {

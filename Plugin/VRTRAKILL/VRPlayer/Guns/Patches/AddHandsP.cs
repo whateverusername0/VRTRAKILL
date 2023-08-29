@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 {
-    [HarmonyPatch] internal class AddHandsP
+    [HarmonyPatch] internal sealed class AddHandsP
     {
         [HarmonyPatch(typeof(Shotgun))] static class ShotgunH
         {

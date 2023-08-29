@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 {
     // change move vector to joystick axis, fix dash, jump, etc.
-    [HarmonyPatch(typeof(PlatformerMovement))] internal class PlatformerMovementP
+    [HarmonyPatch(typeof(PlatformerMovement))] internal sealed class PlatformerMovementP
     {
         // change movement vector to vr one
         [HarmonyPrefix] [HarmonyPatch(nameof(PlatformerMovement.Update))] static bool Update(PlatformerMovement __instance)
@@ -85,7 +85,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                     __instance.boost = true;
                     __instance.anim.Play("Dash", -1, 0f);
 
-                    __instance.dodgeDirection = __instance.movementDirection * Vars.Config.MovementMultiplier;
+                    __instance.dodgeDirection = __instance.movementDirection.normalized * Vars.Config.MovementMultiplier;
                     if (__instance.dodgeDirection == Vector3.zero)
                         __instance.dodgeDirection = __instance.playerModel.forward * Vars.Config.MovementMultiplier;
 

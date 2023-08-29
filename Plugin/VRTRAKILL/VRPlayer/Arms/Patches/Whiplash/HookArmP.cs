@@ -5,7 +5,7 @@ using Plugin.VRTRAKILL.VRPlayer.VRAvatar.Armature;
 namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches.Whiplash
 {
     // you get it? cameracontrollerpatches?? ccp????? lol!!
-    [HarmonyPatch] internal class HookArmP
+    [HarmonyPatch] internal sealed class HookArmP
     {
         [HarmonyPostfix] [HarmonyPatch(typeof(HookArm), nameof(HookArm.Start))] static void ConvertWhiplash(HookArm __instance)
         {

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 {
     // change move vector to joystick axis, fix dash, jump, etc.
-    [HarmonyPatch(typeof(NewMovement))] internal class NewMovementP
+    [HarmonyPatch(typeof(NewMovement))] internal sealed class NewMovementP
     {
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Start))] static void Start(NewMovement __instance)
         {
@@ -389,7 +389,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
             {
                 if (((bool)__instance.groundProperties && !__instance.groundProperties.canDash) || __instance.modNoDashSlide)
                     if (__instance.modNoDashSlide || !__instance.groundProperties.silentDashFail) Object.Instantiate(__instance.staminaFailSound);
-                /* else */ if (__instance.boostCharge >= 100f)
+                if (__instance.boostCharge >= 100f)
                 {
                     if (__instance.sliding) __instance.StopSlide();
 
@@ -457,9 +457,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
             Vector3 vector3 = __instance.hudOriginalPos - __instance.cc.transform.InverseTransformDirection(__instance.rb.velocity) / 1000f;
             float num3 = Vector3.Distance(vector3, __instance.screenHud.transform.localPosition);
             __instance.screenHud.transform.localPosition = Vector3.MoveTowards(__instance.screenHud.transform.localPosition, vector3, Time.deltaTime * 15f * num3);
-            //Vector3 vector4 = Vector3.ClampMagnitude(__instance.camOriginalPos - __instance.cc.transform.InverseTransformDirection(__instance.rb.velocity) / 350f * -1f, 0.2f);
-            //float num4 = Vector3.Distance(vector4, __instance.hudCam.transform.localPosition);
-            //__instance.hudCam.transform.localPosition = Vector3.MoveTowards(__instance.hudCam.transform.localPosition, vector4, Time.deltaTime * 25f * num4);
 
             int rankIndex = MonoSingleton<StyleHUD>.Instance.rankIndex;
             if (rankIndex == 7 || __instance.difficulty <= 1)
