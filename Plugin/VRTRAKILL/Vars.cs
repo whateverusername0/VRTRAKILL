@@ -28,10 +28,9 @@ namespace Plugin.VRTRAKILL
         VirtualRender = 28,
         SandboxGrabba = 29
     }
-    public class Vars : MonoSingleton<Vars>
+    public static class Vars
     {
         public static Config.NewConfig Config => VRTRAKILL.Config.ConfigJSON.GetConfig().Config;
-
         public static BepInEx.Logging.ManualLogSource Log => Plugin.PLog;
 
         #region Checks
@@ -43,12 +42,13 @@ namespace Plugin.VRTRAKILL
             => WeaponWheel.Instance != null && WeaponWheel.Instance.isActiveAndEnabled;
         public static bool IsPlayerUsingShop
             => FistControl.Instance != null && FistControl.Instance.shopping;
-        #endregion
 
         public static bool IsPlayerFrozen
             => (NewMovement.Instance != null && (!NewMovement.Instance.activated || !NewMovement.Instance.enabled))
             || (CameraController.Instance != null && !CameraController.Instance.activated);
+        #endregion
 
+        #region Cameras
         public static GameObject VRCameraContainer
             => VRPlayer.VRCamera.Patches.CameraConverterP.Container;
         private static Camera _MainCamera; public static Camera MainCamera
@@ -67,6 +67,7 @@ namespace Plugin.VRTRAKILL
             => VRPlayer.VRCamera.Patches.CameraConverterP.DesktopUICam;
         public static GameObject SpectatorCamera
             => VRPlayer.VRCamera.Patches.CameraConverterP.SpectatorCam.transform.parent.gameObject;
+        #endregion
 
         #region Controllers
         public static GameObject NonDominantHand
