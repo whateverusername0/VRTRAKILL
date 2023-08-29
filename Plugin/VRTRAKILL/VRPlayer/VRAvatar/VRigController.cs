@@ -8,13 +8,13 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
     {
         private static VRigController _Instance; public static VRigController Instance { get { return _Instance; } }
 
-        public MetaRig Rig; public GameObject Head;
+        public MetaRig Rig;
         public Vector3 HeadOffsetPosition = new Vector3(0, 0, 0),
                        HeadOffsetAngles = new Vector3(-90, 0, 0);
 
-        private IKArm AddArmIK(GameObject GO, Transform Target, int ChainLen = 3, Transform Pole = null)
+        private IKChain AddIK(GameObject GO, Transform Target, int ChainLen = 3, Transform Pole = null)
         {
-            IKArm IK = GO.AddComponent<IKArm>();
+            IKChain IK = GO.AddComponent<IKChain>();
             IK.Target = Target; IK.ChainLength = ChainLen; IK.Pole = Pole;
             return IK;
         }
@@ -45,7 +45,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
                 Rig._LWhiplash, Rig._LSandboxer,
             };
             foreach (Armature.Arm Arm in LArms)
-                AddArmIK(Arm.Hand.Root.gameObject, ArmController.Instance.CC.ArmOffset.transform, Pole: Rig.IKPole_Left);
+                AddIK(Arm.Hand.Root.gameObject, ArmController.Instance.CC.ArmOffset.transform, Pole: Rig.IKPole_Left);
 
             Armature.Arm[] RArms =
             {
@@ -53,9 +53,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
                 Rig._RWhiplash, Rig._RSandboxer,
             };
             foreach (Armature.Arm Arm in RArms)
-                AddArmIK(Arm.Hand.Root.gameObject, GunController.Instance.CC.ArmOffset.transform, Pole: Rig.IKPole_Right);
+                AddIK(Arm.Hand.Root.gameObject, GunController.Instance.CC.ArmOffset.transform, Pole: Rig.IKPole_Right);
 
             // Leg IKs TBD
+
+            AddIK(Rig.NeckEnd.gameObject, Rig.Head.GetChild(0), 2);
 
             //gameObject.AddComponent<SkinsManager>();
         }
@@ -85,8 +87,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         }
         private void HandleHeadRotation()
         {
-            Head.transform.GetChild(0).GetChild(0).position = Vars.MainCamera.transform.position + HeadOffsetPosition;
-            Head.transform.GetChild(0).GetChild(0).eulerAngles = Vars.MainCamera.transform.eulerAngles + HeadOffsetAngles;
+            Rig.Head.GetChild(0).position = Vars.MainCamera.transform.position;
+            Rig.Head.GetChild(0).eulerAngles = Vars.MainCamera.transform.eulerAngles;
         }
         private void HandleArms()
         {
