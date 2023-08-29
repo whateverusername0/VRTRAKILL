@@ -13,6 +13,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
     {
         public SCMode Mode = SCMode.Follow;
 
+        public Transform FollowTarget;
         public Camera SPCam;
 
         public Vector3 OffsetPos = new Vector3(0, 1, -3);
@@ -21,14 +22,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
 
         private Vector3 PrevPos;
         private readonly float BackupCap = .2f;
-
-        private int DetectHit(Vector3 Pos)
-        {
-            int Hits = 0;
-            Collider[] Things = Physics.OverlapSphere(Pos, BackupCap, 1 << (int)Layers.Environment, QueryTriggerInteraction.Ignore);
-            for (int i = 0; i < Things.Length; i++) Hits++;
-            return Hits;
-        }
 
         public override void OnEnable()
         {
@@ -40,7 +33,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
 
         public void Update()
         {
-            transform.position = Vars.MainCamera.transform.position;
+            transform.position = FollowTarget.position;
             Util.Misc.CopyCameraValues(SPCam, Vars.DesktopCamera);
 
             switch (Mode)
@@ -52,9 +45,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
             }
 
             // Pushback (from https://metaanomie.blogspot.com/2020/04/unity-vr-head-blocking-steam-vr-v2.html)
-            int Hits = DetectHit(transform.position);
-            if (Hits == 0) PrevPos = transform.position;
-            else
+            if (Util.Misc.DetectCollisions(transform.position, 2, (int)Layers.Environment) > 0)
             {
                 Vector3 Difference = transform.position - PrevPos;
                 if (Mathf.Abs(Difference.x) > BackupCap)
@@ -72,10 +63,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
                                                       SPCam.transform.position.z - Difference.z);
                 SPCam.transform.SetPositionAndRotation(AdjustedHeadPos, SPCam.transform.rotation);
             }
+            else PrevPos = transform.position;
         }
 
         private void Follow()
-        { transform.forward = Vector3.Lerp(transform.forward, Vars.MainCamera.transform.forward, Time.deltaTime * FMDuration); }
+        { transform.forward = Vector3.Lerp(transform.forward, FollowTarget.forward, Time.deltaTime * FMDuration); }
         private void RotateAround()
         { transform.Rotate(new Vector3(0, RAMRotationSpeed, 0)); }
         
