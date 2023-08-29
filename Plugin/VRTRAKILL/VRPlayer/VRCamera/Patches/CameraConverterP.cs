@@ -40,7 +40,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
             // Spectator Camera
             GameObject SCContainer = new GameObject("Spectator Camera");
             SCContainer.transform.localPosition = Vector3.zero;
-            SCContainer.AddComponent<SpectatorCamera>();
+            SpectatorCamera SPC = SCContainer.AddComponent<SpectatorCamera>();
+            SPC.FollowTarget = Vars.MainCamera.transform;
 
             SpectatorCam = new GameObject("Camera").AddComponent<Camera>();
             SpectatorCam.stereoTargetEye = StereoTargetEyeMask.None;
