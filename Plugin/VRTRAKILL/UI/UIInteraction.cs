@@ -8,7 +8,7 @@ namespace Plugin.VRTRAKILL.UI
     // "borrowed" from huskvr, ty you pretty
     internal class UIInteraction : MonoBehaviour
     {
-        Camera Cam;
+        public Camera Cam;
 
         // Prevents loop over the same selectable
         Selectable ExcludedSelectable;
@@ -22,7 +22,7 @@ namespace Plugin.VRTRAKILL.UI
 
         public void Start()
         {
-            Cam = GetComponent<Camera>();
+            if (Cam == null) Cam = GetComponent<Camera>();
             PointerEvent = new PointerEventData(EventSystem.current) { button = PointerEventData.InputButton.Left };
         }
 
