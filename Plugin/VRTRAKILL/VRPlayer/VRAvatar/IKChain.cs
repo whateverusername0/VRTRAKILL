@@ -3,7 +3,7 @@
 namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
 {
     // code from.. uh.. i frogot.
-    internal class IKArm : MonoBehaviour
+    internal class IKChain : MonoBehaviour
     {
         /// <summary>
         /// Chain length of bones
