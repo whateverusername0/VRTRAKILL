@@ -14,7 +14,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
         private int DetectHit(Vector3 Pos)
         {
             int Hits = 0;
-            Collider[] Things = Physics.OverlapSphere(Pos, .2f, 1 << (int)Vars.Layers.Environment, QueryTriggerInteraction.Ignore);
+            Collider[] Things = Physics.OverlapSphere(Pos, .2f, 1 << (int)Layers.Environment, QueryTriggerInteraction.Ignore);
             for (int i = 0; i < Things.Length; i++) Hits++;
             return Hits;
         }

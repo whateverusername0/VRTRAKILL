@@ -11,7 +11,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
             __instance.gameObject.SetActive(false);
 
             // Left Hand
-            GameObject LHGO = new GameObject("Left Controller") { layer = (int)Vars.Layers.IgnoreRaycast };
+            GameObject LHGO = new GameObject("Left Controller") { layer = (int)Layers.IgnoreRaycast };
             LHGO.transform.parent = Vars.VRCameraContainer.transform;
             LHGO.AddComponent<ControllerController>();
 
@@ -21,7 +21,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
             LeftHand.inputSource = SteamVR_Input_Sources.LeftHand;
 
             // Right Hand
-            GameObject RHGO = new GameObject("Right Controller") { layer = (int)Vars.Layers.IgnoreRaycast };
+            GameObject RHGO = new GameObject("Right Controller") { layer = (int)Layers.IgnoreRaycast };
             RHGO.transform.parent = Vars.VRCameraContainer.transform;
             RHGO.AddComponent<ControllerController>();
 

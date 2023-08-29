@@ -4,8 +4,9 @@ namespace Plugin.VRTRAKILL.UI
 {
     // short for GET THE FUCK OUT OF THE WALL
     // used explicitly for getting the fuck out of the wall
-    internal class GTFOTW : MonoSingleton<GTFOTW>
+    internal sealed class GTFOTW : MonoSingleton<GTFOTW>
     {
+        public Transform DetectorTransform;
         private CanvasGroup CG; private UnityEngine.UI.Text Text;
         public bool ShouldShow, ShouldHide;
 
@@ -28,7 +29,7 @@ namespace Plugin.VRTRAKILL.UI
 
         public void Update()
         {
-            if (Helpers.Misc.DetectCollisions(Vars.MainCamera.transform.position, 1, (int)Vars.Layers.Environment) >= 1)
+            if (Util.Misc.DetectCollisions(DetectorTransform.position, 1, (int)Layers.Environment) >= 1)
                 ShouldShow = true;
             else ShouldHide = true;
 

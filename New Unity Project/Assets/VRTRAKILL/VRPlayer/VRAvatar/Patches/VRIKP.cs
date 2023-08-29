@@ -1,5 +1,5 @@
 ﻿using HarmonyLib;
-using Plugin.Helpers;
+using Plugin.Util;
 
 namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar.Patches
 {

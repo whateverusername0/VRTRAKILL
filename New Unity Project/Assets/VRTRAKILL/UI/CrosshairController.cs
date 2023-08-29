@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using Plugin.Helpers;
+using Plugin.Util;
 
 namespace Plugin.VRTRAKILL.UI
 {

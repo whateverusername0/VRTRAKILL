@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using Plugin.Helpers;
+using Plugin.Util;
 using Plugin.VRTRAKILL.VRPlayer.VRAvatar.Armature;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Arms

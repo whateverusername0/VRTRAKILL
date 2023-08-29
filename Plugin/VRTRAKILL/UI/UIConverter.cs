@@ -11,14 +11,14 @@ namespace Plugin.VRTRAKILL.UI
         public static void ConvertAllCanvases()
         {
             UICamera = new GameObject("UI Camera").AddComponent<Camera>();
-            UICamera.cullingMask = 1 << (int)Vars.Layers.UI;
+            UICamera.cullingMask = 1 << (int)Layers.UI;
             UICamera.clearFlags = CameraClearFlags.Depth; UICamera.depth = 1;
 
             if (!Vars.Config.UIInteraction.ControllerBased)
                 UICamera.gameObject.AddComponent<UIInteraction>();
 
             foreach (Canvas C in Object.FindObjectsOfType<Canvas>())
-                if (!Helpers.Misc.HasComponent<UICanvas>(C.gameObject))
+                if (!Util.Misc.HasComponent<UICanvas>(C.gameObject))
                     RecursiveConvertCanvas();
         }
 
@@ -35,7 +35,7 @@ namespace Plugin.VRTRAKILL.UI
             else
             {
                 foreach (Canvas C in Object.FindObjectsOfType<Canvas>())
-                    if (!Helpers.Misc.HasComponent<UICanvas>(C.gameObject))
+                    if (!Util.Misc.HasComponent<UICanvas>(C.gameObject))
                         try { ConvertCanvas(C); } catch {}
             }
         }
@@ -48,7 +48,7 @@ namespace Plugin.VRTRAKILL.UI
 
             C.worldCamera = UICamera;
             C.renderMode = RenderMode.WorldSpace;
-            C.gameObject.layer = (int)Vars.Layers.UI;
+            C.gameObject.layer = (int)Layers.UI;
             if (!DontAddComponent) C.gameObject.AddComponent<UICanvas>();
 
             foreach (Transform Child in C.transform) ConvertElement(Child);

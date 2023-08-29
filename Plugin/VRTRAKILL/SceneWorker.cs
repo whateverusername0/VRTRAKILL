@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Reflection;
-using Plugin.Helpers;
+using Plugin.Util;
 
 namespace Plugin.VRTRAKILL
 {
@@ -33,7 +33,7 @@ namespace Plugin.VRTRAKILL
                 if (I.GetValue(typeof(Assets.Vars), null) != null)
                 {
                     GameObject GO = (GameObject)I.GetValue(typeof(Assets.Vars), null);
-                    GO.RecursiveChangeLayer((int)Vars.Layers.AlwaysOnTop);
+                    GO.RecursiveChangeLayer((int)Layers.AlwaysOnTop);
                 }
                 else continue;
             }

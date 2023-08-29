@@ -7,8 +7,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
     public class ControllerController : MonoBehaviour
     {
         private SteamVR_RenderModel SVRRM; private SteamVR_Behaviour_Pose Pose;
-        public GameObject GunOffset = new GameObject("Gun Offset") { layer = (int)Vars.Layers.IgnoreRaycast };
-        public GameObject ArmOffset = new GameObject("Arm Offset") { layer = (int)Vars.Layers.IgnoreRaycast };
+        public GameObject GunOffset = new GameObject("Gun Offset") { layer = (int)Layers.IgnoreRaycast };
+        public GameObject ArmOffset = new GameObject("Arm Offset") { layer = (int)Layers.IgnoreRaycast };
 
         GameObject Pointer;
         LineRenderer LR; Vector3 EndPosition;
@@ -26,7 +26,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         private void SetupControllerPointer()
         {
             // Create a real pointer with the camera for ui interaction
-            Pointer = new GameObject("Canvas Pointer") { layer = (int)Vars.Layers.UI };
+            Pointer = new GameObject("Canvas Pointer") { layer = (int)Layers.UI };
             Pointer.transform.parent = GunOffset.transform;
 
             Camera PointerCamera = Pointer.AddComponent<Camera>();
@@ -58,7 +58,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         private void CPRaycast()
         {
             bool Raycast = Physics.Raycast(GunOffset.transform.position, GunOffset.transform.forward,
-                                           out RaycastHit Hit, float.PositiveInfinity, (int)Vars.Layers.UI);
+                                           out RaycastHit Hit, float.PositiveInfinity, (int)Layers.UI);
             EndPosition = GunOffset.transform.position + (GunOffset.transform.forward * DefaultLength);
             if (Raycast) EndPosition = Hit.point;
         }

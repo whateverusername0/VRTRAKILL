@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using UnityEngine.InputSystem;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 {
@@ -13,6 +14,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
             __instance.wallJumpPower *= Vars.Config.MovementMultiplier;
         }
 
+        // why the fuck player physics are in Update()?
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Update))] static bool Update(NewMovement __instance)
         {
             Vector2 vector = Vector2.zero;
@@ -127,8 +129,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
             }
 
             if (!__instance.gc.onGround && __instance.activated
-                && MonoSingleton<InputManager>.Instance.InputSource.Slide.WasPerformedThisFrame
-                && !GameStateManager.Instance.PlayerInputLocked)
+            && MonoSingleton<InputManager>.Instance.InputSource.Slide.WasPerformedThisFrame
+            && !GameStateManager.Instance.PlayerInputLocked)
             {
                 if (__instance.sliding) __instance.StopSlide();
 
@@ -164,8 +166,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
             else Physics.IgnoreLayerCollision(2, 12, false);
 
             if (!__instance.slopeCheck.onGround
-                && __instance.slopeCheck.forcedOff <= 0
-                && !__instance.jumping && !__instance.boost)
+            && __instance.slopeCheck.forcedOff <= 0
+            && !__instance.jumping && !__instance.boost)
             {
                 float num = __instance.playerCollider.height / 2f - __instance.playerCollider.center.y;
                 RaycastHit val2 = default(RaycastHit);
@@ -257,13 +259,13 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                 }
             }
             if (MonoSingleton<InputManager>.Instance.InputSource.Slide.WasPerformedThisFrame && __instance.gc.onGround && __instance.activated
-                && (!__instance.slowMode || __instance.crouching) && !GameStateManager.Instance.PlayerInputLocked && !__instance.sliding)
+            && (!__instance.slowMode || __instance.crouching) && !GameStateManager.Instance.PlayerInputLocked && !__instance.sliding)
                     __instance.StartSlide();
 
             RaycastHit val5 = default(RaycastHit);
             if (MonoSingleton<InputManager>.Instance.InputSource.Slide.WasPerformedThisFrame && !__instance.gc.onGround && !__instance.sliding && !__instance.jumping
-                && __instance.activated && !__instance.slowMode && !GameStateManager.Instance.PlayerInputLocked
-                && Physics.Raycast(__instance.gc.transform.position + __instance.transform.up, __instance.transform.up * -1f, out val5, 2f, (int)__instance.lmask))
+            && __instance.activated && !__instance.slowMode && !GameStateManager.Instance.PlayerInputLocked
+            && Physics.Raycast(__instance.gc.transform.position + __instance.transform.up, __instance.transform.up * -1f, out val5, 2f, (int)__instance.lmask))
                     __instance.StartSlide();
             if ((MonoSingleton<InputManager>.Instance.InputSource.Slide.WasCanceledThisFrame || (__instance.slowMode && !__instance.crouching)) && __instance.sliding) __instance.StopSlide();
 
@@ -383,7 +385,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 
             // Dash
             if (MonoSingleton<InputManager>.Instance.InputSource.Dodge.WasPerformedThisFrame
-                && __instance.activated && !__instance.slowMode && !GameStateManager.Instance.PlayerInputLocked)
+            && __instance.activated && !__instance.slowMode && !GameStateManager.Instance.PlayerInputLocked)
             {
                 if (((bool)__instance.groundProperties && !__instance.groundProperties.canDash) || __instance.modNoDashSlide)
                     if (__instance.modNoDashSlide || !__instance.groundProperties.silentDashFail) Object.Instantiate(__instance.staminaFailSound);
@@ -480,7 +482,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 
             return false;
         }
-
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Dodge))] static bool Dash(NewMovement __instance)
         {
             if (__instance.sliding)

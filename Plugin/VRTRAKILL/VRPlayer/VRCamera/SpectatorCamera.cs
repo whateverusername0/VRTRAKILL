@@ -25,7 +25,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
         private int DetectHit(Vector3 Pos)
         {
             int Hits = 0;
-            Collider[] Things = Physics.OverlapSphere(Pos, BackupCap, 1 << (int)Vars.Layers.Environment, QueryTriggerInteraction.Ignore);
+            Collider[] Things = Physics.OverlapSphere(Pos, BackupCap, 1 << (int)Layers.Environment, QueryTriggerInteraction.Ignore);
             for (int i = 0; i < Things.Length; i++) Hits++;
             return Hits;
         }
@@ -41,7 +41,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
         public void Update()
         {
             transform.position = Vars.MainCamera.transform.position;
-            Helpers.Misc.CopyCameraValues(SPCam, Vars.DesktopCamera);
+            Util.Misc.CopyCameraValues(SPCam, Vars.DesktopCamera);
 
             switch (Mode)
             {

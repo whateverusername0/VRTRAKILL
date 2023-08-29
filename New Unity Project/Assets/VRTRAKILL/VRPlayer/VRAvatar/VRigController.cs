@@ -1,5 +1,5 @@
 ﻿using Plugin.VRTRAKILL.VRPlayer.Controllers;
-using Plugin.Helpers;
+using Plugin.Util;
 using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
@@ -29,7 +29,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         {
             if (Rig == null) Rig = MetaRig.CreateVCustomPreset(Vars.VRCameraContainer, "VR Avatar");
             if (Head == null) Head = Instantiate(Assets.Vars.VHead, Vars.VRCameraContainer.transform);
-            Misc.RecursiveChangeLayer(Rig.GameObjectT.gameObject, (int)Vars.Layers.AlwaysOnTop);
+            Misc.RecursiveChangeLayer(Rig.GameObjectT.gameObject, (int)Layers.AlwaysOnTop);
 
             // transform shenanigans
             Rig.GameObjectT.localPosition = Vector3.zero;

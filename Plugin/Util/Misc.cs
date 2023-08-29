@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Plugin.Helpers
+namespace Plugin.Util
 {
     static class Misc
     {

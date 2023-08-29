@@ -1,5 +1,5 @@
 ﻿using HarmonyLib;
-using Plugin.Helpers;
+using Plugin.Util;
 using UnityEngine;
 
 namespace Plugin.VRTRAKILL.UI.Patches
@@ -13,7 +13,7 @@ namespace Plugin.VRTRAKILL.UI.Patches
             Canvas C = __instance.gameObject.AddComponent<Canvas>();
             C.worldCamera = Vars.UICamera;
             C.renderMode = RenderMode.WorldSpace;
-            __instance.gameObject.layer = (int)Vars.Layers.UI;
+            __instance.gameObject.layer = (int)Layers.UI;
 
             if (__instance.gameObject.HasComponent<UICanvas>())
                 Object.Destroy(__instance.gameObject.GetComponent<UICanvas>());

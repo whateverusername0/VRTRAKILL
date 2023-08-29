@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 
-namespace Plugin.Helpers.Patches
+namespace Plugin.Util.Patches
 {
     [HarmonyPatch] internal class HelpersP
     {

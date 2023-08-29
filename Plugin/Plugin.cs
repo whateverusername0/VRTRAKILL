@@ -7,7 +7,7 @@ using BepInEx.Logging;
 
 using Valve.VR;
 
-using Plugin.Helpers;
+using Plugin.Util;
 using Plugin.VRTRAKILL;
 
 namespace Plugin
@@ -46,7 +46,7 @@ namespace Plugin
         {
             System.Collections.Generic.List<string> Namespaces = new System.Collections.Generic.List<string>
             {
-                typeof(Helpers.Patches.A).Namespace,
+                typeof(Util.Patches.A).Namespace,
                 typeof(VRTRAKILL.Patches).Namespace,
 
                 typeof(VRTRAKILL.VRPlayer.VRCamera.Patches.A).Namespace,

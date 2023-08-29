@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Collections.Generic;
 using Plugin.VRTRAKILL;
 
-namespace Plugin.Helpers
+namespace Plugin.Util
 {
     // Adding more levels of abstraction.
     // This is a custom patcher class that uses HarmonyX, which uses BepInEx.
