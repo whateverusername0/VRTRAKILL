@@ -168,13 +168,13 @@
     <Compile Include="Util\Libraries\WindowsInput\IInputSimulator.cs" />
     <Compile Include="Util\Libraries\WindowsInput\IKeyboardSimulator.cs" />
     <Compile Include="Util\Libraries\WindowsInput\IMouseSimulator.cs" />
-    <Compile Include="Helpers\Libraries\WindowsInput\InputBuilder.cs" />
+    <Compile Include="Util\Libraries\WindowsInput\InputBuilder.cs" />
     <Compile Include="Util\Libraries\WindowsInput\InputSimulator.cs" />
     <Compile Include="Util\Libraries\WindowsInput\KeyboardSimulator.cs" />
-    <Compile Include="Helpers\Libraries\WindowsInput\MouseButton.cs" />
+    <Compile Include="Util\Libraries\WindowsInput\MouseButton.cs" />
     <Compile Include="Util\Libraries\WindowsInput\MouseSimulator.cs" />
-    <Compile Include="Helpers\Libraries\WindowsInput\Native\HARDWAREINPUT.cs" />
-    <Compile Include="Helpers\Libraries\WindowsInput\Native\INPUT.cs" />
+    <Compile Include="Util\Libraries\WindowsInput\Native\HARDWAREINPUT.cs" />
+    <Compile Include="Util\Libraries\WindowsInput\Native\INPUT.cs" />
     <Compile Include="Util\Libraries\WindowsInput\Native\InputType.cs" />
     <Compile Include="Util\Libraries\WindowsInput\Native\KEYBDINPUT.cs" />
     <Compile Include="Util\Libraries\WindowsInput\Native\KeyboardFlag.cs" />
@@ -188,7 +188,7 @@
     <Compile Include="Util\Libraries\WindowsInput\WindowsInputMessageDispatcher.cs" />
     <Compile Include="Util\Misc.cs" />
     <Compile Include="Util\Patcher.cs" />
-    <Compile Include="Helpers\Patches\A.cs" />
+    <Compile Include="Util\Patches\A.cs" />
     <Compile Include="Util\Patches\HelpersP.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
