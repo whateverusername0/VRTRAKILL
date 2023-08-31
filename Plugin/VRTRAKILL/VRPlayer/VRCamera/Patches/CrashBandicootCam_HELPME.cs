@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
 {
-    /*[HarmonyPatch]*/ internal sealed class CrashBandicootCam_HELPME
+    /*[HarmonyPatch]*/ internal class CrashBandicootCam_HELPME
     {
         public static GameObject Container;
         [HarmonyPostfix] [HarmonyPatch(typeof(CameraController), nameof(CameraController.Start))] static void ConvertCamera(CameraController __instance)

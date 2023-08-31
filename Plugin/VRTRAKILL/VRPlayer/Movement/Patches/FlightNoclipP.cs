@@ -5,7 +5,7 @@ using ULTRAKILL.Cheats;
 namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 {
     // change move vector to joystick axis
-    [HarmonyPatch] internal sealed class FlightNoclipP
+    [HarmonyPatch] internal class FlightNoclipP
     {
         [HarmonyPrefix] [HarmonyPatch(typeof(Flight), nameof(Flight.Update))] static bool FlightUpdate(Flight __instance)
         {

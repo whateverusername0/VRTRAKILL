@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Plugin.VRTRAKILL.VRPlayer.Patches
 {
     
-    [HarmonyPatch(typeof(NewMovement))] internal sealed class PlayerP
+    [HarmonyPatch(typeof(NewMovement))] internal class PlayerP
     {
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Respawn))] static bool RespawnFix(NewMovement __instance)
         {

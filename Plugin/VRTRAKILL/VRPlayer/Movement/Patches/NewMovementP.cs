@@ -1,12 +1,11 @@
 ﻿using HarmonyLib;
 using UnityEngine.InputSystem;
 using UnityEngine;
-using System.Collections.Generic;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 {
     // change move vector to joystick axis, fix dash, jump, etc.
-    [HarmonyPatch(typeof(NewMovement))] internal sealed class NewMovementP
+    [HarmonyPatch(typeof(NewMovement))] internal class NewMovementP
     {
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Start))] static void Start(NewMovement __instance)
         {
@@ -558,6 +557,50 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 
             __instance.slideEnding = false;
 
+            return false;
+        }
+        [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.StartSlide))] static bool Slide(NewMovement __instance)
+        {
+            if (__instance.currentSlideParticle != null) Object.Destroy(__instance.currentSlideParticle);
+
+            if (__instance.slideScrape != null) Object.Destroy(__instance.slideScrape);
+
+            if (__instance.modNoDashSlide) __instance.StopSlide();
+            else
+            {
+                if ((bool)MonoSingleton<HookArm>.Instance && MonoSingleton<HookArm>.Instance.beingPulled) return false;
+
+                if ((bool)__instance.groundProperties && !__instance.groundProperties.canSlide)
+                {
+                    if (!__instance.groundProperties.silentSlideFail) __instance.StopSlide();
+                    return false;
+                }
+
+                if (!__instance.crouching)
+                {
+                    __instance.playerCollider.height = 1.25f;
+                    __instance.transform.position = new Vector3(__instance.transform.position.x,
+                                                                __instance.transform.position.y - 1.125f,
+                                                                __instance.transform.position.z);
+                    __instance.gc.transform.localPosition = __instance.groundCheckPos + Vector3.up * 1.125f;
+                }
+
+                __instance.slideSafety = 1f;
+                __instance.sliding = true;
+                __instance.boost = true;
+                __instance.dodgeDirection = __instance.movementDirection.normalized;
+                if (__instance.dodgeDirection == Vector3.zero) __instance.dodgeDirection = __instance.transform.forward;
+
+                Quaternion identity = Quaternion.identity;
+                identity.SetLookRotation(__instance.dodgeDirection * -1f);
+                __instance.currentSlideParticle = Object.Instantiate(__instance.slideParticle, __instance.transform.position + __instance.dodgeDirection * 10f, identity);
+                __instance.slideScrape = Object.Instantiate(__instance.slideScrapePrefab, __instance.transform.position + __instance.dodgeDirection * 2f, identity);
+                if (__instance.dodgeDirection == __instance.transform.forward) __instance.cc.dodgeDirection = 0;
+                else if (__instance.dodgeDirection == __instance.transform.forward * -1f) __instance.cc.dodgeDirection = 1;
+                else __instance.cc.dodgeDirection = 2;
+
+                MonoSingleton<RumbleManager>.Instance.SetVibration("rumble.slide");
+            }
             return false;
         }
 
