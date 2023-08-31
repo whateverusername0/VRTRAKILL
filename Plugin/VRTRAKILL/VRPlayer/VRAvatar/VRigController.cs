@@ -35,7 +35,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             Rig.GameObjectT.localRotation = Quaternion.Euler(Vector3.zero);
 
             Rig.Root.localScale *= 3;
-            Rig.Body.localPosition = new Vector3(0, -0.0135f, 0.002f);
+            Rig.Body.localPosition = new Vector3(0, -.0138f, .0025f);
 
             // Arm IKs
             Armature.Arm[] LArms =
