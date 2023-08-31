@@ -39,24 +39,22 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
             }
         }
 
-        private bool IsTurning;
+        private bool IsTurning; private float SnapTurnTimer;
         private IEnumerator SnapTurn()
         {
             while (true)
             {
-                if (InputVars.TurnVector.x > 0 + Vars.Config.Controllers.Deadzone
-                || InputVars.TurnVector.x < 0 - Vars.Config.Controllers.Deadzone) IsTurning = true;
-                else IsTurning = false;
-
                 if (IsTurning)
                 {
+                    SnapTurnTimer += Time.deltaTime;
+                    if (SnapTurnTimer >= .2f || InputVars.TurnVector.x == 0) { IsTurning = false; SnapTurnTimer = 0; }
+                }
+                else
+                {
                     if (InputVars.TurnVector.x > 0 + Vars.Config.Controllers.Deadzone)
-                        InputVars.TurnOffset += Vars.Config.Controllers.SnapAngles;
+                    { IsTurning = true; InputVars.TurnOffset += Vars.Config.Controllers.SnapAngles; }
                     else if (InputVars.TurnVector.x < 0 - Vars.Config.Controllers.Deadzone)
-                        InputVars.TurnOffset -= Vars.Config.Controllers.SnapAngles;
-
-                    for (float i = .2f; i <= 0; i -= Time.deltaTime)
-                        if (InputVars.TurnVector.x == 0) break;
+                    { IsTurning = true; InputVars.TurnOffset -= Vars.Config.Controllers.SnapAngles; }
                 }
                 yield return new WaitForEndOfFrame();
             }
