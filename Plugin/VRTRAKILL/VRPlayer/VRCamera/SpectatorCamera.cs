@@ -17,8 +17,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
         public Camera SPCam;
 
         public Vector3 OffsetPos = new Vector3(0, 1, -3);
-        public float RAMRotationSpeed = .2f, FMDuration = 2;
         public Vector3 RotAngles = new Vector3(0, 180, 0);
+        public readonly float RAMRotationSpeed = .2f, FMDuration = 2;
+        public float MoveRotateSpeed = .5f;
 
         private Vector3 PrevPos;
         private readonly float BackupCap = .2f;
@@ -34,20 +35,13 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
         public void Update()
         {
             transform.position = FollowTarget.position;
+            SPCam.transform.localPosition = OffsetPos;
             Util.Misc.CopyCameraValues(SPCam, Vars.DesktopCamera);
 
-            switch (Mode)
-            {
-                case SCMode.Follow: Follow(); break;
-                case SCMode.RotateAround: RotateAround(); break;
-                case SCMode.Fixed: transform.eulerAngles = Vector3.zero; break;
-                default: break;
-            }
-
             // Pushback (from https://metaanomie.blogspot.com/2020/04/unity-vr-head-blocking-steam-vr-v2.html)
-            if (Util.Misc.DetectCollisions(transform.position, 2, (int)Layers.Environment) > 0)
+            if (Util.Misc.DetectCollisions(SPCam.transform.position, 2, (int)Layers.Environment) > 0)
             {
-                Vector3 Difference = transform.position - PrevPos;
+                Vector3 Difference = SPCam.transform.position - PrevPos;
                 if (Mathf.Abs(Difference.x) > BackupCap)
                 {
                     if (Difference.x > 0) Difference.x = BackupCap;
@@ -63,7 +57,40 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
                                                       SPCam.transform.position.z - Difference.z);
                 SPCam.transform.SetPositionAndRotation(AdjustedHeadPos, SPCam.transform.rotation);
             }
-            else PrevPos = transform.position;
+            else
+            {
+                PrevPos = SPCam.transform.position;
+                switch (Mode)
+                {
+                    case SCMode.Follow: Follow(); break;
+                    case SCMode.RotateAround: RotateAround(); break;
+                    case SCMode.Fixed: transform.eulerAngles = RotAngles; break;
+                    default: break;
+                }
+
+                if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.SpecCamLeft))  MoveOrRotate(Vector2.left);
+                if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.SpecCamUp))    MoveOrRotate(Vector2.up);
+                if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.SpecCamRight)) MoveOrRotate(Vector2.right);
+                if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.SpecCamDown))  MoveOrRotate(Vector2.down);
+            }
+        }
+
+        public void MoveOrRotate(Vector2 V)
+        {
+            if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.SpecCamHoldMoveMode))
+            {
+                if (V == Vector2.left)       OffsetPos += new Vector3(MoveRotateSpeed, 0, 0);
+                else if (V == Vector2.up)    OffsetPos += new Vector3(0, 0, MoveRotateSpeed);
+                else if (V == Vector2.right) OffsetPos += new Vector3(-MoveRotateSpeed, 0, 0);
+                else if (V == Vector2.down)  OffsetPos += new Vector3(0, 0, -MoveRotateSpeed);
+            }
+            else
+            {
+                if (V == Vector2.left)       RotAngles += new Vector3(0, 0, MoveRotateSpeed);
+                else if (V == Vector2.up)    RotAngles += new Vector3(0, MoveRotateSpeed, 0);
+                else if (V == Vector2.right) RotAngles += new Vector3(0, 0, -MoveRotateSpeed);
+                else if (V == Vector2.down)  RotAngles += new Vector3(0, -MoveRotateSpeed, 0);
+            }
         }
 
         private void Follow()
