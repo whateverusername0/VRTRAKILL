@@ -158,6 +158,7 @@
     <Compile Include="VRTRAKILL\UI\GTFOTW.cs" />
     <Compile Include="VRTRAKILL\UI\StandardHUDWorker.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\AddHandsP.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\ShootYourselfP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Patches\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\Armature\Finger.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\Armature\Hand.cs" />
@@ -262,9 +263,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\plugins\VRTRAKILL\vrtrakillassetbundle">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\plugins\VRTRAKILL\vrtrakillassetbundle.manifest">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\actions.json">
