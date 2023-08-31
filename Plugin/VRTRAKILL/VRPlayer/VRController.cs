@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Linq;
-using System.Collections;
 using Plugin.VRTRAKILL.VRPlayer.VRCamera;
 
 namespace Plugin.VRTRAKILL.VRPlayer
@@ -28,17 +26,17 @@ namespace Plugin.VRTRAKILL.VRPlayer
 
         public void Update()
         {
-            if (UnityEngine.Input.GetKeyDown(Vars.Config.VRKeybinds.ToggleDV))
+            if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.ToggleDesktopView))
             {
                 SubtitleController.Instance.DisplaySubtitle("VR: Toggling desktop view");
                 ToggleDesktopView();
             }
-            if (UnityEngine.Input.GetKeyDown(Vars.Config.VRKeybinds.ToggleSC))
+            if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.ToggleSpectatorCamera))
             {
                 SubtitleController.Instance.DisplaySubtitle("VR: Toggling spectator camera");
                 ToggleSpectatorCamera();
             }
-            if (UnityEngine.Input.GetKeyDown(Vars.Config.VRKeybinds.EnumSCMode))
+            if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.EnumSpecCamMode))
             {
                 SpectatorCamera.Instance.EnumSCMode();
                 SubtitleController.Instance.DisplaySubtitle
