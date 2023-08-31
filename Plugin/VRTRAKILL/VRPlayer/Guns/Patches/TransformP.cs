@@ -93,7 +93,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                 //retransform
                 Arms.VRArmsController FBC = __instance.gameObject.AddComponent<Arms.VRArmsController>();
                 Arm A = Arm.SandboxerPreset(__instance.transform);
-                FBC.Arm = A; FBC.OffsetPosition = new Vector3(0, -.25f, -.5f);
+                FBC.Arm = A; FBC.OffsetPosition = new Vector3(-.15f, -.3f, -.55f);
                 __instance.transform.localScale = Scale;
             }
         }
