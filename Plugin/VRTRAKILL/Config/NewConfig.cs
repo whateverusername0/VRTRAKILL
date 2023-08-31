@@ -35,11 +35,16 @@ namespace Plugin.VRTRAKILL.Config
             [JsonProperty("Slot 9")] public string Slot9 { get; set; } = "9";
             [JsonProperty("Slot 0")] public string Slot0 { get; set; } = "0";
         }
-        [JsonProperty("VRTRAKILL Keybinds (LOWERCASE ONLY)")] public _VRKeybinds VRKeybinds { get; set; } public class _VRKeybinds
+        [JsonProperty("VRTRAKILL Keybinds")] public _VRKeybinds VRKeybinds { get; set; } public class _VRKeybinds
         {
-            [JsonProperty("Toggle Desktop View")] public string ToggleDV { get; set; } = "t";
-            [JsonProperty("Toggle Spectator Camera")] public string ToggleSC { get; set; } = "y";
-            [JsonProperty("Switch Spectator Camera mode")] public string EnumSCMode { get; set; } = "h";
+            [JsonProperty("Toggle Desktop View")] public string ToggleDV { get; set; } = "T";
+            [JsonProperty("Toggle Spectator Camera")] public string ToggleSC { get; set; } = "Y";
+            [JsonProperty("Switch Spectator Camera mode")] public string EnumSCMode { get; set; } = "H";
+            [JsonProperty("Rotate/Move SpecCam Up")] public string SpecCamUp { get; set; } = "UpArrow";
+            [JsonProperty("Rotate/Move SpecCam Down")] public string SpecCamDown { get; set; } = "DownArrow";
+            [JsonProperty("Rotate/Move SpecCam Left")] public string SpecCamLeft { get; set; } = "LeftArrow";
+            [JsonProperty("Rotate/Move SpecCam Right")] public string SpecCamRight { get; set; } = "RightArrow";
+            [JsonProperty("Spectator Camera move mode (hold and use with the keys above)")] public string SpecCamMoveMode { get; set; } = "RightShift";
         }
 
         [JsonProperty("Movement multiplier")] public float MovementMultiplier { get; set; } = 0.575f;

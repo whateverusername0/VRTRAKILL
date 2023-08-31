@@ -44,17 +44,20 @@ namespace Plugin.VRTRAKILL.Config
             MSlot3 = null, MSlot4 = null, MSlot5 = null,
             MSlot6 = null, MSlot7 = null, MSlot8 = null, MSlot9 = null;
 
+        public static UnityEngine.KeyCode?
+            ToggleDesktopView = null, ToggleSpectatorCamera = null, EnumSpecCamMode = null,
+            SpecCamUp = null, SpecCamDown = null, SpecCamLeft = null, SpecCamRight = null, SpecCamHoldMoveMode;
+
         public static void Init()
         {
-            NewConfig._UKKeybinds Keybinds = Vars.Config.UKKeybinds;
-            ConvertJSONToKeys(Keybinds);
+            ConvertJSONToKeys(Vars.Config.UKKeybinds, Vars.Config.VRKeybinds);
         }
 
-        private static void ConvertJSONToKeys(NewConfig._UKKeybinds Config)
+        private static void ConvertJSONToKeys(NewConfig._UKKeybinds Config, NewConfig._VRKeybinds VRConfig)
         {
             try
             {
-                // Keyboard values
+                #region Keys
                 InputMap.Keys.TryGetValue(Config.Shoot, out KShoot);
                 InputMap.Keys.TryGetValue(Config.AltShoot, out KAltShoot);
                 InputMap.Keys.TryGetValue(Config.Punch, out KPunch);
@@ -82,8 +85,9 @@ namespace Plugin.VRTRAKILL.Config
                 InputMap.Keys.TryGetValue(Config.Slot7, out KSlot7);
                 InputMap.Keys.TryGetValue(Config.Slot8, out KSlot8);
                 InputMap.Keys.TryGetValue(Config.Slot9, out KSlot9);
+                #endregion
 
-                // Mouse values
+                #region MouseKeys
                 InputMap.MouseKeys.TryGetValue(Config.Shoot, out MShoot);
                 InputMap.MouseKeys.TryGetValue(Config.AltShoot, out MAltShoot);
                 InputMap.MouseKeys.TryGetValue(Config.Punch, out MPunch);
@@ -111,6 +115,17 @@ namespace Plugin.VRTRAKILL.Config
                 InputMap.MouseKeys.TryGetValue(Config.Slot7, out MSlot7);
                 InputMap.MouseKeys.TryGetValue(Config.Slot8, out MSlot8);
                 InputMap.MouseKeys.TryGetValue(Config.Slot9, out MSlot9);
+                #endregion
+
+                // Unity
+                InputMap.UKeys.TryGetValue(VRConfig.ToggleDV, out ToggleDesktopView);
+                InputMap.UKeys.TryGetValue(VRConfig.ToggleSC, out ToggleSpectatorCamera);
+                InputMap.UKeys.TryGetValue(VRConfig.EnumSCMode, out EnumSpecCamMode);
+                InputMap.UKeys.TryGetValue(VRConfig.SpecCamLeft, out SpecCamLeft);
+                InputMap.UKeys.TryGetValue(VRConfig.SpecCamUp, out SpecCamUp);
+                InputMap.UKeys.TryGetValue(VRConfig.SpecCamRight, out SpecCamRight);
+                InputMap.UKeys.TryGetValue(VRConfig.SpecCamDown, out SpecCamDown);
+                InputMap.UKeys.TryGetValue(VRConfig.SpecCamMoveMode, out SpecCamHoldMoveMode);
             }
             catch (Exception)
             {
