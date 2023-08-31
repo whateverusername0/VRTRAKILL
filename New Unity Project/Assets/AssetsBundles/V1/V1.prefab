@@ -136,6 +136,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7653537833559891736}
+  - component: {fileID: 4705245594889796813}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -158,6 +159,20 @@ Transform:
   m_Father: {fileID: 7536859721193933635}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &4705245594889796813
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464165480678917320}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.00135
+  m_Height: 0.005329305
+  m_Direction: 1
+  m_Center: {x: -2.4703517e-18, y: 0.0018353428, z: 1.8150358e-10}
 --- !u!1 &757962738714444614
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,6 +667,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6007897038973941263}
+  - component: {fileID: 5138621220749831297}
   m_Layer: 0
   m_Name: WingL1
   m_TagString: Untagged
@@ -674,6 +690,20 @@ Transform:
   m_Father: {fileID: 4093905438755067081}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -41, y: 108, z: -15}
+--- !u!136 &5138621220749831297
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3325974163341327265}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.0006
+  m_Height: 0.0056
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.0045, z: 0.001}
 --- !u!1 &3414681815463413086
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,6 +1027,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3703268799502294932}
+  - component: {fileID: 3481224320572678395}
   m_Layer: 0
   m_Name: WingL4
   m_TagString: Untagged
@@ -1019,6 +1050,20 @@ Transform:
   m_Father: {fileID: 4093905438755067081}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -150, y: 87, z: 21}
+--- !u!136 &3481224320572678395
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5003290559070512803}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.0006
+  m_Height: 0.0056
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.0045, z: 0.001}
 --- !u!1 &5054788526973014228
 GameObject:
   m_ObjectHideFlags: 0
@@ -1058,6 +1103,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4605897537214249298}
+  - component: {fileID: 1337448949003494497}
   m_Layer: 0
   m_Name: WingR2
   m_TagString: Untagged
@@ -1080,6 +1126,20 @@ Transform:
   m_Father: {fileID: 4093905438755067081}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -107, y: 30, z: -128}
+--- !u!136 &1337448949003494497
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5083804604852791435}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.0006
+  m_Height: 0.0056
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.0045, z: 0.001}
 --- !u!1 &5219134101692397415
 GameObject:
   m_ObjectHideFlags: 0
@@ -1180,6 +1240,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2898493849522775229}
+  - component: {fileID: 1270884555403176517}
   m_Layer: 0
   m_Name: WingL3
   m_TagString: Untagged
@@ -1202,6 +1263,20 @@ Transform:
   m_Father: {fileID: 4093905438755067081}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -117, y: 65, z: 36}
+--- !u!136 &1270884555403176517
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6274617263631038974}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.0006
+  m_Height: 0.0056
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.0045, z: 0.001}
 --- !u!1 &6417849719236609600
 GameObject:
   m_ObjectHideFlags: 0
@@ -1242,6 +1317,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5862596585587097814}
+  - component: {fileID: 3916833032896036967}
   m_Layer: 0
   m_Name: WingR4
   m_TagString: Untagged
@@ -1264,6 +1340,20 @@ Transform:
   m_Father: {fileID: 4093905438755067081}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: -149, y: -87, z: -21}
+--- !u!136 &3916833032896036967
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6438851487738629472}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.0006
+  m_Height: 0.0056
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.0045, z: 0.001}
 --- !u!1 &6668593495139021281
 GameObject:
   m_ObjectHideFlags: 0
@@ -1303,6 +1393,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5740521257211279886}
+  - component: {fileID: 3521974433207511822}
   m_Layer: 0
   m_Name: WingL2
   m_TagString: Untagged
@@ -1325,6 +1416,20 @@ Transform:
   m_Father: {fileID: 4093905438755067081}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -107, y: -29, z: 126}
+--- !u!136 &3521974433207511822
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6690923766903463730}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.0006
+  m_Height: 0.0056
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.0045, z: 0.001}
 --- !u!1 &6904889173454027427
 GameObject:
   m_ObjectHideFlags: 0
@@ -1707,6 +1812,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3809409311950581041}
+  - component: {fileID: 2288902307375151848}
   m_Layer: 0
   m_Name: WingR3
   m_TagString: Untagged
@@ -1729,6 +1835,20 @@ Transform:
   m_Father: {fileID: 4093905438755067081}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: -117, y: -65, z: -36}
+--- !u!136 &2288902307375151848
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7532254556668270453}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.0006
+  m_Height: 0.0056
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.0045, z: 0.001}
 --- !u!1 &7820755060821660689
 GameObject:
   m_ObjectHideFlags: 0
@@ -1798,6 +1918,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8588700752092214879}
+  - component: {fileID: 3352237872814316309}
   m_Layer: 0
   m_Name: WingR1
   m_TagString: Untagged
@@ -1820,6 +1941,20 @@ Transform:
   m_Father: {fileID: 4093905438755067081}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -40, y: -108, z: 15}
+--- !u!136 &3352237872814316309
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8084259699328100569}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.0006
+  m_Height: 0.0056
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.0045, z: 0.001}
 --- !u!1 &8278746364047317227
 GameObject:
   m_ObjectHideFlags: 0
