@@ -5,8 +5,6 @@ namespace Plugin.VRTRAKILL.UI
     // "borrowed" from huskvr
     internal sealed class UICanvas : MonoBehaviour
     {
-        public Camera Target;
-
         private Vector3 LastCamFwd = Vector3.zero;
 
         private const float Distance = 72f;
@@ -14,13 +12,13 @@ namespace Plugin.VRTRAKILL.UI
 
         private void UpdatePos()
         {
-            LastCamFwd = Target.transform.forward * Distance;
-            transform.rotation = Target.transform.rotation;
+            LastCamFwd = UIConverter.UICamera.transform.forward * Distance;
+            transform.rotation = UIConverter.UICamera.transform.rotation;
         }
         private void ResetPos()
         {
             LastCamFwd = new Vector3(LastCamFwd.x, 0f, LastCamFwd.z);
-            transform.LookAt(Target.transform);
+            transform.LookAt(UIConverter.UICamera.transform);
             transform.forward = new Vector3(-transform.forward.x, 0f, -transform.forward.z);
         }
 
@@ -33,7 +31,7 @@ namespace Plugin.VRTRAKILL.UI
         public void Update()
         {
             if (!Vars.IsPlayerFrozen) UpdatePos(); else ResetPos();
-            transform.position = Target.transform.position + LastCamFwd;
+            transform.position = UIConverter.UICamera.transform.position + LastCamFwd;
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Plugin.VRTRAKILL.UI.Patches
 {
     [HarmonyPatch] internal sealed class CanvasControllerP
     {
-        [HarmonyPrefix] [HarmonyPatch(typeof(CanvasController), nameof(CanvasController.Awake))] static void ResizeCanvases(CanvasController __instance)
+        [HarmonyPrefix] [HarmonyPatch(typeof(HUDOptions), nameof(HUDOptions.Start))] static void ResizeCanvases(HUDOptions __instance)
         {
             // stretches screen effects goatse style so it's not a fucking square in the middle of the hud
             string[] ScreenEffects =
@@ -37,12 +37,24 @@ namespace Plugin.VRTRAKILL.UI.Patches
 
             // Relayer stupid skybox in minos corpse level
             try { GameObject.Find("CityFromAbove").layer = 0; } catch {}
+        }
+        [HarmonyPostfix] [HarmonyPatch(typeof(HUDOptions), nameof(HUDOptions.Start))] static void DeployGTFOTW(HUDOptions __instance)
+        {
+            GameObject UI_GTFOTW = Object.Instantiate(Assets.Vars.UI_GTFOTW, Vector3.zero, Quaternion.identity, __instance.transform);
 
-            // Deploy the "GTFOTW"
-            GameObject UI_GTFOTW = Object.Instantiate<GameObject>(Assets.Vars.UI_GTFOTW, Vector3.zero, Quaternion.identity, __instance.transform);
+            Assets.Vars.UI_GTFOTW.transform.localScale = Vector3.zero;
+
             UI_GTFOTW.transform.SetSiblingIndex(0);
+            UI_GTFOTW.transform.localScale = Vector3.one;
+            UI_GTFOTW.transform.localPosition = Vector3.zero;
+
+            UIConverter.ConvertCanvas(UI_GTFOTW.GetComponent<Canvas>());
+            Util.Misc.RecursiveChangeLayer(UI_GTFOTW, (int)Layers.UI);
+
             GTFOTW GTFOTW = UI_GTFOTW.AddComponent<GTFOTW>();
             GTFOTW.DetectorTransform = Vars.MainCamera.transform;
+
+            
         }
     }
 }

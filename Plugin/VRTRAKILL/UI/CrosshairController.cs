@@ -8,17 +8,20 @@ namespace Plugin.VRTRAKILL.UI
         public float Length => Vars.Config.CBS.CrosshairDistance;
 
         Vector3 Offset = new Vector3(-.2f, -2.75f, 0);
+        Transform Target;
 
         public void LateUpdate()
         {
             if (Vars.IsPlayerFrozen || Vars.IsPlayerUsingShop)
-                transform.position = Vars.MainCamera.transform.forward * Length * .5f;
+                transform.position = (Vars.MainCamera.transform.forward * Length * .25f) + Offset;
             else
             {
                 if (GunControl.Instance != null && GunControl.Instance.currentWeapon.HasComponent<RocketLauncher>())
-                    transform.position = GunControl.Instance.currentWeapon.transform.position
-                                         + (GunControl.Instance.currentWeapon.transform.forward * Length) + Offset;
-                else transform.position = transform.parent.position + (transform.parent.forward * Length) + Offset;
+                    Target = GunControl.Instance.currentWeapon.transform;
+                else Target = Vars.DominantHand.transform;
+
+                transform.position = Target.position + (Target.forward * Length) + Offset;
+                transform.rotation = Target.rotation;
             }
         }
     }
