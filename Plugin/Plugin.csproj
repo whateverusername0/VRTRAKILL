@@ -197,7 +197,7 @@
     <Compile Include="VRTRAKILL\UI\CrosshairController.cs" />
     <Compile Include="VRTRAKILL\UI\HideWhenMenuActive.cs" />
     <Compile Include="VRTRAKILL\UI\Patches\A.cs" />
-    <Compile Include="VRTRAKILL\UI\Patches\CanvasControllerP.cs" />
+    <Compile Include="VRTRAKILL\UI\Patches\HUDOptionsP.cs" />
     <Compile Include="VRTRAKILL\UI\Patches\CrosshairP.cs" />
     <Compile Include="VRTRAKILL\UI\Patches\HudP.cs" />
     <Compile Include="VRTRAKILL\UI\UICanvas.cs" />

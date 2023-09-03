@@ -4,7 +4,7 @@ using HarmonyLib;
 
 namespace Plugin.VRTRAKILL.UI.Patches
 {
-    [HarmonyPatch] internal sealed class CanvasControllerP
+    [HarmonyPatch] internal class HUDOptionsP
     {
         [HarmonyPrefix] [HarmonyPatch(typeof(HUDOptions), nameof(HUDOptions.Start))] static void ResizeCanvases(HUDOptions __instance)
         {

@@ -10,7 +10,7 @@ namespace Plugin.VRTRAKILL.UI.Patches
             if (__instance.altHud) return;
             else
             {
-                __instance.transform.parent = CanvasController.Instance.transform;
+                __instance.transform.parent = HUDOptions.Instance.transform;
                 __instance.transform.localPosition = Vector3.zero;
                 __instance.transform.localEulerAngles = Vector3.zero;
             }
