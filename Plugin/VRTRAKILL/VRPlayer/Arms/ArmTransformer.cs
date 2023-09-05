@@ -4,7 +4,7 @@ using Plugin.VRTRAKILL.VRPlayer.VRAvatar.Armature;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Arms
 {
-    internal class ArmRemover : MonoBehaviour
+    internal class ArmTransformer : MonoBehaviour
     {
         public Arm Arm;
         Vector3 ArmSize, HandSize;
@@ -35,13 +35,14 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                         HandSize = new Vector3(275, 275, 275);
                         break;
                     case FistType.Spear:
-                    default: Destroy(GetComponent<ArmRemover>()); break;
+                    default: Destroy(GetComponent<ArmTransformer>()); break;
                 }
             }
             else if (gameObject.HasComponent<HookArm>())
             {
                 ArmSize = new Vector3(.01f, .01f, .01f);
                 HandSize = new Vector3(35, 35, 35);
+                Arm.Forearm.GetChild(1).SetParent(Arm.Hand.Root, true);
             }
 
             if (Vars.Config.Controllers.LeftHanded)
@@ -56,8 +57,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                 Arm.Root.localScale = ArmSize;
                 Arm.Hand.Root.localScale = HandSize;
             }
-            if (gameObject.HasComponent<HookArm>())
-                Arm.Forearm.GetChild(1).localScale = HandSize;
         }
     }
 }
