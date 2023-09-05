@@ -42,7 +42,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
             {
                 ArmSize = new Vector3(.01f, .01f, .01f);
                 HandSize = new Vector3(35, 35, 35);
-                Arm.Forearm.GetChild(1).SetParent(Arm.Hand.Root, true);
+                //Arm.Forearm.GetChild(1).SetParent(Arm.Hand.Root, true);
             }
 
             if (Vars.Config.Controllers.LeftHanded)

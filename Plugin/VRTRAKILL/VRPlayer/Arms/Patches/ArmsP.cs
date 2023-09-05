@@ -8,7 +8,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
         [HarmonyPostfix] [HarmonyPatch(typeof(Punch), nameof(Punch.Start))] static void ConvertArms(Punch __instance)
         {
             Arm A = null;
-            ArmRemover AR = __instance.gameObject.AddComponent<ArmRemover>();
+            ArmTransformer AR = __instance.gameObject.AddComponent<ArmTransformer>();
             VRArmsController VRAC = __instance.gameObject.AddComponent<VRArmsController>();
             switch (__instance.type)
             {
