@@ -47,7 +47,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
             SpectatorCam.stereoTargetEye = StereoTargetEyeMask.None;
             SpectatorCam.transform.parent = SCContainer.transform;
             SpectatorCam.transform.localPosition = Vector3.zero;
-            SpectatorCam.transform.localEulerAngles = new Vector3(0, -180, 0);
+            //SpectatorCam.transform.localEulerAngles = new Vector3(0, -180, 0);
             SCContainer.SetActive(false);
         }
         [HarmonyPostfix] [HarmonyPatch(typeof(NewMovement), nameof(NewMovement.Start))] static void ScaleObjects(NewMovement __instance)
