@@ -77,7 +77,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
 
         public void MoveOrRotate(Vector2 V)
         {
-            if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.SpecCamHoldMoveMode))
+            if (UnityEngine.Input.GetKey((KeyCode)Config.ConfigMaster.SpecCamHoldMoveMode))
             {
                 if (V == Vector2.left)       OffsetPos += new Vector3(MoveRotateSpeed, 0, 0);
                 else if (V == Vector2.up)    OffsetPos += new Vector3(0, 0, MoveRotateSpeed);
