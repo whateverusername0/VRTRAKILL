@@ -518,7 +518,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 
                 Vector3 vector = new Vector3(__instance.dodgeDirection.x * __instance.walkSpeed * Time.deltaTime * 4f * num,
                                              __instance.rb.velocity.y,
-                                             __instance.dodgeDirection.z * __instance.walkSpeed * Time.deltaTime * 4f * num);
+                                             __instance.dodgeDirection.z * __instance.walkSpeed * Time.deltaTime * 4f * num)
+                               * Vars.Config.MovementMultiplier;
                 if ((bool)__instance.groundProperties && __instance.groundProperties.push)
                 {
                     Vector3 vector2 = __instance.groundProperties.pushForce;
@@ -528,7 +529,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                     vector += vector2;
                 }
 
-                __instance.movementDirection = Vector3.ClampMagnitude(Input.InputVars.MoveVector.x * __instance.transform.right, 1f) * 5f * Vars.Config.MovementMultiplier;
+                __instance.movementDirection = Vector3.ClampMagnitude(Input.InputVars.MoveVector.x * __instance.transform.right, 1f) * 5f
+                                             * Vars.Config.MovementMultiplier;
                 if (!MonoSingleton<HookArm>.Instance || !MonoSingleton<HookArm>.Instance.beingPulled)
                     __instance.rb.velocity = vector + __instance.pushForce + __instance.movementDirection.normalized;
                 else __instance.StopSlide();
@@ -542,7 +544,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
             float num2 = 2.75f;
             __instance.movementDirection2 = new Vector3(__instance.dodgeDirection.x * __instance.walkSpeed * Time.deltaTime * num2,
                                                         y,
-                                                        __instance.dodgeDirection.z * __instance.walkSpeed * Time.deltaTime * num2);
+                                                        __instance.dodgeDirection.z * __instance.walkSpeed * Time.deltaTime * num2)
+                                          * Vars.Config.MovementMultiplier;
             if (!__instance.slideEnding || (__instance.gc.onGround && !__instance.jumping))
                 __instance.rb.velocity = __instance.movementDirection2 * 3f;
 
