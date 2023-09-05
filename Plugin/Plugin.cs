@@ -21,7 +21,7 @@ namespace Plugin
         public const string
             PLUGIN_GUID = "com.whateverusername0.vrtrakill",
             PLUGIN_NAME = "VRTRAKILL",
-            PLUGIN_VERSION = "0.12.1";
+            PLUGIN_VERSION = "0.14";
 
         public static string
             PluginPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
@@ -38,6 +38,7 @@ namespace Plugin
 
             VRTRAKILL.Config.ConfigMaster.Init();
             PatchStuff();
+            new Patcher(new HarmonyLib.Harmony($"{PLUGIN_GUID}.testing")) { Type = typeof(VRTRAKILL.Input.ControlMessages.Patches) }.PatchAll();
             SceneWorker.Init();
 
             InitializeSteamVR();
@@ -47,7 +48,7 @@ namespace Plugin
             System.Collections.Generic.List<string> Namespaces = new System.Collections.Generic.List<string>
             {
                 typeof(Util.Patches.A).Namespace,
-                typeof(VRTRAKILL.Patches).Namespace,
+                typeof(VRTRAKILL.Patches.A).Namespace,
 
                 typeof(VRTRAKILL.VRPlayer.VRCamera.Patches.A).Namespace,
                 typeof(VRTRAKILL.UI.Patches.A).Namespace,
@@ -56,7 +57,8 @@ namespace Plugin
             };
             System.Collections.Generic.List<System.Type> Types = new System.Collections.Generic.List<System.Type>
             {
-                typeof(VRTRAKILL.VRPlayer.Controllers.Patches.ControllerAdder)
+                typeof(VRTRAKILL.VRPlayer.Controllers.Patches.ControllerAdder),
+                typeof(VRTRAKILL.Input.ControlMessages.Patches)
             };
             if (Vars.Config.Controllers.EnableHaptics)
                 Types.Add(typeof(VRTRAKILL.VRPlayer.Controllers.Patches.ControllerHaptics));
