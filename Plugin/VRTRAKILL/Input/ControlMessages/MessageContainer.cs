@@ -18,7 +18,7 @@ namespace Plugin.VRTRAKILL.Input.ControlMessages
         public static string T_Slide
             => $"Hold '<color=orange>{Slide}</color>' to <color=orange>SLIDE</color>.";
         public static string T_JumpDash
-            => $"Press '<color=orange>{Jump}</color> to <color=orange>JUMP</color>'\r\n" +
+            => $"Press '<color=orange>{Jump}</color>' to <color=orange>JUMP</color>\r\n" +
                $"Press '<color=#00DFFF>{Dash}</color>' to <color=#00DFFF>DASH</color>. (Consumes <color=#00DFFF>STAMINA</color>)\r\n" +
                $"Can be performed in air.";
         public static string T_Slam
