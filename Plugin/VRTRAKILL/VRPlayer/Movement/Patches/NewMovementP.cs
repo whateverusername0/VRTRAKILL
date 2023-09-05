@@ -516,10 +516,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                     num *= __instance.groundProperties.speedMultiplier;
                 }
 
-                Vector3 vector = new Vector3(__instance.dodgeDirection.x * __instance.walkSpeed * Time.deltaTime * 4f * num,
+                Vector3 vector = new Vector3(__instance.dodgeDirection.x * __instance.walkSpeed * Time.deltaTime * 4f * num * Vars.Config.MovementMultiplier,
                                              __instance.rb.velocity.y,
-                                             __instance.dodgeDirection.z * __instance.walkSpeed * Time.deltaTime * 4f * num)
-                               * Vars.Config.MovementMultiplier;
+                                             __instance.dodgeDirection.z * __instance.walkSpeed * Time.deltaTime * 4f * num * Vars.Config.MovementMultiplier);
                 if ((bool)__instance.groundProperties && __instance.groundProperties.push)
                 {
                     Vector3 vector2 = __instance.groundProperties.pushForce;
@@ -542,10 +541,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
             if (__instance.slideEnding) y = __instance.rb.velocity.y;
 
             float num2 = 2.75f;
-            __instance.movementDirection2 = new Vector3(__instance.dodgeDirection.x * __instance.walkSpeed * Time.deltaTime * num2,
+            __instance.movementDirection2 = new Vector3(__instance.dodgeDirection.x * __instance.walkSpeed * Time.deltaTime * num2 * Vars.Config.MovementMultiplier,
                                                         y,
-                                                        __instance.dodgeDirection.z * __instance.walkSpeed * Time.deltaTime * num2)
-                                          * Vars.Config.MovementMultiplier;
+                                                        __instance.dodgeDirection.z * __instance.walkSpeed * Time.deltaTime * num2 * Vars.Config.MovementMultiplier);
             if (!__instance.slideEnding || (__instance.gc.onGround && !__instance.jumping))
                 __instance.rb.velocity = __instance.movementDirection2 * 3f;
 
