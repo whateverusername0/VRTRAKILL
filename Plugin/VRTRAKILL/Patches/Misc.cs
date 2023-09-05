@@ -1,10 +1,10 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 
-namespace Plugin.VRTRAKILL
+namespace Plugin.VRTRAKILL.Patches
 {
     // contains necessary patches (and not so necessary)
-    [HarmonyPatch] internal sealed class Patches
+    [HarmonyPatch] internal sealed class Misc
     {
         // discord :)
         [HarmonyPrefix] [HarmonyPatch(typeof(DiscordController), nameof(DiscordController.SendActivity))]
@@ -12,7 +12,7 @@ namespace Plugin.VRTRAKILL
         => __instance.cachedActivity.State = "Playing in VR via VRTRAKILL";
 
         // weapon wheel controller interaction
-        [HarmonyPrefix] [HarmonyPatch(typeof(WeaponWheel) ,nameof(WeaponWheel.Update))] static bool WWUpdate(WeaponWheel __instance)
+        [HarmonyPrefix] [HarmonyPatch(typeof(WeaponWheel), nameof(WeaponWheel.Update))] static bool WWUpdate(WeaponWheel __instance)
         {
             if (!MonoSingleton<GunControl>.Instance
                 || !MonoSingleton<GunControl>.Instance.activated
