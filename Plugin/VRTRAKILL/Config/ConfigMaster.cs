@@ -46,7 +46,7 @@ namespace Plugin.VRTRAKILL.Config
 
         public static UnityEngine.KeyCode?
             ToggleDesktopView = null, ToggleSpectatorCamera = null, EnumSpecCamMode = null,
-            SpecCamUp = null, SpecCamDown = null, SpecCamLeft = null, SpecCamRight = null, SpecCamHoldMoveMode;
+            SpecCamUp = null, SpecCamDown = null, SpecCamLeft = null, SpecCamRight = null, SpecCamHoldMoveMode = null;
 
         public static void Init()
         {

@@ -68,10 +68,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
                     default: break;
                 }
 
-                if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.SpecCamLeft))  MoveOrRotate(Vector2.left);
-                if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.SpecCamUp))    MoveOrRotate(Vector2.up);
-                if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.SpecCamRight)) MoveOrRotate(Vector2.right);
-                if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.SpecCamDown))  MoveOrRotate(Vector2.down);
+                //if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.SpecCamLeft))  MoveOrRotate(Vector2.left);
+                //if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.SpecCamUp))    MoveOrRotate(Vector2.up);
+                //if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.SpecCamRight)) MoveOrRotate(Vector2.right);
+                //if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.SpecCamDown))  MoveOrRotate(Vector2.down);
             }
         }
 
