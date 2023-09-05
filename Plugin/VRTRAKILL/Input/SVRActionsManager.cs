@@ -35,6 +35,66 @@ namespace Plugin.VRTRAKILL.Input
 
         public static bool Escape = false;
 
+        // Helper methods
+        public static string FriendlyBindingName(this ISteamVR_Action_In SVRAI)
+        {
+            string Direction = string.Empty;
+            switch (SVRAI.activeDevice)
+            {
+                case SteamVR_Input_Sources.LeftHand:
+                case SteamVR_Input_Sources.LeftFoot:
+                case SteamVR_Input_Sources.LeftShoulder:
+                    Direction = "Left"; break;
+                case SteamVR_Input_Sources.RightHand:
+                case SteamVR_Input_Sources.RightFoot:
+                case SteamVR_Input_Sources.RightShoulder:
+                    Direction = "Right"; break;
+                default: Direction = string.Empty; break;
+            }
+            if (string.IsNullOrEmpty(Direction))
+                return SVRAI.GetLocalizedOriginPart(SteamVR_Input_Sources.Any, EVRInputStringBits.VRInputString_InputSource);
+            else return $"{Direction} {SVRAI.GetLocalizedOriginPart(SteamVR_Input_Sources.Any, EVRInputStringBits.VRInputString_InputSource)}";
+        }
+
+        // Simulate keyboard input
+        private static void TriggerKey(bool Started, bool Ended, VirtualKeyCode? KeyCode = null, MouseButton? Button = null)
+        {
+            if (KeyCode != null) TriggerKey((VirtualKeyCode)KeyCode, Started, Ended);
+            if (Button != null) TriggerKey((MouseButton)Button, Started, Ended);
+        }
+        private static void TriggerKey(VirtualKeyCode KeyCode, bool Started, bool Ended)
+        {
+            if (Started) InpSim.Keyboard.KeyDown(KeyCode);
+            else if (Ended) InpSim.Keyboard.KeyUp(KeyCode);
+        }
+        private static void TriggerKey(MouseButton Button, bool Started, bool Ended)
+        {
+            if (Started)
+                switch (Button)
+                {
+                    case MouseButton.LeftButton:
+                        InpSim.Mouse.LeftButtonDown(); break;
+                    case MouseButton.RightButton:
+                        InpSim.Mouse.RightButtonDown(); break;
+                    default:
+                        InpSim.Mouse.XButtonDown((int)Button); break;
+                }
+            else if (Ended)
+                switch (Button)
+                {
+                    case MouseButton.LeftButton:
+                        InpSim.Mouse.LeftButtonUp(); break;
+                    case MouseButton.RightButton:
+                        InpSim.Mouse.RightButtonUp(); break;
+                    default:
+                        InpSim.Mouse.XButtonUp((int)Button); break;
+                }
+        }
+        private static void MouseScroll(int Amount)
+        {
+            InpSim.Mouse.VerticalScroll(Amount);
+        }
+
         public static void Init()
         {
             // Movement
@@ -141,44 +201,5 @@ namespace Plugin.VRTRAKILL.Input
         // Go back, pause, etc.
         private static void EscapeH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != Escape) { Escape = newState; TriggerKey(Escape, !Escape, ConfigMaster.KEscape, ConfigMaster.MEscape); } }
-
-        // Simulate keyboard input
-        private static void TriggerKey(bool Started, bool Ended, VirtualKeyCode? KeyCode = null, MouseButton? Button = null)
-        {
-            if (KeyCode != null) TriggerKey((VirtualKeyCode)KeyCode, Started, Ended);
-            if (Button != null) TriggerKey((MouseButton)Button, Started, Ended);
-        }
-        private static void TriggerKey(VirtualKeyCode KeyCode, bool Started, bool Ended)
-        {
-            if (Started) InpSim.Keyboard.KeyDown(KeyCode);
-            else if (Ended) InpSim.Keyboard.KeyUp(KeyCode);
-        }
-        private static void TriggerKey(MouseButton Button, bool Started, bool Ended)
-        {
-            if (Started)
-                switch (Button)
-                {
-                    case MouseButton.LeftButton:
-                        InpSim.Mouse.LeftButtonDown(); break;
-                    case MouseButton.RightButton:
-                        InpSim.Mouse.RightButtonDown(); break;
-                    default:
-                        InpSim.Mouse.XButtonDown((int)Button); break;
-                }
-            else if (Ended)
-                switch (Button)
-                {
-                    case MouseButton.LeftButton:
-                        InpSim.Mouse.LeftButtonUp(); break;
-                    case MouseButton.RightButton:
-                        InpSim.Mouse.RightButtonUp(); break;
-                    default:
-                        InpSim.Mouse.XButtonUp((int)Button); break;
-                }
-        }
-        private static void MouseScroll(int Amount)
-        {
-            InpSim.Mouse.VerticalScroll(Amount);
-        }
     }
 }
