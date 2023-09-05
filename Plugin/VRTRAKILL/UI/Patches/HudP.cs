@@ -47,7 +47,7 @@ namespace Plugin.VRTRAKILL.UI.Patches
         {
             UIConverter.ConvertCanvas(__instance.transform.parent.GetComponent<Canvas>(), Force: true);
             __instance.transform.localPosition = Vector3.zero;
-            __instance.transform.localScale = new Vector3(16, 11.2f, 16);
+            __instance.transform.localScale = new Vector3(16, 8, 16);
         }
     }
 }
