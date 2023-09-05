@@ -56,7 +56,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
 
             // Leg IKs TBD
 
-            AddIK(Rig.NeckEnd.gameObject, Rig.Head.GetChild(0), 2);
+            AddIK(Rig.NeckEnd.gameObject, Rig.Head.GetChild(0).GetChild(0), 2);
 
             //gameObject.AddComponent<SkinsManager>();
         }
