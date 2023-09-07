@@ -28,12 +28,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                 ArmSize = new Vector3(.001f, .001f, .001f);
                 switch (GetComponent<Punch>().type)
                 {
-                    case FistType.Standard:
-                        HandSize = new Vector3(325, 325, 325);
-                        break;
-                    case FistType.Heavy:
-                        HandSize = new Vector3(275, 275, 275);
-                        break;
+                    case FistType.Standard: HandSize = new Vector3(325, 325, 325); break;
+                    case FistType.Heavy: HandSize = new Vector3(275, 275, 275); break;
                     case FistType.Spear:
                     default: Destroy(GetComponent<ArmTransformer>()); break;
                 }
@@ -42,7 +38,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
             {
                 ArmSize = new Vector3(.01f, .01f, .01f);
                 HandSize = new Vector3(35, 35, 35);
-                //Arm.Forearm.GetChild(1).SetParent(Arm.Hand.Root, true);
+                Transform HookOffset = new GameObject("Hook Offset").transform;
+                HookOffset.SetParent(Arm.Hand.Root, false);
+                HookOffset.localPosition = new Vector3(-.01f, -.035f, -.005f);
+                HookOffset.localEulerAngles = new Vector3(0, 80, 0);
+                Arm.Forearm.GetChild(1).SetParent(HookOffset, true);
             }
 
             if (Vars.Config.Controllers.LeftHanded)
