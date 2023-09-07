@@ -8,7 +8,6 @@ assignees: whateverusername0
 ---
 
 Before reporting anything, see [Common problems](https://github.com/whateverusername0/VRTRAKILL#common-issues)  
-Also expect meanie things to be said (https://github.com/whateverusername0/VRTRAKILL/issues/48) (lol)
 
 **Describe the bug**
 A clear and concise description of what the bug is.
@@ -33,4 +32,4 @@ If applicable, add screenshots / videos to help explain your problem.
  - VRTRAKILL Version [e.g. 0.8]
 
 **Additional context**
-Add any other context about the problem here.
+Add any other context about the problem here. For example, did you try to fix it yourself? If yes, how?
