@@ -16,7 +16,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
         public Transform FollowTarget;
         public Camera SPCam;
 
-        public Vector3 OffsetPos = new Vector3(0, 1, -3);
+        public Vector3 OffsetPos = new Vector3(0, 1, 3);
         public Vector3 RotAngles = new Vector3(0, 180, 0);
         public readonly float RAMRotationSpeed = .2f, FMDuration = 2;
         public float MoveRotateSpeed = .5f;
