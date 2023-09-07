@@ -10,8 +10,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches.Whiplash
         [HarmonyPostfix] [HarmonyPatch(typeof(HookArm), nameof(HookArm.Start))] static void ConvertWhiplash(HookArm __instance)
         {
             Arm A = Arm.WhiplashPreset(__instance.transform);
-            ArmTransformer AR = __instance.gameObject.AddComponent<ArmTransformer>(); AR.Arm = A;
-            VRArmsController VRAC = __instance.gameObject.AddComponent<VRArmsController>(); VRAC.Arm = A;
+            ArmTransformer AR = __instance.gameObject.AddComponent<ArmTransformer>();
+            ArmController.DefaultArmCon AC = __instance.gameObject.AddComponent<ArmController.DefaultArmCon>();
+            AR.Arm = A; AC.SetArm(A);
         }
         [HarmonyPrefix] [HarmonyPatch(typeof(HookArm), nameof(HookArm.Update))] static bool Update(HookArm __instance)
         {

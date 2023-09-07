@@ -8,16 +8,15 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
         [HarmonyPostfix] [HarmonyPatch(typeof(Punch), nameof(Punch.Start))] static void ConvertArms(Punch __instance)
         {
             Arm A = null;
-            ArmTransformer AR = __instance.gameObject.AddComponent<ArmTransformer>();
-            VRArmsController VRAC = __instance.gameObject.AddComponent<VRArmsController>();
             switch (__instance.type)
             {
                 case FistType.Standard: A = Arm.FeedbackerPreset(__instance.transform); break;
                 case FistType.Heavy: A = Arm.KnuckleblasterPreset(__instance.transform); break;
-                case FistType.Spear:
-                default: break;
+                case FistType.Spear: default: break;
             }
-            AR.Arm = A; VRAC.Arm = A;
+            ArmTransformer AT = __instance.gameObject.AddComponent<ArmTransformer>();
+            ArmController.ACBase AC = __instance.gameObject.AddComponent<ArmController.DefaultArmCon>();
+            AT.Arm = A; AC.SetArm(A);
         }
     }
 }

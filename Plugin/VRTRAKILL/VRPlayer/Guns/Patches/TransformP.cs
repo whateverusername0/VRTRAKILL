@@ -17,9 +17,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 
             [HarmonyPostfix] [HarmonyPatch(nameof(Revolver.Start))] static void Retransform(Revolver __instance)
             {
-                Arms.VRArmsController FBC = __instance.gameObject.AddComponent<Arms.VRArmsController>();
+                Arms.ArmController.WeaponArmCon WAC = __instance.gameObject.AddComponent<Arms.ArmController.WeaponArmCon>();
                 Arm A = Arm.FeedbackerPreset(__instance.transform);
-                FBC.Arm = A; FBC.OffsetRotation = Quaternion.Euler(OffsetRotation);
+                WAC.SetArm(A); WAC.OffsetRot = OffsetRotation;
 
                 if (__instance.altVersion) { __instance.wpos.defaultPos = AltPosition; __instance.wpos.defaultScale = AltScale; }
                 else { __instance.wpos.defaultPos = Position; __instance.wpos.defaultScale = Scale; }
@@ -91,9 +91,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             [HarmonyPostfix] [HarmonyPatch(nameof(Sandbox.Arm.SandboxArm.Awake))] static void Retransform(Sandbox.Arm.SandboxArm __instance)
             {
                 //retransform
-                Arms.VRArmsController FBC = __instance.gameObject.AddComponent<Arms.VRArmsController>();
+                Arms.ArmController.DefaultArmCon FBC = __instance.gameObject.AddComponent<Arms.ArmController.DefaultArmCon>();
                 Arm A = Arm.SandboxerPreset(__instance.transform);
-                FBC.Arm = A; FBC.OffsetPosition = new Vector3(-.15f, -.3f, -.55f);
+                FBC.SetArm(A); FBC.OffsetPos = new Vector3(-.15f, -.3f, -.55f);
                 __instance.transform.localScale = Scale;
             }
         }

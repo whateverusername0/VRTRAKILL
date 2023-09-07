@@ -10,30 +10,25 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 
         public Vector3 ArmOffset = new Vector3(0, .05f, -.11f);
 
-        private Vector3 _PreviousPosition;
-        private Vector3 _CurrentVelocity;
+        private Vector3 LastPosition, Velocity;
         public float Speed = 0;
-
-        private IEnumerator CalculateVelocity()
-        {
-            _PreviousPosition = transform.position;
-
-            yield return new WaitForEndOfFrame();
-
-            _CurrentVelocity = (_PreviousPosition - transform.position) / Time.deltaTime;
-            Speed = _CurrentVelocity.magnitude;
-        }
 
         public void Start()
         {
             CC = gameObject.GetComponent<ControllerController>();
             GunOffset = CC.GunOffset;
+            LastPosition = transform.position;
         }
 
         public void Update()
         {
             CC.ArmOffset.transform.localPosition = ArmOffset;
-            StartCoroutine(CalculateVelocity());
+            if (LastPosition != transform.position)
+            {
+                Velocity = (transform.position - LastPosition).normalized;
+                Arms.Patches.PunchP._Thing = Velocity;
+                LastPosition = transform.position;
+            }
         }
     }
 }
