@@ -9,8 +9,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 
         public Vector3 ArmOffset = new Vector3(.05f, .0525f, -.1765f);
 
-        public void Start()
+        public override void Awake()
         {
+            base.Awake();
             CC = gameObject.GetComponent<ControllerController>();
             GunOffset = CC.GunOffset;
         }

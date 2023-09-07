@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Arms.ArmController
 {
-    // For things that are "technically or not" weapons (revolver, fishing rod, etc.)
+    // For things that are "technically or not" weapons (revolver, fishing rod, etc.) and in need of a rotation locking
     internal class WeaponArmCon : ACBase
     {
         public override void Start()
@@ -14,9 +14,13 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.ArmController
         }
         public override void LateUpdate()
         {
-            //base.LateUpdate();
-            if (gameObject.HasComponent<Revolver>() && GetComponent<Revolver>().anim.GetBool("Spinning"))
-                Arm.Hand.Root.eulerAngles = (Vector3)(Target.eulerAngles + OffsetRot);
+            if (gameObject.HasComponent<Revolver>())
+            {
+                if (GetComponent<Revolver>().anim.GetBool("Spinning"))
+                { Arm.Hand.Root.rotation = Target.rotation * Quaternion.Euler((Vector3)OffsetRot); return; }
+                return;
+            }
+            Arm.Hand.Root.rotation = Target.rotation * Quaternion.Euler((Vector3)OffsetRot);
         }
     }
 }

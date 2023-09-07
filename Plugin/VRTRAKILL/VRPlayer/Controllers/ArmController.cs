@@ -10,11 +10,22 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 
         public Vector3 ArmOffset = new Vector3(0, .05f, -.11f);
 
-        private Vector3 LastPosition, Velocity;
-        public float Speed = 0;
-
-        public void Start()
+        private Vector3 _PreviousPosition, _CurrentVelocity; public float Speed = 0; // for punch detection
+        private Vector3 LastPosition, Velocity; // for direction
+        // note: do not fucking delete this
+        private IEnumerator CalculateVelocity()
         {
+            _PreviousPosition = transform.position;
+
+            yield return new WaitForEndOfFrame();
+
+            _CurrentVelocity = (_PreviousPosition - transform.position) / Time.deltaTime;
+            Speed = _CurrentVelocity.magnitude;
+        }
+
+        public override void Awake()
+        {
+            base.Awake();
             CC = gameObject.GetComponent<ControllerController>();
             GunOffset = CC.GunOffset;
             LastPosition = transform.position;
@@ -23,6 +34,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         public void Update()
         {
             CC.ArmOffset.transform.localPosition = ArmOffset;
+            StartCoroutine(CalculateVelocity());
             if (LastPosition != transform.position)
             {
                 Velocity = (transform.position - LastPosition).normalized;

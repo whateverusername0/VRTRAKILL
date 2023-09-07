@@ -20,7 +20,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.ArmController
             Arm.GameObjecT.rotation = Target.rotation;
 
             Arm.Root.localPosition = (Vector3)OffsetPos;
-            Arm.Hand.Root.eulerAngles = (Vector3)(Target.eulerAngles + OffsetRot);
+            Arm.Hand.Root.rotation = Target.rotation * Quaternion.Euler((Vector3)OffsetRot);
         }
     }
 }
