@@ -217,7 +217,6 @@
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\SandboxArmP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\Whiplash\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\Patches\Whiplash\HookArmP.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\Arms\VRArmsController.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\Armature\Leg.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\IKFoot.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\MetaRig.cs" />
