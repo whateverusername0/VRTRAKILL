@@ -6,7 +6,7 @@ namespace Plugin.VRTRAKILL.VRPlayer
     // acts as many things in one
     internal class VRController : MonoSingleton<VRController>
     {
-        private bool WasDVActive, IsSCKMode = false;
+        private bool WasDVActive;
 
         public void Start()
         {
