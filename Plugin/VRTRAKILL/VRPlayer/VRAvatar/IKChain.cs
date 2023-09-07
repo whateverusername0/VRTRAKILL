@@ -105,8 +105,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         // ~Update is called once per frame~ sike lmao
         public void LateUpdate()
         {
-            if (Vars.IsPlayerFrozen && Vars.IsPaused) return;
-            ResolveIK();
+            if (!Vars.IsPlayerFrozen && !Vars.IsPaused)
+                ResolveIK();
         }
 
         private void ResolveIK()
