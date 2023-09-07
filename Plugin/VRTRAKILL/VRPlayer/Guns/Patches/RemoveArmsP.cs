@@ -29,12 +29,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         }
         [HarmonyPostfix] [HarmonyPatch(typeof(FishingRodWeapon), nameof(FishingRodWeapon.Awake))] static void RemoveFRArm(FishingRodWeapon __instance)
         {
-            try
-            {
-                __instance.gameObject.transform.Find("MinosRevolver")
-                    .gameObject.transform.Find("RightArm")
-                    .gameObject.SetActive(false);
-            }
+            try { __instance.gameObject.AddComponent<Arms.ArmTransformer>(); }
             catch (NullReferenceException) { Vars.Log.LogWarning("Fishing rod is null???"); }
         }
     }
