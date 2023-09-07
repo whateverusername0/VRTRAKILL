@@ -13,7 +13,7 @@ namespace Plugin.VRTRAKILL.UI
         public void LateUpdate()
         {
             if (Vars.IsPlayerFrozen || Vars.IsPlayerUsingShop)
-                transform.position = (Vars.MainCamera.transform.forward * Length * .25f) + Offset;
+                transform.position = (UIConverter.UICamera.transform.forward * Length * .25f) + Offset;
             else
             {
                 if (GunControl.Instance != null && GunControl.Instance.currentWeapon.HasComponent<RocketLauncher>())
