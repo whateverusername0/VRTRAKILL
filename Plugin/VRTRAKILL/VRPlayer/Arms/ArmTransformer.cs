@@ -61,8 +61,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms
                             // hook fix
                             Transform HookOffset = new GameObject("Hook Offset").transform;
                             HookOffset.SetParent(Arm.Hand.Root, false);
-                            HookOffset.localPosition = new Vector3(-.01f, -.035f, -.005f);
-                            HookOffset.localEulerAngles = new Vector3(0, 80, 0);
+                            HookOffset.localPosition = new Vector3(.005f, -.025f, 0);
+                            HookOffset.localEulerAngles = new Vector3(-5, 80, 0);
+                            HookOffset.localScale = new Vector3(.95f, .95f, .95f);
                             Arm.Forearm.GetChild(1).SetParent(HookOffset, true);
                             break;
                         }
