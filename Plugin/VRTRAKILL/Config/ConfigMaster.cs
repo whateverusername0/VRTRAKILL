@@ -44,9 +44,17 @@ namespace Plugin.VRTRAKILL.Config
             MSlot3 = null, MSlot4 = null, MSlot5 = null,
             MSlot6 = null, MSlot7 = null, MSlot8 = null, MSlot9 = null;
 
+        // joystickwhateverbutton is there because unity is angry when you pass it the null
         public static UnityEngine.KeyCode?
-            ToggleDesktopView = null, ToggleSpectatorCamera = null, EnumSpecCamMode = null,
-            SpecCamUp = null, SpecCamDown = null, SpecCamLeft = null, SpecCamRight = null, SpecCamHoldMoveMode = null;
+            ToggleDesktopView     = UnityEngine.KeyCode.Joystick8Button9,
+            ToggleSpectatorCamera = UnityEngine.KeyCode.Joystick8Button9,
+            EnumSpecCamMode       = UnityEngine.KeyCode.Joystick8Button9,
+
+            SpecCamUp             = UnityEngine.KeyCode.Joystick8Button9,
+            SpecCamDown           = UnityEngine.KeyCode.Joystick8Button9,
+            SpecCamLeft           = UnityEngine.KeyCode.Joystick8Button9,
+            SpecCamRight          = UnityEngine.KeyCode.Joystick8Button9,
+            SpecCamHoldMoveMode   = UnityEngine.KeyCode.Joystick8Button9;
 
         public static void Init()
         {
@@ -117,7 +125,7 @@ namespace Plugin.VRTRAKILL.Config
                 InputMap.MouseKeys.TryGetValue(Config.Slot9, out MSlot9);
                 #endregion
 
-                // Unity
+                #region Unity KeyCodes
                 InputMap.UKeys.TryGetValue(VRConfig.ToggleDV, out ToggleDesktopView);
                 InputMap.UKeys.TryGetValue(VRConfig.ToggleSC, out ToggleSpectatorCamera);
                 InputMap.UKeys.TryGetValue(VRConfig.EnumSCMode, out EnumSpecCamMode);
@@ -126,10 +134,11 @@ namespace Plugin.VRTRAKILL.Config
                 InputMap.UKeys.TryGetValue(VRConfig.SpecCamRight, out SpecCamRight);
                 InputMap.UKeys.TryGetValue(VRConfig.SpecCamDown, out SpecCamDown);
                 InputMap.UKeys.TryGetValue(VRConfig.SpecCamMoveMode, out SpecCamHoldMoveMode);
+                #endregion
             }
             catch (Exception)
             {
-                Vars.Log.LogError("Unable to convert keys in config. Perhaps mismatch? Perhaps keys are literally null?" +
+                Vars.Log.LogError("Unable to convert keys in config. Perhaps mismatch? Perhaps keys are null?" +
                                   "Check spelling and replace every null key either with \"\", \"Empty\" or assign a value to it.");
             }
         }

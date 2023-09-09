@@ -24,7 +24,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
             Vars.MainCamera.transform.parent = Container.transform;
             Vars.UICamera.transform.parent = Container.transform;
 
-            // DesktopView
+            #region Desktop View
             DesktopWorldCam = new GameObject("Desktop World Camera").AddComponent<Camera>();
             DesktopWorldCam.transform.parent = Vars.MainCamera.transform;
             DesktopWorldCam.transform.localPosition = Vector3.zero;
@@ -36,26 +36,42 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
             DesktopUICam.transform.localPosition = Vector3.zero;
             DesktopUICam.gameObject.AddComponent<DesktopUICamera>();
             DesktopUICam.gameObject.SetActive(false);
+            #endregion
 
-            // Spectator Camera
+            #region Spectator Camera
             GameObject SCContainer = new GameObject("Spectator Camera");
             SCContainer.transform.localPosition = Vector3.zero;
-            SpectatorCamera SPC = SCContainer.AddComponent<SpectatorCamera>();
-            SPC.FollowTarget = Vars.MainCamera.transform;
 
-            SpectatorCam = new GameObject("Camera").AddComponent<Camera>();
-            SpectatorCam.stereoTargetEye = StereoTargetEyeMask.None;
+            GameObject SCOffset = new GameObject("SC Limiter");
+            SCOffset.transform.parent = SCContainer.transform;
+            SCOffset.transform.localPosition = Vector3.zero;
+
+            SpectatorCam = new GameObject("SC Camera").AddComponent<Camera>();
             SpectatorCam.transform.parent = SCContainer.transform;
             SpectatorCam.transform.localPosition = Vector3.zero;
-            //SpectatorCam.transform.localEulerAngles = new Vector3(0, -180, 0);
+            SpectatorCam.stereoTargetEye = StereoTargetEyeMask.None;
+
+            // Pushback 2.0
+            Rigidbody SCRB = SpectatorCam.gameObject.AddComponent<Rigidbody>();
+            SCRB.mass = 0; SCRB.drag = 0; SCRB.angularDrag = 0; SCRB.useGravity = false;
+            SCRB.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+            SCRB.constraints = RigidbodyConstraints.FreezeRotation;
+            SphereCollider SCSC = SpectatorCam.gameObject.AddComponent<SphereCollider>(); SCSC.radius = .01f;
+
+            SpectatorCamera SPC = SCContainer.AddComponent<SpectatorCamera>();
+            SPC.FollowTarget = Vars.MainCamera.transform;
+            SPC.Offset = SCOffset.transform;
+            SPC.RB = SCRB;
+
             SCContainer.SetActive(false);
+            #endregion
         }
         [HarmonyPostfix] [HarmonyPatch(typeof(NewMovement), nameof(NewMovement.Start))] static void ScaleObjects(NewMovement __instance)
         {
             // this should've been bigger, but i've changed my mind a thousand years ago and it works
             // this mod is officially my opus magnum spaghetti code and dumpster fire
             Container.transform.localScale = new Vector3(2, 2, 2);
-            __instance.gameObject.AddComponent<VRController>();
+            __instance.gameObject.AddComponent<VRKeybindsController>();
         }
 
         [HarmonyPrefix] [HarmonyPatch(typeof(CameraController), nameof(CameraController.Start))] static void ConvertCameras(CameraController __instance)

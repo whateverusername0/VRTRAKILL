@@ -255,7 +255,7 @@
     <Compile Include="VRTRAKILL\Input\InputVars.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\CameraConverterP.cs" />
     <Compile Include="VRTRAKILL\Vars.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\VRController.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRKeybindsController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CopyToGameRoot\ULTRAKILL\BepInEx\config\BepInEx.cfg">

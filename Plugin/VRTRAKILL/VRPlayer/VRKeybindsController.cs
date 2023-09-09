@@ -4,7 +4,7 @@ using Plugin.VRTRAKILL.VRPlayer.VRCamera;
 namespace Plugin.VRTRAKILL.VRPlayer
 {
     // acts as many things in one
-    internal class VRController : MonoSingleton<VRController>
+    internal class VRKeybindsController : MonoSingleton<VRKeybindsController>
     {
         private bool WasDVActive;
 

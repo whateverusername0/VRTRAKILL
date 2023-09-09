@@ -13,7 +13,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         private Vector3 _PreviousPosition, _CurrentVelocity; public float Speed = 0; // for punch detection
         private Vector3 LastPosition, Velocity; // for direction
         // note: do not fucking delete this
-        private IEnumerator CalculateVelocity()
+        private IEnumerator CalculateSpeed()
         {
             _PreviousPosition = transform.position;
 
@@ -34,7 +34,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         public void Update()
         {
             CC.ArmOffset.transform.localPosition = ArmOffset;
-            StartCoroutine(CalculateVelocity());
+
+            StartCoroutine(CalculateSpeed());
+
             if (LastPosition != transform.position)
             {
                 Velocity = (transform.position - LastPosition).normalized;

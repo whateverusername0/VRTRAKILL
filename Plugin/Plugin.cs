@@ -14,8 +14,8 @@ namespace Plugin
 {
     /* If you're reading this and don't plan on stopping, then
      * welcome to the codebase where all hopes and dreams go die.
-     * This is a dumpster fire of spaghetti code, inconsistent
-     * naming and questionable life choices. Amen. */
+     * This is a dumpster fire of spaghetti, inconsistent
+     * naming, questionable life choices and shitty performance. Amen. */
     [BepInPlugin(PLUGIN_GUID, PLUGIN_NAME, PLUGIN_VERSION)] public sealed class Plugin : BaseUnityPlugin
     {
         public const string
@@ -25,10 +25,8 @@ namespace Plugin
 
         public static string
             PluginPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-            AssetsPath = Path.GetDirectoryName($"{PluginPath}\\AssetBundles\\"),
             FullGamePath = Process.GetCurrentProcess().MainModule.FileName,
-            GamePath = Path.GetDirectoryName(FullGamePath),
-            HMDModel = string.Empty;
+            GamePath = Path.GetDirectoryName(FullGamePath);
 
         internal static ManualLogSource PLog { get; private set; }
 

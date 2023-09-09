@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Plugin.Util;
 
 namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
 {

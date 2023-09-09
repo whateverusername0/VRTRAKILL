@@ -12,8 +12,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.ArmController
             else Arm = A;
         }
         public Transform Target;
-        public Vector3 OffsetPos = Vector3.zero, OffsetRot = new Vector3(-90, 180, 0);
-        
+        public Vector3 OffsetPos = Vector3.zero,
+                       OffsetRot = new Vector3(-90, 180, 0);
 
         protected Vector3 ResolveOffsetPos()
         {

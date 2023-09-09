@@ -6,7 +6,7 @@ using Plugin.Util;
 namespace Plugin.VRTRAKILL
 {
     // does what needs to be done before anything else
-    internal class SceneWorker
+    internal static class SceneWorker
     {
         public static void Init()
         => SceneManager.activeSceneChanged += (x, y) => SceneChanged(y);
