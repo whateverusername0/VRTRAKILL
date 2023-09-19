@@ -56,5 +56,13 @@ namespace Plugin.VRTRAKILL.Patches
             }
             return false;
         }
+
+        [HarmonyPostfix] [HarmonyPatch(typeof(CameraController), nameof(CameraController.Start))] static void AddChair(CameraController __instance)
+        {
+            if (__instance.platformerCamera)
+            {
+                // add chair
+            }
+        }
     }
 }
