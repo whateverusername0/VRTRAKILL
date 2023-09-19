@@ -2,6 +2,8 @@
 using WindowsInput;
 using WindowsInput.Native;
 using Plugin.VRTRAKILL.Input;
+using UnityEngine.InputSystem.Utilities;
+using UnityEngine.InputSystem;
 
 namespace Plugin.VRTRAKILL.Config
 {
@@ -58,10 +60,11 @@ namespace Plugin.VRTRAKILL.Config
 
         public static void Init()
         {
-            ConvertJSONToKeys(Vars.Config.UKKeybinds, Vars.Config.VRKeybinds);
+            ConvertJSONToKeys(Vars.Config.UKKeybinds);
+            ConvertJSONToKeys(Vars.Config.VRKeybinds);
         }
 
-        private static void ConvertJSONToKeys(NewConfig._UKKeybinds Config, NewConfig._VRKeybinds VRConfig)
+        private static void ConvertJSONToKeys(NewConfig._UKKeybinds Config)
         {
             try
             {
@@ -96,36 +99,45 @@ namespace Plugin.VRTRAKILL.Config
                 #endregion
 
                 #region MouseKeys
-                InputMap.MouseKeys.TryGetValue(Config.Shoot, out MShoot);
-                InputMap.MouseKeys.TryGetValue(Config.AltShoot, out MAltShoot);
-                InputMap.MouseKeys.TryGetValue(Config.Punch, out MPunch);
+                InputMap.KeysM.TryGetValue(Config.Shoot, out MShoot);
+                InputMap.KeysM.TryGetValue(Config.AltShoot, out MAltShoot);
+                InputMap.KeysM.TryGetValue(Config.Punch, out MPunch);
 
-                InputMap.MouseKeys.TryGetValue(Config.Jump, out MJump);
-                InputMap.MouseKeys.TryGetValue(Config.Slide, out MSlide);
-                InputMap.MouseKeys.TryGetValue(Config.Dash, out MDash);
+                InputMap.KeysM.TryGetValue(Config.Jump, out MJump);
+                InputMap.KeysM.TryGetValue(Config.Slide, out MSlide);
+                InputMap.KeysM.TryGetValue(Config.Dash, out MDash);
 
-                InputMap.MouseKeys.TryGetValue(Config.LastWeaponUsed, out MLastWeaponUsed);
-                InputMap.MouseKeys.TryGetValue(Config.ChangeWeaponVariation, out MChangeVariation);
-                InputMap.MouseKeys.TryGetValue(Config.IterateWeapon, out MIterateWeapon);
+                InputMap.KeysM.TryGetValue(Config.LastWeaponUsed, out MLastWeaponUsed);
+                InputMap.KeysM.TryGetValue(Config.ChangeWeaponVariation, out MChangeVariation);
+                InputMap.KeysM.TryGetValue(Config.IterateWeapon, out MIterateWeapon);
 
-                InputMap.MouseKeys.TryGetValue(Config.SwapHand, out MSwapHand);
-                InputMap.MouseKeys.TryGetValue(Config.Whiplash, out MWhiplash);
+                InputMap.KeysM.TryGetValue(Config.SwapHand, out MSwapHand);
+                InputMap.KeysM.TryGetValue(Config.Whiplash, out MWhiplash);
 
-                InputMap.MouseKeys.TryGetValue(Config.Escape, out MEscape);
+                InputMap.KeysM.TryGetValue(Config.Escape, out MEscape);
 
-                InputMap.MouseKeys.TryGetValue(Config.Slot0, out MSlot0);
-                InputMap.MouseKeys.TryGetValue(Config.Slot1, out MSlot1);
-                InputMap.MouseKeys.TryGetValue(Config.Slot2, out MSlot2);
-                InputMap.MouseKeys.TryGetValue(Config.Slot3, out MSlot3);
-                InputMap.MouseKeys.TryGetValue(Config.Slot4, out MSlot4);
-                InputMap.MouseKeys.TryGetValue(Config.Slot5, out MSlot5);
-                InputMap.MouseKeys.TryGetValue(Config.Slot6, out MSlot6);
-                InputMap.MouseKeys.TryGetValue(Config.Slot7, out MSlot7);
-                InputMap.MouseKeys.TryGetValue(Config.Slot8, out MSlot8);
-                InputMap.MouseKeys.TryGetValue(Config.Slot9, out MSlot9);
+                InputMap.KeysM.TryGetValue(Config.Slot0, out MSlot0);
+                InputMap.KeysM.TryGetValue(Config.Slot1, out MSlot1);
+                InputMap.KeysM.TryGetValue(Config.Slot2, out MSlot2);
+                InputMap.KeysM.TryGetValue(Config.Slot3, out MSlot3);
+                InputMap.KeysM.TryGetValue(Config.Slot4, out MSlot4);
+                InputMap.KeysM.TryGetValue(Config.Slot5, out MSlot5);
+                InputMap.KeysM.TryGetValue(Config.Slot6, out MSlot6);
+                InputMap.KeysM.TryGetValue(Config.Slot7, out MSlot7);
+                InputMap.KeysM.TryGetValue(Config.Slot8, out MSlot8);
+                InputMap.KeysM.TryGetValue(Config.Slot9, out MSlot9);
                 #endregion
-
-                #region Unity KeyCodes
+            }
+            catch (Exception)
+            {
+                Vars.Log.LogError("Unable to convert keys in config. Perhaps mismatch? Perhaps keys are null?" +
+                                  "Check spelling and replace every null key either with \"\", \"Empty\" or assign a value to it.");
+            }
+        }
+        private static void ConvertJSONToKeys(NewConfig._VRKeybinds VRConfig)
+        {
+            try
+            {
                 InputMap.UKeys.TryGetValue(VRConfig.ToggleDV, out ToggleDesktopView);
                 InputMap.UKeys.TryGetValue(VRConfig.ToggleSC, out ToggleSpectatorCamera);
                 InputMap.UKeys.TryGetValue(VRConfig.EnumSCMode, out EnumSpecCamMode);
@@ -134,13 +146,34 @@ namespace Plugin.VRTRAKILL.Config
                 InputMap.UKeys.TryGetValue(VRConfig.SpecCamRight, out SpecCamRight);
                 InputMap.UKeys.TryGetValue(VRConfig.SpecCamDown, out SpecCamDown);
                 InputMap.UKeys.TryGetValue(VRConfig.SpecCamMoveMode, out SpecCamHoldMoveMode);
-                #endregion
             }
             catch (Exception)
             {
                 Vars.Log.LogError("Unable to convert keys in config. Perhaps mismatch? Perhaps keys are null?" +
                                   "Check spelling and replace every null key either with \"\", \"Empty\" or assign a value to it.");
             }
+        }
+        private static void AutoConvertUKBindsToKeys()
+        {
+
+        }
+
+        private readonly PlayerInput PI = new PlayerInput();
+        public string GetBindingString(string action)
+        {
+            if (!PI.Actions.TryGetValue(action, out InputActionState value)) return null;
+
+            ReadOnlyArray<InputBinding> Bindings = value.Action.bindings;
+            for (int i = 0; i < Bindings.Count; i++)
+            {
+                if (Bindings[i].isComposite) return null;
+
+                InputControl inputControl = InputSystem.FindControl(Bindings[i].path);
+                if (inputControl == null && inputControl?.device is Keyboard) continue;
+
+                return inputControl.displayName;
+            }
+            return null;
         }
     }
 }
