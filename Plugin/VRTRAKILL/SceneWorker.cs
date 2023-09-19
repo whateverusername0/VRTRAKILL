@@ -19,7 +19,7 @@ namespace Plugin.VRTRAKILL
 
             Config.ConfigJSON.Instance = null; // reload config
 
-            Assets.AssetLoader.LoadAllCustomAssets();
+            Assets.LoadAllCustomAssets();
             RelayerAssetsStuff();
 
             UI.UIConverter.ConvertAllCanvases();
@@ -28,11 +28,11 @@ namespace Plugin.VRTRAKILL
         {
             // thanks to unity being so fucking weird instead of actual gameobjects it stores references to them,
             // so this works.
-            foreach (PropertyInfo I in typeof(Assets.Vars).GetProperties())
+            foreach (PropertyInfo I in typeof(Assets).GetProperties())
             {
-                if (I.GetValue(typeof(Assets.Vars), null) != null)
+                if (I.GetValue(typeof(Assets), null) != null)
                 {
-                    GameObject GO = (GameObject)I.GetValue(typeof(Assets.Vars), null);
+                    GameObject GO = (GameObject)I.GetValue(typeof(Assets), null);
                     GO.RecursiveChangeLayer((int)Layers.AlwaysOnTop);
                 }
                 else continue;

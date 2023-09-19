@@ -86,7 +86,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         }
         public static MetaRig CreateVCustomPreset(GameObject Parent, string Name = null)
         {
-            GameObject V1mdlGO = Object.Instantiate(Assets.Vars.VRig, Parent.transform, true);
+            GameObject V1mdlGO = Object.Instantiate(Assets.VRig, Parent.transform, true);
             if (Name != null) V1mdlGO.name = Name;
             return VCustomPreset(V1mdlGO.transform);
         }

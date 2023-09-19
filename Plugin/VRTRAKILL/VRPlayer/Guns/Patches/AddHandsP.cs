@@ -13,7 +13,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 
             [HarmonyPostfix] [HarmonyPatch(nameof(Shotgun.Start))] static void AddHand(Shotgun __instance)
             {
-                Transform Hand = Object.Instantiate(Assets.Vars.HandPose_Shotgun.transform);
+                Transform Hand = Object.Instantiate(Assets.HandPose_Shotgun.transform);
                 // Shotgun ******(Clone)/Shotgun_New/GunArmature/MainBone
                 Hand.SetParent(__instance.transform.GetChild(2).GetChild(2).GetChild(0), false);
                 Hand.localPosition = Vector3.zero;
@@ -38,7 +38,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                 // Sawblade Launcher ******(Clone)/Sawblade Launcher/Armature/Base
                 if (__instance.altVersion)
                 {
-                    Transform Hand = Object.Instantiate(Assets.Vars.HandPose_Sawblade.transform);
+                    Transform Hand = Object.Instantiate(Assets.HandPose_Sawblade.transform);
                     Hand.SetParent(__instance.transform.GetChild(0).GetChild(0).GetChild(0), false);
                     Hand.localPosition = Vector3.zero;
 
@@ -48,7 +48,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                 }
                 else
                 {
-                    Transform Hand = Object.Instantiate(Assets.Vars.HandPose_Nailgun.transform);
+                    Transform Hand = Object.Instantiate(Assets.HandPose_Nailgun.transform);
                     Hand.SetParent(__instance.transform.GetChild(0).GetChild(0).GetChild(0), false);
                     Hand.localPosition = Vector3.zero;
 
@@ -66,7 +66,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 
             [HarmonyPostfix] [HarmonyPatch(nameof(Railcannon.Start))] static void AddHand(Railcannon __instance)
             {
-                Transform Hand = Object.Instantiate(Assets.Vars.HandPose_Railgun.transform);
+                Transform Hand = Object.Instantiate(Assets.HandPose_Railgun.transform);
                 // Railcannon ******(Clone)/Railgun/Armature/Base
                 Hand.SetParent(__instance.transform.GetChild(0).GetChild(0).GetChild(0), false);
                 Hand.localPosition = Vector3.zero;
