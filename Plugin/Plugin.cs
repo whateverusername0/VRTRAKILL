@@ -1,12 +1,10 @@
 ﻿using System.IO;
 using System.Reflection;
 using System.Diagnostics;
-
 using BepInEx;
 using BepInEx.Logging;
-
+using BepInEx.Bootstrap;
 using Valve.VR;
-
 using Plugin.Util;
 using Plugin.VRTRAKILL;
 
@@ -16,19 +14,23 @@ namespace Plugin
      * welcome to the codebase where all hopes and dreams go die.
      * This is a dumpster fire of spaghetti, inconsistent
      * naming, questionable life choices and shitty performance. Amen. */
+
+    // Dependencies (or other mods support)
+    [BepInDependency("com.eternalUnion.pluginConfigurator", BepInDependency.DependencyFlags.SoftDependency)]
+
     [BepInPlugin(PLUGIN_GUID, PLUGIN_NAME, PLUGIN_VERSION)] public sealed class Plugin : BaseUnityPlugin
     {
+        internal static ManualLogSource PLog { get; private set; }
+
         public const string
             PLUGIN_GUID = "com.whateverusername0.vrtrakill",
             PLUGIN_NAME = "VRTRAKILL",
-            PLUGIN_VERSION = "0.14";
+            PLUGIN_VERSION = "0.14.1";
 
         public static string
             PluginPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
             FullGamePath = Process.GetCurrentProcess().MainModule.FileName,
             GamePath = Path.GetDirectoryName(FullGamePath);
-
-        internal static ManualLogSource PLog { get; private set; }
 
         public void Awake()
         {
@@ -36,10 +38,11 @@ namespace Plugin
 
             VRTRAKILL.Config.ConfigMaster.Init();
             PatchStuff();
-            new Patcher(new HarmonyLib.Harmony($"{PLUGIN_GUID}.testing")) { Type = typeof(VRTRAKILL.Input.ControlMessages.Patches) }.PatchAll();
             SceneWorker.Init();
 
             InitializeSteamVR();
+
+            CheckForModSupport();
         }
         private void PatchStuff()
         {
@@ -81,6 +84,15 @@ namespace Plugin
             SteamVR.Initialize();
 
             VRTRAKILL.Input.SVRActionsManager.Init();
+        }
+
+        private void CheckForModSupport()
+        {
+            foreach (var Plugin in Chainloader.PluginInfos)
+            {
+                VRTRAKILL.ModSupport.Initializers.Mods.TryGetValue(Plugin.Value.Metadata.GUID, out System.Action<object> A);
+                A.Invoke(null);
+            }
         }
     }
 }
