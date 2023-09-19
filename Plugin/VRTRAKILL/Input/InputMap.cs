@@ -32,7 +32,7 @@ namespace Plugin.VRTRAKILL.Input
             { "delete",        VirtualKeyCode.DELETE },
 
             { "add",           VirtualKeyCode.ADD },
-            { "separator",     VirtualKeyCode.SEPARATOR},
+            { "separator",     VirtualKeyCode.SEPARATOR },
             { "subtract",      VirtualKeyCode.SUBTRACT },
             { "decimal",       VirtualKeyCode.DECIMAL },
             { "divide",        VirtualKeyCode.DIVIDE },
@@ -106,7 +106,7 @@ namespace Plugin.VRTRAKILL.Input
             // Empty keys
             { "", null }, { "empty", null }, { "null", null }
         };
-        public static readonly Dictionary<string, MouseButton?> MouseKeys = new Dictionary<string, MouseButton?>(System.StringComparer.OrdinalIgnoreCase)
+        public static readonly Dictionary<string, MouseButton?> KeysM = new Dictionary<string, MouseButton?>(System.StringComparer.OrdinalIgnoreCase)
         {
             { "mouseleft",  MouseButton.LeftButton},
             { "lmb",  MouseButton.LeftButton}, { "m1", MouseButton.LeftButton },
@@ -120,7 +120,7 @@ namespace Plugin.VRTRAKILL.Input
             { "mouse4",  (MouseButton)3 },
             { "m4",  (MouseButton)3 },
 
-            { "mouse5",  (MouseButton)3 },
+            { "mouse5",  (MouseButton)4 },
             { "m5",  (MouseButton)4 },
 
             { "mousescroll",    (MouseButton)10 },
@@ -128,6 +128,109 @@ namespace Plugin.VRTRAKILL.Input
 
             // Empty keys
             { "", null }, { "empty", null }, { "null", null }
+        };
+        public static readonly Dictionary<KeyCode, VirtualKeyCode> KeysU = new Dictionary<KeyCode, VirtualKeyCode>
+        {
+            #region SpecialKeys
+            { KeyCode.Backspace,     VirtualKeyCode.BACK },
+            { KeyCode.Tab,           VirtualKeyCode.TAB},
+            { KeyCode.Clear,         VirtualKeyCode.CLEAR },
+            { KeyCode.Return,        VirtualKeyCode.RETURN },
+            { KeyCode.LeftShift,     VirtualKeyCode.LSHIFT },
+            { KeyCode.RightShift,    VirtualKeyCode.RSHIFT },
+            { KeyCode.LeftControl,   VirtualKeyCode.LCONTROL },
+            { KeyCode.RightControl,  VirtualKeyCode.RCONTROL },
+            { KeyCode.CapsLock,      VirtualKeyCode.CAPITAL },
+            { KeyCode.Escape,        VirtualKeyCode.ESCAPE },
+            { KeyCode.Space,         VirtualKeyCode.SPACE },
+            { KeyCode.PageUp,        VirtualKeyCode.PRIOR },
+            { KeyCode.PageDown,      VirtualKeyCode.NEXT },
+            { KeyCode.End,           VirtualKeyCode.END },
+            { KeyCode.Home,          VirtualKeyCode.HOME },
+            { KeyCode.Print,         VirtualKeyCode.SNAPSHOT },
+            { KeyCode.Delete,        VirtualKeyCode.DELETE },
+
+            { KeyCode.KeypadPlus,    VirtualKeyCode.ADD },
+            //{ KeyCode.Separator,     VirtualKeyCode.SEPARATOR },
+            { KeyCode.KeypadMinus,   VirtualKeyCode.SUBTRACT },
+            //{ KeyCode.Decimal,       VirtualKeyCode.DECIMAL },
+            { KeyCode.KeypadDivide,  VirtualKeyCode.DIVIDE },
+
+            { KeyCode.Numlock,       VirtualKeyCode.NUMLOCK },
+            { KeyCode.ScrollLock,    VirtualKeyCode.SCROLL },
+
+            { KeyCode.LeftArrow,     VirtualKeyCode.LEFT },
+            { KeyCode.UpArrow,       VirtualKeyCode.UP },
+            { KeyCode.RightArrow,    VirtualKeyCode.RIGHT },
+            { KeyCode.LeftArrow,     VirtualKeyCode.DOWN },
+            #endregion
+
+            #region Numbers
+            { KeyCode.Alpha0,        VirtualKeyCode.VK_0 },       { KeyCode.Keypad0,       VirtualKeyCode.NUMPAD0 },
+            { KeyCode.Alpha1,        VirtualKeyCode.VK_1 },       { KeyCode.Keypad1,       VirtualKeyCode.NUMPAD1 },
+            { KeyCode.Alpha2,        VirtualKeyCode.VK_2 },       { KeyCode.Keypad2,       VirtualKeyCode.NUMPAD2 },
+            { KeyCode.Alpha3,        VirtualKeyCode.VK_3 },       { KeyCode.Keypad3,       VirtualKeyCode.NUMPAD3 },
+            { KeyCode.Alpha4,        VirtualKeyCode.VK_4 },       { KeyCode.Keypad4,       VirtualKeyCode.NUMPAD4 },
+            { KeyCode.Alpha5,        VirtualKeyCode.VK_5 },       { KeyCode.Keypad5,       VirtualKeyCode.NUMPAD5 },
+            { KeyCode.Alpha6,        VirtualKeyCode.VK_6 },       { KeyCode.Keypad6,       VirtualKeyCode.NUMPAD6 },
+            { KeyCode.Alpha7,        VirtualKeyCode.VK_7 },       { KeyCode.Keypad7,       VirtualKeyCode.NUMPAD7 },
+            { KeyCode.Alpha8,        VirtualKeyCode.VK_8 },       { KeyCode.Keypad8,       VirtualKeyCode.NUMPAD8 },
+            { KeyCode.Alpha9,        VirtualKeyCode.VK_9 },       { KeyCode.Keypad9,       VirtualKeyCode.NUMPAD9 },
+            #endregion
+
+            #region FNumbers
+            { KeyCode.F1,            VirtualKeyCode.F1 },
+            { KeyCode.F2,            VirtualKeyCode.F2 },
+            { KeyCode.F3,            VirtualKeyCode.F3 },
+            { KeyCode.F4,            VirtualKeyCode.F4 },
+            { KeyCode.F5,            VirtualKeyCode.F5 },
+            { KeyCode.F6,            VirtualKeyCode.F6 },
+            { KeyCode.F7,            VirtualKeyCode.F7 },
+            { KeyCode.F8,            VirtualKeyCode.F8 },
+            { KeyCode.F9,            VirtualKeyCode.F9 },
+            { KeyCode.F10,           VirtualKeyCode.F10 },
+            { KeyCode.F11,           VirtualKeyCode.F11 },
+            { KeyCode.F12,           VirtualKeyCode.F12 },
+            #endregion
+
+            #region Alphabet
+            { KeyCode.A,             VirtualKeyCode.VK_A },
+            { KeyCode.B,             VirtualKeyCode.VK_B },
+            { KeyCode.C,             VirtualKeyCode.VK_C },
+            { KeyCode.D,             VirtualKeyCode.VK_D },
+            { KeyCode.E,             VirtualKeyCode.VK_E },
+            { KeyCode.F,             VirtualKeyCode.VK_F },
+            { KeyCode.G,             VirtualKeyCode.VK_G },
+            { KeyCode.H,             VirtualKeyCode.VK_H },
+            { KeyCode.I,             VirtualKeyCode.VK_I },
+            { KeyCode.J,             VirtualKeyCode.VK_J },
+            { KeyCode.K,             VirtualKeyCode.VK_K },
+            { KeyCode.L,             VirtualKeyCode.VK_L },
+            { KeyCode.M,             VirtualKeyCode.VK_M },
+            { KeyCode.N,             VirtualKeyCode.VK_N },
+            { KeyCode.O,             VirtualKeyCode.VK_O },
+            { KeyCode.P,             VirtualKeyCode.VK_P },
+            { KeyCode.Q,             VirtualKeyCode.VK_Q },
+            { KeyCode.R,             VirtualKeyCode.VK_R },
+            { KeyCode.S,             VirtualKeyCode.VK_S },
+            { KeyCode.T,             VirtualKeyCode.VK_T },
+            { KeyCode.U,             VirtualKeyCode.VK_U },
+            { KeyCode.V,             VirtualKeyCode.VK_V },
+            { KeyCode.W,             VirtualKeyCode.VK_W },
+            { KeyCode.X,             VirtualKeyCode.VK_X },
+            { KeyCode.Y,             VirtualKeyCode.VK_Y },
+            { KeyCode.Z,             VirtualKeyCode.VK_Z },
+            #endregion
+        };
+        public static readonly Dictionary<KeyCode, MouseButton> KeysUM = new Dictionary<KeyCode, MouseButton>
+        {
+            { KeyCode.Mouse0, MouseButton.LeftButton },
+            { KeyCode.Mouse1, MouseButton.RightButton },
+            { KeyCode.Mouse2, MouseButton.MiddleButton },
+            { KeyCode.Mouse3, (MouseButton)3 },
+            { KeyCode.Mouse4, (MouseButton)4 },
+            { KeyCode.Mouse5, (MouseButton)5 },
+            { KeyCode.Mouse6, (MouseButton)6 },
         };
 
         // UnityEngine
@@ -217,6 +320,16 @@ namespace Plugin.VRTRAKILL.Input
             { "x",             KeyCode.X },
             { "y",             KeyCode.Y },
             { "z",             KeyCode.Z },
+            #endregion
+
+            #region Mouse
+            { "left mouse button", KeyCode.Mouse0 },
+            { "right mouse button", KeyCode.Mouse0 },
+            { "middle mouse button", KeyCode.Mouse0 },
+            { "mouse4", KeyCode.Mouse0 },
+            { "mouse5", KeyCode.Mouse0 },
+            { "mouse6", KeyCode.Mouse0 },
+            { "mouse7", KeyCode.Mouse0 },
             #endregion
 
             // Empty keys
