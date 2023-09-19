@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>  
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -85,6 +85,10 @@
       <HintPath>Libraries\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="PluginConfigurator">
+      <HintPath>Libraries\ModSupport\PluginConfigurator.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="SteamVR, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Plugin\Libraries\SteamVR\SteamVR.dll</HintPath>
@@ -154,6 +158,8 @@
     <Compile Include="VRTRAKILL\Config\NewConfig.cs" />
     <Compile Include="VRTRAKILL\Input\ControlMessages\MessageContainer.cs" />
     <Compile Include="VRTRAKILL\Input\ControlMessages\Patches.cs" />
+    <Compile Include="VRTRAKILL\ModSupport\Initializers.cs" />
+    <Compile Include="VRTRAKILL\ModSupport\PluginConfigor.cs" />
     <Compile Include="VRTRAKILL\Patches\A.cs" />
     <Compile Include="VRTRAKILL\Patches\Misc.cs" />
     <Compile Include="VRTRAKILL\SceneWorker.cs" />
