@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Plugin.VRTRAKILL.VRPlayer.VRAvatar.Armature;
 
 namespace Plugin.VRTRAKILL
 {
@@ -35,17 +34,17 @@ namespace Plugin.VRTRAKILL
 
         #region Checks
         public static bool IsMainMenu
-            => OptionsManager.Instance != null && OptionsManager.Instance.mainMenu;
+            => (bool)(OptionsManager.Instance?.mainMenu);
         public static bool IsPaused
-            => OptionsManager.Instance != null && OptionsManager.Instance.paused;
+            => (bool)(OptionsManager.Instance?.paused);
         public static bool IsWeaponWheelPresent
-            => WeaponWheel.Instance != null && WeaponWheel.Instance.isActiveAndEnabled;
+            => (bool)(WeaponWheel.Instance?.isActiveAndEnabled);
         public static bool IsPlayerUsingShop
-            => FistControl.Instance != null && FistControl.Instance.shopping;
+            => (bool)(FistControl.Instance?.shopping);
 
         public static bool IsPlayerFrozen
-            => (NewMovement.Instance != null && (!NewMovement.Instance.activated || !NewMovement.Instance.enabled))
-            || (CameraController.Instance != null && !CameraController.Instance.activated);
+            => (bool)!NewMovement.Instance?.activated || (bool)!NewMovement.Instance?.enabled
+            || (bool)!CameraController.Instance?.activated;
         #endregion
 
         #region Cameras
@@ -55,7 +54,11 @@ namespace Plugin.VRTRAKILL
         {
             get
             {
-                if (_MainCamera == null) { _MainCamera = GameObject.Find("Main Camera").gameObject.GetComponent<Camera>(); return _MainCamera; }
+                if (_MainCamera == null)
+                {
+                    _MainCamera = GameObject.Find("Main Camera")?.gameObject.GetComponent<Camera>();
+                    return _MainCamera;
+                }
                 else return _MainCamera;
             }
         }
