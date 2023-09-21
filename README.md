@@ -1,5 +1,5 @@
 # VRTRAKILL
-[Installation](https://github.com/whateverusername0/VRTRAKILL#installation) | [Common problems](https://github.com/whateverusername0/VRTRAKILL#common-issues) | [Default controller bindings](https://github.com/whateverusername0/VRTRAKILL#default-controller-bindings)
+[Installation](https://github.com/whateverusername0/VRTRAKILL#installation) | [Common problems](https://github.com/whateverusername0/VRTRAKILL#common-issues) | [Default controller bindings](https://github.com/whateverusername0/VRTRAKILL#default-controller-bindings) | [Additional repository info](https://github.com/whateverusername0/VRTRAKILL#additional-repository-info)
 
 [![](https://img.shields.io/github/downloads/whateverusername0/VRTRAKILL/total)](https://github.com/whateverusername0/VRTRAKILL/releases)
 [![](https://img.shields.io/github/downloads/whateverusername0/VRTRAKILL/latest/total)](https://github.com/whateverusername0/VRTRAKILL/releases)
@@ -44,11 +44,11 @@ The text version:
 
 The steps 4-6 are actually unnecessary, since you can launch the game from it's original .exe and SteamVR will catch up, but for your own convenience you can follow them.
 
-4. Add the modded ULTRAKILL as a 'non-steam game' to steam so it can be run with SteamVR:  
-  4.1 ADD A GAME (at the bottom left in library) -> Add a non-steam game -> select your VR-ed ULTRAKILL.exe  
+4. Add the modded ULTRAKILL as a 'non-steam game':  
+  4.1 ADD A GAME (at the bottom left in the library) -> Add a non-steam game -> select your VR-ed ULTRAKILL.exe  
   4.2 Right click on the new VR-ed ULTRAKILL in your steam library -> Properties -> Shortcut -> Include in VR Library  
 5. Open SteamVR  
-6. Select your VR-ed ULTRAKILL  
+6. Now ULTRAKILL will show up in there.  
 
 Now **these** steps **are necessary**.
 
@@ -75,6 +75,9 @@ The text version:
   - Solution: If you have SteamVR world size tweaked - disable it. If you set your weapon position to the middle - set it to the right. Else open an issue, because this shouldn't be happening :(  
 2. On Valve Index you move too slowly and can't jump normally:
   - For this in the config there is a setting "movement multiplier". Since the game has a really goofy movement logic, you need to set your own multiplier there depending on your headset refresh rate.
+  - Default values for each headset (if not listed, lmk what value you use):
+    - Oculus Quest 1/2: **0.575**
+    - Valve Index: **1**
 3. "There's no controller bindings for my BICO 3.0"
   - You gotta make your own. It's pretty simple, there's no cryptic words in actions' names.
   - Also if you wanna help you can send me your controller bindings via discord or whatever and I'll set them as defaults so no more people have to suffer.
@@ -96,3 +99,10 @@ The text version:
 
 ### Windows Mixed Reality (made by ![Scruq445](https://github.com/Scruq445)):
 ![](GithubStuff/DCB_WMR.jpeg)
+
+## Additional repository info:
+### Branches:
+- Stable: *very runnable*. Either a release or something you can build, run and *enjoy* playing.
+- Bleeding-edge: *hardly runnable/not runnable at all*. Unfinished code pieces, placeholders, no optimizations at all, or, simply, **dumpster fire**.
+
+Under *some* circumstances branches will be equal to one another, sometimes because i screwed up somewhere, haven't finished organizing stuff/creating a new stable release, etc. etc.
