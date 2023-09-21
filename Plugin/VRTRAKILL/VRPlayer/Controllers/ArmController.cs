@@ -8,7 +8,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         public ControllerController CC;
         public GameObject GunOffset;
 
-        public Vector3 ArmOffset = new Vector3(0, .05f, -.11f);
+        public Vector3 ArmIKOffset = new Vector3(0, .05f, -.11f);
 
         private Vector3 _PreviousPosition, _CurrentVelocity; public float Speed = 0; // for punch detection
         private Vector3 LastPosition, Velocity; // for direction
@@ -33,7 +33,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 
         public void Update()
         {
-            CC.ArmOffset.transform.localPosition = ArmOffset;
+            CC.ArmOffset.transform.localPosition = ArmIKOffset;
 
             StartCoroutine(CalculateSpeed());
 

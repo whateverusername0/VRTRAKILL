@@ -7,7 +7,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         public ControllerController CC;
         public GameObject GunOffset;
 
-        public Vector3 ArmOffset = new Vector3(.05f, .0525f, -.1765f);
+        public Vector3 ArmIKOffset = new Vector3(.05f, .0525f, -.1765f);
 
         public override void Awake()
         {
@@ -16,6 +16,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
             GunOffset = CC.GunOffset;
         }
 
-        public void Update() => CC.ArmOffset.transform.localPosition = ArmOffset;
+        public void Update() => CC.ArmOffset.transform.localPosition = ArmIKOffset;
     }
 }
