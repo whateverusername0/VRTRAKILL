@@ -16,6 +16,16 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
             GunOffset = CC.GunOffset;
         }
 
-        public void Update() => CC.ArmOffset.transform.localPosition = ArmIKOffset;
+        public void Update()
+        {
+            CC.ArmOffset.transform.localPosition = ArmIKOffset;
+            SetControllers();
+        }
+
+        private void SetControllers()
+        {
+            if (Vars.Weapons == 0) CC.RenderModel.SetActive(true);
+            else CC.RenderModel.SetActive(false);
+        }
     }
 }
