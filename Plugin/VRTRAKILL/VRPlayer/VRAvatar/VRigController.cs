@@ -55,6 +55,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
                 AddIK(Arm.Hand.Root.gameObject, GunController.Instance.CC.ArmOffset.transform, Pole: Rig.IKPole_Right);
 
             // Leg IKs TBD
+            // add blabla
 
             AddIK(Rig.NeckEnd.gameObject, Rig.Head.GetChild(0).GetChild(0), 2);
 
@@ -66,7 +67,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             
             if (Rig == null) return;
 
-            if (!Vars.IsPlayerFrozen && !Vars.IsMainMenu)
+            if (!Vars.IsPaused && !Vars.IsMainMenu)
             {
                 HandleBodyRotation();
                 HandleHeadRotation();
@@ -119,6 +120,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             switch (FistControl.Instance.currentPunch.type)
             {
                 case FistType.Standard:
+                default:
                     ActiveArm = Rig.FeedbackerA;
                     Rig.FeedbackerA.GameObjecT.gameObject.SetActive(true);
                     Rig.Knuckleblaster.GameObjecT.gameObject.SetActive(false);
@@ -128,8 +130,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
                     Rig.FeedbackerA.GameObjecT.gameObject.SetActive(false);
                     Rig.Knuckleblaster.GameObjecT.gameObject.SetActive(true);
                     break;
-                case FistType.Spear:
-                default: break;
+                case FistType.Spear: break;
             }
 
             if (HookArm.Instance != null && HookArm.Instance.enabled
