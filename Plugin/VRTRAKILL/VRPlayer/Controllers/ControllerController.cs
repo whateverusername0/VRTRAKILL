@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using Valve.VR;
+using Plugin.Util;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 {
     // lol the name
     public class ControllerController : MonoBehaviour
     {
-        private GameObject RenderModel;
+        public GameObject RenderModel;
         public Vector3 RenderModelOffsetPos = Vector3.zero;
         public Vector3 RenderModelOffsetEulerAngles = Vector3.zero;
         private bool? _ShouldRenderRM = null; public bool ShouldRenderRM
@@ -32,22 +33,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
             ArmOffset.transform.parent = transform;
         }
 
-        private void SetupControllerPointer()
-        {
-            // Create a real pointer with the camera for ui interaction
-            Pointer = new GameObject("Canvas Pointer") { layer = (int)Layers.UI };
-            Pointer.transform.parent = GunOffset.transform;
-
-            Camera PointerCamera = Pointer.AddComponent<Camera>();
-            PointerCamera.stereoTargetEye = StereoTargetEyeMask.None;
-            PointerCamera.clearFlags = CameraClearFlags.Nothing;
-            PointerCamera.cullingMask = -1; // Nothing
-            PointerCamera.nearClipPlane = .01f;
-            PointerCamera.fieldOfView = 1; // haha, ha, 1!
-            PointerCamera.enabled = false;
-
-            Pointer.AddComponent<UI.UIInteraction>();
-        }
         private void SetupControllerLines()
         {
             LR = Pointer.AddComponent<LineRenderer>();
@@ -73,6 +58,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         }
         private void DrawControllerLines()
         {
+            if (LR == null) return;
+
             if (Vars.IsPlayerFrozen || Vars.IsPlayerUsingShop) LR.enabled = true;
             else LR.enabled = false;
 
@@ -90,8 +77,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 
             SetupOffsets();
 
-            if (Vars.Config.UIInteraction.ControllerBased) SetupControllerPointer();
-            if (Vars.Config.UIInteraction.ControllerLines.Enabled) SetupControllerLines();
+            if (Vars.Config.UIInteraction.ControllerLines.Enabled && gameObject.HasComponent<GunController>())
+                SetupControllerLines();
         }
         public void Update()
         {

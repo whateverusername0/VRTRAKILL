@@ -32,7 +32,7 @@ namespace Plugin.VRTRAKILL
         public static Config.NewConfig Config => VRTRAKILL.Config.ConfigJSON.GetConfig().Config;
         public static BepInEx.Logging.ManualLogSource Log => Plugin.PLog;
 
-        #region Checks
+        #region Checks n' Shits
         public static bool IsMainMenu
             => (bool)(OptionsManager.Instance?.mainMenu);
         public static bool IsPaused
@@ -45,6 +45,11 @@ namespace Plugin.VRTRAKILL
         public static bool IsPlayerFrozen
             => (bool)!NewMovement.Instance?.activated || (bool)!NewMovement.Instance?.enabled
             || (bool)!CameraController.Instance?.activated;
+
+        public static int Weapons
+            => GunControl.Instance?.allWeapons.Count ?? 0;
+        public static int Arms
+            => FistControl.Instance?.spawnedArms.Count ?? 0;
         #endregion
 
         #region Cameras

@@ -149,7 +149,14 @@ namespace Plugin.VRTRAKILL.Input
 
         // Fisting
         private static void PunchH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != Punch) { Punch = newState; TriggerKey(Punch, !Punch, ConfigMaster.KPunch, ConfigMaster.MPunch); } }
+        {
+            if (newState != Punch)
+            {
+                Punch = newState;
+                if (Vars.IsPlayerFrozen || Vars.IsPlayerUsingShop) TriggerKey(Punch, !Punch, ConfigMaster.KShoot, ConfigMaster.MShoot);
+                else TriggerKey(Punch, !Punch, ConfigMaster.KPunch, ConfigMaster.MPunch);
+            }
+        }
         private static void SwapHandH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != SwapHand) { SwapHand = newState; TriggerKey(SwapHand, !SwapHand, ConfigMaster.KSwapHand, ConfigMaster.MSwapHand); } }
         private static void WhiplashH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)

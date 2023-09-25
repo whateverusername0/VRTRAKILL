@@ -105,4 +105,9 @@ The text version:
 - Stable: *very runnable*. Either a release or something you can build, run and *enjoy* playing.
 - Bleeding-edge: *hardly runnable/not runnable at all*. Unfinished code pieces, placeholders, no optimizations at all, or, simply, **dumpster fire**.
 
-Under *some* circumstances branches will be equal to one another, sometimes because i screwed up somewhere, haven't finished organizing stuff/creating a new stable release, etc. etc.
+Under *some* circumstances branches will be equal to one another, sometimes because i screwed up somewhere, haven't finished organizing stuff/creating a new stable release, blabla.
+
+### Version control:
+- **X**.y.z - something **very** global. Perhaps a whole rewrite of the mod, even.
+- x.**Y**.z - a new feature, a major change, etc.
+- x.y.**Z** - a bugfix, a tweak, a minor change, etc.

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Plugin.VRTRAKILL.VRPlayer.Controllers;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Plugin.VRTRAKILL.UI
@@ -7,6 +8,7 @@ namespace Plugin.VRTRAKILL.UI
     internal class UIConverter
     {
         public static Camera UICamera { get; private set; }
+        public static Camera UIEventCamera { get; private set; }
 
         public static void ConvertAllCanvases()
         {
@@ -16,9 +18,20 @@ namespace Plugin.VRTRAKILL.UI
 
             if (Vars.Config.UIInteraction.ControllerBased)
             {
+                // make this camera almost useless because it's only use is to give me the middle POINT.
+                UIEventCamera = new GameObject("UI Event Camera").AddComponent<Camera>();
+                UIEventCamera.enabled = false;
+                UIEventCamera.stereoTargetEye = StereoTargetEyeMask.None;
+                UIEventCamera.clearFlags = CameraClearFlags.Nothing;
+                UIEventCamera.depth = 99;
+                UIEventCamera.fieldOfView = 1;
+                UIEventCamera.nearClipPlane = .01f;
+                UIEventCamera.cullingMask = -1;
 
+                UIEventCamera.transform.parent = Vars.NonDominantHand.transform;
             }
-            else UICamera.gameObject.AddComponent<UIInteraction>();
+            else UIEventCamera = UICamera;
+            UIEventCamera.gameObject.AddComponent<UIInteraction>();
 
             foreach (Canvas C in Object.FindObjectsOfType<Canvas>())
                 if (!Util.Misc.HasComponent<UICanvas>(C.gameObject))
@@ -46,7 +59,7 @@ namespace Plugin.VRTRAKILL.UI
         {
             if (!Force && C.renderMode != RenderMode.ScreenSpaceOverlay) return;
 
-            C.worldCamera = UICamera;
+            C.worldCamera = UIEventCamera;
             C.renderMode = RenderMode.WorldSpace;
             C.gameObject.layer = (int)Layers.UI;
             if (!DontAddComponent) C.gameObject.AddComponent<UICanvas>();

@@ -43,6 +43,14 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
                 Arms.Patches.PunchP._Thing = Velocity;
                 LastPosition = transform.position;
             }
+
+            SetControllers();
+        }
+
+        private void SetControllers()
+        {
+            if (Vars.Arms == 0) CC.RenderModel.SetActive(true);
+            else CC.RenderModel.SetActive(false);
         }
     }
 }
