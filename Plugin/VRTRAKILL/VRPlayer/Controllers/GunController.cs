@@ -24,7 +24,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 
         private void SetControllers()
         {
-            if (Vars.Weapons == 0) CC.RenderModel.SetActive(true);
+            if (Vars.GunControlCheck) CC.RenderModel.SetActive(true);
             else CC.RenderModel.SetActive(false);
         }
     }
