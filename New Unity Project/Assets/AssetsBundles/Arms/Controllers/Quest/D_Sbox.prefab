@@ -284,7 +284,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8471540563007137412}
   m_Layer: 0
-  m_Name: Controller_Quest_D
+  m_Name: D_Sbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -728,6 +728,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -32.181
       objectReference: {fileID: 0}
+    - target: {fileID: 642985477301325754, guid: 56e74a8614940654bbdeda32ec46c08d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: ddbab5e3d8b439e47a9ce0f999acfb80, type: 2}
     - target: {fileID: 2508374847417453787, guid: 56e74a8614940654bbdeda32ec46c08d,
         type: 3}
       propertyPath: m_LocalPosition.x
