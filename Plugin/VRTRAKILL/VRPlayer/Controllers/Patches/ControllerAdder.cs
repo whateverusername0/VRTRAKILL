@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using GameConsole.Commands;
+using HarmonyLib;
 using UnityEngine;
 using Valve.VR;
 
@@ -11,12 +12,27 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
             __instance.gameObject.SetActive(false);
 
             GameObject LHGO = CreateController("Left Controller", SteamVR_Input_Sources.LeftHand);
+
+            ControllerController LCon = LHGO.AddComponent<ControllerController>();
+            LCon.RenderModelOffsetPos = new Vector3(.055f, -.1f, -.1f);
+            LCon.RenderModelOffsetEulerAngles = new Vector3(75, 0, 0);
+            LCon.RenderModelOffsetScale = new Vector3(.65f, .65f, .65f);
+
+            LHGO.transform.parent = Vars.VRCameraContainer.transform;
+
             GameObject RHGO = CreateController("Right Controller", SteamVR_Input_Sources.RightHand);
+
+            ControllerController RCon = RHGO.AddComponent<ControllerController>();
+            RCon.RenderModelOffsetPos = new Vector3(-.015f, -.105f, -.15f);
+            RCon.RenderModelOffsetEulerAngles = new Vector3(75, 0, 0);
+            RCon.RenderModelOffsetScale = new Vector3(.65f, .65f, .65f);
+
+            RHGO.transform.parent = Vars.VRCameraContainer.transform;
 
             if (Vars.Config.Controllers.DrawControllers)
             {
-                GameObject LHMGO = CreateControllerModel(); LHMGO.transform.parent = LHGO.transform;
-                GameObject RHMGO = CreateControllerModel(); RHMGO.transform.parent = RHGO.transform;
+                GameObject LHMGO = CreateControllerModel(SteamVR_Input_Sources.LeftHand); LHMGO.transform.parent = LHGO.transform;
+                GameObject RHMGO = CreateControllerModel(SteamVR_Input_Sources.RightHand); RHMGO.transform.parent = RHGO.transform;
             }
 
             if (Vars.Config.Controllers.LeftHanded)
@@ -36,7 +52,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
         private static GameObject CreateController(string Name, SteamVR_Input_Sources Source)
         {
             GameObject GO = new GameObject(Name) { layer = (int)Layers.IgnoreRaycast };
-            GO.AddComponent<ControllerController>();
             SteamVR_Behaviour_Pose Controller = GO.AddComponent<SteamVR_Behaviour_Pose>();
             Controller.onTransformUpdatedEvent += ControllerController.onTransformUpdatedH;
             if (Source == SteamVR_Input_Sources.LeftHand)
@@ -52,9 +67,29 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
             else throw new System.NotImplementedException();
             return GO;
         }
-        private static GameObject CreateControllerModel(string Name = "Model")
+        private static GameObject CreateControllerModel(SteamVR_Input_Sources Source, string Name = "Model")
         {
             GameObject GO = new GameObject(Name) { layer = (int)Layers.IgnoreRaycast };
+
+            Transform T;
+            if (Source == SteamVR_Input_Sources.LeftHand)
+            {
+                if (Vars.Config.Controllers.LeftHanded) T = Object.Instantiate(Assets.Controller_D).transform;
+                else T = Object.Instantiate(Assets.Controller_ND).transform;
+                T.parent = GO.transform;
+                T.localPosition = Vector3.zero;
+            }
+            else if (Source == SteamVR_Input_Sources.RightHand)
+            {
+                
+                if (Vars.Config.Controllers.LeftHanded) T = Object.Instantiate(Assets.Controller_ND).transform;
+                else T = Object.Instantiate(Assets.Controller_D).transform;
+                T.parent = GO.transform;
+                T.localPosition = Vector3.zero;
+                T.localScale = new Vector3(T.localScale.x * -1, T.localScale.y, T.localScale.z);
+            }
+
+            else throw new System.NotImplementedException();
 
             return GO;
         }
