@@ -8,19 +8,13 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
     public class ControllerController : MonoBehaviour
     {
         public GameObject RenderModel;
-        public Vector3 RenderModelOffsetPos = Vector3.zero;
-        public Vector3 RenderModelOffsetEulerAngles = Vector3.zero;
-        private bool? _ShouldRenderRM = null; public bool ShouldRenderRM
-        {
-            get { return _ShouldRenderRM ?? Vars.Config.Controllers.DrawControllers && Vars.IsMainMenu; }
-            set { _ShouldRenderRM = value; }
-        }
+        public Vector3 RenderModelOffsetPos,
+                       RenderModelOffsetEulerAngles,
+                       RenderModelOffsetScale;
 
-        private SteamVR_Behaviour_Pose Pose;
         public GameObject GunOffset = new GameObject("Gun Offset") { layer = (int)Layers.IgnoreRaycast };
         public GameObject ArmOffset = new GameObject("Arm Offset") { layer = (int)Layers.IgnoreRaycast };
 
-        GameObject Pointer;
         LineRenderer LR; Vector3 EndPosition;
         public float DefaultLength => Vars.Config.CBS.CrosshairDistance;
 
@@ -35,7 +29,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 
         private void SetupControllerLines()
         {
-            LR = Pointer.AddComponent<LineRenderer>();
+            LR = gameObject.AddComponent<LineRenderer>();
             LR.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             LR.receiveShadows = false;
             LR.allowOcclusionWhenDynamic = false;
@@ -73,31 +67,25 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         public void Start()
         {
             RenderModel = RenderModel ?? transform.Find("Model").gameObject;
-            Pose = GetComponent<SteamVR_Behaviour_Pose>();
 
             SetupOffsets();
 
-            if (Vars.Config.UIInteraction.ControllerLines.Enabled && gameObject.HasComponent<GunController>())
+            if (Vars.Config.UIInteraction.ControllerLines.Enabled && gameObject.HasComponent<ArmController>())
                 SetupControllerLines();
         }
         public void Update()
         {
-            // controller model
-            if (ShouldRenderRM)
-            {
-                RenderModel?.gameObject.SetActive(true);
-                RenderModel.transform.localPosition = RenderModelOffsetPos;
-                RenderModel.transform.localRotation = Quaternion.Euler(RenderModelOffsetEulerAngles);
-            }
-            else RenderModel?.gameObject.SetActive(false);
-
-            // paused
-            if (Vars.IsPaused && !Vars.IsMainMenu) Pose.enabled = false;
-            else Pose.enabled = true;
-
             // controller-based ui interaction
             if (Vars.Config.UIInteraction.ControllerBased) CPRaycast();
             if (Vars.Config.UIInteraction.ControllerLines.Enabled) DrawControllerLines();
+
+            // controller model
+            if (Vars.Config.Controllers.DrawControllers)
+            {
+                RenderModel.transform.localPosition = RenderModelOffsetPos;
+                RenderModel.transform.localRotation = Quaternion.Euler(RenderModelOffsetEulerAngles);
+                RenderModel.transform.localScale = RenderModelOffsetScale;
+            }
         }
 
         public static Vector3 ControllerOffset = new Vector3(0, 2.85f, 0);
