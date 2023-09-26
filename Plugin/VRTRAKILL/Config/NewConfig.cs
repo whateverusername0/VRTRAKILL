@@ -95,12 +95,11 @@ namespace Plugin.VRTRAKILL.Config
         [JsonProperty("UI Interaction Settings")] public _UIInteraction UIInteraction { get; set; } public class _UIInteraction
         {
             [JsonProperty("UI Size (from 0 to 0.1)")] public float UISize { get; set; } = 0.0625f;
-            [JsonProperty("Enable UI Pointer")] public bool EnableUIPointer { get; set; } = true;
-            [JsonProperty("Controller-based? (BROKEN)")] public bool ControllerBased { get; set; } = false;
+            [JsonProperty("Controller-based?")] public bool ControllerBased { get; set; } = true;
 
             [JsonProperty("Controller Lines")] public _ControllerLines ControllerLines { get; set; } public class _ControllerLines
             {
-                [JsonProperty("Enabled")] public bool Enabled { get; set; } = false;
+                [JsonProperty("Enabled")] public bool Enabled { get; set; } = true;
                 [JsonProperty("Starting transparency (from 0 to 1)")] public float StartAlpha { get; set; } = 0.4f;
                 [JsonProperty("End transparency (from 0 to 1)")] public float EndAlpha { get; set; } = 0.1f;
             }
@@ -131,7 +130,7 @@ namespace Plugin.VRTRAKILL.Config
 
         [JsonProperty("Miscellaneous (or unsorted) Settings")] public _Misc Misc { get; set; } public class _Misc
         {
-            [JsonProperty("Enable 4S FPS Camera (BROKEN)")] public bool Enable4SFPSCam { get; set; } = false;
+            //[JsonProperty("Enable 4S FPS Camera (BROKEN)")] public bool Enable4SFPSCam { get; set; } = false;
         }
 
         public NewConfig()
