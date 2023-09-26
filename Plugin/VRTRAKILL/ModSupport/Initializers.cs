@@ -9,12 +9,13 @@ namespace Plugin.VRTRAKILL.ModSupport
     {
         public static Dictionary<string, Action<object>> Mods = new Dictionary<string, Action<object>>
         {
-            { "com.eternalUnion.pluginConfigurator", PluginConfigurator },
+            { "com.eternalUnion.pluginConfigurator", (o) => PluginConfigurator() },
         };
 
-        public static void PluginConfigurator(object o)
+        public static void PluginConfigurator()
         {
-            PluginConfig.API.PluginConfigurator PC = PluginConfig.API.PluginConfigurator.Create(Plugin.PLUGIN_NAME, Plugin.PLUGIN_GUID);
+            PluginConfigurator PC = PluginConfig.API.PluginConfigurator.Create(Plugin.PLUGIN_NAME, Plugin.PLUGIN_GUID);
+            new ConfigPanel(PC.rootPanel, "WORK IN PROGRESS!", "WIP");
         }
     }
 }

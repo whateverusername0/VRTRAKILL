@@ -162,7 +162,7 @@ namespace Plugin.VRTRAKILL.Input
             { KeyCode.LeftArrow,     VirtualKeyCode.LEFT },
             { KeyCode.UpArrow,       VirtualKeyCode.UP },
             { KeyCode.RightArrow,    VirtualKeyCode.RIGHT },
-            { KeyCode.LeftArrow,     VirtualKeyCode.DOWN },
+            { KeyCode.DownArrow,     VirtualKeyCode.DOWN },
             #endregion
 
             #region Numbers
@@ -259,10 +259,10 @@ namespace Plugin.VRTRAKILL.Input
             { "numlock",       KeyCode.Numlock },
             { "scrolllock",    KeyCode.ScrollLock },
 
-            { "arrowleft",     KeyCode.LeftArrow },       { "left", KeyCode.LeftArrow },
-            { "arrowup",       KeyCode.UpArrow },         { "up", KeyCode.UpArrow },
-            { "arrowright",    KeyCode.RightArrow },      { "right", KeyCode.RightArrow },
-            { "arrowdown",     KeyCode.DownArrow },       { "down", KeyCode.DownArrow },
+            { "arrowleft",     KeyCode.LeftArrow },
+            { "arrowup",       KeyCode.UpArrow },
+            { "arrowright",    KeyCode.RightArrow },
+            { "arrowdown",     KeyCode.DownArrow },
             #endregion
 
             #region Numbers
