@@ -51,7 +51,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
         public void LateUpdate()
         {
             RB.velocity = Vector3.zero; RB.angularVelocity = Vector3.zero;
-            RB.position = Offset.TransformPoint(Offset.localPosition);
+            RB.position = Vector3.Lerp(RB.position, Offset.TransformPoint(Offset.localPosition), Time.deltaTime);
         }
 
         public void MoveOrRotate(Vector2 V)

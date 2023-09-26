@@ -46,10 +46,8 @@ namespace Plugin.VRTRAKILL
             => (bool)!NewMovement.Instance?.activated || (bool)!NewMovement.Instance?.enabled
             || (bool)!CameraController.Instance?.activated;
 
-        public static int Weapons
-            => GunControl.Instance?.allWeapons.Count ?? 0;
-        public static int Arms
-            => FistControl.Instance?.spawnedArms.Count ?? 0;
+        public static bool GunControlCheck
+            => !(bool)GunControl.Instance?.activated || (bool)GunControl.Instance?.noWeapons;
         #endregion
 
         #region Cameras

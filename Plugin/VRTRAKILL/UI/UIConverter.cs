@@ -27,18 +27,16 @@ namespace Plugin.VRTRAKILL.UI
                 UIEventCamera.fieldOfView = 1;
                 UIEventCamera.nearClipPlane = .01f;
                 UIEventCamera.cullingMask = -1;
-
-                UIEventCamera.transform.parent = Vars.NonDominantHand.transform;
             }
             else UIEventCamera = UICamera;
             UIEventCamera.gameObject.AddComponent<UIInteraction>();
 
-            foreach (Canvas C in Object.FindObjectsOfType<Canvas>())
+            foreach (Canvas C in Resources.FindObjectsOfTypeAll(typeof(Canvas)))
                 if (!Util.Misc.HasComponent<UICanvas>(C.gameObject))
                     RecursiveConvertCanvas();
         }
 
-        private static void RecursiveConvertCanvas(GameObject GO = null)
+        public static void RecursiveConvertCanvas(GameObject GO = null)
         {
             if (GO != null)
             {
@@ -57,9 +55,8 @@ namespace Plugin.VRTRAKILL.UI
         }
         public static void ConvertCanvas(Canvas C, bool Force = false, bool DontAddComponent = false)
         {
-            if (!Force && C.renderMode != RenderMode.ScreenSpaceOverlay) return;
-
             C.worldCamera = UIEventCamera;
+            if (!Force && C.renderMode != RenderMode.ScreenSpaceOverlay) return;
             C.renderMode = RenderMode.WorldSpace;
             C.gameObject.layer = (int)Layers.UI;
             if (!DontAddComponent) C.gameObject.AddComponent<UICanvas>();

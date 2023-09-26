@@ -16,6 +16,7 @@ namespace Plugin.VRTRAKILL
         public static GameObject HandPose_Railgun { get; private set; }
 
         public static GameObject Controller_D { get; private set; }
+        public static GameObject Controller_D_Sandbox { get; private set; }
         public static GameObject Controller_ND { get; private set; }
 
         public static GameObject UI_GTFOTW { get; private set; }
@@ -34,8 +35,9 @@ namespace Plugin.VRTRAKILL
             HandPose_Sawblade = Object.Instantiate(LoadAsset<GameObject>(Assets, "Arms/Feedbacker/Hand_Sawblade.prefab"), DefaultPos, DefaultRot);
             HandPose_Railgun = Object.Instantiate(LoadAsset<GameObject>(Assets, "Arms/Feedbacker/Hand_Railgun.prefab"), DefaultPos, DefaultRot);
 
-            Controller_D = Object.Instantiate(LoadAsset<GameObject>(Assets, "Arms/Controllers/Controller_Quest_D"), DefaultPos, DefaultRot);
-            Controller_ND = Object.Instantiate(LoadAsset<GameObject>(Assets, "Arms/Controllers/Controller_Quest_ND"), DefaultPos, DefaultRot);
+            Controller_D = Object.Instantiate(LoadAsset<GameObject>(Assets, "Arms/Controllers/Quest/D.prefab"), DefaultPos, DefaultRot);
+            Controller_D_Sandbox = Object.Instantiate(LoadAsset<GameObject>(Assets, "Arms/Controllers/Quest/D_Sbox.prefab"), DefaultPos, DefaultRot);
+            Controller_ND = Object.Instantiate(LoadAsset<GameObject>(Assets, "Arms/Controllers/Quest/ND.prefab"), DefaultPos, DefaultRot);
 
             UI_GTFOTW = Object.Instantiate(LoadAsset<GameObject>(Assets, "UI/GetOutOfTheWall.prefab"), DefaultPos, DefaultRot);
 

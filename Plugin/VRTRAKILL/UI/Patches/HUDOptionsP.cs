@@ -40,9 +40,9 @@ namespace Plugin.VRTRAKILL.UI.Patches
         }
         [HarmonyPostfix] [HarmonyPatch(typeof(HUDOptions), nameof(HUDOptions.Start))] static void DeployGTFOTW(HUDOptions __instance)
         {
-            GameObject UI_GTFOTW = Object.Instantiate(Assets.Vars.UI_GTFOTW, Vector3.zero, Quaternion.identity, __instance.transform);
+            GameObject UI_GTFOTW = Object.Instantiate(Assets.UI_GTFOTW, Vector3.zero, Quaternion.identity, __instance.transform);
 
-            Assets.Vars.UI_GTFOTW.transform.localScale = Vector3.zero;
+            Assets.UI_GTFOTW.transform.localScale = Vector3.zero;
 
             UI_GTFOTW.transform.SetSiblingIndex(0);
             UI_GTFOTW.transform.localScale = Vector3.one;
@@ -53,8 +53,14 @@ namespace Plugin.VRTRAKILL.UI.Patches
 
             GTFOTW GTFOTW = UI_GTFOTW.AddComponent<GTFOTW>();
             GTFOTW.DetectorTransform = Vars.MainCamera.transform;
+        }
 
-            
+        [HarmonyPostfix] [HarmonyPatch(typeof(ScreenZone), nameof(ScreenZone.OnTriggerEnter))]
+        static void ConvertThing()
+        {
+            foreach (Canvas C in Resources.FindObjectsOfTypeAll(typeof(Canvas)))
+                if (!Util.Misc.HasComponent<UICanvas>(C.gameObject))
+                    UIConverter.RecursiveConvertCanvas();
         }
     }
 }
