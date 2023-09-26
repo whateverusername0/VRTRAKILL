@@ -29,6 +29,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
             CC = gameObject.GetComponent<ControllerController>();
             GunOffset = CC.GunOffset;
             LastPosition = transform.position;
+
+            if (Vars.Config.UIInteraction.ControllerBased)
+                UI.UIConverter.UIEventCamera.transform.parent = Vars.NonDominantHand.transform;
         }
 
         public void Update()
@@ -49,7 +52,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
 
         private void SetControllers()
         {
-            if (Vars.Arms == 0) CC.RenderModel.SetActive(true);
+            if (FistControl.Instance?.spawnedArms.Count == 0 || (bool)!FistControl.Instance?.activated) CC.RenderModel.SetActive(true);
             else CC.RenderModel.SetActive(false);
         }
     }
