@@ -64,15 +64,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         
         public void LateUpdate()
         {
-            
             if (Rig == null) return;
 
-            if (!Vars.IsPaused && !Vars.IsMainMenu)
-            {
-                HandleBodyRotation();
-                HandleHeadRotation();
-                HandleArms();
-            }
+            HandleBodyRotation();
+            HandleHeadRotation();
+            HandleArms();
         }
 
         private void HandleBodyRotation()
