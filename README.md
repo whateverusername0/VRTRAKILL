@@ -17,15 +17,14 @@ Also it does not require any other mods to function.
 ### What works right now:
 It'll be much easier to describe what **doesn't** work.
 ### What doesn't work right now:
-- Controller-based UI interaction.
 - Accessibility stuff. (left-handed mode, something else, blabla)
-- 5-S.
-- 4-S.
+- 4-S, 5-S.
 - VRAvatar's legs.
 ### Planned stuff:
 **1.0**: Full release (when i think that nothing more can be done)  
 **1.x.x**: Mods compatibility (JAKET, ultraballing, etc.) (angry level loader works) (dab me up ![xzxADIxzx](https://github.com/xzxADIxzx))  
 **Future**: Maintenance updates  
+...and a separate UI for config edit, setup, uninstall and updating, since such actions might get complicated.
 
 ## Requirements
 - A copy of the latest version of ULTRAKILL (doesn't matter which one)
