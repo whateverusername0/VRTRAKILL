@@ -45,9 +45,6 @@ namespace Plugin.VRTRAKILL
         public static bool IsPlayerFrozen
             => (bool)!NewMovement.Instance?.activated || (bool)!NewMovement.Instance?.enabled
             || (bool)!CameraController.Instance?.activated;
-
-        public static bool GunControlCheck
-            => !(bool)GunControl.Instance?.activated || (bool)GunControl.Instance?.noWeapons;
         #endregion
 
         #region Cameras
