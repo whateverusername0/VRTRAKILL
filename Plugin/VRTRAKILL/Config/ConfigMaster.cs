@@ -46,17 +46,19 @@ namespace Plugin.VRTRAKILL.Config
             MSlot3 = null, MSlot4 = null, MSlot5 = null,
             MSlot6 = null, MSlot7 = null, MSlot8 = null, MSlot9 = null;
 
-        // joystickwhateverbutton is there because unity is angry when you pass it the null
+        // joystickwhateverbutton is there because unity is angry when you pass it as null
         public static UnityEngine.KeyCode?
-            ToggleDesktopView     = UnityEngine.KeyCode.Joystick8Button9,
+            ToggleDesktopView = UnityEngine.KeyCode.Joystick8Button9,
             ToggleSpectatorCamera = UnityEngine.KeyCode.Joystick8Button9,
-            EnumSpecCamMode       = UnityEngine.KeyCode.Joystick8Button9,
+            EnumSpecCamMode = UnityEngine.KeyCode.Joystick8Button9,
 
-            SpecCamUp             = UnityEngine.KeyCode.Joystick8Button9,
-            SpecCamDown           = UnityEngine.KeyCode.Joystick8Button9,
-            SpecCamLeft           = UnityEngine.KeyCode.Joystick8Button9,
-            SpecCamRight          = UnityEngine.KeyCode.Joystick8Button9,
-            SpecCamHoldMoveMode   = UnityEngine.KeyCode.Joystick8Button9;
+            SpecCamUp = UnityEngine.KeyCode.Joystick8Button9,
+            SpecCamDown = UnityEngine.KeyCode.Joystick8Button9,
+            SpecCamLeft = UnityEngine.KeyCode.Joystick8Button9,
+            SpecCamRight = UnityEngine.KeyCode.Joystick8Button9,
+            SpecCamHoldMoveMode = UnityEngine.KeyCode.Joystick8Button9,
+
+            ToggleAvatarCalibration = UnityEngine.KeyCode.Joystick8Button9;
 
         public static void Init()
         {

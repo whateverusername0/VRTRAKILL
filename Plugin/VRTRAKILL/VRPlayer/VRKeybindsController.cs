@@ -42,6 +42,16 @@ namespace Plugin.VRTRAKILL.VRPlayer
                 SubtitleController.Instance.DisplaySubtitle
                     ($"VR: Switched spectator camera mode to {System.Enum.GetName(typeof(SCMode), SpectatorCamera.Instance.Mode)}");
             }
+            if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.ToggleAvatarCalibration))
+            {
+                try
+                {
+                    if ((bool)(VRAvatar.AvatarSizeCalibrator.Instance?.enabled))
+                        VRAvatar.AvatarSizeCalibrator.Instance.enabled = false;
+                    else if ((bool)!VRAvatar.AvatarSizeCalibrator.Instance?.enabled)
+                        VRAvatar.AvatarSizeCalibrator.Instance.enabled = true;
+                } catch (System.NullReferenceException) { SubtitleController.Instance.DisplaySubtitle("Unable to toggle ASC!"); }
+            }
         }
 
         private void ToggleDesktopView()

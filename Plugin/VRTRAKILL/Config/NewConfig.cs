@@ -45,6 +45,8 @@ namespace Plugin.VRTRAKILL.Config
             [JsonProperty("Rotate/Move SpecCam Left")] public string SpecCamLeft { get; set; } = "LeftArrow";
             [JsonProperty("Rotate/Move SpecCam Right")] public string SpecCamRight { get; set; } = "RightArrow";
             [JsonProperty("Spectator Camera move mode (hold and use with the keys above)")] public string SpecCamMoveMode { get; set; } = "RightShift";
+
+            [JsonProperty("Toggle Avatar Calibration (PLACEHOLDER)")] public string ToggleAvatarCalibration { get; set; } = "J";
         }
 
         [JsonProperty("Movement multiplier")] public float MovementMultiplier { get; set; } = 0.575f;
