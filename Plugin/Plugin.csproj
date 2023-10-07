@@ -169,7 +169,6 @@
     <Compile Include="VRTRAKILL\VRPlayer\Arms\ArmController\ACBase.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\ArmController\WeaponArmCon.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\AddHandsP.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\ShootYourselfP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Patches\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\Armature\Finger.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\Armature\Hand.cs" />
