@@ -1,5 +1,4 @@
-﻿using GameConsole.Commands;
-using HarmonyLib;
+﻿using HarmonyLib;
 using UnityEngine;
 using Valve.VR;
 
@@ -25,14 +24,17 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
             ControllerController RCon = RHGO.AddComponent<ControllerController>();
             RCon.RenderModelOffsetPos = new Vector3(-.015f, -.105f, -.15f);
             RCon.RenderModelOffsetEulerAngles = new Vector3(75, 0, 0);
-            RCon.RenderModelOffsetScale = new Vector3(.65f, .65f, .65f);
+            RCon.RenderModelOffsetScale = new Vector3(-.65f, .65f, .65f);
 
             RHGO.transform.parent = Vars.VRCameraContainer.transform;
 
             if (Vars.Config.Controllers.DrawControllers)
             {
-                GameObject LHMGO = CreateControllerModel(SteamVR_Input_Sources.LeftHand); LHMGO.transform.parent = LHGO.transform;
-                GameObject RHMGO = CreateControllerModel(SteamVR_Input_Sources.RightHand); RHMGO.transform.parent = RHGO.transform;
+                GameObject LHMGO = CreateControllerModel(SteamVR_Input_Sources.LeftHand, out GameObject _);
+                LHMGO.transform.parent = LHGO.transform;
+
+                GameObject RHMGO = CreateControllerModel(SteamVR_Input_Sources.RightHand, out GameObject _);
+                RHMGO.transform.parent = RHGO.transform;
             }
 
             if (Vars.Config.Controllers.LeftHanded)
@@ -67,29 +69,46 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
             else throw new System.NotImplementedException();
             return GO;
         }
-        private static GameObject CreateControllerModel(SteamVR_Input_Sources Source, string Name = "Model")
+        private static GameObject CreateControllerModel(SteamVR_Input_Sources Source, out GameObject SandboxRM, string Name = "Model")
         {
             GameObject GO = new GameObject(Name) { layer = (int)Layers.IgnoreRaycast };
+            SandboxRM = null;
 
             Transform T;
             if (Source == SteamVR_Input_Sources.LeftHand)
             {
-                if (Vars.Config.Controllers.LeftHanded) T = Object.Instantiate(Assets.Controller_D).transform;
+                if (Vars.Config.Controllers.LeftHanded)
+                {
+                    T = Object.Instantiate(Assets.Controller_D).transform;
+                    SandboxRM = Object.Instantiate(Assets.Controller_D_Sandbox);
+                }
                 else T = Object.Instantiate(Assets.Controller_ND).transform;
                 T.parent = GO.transform;
                 T.localPosition = Vector3.zero;
             }
             else if (Source == SteamVR_Input_Sources.RightHand)
             {
-                
-                if (Vars.Config.Controllers.LeftHanded) T = Object.Instantiate(Assets.Controller_ND).transform;
-                else T = Object.Instantiate(Assets.Controller_D).transform;
+
+                if (Vars.Config.Controllers.LeftHanded)
+                    T = Object.Instantiate(Assets.Controller_ND).transform;
+                else
+                {
+                    T = Object.Instantiate(Assets.Controller_D).transform;
+                    SandboxRM = Object.Instantiate(Assets.Controller_D_Sandbox);
+                }
                 T.parent = GO.transform;
                 T.localPosition = Vector3.zero;
-                T.localScale = new Vector3(T.localScale.x * -1, T.localScale.y, T.localScale.z);
+                //T.localScale = new Vector3(T.localScale.x * -1, T.localScale.y, T.localScale.z);
             }
-
             else throw new System.NotImplementedException();
+
+            if (SandboxRM != null)
+            {
+                SandboxRM.transform.parent = GO.transform;
+                SandboxRM.transform.localPosition = Vector3.zero;
+                //SandboxRM.transform.localScale =
+                //    new Vector3(SandboxRM.transform.localScale.x * -1, SandboxRM.transform.localScale.y, SandboxRM.transform.localScale.z);
+            }
 
             return GO;
         }

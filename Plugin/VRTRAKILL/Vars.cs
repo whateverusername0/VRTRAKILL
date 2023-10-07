@@ -34,20 +34,17 @@ namespace Plugin.VRTRAKILL
 
         #region Checks n' Shits
         public static bool IsMainMenu
-            => (bool)(OptionsManager.Instance?.mainMenu);
+            => OptionsManager.Instance?.mainMenu ?? false;
         public static bool IsPaused
-            => (bool)(OptionsManager.Instance?.paused);
+            => OptionsManager.Instance?.paused ?? false;
         public static bool IsWeaponWheelPresent
-            => (bool)(WeaponWheel.Instance?.isActiveAndEnabled);
+        => WeaponWheel.Instance?.isActiveAndEnabled ?? false;
         public static bool IsPlayerUsingShop
-            => (bool)(FistControl.Instance?.shopping);
+            => FistControl.Instance?.shopping ?? false;
 
         public static bool IsPlayerFrozen
-            => (bool)!NewMovement.Instance?.activated || (bool)!NewMovement.Instance?.enabled
-            || (bool)!CameraController.Instance?.activated;
-
-        public static bool GunControlCheck
-            => !(bool)GunControl.Instance?.activated || (bool)GunControl.Instance?.noWeapons;
+            => (!NewMovement.Instance?.activated ?? false) || (!NewMovement.Instance?.enabled ?? false)
+            || (!CameraController.Instance?.activated ?? false);
         #endregion
 
         #region Cameras

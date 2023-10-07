@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VRPatcher", "VRPatcher\VRPa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin", "Plugin\Plugin.csproj", "{3FBB1FC9-B424-404C-B0C5-1A8AFFF14F5B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIManager", "UIManager\UIManager.csproj", "{D96A8CCE-8E12-4B15-A5E0-78CF404259EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{3FBB1FC9-B424-404C-B0C5-1A8AFFF14F5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FBB1FC9-B424-404C-B0C5-1A8AFFF14F5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FBB1FC9-B424-404C-B0C5-1A8AFFF14F5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D96A8CCE-8E12-4B15-A5E0-78CF404259EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D96A8CCE-8E12-4B15-A5E0-78CF404259EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D96A8CCE-8E12-4B15-A5E0-78CF404259EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D96A8CCE-8E12-4B15-A5E0-78CF404259EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

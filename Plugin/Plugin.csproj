@@ -26,7 +26,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\Release\</OutputPath>
+    <OutputPath>..\bin\Release\Plugin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -169,10 +169,10 @@
     <Compile Include="VRTRAKILL\VRPlayer\Arms\ArmController\ACBase.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\ArmController\WeaponArmCon.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\AddHandsP.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\ShootYourselfP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Patches\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\Armature\Finger.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\Armature\Hand.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\AvatarSizeCalibrator.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\SkinsManager.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\IKChain.cs" />
     <Compile Include="Util\Libraries\WindowsInput\IInputDeviceStateAdaptor.cs" />

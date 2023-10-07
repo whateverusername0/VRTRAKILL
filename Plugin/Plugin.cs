@@ -17,7 +17,7 @@ namespace Plugin
 
     // Dependencies (or other mods support)
     [BepInDependency("com.eternalUnion.pluginConfigurator", BepInDependency.DependencyFlags.SoftDependency)]
-
+    [BepInDependency("xzxADIxzx.Jaket", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInPlugin(PLUGIN_GUID, PLUGIN_NAME, PLUGIN_VERSION)] public sealed class Plugin : BaseUnityPlugin
     {
         internal static ManualLogSource PLog { get; private set; }
@@ -91,7 +91,7 @@ namespace Plugin
             foreach (var Plugin in Chainloader.PluginInfos)
             {
                 VRTRAKILL.ModSupport.Initializers.Mods.TryGetValue(Plugin.Value.Metadata.GUID, out System.Action<object> A);
-                A.Invoke(null);
+                A?.Invoke(null);
             }
         }
     }

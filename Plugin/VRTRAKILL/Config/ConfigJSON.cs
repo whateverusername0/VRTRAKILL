@@ -16,8 +16,8 @@ namespace Plugin.VRTRAKILL.Config
 
         public static ConfigJSON GetConfig()
         {
-            if (Instance != null) return Instance;
-            else { Instance = Deserialize(); return Instance; }
+            if (Instance == null) Instance = Deserialize();
+            return Instance;
         }
 
         public static ConfigJSON Deserialize()

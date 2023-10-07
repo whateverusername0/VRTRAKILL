@@ -60,6 +60,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             AddIK(Rig.NeckEnd.gameObject, Rig.Head.GetChild(0).GetChild(0), 2);
 
             //gameObject.AddComponent<SkinsManager>();
+            //var ASC = gameObject.AddComponent<AvatarSizeCalibrator>(); ASC.enabled = false;
         }
         
         public void LateUpdate()
@@ -68,7 +69,17 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
 
             HandleBodyRotation();
             HandleHeadRotation();
-            HandleArms();
+
+            if (!Vars.IsMainMenu)
+                HandleArms();
+            else
+            {
+                Rig.FeedbackerA.GameObjecT.gameObject.SetActive(true);
+                Rig.FeedbackerB.GameObjecT.gameObject.SetActive(true);
+                Rig.Knuckleblaster.GameObjecT.gameObject.SetActive(false);
+                Rig.Whiplash.GameObjecT.gameObject.SetActive(false);
+                Rig.Sandboxer.GameObjecT.gameObject.SetActive(false);
+            }
         }
 
         private void HandleBodyRotation()
@@ -88,16 +99,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         }
         private void HandleArms()
         {
-            // Main Menu
-            if (Vars.IsMainMenu)
-            {
-                Rig.FeedbackerA.GameObjecT.gameObject.SetActive(true);
-                Rig.FeedbackerB.GameObjecT.gameObject.SetActive(true);
-                Rig.Knuckleblaster.GameObjecT.gameObject.SetActive(false);
-                Rig.Whiplash.GameObjecT.gameObject.SetActive(false);
-                Rig.Sandboxer.GameObjecT.gameObject.SetActive(false);
-            }
-
             // Arm to render
             if (GunControl.Instance != null
             && GunControl.Instance.currentWeapon != null
@@ -129,6 +130,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
                 case FistType.Spear: break;
             }
 
+            // Whiplash
             if (HookArm.Instance != null && HookArm.Instance.enabled
             && HookArm.Instance.model.activeSelf && !Vars.Config.MBP.CameraWhiplash)
             {
