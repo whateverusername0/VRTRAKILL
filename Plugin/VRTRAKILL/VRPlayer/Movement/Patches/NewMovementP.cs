@@ -395,9 +395,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                     __instance.boostLeft = 100f;
                     __instance.boost = true;
 
-                    __instance.dodgeDirection = __instance.movementDirection.normalized * Vars.Config.MovementMultiplier;
+                    __instance.dodgeDirection = __instance.movementDirection.normalized;
                     if (__instance.dodgeDirection == Vector3.zero)
-                        __instance.dodgeDirection = __instance.transform.forward * Vars.Config.MovementMultiplier;
+                        __instance.dodgeDirection = __instance.transform.forward;
 
                     Quaternion identity = Quaternion.identity;
                     identity.SetLookRotation(__instance.dodgeDirection * -1f);
