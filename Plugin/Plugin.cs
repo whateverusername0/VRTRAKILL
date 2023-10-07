@@ -17,7 +17,7 @@ namespace Plugin
 
     // Dependencies (or other mods support)
     [BepInDependency("com.eternalUnion.pluginConfigurator", BepInDependency.DependencyFlags.SoftDependency)]
-
+    [BepInDependency("xzxADIxzx.Jaket", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInPlugin(PLUGIN_GUID, PLUGIN_NAME, PLUGIN_VERSION)] public sealed class Plugin : BaseUnityPlugin
     {
         internal static ManualLogSource PLog { get; private set; }
