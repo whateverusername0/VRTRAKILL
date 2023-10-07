@@ -91,7 +91,7 @@ namespace Plugin
             foreach (var Plugin in Chainloader.PluginInfos)
             {
                 VRTRAKILL.ModSupport.Initializers.Mods.TryGetValue(Plugin.Value.Metadata.GUID, out System.Action<object> A);
-                A.Invoke(null);
+                A?.Invoke(null);
             }
         }
     }
