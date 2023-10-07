@@ -53,7 +53,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers
         private void SetControllers()
         {
             if ((FistControl.Instance?.spawnedArms.Count == 0 && !Vars.IsPlayerFrozen)
-            || ((bool)!FistControl.Instance?.activated && FistControl.Instance?.spawnedArms.Count == 0))
+            || ((bool)!FistControl.Instance?.activated && FistControl.Instance?.spawnedArms.Count == 0)
+            || Vars.IsMainMenu)
                 CC.RenderModel.SetActive(true);
             else CC.RenderModel.SetActive(false);
         }
