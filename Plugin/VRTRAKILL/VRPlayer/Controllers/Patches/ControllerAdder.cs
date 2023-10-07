@@ -1,5 +1,4 @@
-﻿using GameConsole.Commands;
-using HarmonyLib;
+﻿using HarmonyLib;
 using UnityEngine;
 using Valve.VR;
 
@@ -25,16 +24,16 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
             ControllerController RCon = RHGO.AddComponent<ControllerController>();
             RCon.RenderModelOffsetPos = new Vector3(-.015f, -.105f, -.15f);
             RCon.RenderModelOffsetEulerAngles = new Vector3(75, 0, 0);
-            RCon.RenderModelOffsetScale = new Vector3(.65f, .65f, .65f);
+            RCon.RenderModelOffsetScale = new Vector3(-.65f, .65f, .65f);
 
             RHGO.transform.parent = Vars.VRCameraContainer.transform;
 
             if (Vars.Config.Controllers.DrawControllers)
             {
-                GameObject LHMGO = CreateControllerModel(SteamVR_Input_Sources.LeftHand, out GameObject SandboxRM);
+                GameObject LHMGO = CreateControllerModel(SteamVR_Input_Sources.LeftHand, out GameObject _);
                 LHMGO.transform.parent = LHGO.transform;
 
-                GameObject RHMGO = CreateControllerModel(SteamVR_Input_Sources.RightHand, out GameObject Null);
+                GameObject RHMGO = CreateControllerModel(SteamVR_Input_Sources.RightHand, out GameObject _);
                 RHMGO.transform.parent = RHGO.transform;
             }
 
@@ -99,7 +98,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
                 }
                 T.parent = GO.transform;
                 T.localPosition = Vector3.zero;
-                T.localScale = new Vector3(T.localScale.x * -1, T.localScale.y, T.localScale.z);
+                //T.localScale = new Vector3(T.localScale.x * -1, T.localScale.y, T.localScale.z);
             }
             else throw new System.NotImplementedException();
 
@@ -107,8 +106,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
             {
                 SandboxRM.transform.parent = GO.transform;
                 SandboxRM.transform.localPosition = Vector3.zero;
-                SandboxRM.transform.localScale =
-                    new Vector3(SandboxRM.transform.localScale.x * -1, SandboxRM.transform.localScale.y, SandboxRM.transform.localScale.z);
+                //SandboxRM.transform.localScale =
+                //    new Vector3(SandboxRM.transform.localScale.x * -1, SandboxRM.transform.localScale.y, SandboxRM.transform.localScale.z);
             }
 
             return GO;
