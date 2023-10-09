@@ -36,6 +36,8 @@ namespace Plugin
         {
             PLog = Logger;
 
+            Versioning.CheckForUpdates();
+
             VRTRAKILL.Config.ConfigMaster.Init();
             PatchStuff();
             SceneWorker.Init();
