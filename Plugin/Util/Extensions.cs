@@ -26,5 +26,11 @@ namespace Plugin.Util
             Config.GetType().GetProperty(SettingName).SetValue(Config, Value);
             File.WriteAllText(ConfigMaster.ConfigPath, JsonConvert.SerializeObject(Config, Formatting.Indented));
         }
+        public static KeyCode ToKeyCode(this object O)
+        {
+            if (VRTRAKILL.Input.InputMap.UKeys.TryGetValue(O.ToString(), out KeyCode? A))
+                return (KeyCode)A;
+            else return 0;
+        }
     }
 }
