@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using HarmonyLib;
+using Plugin.Util;
 
 namespace Plugin.VRTRAKILL.UI.Patches
 {
@@ -49,7 +50,7 @@ namespace Plugin.VRTRAKILL.UI.Patches
             UI_GTFOTW.transform.localPosition = Vector3.zero;
 
             UIConverter.ConvertCanvas(UI_GTFOTW.GetComponent<Canvas>());
-            Util.Misc.RecursiveChangeLayer(UI_GTFOTW, (int)Layers.UI);
+            Util.Unity.RecursiveChangeLayer(UI_GTFOTW, (int)Layers.UI);
 
             GTFOTW GTFOTW = UI_GTFOTW.AddComponent<GTFOTW>();
             GTFOTW.DetectorTransform = Vars.MainCamera.transform;
@@ -59,7 +60,7 @@ namespace Plugin.VRTRAKILL.UI.Patches
         static void ConvertThing()
         {
             foreach (Canvas C in Resources.FindObjectsOfTypeAll(typeof(Canvas)))
-                if (!Util.Misc.HasComponent<UICanvas>(C.gameObject))
+                if (!C.gameObject.HasComponent<UICanvas>())
                     UIConverter.RecursiveConvertCanvas();
         }
     }

@@ -15,7 +15,7 @@ namespace Plugin.VRTRAKILL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "<Pending>")]
         private static void SceneChanged(Scene S)
         {
-            Misc.EnableOffscreenRendering();
+            Util.Unity.EnableOffscreenRendering();
 
             Config.ConfigJSON.Instance = null; // reload config
 

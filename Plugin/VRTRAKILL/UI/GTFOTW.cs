@@ -28,7 +28,7 @@ namespace Plugin.VRTRAKILL.UI
 
         public void Update()
         {
-            if (Util.Misc.DetectCollisions(DetectorTransform.position, .1f, (int)Layers.Environment) > 0)
+            if (Util.Unity.DetectCollisions(DetectorTransform.position, .1f, (int)Layers.Environment) > 0)
                 ShouldShow = true;
             else ShouldShow = false;
 

@@ -28,7 +28,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         public void Start()
         {
             if (Rig == null) Rig = MetaRig.CreateVCustomPreset(Vars.VRCameraContainer, "VR Avatar");
-            Misc.RecursiveChangeLayer(Rig.GameObjectT.gameObject, (int)Layers.AlwaysOnTop);
+            Util.Unity.RecursiveChangeLayer(Rig.GameObjectT.gameObject, (int)Layers.AlwaysOnTop);
 
             // transform shenanigans
             Rig.GameObjectT.localPosition = Vector3.zero;

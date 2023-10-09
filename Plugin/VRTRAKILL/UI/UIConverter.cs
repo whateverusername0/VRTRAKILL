@@ -1,6 +1,7 @@
 ﻿using Plugin.VRTRAKILL.VRPlayer.Controllers;
 using UnityEngine;
 using UnityEngine.UI;
+using Plugin.Util;
 
 namespace Plugin.VRTRAKILL.UI
 {
@@ -32,7 +33,7 @@ namespace Plugin.VRTRAKILL.UI
             UIEventCamera.gameObject.AddComponent<UIInteraction>();
 
             foreach (Canvas C in Resources.FindObjectsOfTypeAll(typeof(Canvas)))
-                if (!Util.Misc.HasComponent<UICanvas>(C.gameObject))
+                if (!C.gameObject.HasComponent<UICanvas>())
                     RecursiveConvertCanvas();
         }
 
@@ -49,7 +50,7 @@ namespace Plugin.VRTRAKILL.UI
             else
             {
                 foreach (Canvas C in Object.FindObjectsOfType<Canvas>())
-                    if (!Util.Misc.HasComponent<UICanvas>(C.gameObject))
+                    if (!C.gameObject.HasComponent<UICanvas>())
                         try { ConvertCanvas(C); } catch {}
             }
         }

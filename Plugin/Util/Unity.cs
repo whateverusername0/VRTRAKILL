@@ -2,11 +2,8 @@
 
 namespace Plugin.Util
 {
-    static class Misc
+    static class Unity
     {
-        public static bool HasComponent<T>(this GameObject GM) where T : Component
-        { return GM.GetComponent<T>() != null; }
-
         public static GameObject ForceFindGameObject(string Name)
         {
             foreach (GameObject GO in Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[])
