@@ -13,6 +13,8 @@ namespace Plugin.VRTRAKILL.Compatibility
 {
     internal static class PluginConfigurator
     {
+        // You gotta love pluginconfigurator for all the bloat you need to write :) (eternalUnion i fucking hate you)
+
         private static PluginConfig.API.PluginConfigurator PC;
 
         // this shit doesn't scale!
@@ -33,10 +35,14 @@ namespace Plugin.VRTRAKILL.Compatibility
         {
             PC = PluginConfig.API.PluginConfigurator.Create(PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_GUID);
             new ButtonField(PC.rootPanel, "RESTART SCENE (UPDATES CONFIG)", "btnRestartScene").onClick += RestartScene;
-            new ConfigHeader(PC.rootPanel, "WORK IN PROGRESS! All of the fields below are WORKING, but the rest is incomplete.");
+            new ConfigHeader(PC.rootPanel, "WORK IN PROGRESS! All of the fields below are WORKING, but the rest is incomplete.") { textColor = Color.red };
 
-            // You gotta love pluginconfigurator for all the bloat you need to write :) (eternalUnion i fucking hate you)
-            #region UK Keybinds
+            AddUKKeybindsPanel();
+            AddVRKeybindsPanel();
+        }
+
+        private static void AddUKKeybindsPanel()
+        {
             UKKeybinds = new ConfigPanel(PC.rootPanel, "ULTRAKILL Keybinds (MUST BE IN SYNC WITH THE BASE GAME!)", "UKKeybinds");
 
             Shoot = new KeyCodeField(UKKeybinds, "Shoot", "ukkShoot", Vars.Config.UKKeybinds.Shoot.ToKeyCode());
@@ -84,11 +90,10 @@ namespace Plugin.VRTRAKILL.Compatibility
             Slot8.onValueChange += (o) => { Vars.Config.ChangeWrite(nameof(Vars.Config.UKKeybinds.Slot8), Enum.GetName(typeof(KeyCode), o.value)); };
             Slot9.onValueChange += (o) => { Vars.Config.ChangeWrite(nameof(Vars.Config.UKKeybinds.Slot9), Enum.GetName(typeof(KeyCode), o.value)); };
             Slot0.onValueChange += (o) => { Vars.Config.ChangeWrite(nameof(Vars.Config.UKKeybinds.Slot0), Enum.GetName(typeof(KeyCode), o.value)); };
-            #endregion
-
-            #region VRKeybinds
+        }
+        private static void AddVRKeybindsPanel()
+        {
             VRKeybinds = new ConfigPanel(PC.rootPanel, "VRTRAKILL Keybinds", "VRKeybinds");
-            #endregion
         }
 
         public static void RestartScene()
