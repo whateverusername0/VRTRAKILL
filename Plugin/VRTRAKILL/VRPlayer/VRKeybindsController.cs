@@ -18,10 +18,10 @@ namespace Plugin.VRTRAKILL.VRPlayer
                 Vars.DesktopUICamera.gameObject.SetActive(true);
             }
 
-            if (SpectatorCamera.Instance != null)
+            if (ThirdPersonCamera.Instance != null)
                 if (Vars.Config.DesktopView.SpectatorCamera.Mode <= 2 || Vars.Config.DesktopView.SpectatorCamera.Mode >= 0)
-                    SpectatorCamera.Instance.Mode = (SCMode)Vars.Config.DesktopView.SpectatorCamera.Mode;
-                else SpectatorCamera.Instance.Mode = 0;
+                    ThirdPersonCamera.Instance.Mode = (SCMode)Vars.Config.DesktopView.SpectatorCamera.Mode;
+                else ThirdPersonCamera.Instance.Mode = 0;
         }
 
         public void Update()
@@ -38,9 +38,9 @@ namespace Plugin.VRTRAKILL.VRPlayer
             }
             if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.EnumSpecCamMode))
             {
-                SpectatorCamera.Instance.EnumSCMode();
+                ThirdPersonCamera.Instance.EnumSCMode();
                 SubtitleController.Instance.DisplaySubtitle
-                    ($"VR: Switched spectator camera mode to {System.Enum.GetName(typeof(SCMode), SpectatorCamera.Instance.Mode)}");
+                    ($"VR: Switched spectator camera mode to {System.Enum.GetName(typeof(SCMode), ThirdPersonCamera.Instance.Mode)}");
             }
             if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.ToggleAvatarCalibration))
             {

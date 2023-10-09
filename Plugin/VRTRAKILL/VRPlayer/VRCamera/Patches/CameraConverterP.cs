@@ -58,7 +58,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
             SCRB.constraints = RigidbodyConstraints.FreezeRotation;
             SphereCollider SCSC = SpectatorCam.gameObject.AddComponent<SphereCollider>(); SCSC.radius = .01f;
 
-            SpectatorCamera SPC = SCContainer.AddComponent<SpectatorCamera>();
+            ThirdPersonCamera SPC = SCContainer.AddComponent<ThirdPersonCamera>();
             SPC.FollowTarget = Vars.MainCamera.transform;
             SPC.Offset = SCOffset.transform;
             SPC.RB = SCRB;

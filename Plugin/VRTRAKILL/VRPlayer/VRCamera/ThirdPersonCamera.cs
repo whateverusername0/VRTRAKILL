@@ -9,7 +9,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
         RotateAround = 1,
         Fixed = 2
     }
-    internal class SpectatorCamera : MonoSingleton<SpectatorCamera>
+    internal class ThirdPersonCamera : MonoSingleton<ThirdPersonCamera>
     {
         public SCMode Mode = SCMode.Follow;
 
@@ -32,7 +32,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
 
         public void Update()
         {
-            Util.Misc.CopyCameraValues(SPCam, Vars.DesktopCamera);
+            Util.Unity.CopyCameraValues(SPCam, Vars.DesktopCamera);
             transform.position = FollowTarget.position;
 
             switch (Mode)
