@@ -52,7 +52,7 @@ namespace Plugin.VRTRAKILL
         }
         public static AssetBundle LoadBundle(string BundleName, string Path = null)
         {
-            if (Path == null) Path = $"{Plugin.PluginPath}\\";
+            if (Path == null) Path = $"{PluginInfo.PluginPath}\\";
             return AssetBundle.LoadFromFile($"{Path}\\{BundleName}");
         }
     }

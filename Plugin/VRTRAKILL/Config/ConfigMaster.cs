@@ -9,7 +9,7 @@ namespace Plugin.VRTRAKILL.Config
 {
     internal sealed class ConfigMaster
     {
-        public static string ConfigPath = $"{Plugin.PluginPath}\\VRTRAKILL_Config.json";
+        public static string ConfigPath = $"{PluginInfo.PluginPath}\\VRTRAKILL_Config.json";
 
         public static VirtualKeyCode?
             KShoot = null, KAltShoot = null, KPunch = null ,
@@ -141,23 +141,19 @@ namespace Plugin.VRTRAKILL.Config
             try
             {
                 InputMap.UKeys.TryGetValue(VRConfig.ToggleDV, out ToggleDesktopView);
-                InputMap.UKeys.TryGetValue(VRConfig.ToggleSC, out ToggleSpectatorCamera);
-                InputMap.UKeys.TryGetValue(VRConfig.EnumSCMode, out EnumSpecCamMode);
-                InputMap.UKeys.TryGetValue(VRConfig.SpecCamLeft, out SpecCamLeft);
-                InputMap.UKeys.TryGetValue(VRConfig.SpecCamUp, out SpecCamUp);
-                InputMap.UKeys.TryGetValue(VRConfig.SpecCamRight, out SpecCamRight);
-                InputMap.UKeys.TryGetValue(VRConfig.SpecCamDown, out SpecCamDown);
-                InputMap.UKeys.TryGetValue(VRConfig.SpecCamMoveMode, out SpecCamHoldMoveMode);
+                InputMap.UKeys.TryGetValue(VRConfig.ToggleTPC, out ToggleSpectatorCamera);
+                InputMap.UKeys.TryGetValue(VRConfig.EnumTPCMode, out EnumSpecCamMode);
+                InputMap.UKeys.TryGetValue(VRConfig.TPCamLeft, out SpecCamLeft);
+                InputMap.UKeys.TryGetValue(VRConfig.TPCamUp, out SpecCamUp);
+                InputMap.UKeys.TryGetValue(VRConfig.TPCamRight, out SpecCamRight);
+                InputMap.UKeys.TryGetValue(VRConfig.TPCamDown, out SpecCamDown);
+                InputMap.UKeys.TryGetValue(VRConfig.TPCamMoveMode, out SpecCamHoldMoveMode);
             }
             catch (Exception)
             {
                 Vars.Log.LogError("Unable to convert keys in config. Perhaps mismatch? Perhaps keys are null?" +
                                   "Check spelling and replace every null key either with \"\", \"Empty\" or assign a value to it.");
             }
-        }
-        private static void AutoConvertUKBindsToKeys()
-        {
-
         }
 
         private readonly PlayerInput PI = new PlayerInput();
