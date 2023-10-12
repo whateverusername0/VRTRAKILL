@@ -12,15 +12,15 @@ namespace Plugin.VRTRAKILL.VRPlayer
         {
             if (Vars.Config.DesktopView.Enabled)
             {
-                if (Vars.Config.DesktopView.SpectatorCamera.Enabled)
+                if (Vars.Config.DesktopView.ThirdPersonCamera.Enabled)
                     Vars.SpectatorCamera.SetActive(true);
                 else Vars.DesktopCamera.gameObject.SetActive(true);
                 Vars.DesktopUICamera.gameObject.SetActive(true);
             }
 
             if (ThirdPersonCamera.Instance != null)
-                if (Vars.Config.DesktopView.SpectatorCamera.Mode <= 2 || Vars.Config.DesktopView.SpectatorCamera.Mode >= 0)
-                    ThirdPersonCamera.Instance.Mode = (SCMode)Vars.Config.DesktopView.SpectatorCamera.Mode;
+                if (Vars.Config.DesktopView.ThirdPersonCamera.Mode <= 2 || Vars.Config.DesktopView.ThirdPersonCamera.Mode >= 0)
+                    ThirdPersonCamera.Instance.Mode = (SCMode)Vars.Config.DesktopView.ThirdPersonCamera.Mode;
                 else ThirdPersonCamera.Instance.Mode = 0;
         }
 
