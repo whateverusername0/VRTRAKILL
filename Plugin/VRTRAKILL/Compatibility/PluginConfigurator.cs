@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 using System;
 using Object = UnityEngine.Object;
 using Plugin.Util;
-using Plugin.VRTRAKILL.Input;
 
 namespace Plugin.VRTRAKILL.Compatibility
 {
@@ -18,6 +17,7 @@ namespace Plugin.VRTRAKILL.Compatibility
         private static PluginConfig.API.PluginConfigurator PC;
 
         // this shit doesn't scale!
+        #region UKKeybinds
         public static ConfigPanel UKKeybinds;
         static KeyCodeField
             Shoot, AltShoot, Punch,
@@ -26,24 +26,82 @@ namespace Plugin.VRTRAKILL.Compatibility
             SwapHand, Whiplash, Escape,
             Slot1, Slot2, Slot3, Slot4, Slot5, Slot6, Slot7, Slot8, Slot9, Slot0;
         static StringField IterateWeapon;
-
+        #endregion
+        #region VRKeybinds
         public static ConfigPanel VRKeybinds;
+        static KeyCodeField
+            ToggleDV, ToggleTPC, EnumTPCMode,
+            TPCamUp, TPCamDown, TPCamLeft, TPCamRight,
+            TPCamMoveMode,
+            ToggleAvatarCalibration;
+        #endregion
+        static FloatField MovementMultiplier;
+        #region Controllers
+        static ConfigPanel Controllers;
+        static FloatField Deadzone, SmoothSpeed, SnapAngles;
+        static BoolField SnapTurn, DrawControllers, EnableHaptics, LeftHanded;
+        #endregion
+        #region CBS
+        static ConfigPanel CBS;
+        static BoolField EnableCBS;
+        static BoolField EnableCrosshair;
+        static FloatField CrosshairDistance;
+        #endregion
+        #region MBP
+        static ConfigPanel MBP;
+        static BoolField EnableMBP;
+        static BoolField ToggleVelocity, EnableNDHCoinThrow, CameraWhiplash;
+        static FloatField PunchingSpeed;
+        #endregion
+        #region VRBody
+        static ConfigPanel VRBody;
+        static BoolField EnableVRBody;
+        #endregion
+        #region UIInteraction
+        static ConfigPanel UIInteraction;
+        static FloatField UISize;
+        static BoolField ControlerBased;
+        static ConfigPanel CLines;
+        static BoolField CLEnabled; static FloatField StartAlpha, EndAlpha;
+        #endregion
+        #region DesktopView
+        static ConfigPanel DesktopView;
+        static BoolField DVEnabled;
+        static FloatField WCFOV, UICFOV;
 
-
+        static BoolField SCEnabled;
+        static FloatField SCMode;
+        #endregion
+        #region Misc
+        static ConfigPanel Misc;
+        #endregion
 
         public static void Init()
         {
             PC = PluginConfig.API.PluginConfigurator.Create(PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_GUID);
-            new ButtonField(PC.rootPanel, "RESTART SCENE (UPDATES CONFIG)", "btnRestartScene").onClick += RestartScene;
-            new ConfigHeader(PC.rootPanel, "WORK IN PROGRESS! All of the fields below are WORKING, but the rest is incomplete.") { textColor = Color.red };
+            PC.saveToFile = false;
+            new ButtonField(PC.rootPanel, "RESTART SCENE (MUST NOT BE IN MAIN MENU)", "btnRestartScene").onClick += RestartScene;
+            new ConfigHeader(PC.rootPanel, "To apply settings, restart the scene by pressing the button above.") { textColor = Color.yellow };
 
             AddUKKeybindsPanel();
             AddVRKeybindsPanel();
+
+            MovementMultiplier = new FloatField(PC.rootPanel, "Movement Multiplier (affects player force)", "MMP", Vars.Config.MovementMultiplier);
+            MovementMultiplier.onValueChange += (o) => Vars.Config.ChangeWrite(nameof(Vars.Config.MovementMultiplier), o.value);
+
+            AddControllersPanel();
+            AddCBSPanel();
+            AddMBPPanel();
+            AddVRBodyPanel();
+            AddUIIPanel();
+            AddDVPanel();
+            AddMiscPanel();
         }
 
         private static void AddUKKeybindsPanel()
         {
-            UKKeybinds = new ConfigPanel(PC.rootPanel, "ULTRAKILL Keybinds (MUST BE IN SYNC WITH THE BASE GAME!)", "UKKeybinds");
+            UKKeybinds = new ConfigPanel(PC.rootPanel, "ULTRAKILL Keybinds", "UKKeybinds");
+            new ConfigHeader(UKKeybinds, "MUST BE IN SYNC WITH THE BASE GAME!") { textColor = Color.yellow };
 
             Shoot = new KeyCodeField(UKKeybinds, "Shoot", "ukkShoot", Vars.Config.UKKeybinds.Shoot.ToKeyCode());
             AltShoot = new KeyCodeField(UKKeybinds, "Alternative Fire", "ukkAltShoot", Vars.Config.UKKeybinds.AltShoot.ToKeyCode());
@@ -68,33 +126,124 @@ namespace Plugin.VRTRAKILL.Compatibility
             Slot9 = new KeyCodeField(UKKeybinds, "Slot 9", "ukkSlot9", Vars.Config.UKKeybinds.Slot9.ToKeyCode());
             Slot0 = new KeyCodeField(UKKeybinds, "Slot 0", "ukkSlot0", Vars.Config.UKKeybinds.Slot0.ToKeyCode());
 
-            Shoot.onValueChange += (o) => { Vars.Config.ChangeWrite(nameof(Vars.Config.UKKeybinds.Shoot), Enum.GetName(typeof(KeyCode), o.value)); };
-            AltShoot.onValueChange += (o) => { Vars.Config.ChangeWrite(nameof(Vars.Config.UKKeybinds.AltShoot), Enum.GetName(typeof(KeyCode), o.value)); };
-            Punch.onValueChange += (o) => { Vars.Config.ChangeWrite(nameof(Vars.Config.UKKeybinds.Punch), Enum.GetName(typeof(KeyCode), o.value)); };
-            Jump.onValueChange += (o) => { Vars.Config.ChangeWrite(nameof(Vars.Config.UKKeybinds.Jump), Enum.GetName(typeof(KeyCode), o.value)); };
-            Slide.onValueChange += (o) => { Vars.Config.ChangeWrite(nameof(Vars.Config.UKKeybinds.Slide), Enum.GetName(typeof(KeyCode), o.value)); };
-            Dash.onValueChange += (o) => { Vars.Config.ChangeWrite(nameof(Vars.Config.UKKeybinds.Dash), Enum.GetName(typeof(KeyCode), o.value)); };
-            LastWeaponUsed.onValueChange += (o) => { Vars.Config.ChangeWrite(nameof(Vars.Config.UKKeybinds.LastWeaponUsed), Enum.GetName(typeof(KeyCode), o.value)); };
-            ChangeWeaponVariation.onValueChange += (o) => { Vars.Config.ChangeWrite(nameof(Vars.Config.UKKeybinds.ChangeWeaponVariation), Enum.GetName(typeof(KeyCode), o.value)); };
-            IterateWeapon.onValueChange += (o) => { Vars.Config.ChangeWrite(nameof(Vars.Config.UKKeybinds.IterateWeapon), Enum.GetName(typeof(KeyCode), o.value)); };
-            SwapHand.onValueChange += (o) => { Vars.Config.ChangeWrite(nameof(Vars.Config.UKKeybinds.SwapHand), Enum.GetName(typeof(KeyCode), o.value)); };
-            Whiplash.onValueChange += (o) => { Vars.Config.ChangeWrite(nameof(Vars.Config.UKKeybinds.Whiplash), Enum.GetName(typeof(KeyCode), o.value)); };
-            Escape.onValueChange += (o) => { Vars.Config.ChangeWrite(nameof(Vars.Config.UKKeybinds.Escape), Enum.GetName(typeof(KeyCode), o.value)); };
-            Slot1.onValueChange += (o) => { Vars.Config.ChangeWrite(nameof(Vars.Config.UKKeybinds.Slot1), Enum.GetName(typeof(KeyCode), o.value)); };
-            Slot2.onValueChange += (o) => { Vars.Config.ChangeWrite(nameof(Vars.Config.UKKeybinds.Slot2), Enum.GetName(typeof(KeyCode), o.value)); };
-            Slot3.onValueChange += (o) => { Vars.Config.ChangeWrite(nameof(Vars.Config.UKKeybinds.Slot3), Enum.GetName(typeof(KeyCode), o.value)); };
-            Slot4.onValueChange += (o) => { Vars.Config.ChangeWrite(nameof(Vars.Config.UKKeybinds.Slot4), Enum.GetName(typeof(KeyCode), o.value)); };
-            Slot5.onValueChange += (o) => { Vars.Config.ChangeWrite(nameof(Vars.Config.UKKeybinds.Slot5), Enum.GetName(typeof(KeyCode), o.value)); };
-            Slot6.onValueChange += (o) => { Vars.Config.ChangeWrite(nameof(Vars.Config.UKKeybinds.Slot6), Enum.GetName(typeof(KeyCode), o.value)); };
-            Slot7.onValueChange += (o) => { Vars.Config.ChangeWrite(nameof(Vars.Config.UKKeybinds.Slot7), Enum.GetName(typeof(KeyCode), o.value)); };
-            Slot8.onValueChange += (o) => { Vars.Config.ChangeWrite(nameof(Vars.Config.UKKeybinds.Slot8), Enum.GetName(typeof(KeyCode), o.value)); };
-            Slot9.onValueChange += (o) => { Vars.Config.ChangeWrite(nameof(Vars.Config.UKKeybinds.Slot9), Enum.GetName(typeof(KeyCode), o.value)); };
-            Slot0.onValueChange += (o) => { Vars.Config.ChangeWrite(nameof(Vars.Config.UKKeybinds.Slot0), Enum.GetName(typeof(KeyCode), o.value)); };
+            Shoot.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.UKKeybinds.Shoot), o.value);
+            AltShoot.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.UKKeybinds.AltShoot), o.value);
+            Punch.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.UKKeybinds.Punch), o.value);
+            Jump.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.UKKeybinds.Jump), o.value);
+            Slide.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.UKKeybinds.Slide), o.value);
+            Dash.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.UKKeybinds.Dash), o.value);
+            LastWeaponUsed.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.UKKeybinds.LastWeaponUsed), o.value);
+            ChangeWeaponVariation.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.UKKeybinds.ChangeWeaponVariation), o.value);
+            IterateWeapon.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.UKKeybinds.IterateWeapon), o.value);
+            SwapHand.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.UKKeybinds.SwapHand), o.value);
+            Whiplash.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.UKKeybinds.Whiplash), o.value);
+            Escape.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.UKKeybinds.Escape), o.value);
+            Slot1.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.UKKeybinds.Slot1), o.value);
+            Slot2.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.UKKeybinds.Slot2), o.value);
+            Slot3.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.UKKeybinds.Slot3), o.value);
+            Slot4.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.UKKeybinds.Slot4), o.value);
+            Slot5.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.UKKeybinds.Slot5), o.value);
+            Slot6.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.UKKeybinds.Slot6), o.value);
+            Slot7.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.UKKeybinds.Slot7), o.value);
+            Slot8.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.UKKeybinds.Slot8), o.value);
+            Slot9.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.UKKeybinds.Slot9), o.value);
+            Slot0.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.UKKeybinds.Slot0), o.value);
         }
         private static void AddVRKeybindsPanel()
         {
             VRKeybinds = new ConfigPanel(PC.rootPanel, "VRTRAKILL Keybinds", "VRKeybinds");
+            ToggleDV = new KeyCodeField(VRKeybinds, "Toggle DesktopView", "ToggleDV", Vars.Config.VRKeybinds.ToggleDV.ToKeyCode());
+            ToggleTPC = new KeyCodeField(VRKeybinds, "Toggle ThirdPersonCamera", "ToggleTPC", Vars.Config.VRKeybinds.ToggleTPC.ToKeyCode());
+            EnumTPCMode = new KeyCodeField(VRKeybinds, "Switch TPC mode", "EnumTPCMode", Vars.Config.VRKeybinds.EnumTPCMode.ToKeyCode());
+            TPCamUp = new KeyCodeField(VRKeybinds, "TPCam Up", "TPCUp", Vars.Config.VRKeybinds.TPCamUp.ToKeyCode());
+            TPCamDown = new KeyCodeField(VRKeybinds, "TPCam Down", "TPCDown", Vars.Config.VRKeybinds.TPCamDown.ToKeyCode());
+            TPCamLeft = new KeyCodeField(VRKeybinds, "TPCam Left", "TPCLeft", Vars.Config.VRKeybinds.TPCamLeft.ToKeyCode());
+            TPCamRight = new KeyCodeField(VRKeybinds, "TPCam Right", "TPCRight", Vars.Config.VRKeybinds.TPCamRight.ToKeyCode());
+            TPCamMoveMode = new KeyCodeField(VRKeybinds, "TPCam move mode", "", Vars.Config.VRKeybinds.TPCamMoveMode.ToKeyCode());
+            ToggleAvatarCalibration = new KeyCodeField(VRKeybinds, "Toggle Avatar Calibration (PLACEHOLDER)", "ToggleAvatarC", Vars.Config.VRKeybinds.ToggleAvatarCalibration.ToKeyCode());
+
+            ToggleDV.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.VRKeybinds.ToggleDV), o.value);
+            ToggleTPC.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.VRKeybinds.ToggleTPC), o.value);
+            EnumTPCMode.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.VRKeybinds.EnumTPCMode), o.value);
+            TPCamUp.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.VRKeybinds.TPCamUp), o.value);
+            TPCamDown.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.VRKeybinds.TPCamDown), o.value);
+            TPCamLeft.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.VRKeybinds.TPCamLeft), o.value);
+            TPCamRight.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.VRKeybinds.TPCamRight), o.value);
+            TPCamMoveMode.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.VRKeybinds.TPCamMoveMode), o.value);
+            ToggleAvatarCalibration.onValueChange += (o) => ChangeKeyCode(nameof(Vars.Config.VRKeybinds.ToggleAvatarCalibration), o.value);
         }
+        private static void AddControllersPanel()
+        {
+            Controllers = new ConfigPanel(PC.rootPanel, "Controllers Settings", "Controllers");
+            Deadzone = new FloatField(Controllers, "Deadzone", "Deadzone", Vars.Config.Controllers.Deadzone);
+            SmoothSpeed = new FloatField(Controllers, "Smooth turning speed", "SmoothS", Vars.Config.Controllers.SmoothSpeed);
+            SnapTurn = new BoolField(Controllers, "Snap turning (overrides smooth turning)", "SnapTurn", Vars.Config.Controllers.SnapTurn);
+            SnapAngles = new FloatField(Controllers, "Snap turning angles", "SnapA", Vars.Config.Controllers.SnapAngles);
+            DrawControllers = new BoolField(Controllers, "Draw controller models", "DrawControllers", Vars.Config.Controllers.DrawControllers);
+            EnableHaptics = new BoolField(Controllers, "Enable controller rumble", "EnableHaptics", Vars.Config.Controllers.EnableHaptics);
+            LeftHanded = new BoolField(Controllers, "Left-handed mode (BROKEN)", "LHM", Vars.Config.Controllers.LeftHanded);
+
+            Deadzone.onValueChange += (o) => Vars.Config.ChangeWrite(nameof(Vars.Config.Controllers.Deadzone), o.value);
+            SmoothSpeed.onValueChange += (o) => Vars.Config.ChangeWrite(nameof(Vars.Config.Controllers.SmoothSpeed), o.value);
+            SnapTurn.onValueChange += (o) => Vars.Config.ChangeWrite(nameof(Vars.Config.Controllers.SnapTurn), o.value);
+            SnapAngles.onValueChange += (o) => Vars.Config.ChangeWrite(nameof(Vars.Config.Controllers.SnapAngles), o.value);
+            DrawControllers.onValueChange += (o) => Vars.Config.ChangeWrite(nameof(Vars.Config.Controllers.DrawControllers), o.value);
+            EnableHaptics.onValueChange += (o) => Vars.Config.ChangeWrite(nameof(Vars.Config.Controllers.EnableHaptics), o.value);
+            LeftHanded.onValueChange += (o) => Vars.Config.ChangeWrite(nameof(Vars.Config.Controllers.LeftHanded), o.value);
+        }
+        private static void AddCBSPanel()
+        {
+            CBS = new ConfigPanel(PC.rootPanel, "Controller-based Shooting", "CBS");
+            EnableCBS = new BoolField(CBS, "Enabled", "ECBS", Vars.Config.EnableCBS);
+            ConfigDivision CBSCD = new ConfigDivision(CBS, "CBSCD");
+            EnableCrosshair = new BoolField(CBSCD, "Enable Crosshair", "EnableCrosshair", Vars.Config.CBS.EnableCrosshair);
+            CrosshairDistance = new FloatField(CBSCD, "Crosshair distance (from the hand)", "CrosshairDistance", Vars.Config.CBS.CrosshairDistance);
+
+            EnableCBS.onValueChange += (o) => { CBSCD.interactable = o.value; Vars.Config.ChangeWrite(nameof(Vars.Config.EnableCBS), o.value); };
+            EnableCrosshair.onValueChange += (o) => Vars.Config.ChangeWrite(nameof(Vars.Config.CBS.EnableCrosshair), o.value);
+            CrosshairDistance.onValueChange += (o) => Vars.Config.ChangeWrite(nameof(Vars.Config.CBS.CrosshairDistance), o.value);
+        }
+        private static void AddMBPPanel()
+        {
+            MBP = new ConfigPanel(PC.rootPanel, "Movement-based Punching", "MBP");
+            EnableMBP = new BoolField(MBP, "Enabled", "EMBP", Vars.Config.EnableMBP);
+            ConfigDivision MBPCD = new ConfigDivision(MBP, "MBPCD");
+            ToggleVelocity = new BoolField(MBP, "Velocity-based punching direction", "ToggleVelocity", Vars.Config.MBP.ToggleVelocity);
+            PunchingSpeed = new FloatField(MBP, "Required speed to punch", "PunchingSpeed", Vars.Config.MBP.PunchingSpeed);
+            EnableNDHCoinThrow = new BoolField(MBP, "Enable coin throwing from the non-dominant hand", "EnableNDHCT", Vars.Config.MBP.EnableNDHCoinThrow);
+            CameraWhiplash = new BoolField(MBP, "WHIPLASH: camera-based aiming", "CameraWhiplash", Vars.Config.MBP.CameraWhiplash);
+
+            EnableMBP.onValueChange += (o) => { MBPCD.interactable = o.value; Vars.Config.ChangeWrite(nameof(Vars.Config.EnableMBP), o.value); };
+            ToggleVelocity.onValueChange += (o) => Vars.Config.ChangeWrite(nameof(Vars.Config.MBP.ToggleVelocity), o.value);
+            PunchingSpeed.onValueChange += (o) => Vars.Config.ChangeWrite(nameof(Vars.Config.MBP.PunchingSpeed), o.value);
+            EnableNDHCoinThrow.onValueChange += (o) => Vars.Config.ChangeWrite(nameof(Vars.Config.MBP.EnableNDHCoinThrow), o.value);
+            CameraWhiplash.onValueChange += (o) => Vars.Config.ChangeWrite(nameof(Vars.Config.MBP.CameraWhiplash), o.value);
+        }
+        private static void AddVRBodyPanel()
+        {
+            VRBody = new ConfigPanel(PC.rootPanel, "VR Avatar", "VRBody");
+            ConfigDivision VRBCD = new ConfigDivision(VRBody, "VRBCD");
+            EnableVRBody = new BoolField(VRBody, "Enabled", "EnableVRB", Vars.Config.EnableVRBody);
+
+            EnableVRBody.onValueChange += (o) => { VRBCD.interactable = o.value; Vars.Config.ChangeWrite(nameof(Vars.Config.EnableVRBody), o.value); };
+        }
+        private static void AddUIIPanel()
+        {
+
+        }
+        private static void AddDVPanel()
+        {
+
+        }
+        private static void AddMiscPanel()
+        {
+            Misc = new ConfigPanel(PC.rootPanel, "Miscellaneous", "Misc");
+            new ConfigHeader(Misc, "There are currently no miscellaenous settings.");
+        }
+
+
+        private static void ChangeKeyCode(string Name, object Value)
+        => Vars.Config.ChangeWrite(Name, Enum.GetName(typeof(KeyCode), Value));
 
         public static void RestartScene()
         => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
