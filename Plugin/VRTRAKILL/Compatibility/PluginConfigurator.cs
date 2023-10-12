@@ -60,8 +60,7 @@ namespace Plugin.VRTRAKILL.Compatibility
         #region UIInteraction
         static ConfigPanel UIInteraction;
         static FloatField UISize;
-        static BoolField ControlerBased;
-        static ConfigPanel CLines;
+        static BoolField ControllerBased;
         static BoolField CLEnabled; static FloatField StartAlpha, EndAlpha;
         #endregion
         #region DesktopView
@@ -79,9 +78,10 @@ namespace Plugin.VRTRAKILL.Compatibility
         public static void Init()
         {
             PC = PluginConfig.API.PluginConfigurator.Create(PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_GUID);
+            PC.SetIconWithURL($"file://{PluginInfo.PluginPath}\\icon.png");
             PC.saveToFile = false;
-            new ButtonField(PC.rootPanel, "RESTART SCENE (MUST NOT BE IN MAIN MENU)", "btnRestartScene").onClick += RestartScene;
-            new ConfigHeader(PC.rootPanel, "To apply settings, restart the scene by pressing the button above.") { textColor = Color.yellow };
+            new ButtonField(PC.rootPanel, "RESET (RESTARTS THE GAME)", "btnRestartScene").onClick += RESET;
+            new ConfigHeader(PC.rootPanel, "To apply settings, RESET by pressing the button above.") { textColor = Color.yellow };
 
             AddUKKeybindsPanel();
             AddVRKeybindsPanel();
@@ -229,7 +229,20 @@ namespace Plugin.VRTRAKILL.Compatibility
         }
         private static void AddUIIPanel()
         {
+            UIInteraction = new ConfigPanel(PC.rootPanel, "UI Interaction", "UII");
+            UISize = new FloatField(UIInteraction, "UI Size (0 - 0.1)", "UISize", Vars.Config.UIInteraction.UISize);
+            ControllerBased = new BoolField(UIInteraction, "Controller-based", "ControllerBased", Vars.Config.UIInteraction.ControllerBased);
 
+            new ConfigHeader(UIInteraction, "--- Controller lines ---");
+            ConfigDivision CLCD = new ConfigDivision(UIInteraction, "CLCD");
+            CLEnabled = new BoolField(UIInteraction, "Enabled", "CLEnabled", Vars.Config.UIInteraction.ControllerLines.Enabled);
+            StartAlpha = new FloatField(CLCD, "Initial alpha (0 - 1)", "StartAlpha", Vars.Config.UIInteraction.ControllerLines.StartAlpha);
+            EndAlpha = new FloatField(CLCD, "End alpha (0 - 1)", "EndAlpha", Vars.Config.UIInteraction.ControllerLines.EndAlpha);
+
+            UISize.onValueChange += (o) => Vars.Config.ChangeWrite(nameof(Vars.Config.UIInteraction.UISize), o.value);
+            CLEnabled.onValueChange += (o) => { CLCD.interactable = o.value; Vars.Config.ChangeWrite(nameof(Vars.Config.UIInteraction.ControllerLines.Enabled), o.value); };
+            StartAlpha.onValueChange += (o) => Vars.Config.ChangeWrite(nameof(Vars.Config.UIInteraction.ControllerLines.StartAlpha), o.value);
+            EndAlpha.onValueChange += (o) => Vars.Config.ChangeWrite(nameof(Vars.Config.UIInteraction.ControllerLines.EndAlpha), o.value);
         }
         private static void AddDVPanel()
         {
@@ -245,7 +258,7 @@ namespace Plugin.VRTRAKILL.Compatibility
         private static void ChangeKeyCode(string Name, object Value)
         => Vars.Config.ChangeWrite(Name, Enum.GetName(typeof(KeyCode), Value));
 
-        public static void RestartScene()
-        => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        public static void RESET()
+        => SceneManager.LoadScene("Bootstrap");
     }
 }
