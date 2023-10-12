@@ -34,13 +34,13 @@ namespace Plugin.Util
         /// <param name="Config"> An instance of the <c>NewConfig</c> class </param>
         /// <param name="SettingName"> A name of the setting (usually set by <c>nameof()</c>) </param>
         /// <param name="Value"> Value of the setting </param>
-        public static void ChangeWrite<T>(this NewConfig Config, string SettingName, T Value)
+        public static void ChangeWrite<T, O>(this T Config, string SettingName, O Value)
         {
             Vars.Log.LogInfo($"Writing changes to {SettingName}");
-            if (Value.GetType() == typeof(NewConfig).GetProperty(SettingName).GetType())
-                typeof(NewConfig).GetProperty(SettingName).SetValue(Config, Value, null);
-            else if (typeof(NewConfig).GetProperty(SettingName).GetType() == typeof(string))
-                typeof(NewConfig).GetProperty(SettingName).SetValue(Config, Value.ToString(), null);
+            if (Value.GetType() == Config.GetType().GetProperty(SettingName).GetType())
+                Config.GetType().GetProperty(SettingName).SetValue(Config, Value, null);
+            else if (Config.GetType().GetProperty(SettingName).GetType() == typeof(string))
+                Config.GetType().GetProperty(SettingName).SetValue(Config, Value.ToString(), null);
             else throw new System.Exception("Type mismatch!");
             
             File.WriteAllText(ConfigMaster.ConfigPath, JsonConvert.SerializeObject(ConfigJSON.Instance, Formatting.Indented));
