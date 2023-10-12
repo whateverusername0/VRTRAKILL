@@ -14,7 +14,7 @@ namespace Plugin
         public const string
             PLUGIN_GUID = "com.whateverusername0.vrtrakill", // do not change this string EVER
             PLUGIN_NAME = "VRTRAKILL",
-            PLUGIN_VERSION = "0.15.3"; // never use spaces
+            PLUGIN_VERSION = "0.16.0"; // never use spaces
 
         public static readonly string
             PluginPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), // ".../BepInEx/plugins/VRTRAKILL"
