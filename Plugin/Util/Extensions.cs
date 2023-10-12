@@ -37,10 +37,10 @@ namespace Plugin.Util
         public static void ChangeWrite<T>(this NewConfig Config, string SettingName, T Value)
         {
             Vars.Log.LogInfo($"Writing changes to {SettingName}");
-            if (Value.GetType() == Config.GetType().GetProperty(SettingName).GetType())
-                Config.GetType().GetProperty(SettingName).SetValue(Config, Value);
-            else if (Config.GetType().GetProperty(SettingName).GetType() == typeof(string))
-                Config.GetType().GetProperty(SettingName).SetValue(Config, Value.ToString());
+            if (Value.GetType() == typeof(NewConfig).GetProperty(SettingName).GetType())
+                typeof(NewConfig).GetProperty(SettingName).SetValue(Config, Value, null);
+            else if (typeof(NewConfig).GetProperty(SettingName).GetType() == typeof(string))
+                typeof(NewConfig).GetProperty(SettingName).SetValue(Config, Value.ToString(), null);
             else throw new System.Exception("Type mismatch!");
             
             File.WriteAllText(ConfigMaster.ConfigPath, JsonConvert.SerializeObject(ConfigJSON.Instance, Formatting.Indented));
