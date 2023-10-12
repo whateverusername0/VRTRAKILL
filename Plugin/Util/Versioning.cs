@@ -16,18 +16,33 @@ namespace Plugin.Util
             {
                 using (HttpClient HC = new HttpClient())
                 {
-                    var Stream = HC.GetStreamAsync($"{PluginInfo.GithubRepoLink}/releases/latest"); Stream.Wait();
-                    Versioning LatestVersion = JsonConvert.DeserializeObject<Versioning>(Stream.ToString());
-                    if (PluginInfo.PLUGIN_VERSION != LatestVersion.Version.ToVersion().ToString())
+                    var HRQM = new HttpRequestMessage(HttpMethod.Get, $"{PluginInfo.GithubRepoLink}/releases/latest");
+                    HRQM.Headers.Add("User-Agent", "User-Agent");
+                    var Response = HC.SendAsync(HRQM, HttpCompletionOption.ResponseContentRead); Response.Wait();
+
+                    var Stream = Response.Result.Content.ReadAsStringAsync(); Stream.Wait();
+
+                    Versioning LatestVersion = JsonConvert.DeserializeObject<Versioning>(Stream.Result);
+                    if (PluginInfo.PLUGIN_VERSION.ToVersion() > LatestVersion.Version.ToVersion())
+                    {
+                        Vars.Log.LogWarning(
+                            $"This version of VRTRAKILL is higher than the one on github!" +
+                            $"\nAre you a developer? Or just fucking around with versioning? Or is it my deadass who forgot to switch the version?" +
+                            $"\nFind the latest prebuilt binary here: {PluginInfo.FriendlyGithubRepoLink}/releases/latest");
+                        return;
+                    }
+                    else if (PluginInfo.PLUGIN_VERSION.ToVersion() == LatestVersion.Version.ToVersion())
+                    { Vars.Log.LogInfo($"You are up to date! :)"); return; }
+                    else if (PluginInfo.PLUGIN_VERSION.ToVersion() < LatestVersion.Version.ToVersion())
                     {
                         Vars.Log.LogWarning(
                             $"This version of VRTRAKILL is outdated!" +
-                            $"\nIt is highly recommended that you download a newer version by visiting" +
+                            $"\nIt is highly recommended that you download a newer version by visiting " +
                             $"{PluginInfo.FriendlyGithubRepoLink}/releases/latest");
                         return;
                     }
                 }
-            } catch { Vars.Log.LogError("Unable to check for updates!"); return; }
+            } catch(System.Exception E) { Vars.Log.LogError("Unable to check for updates!"); Vars.Log.LogError(E.Message + E.InnerException); return; }
             Vars.Log.LogInfo("Your VRTRAKILL is fully up-to-date! :)");
         }
     }
