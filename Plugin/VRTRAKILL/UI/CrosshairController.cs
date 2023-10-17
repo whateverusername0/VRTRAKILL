@@ -15,13 +15,12 @@ namespace Plugin.VRTRAKILL.UI
 
         public void LateUpdate()
         {
-            // Doesn't work. (for some reason)
             if ((Vars.IsPlayerFrozen || Vars.IsPlayerUsingShop) && !Vars.Config.UIInteraction.ControllerBased)
                 transform.position = Vars.MainCamera.transform.position + (Vars.MainCamera.transform.forward * Length * .25f) + Offset;
             else
             {
-                // This otoh works.
-                if (GunControl.Instance != null) Target = GunControl.Instance.currentWeapon.transform;
+                if (GunControl.Instance != null && GunControl.Instance.currentWeapon.HasComponent<RocketLauncher>())
+                    Target = GunControl.Instance.currentWeapon.transform;
                 else Target = Vars.DominantHand.transform;
 
                 transform.position = Target.position + (Target.forward * Length) + Offset;
