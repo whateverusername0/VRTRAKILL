@@ -131,13 +131,17 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             if ((bool)__instance.punch) __instance.punch.CoinFlip();
 
             GameObject obj;
-            if (Vars.Config.EnableMBP && Vars.Config.MBP.EnableNDHCoinThrow)
+            if (Vars.Config.EnableMBP)
                 obj = Object.Instantiate(__instance.coin,
                                          Vars.NonDominantHand.transform.position + Vars.NonDominantHand.transform.up * -.5f,
                                          Vars.NonDominantHand.transform.rotation);
+            else if (Vars.Config.EnableCBS)
+                obj = Object.Instantiate(__instance.coin,
+                                         Vars.DominantHand.transform.position + Vars.DominantHand.transform.up * -.5f,
+                                         Vars.DominantHand.transform.rotation);
             else obj = Object.Instantiate(__instance.coin,
-                                          Vars.DominantHand.transform.position + Vars.DominantHand.transform.up * -0.5f,
-                                          Vars.DominantHand.transform.rotation);
+                                          __instance.camObj.transform.position + __instance.camObj.transform.up * -0.5f,
+                                          __instance.camObj.transform.rotation);
 
             obj.GetComponent<Coin>().sourceWeapon = __instance.gc.currentWeapon;
 
