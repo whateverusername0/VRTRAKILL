@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Plugin.VRTRAKILL.VRPlayer.VRAvatar.Armature;
 
+#pragma warning disable IDE1006 // Naming Styles
 namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
 {
     internal class MetaRig
@@ -92,3 +93,4 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         }
     }
 }
+#pragma warning restore IDE1006 // Naming Styles
