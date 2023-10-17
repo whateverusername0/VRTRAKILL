@@ -75,30 +75,29 @@ namespace Plugin.VRTRAKILL.Config
         {
             [JsonProperty("Velocity-based punching direction")] public bool ToggleVelocity { get; set; } = false;
             [JsonProperty("Required speed to punch")] public float PunchingSpeed { get; set; } = 7.5f;
-            [JsonProperty("Enable coin throwing from the non-dominant hand")] public bool EnableNDHCoinThrow { get; set; } = true;
             [JsonProperty("WHIPLASH: camera-based aiming")] public bool CameraWhiplash { get; set; } = false;
         }
 
         [JsonProperty("Enable VRAvatar")] public bool EnableVRBody { get; set; } = true;
         [JsonProperty("VRAvatar Settings")] public _VRBody VRBody { get; set; } public class _VRBody
         {
-            [JsonProperty("Enable skins")] public bool EnableSkins { get; set; } = false;
-            [JsonProperty("Skins *(ONLY ONE MUST BE CHOSEN)*")] public _Skins Skins { get; set; } public class _Skins
-            {
-                [JsonProperty("V1 (Default)")] public bool V1 { get; set; } = true;
-                [JsonProperty("V2 (PLACEHOLDER. NOT IMPLEMENTED YET)")] public bool V2 { get; set; } = false;
-            }
+            //[JsonProperty("Enable skins")] public bool EnableSkins { get; set; } = false;
+            //[JsonProperty("Skins *(ONLY ONE MUST BE CHOSEN)*")] public _Skins Skins { get; set; } public class _Skins
+            //{
+            //    [JsonProperty("V1 (Default)")] public bool V1 { get; set; } = true;
+            //    [JsonProperty("V2 (PLACEHOLDER. NOT IMPLEMENTED YET)")] public bool V2 { get; set; } = false;
+            //}
 
             public _VRBody()
             {
-                Skins = new _Skins();
+                //Skins = new _Skins();
             }
         }
 
         [JsonProperty("UI Interaction Settings")] public _UIInteraction UIInteraction { get; set; } public class _UIInteraction
         {
             [JsonProperty("UI Size (from 0 to 0.1)")] public float UISize { get; set; } = 0.0625f;
-            [JsonProperty("Controller-based?")] public bool ControllerBased { get; set; } = true;
+            [JsonProperty("Controller-based")] public bool ControllerBased { get; set; } = true;
 
             [JsonProperty("Controller Lines")] public _ControllerLines ControllerLines { get; set; } public class _ControllerLines
             {
@@ -121,7 +120,7 @@ namespace Plugin.VRTRAKILL.Config
 
             [JsonProperty("Third Person Camera")] public _TPCam ThirdPersonCamera { get; set; } public class _TPCam
             {
-                [JsonProperty("Enabled by default (replaces dv pov)")] public bool Enabled { get; set; } = false;
+                [JsonProperty("Enabled by default")] public bool Enabled { get; set; } = false;
                 [JsonProperty("Mode (0: follow, 1: rotate, 2: fixed)")] public int Mode { get; set; } = 0;
             }
 
@@ -147,6 +146,18 @@ namespace Plugin.VRTRAKILL.Config
             UIInteraction = new _UIInteraction();
             DesktopView = new _DesktopView();
             Misc = new _Misc();
+        }
+
+        /// <summary>
+        /// Make changes to the config and write to file
+        /// </summary>
+        /// <param name="Value"> Value of the setting </param>
+        /// <param name="SetOutput"> An action to be performed to apply the value </param>
+        public void ChangeWrite<T>(T Value, System.Action<T> SetOutput)
+        {
+            SetOutput(Value);
+            File.WriteAllText(ConfigMaster.ConfigPath, JsonConvert.SerializeObject(ConfigJSON.Instance, Formatting.Indented));
+            Vars.Log.LogInfo($"Successfully written changes to {Value.GetType().Name}");
         }
     }
 }
