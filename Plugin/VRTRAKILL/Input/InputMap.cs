@@ -108,14 +108,14 @@ namespace Plugin.VRTRAKILL.Input
         };
         public static readonly Dictionary<string, MouseButton?> KeysM = new Dictionary<string, MouseButton?>(System.StringComparer.OrdinalIgnoreCase)
         {
-            { "mouseleft",  MouseButton.LeftButton},
-            { "lmb",  MouseButton.LeftButton}, { "m1", MouseButton.LeftButton },
+            { "leftmouse", MouseButton.RightButton },{ "mouseleft",  MouseButton.LeftButton}, { "mouse0", MouseButton.LeftButton },
+            { "lmb",  MouseButton.LeftButton}, { "m0", MouseButton.LeftButton },
 
-            { "mouseright",  MouseButton.RightButton},
-            { "rmb",  MouseButton.RightButton}, { "m2", MouseButton.RightButton },
+            { "rightmouse", MouseButton.RightButton },{ "mouseright",  MouseButton.RightButton}, { "mouse1", MouseButton.RightButton },
+            { "rmb",  MouseButton.RightButton}, { "m1", MouseButton.RightButton },
 
-            { "mousemiddle",  MouseButton.MiddleButton},
-            { "mmb",  MouseButton.MiddleButton}, { "m3", MouseButton.MiddleButton },
+            { "middlemouse", MouseButton.RightButton }, { "mousemiddle",  MouseButton.MiddleButton}, { "mouse2", MouseButton.MiddleButton },
+            { "mmb",  MouseButton.MiddleButton}, { "m2", MouseButton.MiddleButton },
 
             { "mouse4",  (MouseButton)3 },
             { "m4",  (MouseButton)3 },
