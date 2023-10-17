@@ -29,24 +29,6 @@ namespace Plugin.Util
         }
 
         /// <summary>
-        /// Make changes to the config and write to file
-        /// </summary>
-        /// <param name="Config"> An instance of the <c>NewConfig</c> class </param>
-        /// <param name="SettingName"> A name of the setting (usually set by <c>nameof()</c>) </param>
-        /// <param name="Value"> Value of the setting </param>
-        public static void ChangeWrite<T, O>(this T Config, string SettingName, O Value)
-        {
-            Vars.Log.LogInfo($"Writing changes to {SettingName}");
-            if (Value.GetType() == Config.GetType().GetProperty(SettingName).GetType())
-                Config.GetType().GetProperty(SettingName).SetValue(Config, Value, null);
-            else if (Config.GetType().GetProperty(SettingName).GetType() == typeof(string))
-                Config.GetType().GetProperty(SettingName).SetValue(Config, Value.ToString(), null);
-            else throw new System.Exception("Type mismatch!");
-            
-            File.WriteAllText(ConfigMaster.ConfigPath, JsonConvert.SerializeObject(ConfigJSON.Instance, Formatting.Indented));
-            Vars.Log.LogInfo($"Successfully written changes to {SettingName}");
-        }
-        /// <summary>
         /// Converts an object (usually a <c>string</c>) to a <c>UnityEngine.KeyCode</c>
         /// </summary>
         /// <param name="O"></param>
