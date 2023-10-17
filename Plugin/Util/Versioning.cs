@@ -27,7 +27,7 @@ namespace Plugin.Util
                     {
                         Vars.Log.LogWarning(
                             $"This version of VRTRAKILL is higher than the one on github!" +
-                            $"\nAre you a developer? Or just fucking around with versioning? Or is it my deadass who forgot to switch the version?" +
+                            $"\nAre you a developer? Or just fucking around with versions? Or is it my deadass who forgot to update a single number?" +
                             $"\nFind the latest prebuilt binary here: {PluginInfo.FriendlyGithubRepoLink}/releases/latest");
                         return;
                     }
