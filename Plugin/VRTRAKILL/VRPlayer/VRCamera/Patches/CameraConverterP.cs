@@ -9,7 +9,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
     {
         // ty huskvr you pretty
         public static GameObject Container;
-        public static Camera DesktopWorldCam, DesktopUICam, SpectatorCam;
+        public static Camera DesktopWorldCam, DesktopUICam, ThirdPersonCam;
 
         [HarmonyPrefix] [HarmonyPatch(typeof(NewMovement), nameof(NewMovement.Start))] static void Containerize()
         {
@@ -38,32 +38,33 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
             DesktopUICam.gameObject.SetActive(false);
             #endregion
 
-            #region Spectator Camera
-            GameObject SCContainer = new GameObject("Spectator Camera");
-            SCContainer.transform.localPosition = Vector3.zero;
+            #region Third Person Camera
+            GameObject TPCContainer = new GameObject("Third Person Camera");
+            TPCContainer.transform.localPosition = Vector3.zero;
 
-            GameObject SCOffset = new GameObject("SC Limiter");
-            SCOffset.transform.parent = SCContainer.transform;
-            SCOffset.transform.localPosition = Vector3.zero;
+            GameObject TPCOffset = new GameObject("TPC Limiter");
+            TPCOffset.transform.parent = TPCContainer.transform;
+            TPCOffset.transform.localPosition = Vector3.zero;
 
-            SpectatorCam = new GameObject("SC Camera").AddComponent<Camera>();
-            SpectatorCam.transform.parent = SCContainer.transform;
-            SpectatorCam.transform.localPosition = Vector3.zero;
-            SpectatorCam.stereoTargetEye = StereoTargetEyeMask.None;
+            ThirdPersonCam = new GameObject("TPC Camera").AddComponent<Camera>();
+            ThirdPersonCam.transform.parent = TPCContainer.transform;
+            ThirdPersonCam.transform.localPosition = Vector3.zero;
+            ThirdPersonCam.stereoTargetEye = StereoTargetEyeMask.None;
+
+            ThirdPersonCamera SPC = TPCContainer.AddComponent<ThirdPersonCamera>();
+            SPC.TPCam = ThirdPersonCam;
+            SPC.FollowTarget = Vars.MainCamera.transform;
+            SPC.Offset = TPCOffset.transform;
 
             // Pushback 2.0
-            Rigidbody SCRB = SpectatorCam.gameObject.AddComponent<Rigidbody>();
-            SCRB.mass = 0; SCRB.drag = 0; SCRB.angularDrag = 0; SCRB.useGravity = false;
-            SCRB.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
-            SCRB.constraints = RigidbodyConstraints.FreezeRotation;
-            SphereCollider SCSC = SpectatorCam.gameObject.AddComponent<SphereCollider>(); SCSC.radius = .01f;
+            Rigidbody TPCRB = ThirdPersonCam.gameObject.AddComponent<Rigidbody>();
+            TPCRB.mass = 0; TPCRB.drag = 0; TPCRB.angularDrag = 0; TPCRB.useGravity = false;
+            TPCRB.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+            TPCRB.constraints = RigidbodyConstraints.FreezeRotation;
+            SphereCollider TTPC = ThirdPersonCam.gameObject.AddComponent<SphereCollider>(); TTPC.radius = .01f;
+            SPC.RB = TPCRB;
 
-            ThirdPersonCamera SPC = SCContainer.AddComponent<ThirdPersonCamera>();
-            SPC.FollowTarget = Vars.MainCamera.transform;
-            SPC.Offset = SCOffset.transform;
-            SPC.RB = SCRB;
-
-            SCContainer.SetActive(false);
+            TPCContainer.SetActive(false);
             #endregion
         }
         [HarmonyPostfix] [HarmonyPatch(typeof(NewMovement), nameof(NewMovement.Start))] static void ScaleObjects(NewMovement __instance)

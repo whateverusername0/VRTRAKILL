@@ -49,14 +49,14 @@ namespace Plugin.VRTRAKILL.Config
         // joystickwhateverbutton is there because unity is angry when you pass it as null
         public static UnityEngine.KeyCode?
             ToggleDesktopView = UnityEngine.KeyCode.Joystick8Button9,
-            ToggleSpectatorCamera = UnityEngine.KeyCode.Joystick8Button9,
-            EnumSpecCamMode = UnityEngine.KeyCode.Joystick8Button9,
+            ToggleThirdPersonCamera = UnityEngine.KeyCode.Joystick8Button9,
+            EnumTPCamMode = UnityEngine.KeyCode.Joystick8Button9,
 
-            SpecCamUp = UnityEngine.KeyCode.Joystick8Button9,
-            SpecCamDown = UnityEngine.KeyCode.Joystick8Button9,
-            SpecCamLeft = UnityEngine.KeyCode.Joystick8Button9,
-            SpecCamRight = UnityEngine.KeyCode.Joystick8Button9,
-            SpecCamHoldMoveMode = UnityEngine.KeyCode.Joystick8Button9,
+            TPCamUp = UnityEngine.KeyCode.Joystick8Button9,
+            TPCamDown = UnityEngine.KeyCode.Joystick8Button9,
+            TPCamLeft = UnityEngine.KeyCode.Joystick8Button9,
+            TPCamRight = UnityEngine.KeyCode.Joystick8Button9,
+            TPCamHoldMoveMode = UnityEngine.KeyCode.Joystick8Button9,
 
             ToggleAvatarCalibration = UnityEngine.KeyCode.Joystick8Button9;
 
@@ -141,13 +141,13 @@ namespace Plugin.VRTRAKILL.Config
             try
             {
                 InputMap.UKeys.TryGetValue(VRConfig.ToggleDV, out ToggleDesktopView);
-                InputMap.UKeys.TryGetValue(VRConfig.ToggleTPC, out ToggleSpectatorCamera);
-                InputMap.UKeys.TryGetValue(VRConfig.EnumTPCMode, out EnumSpecCamMode);
-                InputMap.UKeys.TryGetValue(VRConfig.TPCamLeft, out SpecCamLeft);
-                InputMap.UKeys.TryGetValue(VRConfig.TPCamUp, out SpecCamUp);
-                InputMap.UKeys.TryGetValue(VRConfig.TPCamRight, out SpecCamRight);
-                InputMap.UKeys.TryGetValue(VRConfig.TPCamDown, out SpecCamDown);
-                InputMap.UKeys.TryGetValue(VRConfig.TPCamMoveMode, out SpecCamHoldMoveMode);
+                InputMap.UKeys.TryGetValue(VRConfig.ToggleTPC, out ToggleThirdPersonCamera);
+                InputMap.UKeys.TryGetValue(VRConfig.EnumTPCMode, out EnumTPCamMode);
+                InputMap.UKeys.TryGetValue(VRConfig.TPCamLeft, out TPCamLeft);
+                InputMap.UKeys.TryGetValue(VRConfig.TPCamUp, out TPCamUp);
+                InputMap.UKeys.TryGetValue(VRConfig.TPCamRight, out TPCamRight);
+                InputMap.UKeys.TryGetValue(VRConfig.TPCamDown, out TPCamDown);
+                InputMap.UKeys.TryGetValue(VRConfig.TPCamMoveMode, out TPCamHoldMoveMode);
             }
             catch (Exception)
             {
