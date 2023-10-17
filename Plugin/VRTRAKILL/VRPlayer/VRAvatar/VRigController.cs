@@ -1,5 +1,6 @@
 ﻿using Plugin.VRTRAKILL.VRPlayer.Controllers;
 using Plugin.Util;
+using Plugin.Util.Libraries.EZhex1991.EZSoftBone;
 using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
@@ -11,6 +12,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         public MetaRig Rig;
         public Vector3 HeadOffsetPosition = new Vector3(0, 0, 0),
                        HeadOffsetAngles = new Vector3(-90, 0, 0);
+        private EZSoftBone WingBone;
 
         private IKChain AddIK(GameObject GO, Transform Target, int ChainLen = 3, Transform Pole = null)
         {
@@ -54,9 +56,23 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             foreach (Armature.Arm Arm in RArms)
                 AddIK(Arm.Hand.Root.gameObject, GunController.Instance.CC.ArmOffset.transform, Pole: Rig.IKPole_Right);
 
-            // Leg IKs TBD
+            // Leg IKs
             // add blabla
 
+            // Dynamic Wings
+            WingBone = Rig.Chest.GetChild(4).gameObject.AddComponent<EZSoftBone>();
+            WingBone.m_RootBones.Add(WingBone.transform);
+            WingBone.startDepth = 1;
+            WingBone.collisionLayers = 1 << (int)Layers.Environment;
+            WingBone.deltaTimeMode = EZSoftBone.DeltaTimeMode.Constant;
+            WingBone.constantDeltaTime = 5;
+            WingBone.Awake();
+            WingBone.material.damping = 1;
+            WingBone.material.stiffness = .8f;
+            WingBone.material.resistance = 0;
+            WingBone.material.slackness = 0;
+
+            // Add IK to neck so that it moves with the head
             AddIK(Rig.NeckEnd.gameObject, Rig.Head.GetChild(0).GetChild(0), 2);
 
             //gameObject.AddComponent<SkinsManager>();
@@ -70,8 +86,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             HandleBodyRotation();
             HandleHeadRotation();
 
-            if (!Vars.IsMainMenu)
-                HandleArms();
+            if (!Vars.IsMainMenu) HandleArms();
             else
             {
                 Rig.FeedbackerA.GameObjecT.gameObject.SetActive(true);
@@ -80,6 +95,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
                 Rig.Whiplash.GameObjecT.gameObject.SetActive(false);
                 Rig.Sandboxer.GameObjecT.gameObject.SetActive(false);
             }
+
+            HandleWings();
         }
 
         private void HandleBodyRotation()
@@ -141,6 +158,23 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             {
                 ActiveArm.GameObjecT.gameObject.SetActive(true);
                 Rig.Whiplash.GameObjecT.gameObject.SetActive(false);
+            }
+        }
+        private void HandleWings()
+        {
+            if (NewMovement.Instance.rb.velocity.magnitude > .1f)
+            {
+                WingBone.material.damping = 1;
+                WingBone.material.stiffness = .8f;
+                WingBone.material.resistance = 0;
+                WingBone.material.slackness = 0;
+            }
+            else
+            {
+                WingBone.material.damping = .2f;
+                WingBone.material.stiffness = .1f;
+                WingBone.material.resistance = .9f;
+                WingBone.material.slackness = .1f;
             }
         }
     }
