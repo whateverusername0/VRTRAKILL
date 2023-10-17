@@ -37,7 +37,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         public Transform IKPole_Left { get; set; }
         public Transform IKPole_Right { get; set; }
 
-        // V stands for Model V (V1, V2), since they have identical armatures.
         public static MetaRig VCustomPreset(Transform T)
         {
             MetaRig MR = new MetaRig

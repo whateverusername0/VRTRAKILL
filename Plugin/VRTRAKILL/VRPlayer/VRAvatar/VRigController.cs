@@ -7,12 +7,12 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
 {
     internal class VRigController : MonoBehaviour
     {
+        // Can't use stuff normally without it being both a singleton and a monobehavior
         private static VRigController _Instance; public static VRigController Instance { get { return _Instance; } }
 
-        public MetaRig Rig;
+        public MetaRig Rig; private EZSoftBone WingBone;
         public Vector3 HeadOffsetPosition = new Vector3(0, 0, 0),
                        HeadOffsetAngles = new Vector3(-90, 0, 0);
-        private EZSoftBone WingBone;
 
         private IKChain AddIK(GameObject GO, Transform Target, int ChainLen = 3, Transform Pole = null)
         {
@@ -32,7 +32,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             if (Rig == null) Rig = MetaRig.CreateVCustomPreset(Vars.VRCameraContainer, "VR Avatar");
             Util.Unity.RecursiveChangeLayer(Rig.GameObjectT.gameObject, (int)Layers.AlwaysOnTop);
 
-            // transform shenanigans
+            // transform shenanigans (necessary)
             Rig.GameObjectT.localPosition = Vector3.zero;
             Rig.GameObjectT.localRotation = Quaternion.Euler(Vector3.zero);
 
@@ -101,22 +101,22 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
 
         private void HandleBodyRotation()
         {
+            // Smooth body rotation towards the camera
             Rig.Root.position = Vars.MainCamera.transform.position;
-            if ((Vars.MainCamera.transform.rotation.eulerAngles.y - Rig.Abdomen.rotation.eulerAngles.y) >= Quaternion.Euler(0, 90, 0).y
-            || (Vars.MainCamera.transform.rotation.eulerAngles.y - Rig.Abdomen.rotation.eulerAngles.y) <= Quaternion.Euler(0, -90, 0).y)
-            {
-                Quaternion Rotation = Quaternion.Lerp(Rig.Abdomen.rotation, Vars.MainCamera.transform.rotation, Time.deltaTime * 2.5f);
-                Rig.Root.rotation = Quaternion.Euler(0, Rotation.eulerAngles.y, 0);
-            }
+            Quaternion Rotation = Quaternion.Lerp(Rig.Abdomen.rotation, Vars.MainCamera.transform.rotation, Time.deltaTime * 2.5f);
+            Rig.Root.rotation = Quaternion.Euler(0, Rotation.eulerAngles.y, 0);
         }
         private void HandleHeadRotation()
         {
+            // Basic
             Rig.Head.GetChild(0).position = Vars.MainCamera.transform.position;
             Rig.Head.GetChild(0).eulerAngles = Vars.MainCamera.transform.eulerAngles;
         }
         private void HandleArms()
         {
-            // Arm to render
+            // This method decides which arm to render
+
+            // Sandbox arm
             if (GunControl.Instance != null
             && GunControl.Instance.currentWeapon != null
             && GunControl.Instance.currentWeapon.HasComponent<Sandbox.Arm.SandboxArm>())
@@ -130,6 +130,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
                 Rig.Sandboxer.GameObjecT.gameObject.SetActive(false);
             }
 
+            // Set activearm to use with whiplash (for convenience)
             Armature.Arm ActiveArm = null;
             switch (FistControl.Instance.currentPunch.type)
             {
@@ -147,7 +148,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
                 case FistType.Spear: break;
             }
 
-            // Whiplash
+            // Whiplash behavior
             if (HookArm.Instance != null && HookArm.Instance.enabled
             && HookArm.Instance.model.activeSelf && !Vars.Config.MBP.CameraWhiplash)
             {
@@ -162,10 +163,13 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         }
         private void HandleWings()
         {
+            // Basically if you move (as in moveyour player via stick)
+            // Wings will get less mobile for convenience
+            // Also don't try to tweak these without unity editor, it'll take forever.
             if (NewMovement.Instance.rb.velocity.magnitude > .1f)
             {
-                WingBone.material.damping = 1;
-                WingBone.material.stiffness = .8f;
+                WingBone.material.damping = .2f;
+                WingBone.material.stiffness = .65f;
                 WingBone.material.resistance = 0;
                 WingBone.material.slackness = 0;
             }

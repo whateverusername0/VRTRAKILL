@@ -51,10 +51,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
             ThirdPersonCam.transform.localPosition = Vector3.zero;
             ThirdPersonCam.stereoTargetEye = StereoTargetEyeMask.None;
 
-            ThirdPersonCamera SPC = TPCContainer.AddComponent<ThirdPersonCamera>();
-            SPC.TPCam = ThirdPersonCam;
-            SPC.FollowTarget = Vars.MainCamera.transform;
-            SPC.Offset = TPCOffset.transform;
+            ThirdPersonCamera TPC = TPCContainer.AddComponent<ThirdPersonCamera>();
+            TPC.TPCam = ThirdPersonCam;
+            TPC.FollowTarget = Vars.MainCamera.transform;
+            TPC.Offset = TPCOffset.transform;
 
             // Pushback 2.0
             Rigidbody TPCRB = ThirdPersonCam.gameObject.AddComponent<Rigidbody>();
@@ -62,7 +62,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera.Patches
             TPCRB.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
             TPCRB.constraints = RigidbodyConstraints.FreezeRotation;
             SphereCollider TTPC = ThirdPersonCam.gameObject.AddComponent<SphereCollider>(); TTPC.radius = .01f;
-            SPC.RB = TPCRB;
+            TPC.RB = TPCRB;
 
             TPCContainer.SetActive(false);
             #endregion

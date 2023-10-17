@@ -5,6 +5,8 @@ namespace Plugin.VRTRAKILL.UI.Patches
 {
     [HarmonyPatch] internal sealed class HudP
     {
+        // Magic numbers to make good hud good.
+
         [HarmonyPostfix] [HarmonyPatch(typeof(HudController), nameof(HudController.Start))] static void ReparentHUD(HudController __instance)
         {
             if (__instance.altHud) return;
