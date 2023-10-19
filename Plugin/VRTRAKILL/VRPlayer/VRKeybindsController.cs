@@ -33,14 +33,14 @@ namespace Plugin.VRTRAKILL.VRPlayer
             }
             if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.ToggleThirdPersonCamera))
             {
-                SubtitleController.Instance.DisplaySubtitle("VR: Toggling spectator camera");
+                SubtitleController.Instance.DisplaySubtitle("VR: Toggling third person camera");
                 ToggleSpectatorCamera();
             }
             if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.EnumTPCamMode))
             {
                 ThirdPersonCamera.Instance.EnumTPCMode();
                 SubtitleController.Instance.DisplaySubtitle
-                    ($"VR: Switched spectator camera mode to {System.Enum.GetName(typeof(TPCMode), ThirdPersonCamera.Instance.Mode)}");
+                    ($"VR: Switched third person camera mode to {System.Enum.GetName(typeof(TPCMode), ThirdPersonCamera.Instance.Mode)}");
             }
             if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.ToggleAvatarCalibration))
             {
