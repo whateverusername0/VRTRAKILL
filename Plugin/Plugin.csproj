@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?> 
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -154,12 +154,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PluginInfo.cs" />
+    <Compile Include="Util\Extensions.cs" />
+    <Compile Include="Util\Libraries\EZSoftBone.cs" />
+    <Compile Include="Util\Versioning.cs" />
     <Compile Include="VRTRAKILL\Assets.cs" />
     <Compile Include="VRTRAKILL\Config\NewConfig.cs" />
     <Compile Include="VRTRAKILL\Input\ControlMessages\MessageContainer.cs" />
     <Compile Include="VRTRAKILL\Input\ControlMessages\Patches.cs" />
-    <Compile Include="VRTRAKILL\ModSupport\Initializers.cs" />
-    <Compile Include="VRTRAKILL\ModSupport\PluginConfigor.cs" />
+    <Compile Include="VRTRAKILL\Compatibility\Initializer.cs" />
+    <Compile Include="VRTRAKILL\Compatibility\PluginConfigurator.cs" />
     <Compile Include="VRTRAKILL\Patches\A.cs" />
     <Compile Include="VRTRAKILL\Patches\Misc.cs" />
     <Compile Include="VRTRAKILL\SceneWorker.cs" />
@@ -198,7 +202,7 @@
     <Compile Include="Util\Libraries\WindowsInput\Native\XButton.cs" />
     <Compile Include="Util\Libraries\WindowsInput\WindowsInputDeviceStateAdaptor.cs" />
     <Compile Include="Util\Libraries\WindowsInput\WindowsInputMessageDispatcher.cs" />
-    <Compile Include="Util\Misc.cs" />
+    <Compile Include="Util\Unity.cs" />
     <Compile Include="Util\Patcher.cs" />
     <Compile Include="Util\Patches\A.cs" />
     <Compile Include="Util\Patches\HelpersP.cs" />
@@ -251,7 +255,7 @@
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\DesktopCamera.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\DesktopUICamera.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\A.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\VRCamera\SpectatorCamera.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRCamera\ThirdPersonCamera.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\VRCameraController.cs" />
     <Compile Include="VRTRAKILL\Config\ConfigJSON.cs" />
     <Compile Include="VRTRAKILL\Config\ConfigMaster.cs" />
@@ -271,6 +275,9 @@
     <None Include="CopyToGameRoot\ULTRAKILL\BepInEx\patchers\classdata.tpk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\plugins\VRTRAKILL\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\plugins\VRTRAKILL\vrtrakillassetbundle">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -348,8 +355,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\Gestures\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

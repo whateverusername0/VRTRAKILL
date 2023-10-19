@@ -7,14 +7,16 @@ using Plugin.VRTRAKILL;
 
 namespace Plugin.Util
 {
-    // Adding more levels of abstraction.
-    // This is a custom patcher class that uses HarmonyX, which uses BepInEx.
     // If you wanna use it for your own purposes - you have my full permission :)
     // You can find the usage of this class in the Plugin.Plugin class
+
+    /// <summary>
+    /// Uses BepInEx'd HarmonyX to simplify patching in plugins/mods.
+    /// </summary>
     public class Patcher
     {
         public Harmony Harmony { get; set; }
-        public Assembly ASS { get; private set; } = Assembly.GetCallingAssembly();
+        public Assembly Ass { get; private set; } = Assembly.GetCallingAssembly();
 
         public string Namespace { get; set; } 
         public string[] Namespaces { get; set; } 
@@ -48,30 +50,30 @@ namespace Plugin.Util
         public Patcher(Harmony _Harmony, Assembly _ASS)
         {
             Harmony = _Harmony;
-            ASS = _ASS;
+            Ass = _ASS;
         }
         public Patcher(Harmony _Harmony, Assembly _ASS, string _Namespace)
         {
             Harmony = _Harmony;
-            ASS = _ASS;
+            Ass = _ASS;
             Namespace = _Namespace;
         }
         public Patcher(Harmony _Harmony, Assembly _ASS, string[] _Namespaces)
         {
             Harmony = _Harmony;
-            ASS = _ASS;
+            Ass = _ASS;
             Namespaces = _Namespaces;
         }
         public Patcher(Harmony _Harmony, Assembly _ASS, Type _Type)
         {
             Harmony = _Harmony;
-            ASS = _ASS;
+            Ass = _ASS;
             Type = _Type;
         }
         public Patcher(Harmony _Harmony, Assembly _ASS, Type[] _Types)
         {
             Harmony = _Harmony;
-            ASS = _ASS;
+            Ass = _ASS;
             Types = _Types.ToArray();
         }
 
@@ -80,13 +82,13 @@ namespace Plugin.Util
             IEnumerable<Type> Q;
             if (_Namespace == null)
             {
-                Q = from T in ASS.GetTypes()
+                Q = from T in Ass.GetTypes()
                     where T.IsDefined(typeof(HarmonyPatch), false)
                     select T;
             }
             else
             {
-                Q = from T in ASS.GetTypes()
+                Q = from T in Ass.GetTypes()
                     where T.Namespace == _Namespace && T.IsDefined(typeof(HarmonyPatch), false)
                     select T;
             }
@@ -123,6 +125,7 @@ namespace Plugin.Util
 
         public void Patch(string _Namespace)
         {
+            Vars.Log.LogInfo($"Patching Namespace \"{_Namespace}\"...");
             IEnumerable<Type> Q = GetTypes(_Namespace);
             foreach (Type T in Q) try { Harmony.PatchAll(T); } catch { Vars.Log.LogError($"Nullref with type {T}"); }
         }
@@ -132,7 +135,10 @@ namespace Plugin.Util
             foreach (Type T in Q) try { Harmony.PatchAll(T); } catch { Vars.Log.LogError($"Nullref with type {T}"); }
         }
         public void Patch(Type _T)
-        => Harmony.PatchAll(_T);
+        {
+            Vars.Log.LogInfo($"Patching Type \"{nameof(_T)}\"...");
+            Harmony.PatchAll(_T);
+        }
         public void Patch(Type[] _T)
         { foreach(Type T in _T) Harmony.PatchAll(T); }
 

@@ -68,8 +68,8 @@ namespace Plugin.VRTRAKILL
             => VRPlayer.VRCamera.Patches.CameraConverterP.DesktopWorldCam;
         public static Camera DesktopUICamera
             => VRPlayer.VRCamera.Patches.CameraConverterP.DesktopUICam;
-        public static GameObject SpectatorCamera
-            => VRPlayer.VRCamera.Patches.CameraConverterP.SpectatorCam.transform.parent.gameObject;
+        public static GameObject ThirdPersonCamera
+            => VRPlayer.VRCamera.Patches.CameraConverterP.ThirdPersonCam.transform.parent.gameObject;
         #endregion
 
         #region Controllers

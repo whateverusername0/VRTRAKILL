@@ -9,7 +9,7 @@ namespace Plugin.VRTRAKILL.Config
 {
     internal sealed class ConfigMaster
     {
-        public static string ConfigPath = $"{Plugin.PluginPath}\\VRTRAKILL_Config.json";
+        public static string ConfigPath = $"{PluginInfo.PluginPath}\\VRTRAKILL_Config.json";
 
         public static VirtualKeyCode?
             KShoot = null, KAltShoot = null, KPunch = null ,
@@ -49,14 +49,14 @@ namespace Plugin.VRTRAKILL.Config
         // joystickwhateverbutton is there because unity is angry when you pass it as null
         public static UnityEngine.KeyCode?
             ToggleDesktopView = UnityEngine.KeyCode.Joystick8Button9,
-            ToggleSpectatorCamera = UnityEngine.KeyCode.Joystick8Button9,
-            EnumSpecCamMode = UnityEngine.KeyCode.Joystick8Button9,
+            ToggleThirdPersonCamera = UnityEngine.KeyCode.Joystick8Button9,
+            EnumTPCamMode = UnityEngine.KeyCode.Joystick8Button9,
 
-            SpecCamUp = UnityEngine.KeyCode.Joystick8Button9,
-            SpecCamDown = UnityEngine.KeyCode.Joystick8Button9,
-            SpecCamLeft = UnityEngine.KeyCode.Joystick8Button9,
-            SpecCamRight = UnityEngine.KeyCode.Joystick8Button9,
-            SpecCamHoldMoveMode = UnityEngine.KeyCode.Joystick8Button9,
+            TPCamUp = UnityEngine.KeyCode.Joystick8Button9,
+            TPCamDown = UnityEngine.KeyCode.Joystick8Button9,
+            TPCamLeft = UnityEngine.KeyCode.Joystick8Button9,
+            TPCamRight = UnityEngine.KeyCode.Joystick8Button9,
+            TPCamHoldMoveMode = UnityEngine.KeyCode.Joystick8Button9,
 
             ToggleAvatarCalibration = UnityEngine.KeyCode.Joystick8Button9;
 
@@ -141,23 +141,19 @@ namespace Plugin.VRTRAKILL.Config
             try
             {
                 InputMap.UKeys.TryGetValue(VRConfig.ToggleDV, out ToggleDesktopView);
-                InputMap.UKeys.TryGetValue(VRConfig.ToggleSC, out ToggleSpectatorCamera);
-                InputMap.UKeys.TryGetValue(VRConfig.EnumSCMode, out EnumSpecCamMode);
-                InputMap.UKeys.TryGetValue(VRConfig.SpecCamLeft, out SpecCamLeft);
-                InputMap.UKeys.TryGetValue(VRConfig.SpecCamUp, out SpecCamUp);
-                InputMap.UKeys.TryGetValue(VRConfig.SpecCamRight, out SpecCamRight);
-                InputMap.UKeys.TryGetValue(VRConfig.SpecCamDown, out SpecCamDown);
-                InputMap.UKeys.TryGetValue(VRConfig.SpecCamMoveMode, out SpecCamHoldMoveMode);
+                InputMap.UKeys.TryGetValue(VRConfig.ToggleTPC, out ToggleThirdPersonCamera);
+                InputMap.UKeys.TryGetValue(VRConfig.EnumTPCMode, out EnumTPCamMode);
+                InputMap.UKeys.TryGetValue(VRConfig.TPCamLeft, out TPCamLeft);
+                InputMap.UKeys.TryGetValue(VRConfig.TPCamUp, out TPCamUp);
+                InputMap.UKeys.TryGetValue(VRConfig.TPCamRight, out TPCamRight);
+                InputMap.UKeys.TryGetValue(VRConfig.TPCamDown, out TPCamDown);
+                InputMap.UKeys.TryGetValue(VRConfig.TPCamMoveMode, out TPCamHoldMoveMode);
             }
             catch (Exception)
             {
                 Vars.Log.LogError("Unable to convert keys in config. Perhaps mismatch? Perhaps keys are null?" +
                                   "Check spelling and replace every null key either with \"\", \"Empty\" or assign a value to it.");
             }
-        }
-        private static void AutoConvertUKBindsToKeys()
-        {
-
         }
 
         private readonly PlayerInput PI = new PlayerInput();

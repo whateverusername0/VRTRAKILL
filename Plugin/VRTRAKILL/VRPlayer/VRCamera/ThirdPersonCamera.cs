@@ -3,19 +3,19 @@ using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
 {
-    public enum SCMode
+    public enum TPCMode
     {
         Follow = 0,
         RotateAround = 1,
         Fixed = 2
     }
-    internal class SpectatorCamera : MonoSingleton<SpectatorCamera>
+    internal class ThirdPersonCamera : MonoSingleton<ThirdPersonCamera>
     {
-        public SCMode Mode = SCMode.Follow;
+        public TPCMode Mode = TPCMode.Follow;
 
         public Transform FollowTarget;
         public Transform Offset;
-        public Rigidbody RB; public Camera SPCam;
+        public Rigidbody RB; public Camera TPCam;
 
         public Vector3 OffsetPos = new Vector3(0, 1, -3);
         public Vector3 RotAngles = new Vector3(0, 0, 0);
@@ -25,21 +25,21 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
         public override void OnEnable()
         {
             base.OnEnable();
-            SPCam = GetComponentInChildren<Camera>();
+            TPCam = TPCam ?? GetComponentInChildren<Camera>();
             Offset.localPosition = OffsetPos;
-            SPCam.transform.rotation = Quaternion.Euler(RotAngles);
+            TPCam.transform.rotation = Quaternion.Euler(RotAngles);
         }
 
         public void Update()
         {
-            Util.Misc.CopyCameraValues(SPCam, Vars.DesktopCamera);
+            Util.Unity.CopyCameraValues(TPCam, Vars.DesktopCamera);
             transform.position = FollowTarget.position;
 
             switch (Mode)
             {
-                case SCMode.Follow: Follow(); break;
-                case SCMode.RotateAround: RotateAround(); break;
-                case SCMode.Fixed: transform.eulerAngles = RotAngles; break;
+                case TPCMode.Follow: Follow(); break;
+                case TPCMode.RotateAround: RotateAround(); break;
+                case TPCMode.Fixed: transform.eulerAngles = RotAngles; break;
                 default: break;
             }
 
@@ -56,7 +56,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
 
         public void MoveOrRotate(Vector2 V)
         {
-            if (UnityEngine.Input.GetKey((KeyCode)Config.ConfigMaster.SpecCamHoldMoveMode))
+            if (UnityEngine.Input.GetKey((KeyCode)Config.ConfigMaster.TPCamHoldMoveMode))
             {
                 if (V == Vector2.left)       OffsetPos += new Vector3(MoveRotateSpeed, 0, 0);
                 else if (V == Vector2.up)    OffsetPos += new Vector3(0, 0, MoveRotateSpeed);
@@ -75,12 +75,12 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
         private void Follow()
         { transform.forward = Vector3.Lerp(transform.forward, FollowTarget.forward, Time.deltaTime * FMDuration); }
         private void RotateAround()
-        { transform.Rotate(new Vector3(0, RAMRotationSpeed, 0)); }
+        { transform.rotation = Quaternion.identity; transform.Rotate(new Vector3(0, RAMRotationSpeed, 0)); }
         
-        public void EnumSCMode() // ugly
+        public void EnumTPCMode() // ugly
         {
             transform.eulerAngles = RotAngles; Mode++;
-            if ((int)Mode > System.Enum.GetValues(typeof(SCMode)).Cast<int>().Max()) Mode = 0;
+            if ((int)Mode > System.Enum.GetValues(typeof(TPCMode)).Cast<int>().Max()) Mode = 0;
         }
     }
 }

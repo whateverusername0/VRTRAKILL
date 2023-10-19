@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using HarmonyLib;
+using Plugin.Util;
 
 namespace Plugin.VRTRAKILL.UI.Patches
 {
@@ -8,7 +9,7 @@ namespace Plugin.VRTRAKILL.UI.Patches
     {
         [HarmonyPrefix] [HarmonyPatch(typeof(HUDOptions), nameof(HUDOptions.Start))] static void ResizeCanvases(HUDOptions __instance)
         {
-            // stretches screen effects goatse style so it's not a fucking square in the middle of the hud
+            // Stretches screen effects so it's not a small square in the middle of the hud
             string[] ScreenEffects =
             {
                 "HurtScreen", "BlackScreen", "ParryFlash",
@@ -18,16 +19,16 @@ namespace Plugin.VRTRAKILL.UI.Patches
                 try
                 {
                     Transform T = __instance.gameObject.transform.Find(ScreenEffect);
-                    T.transform.localScale *= 5;
+                    T.transform.localScale *= 10;
                     for (int i = 0; i < T.childCount; i++)
-                        T.GetChild(i).transform.localScale /= 5;
+                        T.GetChild(i).transform.localScale /= 10;
                 }
                 catch { continue; }
 
             // prime bosses specific
-            try { Object.FindObjectOfType<FlashImage>().transform.localScale *= 5; } catch {}
+            try { Object.FindObjectOfType<FlashImage>().transform.localScale *= 10; } catch {}
 
-            // disable useless stuffs
+            // disable unnecessary stuff (for now)
             string[] ScreenEffectsToDisable =
             {
                 "PowerUpVignette",
@@ -35,7 +36,7 @@ namespace Plugin.VRTRAKILL.UI.Patches
             foreach (string ScreenEffectToDisable in ScreenEffectsToDisable)
                 try { __instance.gameObject.transform.Find(ScreenEffectToDisable).GetComponent<Image>().enabled = false; } catch { continue; }
 
-            // Relayer stupid skybox in minos corpse level
+            // Relayer skybox in 2-4
             try { GameObject.Find("CityFromAbove").layer = 0; } catch {}
         }
         [HarmonyPostfix] [HarmonyPatch(typeof(HUDOptions), nameof(HUDOptions.Start))] static void DeployGTFOTW(HUDOptions __instance)
@@ -44,22 +45,22 @@ namespace Plugin.VRTRAKILL.UI.Patches
 
             Assets.UI_GTFOTW.transform.localScale = Vector3.zero;
 
+            // Sets it's index to 0 so that it's above everything else
             UI_GTFOTW.transform.SetSiblingIndex(0);
             UI_GTFOTW.transform.localScale = Vector3.one;
             UI_GTFOTW.transform.localPosition = Vector3.zero;
 
             UIConverter.ConvertCanvas(UI_GTFOTW.GetComponent<Canvas>());
-            Util.Misc.RecursiveChangeLayer(UI_GTFOTW, (int)Layers.UI);
+            Util.Unity.RecursiveChangeLayer(UI_GTFOTW, (int)Layers.UI);
 
             GTFOTW GTFOTW = UI_GTFOTW.AddComponent<GTFOTW>();
             GTFOTW.DetectorTransform = Vars.MainCamera.transform;
         }
 
-        [HarmonyPostfix] [HarmonyPatch(typeof(ScreenZone), nameof(ScreenZone.OnTriggerEnter))]
-        static void ConvertThing()
+        [HarmonyPostfix] [HarmonyPatch(typeof(ScreenZone), nameof(ScreenZone.OnTriggerEnter))] static void ConvertThing()
         {
             foreach (Canvas C in Resources.FindObjectsOfTypeAll(typeof(Canvas)))
-                if (!Util.Misc.HasComponent<UICanvas>(C.gameObject))
+                if (!C.gameObject.HasComponent<UICanvas>())
                     UIConverter.RecursiveConvertCanvas();
         }
     }

@@ -10,7 +10,7 @@ namespace Plugin.VRTRAKILL.UI
         private CanvasGroup CG; private UnityEngine.UI.Text Text;
         private bool ShouldShow;
 
-        private string[] Texts = new string[]
+        private readonly string[] Texts = new string[]
         {
             "GET OUT OF THE WALL.",
             "GET THE FUCK OUT OF THE WALL.",
@@ -28,7 +28,7 @@ namespace Plugin.VRTRAKILL.UI
 
         public void Update()
         {
-            if (Util.Misc.DetectCollisions(DetectorTransform.position, .1f, (int)Layers.Environment) > 0)
+            if (Util.Unity.DetectCollisions(DetectorTransform.position, .1f, (int)Layers.Environment) > 0)
                 ShouldShow = true;
             else ShouldShow = false;
 

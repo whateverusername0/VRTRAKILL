@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Plugin.VRTRAKILL.Input
 {
     // Converts config strings into keycodes
-    internal class InputMap
+    internal static class InputMap
     {
         // InputSimulator
         public static readonly Dictionary<string, VirtualKeyCode?> Keys = new Dictionary<string, VirtualKeyCode?>(System.StringComparer.OrdinalIgnoreCase)
@@ -108,14 +108,14 @@ namespace Plugin.VRTRAKILL.Input
         };
         public static readonly Dictionary<string, MouseButton?> KeysM = new Dictionary<string, MouseButton?>(System.StringComparer.OrdinalIgnoreCase)
         {
-            { "mouseleft",  MouseButton.LeftButton},
-            { "lmb",  MouseButton.LeftButton}, { "m1", MouseButton.LeftButton },
+            { "leftmouse", MouseButton.RightButton },{ "mouseleft",  MouseButton.LeftButton}, { "mouse0", MouseButton.LeftButton },
+            { "lmb",  MouseButton.LeftButton}, { "m0", MouseButton.LeftButton },
 
-            { "mouseright",  MouseButton.RightButton},
-            { "rmb",  MouseButton.RightButton}, { "m2", MouseButton.RightButton },
+            { "rightmouse", MouseButton.RightButton },{ "mouseright",  MouseButton.RightButton}, { "mouse1", MouseButton.RightButton },
+            { "rmb",  MouseButton.RightButton}, { "m1", MouseButton.RightButton },
 
-            { "mousemiddle",  MouseButton.MiddleButton},
-            { "mmb",  MouseButton.MiddleButton}, { "m3", MouseButton.MiddleButton },
+            { "middlemouse", MouseButton.RightButton }, { "mousemiddle",  MouseButton.MiddleButton}, { "mouse2", MouseButton.MiddleButton },
+            { "mmb",  MouseButton.MiddleButton}, { "m2", MouseButton.MiddleButton },
 
             { "mouse4",  (MouseButton)3 },
             { "m4",  (MouseButton)3 },
@@ -259,10 +259,10 @@ namespace Plugin.VRTRAKILL.Input
             { "numlock",       KeyCode.Numlock },
             { "scrolllock",    KeyCode.ScrollLock },
 
-            { "arrowleft",     KeyCode.LeftArrow },
-            { "arrowup",       KeyCode.UpArrow },
-            { "arrowright",    KeyCode.RightArrow },
-            { "arrowdown",     KeyCode.DownArrow },
+            { "arrowleft",     KeyCode.LeftArrow }, { "leftarrow", KeyCode.LeftArrow },
+            { "arrowup",       KeyCode.UpArrow }, { "uparrow",       KeyCode.UpArrow },
+            { "arrowright",    KeyCode.RightArrow }, { "rightarrow",       KeyCode.RightArrow },
+            { "arrowdown",     KeyCode.DownArrow }, { "downarrow",       KeyCode.DownArrow },
             #endregion
 
             #region Numbers
@@ -323,13 +323,13 @@ namespace Plugin.VRTRAKILL.Input
             #endregion
 
             #region Mouse
-            { "left mouse button", KeyCode.Mouse0 },
-            { "right mouse button", KeyCode.Mouse0 },
-            { "middle mouse button", KeyCode.Mouse0 },
-            { "mouse4", KeyCode.Mouse0 },
-            { "mouse5", KeyCode.Mouse0 },
-            { "mouse6", KeyCode.Mouse0 },
-            { "mouse7", KeyCode.Mouse0 },
+            { "leftmouse", KeyCode.Mouse0 }, { "mouseleft", KeyCode.Mouse0 }, { "lmb", KeyCode.Mouse0 }, { "mouse0", KeyCode.Mouse0 }, { "m0", KeyCode.Mouse0 },
+            { "rightmouse", KeyCode.Mouse1 }, { "mouseright", KeyCode.Mouse1 }, { "rmb", KeyCode.Mouse1 }, { "mouse1", KeyCode.Mouse1 }, { "m1", KeyCode.Mouse1 },
+            { "middlemouse", KeyCode.Mouse2 }, { "mousemiddle", KeyCode.Mouse2 }, { "mmb", KeyCode.Mouse2 }, { "mouse2", KeyCode.Mouse2 }, { "m2", KeyCode.Mouse2 },
+            { "mouse4", KeyCode.Mouse3 }, { "m4", KeyCode.Mouse3 },
+            { "mouse5", KeyCode.Mouse4 }, { "m5", KeyCode.Mouse4 },
+            { "mouse6", KeyCode.Mouse5 }, { "m6", KeyCode.Mouse5 },
+            { "mouse7", KeyCode.Mouse6 }, { "m7", KeyCode.Mouse6 },
             #endregion
 
             // Empty keys

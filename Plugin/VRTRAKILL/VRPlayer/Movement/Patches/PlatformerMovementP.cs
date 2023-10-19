@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
 {
     // change move vector to joystick axis, fix dash, jump, etc.
+    // CHANGE THIS
     [HarmonyPatch(typeof(PlatformerMovement))] internal class PlatformerMovementP
     {
         // change movement vector to vr one

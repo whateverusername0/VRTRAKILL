@@ -9,6 +9,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
     {
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Start))] static void Start(NewMovement __instance)
         {
+            __instance.walkSpeed *= Vars.Config.MovementMultiplier;
             __instance.jumpPower *= Vars.Config.MovementMultiplier;
             __instance.wallJumpPower *= Vars.Config.MovementMultiplier;
         }
@@ -19,7 +20,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
             Vector2 vector = Vector2.zero;
             if (__instance.activated)
             {
-                vector = Input.InputVars.MoveVector * Vars.Config.MovementMultiplier;
+                vector = Input.InputVars.MoveVector;
 
                 __instance.cc.movementHor = vector.x;
                 __instance.cc.movementVer = vector.y;
@@ -516,9 +517,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                     num *= __instance.groundProperties.speedMultiplier;
                 }
 
-                Vector3 vector = new Vector3(__instance.dodgeDirection.x * __instance.walkSpeed * Time.deltaTime * 4f * num * Vars.Config.MovementMultiplier,
+                Vector3 vector = new Vector3(__instance.dodgeDirection.x * __instance.walkSpeed * Time.deltaTime * 4f * num,
                                              __instance.rb.velocity.y,
-                                             __instance.dodgeDirection.z * __instance.walkSpeed * Time.deltaTime * 4f * num * Vars.Config.MovementMultiplier);
+                                             __instance.dodgeDirection.z * __instance.walkSpeed * Time.deltaTime * 4f * num);
                 if ((bool)__instance.groundProperties && __instance.groundProperties.push)
                 {
                     Vector3 vector2 = __instance.groundProperties.pushForce;
@@ -541,9 +542,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
             if (__instance.slideEnding) y = __instance.rb.velocity.y;
 
             float num2 = 2.75f;
-            __instance.movementDirection2 = new Vector3(__instance.dodgeDirection.x * __instance.walkSpeed * Time.deltaTime * num2 * Vars.Config.MovementMultiplier,
+            __instance.movementDirection2 = new Vector3(__instance.dodgeDirection.x * __instance.walkSpeed * Time.deltaTime * num2,
                                                         y,
-                                                        __instance.dodgeDirection.z * __instance.walkSpeed * Time.deltaTime * num2 * Vars.Config.MovementMultiplier);
+                                                        __instance.dodgeDirection.z * __instance.walkSpeed * Time.deltaTime * num2);
             if (!__instance.slideEnding || (__instance.gc.onGround && !__instance.jumping))
                 __instance.rb.velocity = __instance.movementDirection2 * 3f;
 
