@@ -2,7 +2,7 @@
 
 namespace Plugin.VRTRAKILL.VRPlayer.VRIK
 {
-    internal class IKArm : MonoBehaviour
+    public class IKArm : MonoBehaviour
     {
         /// <summary>
         /// Chain length of bones
