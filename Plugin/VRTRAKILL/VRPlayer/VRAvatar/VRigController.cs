@@ -14,7 +14,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         public Vector3 HeadOffsetPosition = new Vector3(0, 0, 0),
                        HeadOffsetAngles = new Vector3(-90, 0, 0);
 
-        private IKChain AddIK(GameObject GO, Transform Target, int ChainLen = 3, Transform Pole = null)
+        private IKChain AddIK(GameObject GO, Transform Target, int ChainLen = 2, Transform Pole = null)
         {
             IKChain IK = GO.AddComponent<IKChain>();
             IK.Target = Target; IK.ChainLength = ChainLen; IK.Pole = Pole;
@@ -84,17 +84,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             if (Rig == null) return;
 
             HandleBodyRotation();
-            HandleHeadRotation();
+            HandleHead();
 
-            if (!Vars.IsMainMenu) HandleArms();
-            else
-            {
-                Rig.FeedbackerA.GameObjecT.gameObject.SetActive(true);
-                Rig.FeedbackerB.GameObjecT.gameObject.SetActive(true);
-                Rig.Knuckleblaster.GameObjecT.gameObject.SetActive(false);
-                Rig.Whiplash.GameObjecT.gameObject.SetActive(false);
-                Rig.Sandboxer.GameObjecT.gameObject.SetActive(false);
-            }
+            HandleArms();
 
             HandleWings();
         }
@@ -106,15 +98,25 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             Quaternion Rotation = Quaternion.Lerp(Rig.Abdomen.rotation, Vars.MainCamera.transform.rotation, Time.deltaTime * 2.5f);
             Rig.Root.rotation = Quaternion.Euler(0, Rotation.eulerAngles.y, 0);
         }
-        private void HandleHeadRotation()
+        private void HandleHead()
         {
-            // Basic
             Rig.Head.GetChild(0).position = Vars.MainCamera.transform.position;
             Rig.Head.GetChild(0).eulerAngles = Vars.MainCamera.transform.eulerAngles;
         }
         private void HandleArms()
         {
             // This method decides which arm to render
+
+            // Reset everything to feedbacker in the main menu
+            if (Vars.IsMainMenu)
+            {
+                Rig.FeedbackerA.GameObjecT.gameObject.SetActive(true);
+                Rig.FeedbackerB.GameObjecT.gameObject.SetActive(true);
+                Rig.Knuckleblaster.GameObjecT.gameObject.SetActive(false);
+                Rig.Whiplash.GameObjecT.gameObject.SetActive(false);
+                Rig.Sandboxer.GameObjecT.gameObject.SetActive(false);
+                return;
+            }
 
             // Sandbox arm
             if (GunControl.Instance != null
@@ -161,6 +163,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
                 Rig.Whiplash.GameObjecT.gameObject.SetActive(false);
             }
         }
+
         private void HandleWings()
         {
             // Basically if you move (as in moveyour player via stick)
