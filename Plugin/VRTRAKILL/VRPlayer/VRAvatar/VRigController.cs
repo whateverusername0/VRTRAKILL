@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
 {
+    // The NewMovement of VRTRAKILL's avatar
     internal class VRigController : MonoBehaviour
     {
         // Can't use stuff normally without it being both a singleton and a monobehavior
@@ -13,6 +14,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         public MetaRig Rig; private EZSoftBone WingBone;
         public Vector3 HeadOffsetPosition = new Vector3(0, 0, 0),
                        HeadOffsetAngles = new Vector3(-90, 0, 0);
+        public Animator Anim;
 
         private IKChain AddIK(GameObject GO, Transform Target, int ChainLen = 2, Transform Pole = null)
         {
@@ -37,24 +39,28 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             Rig.GameObjectT.localRotation = Quaternion.Euler(Vector3.zero);
 
             Rig.Root.localScale *= 3;
-            Rig.Body.localPosition = new Vector3(0, -.0138f, .0025f);
+            Rig.Root.GetChild(0).localPosition = new Vector3(0, -.015f, -.00075f);
 
-            // Arm IKs
-            Armature.Arm[] LArms =
-            {
-                Rig._LFeedbacker, Rig._LKnuckleblaster,
-                Rig._LWhiplash, Rig._LSandboxer,
-            };
-            foreach (Armature.Arm Arm in LArms)
-                AddIK(Arm.Hand.Root.gameObject, ArmController.Instance.CC.ArmOffset.transform, Pole: Rig.IKPole_Left);
 
-            Armature.Arm[] RArms =
+            if (Vars.Config.VRBody.EnableArmsIK)
             {
-                Rig._RFeedbacker, Rig._RKnuckleblaster,
-                Rig._RWhiplash, Rig._RSandboxer,
-            };
-            foreach (Armature.Arm Arm in RArms)
-                AddIK(Arm.Hand.Root.gameObject, GunController.Instance.CC.ArmOffset.transform, Pole: Rig.IKPole_Right);
+                Armature.Arm[] LArms =
+                {
+                    Rig._LFeedbacker, Rig._LKnuckleblaster,
+                    Rig._LWhiplash, Rig._LSandboxer,
+                };
+                foreach (Armature.Arm Arm in LArms)
+                    AddIK(Arm.Hand.Root.gameObject, ArmController.Instance.CC.ArmOffset.transform, Pole: Rig.Arm_IKPole_Left);
+
+                Armature.Arm[] RArms =
+                {
+                    Rig._RFeedbacker, Rig._RKnuckleblaster,
+                    Rig._RWhiplash, Rig._RSandboxer,
+                };
+                foreach (Armature.Arm Arm in RArms)
+                    AddIK(Arm.Hand.Root.gameObject, GunController.Instance.CC.ArmOffset.transform, Pole: Rig.Arm_IKPole_Right);
+            }
+
             if (Vars.Config.VRBody.EnableLegsIK)
             {
                 Anim = Rig.GameObjectT.GetComponent<Animator>();
@@ -74,10 +80,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
                 RightLeg.OtherFoot = LeftLeg;
             }
 
-            // Leg IKs
-            // add blabla
+            #region Dynamic wings
 
-            // Dynamic Wings
             WingBone = Rig.Chest.GetChild(4).gameObject.AddComponent<EZSoftBone>();
             WingBone.m_RootBones.Add(WingBone.transform);
             WingBone.startDepth = 1;
@@ -90,7 +94,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             WingBone.material.resistance = 0;
             WingBone.material.slackness = 0;
 
-            // Add IK to neck so that it moves with the head
+            #endregion
+
+            // Neck chain Ik
             AddIK(Rig.NeckEnd.gameObject, Rig.Head.GetChild(0).GetChild(0), 2);
 
             //gameObject.AddComponent<SkinsManager>();
@@ -102,6 +108,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             if (Rig == null) return;
 
             HandleBodyRotation();
+
             HandleHead();
 
             HandleArms();
@@ -111,7 +118,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             if (Vars.Config.VRBody.EnableLegsIK)
             {
                 HandleAnimations();
-        }
+            }
         }
 
         private void HandleBodyRotation()
