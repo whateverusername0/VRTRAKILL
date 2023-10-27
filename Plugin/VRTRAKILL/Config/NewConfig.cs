@@ -87,6 +87,8 @@ namespace Plugin.VRTRAKILL.Config
             //    [JsonProperty("V1 (Default)")] public bool V1 { get; set; } = true;
             //    [JsonProperty("V2 (PLACEHOLDER. NOT IMPLEMENTED YET)")] public bool V2 { get; set; } = false;
             //}
+            [JsonProperty("Enable arms IK")] public bool EnableArmsIK { get; set; } = true;
+            [JsonProperty("Enable legs IK")] public bool EnableLegsIK { get; set; } = true;
 
             public _VRBody()
             {
