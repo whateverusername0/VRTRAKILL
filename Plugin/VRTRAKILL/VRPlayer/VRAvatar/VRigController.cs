@@ -55,6 +55,24 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             };
             foreach (Armature.Arm Arm in RArms)
                 AddIK(Arm.Hand.Root.gameObject, GunController.Instance.CC.ArmOffset.transform, Pole: Rig.IKPole_Right);
+            if (Vars.Config.VRBody.EnableLegsIK)
+            {
+                Anim = Rig.GameObjectT.GetComponent<Animator>();
+                AddIK(Rig.LeftLegIK.Foot.gameObject, Rig.LeftLeg.Foot, Pole: Rig.Leg_IKPole_Left);
+                AddIK(Rig.RightLegIK.Foot.gameObject, Rig.RightLeg.Foot, Pole: Rig.Leg_IKPole_Right);
+
+                IKFoot LeftLeg = Rig.LeftLeg.Foot.gameObject.AddComponent<IKFoot>();
+                LeftLeg.Anim = this.Anim;
+                LeftLeg.Body = Rig.Root;
+                LeftLeg.FootSpacing = -.3f;
+                IKFoot RightLeg = Rig.RightLeg.Foot.gameObject.AddComponent<IKFoot>();
+                RightLeg.Anim = this.Anim;
+                RightLeg.Body = Rig.Root;
+                RightLeg.FootSpacing = .3f;
+
+                LeftLeg.OtherFoot = RightLeg;
+                RightLeg.OtherFoot = LeftLeg;
+            }
 
             // Leg IKs
             // add blabla
@@ -89,6 +107,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             HandleArms();
 
             HandleWings();
+
+            if (Vars.Config.VRBody.EnableLegsIK)
+            {
+                HandleAnimations();
+        }
         }
 
         private void HandleBodyRotation()
@@ -183,6 +206,14 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
                 WingBone.material.resistance = .9f;
                 WingBone.material.slackness = .1f;
             }
+        }
+
+        private void HandleAnimations()
+        {
+            if (!NewMovement.Instance.gc.onGround) Anim.SetBool("Jumping", true);
+            else Anim.SetBool("Jumping", false);
+            if (NewMovement.Instance.sliding) Anim.SetBool("Sliding", true);
+            else Anim.SetBool("Sliding", false);
         }
     }
 }
