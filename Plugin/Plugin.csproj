@@ -177,7 +177,6 @@
     <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\Armature\Finger.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\Armature\Hand.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\AvatarSizeCalibrator.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\SkinsManager.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\IKChain.cs" />
     <Compile Include="Util\Libraries\WindowsInput\IInputDeviceStateAdaptor.cs" />
     <Compile Include="Util\Libraries\WindowsInput\IInputMessageDispatcher.cs" />
