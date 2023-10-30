@@ -56,6 +56,8 @@ namespace Plugin.VRTRAKILL.Compatibility
         static BoolField EnableVRBody;
         #region VRBody
         static ConfigPanel VRBody;
+        static BoolField EnableArmsIK;
+        static BoolField EnableLegsIK;
         #endregion
         #region UIInteraction
         static ConfigPanel UIInteraction;
@@ -226,9 +228,12 @@ namespace Plugin.VRTRAKILL.Compatibility
             VRBody = new ConfigPanel(PC.rootPanel, "VR Avatar", "VRBody");
             ConfigDivision VRBCD = new ConfigDivision(VRBody, "VRBCD");
             EnableVRBody = new BoolField(VRBody, "Enabled", "EnableVRB", Vars.Config.EnableVRBody);
-            new ConfigHeader(VRBody, "--- SKINS COMING SOON (not very) ---");
+            EnableArmsIK = new BoolField(VRBCD, "Enable arms IK", "EnableArmsIK", Vars.Config.VRBody.EnableArmsIK);
+            EnableLegsIK = new BoolField(VRBCD, "Enable legs IK", "EnableLegsIK", Vars.Config.VRBody.EnableLegsIK);
 
             EnableVRBody.onValueChange += (o) => { VRBCD.interactable = o.value; Vars.Config.ChangeWrite(o.value, v => Vars.Config.EnableVRBody = v); };
+            EnableArmsIK.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRBody.EnableArmsIK = v);
+            EnableLegsIK.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRBody.EnableLegsIK = v);
         }
         private static void AddUIIPanel()
         {

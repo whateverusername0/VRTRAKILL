@@ -16,6 +16,7 @@ namespace Plugin.VRTRAKILL.Compatibility
         {
             { "com.eternalUnion.pluginConfigurator", (_) => PluginConfigurator() },
             { "xzxADIxzx.Jaket", (_) => JAKET() },
+            { "Hydraxous.ULTRAKILL.UltraFunGuns", (_) => UFG() },
         };
 
         /// <summary> Searches for every compatible mod and calls it's equivalent function </summary>
@@ -37,7 +38,11 @@ namespace Plugin.VRTRAKILL.Compatibility
         }
         private static void JAKET()
         {
-            Vars.Log.LogInfo("Detected JAKET! No funationality added. WIP!");
+            Vars.Log.LogInfo("Detected JAKET! No funationality added yet. WIP!");
+        }
+        private static void UFG()
+        {
+            Vars.Log.LogInfo("Detected UFG! No functionality added yet. WIP!");
         }
     }
 }

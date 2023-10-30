@@ -107,9 +107,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 
         [HarmonyPatch(typeof(FishingRodWeapon))] static class FishingRodWeaponT
         {
-            static Vector3 Position = new Vector3(0, .25f, .3f),
+            static Vector3 Position = new Vector3(.05f, -.06f, -.185f),
                            Rotation = new Vector3(10, 90, 20),
-                           Scale = new Vector3(.1f, .1f, .14f);
+                           Scale = new Vector3(-.0023f, .0023f, .0023f);
 
             [HarmonyPostfix] [HarmonyPatch(nameof(FishingRodWeapon.Awake))] static void Retransform(FishingRodWeapon __instance)
             {

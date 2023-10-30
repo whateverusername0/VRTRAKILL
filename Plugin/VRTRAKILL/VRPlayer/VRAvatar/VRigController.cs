@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
 {
+    // The NewMovement of VRTRAKILL's avatar
     internal class VRigController : MonoBehaviour
     {
         // Can't use stuff normally without it being both a singleton and a monobehavior
@@ -13,8 +14,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         public MetaRig Rig; private EZSoftBone WingBone;
         public Vector3 HeadOffsetPosition = new Vector3(0, 0, 0),
                        HeadOffsetAngles = new Vector3(-90, 0, 0);
+        public Animator Anim;
 
-        private IKChain AddIK(GameObject GO, Transform Target, int ChainLen = 3, Transform Pole = null)
+        private IKChain AddIK(GameObject GO, Transform Target, int ChainLen = 2, Transform Pole = null)
         {
             IKChain IK = GO.AddComponent<IKChain>();
             IK.Target = Target; IK.ChainLength = ChainLen; IK.Pole = Pole;
@@ -29,7 +31,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
 
         public void Start()
         {
-            if (Rig == null) Rig = MetaRig.CreateVCustomPreset(Vars.VRCameraContainer, "VR Avatar");
+            Rig = Rig ?? MetaRig.CreateVCustomPreset(Vars.VRCameraContainer, "VR Avatar");
             Util.Unity.RecursiveChangeLayer(Rig.GameObjectT.gameObject, (int)Layers.AlwaysOnTop);
 
             // transform shenanigans (necessary)
@@ -37,29 +39,49 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             Rig.GameObjectT.localRotation = Quaternion.Euler(Vector3.zero);
 
             Rig.Root.localScale *= 3;
-            Rig.Body.localPosition = new Vector3(0, -.0138f, .0025f);
+            Rig.Root.GetChild(0).localPosition = new Vector3(0, -.015f, -.0005f);
 
-            // Arm IKs
-            Armature.Arm[] LArms =
+
+            if (Vars.Config.VRBody.EnableArmsIK)
             {
-                Rig._LFeedbacker, Rig._LKnuckleblaster,
-                Rig._LWhiplash, Rig._LSandboxer,
-            };
-            foreach (Armature.Arm Arm in LArms)
-                AddIK(Arm.Hand.Root.gameObject, ArmController.Instance.CC.ArmOffset.transform, Pole: Rig.IKPole_Left);
+                Armature.Arm[] LArms =
+                {
+                    Rig._LFeedbacker, Rig._LKnuckleblaster,
+                    Rig._LWhiplash, Rig._LSandboxer,
+                };
+                foreach (Armature.Arm Arm in LArms)
+                    AddIK(Arm.Hand.Root.gameObject, ArmController.Instance.CC.ArmOffset.transform, Pole: Rig.Arm_IKPole_Left);
 
-            Armature.Arm[] RArms =
+                Armature.Arm[] RArms =
+                {
+                    Rig._RFeedbacker, Rig._RKnuckleblaster,
+                    Rig._RWhiplash, Rig._RSandboxer,
+                };
+                foreach (Armature.Arm Arm in RArms)
+                    AddIK(Arm.Hand.Root.gameObject, GunController.Instance.CC.ArmOffset.transform, Pole: Rig.Arm_IKPole_Right);
+            }
+
+            if (Vars.Config.VRBody.EnableLegsIK)
             {
-                Rig._RFeedbacker, Rig._RKnuckleblaster,
-                Rig._RWhiplash, Rig._RSandboxer,
-            };
-            foreach (Armature.Arm Arm in RArms)
-                AddIK(Arm.Hand.Root.gameObject, GunController.Instance.CC.ArmOffset.transform, Pole: Rig.IKPole_Right);
+                Anim = Rig.GameObjectT.GetComponent<Animator>();
+                AddIK(Rig.LeftLegIK.Foot.gameObject, Rig.LeftLeg.Foot, Pole: Rig.Leg_IKPole_Left);
+                AddIK(Rig.RightLegIK.Foot.gameObject, Rig.RightLeg.Foot, Pole: Rig.Leg_IKPole_Right);
 
-            // Leg IKs
-            // add blabla
+                IKFoot LeftLeg = Rig.LeftLeg.Foot.gameObject.AddComponent<IKFoot>();
+                LeftLeg.Anim = this.Anim;
+                LeftLeg.Body = Rig.Root;
+                LeftLeg.FootSpacing = -.3f;
+                IKFoot RightLeg = Rig.RightLeg.Foot.gameObject.AddComponent<IKFoot>();
+                RightLeg.Anim = this.Anim;
+                RightLeg.Body = Rig.Root;
+                RightLeg.FootSpacing = .3f;
 
-            // Dynamic Wings
+                LeftLeg.OtherFoot = RightLeg;
+                RightLeg.OtherFoot = LeftLeg;
+            }
+
+            #region Dynamic wings
+
             WingBone = Rig.Chest.GetChild(4).gameObject.AddComponent<EZSoftBone>();
             WingBone.m_RootBones.Add(WingBone.transform);
             WingBone.startDepth = 1;
@@ -72,11 +94,12 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             WingBone.material.resistance = 0;
             WingBone.material.slackness = 0;
 
-            // Add IK to neck so that it moves with the head
+            #endregion
+
+            // Neck chain Ik
             AddIK(Rig.NeckEnd.gameObject, Rig.Head.GetChild(0).GetChild(0), 2);
 
-            //gameObject.AddComponent<SkinsManager>();
-            //var ASC = gameObject.AddComponent<AvatarSizeCalibrator>(); ASC.enabled = false;
+            var ASC = gameObject.AddComponent<AvatarSizeCalibrator>(); ASC.enabled = false;
         }
         
         public void LateUpdate()
@@ -84,19 +107,17 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             if (Rig == null) return;
 
             HandleBodyRotation();
-            HandleHeadRotation();
 
-            if (!Vars.IsMainMenu) HandleArms();
-            else
-            {
-                Rig.FeedbackerA.GameObjecT.gameObject.SetActive(true);
-                Rig.FeedbackerB.GameObjecT.gameObject.SetActive(true);
-                Rig.Knuckleblaster.GameObjecT.gameObject.SetActive(false);
-                Rig.Whiplash.GameObjecT.gameObject.SetActive(false);
-                Rig.Sandboxer.GameObjecT.gameObject.SetActive(false);
-            }
+            HandleHead();
+
+            HandleArms();
 
             HandleWings();
+
+            if (Vars.Config.VRBody.EnableLegsIK)
+            {
+                HandleAnimations();
+            }
         }
 
         private void HandleBodyRotation()
@@ -106,15 +127,25 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             Quaternion Rotation = Quaternion.Lerp(Rig.Abdomen.rotation, Vars.MainCamera.transform.rotation, Time.deltaTime * 2.5f);
             Rig.Root.rotation = Quaternion.Euler(0, Rotation.eulerAngles.y, 0);
         }
-        private void HandleHeadRotation()
+        private void HandleHead()
         {
-            // Basic
             Rig.Head.GetChild(0).position = Vars.MainCamera.transform.position;
             Rig.Head.GetChild(0).eulerAngles = Vars.MainCamera.transform.eulerAngles;
         }
         private void HandleArms()
         {
             // This method decides which arm to render
+
+            // Reset everything to feedbacker in the main menu
+            if (Vars.IsMainMenu)
+            {
+                Rig.FeedbackerA.GameObjecT.gameObject.SetActive(true);
+                Rig.FeedbackerB.GameObjecT.gameObject.SetActive(true);
+                Rig.Knuckleblaster.GameObjecT.gameObject.SetActive(false);
+                Rig.Whiplash.GameObjecT.gameObject.SetActive(false);
+                Rig.Sandboxer.GameObjecT.gameObject.SetActive(false);
+                return;
+            }
 
             // Sandbox arm
             if (GunControl.Instance != null
@@ -161,6 +192,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
                 Rig.Whiplash.GameObjecT.gameObject.SetActive(false);
             }
         }
+
         private void HandleWings()
         {
             // Basically if you move (as in moveyour player via stick)
@@ -180,6 +212,15 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
                 WingBone.material.resistance = .9f;
                 WingBone.material.slackness = .1f;
             }
+        }
+
+        private void HandleAnimations()
+        {
+            if (!NewMovement.Instance.gc.onGround) Anim.SetBool("Jumping", true);
+            else Anim.SetBool("Jumping", false);
+            if (NewMovement.Instance.sliding || (HookArm.Instance?.state == HookState.Pulling && (bool)!HookArm.Instance?.lightTarget))
+            { Anim.SetBool("Jumping", false); Anim.SetBool("Sliding", true); }
+            else Anim.SetBool("Sliding", false);
         }
     }
 }

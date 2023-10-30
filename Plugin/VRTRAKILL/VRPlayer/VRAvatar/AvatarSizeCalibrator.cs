@@ -8,7 +8,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         private static AvatarSizeCalibrator _Instance; public static AvatarSizeCalibrator Instance { get { return _Instance; } }
         public MetaRig Rig => VRigController.Instance.Rig;
 
-        private float ScalePercentage = .05f;
+        private readonly float ScalePercentage = .05f;
 
         public void Awake()
         {
@@ -26,9 +26,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         public void Update()
         {
             if (InputManager.Instance.InputSource.Fire1.WasPerformedThisFrame && !IsHoldingKey)
-            { IsHoldingKey = true; ChangeSize(ScalePercentage, Rig.Root); }
+            { IsHoldingKey = true; ChangeSize(ScalePercentage, NewMovement.Instance.transform); }
             else if (InputManager.Instance.InputSource.Fire2.WasPerformedThisFrame && !IsHoldingKey)
-            { IsHoldingKey = true; ChangeSize(-ScalePercentage, Rig.Root); }
+            { IsHoldingKey = true; ChangeSize(-ScalePercentage, NewMovement.Instance.transform); }
             else if (InputManager.Instance.InputSource.Fire1.WasCanceledThisFrame
                  || InputManager.Instance.InputSource.Fire2.WasCanceledThisFrame
                  && IsHoldingKey) IsHoldingKey = false;

@@ -6,36 +6,51 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
 {
     internal class MetaRig
     {
-        public Transform GameObjectT { get; set; }
-        public Transform Root { get; set; }
-        public Transform Body { get; set; }
-        public Transform Abdomen { get; set; }
-        public Transform Chest { get; set; }
-        public Transform NeckEnd { get; set; }
-        public Transform Head { get; set; }
+        public Transform GameObjectT { get; private set; }
 
-        public Transform LShoulder { get; set; }
-        public Arm _LFeedbacker { get; set; }
-        public Arm _LKnuckleblaster { get; set; }
-        public Arm _LWhiplash { get; set; }
-        public Arm _LSandboxer { get; set; }
+        #region Core
+        public Transform Root { get; private set; }
+        public Transform Body { get; private set; }
+        public Transform Abdomen { get; private set; }
+        public Transform Chest { get; private set; }
+        public Transform NeckEnd { get; private set; }
+        public Transform Head { get; private set; }
+        #endregion
 
-        public Transform RShoulder { get; set; }
-        public Arm _RFeedbacker { get; set; }
-        public Arm _RKnuckleblaster { get; set; }
-        public Arm _RWhiplash { get; set; }
-        public Arm _RSandboxer { get; set; }
+        #region Arms & Shoulders
+        public Transform LShoulder { get; private set; }
+        public Arm _LFeedbacker { get; private set; }
+        public Arm _LKnuckleblaster { get; private set; }
+        public Arm _LWhiplash { get; private set; }
+        public Arm _LSandboxer { get; private set; }
 
-        public Arm FeedbackerA { get; set; } public Arm FeedbackerB { get; set; }
-        public Arm Knuckleblaster { get; set; }
-        public Arm Whiplash { get; set; }
-        public Arm Sandboxer { get; set; }
+        public Transform RShoulder { get; private set; }
+        public Arm _RFeedbacker { get; private set; }
+        public Arm _RKnuckleblaster { get; private set; }
+        public Arm _RWhiplash { get; private set; }
+        public Arm _RSandboxer { get; private set; }
 
+        public Arm FeedbackerA { get; private set; } public Arm FeedbackerB { get; private set; }
+        public Arm Knuckleblaster { get; private set; }
+        public Arm Whiplash { get; private set; }
+        public Arm Sandboxer { get; private set; }
+
+        #endregion
+
+        #region Legs
+        public Transform Pelvis { get; set; }
         public Leg LeftLeg { get; set; }
+        public Leg LeftLegIK { get; private set; }
         public Leg RightLeg { get; set; }
+        public Leg RightLegIK { get; private set; }
+        #endregion
 
-        public Transform IKPole_Left { get; set; }
-        public Transform IKPole_Right { get; set; }
+        #region IK Poles
+        public Transform Arm_IKPole_Left { get; private set; }
+        public Transform Arm_IKPole_Right { get; private set; }
+        public Transform Leg_IKPole_Left { get; private set; }
+        public Transform Leg_IKPole_Right { get; private set; }
+        #endregion
 
         public static MetaRig VCustomPreset(Transform T)
         {
@@ -77,11 +92,16 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
                 MR.Sandboxer = MR._RSandboxer;
             }
 
-            MR.LeftLeg = Leg.MRPreset(MR.Root.GetChild(0).GetChild(0).GetChild(1));
-            MR.RightLeg = Leg.MRPreset(MR.Root.GetChild(0).GetChild(0).GetChild(2));
+            MR.Pelvis = MR.Root.GetChild(0).GetChild(0).GetChild(1);
+            MR.LeftLeg = Leg.MRPreset(MR.Root.GetChild(0).GetChild(0).GetChild(1).GetChild(0));
+            MR.RightLeg = Leg.MRPreset(MR.Root.GetChild(0).GetChild(0).GetChild(1).GetChild(2));
+            MR.LeftLegIK = Leg.MRIKPreset(MR.Root.GetChild(0).GetChild(0).GetChild(1).GetChild(1));
+            MR.RightLegIK = Leg.MRIKPreset(MR.Root.GetChild(0).GetChild(0).GetChild(1).GetChild(3));
 
-            MR.IKPole_Left = MR.Root.GetChild(0).GetChild(1);
-            MR.IKPole_Right = MR.Root.GetChild(0).GetChild(2);
+            MR.Arm_IKPole_Left = MR.Root.GetChild(0).GetChild(1);
+            MR.Arm_IKPole_Right = MR.Root.GetChild(0).GetChild(2);
+            MR.Leg_IKPole_Left = MR.Root.GetChild(0).GetChild(0).GetChild(1).GetChild(4);
+            MR.Leg_IKPole_Right = MR.Root.GetChild(0).GetChild(0).GetChild(1).GetChild(5);
             return MR;
         }
         public static MetaRig CreateVCustomPreset(GameObject Parent, string Name = null)

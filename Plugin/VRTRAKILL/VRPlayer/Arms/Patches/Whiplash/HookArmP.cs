@@ -1,20 +1,22 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 using Plugin.VRTRAKILL.VRPlayer.VRAvatar.Armature;
+using static UnityEngine.Random;
+using Valve.VR.InteractionSystem;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches.Whiplash
 {
     // you get it? cameracontrollerpatches?? ccp????? lol!!
-    [HarmonyPatch] internal sealed class HookArmP
+    [HarmonyPatch(typeof(HookArm))] internal sealed class HookArmP
     {
-        [HarmonyPostfix] [HarmonyPatch(typeof(HookArm), nameof(HookArm.Start))] static void ConvertWhiplash(HookArm __instance)
+        [HarmonyPostfix] [HarmonyPatch(nameof(HookArm.Start))] static void ConvertWhiplash(HookArm __instance)
         {
             Arm A = Arm.WhiplashPreset(__instance.transform);
             ArmTransformer AR = __instance.gameObject.AddComponent<ArmTransformer>();
             ArmController.DefaultArmCon AC = __instance.gameObject.AddComponent<ArmController.DefaultArmCon>();
             AR.Arm = A; AC.SetArm(A);
         }
-        [HarmonyPrefix] [HarmonyPatch(typeof(HookArm), nameof(HookArm.Update))] static bool Update(HookArm __instance)
+        [HarmonyPrefix] [HarmonyPatch(nameof(HookArm.Update))] static bool Update(HookArm __instance)
         {
             if (!MonoSingleton<OptionsManager>.Instance || MonoSingleton<OptionsManager>.Instance.paused) return false;
             if (!__instance.equipped || MonoSingleton<FistControl>.Instance.shopping || !MonoSingleton<FistControl>.Instance.activated)
@@ -128,6 +130,79 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches.Whiplash
                         for (int j = 0; j < componentsInChildren.Length; j++) componentsInChildren[j].gameObject.layer = 13; 
                     }
                 }
+            }
+
+            return false;
+        }
+        [HarmonyPrefix] [HarmonyPatch(nameof(HookArm.StopThrow))] static bool StopThrow(HookArm __instance, float animationTime = 0f, bool sparks = false)
+        {
+            MonoSingleton<RumbleManager>.Instance.StopVibration("rumble.whiplash.throw");
+            MonoSingleton<RumbleManager>.Instance.StopVibration("rumble.whiplash.pull");
+            if (animationTime == 0f)
+            {
+                UnityEngine.Object.Instantiate(__instance.pullSound);
+                __instance.aud.clip = __instance.pullLoop;
+                __instance.aud.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+                __instance.aud.panStereo = -0.5f;
+                __instance.aud.Play();
+            }
+            else
+            {
+                UnityEngine.Object.Instantiate(__instance.pullDoneSound);
+            }
+
+            if (__instance.forcingGroundCheck)
+            {
+                __instance.StopForceGroundCheck();
+            }
+
+            if (__instance.lightTarget)
+            {
+                if ((bool)__instance.enemyGroundCheck)
+                {
+                    __instance.enemyGroundCheck.StopForceOff();
+                }
+
+                __instance.lightTarget = false;
+                __instance.enemyGroundCheck = null;
+                __instance.enemyRigidbody = null;
+            }
+
+            if ((bool)__instance.caughtEid)
+            {
+                __instance.caughtEid.hooked = false;
+                __instance.caughtEid = null;
+            }
+
+            if ((bool)__instance.caughtHook)
+            {
+                __instance.caughtHook.Unhooked();
+                __instance.caughtHook = null;
+            }
+
+            if (sparks)
+            {
+                UnityEngine.Object.Instantiate(__instance.clinkSparks, __instance.hookPoint, Quaternion.LookRotation(__instance.transform.position - __instance.hookPoint));
+            }
+
+            __instance.state = HookState.Ready;
+            __instance.anim.Play("Pull", -1, animationTime);
+            //__instance.hand.transform.localPosition = new Vector3(-0.015f, 0.071f, 0.04f);
+            //if (MonoSingleton<CameraController>.Instance.defaultFov > 105f)
+            //{
+            //    __instance.hand.transform.localPosition += new Vector3(0.25f * ((MonoSingleton<CameraController>.Instance.defaultFov - 105f) / 55f), 0f, 0.05f * ((MonoSingleton<CameraController>.Instance.defaultFov - 105f) / 60f));
+            //}
+            //else if (MonoSingleton<CameraController>.Instance.defaultFov < 105f)
+            //{
+            //    __instance.hand.transform.localPosition -= new Vector3(0.05f * ((105f - MonoSingleton<CameraController>.Instance.defaultFov) / 60f), 0.075f * ((105f - MonoSingleton<CameraController>.Instance.defaultFov) / 60f), 0.125f * ((105f - MonoSingleton<CameraController>.Instance.defaultFov) / 60f));
+            //}
+
+            __instance.returnDistance = Mathf.Max(Vector3.Distance(__instance.transform.position, __instance.hookPoint), 25f);
+            __instance.returning = true;
+            __instance.throwWarp = 0f;
+            if ((bool)__instance.currentWoosh)
+            {
+                UnityEngine.Object.Destroy(__instance.currentWoosh);
             }
 
             return false;
