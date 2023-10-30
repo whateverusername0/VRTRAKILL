@@ -16,8 +16,7 @@ Also it does not require any other mods to function.
 It'll be much easier to describe what **doesn't** work.
 ### What doesn't work right now:
 - Accessibility stuff. (e.g. left-handed mode)
-- 4-S, 5-S.
-- VRAvatar's legs.
+- 4-S.
 ### Planned stuff:
 **1.0**: Full release (when i think that nothing more can be done)  
 **1.x.x**: Mods compatibility (JAKET, ultraballing, etc.)
