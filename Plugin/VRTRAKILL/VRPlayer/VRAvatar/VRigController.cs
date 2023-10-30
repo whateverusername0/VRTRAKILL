@@ -39,7 +39,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             Rig.GameObjectT.localRotation = Quaternion.Euler(Vector3.zero);
 
             Rig.Root.localScale *= 3;
-            Rig.Root.GetChild(0).localPosition = new Vector3(0, -.015f, -.001f);
+            Rig.Root.GetChild(0).localPosition = new Vector3(0, -.015f, -.0005f);
 
 
             if (Vars.Config.VRBody.EnableArmsIK)
@@ -219,7 +219,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             if (!NewMovement.Instance.gc.onGround) Anim.SetBool("Jumping", true);
             else Anim.SetBool("Jumping", false);
             if (NewMovement.Instance.sliding || (HookArm.Instance?.state == HookState.Pulling && (bool)!HookArm.Instance?.lightTarget))
-                Anim.SetBool("Sliding", true);
+            { Anim.SetBool("Jumping", false); Anim.SetBool("Sliding", true); }
             else Anim.SetBool("Sliding", false);
         }
     }
