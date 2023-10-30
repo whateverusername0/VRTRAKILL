@@ -40,17 +40,20 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
 
         public bool IsMoving => Lerp < 1;
 
+        Vector3 LastFootPos = default;
+
         public void Start()
         {
             DetectionLayerMask |= 1 << (int)Layers.Outdoors;
             if (FootSpacing == null) FootSpacing = Body.InverseTransformPoint(transform.position).x;
             CurrentPos = OldPos = NewPos = transform.position;
             Lerp = 1;
+            LastFootPos = transform.localPosition;
         }
 
         public void Update()
         {
-            if (Anim?.GetBool("Jumping") == true || Anim?.GetBool("Sliding") == true) return;
+            if (Anim?.GetBool("Jumping") == true || Anim?.GetBool("Sliding") == true) { transform.localPosition = LastFootPos; return; }
 
             if (NewMovement.Instance.rb.velocity.magnitude > .1f)
             {
