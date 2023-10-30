@@ -54,7 +54,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
 
             if (NewMovement.Instance.rb.velocity.magnitude > .1f)
             {
-                Speed = 7.5f;
+                Speed = 10f;
                 StepDistance = 1.5f;
                 StepLength = 1.5f;
                 StepHeight = 1f;
