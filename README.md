@@ -8,7 +8,7 @@
 [Full minos fight (0.3)](https://www.youtube.com/watch?v=yrofGYf_xTI) | [Full sisyphus fight (0.5)](https://www.youtube.com/watch?v=DhcVx6yBEaM) | [Cybergrind tomfoolery (0.8)](https://youtu.be/n2aAljuvpMo) | [0.12](https://youtu.be/aosvmxn6bNU)
 
 ULTRAKILLing in VR is now a thing.  
-This mod exists because [HuskVR](https://github.com/TeamDoodz/HuskVR) is not being updated for like 7 months, so I was like "Fine, I'll do it myself".  
+This mod exists because [HuskVR](https://github.com/TeamDoodz/HuskVR) was not being updated for a whole year, so I was like "Fine, I'll do it myself".  
 Also it does not require any other mods to function.  
 
 ## Features
@@ -24,4 +24,13 @@ It'll be much easier to describe what **doesn't** work.
 **Future**: Maintenance updates  
 ...and a separate UI for config edit, setup, uninstall and updating, since such actions might get complicated.
 
-**Additional info (such as installation, common problems, default bindings, etc.) has moved to the [Wiki](https://github.com/whateverusername0/VRTRAKILL/wiki)**
+## Wiki shortcuts
+Install: [link](https://github.com/whateverusername0/VRTRAKILL/wiki/Installation-%7C-Build#installation)
+
+Controls: [link](https://github.com/whateverusername0/VRTRAKILL/wiki/Controls)
+
+Default controller bindings: [link](https://github.com/whateverusername0/VRTRAKILL/wiki/Default-controller-bindings)
+
+Common issues: [link](https://github.com/whateverusername0/VRTRAKILL/wiki/Common-issues)
+
+Build from source: [link](https://github.com/whateverusername0/VRTRAKILL/wiki/Installation-%7C-Build#building-from-source)
