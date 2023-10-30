@@ -99,8 +99,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             // Neck chain Ik
             AddIK(Rig.NeckEnd.gameObject, Rig.Head.GetChild(0).GetChild(0), 2);
 
-            //gameObject.AddComponent<SkinsManager>();
-            //var ASC = gameObject.AddComponent<AvatarSizeCalibrator>(); ASC.enabled = false;
+            var ASC = gameObject.AddComponent<AvatarSizeCalibrator>(); ASC.enabled = false;
         }
         
         public void LateUpdate()

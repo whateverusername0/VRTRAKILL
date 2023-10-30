@@ -231,8 +231,6 @@ namespace Plugin.VRTRAKILL.Compatibility
             EnableArmsIK = new BoolField(VRBCD, "Enable arms IK", "EnableArmsIK", Vars.Config.VRBody.EnableArmsIK);
             EnableLegsIK = new BoolField(VRBCD, "Enable legs IK", "EnableLegsIK", Vars.Config.VRBody.EnableLegsIK);
 
-            new ConfigHeader(VRBody, "--- SKINS COMING SOON (not very) ---");
-
             EnableVRBody.onValueChange += (o) => { VRBCD.interactable = o.value; Vars.Config.ChangeWrite(o.value, v => Vars.Config.EnableVRBody = v); };
             EnableArmsIK.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRBody.EnableArmsIK = v);
             EnableLegsIK.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRBody.EnableLegsIK = v);
