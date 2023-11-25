@@ -22,9 +22,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
         public readonly float RAMRotationSpeed = .2f, FMDuration = 2;
         public float MoveRotateSpeed = .5f;
 
-        public override void OnEnable()
+        public void Start()
         {
-            base.OnEnable();
             TPCam = TPCam ?? GetComponentInChildren<Camera>();
             Offset.localPosition = OffsetPos;
             TPCam.transform.rotation = Quaternion.Euler(RotAngles);
@@ -42,11 +41,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
                 case TPCMode.Fixed: transform.eulerAngles = RotAngles; break;
                 default: break;
             }
-
-            //if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.SpecCamLeft))  MoveOrRotate(Vector2.left);
-            //if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.SpecCamUp))    MoveOrRotate(Vector2.up);
-            //if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.SpecCamRight)) MoveOrRotate(Vector2.right);
-            //if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.SpecCamDown))  MoveOrRotate(Vector2.down);
         }
         public void LateUpdate()
         {
