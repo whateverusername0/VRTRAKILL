@@ -16,7 +16,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
             }
             ArmTransformer AT = __instance.gameObject.AddComponent<ArmTransformer>();
             ArmController.ACBase AC = __instance.gameObject.AddComponent<ArmController.DefaultArmCon>();
-            AT.Arm = A; AC.SetArm(A);
+            AT.Arm = A; AC.Arm = A;
         }
     }
 }

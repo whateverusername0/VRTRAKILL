@@ -5,12 +5,13 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.ArmController
 {
     internal class DefaultArmCon : ACBase
     {
+        public Transform RawTarget { get; set; }
         public override void Start()
         {
             base.Start();
             if (Vars.Config.Controllers.LeftHanded || gameObject.HasComponent<Sandbox.Arm.SandboxArm>())
-                Target = Vars.DominantHand.transform;
-            else Target = Vars.NonDominantHand.transform;
+            { Target = Vars.DominantHand.transform; RawTarget = Vars.NDHC.transform; }
+            else { Target = Vars.NonDominantHand.transform; RawTarget = Vars.DHC.transform; }
         }
 
         public override void LateUpdate()

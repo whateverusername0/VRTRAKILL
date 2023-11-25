@@ -38,7 +38,7 @@ namespace Plugin.VRTRAKILL.Input
         // Helper methods
         public static string FriendlyBindingName(this ISteamVR_Action_In SVRAI)
         {
-            string Direction = string.Empty;
+            string Direction;
             switch (SVRAI.activeDevice)
             {
                 case SteamVR_Input_Sources.LeftHand:
