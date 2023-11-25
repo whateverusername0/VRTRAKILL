@@ -254,6 +254,7 @@
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\DesktopCamera.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\DesktopUICamera.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\A.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\CrashBandicrootCCP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\ThirdPersonCamera.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\VRCameraController.cs" />
     <Compile Include="VRTRAKILL\Config\ConfigJSON.cs" />
