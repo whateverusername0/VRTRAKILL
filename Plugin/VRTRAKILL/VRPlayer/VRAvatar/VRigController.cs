@@ -5,10 +5,10 @@ using UnityEngine;
 
 namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
 {
-    // The NewMovement of VRTRAKILL's avatar
+    // the NewMovement of the player's avatar
     internal class VRigController : MonoBehaviour
     {
-        // Can't use stuff normally without it being both a singleton and a monobehavior
+        // can't use stuff normally without it being both a singleton and a monobehavior
         private static VRigController _Instance; public static VRigController Instance { get { return _Instance; } }
 
         public MetaRig Rig; private EZSoftBone WingBone;
@@ -25,6 +25,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
 
         public void Awake()
         {
+            // awake would be inaccessible if it was a monosingleton
             if (_Instance != null && _Instance != this) Destroy(this.gameObject);
             else _Instance = this;
         }
@@ -106,24 +107,21 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         {
             if (Rig == null) return;
 
-            HandleBodyRotation();
-
+            HandleBodyTransform();
             HandleHead();
-
             HandleArms();
-
             HandleWings();
-
             if (Vars.Config.VRBody.EnableLegsIK)
             {
                 HandleAnimations();
+                HandlePelvisRotation();
             }
         }
 
-        private void HandleBodyRotation()
+        private void HandleBodyTransform()
         {
-            // Smooth body rotation towards the camera
-            Rig.Root.position = Vars.MainCamera.transform.position;
+            // Smooth body's position and rotation towards the camera
+            Rig.Root.position = Vector3.Lerp(Rig.Root.position, Vars.MainCamera.transform.position, Time.deltaTime * 5f);
             Quaternion Rotation = Quaternion.Lerp(Rig.Abdomen.rotation, Vars.MainCamera.transform.rotation, Time.deltaTime * 2.5f);
             Rig.Root.rotation = Quaternion.Euler(0, Rotation.eulerAngles.y, 0);
         }
@@ -171,11 +169,13 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
                     Rig.FeedbackerA.GameObjecT.gameObject.SetActive(true);
                     Rig.Knuckleblaster.GameObjecT.gameObject.SetActive(false);
                     break;
+
                 case FistType.Heavy:
                     ActiveArm = Rig.Knuckleblaster;
                     Rig.FeedbackerA.GameObjecT.gameObject.SetActive(false);
                     Rig.Knuckleblaster.GameObjecT.gameObject.SetActive(true);
                     break;
+
                 case FistType.Spear: break;
             }
 
@@ -216,11 +216,21 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
 
         private void HandleAnimations()
         {
+            // triggers in the air
             if (!NewMovement.Instance.gc.onGround) Anim.SetBool("Jumping", true);
             else Anim.SetBool("Jumping", false);
+
+            // triggers when a player is either sliding or pulling himself towards something heavy (e.g. hookpoint, maurice)
             if (NewMovement.Instance.sliding || (HookArm.Instance?.state == HookState.Pulling && (bool)!HookArm.Instance?.lightTarget))
             { Anim.SetBool("Jumping", false); Anim.SetBool("Sliding", true); }
             else Anim.SetBool("Sliding", false);
+        }
+        private void HandlePelvisRotation()
+        {
+            // this exists because my foot placement logic does not want to work *horizontally*
+            Vector3 Direction = new Vector3(-Input.InputVars.MoveVector.y, 0, Input.InputVars.MoveVector.x);
+            Quaternion Rotation = Quaternion.LookRotation(Direction, Vector3.up);
+            Rig.Pelvis.rotation = Quaternion.Lerp(Rig.Pelvis.rotation, Rotation, Time.deltaTime * 5);
         }
     }
 }
