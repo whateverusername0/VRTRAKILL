@@ -28,7 +28,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             {
                 Arms.ArmController.WeaponArmCon WAC = __instance.gameObject.AddComponent<Arms.ArmController.WeaponArmCon>();
                 Arm A = Arm.FeedbackerPreset(__instance.transform);
-                WAC.SetArm(A); WAC.OffsetRot = HandOffsetRotation;
+                WAC.Arm = A; WAC.OffsetRot = HandOffsetRotation;
 
                 if (__instance.altVersion) { ApplyTransform(ref __instance.wpos, AltPosition, AltRotation, AltScale); }
                 else { ApplyTransform(ref __instance.wpos, Position, Rotation, Scale); }
@@ -100,7 +100,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                 //retransform
                 Arms.ArmController.DefaultArmCon DAC = __instance.gameObject.AddComponent<Arms.ArmController.DefaultArmCon>();
                 Arm A = Arm.SandboxerPreset(__instance.transform);
-                DAC.SetArm(A); DAC.OffsetPos = new Vector3(-.15f, -.3f, -.55f);
+                DAC.Arm = A; DAC.OffsetPos = new Vector3(-.15f, -.3f, -.55f);
                 __instance.transform.localScale = Scale;
             }
         }
@@ -117,7 +117,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 
                 Arms.ArmController.WeaponArmCon WAC = __instance.gameObject.AddComponent<Arms.ArmController.WeaponArmCon>();
                 Arm A = Arm.FeedbackerPreset(__instance.transform);
-                WAC.SetArm(A); WAC.OffsetPos = Vector3.zero;
+                WAC.Arm = A; WAC.OffsetPos = Vector3.zero;
             }
         }
 
