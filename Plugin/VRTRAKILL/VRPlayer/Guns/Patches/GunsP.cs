@@ -20,5 +20,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         { __instance.transform.localPosition = Vector3.zero; }
         [HarmonyPostfix] [HarmonyPatch(typeof(GunSetter), nameof(GunSetter.ResetWeapons))] static void RLPGS(GunSetter __instance)
         { __instance.transform.localPosition = Vector3.zero; }
+        [HarmonyPostfix] [HarmonyPatch(typeof(GunSetter), nameof(GunSetter.Start))] static void MakeThemUndisappear(GunSetter __instance, bool firstTime = false)
+        {
+            foreach (SkinnedMeshRenderer SMR in __instance.GetComponentsInChildren<SkinnedMeshRenderer>())
+                SMR.updateWhenOffscreen = true;
+        }
     }
 }
