@@ -33,16 +33,18 @@ namespace Plugin.VRTRAKILL.Compatibility
 
         private static void PluginConfigurator()
         {
-            Vars.Log.LogInfo("Detected PluginConfigurator! Building settings UI...");
+            Vars.Log.LogInfo("Detected PluginConfigurator!");
             Compatibility.PluginConfigurator.Init();
         }
         private static void JAKET()
         {
-            Vars.Log.LogInfo("Detected JAKET! No funationality added yet. WIP!");
+            Vars.Log.LogInfo("Detected JAKET!");
+            Compatibility.JAKET.Init();
         }
         private static void UFG()
         {
-            Vars.Log.LogInfo("Detected UFG! No functionality added yet. WIP!");
+            Vars.Log.LogInfo("Detected UFG!");
+            Compatibility.UltraFunGuns.Init();
         }
     }
 }
