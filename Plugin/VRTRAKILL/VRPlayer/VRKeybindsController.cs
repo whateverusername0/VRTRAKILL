@@ -42,15 +42,15 @@ namespace Plugin.VRTRAKILL.VRPlayer
                 SubtitleController.Instance.DisplaySubtitle
                     ($"VR: Switched third person camera mode to {System.Enum.GetName(typeof(TPCMode), ThirdPersonCamera.Instance.Mode)}");
             }
-            if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.ToggleAvatarCalibration))
+            if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.ToggleAvatarSizeAdj))
             {
                 try
                 {
-                    if ((bool)(VRAvatar.AvatarSizeCalibrator.Instance?.enabled))
-                        VRAvatar.AvatarSizeCalibrator.Instance.enabled = false;
-                    else if ((bool)!VRAvatar.AvatarSizeCalibrator.Instance?.enabled)
-                        VRAvatar.AvatarSizeCalibrator.Instance.enabled = true;
-                } catch (System.NullReferenceException) { SubtitleController.Instance.DisplaySubtitle("Unable to toggle ASC!"); }
+                    if ((bool)(VRAvatar.AvatarSizeAdjustor.Instance?.enabled))
+                        VRAvatar.AvatarSizeAdjustor.Instance.enabled = false;
+                    else if ((bool)!VRAvatar.AvatarSizeAdjustor.Instance?.enabled)
+                        VRAvatar.AvatarSizeAdjustor.Instance.enabled = true;
+                } catch (System.NullReferenceException) { SubtitleController.Instance.DisplaySubtitle("Unable to toggle avatar size adjustment!"); }
             }
         }
 

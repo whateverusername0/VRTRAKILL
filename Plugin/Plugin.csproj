@@ -159,6 +159,8 @@
     <Compile Include="Util\Libraries\EZSoftBone.cs" />
     <Compile Include="Util\Versioning.cs" />
     <Compile Include="VRTRAKILL\Assets.cs" />
+    <Compile Include="VRTRAKILL\Compatibility\JAKET.cs" />
+    <Compile Include="VRTRAKILL\Compatibility\UltraFunGuns.cs" />
     <Compile Include="VRTRAKILL\Config\NewConfig.cs" />
     <Compile Include="VRTRAKILL\Input\ControlMessages\MessageContainer.cs" />
     <Compile Include="VRTRAKILL\Input\ControlMessages\Patches.cs" />
@@ -176,7 +178,7 @@
     <Compile Include="VRTRAKILL\VRPlayer\Patches\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\Armature\Finger.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\Armature\Hand.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\AvatarSizeCalibrator.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\AvatarSizeAdjustor.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\IKChain.cs" />
     <Compile Include="Util\Libraries\WindowsInput\IInputDeviceStateAdaptor.cs" />
     <Compile Include="Util\Libraries\WindowsInput\IInputMessageDispatcher.cs" />

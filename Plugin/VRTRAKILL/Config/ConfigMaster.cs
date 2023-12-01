@@ -58,7 +58,7 @@ namespace Plugin.VRTRAKILL.Config
             TPCamRight = UnityEngine.KeyCode.Joystick8Button9,
             TPCamHoldMoveMode = UnityEngine.KeyCode.Joystick8Button9,
 
-            ToggleAvatarCalibration = UnityEngine.KeyCode.Joystick8Button9;
+            ToggleAvatarSizeAdj = UnityEngine.KeyCode.Joystick8Button9;
 
         public static void Init()
         {

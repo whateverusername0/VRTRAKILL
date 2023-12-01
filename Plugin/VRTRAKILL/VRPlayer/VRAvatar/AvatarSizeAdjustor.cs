@@ -3,9 +3,9 @@
 namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
 {
     [RequireComponent(typeof(VRigController))]
-    internal class AvatarSizeCalibrator : MonoBehaviour
+    internal class AvatarSizeAdjustor : MonoBehaviour
     {
-        private static AvatarSizeCalibrator _Instance; public static AvatarSizeCalibrator Instance { get { return _Instance; } }
+        private static AvatarSizeAdjustor _Instance; public static AvatarSizeAdjustor Instance { get { return _Instance; } }
         public MetaRig Rig => VRigController.Instance.Rig;
 
         private readonly float ScalePercentage = .05f;
