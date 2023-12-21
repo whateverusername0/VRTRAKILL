@@ -40,8 +40,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
 
         private void ChangeSize(float ScalePercentage, Transform Target)
         {
-            float Scale = Target.localScale.y + ScalePercentage;
-            Target.localScale = new Vector3(Scale, Scale, Scale);
+            Target.localScale = new Vector3(Target.localScale.x + ScalePercentage,
+                                            Target.localScale.y + ScalePercentage,
+                                            Target.localScale.z + ScalePercentage);
         }
     }
 }
