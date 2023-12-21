@@ -91,7 +91,7 @@
     </Reference>
     <Reference Include="SteamVR, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Plugin\Libraries\SteamVR\SteamVR.dll</HintPath>
+      <HintPath>Libraries\SteamVR\SteamVR.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SteamVR_Actions, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -174,7 +174,6 @@
     <Compile Include="VRTRAKILL\VRPlayer\Arms\ArmController\DefaultArmCon.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\ArmController\ACBase.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Arms\ArmController\WeaponArmCon.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\Guns\FuckRevolver.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Guns\Patches\AddHandsP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\Patches\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\Armature\Finger.cs" />
