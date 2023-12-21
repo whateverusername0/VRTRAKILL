@@ -159,18 +159,18 @@ namespace Plugin.VRTRAKILL.Config
         private readonly PlayerInput PI = new PlayerInput();
         public string GetBindingString(string action)
         {
-            if (!PI.Actions.TryGetValue(action, out InputActionState value)) return null;
+            //if (!PI.Actions.TryGetValue(action, out InputActionState value)) return null;
 
-            ReadOnlyArray<InputBinding> Bindings = value.Action.bindings;
-            for (int i = 0; i < Bindings.Count; i++)
-            {
-                if (Bindings[i].isComposite) return null;
+            //ReadOnlyArray<InputBinding> Bindings = value.Action.bindings;
+            //for (int i = 0; i < Bindings.Count; i++)
+            //{
+            //    if (Bindings[i].isComposite) return null;
 
-                InputControl inputControl = InputSystem.FindControl(Bindings[i].path);
-                if (inputControl == null && inputControl?.device is Keyboard) continue;
+            //    InputControl inputControl = InputSystem.FindControl(Bindings[i].path);
+            //    if (inputControl == null && inputControl?.device is Keyboard) continue;
 
-                return inputControl.displayName;
-            }
+            //    return inputControl.displayName;
+            //}
             return null;
         }
     }
