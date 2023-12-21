@@ -16,12 +16,14 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.ArmController
 
         public override void LateUpdate()
         {
+            if (Vars.IsMainMenu || Arm == null) { Vars.Log.LogWarning("No arm found!"); return; }
+
             if (!gameObject.HasComponent<HookArm>()) base.LateUpdate();
             Arm.GameObjecT.position = Target.position;
             Arm.GameObjecT.rotation = Target.rotation;
 
-            Arm.Root.localPosition = (Vector3)OffsetPos;
-            Arm.Hand.Root.rotation = Target.rotation * Quaternion.Euler((Vector3)OffsetRot);
+            Arm.Root.localPosition = OffsetPos;
+            Arm.Hand.Root.rotation = Target.rotation * Quaternion.Euler(OffsetRot);
         }
     }
 }
