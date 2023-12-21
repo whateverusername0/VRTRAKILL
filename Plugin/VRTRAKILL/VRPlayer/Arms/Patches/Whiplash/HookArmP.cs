@@ -76,7 +76,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches.Whiplash
                     __instance.aud.Play();
                     __instance.aud.pitch = Random.Range(0.9f, 1.1f);
                     __instance.semiBlocked = 0f;
-                    MonoSingleton<RumbleManager>.Instance.SetVibrationTracked("rumble.whiplash.throw", __instance.gameObject);
+                    MonoSingleton<RumbleManager>.Instance.SetVibrationTracked(RumbleProperties.WhiplashThrow, __instance.gameObject);
                 }
             }
             if (__instance.cooldown != 0f) __instance.cooldown = Mathf.MoveTowards(__instance.cooldown, 0f, Time.deltaTime); 
@@ -136,8 +136,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches.Whiplash
         }
         [HarmonyPrefix] [HarmonyPatch(nameof(HookArm.StopThrow))] static bool StopThrow(HookArm __instance, float animationTime = 0f, bool sparks = false)
         {
-            MonoSingleton<RumbleManager>.Instance.StopVibration("rumble.whiplash.throw");
-            MonoSingleton<RumbleManager>.Instance.StopVibration("rumble.whiplash.pull");
+            MonoSingleton<RumbleManager>.Instance.StopVibration(RumbleProperties.WhiplashThrow);
+            MonoSingleton<RumbleManager>.Instance.StopVibration(RumbleProperties.WhiplashPull);
             if (animationTime == 0f)
             {
                 UnityEngine.Object.Instantiate(__instance.pullSound);

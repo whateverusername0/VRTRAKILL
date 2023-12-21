@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Valve.VR;
 
 namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
@@ -12,31 +13,32 @@ namespace Plugin.VRTRAKILL.VRPlayer.Controllers.Patches
         // I can't believe it worked first try without any corrections.
         [HarmonyPrefix] [HarmonyPatch(nameof(RumbleManager.Update))] static bool Update(RumbleManager __instance)
         {
-            List<string> list = new List<string>();
-            foreach (KeyValuePair<string, PendingVibration> keyValuePair in __instance.pendingVibrations)
+            __instance.discardedKeys.Clear();
+            foreach (KeyValuePair<RumbleKey, PendingVibration> pendingVibration in __instance.pendingVibrations)
             {
-                if (keyValuePair.Value.isTracking && (keyValuePair.Value.trackedObject == null || !keyValuePair.Value.trackedObject.activeInHierarchy))
-                    list.Add(keyValuePair.Key);
-                else if (keyValuePair.Value.IsFinished)
-                    list.Add(keyValuePair.Key);
+                if (pendingVibration.Value.isTracking && (pendingVibration.Value.trackedObject == null || !pendingVibration.Value.trackedObject.activeInHierarchy))
+                    __instance.discardedKeys.Add(pendingVibration.Key);
+                else if (pendingVibration.Value.IsFinished)
+                    __instance.discardedKeys.Add(pendingVibration.Key);
             }
-            foreach (string key in list)
-            {
-                __instance.pendingVibrations.Remove(key);
-            }
-            float Num = 0f;
-            SteamVR_Input_Sources Source = 0;
-            foreach (KeyValuePair<string, PendingVibration> keyValuePair2 in __instance.pendingVibrations)
-            {
-                if (keyValuePair2.Value.Intensity > Num)
-                    Num = keyValuePair2.Value.Intensity;
-                Source = ResolveController(keyValuePair2.Key);
-            }
-            Num *= MonoSingleton<PrefsManager>.Instance.GetFloat("totalRumbleIntensity", 0f);
-            if (MonoSingleton<OptionsManager>.Instance && MonoSingleton<OptionsManager>.Instance.paused) Num = 0f;
-            __instance.currentIntensity = Num;
 
-            if (list.Count > 0) Vibrate(1, Num, Num, Source);
+            foreach (RumbleKey discardedKey in __instance.discardedKeys)
+                __instance.pendingVibrations.Remove(discardedKey);
+
+            float num = 0f;
+            SteamVR_Input_Sources source = 0;
+            foreach (KeyValuePair<RumbleKey, PendingVibration> pendingVibration2 in __instance.pendingVibrations)
+                if (pendingVibration2.Value.Intensity > num)
+                {
+                    num = pendingVibration2.Value.Intensity;
+                    source = ResolveController(pendingVibration2.Key.name);
+                }
+
+            num *= MonoSingleton<PrefsManager>.Instance.GetFloat("totalRumbleIntensity");
+            if ((bool)MonoSingleton<OptionsManager>.Instance && MonoSingleton<OptionsManager>.Instance.paused)
+                num = 0f;
+
+            Vibrate(1, num, num, source);
 
             return false;
         }

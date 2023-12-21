@@ -18,9 +18,9 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
         // idk if this is needed, but i'm not removing it
         [HarmonyPostfix] [HarmonyPatch(typeof(GunControl), nameof(GunControl.Start))] static void RLPGC(GunControl __instance)
         { __instance.transform.localPosition = Vector3.zero; }
-        [HarmonyPostfix] [HarmonyPatch(typeof(GunSetter), nameof(GunSetter.ResetWeapons))] static void RLPGS(GunSetter __instance)
+        [HarmonyPostfix] [HarmonyPatch(typeof(GunSetter), nameof(GunSetter.ResetWeapons))] static void RLPGS(GunSetter __instance, bool firstTime = false)
         { __instance.transform.localPosition = Vector3.zero; }
-        [HarmonyPostfix] [HarmonyPatch(typeof(GunSetter), nameof(GunSetter.Start))] static void MakeThemUndisappear(GunSetter __instance, bool firstTime = false)
+        [HarmonyPostfix] [HarmonyPatch(typeof(GunSetter), nameof(GunSetter.Start))] static void MakeThemUndisappear(GunSetter __instance)
         {
             foreach (SkinnedMeshRenderer SMR in __instance.GetComponentsInChildren<SkinnedMeshRenderer>())
                 SMR.updateWhenOffscreen = true;
