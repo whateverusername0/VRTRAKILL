@@ -30,8 +30,19 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                 Arm A = Arm.FeedbackerPreset(__instance.transform);
                 WAC.Arm = A; WAC.OffsetRot = HandOffsetRotation;
 
-                if (__instance.altVersion) { ApplyTransform(ref __instance.wpos, AltPosition, AltRotation, AltScale); }
-                else { ApplyTransform(ref __instance.wpos, Position, Rotation, Scale); }
+                __instance.wpos.enabled = false;
+                if (__instance.altVersion)
+                {
+                    ApplyTransform(ref __instance.wpos, AltPosition, AltRotation, AltScale);
+                    FuckRevolver FR = __instance.gameObject.AddComponent<FuckRevolver>();
+                    FR.FuckPosition = AltPosition; FR.FuckRotation = AltRotation; FR.FuckScale = AltScale;
+                }
+                else
+                {
+                    ApplyTransform(ref __instance.wpos, Position, Rotation, Scale);
+                    FuckRevolver FR = __instance.gameObject.AddComponent<FuckRevolver>();
+                    FR.FuckPosition = Position; FR.FuckRotation = Rotation; FR.FuckScale = Scale;
+                }
             }
         }
         [HarmonyPatch(typeof(Shotgun))] static class ShotgunT
