@@ -63,5 +63,14 @@ namespace Plugin.VRTRAKILL.UI.Patches
                 if (!C.gameObject.HasComponent<UICanvas>())
                     UIConverter.RecursiveConvertCanvas();
         }
+
+        /// <summary>
+        ///     Fuck you
+        /// </summary>
+        [HarmonyPostfix] [HarmonyPatch(typeof(FlashImage), nameof(FlashImage.Flash))] static void FlashImageTweak(FlashImage __instance)
+        {
+            if (__instance.gameObject.name.Contains("White") || __instance.gameObject.name.Contains("Black"))
+                __instance.transform.localScale *= 20;
+        }
     }
 }

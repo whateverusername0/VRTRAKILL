@@ -48,7 +48,7 @@ namespace Plugin.VRTRAKILL.UI.Patches
         {
             UIConverter.ConvertCanvas(__instance.transform.parent.GetComponent<Canvas>(), Force: true);
             __instance.transform.localPosition = Vector3.zero;
-            __instance.transform.localScale = new Vector3(8, 8, 8);
+            __instance.transform.localScale = new Vector3(16, 8, 8);
         }
         [HarmonyPostfix] [HarmonyPatch(typeof(ScreenBlood), nameof(ScreenBlood.Start))] static void CScreenBlood(ScreenBlood __instance)
         {
