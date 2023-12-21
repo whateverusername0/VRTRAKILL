@@ -228,12 +228,13 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             { Anim.SetBool("Jumping", false); Anim.SetBool("Sliding", true); }
             else Anim.SetBool("Sliding", false);
         }
+        Vector3 PelvisPosition;
         private void HandlePelvisRotation()
         {
             // this exists because my foot placement logic does not want to work *horizontally*
-            Vector3 Direction = new Vector3(-Input.InputVars.MoveVector.y, 0, Input.InputVars.MoveVector.x);
-            Quaternion Rotation = Quaternion.Euler(0, Quaternion.LookRotation(Direction, Vector3.up).eulerAngles.y - 90, 0);
-            if (Input.InputVars.MoveVector.y < 0) Rotation = Quaternion.Euler(0, -Rotation.eulerAngles.y + 90, 0);
+            Vector3 Direction = new Vector3(-NewMovement.Instance.rb.velocity.z, 0, NewMovement.Instance.rb.velocity.x);
+            Quaternion Rotation = Quaternion.Euler(0, Quaternion.LookRotation(Direction, Vector3.up).eulerAngles.y + 90, 0);
+            if (Input.InputVars.MoveVector.y < 0) Rotation = Quaternion.Euler(0, -Rotation.eulerAngles.y - 180, 0);
             Rig.Pelvis.rotation = Quaternion.Lerp(Rig.Pelvis.rotation, Rotation, Time.deltaTime * 5);
         }
     }
