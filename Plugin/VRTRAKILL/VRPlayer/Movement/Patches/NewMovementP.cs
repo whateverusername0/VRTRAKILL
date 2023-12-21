@@ -121,7 +121,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                 {
                     Object.Instantiate(__instance.impactDust, __instance.gc.transform.position, Quaternion.identity).transform.forward = Vector3.up;
                     __instance.cc.CameraShake(0.5f);
-                    MonoSingleton<RumbleManager>.Instance.SetVibration("rumble.fall_impact");
+                    MonoSingleton<RumbleManager>.Instance.SetVibration(RumbleProperties.FallImpact);
                 }
 
                 __instance.fallSpeed = 0f; __instance.gc.heavyFall = false;
@@ -415,7 +415,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                     __instance.aud.pitch = 1f;
                     __instance.aud.Play();
 
-                    MonoSingleton<RumbleManager>.Instance.SetVibration("rumble.dash");
+                    MonoSingleton<RumbleManager>.Instance.SetVibration(RumbleProperties.Dash);
                     if (__instance.gc.heavyFall)
                     {
                         __instance.fallSpeed = 0f;
@@ -601,7 +601,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Movement.Patches
                 else if (__instance.dodgeDirection == __instance.transform.forward * -1f) __instance.cc.dodgeDirection = 1;
                 else __instance.cc.dodgeDirection = 2;
 
-                MonoSingleton<RumbleManager>.Instance.SetVibration("rumble.slide");
+                MonoSingleton<RumbleManager>.Instance.SetVibration(RumbleProperties.Slide);
             }
             return false;
         }

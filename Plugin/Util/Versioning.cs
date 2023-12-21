@@ -49,7 +49,7 @@ namespace Plugin.Util
 
     /// <summary>
     /// Reprenents a version of the mod.
-    /// Structure: <c>"Major.Minor.Patch-revision"</c>
+    /// Structure: <c>"Major.Minor.Patch"</c>
     /// </summary>
     public readonly struct Version
     {

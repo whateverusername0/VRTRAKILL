@@ -48,7 +48,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 
                         //__instance.cam.fieldOfView += __instance.cc.defaultFov / 40f;
 
-                        MonoSingleton<RumbleManager>.Instance.SetVibrationTracked("rumble.gun.fire", __instance.gameObject);
+                        MonoSingleton<RumbleManager>.Instance.SetVibrationTracked(RumbleProperties.GunFire, __instance.gameObject);
                         break;
                     }
                 case 2:
@@ -106,7 +106,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                             Object.Instantiate(__instance.twirlShotSound, __instance.transform.position, Quaternion.identity);
 
                         __instance.cam.fieldOfView += __instance.cc.defaultFov / 20f;
-                        MonoSingleton<RumbleManager>.Instance.SetVibrationTracked("rumble.gun.fire_strong", __instance.gameObject);
+                        MonoSingleton<RumbleManager>.Instance.SetVibrationTracked(RumbleProperties.GunFireStrong, __instance.gameObject);
                         break;
                     }
             }
@@ -145,7 +145,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
 
             obj.GetComponent<Coin>().sourceWeapon = __instance.gc.currentWeapon;
 
-            MonoSingleton<RumbleManager>.Instance.SetVibration("rumble.coin_toss");
+            MonoSingleton<RumbleManager>.Instance.SetVibration(RumbleProperties.CoinToss);
 
             Vector3 zero = Vector3.zero;
             obj.GetComponent<Rigidbody>().AddForce(Vars.DominantHand.transform.forward * 20f + Vector3.up * 15f
@@ -218,7 +218,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                     }
                 }
             }
-            MonoSingleton<RumbleManager>.Instance.SetVibrationTracked("rumble.gun.fire_projectiles", __instance.gameObject);
+            MonoSingleton<RumbleManager>.Instance.SetVibrationTracked(RumbleProperties.GunFireProjectiles, __instance.gameObject);
             if (__instance.variation != 1 || __instance.primaryCharge != 3)
             {
                 for (int j = 0; j < num; j++)
@@ -366,7 +366,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                         }
                     }
                 }
-                MonoSingleton<RumbleManager>.Instance.SetVibrationTracked("rumble.gun.shotgun_charge", __instance.tempChargeSound.gameObject).intensityMultiplier = __instance.grenadeForce / 60f;
+                MonoSingleton<RumbleManager>.Instance.SetVibrationTracked(RumbleProperties.ShotgunCharge, __instance.tempChargeSound.gameObject).intensityMultiplier = __instance.grenadeForce / 60f;
                 __instance.tempChargeSound.pitch = __instance.grenadeForce / 60f;
             }
             if ((MonoSingleton<InputManager>.Instance.InputSource.Fire2.WasCanceledThisFrame || (!MonoSingleton<InputManager>.Instance.PerformingCheatMenuCombo() && !GameStateManager.Instance.PlayerInputLocked && MonoSingleton<InputManager>.Instance.InputSource.Fire1.WasPerformedThisFrame)) && __instance.variation == 0 && __instance.gunReady && __instance.gc.activated && __instance.charging)
@@ -573,7 +573,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             }
             if (__instance.altVersion)
             {
-                MonoSingleton<RumbleManager>.Instance.SetVibration("rumble.gun.sawblade");
+                MonoSingleton<RumbleManager>.Instance.SetVibration(RumbleProperties.Sawblade);
             }
 
             return false;
@@ -585,7 +585,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             __instance.shotSuccesfully = true;
             __instance.anim.SetLayerWeight(1, 0f);
             __instance.anim.SetTrigger("SuperShoot");
-            MonoSingleton<RumbleManager>.Instance.SetVibration("rumble.gun.super_saw");
+            MonoSingleton<RumbleManager>.Instance.SetVibration(RumbleProperties.SuperSaw);
             __instance.barrelNum++;
             if (__instance.barrelNum >= __instance.shootPoints.Length)
             {
@@ -648,7 +648,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             Object.Instantiate<GameObject>(__instance.fireSound);
             __instance.anim.SetTrigger("Shoot");
             __instance.cc.CameraShake(2f);
-            MonoSingleton<RumbleManager>.Instance.SetVibration("rumble.gun.fire_strong");
+            MonoSingleton<RumbleManager>.Instance.SetVibration(RumbleProperties.GunFireStrong);
 
             return false;
         }
@@ -689,7 +689,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                 component.sourceWeapon = MonoSingleton<GunControl>.Instance.currentWeapon;
             }
             MonoSingleton<CameraController>.Instance.CameraShake(0.75f);
-            MonoSingleton<RumbleManager>.Instance.SetVibrationTracked("rumble.gun.fire", __instance.gameObject);
+            MonoSingleton<RumbleManager>.Instance.SetVibrationTracked(RumbleProperties.GunFire, __instance.gameObject);
 
             return false;
         }

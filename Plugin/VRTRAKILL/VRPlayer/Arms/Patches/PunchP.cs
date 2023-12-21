@@ -14,6 +14,11 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.Patches
                 else return Vars.NonDominantHand.transform.forward;
             }
         }
+        // Unholster
+        /*[HarmonyPostfix] [HarmonyPatch(nameof(Punch.Start))]*/ static void Start(Punch __instance)
+        {
+            GameObject H = Object.Instantiate(__instance.gameObject, __instance.transform.parent);
+        } 
         [HarmonyPrefix] [HarmonyPatch(nameof(Punch.Update))] static bool Update(Punch __instance)
         {
             if (MonoSingleton<OptionsManager>.Instance.paused) return false;

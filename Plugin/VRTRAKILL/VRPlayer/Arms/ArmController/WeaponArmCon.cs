@@ -17,10 +17,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.ArmController
             if (gameObject.HasComponent<Revolver>())
             {
                 if (GetComponent<Revolver>().anim.GetBool("Spinning"))
-                { Arm.Hand.Root.rotation = Target.rotation * Quaternion.Euler((Vector3)OffsetRot); return; }
+                { Arm.Hand.Root.rotation = Target.rotation * Quaternion.Euler(OffsetRot); return; }
                 return;
             }
-            Arm.Hand.Root.rotation = Target.rotation * Quaternion.Euler((Vector3)OffsetRot);
+            Arm.Hand.Root.rotation = Target.rotation * Quaternion.Euler(OffsetRot);
         }
     }
 }

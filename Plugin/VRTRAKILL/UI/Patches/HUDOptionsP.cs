@@ -7,7 +7,7 @@ namespace Plugin.VRTRAKILL.UI.Patches
 {
     [HarmonyPatch] internal class HUDOptionsP
     {
-        [HarmonyPrefix] [HarmonyPatch(typeof(HUDOptions), nameof(HUDOptions.Start))] static void ResizeCanvases(HUDOptions __instance)
+        [HarmonyPostfix] [HarmonyPatch(typeof(HUDOptions), nameof(HUDOptions.Start))] static void ResizeCanvases(HUDOptions __instance)
         {
             // Stretches screen effects so it's not a small square in the middle of the hud
             string[] ScreenEffects =
@@ -62,6 +62,15 @@ namespace Plugin.VRTRAKILL.UI.Patches
             foreach (Canvas C in Resources.FindObjectsOfTypeAll(typeof(Canvas)))
                 if (!C.gameObject.HasComponent<UICanvas>())
                     UIConverter.RecursiveConvertCanvas();
+        }
+
+        /// <summary>
+        ///     Fuck you
+        /// </summary>
+        [HarmonyPostfix] [HarmonyPatch(typeof(FlashImage), nameof(FlashImage.Flash))] static void FlashImageTweak(FlashImage __instance)
+        {
+            if (__instance.gameObject.name.Contains("White") || __instance.gameObject.name.Contains("Black"))
+                __instance.transform.localScale *= 20;
         }
     }
 }

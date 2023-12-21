@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Plugin
 {
@@ -14,7 +9,7 @@ namespace Plugin
         public const string
             PLUGIN_GUID = "com.whateverusername0.vrtrakill", // do not change this string EVER
             PLUGIN_NAME = "VRTRAKILL",
-            PLUGIN_VERSION = "0.16.0"; // never use spaces
+            PLUGIN_VERSION = "0.18.0"; // never use spaces
 
         public static readonly string
             PluginPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), // ".../BepInEx/plugins/VRTRAKILL"

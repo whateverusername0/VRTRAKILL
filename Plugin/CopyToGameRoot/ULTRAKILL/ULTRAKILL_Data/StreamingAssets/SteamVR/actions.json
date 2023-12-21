@@ -125,6 +125,16 @@
       "type": "vector2"
     },
     {
+      "name": "/actions/default/in/NextWeapon",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/PrevWeapon",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration",
       "requirement": "optional"

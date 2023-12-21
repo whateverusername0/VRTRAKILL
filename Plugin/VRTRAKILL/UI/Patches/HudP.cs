@@ -6,7 +6,6 @@ namespace Plugin.VRTRAKILL.UI.Patches
     [HarmonyPatch] internal sealed class HudP
     {
         // Magic numbers to make good hud good.
-
         [HarmonyPostfix] [HarmonyPatch(typeof(HudController), nameof(HudController.Start))] static void ReparentHUD(HudController __instance)
         {
             if (__instance.altHud) return;
@@ -45,11 +44,16 @@ namespace Plugin.VRTRAKILL.UI.Patches
                     break;
             }
         }
-        [HarmonyPostfix] [HarmonyPatch(typeof(FinalRank), nameof(FinalRank.Start))] static void ConvertFinalRank(FinalRank __instance)
+        [HarmonyPostfix] [HarmonyPatch(typeof(FinalRank), nameof(FinalRank.Start))] static void CFinalRank(FinalRank __instance)
         {
             UIConverter.ConvertCanvas(__instance.transform.parent.GetComponent<Canvas>(), Force: true);
             __instance.transform.localPosition = Vector3.zero;
-            __instance.transform.localScale = new Vector3(8, 8, 16);
+            __instance.transform.localScale = new Vector3(16, 8, 8);
+        }
+        [HarmonyPostfix] [HarmonyPatch(typeof(ScreenBlood), nameof(ScreenBlood.Start))] static void CScreenBlood(ScreenBlood __instance)
+        {
+            // makes blood splatters bigger for aesthetic reasons
+            __instance.transform.localScale *= 10;
         }
     }
 }

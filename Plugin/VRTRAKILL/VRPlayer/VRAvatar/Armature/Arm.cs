@@ -24,49 +24,33 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar.Armature
 
         public static Arm FeedbackerPreset(Transform GameObjectT)
         {
-            try
+            Arm A = new Arm
             {
-                Arm A = new Arm
-                {
-                    Type = ArmType.Feedbacker,
-                    GameObjecT = GameObjectT,
-                    Root = GameObjectT.GetChild(0).GetChild(0)
-                };
-                A.Clavicle = A.Root;
-                A.UpperArm = A.Clavicle.GetChild(0);
-                A.Forearm = A.UpperArm.GetChild(0);
+                Type = ArmType.Feedbacker,
+                GameObjecT = GameObjectT,
+                Root = GameObjectT.GetChild(0).GetChild(0)
+            };
+            A.Clavicle = A.Root;
+            A.UpperArm = A.Clavicle.GetChild(0);
+            A.Forearm = A.UpperArm.GetChild(0);
 
-                A.Hand = Hand.FeedbackerPreset(A.Forearm.GetChild(0));
-                return A;
-            }
-            catch (System.Exception E)
-            {
-                Vars.Log.LogError($"{E.Message}\n{E.Source}");
-                return null;
-            }
+            A.Hand = Hand.FeedbackerPreset(A.Forearm.GetChild(0));
+            return A;
         }
         public static Arm KnuckleblasterPreset(Transform GameObjectT)
         {
-            try
+            Arm A = new Arm
             {
-                Arm A = new Arm
-                {
-                    Type = ArmType.Knuckleblaster,
-                    GameObjecT = GameObjectT,
-                    Root = GameObjectT.GetChild(1)
-                };
-                A.Clavicle = A.Root.GetChild(1);
-                A.UpperArm = A.Clavicle.GetChild(0);
-                A.Forearm = A.Clavicle.GetChild(1);
+                Type = ArmType.Knuckleblaster,
+                GameObjecT = GameObjectT,
+                Root = GameObjectT.GetChild(1)
+            };
+            A.Clavicle = A.Root.GetChild(1);
+            A.UpperArm = A.Clavicle.GetChild(0);
+            A.Forearm = A.Clavicle.GetChild(1);
 
-                A.Hand = Hand.KnuckleblasterPreset(A.Forearm.GetChild(0));
-                return A;
-            }
-            catch (System.Exception E)
-            {
-                Vars.Log.LogError($"{E.Message}\n{E.Source}");
-                return null;
-            }
+            A.Hand = Hand.KnuckleblasterPreset(A.Forearm.GetChild(0));
+            return A;
         }
         public static Arm SpearPreset(Transform T)
         {

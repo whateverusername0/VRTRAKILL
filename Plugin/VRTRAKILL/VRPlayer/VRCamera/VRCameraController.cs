@@ -8,15 +8,16 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
 {
     internal class VRCameraController : MonoSingleton<VRCameraController>
     {
-        public void Start()
-        {
-            if (Vars.Config.Controllers.SnapTurn)
-                StartCoroutine(SnapTurn());
-            else StartCoroutine(SmoothTurn());
-        }
+        Vector2 TurnVector; float TurnOffset;
 
         public void Update()
         {
+            TurnVector = InputVars.TurnVector;
+            TurnOffset = InputVars.TurnOffset;
+
+            if (Vars.Config.Controllers.SnapTurn) StartCoroutine(SnapTurn());
+            else StartCoroutine(SmoothTurn());
+
             // Follow MC rotation
             if (NewMovement.Instance.dead) return;
             NewMovement.Instance.gameObject.transform.rotation =
@@ -29,21 +30,16 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
 
         private IEnumerator SmoothTurn()
         {
-            while(true)
-            {
                 if (InputVars.TurnVector.x > 0 + Vars.Config.Controllers.Deadzone)
                     InputVars.TurnOffset += Vars.Config.Controllers.SmoothSpeed * Time.deltaTime;
                 if (InputVars.TurnVector.x < 0 - Vars.Config.Controllers.Deadzone)
                     InputVars.TurnOffset -= Vars.Config.Controllers.SmoothSpeed * Time.deltaTime;
                 yield return new WaitForEndOfFrame();
-            }
         }
 
         private bool IsTurning; private float SnapTurnTimer;
         private IEnumerator SnapTurn()
         {
-            while (true)
-            {
                 if (IsTurning)
                 {
                     SnapTurnTimer += Time.deltaTime;
@@ -57,7 +53,6 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRCamera
                     { IsTurning = true; InputVars.TurnOffset -= Vars.Config.Controllers.SnapAngles; }
                 }
                 yield return new WaitForEndOfFrame();
-            }
         }
     }
 }

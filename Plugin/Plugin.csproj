@@ -91,7 +91,7 @@
     </Reference>
     <Reference Include="SteamVR, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Plugin\Libraries\SteamVR\SteamVR.dll</HintPath>
+      <HintPath>Libraries\SteamVR\SteamVR.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SteamVR_Actions, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -159,6 +159,8 @@
     <Compile Include="Util\Libraries\EZSoftBone.cs" />
     <Compile Include="Util\Versioning.cs" />
     <Compile Include="VRTRAKILL\Assets.cs" />
+    <Compile Include="VRTRAKILL\Compatibility\JAKET.cs" />
+    <Compile Include="VRTRAKILL\Compatibility\UltraFunGuns.cs" />
     <Compile Include="VRTRAKILL\Config\NewConfig.cs" />
     <Compile Include="VRTRAKILL\Input\ControlMessages\MessageContainer.cs" />
     <Compile Include="VRTRAKILL\Input\ControlMessages\Patches.cs" />
@@ -176,7 +178,7 @@
     <Compile Include="VRTRAKILL\VRPlayer\Patches\A.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\Armature\Finger.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\Armature\Hand.cs" />
-    <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\AvatarSizeCalibrator.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\AvatarSizeAdjustor.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRAvatar\IKChain.cs" />
     <Compile Include="Util\Libraries\WindowsInput\IInputDeviceStateAdaptor.cs" />
     <Compile Include="Util\Libraries\WindowsInput\IInputMessageDispatcher.cs" />
@@ -254,6 +256,7 @@
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\DesktopCamera.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\DesktopUICamera.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\A.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\CrashBandicrootCCP.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\ThirdPersonCamera.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\VRCameraController.cs" />
     <Compile Include="VRTRAKILL\Config\ConfigJSON.cs" />
@@ -263,6 +266,7 @@
     <Compile Include="VRTRAKILL\VRPlayer\VRCamera\Patches\CameraConverterP.cs" />
     <Compile Include="VRTRAKILL\Vars.cs" />
     <Compile Include="VRTRAKILL\VRPlayer\VRKeybindsController.cs" />
+    <Compile Include="VRTRAKILL\VRPlayer\VRPlayerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CopyToGameRoot\ULTRAKILL\BepInEx\config\BepInEx.cfg">

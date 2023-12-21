@@ -14,8 +14,7 @@ namespace Plugin.VRTRAKILL.UI
         {
             "GET OUT OF THE WALL.",
             "GET THE FUCK OUT OF THE WALL.",
-            "DON'T MAKE ME REPEAT MYSELF.",
-            "STOP IT."
+            "DON'T MAKE ME REPEAT MYSELF."
         };
         private bool ChangeText = false;
 

@@ -5,7 +5,6 @@ using PluginConfig.API.Functionals;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
-using Object = UnityEngine.Object;
 using Plugin.Util;
 
 namespace Plugin.VRTRAKILL.Compatibility
@@ -13,7 +12,6 @@ namespace Plugin.VRTRAKILL.Compatibility
     internal static class PluginConfigurator
     {
         // You gotta love pluginconfigurator for all the bloat you need to write :) (eternalUnion i fucking hate you)
-
         private static PluginConfig.API.PluginConfigurator PC;
 
         // this shit doesn't scale!
@@ -79,6 +77,7 @@ namespace Plugin.VRTRAKILL.Compatibility
 
         public static void Init()
         {
+            Vars.Log.LogInfo("Building settings UI...");
             PC = PluginConfig.API.PluginConfigurator.Create(PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_GUID);
             PC.SetIconWithURL($"file://{PluginInfo.PluginPath}\\icon.png");
             PC.saveToFile = false;
@@ -163,8 +162,7 @@ namespace Plugin.VRTRAKILL.Compatibility
             TPCamRight = new KeyCodeField(VRKeybinds, "TPCam Right", "TPCRight", Vars.Config.VRKeybinds.TPCamRight.ToKeyCode());
             TPCamMoveMode = new KeyCodeField(VRKeybinds, "TPCam move mode", "", Vars.Config.VRKeybinds.TPCamMoveMode.ToKeyCode());
 
-            new ConfigHeader(VRKeybinds, "--- PLACEHOLDER ---");
-            ToggleAvatarCalibration = new KeyCodeField(VRKeybinds, "Toggle Avatar Calibration", "ToggleAvatarC", Vars.Config.VRKeybinds.ToggleAvatarCalibration.ToKeyCode());
+            ToggleAvatarCalibration = new KeyCodeField(VRKeybinds, "Toggle Size Adjustment", "ToggleSizeAdj", Vars.Config.VRKeybinds.ToggleAvatarSizeAdj.ToKeyCode());
 
             ToggleDV.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRKeybinds.ToggleDV = Enum.GetName(typeof(KeyCode), v));
             ToggleTPC.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRKeybinds.ToggleTPC = Enum.GetName(typeof(KeyCode), v));
@@ -174,7 +172,7 @@ namespace Plugin.VRTRAKILL.Compatibility
             TPCamLeft.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRKeybinds.TPCamLeft = Enum.GetName(typeof(KeyCode), v));
             TPCamRight.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRKeybinds.TPCamRight = Enum.GetName(typeof(KeyCode), v));
             TPCamMoveMode.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRKeybinds.TPCamMoveMode = Enum.GetName(typeof(KeyCode), v));
-            ToggleAvatarCalibration.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRKeybinds.ToggleAvatarCalibration = Enum.GetName(typeof(KeyCode), v));
+            ToggleAvatarCalibration.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRKeybinds.ToggleAvatarSizeAdj = Enum.GetName(typeof(KeyCode), v));
         }
         private static void AddControllersPanel()
         {

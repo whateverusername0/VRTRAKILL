@@ -46,7 +46,7 @@ namespace Plugin.VRTRAKILL.Config
             [JsonProperty("Rotate/Move TPCam Right")] public string TPCamRight { get; set; } = "RightArrow";
             [JsonProperty("Third Person Camera move mode")] public string TPCamMoveMode { get; set; } = "RightShift";
 
-            [JsonProperty("Toggle Avatar Calibration (PLACEHOLDER)")] public string ToggleAvatarCalibration { get; set; } = "J";
+            [JsonProperty("Toggle Avatar Calibration (PLACEHOLDER)")] public string ToggleAvatarSizeAdj { get; set; } = "J";
         }
 
         [JsonProperty("Movement multiplier")] public float MovementMultiplier { get; set; } = 0.575f;
