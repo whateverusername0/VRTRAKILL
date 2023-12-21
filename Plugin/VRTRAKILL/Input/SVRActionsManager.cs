@@ -20,7 +20,9 @@ namespace Plugin.VRTRAKILL.Input
             RHPrimaryFire = false,
             RHAltFire = false,
             ChangeVariation = false,
-            OpenWeaponWheel = false;
+            OpenWeaponWheel = false,
+            NextWeapon = false,
+            PrevWeapon = false;
 
         public static bool
             Punch = false,
@@ -114,6 +116,9 @@ namespace Plugin.VRTRAKILL.Input
             SteamVR_Actions._default.AltShoot.AddOnUpdateListener(RHAltShootH, SteamVR_Input_Sources.Any);
             SteamVR_Actions._default.IterateWeapon.AddOnUpdateListener(IterateWeaponH, SteamVR_Input_Sources.Any);
             SteamVR_Actions._default.ChangeWeaponVariation.AddOnUpdateListener(ChangeWeaponVariationH, SteamVR_Input_Sources.Any);
+            //SteamVR_Actions._default.NextWeapon.AddOnUpdateListener(NextWeaponH, SteamVR_Input_Sources.Any);
+            //SteamVR_Actions._default.PrevWeapon.AddOnUpdateListener(PrevWeaponH, SteamVR_Input_Sources.Any);
+
             // Weapon quick switch, open weapon wheel
             SteamVR_Actions._default.OpenWeaponWheel.AddOnUpdateListener(OpenWeaponWheelH, SteamVR_Input_Sources.Any);
             SteamVR_Actions._default.WeaponWheelScroll.AddOnUpdateListener(WeaponWheelScrollH, SteamVR_Input_Sources.Any);
@@ -177,12 +182,17 @@ namespace Plugin.VRTRAKILL.Input
         }
         private static void ChangeWeaponVariationH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != ChangeVariation) { ChangeVariation = newState; TriggerKey(ChangeVariation, !ChangeVariation, ConfigMaster.KChangeVariation, ConfigMaster.MChangeVariation); } }
+        private static void NextWeaponH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
+        { if (newState != NextWeapon) NextWeapon = newState; if (NextWeapon) MouseScroll(1); }
+        private static void PrevWeaponH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
+        { if (newState != PrevWeapon) PrevWeapon = newState; if (PrevWeapon) MouseScroll(-1); }
 
         // Quick swap & Weapon wheel
         private static void OpenWeaponWheelH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != OpenWeaponWheel) { OpenWeaponWheel = newState; TriggerKey(OpenWeaponWheel, !OpenWeaponWheel, ConfigMaster.KLastWeaponUsed, ConfigMaster.MLastWeaponUsed); } }
         private static void WeaponWheelScrollH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
         { InputVars.WWVector = axis; }
+
         // Slots
         private static void Slot0H(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         { if (newState != Slot0) { Slot0 = newState; TriggerKey(Slot0, !Slot0, ConfigMaster.KSlot0, ConfigMaster.MSlot0); } }
