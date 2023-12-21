@@ -52,7 +52,7 @@ namespace Plugin.VRTRAKILL.Patches
                 Object.Instantiate(__instance.clickSound);
                 __instance.lastSelectedSegment = __instance.selectedSegment;
                 if ((bool)MonoSingleton<RumbleManager>.Instance)
-                    MonoSingleton<RumbleManager>.Instance.SetVibration("rumble.weapon_wheel_tick");
+                    MonoSingleton<RumbleManager>.Instance.SetVibration(RumbleProperties.WeaponWheelTick);
             }
             return false;
         }
