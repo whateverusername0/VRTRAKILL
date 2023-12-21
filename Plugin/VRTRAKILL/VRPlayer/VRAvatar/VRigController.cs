@@ -100,7 +100,10 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
             // Neck chain Ik
             AddIK(Rig.NeckEnd.gameObject, Rig.Head.GetChild(0).GetChild(0), 2);
 
-            var ASC = gameObject.AddComponent<AvatarSizeAdjustor>(); ASC.enabled = false;
+            this.gameObject.SetActive(false);
+            var ASC = gameObject.AddComponent<AvatarSizeAdjustor>();
+            ASC.enabled = false;
+            this.gameObject.SetActive(true);
         }
         
         public void LateUpdate()
@@ -229,8 +232,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.VRAvatar
         {
             // this exists because my foot placement logic does not want to work *horizontally*
             Vector3 Direction = new Vector3(-Input.InputVars.MoveVector.y, 0, Input.InputVars.MoveVector.x);
-            Quaternion Rotation = Quaternion.LookRotation(Direction, Vector3.up);
-            if (Input.InputVars.MoveVector.y < 0) Rotation = Quaternion.Euler(0, -Rotation.eulerAngles.y, 0);
+            Quaternion Rotation = Quaternion.Euler(0, Quaternion.LookRotation(Direction, Vector3.up).eulerAngles.y - 90, 0);
+            if (Input.InputVars.MoveVector.y < 0) Rotation = Quaternion.Euler(0, -Rotation.eulerAngles.y + 90, 0);
             Rig.Pelvis.rotation = Quaternion.Lerp(Rig.Pelvis.rotation, Rotation, Time.deltaTime * 5);
         }
     }
