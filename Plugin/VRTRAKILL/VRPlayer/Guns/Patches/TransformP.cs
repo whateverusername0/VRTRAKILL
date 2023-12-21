@@ -31,18 +31,8 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
                 WAC.Arm = A; WAC.OffsetRot = HandOffsetRotation;
 
                 __instance.wpos.enabled = false;
-                if (__instance.altVersion)
-                {
-                    ApplyTransform(ref __instance.wpos, AltPosition, AltRotation, AltScale);
-                    FuckRevolver FR = __instance.gameObject.AddComponent<FuckRevolver>();
-                    FR.FuckPosition = AltPosition; FR.FuckRotation = AltRotation; FR.FuckScale = AltScale;
-                }
-                else
-                {
-                    ApplyTransform(ref __instance.wpos, Position, Rotation, Scale);
-                    FuckRevolver FR = __instance.gameObject.AddComponent<FuckRevolver>();
-                    FR.FuckPosition = Position; FR.FuckRotation = Rotation; FR.FuckScale = Scale;
-                }
+                if (__instance.altVersion) ApplyTransform(ref __instance.wpos, AltPosition, AltRotation, AltScale);
+                else ApplyTransform(ref __instance.wpos, Position, Rotation, Scale);
             }
         }
         [HarmonyPatch(typeof(Shotgun))] static class ShotgunT
@@ -144,7 +134,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Guns.Patches
             if (WPos == null) return;
             if (Position != new Vector3())
             {
-                WPos.defaultPos = Position; WPos.middlePos = Position;
+                WPos.defaultPos = Position; WPos.middlePos = Position; WPos.currentDefault = Position;
                 WPos.transform.localPosition = Position;
             }
             if (EulerAngles != new Vector3())
