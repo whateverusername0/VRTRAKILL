@@ -233,6 +233,22 @@ namespace Valve.VR
             }
         }
         
+        public virtual SteamVR_Action_Boolean NextWeapon
+        {
+            get
+            {
+                return SteamVR_Actions.default_NextWeapon;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean PrevWeapon
+        {
+            get
+            {
+                return SteamVR_Actions.default_PrevWeapon;
+            }
+        }
+        
         public virtual SteamVR_Action_Vibration Haptic
         {
             get
