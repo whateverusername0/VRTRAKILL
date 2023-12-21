@@ -116,8 +116,8 @@ namespace Plugin.VRTRAKILL.Input
             SteamVR_Actions._default.AltShoot.AddOnUpdateListener(RHAltShootH, SteamVR_Input_Sources.Any);
             SteamVR_Actions._default.IterateWeapon.AddOnUpdateListener(IterateWeaponH, SteamVR_Input_Sources.Any);
             SteamVR_Actions._default.ChangeWeaponVariation.AddOnUpdateListener(ChangeWeaponVariationH, SteamVR_Input_Sources.Any);
-            //SteamVR_Actions._default.NextWeapon.AddOnUpdateListener(NextWeaponH, SteamVR_Input_Sources.Any);
-            //SteamVR_Actions._default.PrevWeapon.AddOnUpdateListener(PrevWeaponH, SteamVR_Input_Sources.Any);
+            SteamVR_Actions._default.NextWeapon.AddOnUpdateListener(NextWeaponH, SteamVR_Input_Sources.Any);
+            SteamVR_Actions._default.PrevWeapon.AddOnUpdateListener(PrevWeaponH, SteamVR_Input_Sources.Any);
 
             // Weapon quick switch, open weapon wheel
             SteamVR_Actions._default.OpenWeaponWheel.AddOnUpdateListener(OpenWeaponWheelH, SteamVR_Input_Sources.Any);
