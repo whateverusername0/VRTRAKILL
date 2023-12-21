@@ -7,7 +7,7 @@ namespace Plugin.VRTRAKILL.UI.Patches
 {
     [HarmonyPatch] internal class HUDOptionsP
     {
-        [HarmonyPrefix] [HarmonyPatch(typeof(HUDOptions), nameof(HUDOptions.Start))] static void ResizeCanvases(HUDOptions __instance)
+        [HarmonyPostfix] [HarmonyPatch(typeof(HUDOptions), nameof(HUDOptions.Start))] static void ResizeCanvases(HUDOptions __instance)
         {
             // Stretches screen effects so it's not a small square in the middle of the hud
             string[] ScreenEffects =
