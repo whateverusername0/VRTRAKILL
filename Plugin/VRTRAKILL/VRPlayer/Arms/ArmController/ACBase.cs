@@ -5,8 +5,7 @@ namespace Plugin.VRTRAKILL.VRPlayer.Arms.ArmController
 {
     internal class ACBase : MonoBehaviour
     {
-        private Arm _Arm;
-        public Arm Arm { get => _Arm; set { if (value != null) { if (value.Type == _Arm.Type) _Arm = value; } else _Arm = value; } }
+        public Arm Arm { get; set; }
         public Transform Target;
         public Vector3 OffsetPos = Vector3.zero,
                        OffsetRot = new Vector3(-90, 180, 0);
