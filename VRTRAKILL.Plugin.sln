@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VRPatcher", "VRPatcher\VRPatcher.csproj", "{423F0911-CCF0-4DBD-B8D3-423BF7BE559C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin", "Plugin\Plugin.csproj", "{3FBB1FC9-B424-404C-B0C5-1A8AFFF14F5B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{423F0911-CCF0-4DBD-B8D3-423BF7BE559C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{423F0911-CCF0-4DBD-B8D3-423BF7BE559C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{423F0911-CCF0-4DBD-B8D3-423BF7BE559C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{423F0911-CCF0-4DBD-B8D3-423BF7BE559C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FBB1FC9-B424-404C-B0C5-1A8AFFF14F5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FBB1FC9-B424-404C-B0C5-1A8AFFF14F5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FBB1FC9-B424-404C-B0C5-1A8AFFF14F5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FBB1FC9-B424-404C-B0C5-1A8AFFF14F5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D96A8CCE-8E12-4B15-A5E0-78CF404259EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D96A8CCE-8E12-4B15-A5E0-78CF404259EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D96A8CCE-8E12-4B15-A5E0-78CF404259EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D96A8CCE-8E12-4B15-A5E0-78CF404259EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BC927AC1-39AC-4EF9-8751-03FF1F683BED}
+	EndGlobalSection
+EndGlobal

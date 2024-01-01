@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3FBB1FC9-B424-404C-B0C5-1A8AFFF14F5B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VRBasePlugin</RootNamespace>
+    <AssemblyName>VRTRAKILL</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>Libraries\BepInEx\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>Libraries\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="BepInEx">
+      <HintPath>Libraries\BepInEx\BepInEx.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="BepInEx.Harmony">
+      <HintPath>Libraries\BepInEx\BepInEx.Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="BepInEx.Preloader">
+      <HintPath>Libraries\BepInEx\BepInEx.Preloader.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="HarmonyXInterop">
+      <HintPath>Libraries\BepInEx\HarmonyXInterop.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>Libraries\BepInEx\Mono.Cecil.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil.Mdb">
+      <HintPath>Libraries\BepInEx\Mono.Cecil.Mdb.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb">
+      <HintPath>Libraries\BepInEx\Mono.Cecil.Pdb.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil.Rocks">
+      <HintPath>Libraries\BepInEx\Mono.Cecil.Rocks.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MonoMod.RuntimeDetour">
+      <HintPath>Libraries\BepInEx\MonoMod.RuntimeDetour.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MonoMod.Utils">
+      <HintPath>Libraries\BepInEx\MonoMod.Utils.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Libraries\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="SteamVR, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\SteamVR\SteamVR.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="SteamVR_Actions, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\SteamVR\SteamVR_Actions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="Unity.InputSystem">
+      <HintPath>Libraries\Unity\Unity.InputSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>Libraries\Unity\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>Libraries\Unity\UnityEngine.AnimationModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule">
+      <HintPath>Libraries\Unity\UnityEngine.AssetBundleModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>Libraries\Unity\UnityEngine.AudioModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>Libraries\Unity\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>Libraries\Unity\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputModule">
+      <HintPath>Libraries\Unity\UnityEngine.InputModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>Libraries\Unity\UnityEngine.PhysicsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Libraries\Unity\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>Libraries\Unity\UnityEngine.UIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.VRModule">
+      <HintPath>Libraries\Unity\UnityEngine.VRModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PluginInfo.cs" />
+    <Compile Include="Versioning.cs" />
+    <Compile Include="ULTRAKILL\Assets.cs" />
+    <Compile Include="Config\NewConfig.cs" />
+    <Compile Include="Input\ControlMessages\MessageContainer.cs" />
+    <Compile Include="Input\ControlMessages\Patches.cs" />
+    <Compile Include="Patches\A.cs" />
+    <Compile Include="Patches\MiscP.cs" />
+    <Compile Include="ULTRAKILL\SceneWorker.cs" />
+    <Compile Include="ULTRAKILL\UI\GTFOTW.cs" />
+    <Compile Include="ULTRAKILL\UI\StandardHUDWorker.cs" />
+    <Compile Include="ULTRAKILL\Arms\ArmController\DefaultArmCon.cs" />
+    <Compile Include="ULTRAKILL\Arms\ArmController\ACBase.cs" />
+    <Compile Include="ULTRAKILL\Arms\ArmController\WeaponArmCon.cs" />
+    <Compile Include="ULTRAKILL\Guns\Patches\AddHandsP.cs" />
+    <Compile Include="ULTRAKILL\Patches\A.cs" />
+    <Compile Include="ULTRAKILL\VRAvatar\Armature\Finger.cs" />
+    <Compile Include="ULTRAKILL\VRAvatar\Armature\Hand.cs" />
+    <Compile Include="ULTRAKILL\VRAvatar\AvatarSizeAdjustor.cs" />
+    <Compile Include="ULTRAKILL\VRAvatar\IKChain.cs" />
+    <Compile Include="Patches\HelpersP.cs" />
+    <Compile Include="Plugin.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Patches\SteamVRP.cs" />
+    <Compile Include="ULTRAKILL\UI\CrosshairController.cs" />
+    <Compile Include="ULTRAKILL\UI\HideWhenMenuActive.cs" />
+    <Compile Include="ULTRAKILL\UI\Patches\A.cs" />
+    <Compile Include="ULTRAKILL\UI\Patches\HUDOptionsP.cs" />
+    <Compile Include="ULTRAKILL\UI\Patches\CrosshairP.cs" />
+    <Compile Include="ULTRAKILL\UI\Patches\HudP.cs" />
+    <Compile Include="ULTRAKILL\UI\UICanvas.cs" />
+    <Compile Include="ULTRAKILL\UI\UIConverter.cs" />
+    <Compile Include="ULTRAKILL\UI\UIInteraction.cs" />
+    <Compile Include="ULTRAKILL\VRAvatar\Armature\Arm.cs" />
+    <Compile Include="ULTRAKILL\Arms\ArmTransformer.cs" />
+    <Compile Include="ULTRAKILL\Arms\Patches\A.cs" />
+    <Compile Include="ULTRAKILL\Arms\Patches\ArmsP.cs" />
+    <Compile Include="ULTRAKILL\Arms\Patches\PunchP.cs" />
+    <Compile Include="ULTRAKILL\Arms\Patches\SandboxArmP.cs" />
+    <Compile Include="ULTRAKILL\Arms\Patches\Whiplash\A.cs" />
+    <Compile Include="ULTRAKILL\Arms\Patches\Whiplash\HookArmP.cs" />
+    <Compile Include="ULTRAKILL\VRAvatar\Armature\Leg.cs" />
+    <Compile Include="ULTRAKILL\VRAvatar\IKFoot.cs" />
+    <Compile Include="ULTRAKILL\VRAvatar\MetaRig.cs" />
+    <Compile Include="ULTRAKILL\VRAvatar\Patches\A.cs" />
+    <Compile Include="ULTRAKILL\VRAvatar\Patches\VRIKP.cs" />
+    <Compile Include="ULTRAKILL\VRAvatar\VRigController.cs" />
+    <Compile Include="ULTRAKILL\Controllers\ControllerController.cs" />
+    <Compile Include="ULTRAKILL\Controllers\Patches\ControllerHaptics.cs" />
+    <Compile Include="ULTRAKILL\Controllers\ArmController.cs" />
+    <Compile Include="ULTRAKILL\Controllers\Patches\ControllerAdder.cs" />
+    <Compile Include="ULTRAKILL\Controllers\GunController.cs" />
+    <Compile Include="ULTRAKILL\Guns\Patches\A.cs" />
+    <Compile Include="ULTRAKILL\Guns\Patches\DoubleWieldP.cs" />
+    <Compile Include="ULTRAKILL\Guns\Patches\GunsP.cs" />
+    <Compile Include="Input\SVRActionsManager.cs" />
+    <Compile Include="ULTRAKILL\Guns\Patches\RemoveArmsP.cs" />
+    <Compile Include="ULTRAKILL\Guns\Patches\AimingP.cs" />
+    <Compile Include="ULTRAKILL\Guns\Patches\TransformP.cs" />
+    <Compile Include="ULTRAKILL\Guns\VRGunsController.cs" />
+    <Compile Include="ULTRAKILL\Movement\Patches\ClimbStepP.cs" />
+    <Compile Include="ULTRAKILL\Movement\Patches\FlightNoclipP.cs" />
+    <Compile Include="ULTRAKILL\Movement\Patches\NewMovementP.cs" />
+    <Compile Include="ULTRAKILL\Movement\Patches\GrenadeP.cs" />
+    <Compile Include="ULTRAKILL\Movement\Patches\A.cs" />
+    <Compile Include="ULTRAKILL\Movement\Patches\PlatformerMovementP.cs" />
+    <Compile Include="ULTRAKILL\Patches\PlayerP.cs" />
+    <Compile Include="ULTRAKILL\VRCamera\DesktopCamera.cs" />
+    <Compile Include="ULTRAKILL\VRCamera\DesktopUICamera.cs" />
+    <Compile Include="ULTRAKILL\VRCamera\Patches\A.cs" />
+    <Compile Include="ULTRAKILL\VRCamera\Patches\CrashBandicrootCCP.cs" />
+    <Compile Include="ULTRAKILL\VRCamera\VRCameraController.cs" />
+    <Compile Include="Config\ConfigJSON.cs" />
+    <Compile Include="Config\ConfigMaster.cs" />
+    <Compile Include="Input\InputMap.cs" />
+    <Compile Include="Input\InputVars.cs" />
+    <Compile Include="ULTRAKILL\VRCamera\Patches\CameraConverterP.cs" />
+    <Compile Include="ULTRAKILL\Vars.cs" />
+    <Compile Include="ULTRAKILL\VRPlayer\VRKeybindsController.cs" />
+    <Compile Include="ULTRAKILL\VRPlayer\VRPlayerController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CopyToGameRoot\ULTRAKILL\BepInEx\config\BepInEx.cfg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CopyToGameRoot\ULTRAKILL\BepInEx\patchers\classdata.tpk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CopyToGameRoot\ULTRAKILL\BepInEx\patchers\classdata.tpk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\plugins\VRTRAKILL\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\plugins\VRTRAKILL\vrtrakillassetbundle">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\actions.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\bindings_holographic_controller.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\bindings_knuckles.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\bindings_logitech_stylus.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\bindings_oculus_touch.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\bindings_vive_controller.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\bindings_vive_cosmos_controller.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\binding_holographic_hmd.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\binding_index_hmd.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\binding_index_hmd.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\binding_rift.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\binding_vive.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\binding_vive_cosmos.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\binding_vive_pro.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\StreamingAssets\SteamVR\binding_vive_tracker_camera.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\patchers\AssetsTools.NET.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\patchers\VRPatcher.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\patchers\VRPatcher.dll" />
+    <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\plugins\VRTRAKILL\Newtonsoft.Json.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\plugins\VRTRAKILL\SteamVR.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\plugins\VRTRAKILL\SteamVR_Actions.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CopyToGameRoot\ULTRAKILL\BepInEx\plugins\VRTRAKILL\SteamVR_Actions.dll" />
+    <Content Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\Plugins\x86_64\AudioPluginOculusSpatializer.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\Plugins\x86_64\openvr_api.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CopyToGameRoot\ULTRAKILL\ULTRAKILL_Data\Plugins\x86_64\OVRPlugin.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\VRTRAKILL.Utilities\VRTRAKILL.Utilities.csproj">
+      <Project>{3709e33e-4c44-43f8-a947-f71fe9f67233}</Project>
+      <Name>VRTRAKILL.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
