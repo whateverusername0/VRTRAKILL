@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Goodies", "Goodies", "{25B03EE2-0E8B-4F8B-8F44-C61A8C9E3F5D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Compatibility", "Compatibility", "{09338865-4B3C-4ED6-92A5-26EF47ABAD4F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugin", "Plugin", "{1CC14358-8E52-4920-926A-0D633E980F46}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UIManager", "UIManager", "{1FCFA71D-648C-401E-AD57-6B68A1456EA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VRTRAKILL.Compatibility.PluginConfigurator", "VRTRAKILL.Compatibility\VRTRAKILL.Compatibility.PluginConfigurator\VRTRAKILL.Compatibility.PluginConfigurator.csproj", "{ADBBFB7A-1577-4A45-B8F1-15954ED6DDBB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3709E33E-4C44-43F8-A947-F71FE9F67233} = {3709E33E-4C44-43F8-A947-F71FE9F67233}
+		{3FBB1FC9-B424-404C-B0C5-1A8AFFF14F5B} = {3FBB1FC9-B424-404C-B0C5-1A8AFFF14F5B}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VRTRAKILL.Plugin", "VRTRAKILL.Plugin\Plugin\VRTRAKILL.Plugin.csproj", "{3FBB1FC9-B424-404C-B0C5-1A8AFFF14F5B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3709E33E-4C44-43F8-A947-F71FE9F67233} = {3709E33E-4C44-43F8-A947-F71FE9F67233}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VRTRAKILL.Utilities", "VRTRAKILL.Utilities\VRTRAKILL.Utilities.csproj", "{3709E33E-4C44-43F8-A947-F71FE9F67233}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VRTRAKILL.Goodies.ThirdPersonCamera", "VRTRAKILL.Goodies\VRTRAKILL.Goodies.ThirdPersonCamera\VRTRAKILL.Goodies.ThirdPersonCamera.csproj", "{C67E434E-4439-4D64-852F-272198874402}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ADBBFB7A-1577-4A45-B8F1-15954ED6DDBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADBBFB7A-1577-4A45-B8F1-15954ED6DDBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADBBFB7A-1577-4A45-B8F1-15954ED6DDBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADBBFB7A-1577-4A45-B8F1-15954ED6DDBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FBB1FC9-B424-404C-B0C5-1A8AFFF14F5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FBB1FC9-B424-404C-B0C5-1A8AFFF14F5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FBB1FC9-B424-404C-B0C5-1A8AFFF14F5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FBB1FC9-B424-404C-B0C5-1A8AFFF14F5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3709E33E-4C44-43F8-A947-F71FE9F67233}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3709E33E-4C44-43F8-A947-F71FE9F67233}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3709E33E-4C44-43F8-A947-F71FE9F67233}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3709E33E-4C44-43F8-A947-F71FE9F67233}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C67E434E-4439-4D64-852F-272198874402}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C67E434E-4439-4D64-852F-272198874402}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C67E434E-4439-4D64-852F-272198874402}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C67E434E-4439-4D64-852F-272198874402}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ADBBFB7A-1577-4A45-B8F1-15954ED6DDBB} = {09338865-4B3C-4ED6-92A5-26EF47ABAD4F}
+		{3FBB1FC9-B424-404C-B0C5-1A8AFFF14F5B} = {1CC14358-8E52-4920-926A-0D633E980F46}
+		{C67E434E-4439-4D64-852F-272198874402} = {25B03EE2-0E8B-4F8B-8F44-C61A8C9E3F5D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6B8D947E-C34E-4CAE-AD36-799446D2EA37}
+	EndGlobalSection
+EndGlobal
