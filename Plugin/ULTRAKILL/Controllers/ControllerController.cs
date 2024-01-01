@@ -2,7 +2,7 @@
 using Valve.VR;
 using VRTRAKILL.Utilities;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.Controllers
+namespace VRBasePlugin.ULTRAKILL.Controllers
 {
     // lol the name
     public class ControllerController : MonoBehaviour

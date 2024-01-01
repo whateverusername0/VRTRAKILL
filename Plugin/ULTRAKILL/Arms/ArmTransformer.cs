@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using VRBasePlugin.ULTRAKILL.VRPlayer.VRAvatar.Armature;
+using VRBasePlugin.ULTRAKILL.VRAvatar.Armature;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.Arms
+namespace VRBasePlugin.ULTRAKILL.Arms
 {
     internal class ArmTransformer : MonoBehaviour
     {

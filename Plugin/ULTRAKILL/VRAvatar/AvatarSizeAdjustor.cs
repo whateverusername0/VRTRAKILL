@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.VRAvatar
+namespace VRBasePlugin.ULTRAKILL.VRAvatar
 {
     [RequireComponent(typeof(VRigController))]
     internal class AvatarSizeAdjustor : MonoBehaviour

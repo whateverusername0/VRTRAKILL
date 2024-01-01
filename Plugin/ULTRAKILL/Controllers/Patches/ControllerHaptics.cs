@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Valve.VR;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.Controllers.Patches
+namespace VRBasePlugin.ULTRAKILL.Controllers.Patches
 {
     [HarmonyPatch(typeof(RumbleManager))] internal sealed class ControllerHaptics
     {

@@ -1,9 +1,9 @@
-﻿using VRBasePlugin.ULTRAKILL.VRPlayer.Controllers;
+﻿using VRBasePlugin.ULTRAKILL.Controllers;
 using VRTRAKILL.Utilities;
 using VRBasePlugin.Util.Libraries.EZhex1991.EZSoftBone;
 using UnityEngine;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.VRAvatar
+namespace VRBasePlugin.ULTRAKILL.VRAvatar
 {
     // the NewMovement of the player's avatar
     internal class VRigController : MonoBehaviour

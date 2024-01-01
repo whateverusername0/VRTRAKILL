@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.Guns
+namespace VRBasePlugin.ULTRAKILL.Guns
 {
     internal class VRGunsController : MonoSingleton<VRGunsController>
     {

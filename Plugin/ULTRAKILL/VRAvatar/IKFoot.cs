@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.VRAvatar
+namespace VRBasePlugin.ULTRAKILL.VRAvatar
 {
     internal class IKFoot : MonoBehaviour
     {

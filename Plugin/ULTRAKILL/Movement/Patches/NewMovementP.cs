@@ -2,7 +2,7 @@
 using UnityEngine.InputSystem;
 using UnityEngine;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.Movement.Patches
+namespace VRBasePlugin.ULTRAKILL.Movement.Patches
 {
     // change move vector to joystick axis, fix dash, jump, etc.
     [HarmonyPatch(typeof(NewMovement))] internal class NewMovementP

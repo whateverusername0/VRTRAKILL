@@ -1,8 +1,8 @@
 ﻿using HarmonyLib;
-using VRBasePlugin.ULTRAKILL.VRPlayer.VRAvatar.Armature;
+using VRBasePlugin.ULTRAKILL.VRAvatar.Armature;
 using UnityEngine;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.Arms.Patches
+namespace VRBasePlugin.ULTRAKILL.Arms.Patches
 {
     [HarmonyPatch] internal sealed class ArmsP
     {

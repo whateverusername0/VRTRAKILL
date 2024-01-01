@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.Patches
+namespace VRBasePlugin.ULTRAKILL.Patches
 {
     
     [HarmonyPatch(typeof(NewMovement))] internal class PlayerP

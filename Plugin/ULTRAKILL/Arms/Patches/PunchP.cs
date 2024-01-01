@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.Arms.Patches
+namespace VRBasePlugin.ULTRAKILL.Arms.Patches
 {
     [HarmonyPatch(typeof(Punch))] internal sealed class PunchP
     {

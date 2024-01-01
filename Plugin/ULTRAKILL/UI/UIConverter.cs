@@ -1,4 +1,4 @@
-﻿using VRBasePlugin.ULTRAKILL.VRPlayer.Controllers;
+﻿using VRBasePlugin.ULTRAKILL.Controllers;
 using UnityEngine;
 using UnityEngine.UI;
 using VRTRAKILL.Utilities;

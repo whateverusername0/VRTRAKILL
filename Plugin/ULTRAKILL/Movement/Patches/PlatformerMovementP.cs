@@ -2,7 +2,7 @@
 using ULTRAKILL.Cheats;
 using UnityEngine;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.Movement.Patches
+namespace VRBasePlugin.ULTRAKILL.Movement.Patches
 {
     // change move vector to joystick axis, fix dash, jump, etc.
     // CHANGE THIS

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.XR;
 
 using Valve.VR;
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.VRCamera.Patches
+namespace VRBasePlugin.ULTRAKILL.VRCamera.Patches
 {
     [HarmonyPatch] public class CameraConverterP
     {
@@ -43,7 +43,7 @@ namespace VRBasePlugin.ULTRAKILL.VRPlayer.VRCamera.Patches
             // this should've been bigger, but i've changed my mind a thousand years ago and it works
             // this mod is officially my opus magnum spaghetti code and dumpster fire
             Container.transform.localScale = new Vector3(2, 2, 2);
-            __instance.gameObject.AddComponent<VRKeybindsController>();
+            __instance.gameObject.AddComponent<VRPlayer.VRKeybindsController>();
         }
 
         [HarmonyPrefix] [HarmonyPatch(typeof(CameraController), nameof(CameraController.Start))] static void ConvertCameras(CameraController __instance)

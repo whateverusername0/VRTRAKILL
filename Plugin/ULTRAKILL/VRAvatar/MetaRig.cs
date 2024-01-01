@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using VRBasePlugin.ULTRAKILL.VRPlayer.VRAvatar.Armature;
+using VRBasePlugin.ULTRAKILL.VRAvatar.Armature;
 
 #pragma warning disable IDE1006 // Naming Styles
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.VRAvatar
+namespace VRBasePlugin.ULTRAKILL.VRAvatar
 {
     internal class MetaRig
     {

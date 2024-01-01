@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using VRBasePlugin.Util;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.VRCamera
+namespace VRBasePlugin.ULTRAKILL.VRCamera
 {
     internal class DesktopUICamera : MonoBehaviour
     {

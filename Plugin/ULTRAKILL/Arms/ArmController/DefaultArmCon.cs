@@ -1,7 +1,7 @@
 ﻿using VRTRAKILL.Utilities;
 using UnityEngine;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.Arms.ArmController
+namespace VRBasePlugin.ULTRAKILL.Arms.ArmController
 {
     internal class DefaultArmCon : ACBase
     {

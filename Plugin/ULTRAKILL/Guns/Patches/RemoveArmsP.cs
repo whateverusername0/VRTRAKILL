@@ -2,7 +2,7 @@
 using Sandbox.Arm;
 using System;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.Guns.Patches
+namespace VRBasePlugin.ULTRAKILL.Guns.Patches
 {
     // Removes hands from revolver & shotgun
     [HarmonyPatch] internal class RemoveArmsP

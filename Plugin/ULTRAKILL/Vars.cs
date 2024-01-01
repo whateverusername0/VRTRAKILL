@@ -49,7 +49,7 @@ namespace VRBasePlugin.ULTRAKILL
 
         #region Cameras
         public static GameObject VRCameraContainer
-            => VRPlayer.VRCamera.Patches.CameraConverterP.Container;
+            => VRCamera.Patches.CameraConverterP.Container;
         private static Camera _MainCamera; public static Camera MainCamera
         {
             get
@@ -65,20 +65,20 @@ namespace VRBasePlugin.ULTRAKILL
         public static Camera UICamera
             => UI.UIConverter.UICamera;
         public static Camera DesktopCamera
-            => VRPlayer.VRCamera.Patches.CameraConverterP.DesktopWorldCam;
+            => VRCamera.Patches.CameraConverterP.DesktopWorldCam;
         public static Camera DesktopUICamera
-            => VRPlayer.VRCamera.Patches.CameraConverterP.DesktopUICam;
+            => VRCamera.Patches.CameraConverterP.DesktopUICam;
         #endregion
 
         #region Controllers
         public static GameObject NonDominantHand
-            => VRPlayer.Controllers.ArmController.Instance.GunOffset;
-        public static VRPlayer.Controllers.ArmController NDHC
-            => VRPlayer.Controllers.ArmController.Instance;
+            => Controllers.ArmController.Instance.GunOffset;
+        public static Controllers.ArmController NDHC
+            => Controllers.ArmController.Instance;
         public static GameObject DominantHand
-            => VRPlayer.Controllers.GunController.Instance.GunOffset;
-        public static VRPlayer.Controllers.GunController DHC
-            => VRPlayer.Controllers.GunController.Instance;
+            => Controllers.GunController.Instance.GunOffset;
+        public static Controllers.GunController DHC
+            => Controllers.GunController.Instance;
         #endregion
     }
 }

@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using VRTRAKILL.Utilities;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.VRAvatar.Patches
+namespace VRBasePlugin.ULTRAKILL.VRAvatar.Patches
 {
     [HarmonyPatch] internal class VRIKP
     {

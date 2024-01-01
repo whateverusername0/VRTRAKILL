@@ -4,7 +4,7 @@ using VRBasePlugin.ULTRAKILL.Input;
 using Valve.VR.InteractionSystem;
 using Valve.VR;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.VRCamera
+namespace VRBasePlugin.ULTRAKILL.VRCamera
 {
     internal class VRCameraController : MonoSingleton<VRCameraController>
     {

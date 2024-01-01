@@ -2,7 +2,7 @@
 using UnityEngine;
 using Valve.VR;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.Controllers.Patches
+namespace VRBasePlugin.ULTRAKILL.Controllers.Patches
 {
     [HarmonyPatch(typeof(NewMovement))] internal sealed class ControllerAdder
     {

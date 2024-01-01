@@ -1,7 +1,7 @@
 ﻿using VRTRAKILL.Utilities;
 using UnityEngine;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.Arms.ArmController
+namespace VRBasePlugin.ULTRAKILL.Arms.ArmController
 {
     // For things that are "technically or not" weapons (revolver, fishing rod, etc.) and in need of a rotation locking
     internal class WeaponArmCon : ACBase

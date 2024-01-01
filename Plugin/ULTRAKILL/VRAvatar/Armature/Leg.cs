@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.VRAvatar.Armature
+namespace VRBasePlugin.ULTRAKILL.VRAvatar.Armature
 {
     internal class Leg
     {

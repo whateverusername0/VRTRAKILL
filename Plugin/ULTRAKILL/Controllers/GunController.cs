@@ -1,7 +1,7 @@
 ﻿using VRTRAKILL.Utilities;
 using UnityEngine;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.Controllers
+namespace VRBasePlugin.ULTRAKILL.Controllers
 {
     public class GunController : MonoSingleton<GunController>
     {

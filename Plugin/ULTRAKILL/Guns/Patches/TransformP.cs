@@ -1,8 +1,8 @@
 ﻿using HarmonyLib;
 using UnityEngine;
-using VRBasePlugin.ULTRAKILL.VRPlayer.VRAvatar.Armature;
+using VRBasePlugin.ULTRAKILL.VRAvatar.Armature;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.Guns.Patches
+namespace VRBasePlugin.ULTRAKILL.Guns.Patches
 {
     [HarmonyPatch] internal class TransformP
     {

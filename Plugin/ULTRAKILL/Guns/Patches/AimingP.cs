@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.Guns.Patches
+namespace VRBasePlugin.ULTRAKILL.Guns.Patches
 {
     [HarmonyPatch] internal sealed class AimingP
     {

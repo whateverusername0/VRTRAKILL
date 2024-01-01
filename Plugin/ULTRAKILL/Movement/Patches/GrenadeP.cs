@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.Movement.Patches
+namespace VRBasePlugin.ULTRAKILL.Movement.Patches
 {
     // rocket riding - change move vector to joystick axis
     [HarmonyPatch(typeof(Grenade))] internal class GrenadeP

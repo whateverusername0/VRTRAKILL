@@ -2,7 +2,7 @@
 using UnityEngine;
 using ULTRAKILL.Cheats;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.Movement.Patches
+namespace VRBasePlugin.ULTRAKILL.Movement.Patches
 {
     // change move vector to joystick axis
     [HarmonyPatch] internal class FlightNoclipP

@@ -3,7 +3,7 @@ using UnityEngine;
 using Sandbox.Arm;
 using ULTRAKILL.Cheats;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.Arms.Patches
+namespace VRBasePlugin.ULTRAKILL.Arms.Patches
 {
     [HarmonyPatch] internal sealed class SandboxArmP
     {

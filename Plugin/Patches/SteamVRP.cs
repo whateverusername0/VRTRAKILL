@@ -2,7 +2,7 @@
 using UnityEngine;
 using Valve.VR;
 
-namespace VRBasePlugin.ULTRAKILL.Patches
+namespace VRBasePlugin.Patches
 {
     [HarmonyPatch] internal static class SteamVRP
     {

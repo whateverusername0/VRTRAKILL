@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 
-namespace VRBasePlugin.ULTRAKILL.Patches
+namespace VRBasePlugin.Patches
 {
     [HarmonyPatch] internal class HelpersP
     {

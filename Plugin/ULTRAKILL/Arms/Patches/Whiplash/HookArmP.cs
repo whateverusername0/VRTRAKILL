@@ -1,10 +1,10 @@
 ﻿using HarmonyLib;
 using UnityEngine;
-using VRBasePlugin.ULTRAKILL.VRPlayer.VRAvatar.Armature;
+using VRBasePlugin.ULTRAKILL.VRAvatar.Armature;
 using static UnityEngine.Random;
 using Valve.VR.InteractionSystem;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.Arms.Patches.Whiplash
+namespace VRBasePlugin.ULTRAKILL.Arms.Patches.Whiplash
 {
     // you get it? cameracontrollerpatches?? ccp????? lol!!
     [HarmonyPatch(typeof(HookArm))] internal sealed class HookArmP

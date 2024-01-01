@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.VRAvatar
+namespace VRBasePlugin.ULTRAKILL.VRAvatar
 {
     // code from.. uh.. i frogot.
     internal class IKChain : MonoBehaviour

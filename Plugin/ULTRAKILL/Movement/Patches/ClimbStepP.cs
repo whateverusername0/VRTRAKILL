@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.Movement.Patches
+namespace VRBasePlugin.ULTRAKILL.Movement.Patches
 {
     // ClimbStep fix (make you climb stairs like a real machine)
     [HarmonyPatch(typeof(ClimbStep))] internal class ClimbStepP

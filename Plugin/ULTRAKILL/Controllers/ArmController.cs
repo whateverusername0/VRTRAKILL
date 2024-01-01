@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace VRBasePlugin.ULTRAKILL.VRPlayer.Controllers
+namespace VRBasePlugin.ULTRAKILL.Controllers
 {
     public class ArmController : MonoSingleton<ArmController>
     {
