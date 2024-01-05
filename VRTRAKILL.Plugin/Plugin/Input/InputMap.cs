@@ -323,9 +323,12 @@ namespace VRBasePlugin.ULTRAKILL.Input
             #endregion
 
             #region Mouse
-            { "leftmouse", KeyCode.Mouse0 }, { "mouseleft", KeyCode.Mouse0 }, { "lmb", KeyCode.Mouse0 }, { "mouse0", KeyCode.Mouse0 }, { "m0", KeyCode.Mouse0 },
-            { "rightmouse", KeyCode.Mouse1 }, { "mouseright", KeyCode.Mouse1 }, { "rmb", KeyCode.Mouse1 }, { "mouse1", KeyCode.Mouse1 }, { "m1", KeyCode.Mouse1 },
-            { "middlemouse", KeyCode.Mouse2 }, { "mousemiddle", KeyCode.Mouse2 }, { "mmb", KeyCode.Mouse2 }, { "mouse2", KeyCode.Mouse2 }, { "m2", KeyCode.Mouse2 },
+            { "leftmouse", KeyCode.Mouse0 }, { "mouseleft", KeyCode.Mouse0 }, { "leftbutton", KeyCode.Mouse0 },
+            { "lmb", KeyCode.Mouse0 }, { "mouse0", KeyCode.Mouse0 }, { "m0", KeyCode.Mouse0 },
+            { "rightmouse", KeyCode.Mouse1 }, { "mouseright", KeyCode.Mouse1 }, { "rightbutton", KeyCode.Mouse1 },
+            { "rmb", KeyCode.Mouse1 }, { "mouse1", KeyCode.Mouse1 }, { "m1", KeyCode.Mouse1 },
+            { "middlemouse", KeyCode.Mouse2 }, { "mousemiddle", KeyCode.Mouse2 }, { "middlebutton", KeyCode.Mouse2 },
+            { "mmb", KeyCode.Mouse2 }, { "mouse2", KeyCode.Mouse2 }, { "m2", KeyCode.Mouse2 },
             { "mouse4", KeyCode.Mouse3 }, { "m4", KeyCode.Mouse3 },
             { "mouse5", KeyCode.Mouse4 }, { "m5", KeyCode.Mouse4 },
             { "mouse6", KeyCode.Mouse5 }, { "m6", KeyCode.Mouse5 },

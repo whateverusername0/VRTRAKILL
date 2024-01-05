@@ -1,7 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System.IO;
+using VRBasePlugin.ULTRAKILL;
 
-namespace VRBasePlugin.ULTRAKILL.Config
+namespace VRBasePlugin.Prefs
 {
     public class ConfigJSON
     {

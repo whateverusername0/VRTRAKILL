@@ -159,26 +159,26 @@ namespace VRTRAKILL.Compatibility.PluginConfigurator
         private static void AddVRKeybindsPanel()
         {
             VRKeybinds = new ConfigPanel(PC.rootPanel, "VRTRAKILL Keybinds", "VRKeybinds");
-            ToggleDV = new KeyCodeField(VRKeybinds, "Toggle DesktopView", "ToggleDV", Vars.Config.VRKeybinds.ToggleDV.ToKeyCode());
-            ToggleTPC = new KeyCodeField(VRKeybinds, "Toggle ThirdPersonCamera", "ToggleTPC", Vars.Config.VRKeybinds.ToggleTPC.ToKeyCode());
-            EnumTPCMode = new KeyCodeField(VRKeybinds, "Switch TPC mode", "EnumTPCMode", Vars.Config.VRKeybinds.EnumTPCMode.ToKeyCode());
-            TPCamUp = new KeyCodeField(VRKeybinds, "TPCam Up", "TPCUp", Vars.Config.VRKeybinds.TPCamUp.ToKeyCode());
-            TPCamDown = new KeyCodeField(VRKeybinds, "TPCam Down", "TPCDown", Vars.Config.VRKeybinds.TPCamDown.ToKeyCode());
-            TPCamLeft = new KeyCodeField(VRKeybinds, "TPCam Left", "TPCLeft", Vars.Config.VRKeybinds.TPCamLeft.ToKeyCode());
-            TPCamRight = new KeyCodeField(VRKeybinds, "TPCam Right", "TPCRight", Vars.Config.VRKeybinds.TPCamRight.ToKeyCode());
-            TPCamMoveMode = new KeyCodeField(VRKeybinds, "TPCam move mode", "", Vars.Config.VRKeybinds.TPCamMoveMode.ToKeyCode());
+            ToggleDV = new KeyCodeField(VRKeybinds, "Toggle DesktopView", "ToggleDV", Vars.Config.VRBinds.ToggleDV.ToKeyCode());
+            ToggleTPC = new KeyCodeField(VRKeybinds, "Toggle ThirdPersonCamera", "ToggleTPC", Vars.Config.VRBinds.ToggleTPC.ToKeyCode());
+            EnumTPCMode = new KeyCodeField(VRKeybinds, "Switch TPC mode", "EnumTPCMode", Vars.Config.VRBinds.EnumTPCMode.ToKeyCode());
+            TPCamUp = new KeyCodeField(VRKeybinds, "TPCam Up", "TPCUp", Vars.Config.VRBinds.TPCamUp.ToKeyCode());
+            TPCamDown = new KeyCodeField(VRKeybinds, "TPCam Down", "TPCDown", Vars.Config.VRBinds.TPCamDown.ToKeyCode());
+            TPCamLeft = new KeyCodeField(VRKeybinds, "TPCam Left", "TPCLeft", Vars.Config.VRBinds.TPCamLeft.ToKeyCode());
+            TPCamRight = new KeyCodeField(VRKeybinds, "TPCam Right", "TPCRight", Vars.Config.VRBinds.TPCamRight.ToKeyCode());
+            TPCamMoveMode = new KeyCodeField(VRKeybinds, "TPCam move mode", "", Vars.Config.VRBinds.TPCamMoveMode.ToKeyCode());
 
-            ToggleAvatarCalibration = new KeyCodeField(VRKeybinds, "Toggle Size Adjustment", "ToggleSizeAdj", Vars.Config.VRKeybinds.ToggleAvatarSizeAdj.ToKeyCode());
+            ToggleAvatarCalibration = new KeyCodeField(VRKeybinds, "Toggle Size Adjustment", "ToggleSizeAdj", Vars.Config.VRBinds.ToggleAvatarSizeAdj.ToKeyCode());
 
-            ToggleDV.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRKeybinds.ToggleDV = Enum.GetName(typeof(KeyCode), v));
-            ToggleTPC.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRKeybinds.ToggleTPC = Enum.GetName(typeof(KeyCode), v));
-            EnumTPCMode.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRKeybinds.EnumTPCMode = Enum.GetName(typeof(KeyCode), v));
-            TPCamUp.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRKeybinds.TPCamUp = Enum.GetName(typeof(KeyCode), v));
-            TPCamDown.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRKeybinds.TPCamDown = Enum.GetName(typeof(KeyCode), v));
-            TPCamLeft.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRKeybinds.TPCamLeft = Enum.GetName(typeof(KeyCode), v));
-            TPCamRight.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRKeybinds.TPCamRight = Enum.GetName(typeof(KeyCode), v));
-            TPCamMoveMode.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRKeybinds.TPCamMoveMode = Enum.GetName(typeof(KeyCode), v));
-            ToggleAvatarCalibration.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRKeybinds.ToggleAvatarSizeAdj = Enum.GetName(typeof(KeyCode), v));
+            ToggleDV.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRBinds.ToggleDV = Enum.GetName(typeof(KeyCode), v));
+            ToggleTPC.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRBinds.ToggleTPC = Enum.GetName(typeof(KeyCode), v));
+            EnumTPCMode.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRBinds.EnumTPCMode = Enum.GetName(typeof(KeyCode), v));
+            TPCamUp.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRBinds.TPCamUp = Enum.GetName(typeof(KeyCode), v));
+            TPCamDown.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRBinds.TPCamDown = Enum.GetName(typeof(KeyCode), v));
+            TPCamLeft.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRBinds.TPCamLeft = Enum.GetName(typeof(KeyCode), v));
+            TPCamRight.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRBinds.TPCamRight = Enum.GetName(typeof(KeyCode), v));
+            TPCamMoveMode.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRBinds.TPCamMoveMode = Enum.GetName(typeof(KeyCode), v));
+            ToggleAvatarCalibration.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.VRBinds.ToggleAvatarSizeAdj = Enum.GetName(typeof(KeyCode), v));
         }
         private static void AddControllersPanel()
         {
@@ -267,15 +267,15 @@ namespace VRTRAKILL.Compatibility.PluginConfigurator
 
             new ConfigHeader(DesktopView, "--- THIRD PERSON CAMERA ---");
             ConfigDivision SCCD = new ConfigDivision(DesktopView, "SCCD");
-            SCEnabled = new BoolField(DesktopView, "Enabled", "SCEnabled", Vars.Config.DesktopView.ThirdPersonCamera.Enabled);
+            //SCEnabled = new BoolField(DesktopView, "Enabled", "SCEnabled", Vars.Config.DesktopView.ThirdPersonCamera.Enabled);
             new ConfigHeader(SCCD, "Modes: 0 - follow, 1 - rotate around, 2 - fixed");
-            SCMode = new FloatField(SCCD, "Mode", "SCMode", Vars.Config.DesktopView.ThirdPersonCamera.Mode);
+            //SCMode = new FloatField(SCCD, "Mode", "SCMode", Vars.Config.DesktopView.ThirdPersonCamera.Mode);
 
             DVEnabled.onValueChange += (o) => { DVCD.interactable = o.value; Vars.Config.ChangeWrite(o.value, v => Vars.Config.DesktopView.Enabled = v); };
             WCFOV.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.DesktopView.WorldCamFOV = v);
             UICFOV.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.DesktopView.UICamFOV = v);
-            SCEnabled.onValueChange += (o) => { SCCD.interactable = o.value; Vars.Config.ChangeWrite(o.value, v => Vars.Config.DesktopView.ThirdPersonCamera.Enabled = v); };
-            SCMode.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.DesktopView.ThirdPersonCamera.Mode = (int)v);
+            //SCEnabled.onValueChange += (o) => { SCCD.interactable = o.value; Vars.Config.ChangeWrite(o.value, v => Vars.Config.DesktopView.ThirdPersonCamera.Enabled = v); };
+            //SCMode.onValueChange += (o) => Vars.Config.ChangeWrite(o.value, v => Vars.Config.DesktopView.ThirdPersonCamera.Mode = (int)v);
         }
         private static void AddMiscPanel()
         {
