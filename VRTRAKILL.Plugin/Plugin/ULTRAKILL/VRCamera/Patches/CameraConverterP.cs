@@ -66,5 +66,15 @@ namespace VRBasePlugin.ULTRAKILL.VRCamera.Patches
         }
         [HarmonyPostfix] [HarmonyPatch(typeof(CameraController), nameof(CameraController.Start))] static void AddSVRCam(CameraController __instance)
         { __instance.gameObject.AddComponent<SteamVR_Camera>(); }
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(CameraController), nameof(CameraController.Update))]
+        [HarmonyPatch(typeof(CameraFrustumTargeter), nameof(CameraFrustumTargeter.Update))]
+        [HarmonyPatch(typeof(CameraFrustumTargeter), nameof(CameraFrustumTargeter.LateUpdate))]
+        static bool DoNothing()
+        {
+            // do nothing
+            return false;
+        }
     }
 }

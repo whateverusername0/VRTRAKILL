@@ -98,7 +98,6 @@ namespace VRBasePlugin.ULTRAKILL.Controllers.Patches
                 }
                 T.parent = GO.transform;
                 T.localPosition = Vector3.zero;
-                //T.localScale = new Vector3(T.localScale.x * -1, T.localScale.y, T.localScale.z);
             }
             else throw new System.NotImplementedException();
 
@@ -106,8 +105,6 @@ namespace VRBasePlugin.ULTRAKILL.Controllers.Patches
             {
                 SandboxRM.transform.parent = GO.transform;
                 SandboxRM.transform.localPosition = Vector3.zero;
-                //SandboxRM.transform.localScale =
-                //    new Vector3(SandboxRM.transform.localScale.x * -1, SandboxRM.transform.localScale.y, SandboxRM.transform.localScale.z);
             }
 
             return GO;

@@ -228,7 +228,6 @@ namespace VRBasePlugin.ULTRAKILL.VRAvatar
             { Anim.SetBool("Jumping", false); Anim.SetBool("Sliding", true); }
             else Anim.SetBool("Sliding", false);
         }
-        Vector3 PelvisPosition;
         private void HandlePelvisRotation()
         {
             // this exists because my foot placement logic does not want to work *horizontally*
