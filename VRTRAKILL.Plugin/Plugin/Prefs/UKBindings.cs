@@ -73,15 +73,19 @@ namespace VRBasePlugin.Prefs
         public class ModifiedAction
         {
             [JsonProperty("path")] public string LocalPath { get; set; }
-            [JsonIgnore] public string Path { get; private set; }
-            public ModifiedAction(string Path)
+            [JsonIgnore] public string Path => GetPath();
+            public string GetPath()
             {
-                LocalPath = Path;
                 if (LocalPath.Contains("/"))
                 {
                     string[] Temp = LocalPath.Split('/');
-                    this.Path = Temp[Temp.Length - 1];
+                    return Temp[Temp.Length - 1];
                 }
+                return LocalPath;
+            }
+            public ModifiedAction(string LocalPath)
+            {
+                this.LocalPath = LocalPath;
             }
         }
         [JsonProperty("controlScheme")] public string ControlScheme { get; set; } = "Keyboard & Mouse";

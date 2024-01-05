@@ -34,13 +34,13 @@ namespace VRBasePlugin.ULTRAKILL.VRAvatar
         public void Update()
         {
             if ((Anim?.GetBool("Jumping") == true || Anim?.GetBool("Sliding") == true) // animations
-            || (Input.InputVars.MoveVector.magnitude == 0 && NewMovement.Instance.rb.velocity.magnitude > 0)) // moving platforms fix
+            || (Input.InputVars.MoveVector.magnitude < Vars.Config.Controllers.Deadzone && NewMovement.Instance.rb.velocity.magnitude > 0)) // moving platforms fix
             {
                 transform.localPosition = LastFootPos;
                 return;
             }
 
-            if (Input.InputVars.MoveVector.magnitude > 0)
+            if (NewMovement.Instance.rb.velocity.magnitude > 0)
             {
                 Speed = ((Input.InputVars.MoveVector.magnitude * 7.5f) - Speed) > 0 ? Input.InputVars.MoveVector.magnitude * 7.5f : 5;
                 StepDistance = Input.InputVars.MoveVector.magnitude * 2.5f;

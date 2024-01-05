@@ -55,7 +55,7 @@ namespace VRBasePlugin.Prefs
 
         public static void Init()
         {
-            ConvertJSONToKeys(Vars.Config.UKKeybinds);
+            ConvertJSONToKeys(Vars.Config.UKBinds);
             ConvertJSONToKeys(Vars.Config.VRBinds);
         }
 
@@ -128,11 +128,7 @@ namespace VRBasePlugin.Prefs
             try
             {
                 InputMap.UKeys.TryGetValue(VRConfig.ToggleDV, out ToggleDesktopView);
-                InputMap.UKeys.TryGetValue(VRConfig.TPCamLeft, out TPCamLeft);
-                InputMap.UKeys.TryGetValue(VRConfig.TPCamUp, out TPCamUp);
-                InputMap.UKeys.TryGetValue(VRConfig.TPCamRight, out TPCamRight);
-                InputMap.UKeys.TryGetValue(VRConfig.TPCamDown, out TPCamDown);
-                InputMap.UKeys.TryGetValue(VRConfig.TPCamMoveMode, out TPCamHoldMoveMode);
+                InputMap.UKeys.TryGetValue(VRConfig.ToggleAvatarSizeAdj, out ToggleAvatarSizeAdj);
             }
             catch (Exception)
             {

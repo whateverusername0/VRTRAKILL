@@ -17,8 +17,8 @@ namespace VRBasePlugin.ULTRAKILL
             VRTRAKILL.Utilities.Unity.EnableOffscreenRendering();
 
             // reload config
-            Config.ConfigJSON.Instance = null;
-            Config.ConfigMaster.Init();
+            Prefs.ConfigJSON.Instance = null;
+            Prefs.ConfigMaster.Init();
 
             Assets.LoadAllCustomAssets();
             RelayerAssetsStuff();

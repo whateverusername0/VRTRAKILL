@@ -23,7 +23,7 @@ namespace VRBasePlugin.ULTRAKILL.Input
             { "rightcontrol",  VirtualKeyCode.RCONTROL },
             { "capslock",      VirtualKeyCode.CAPITAL },
             { "escape",        VirtualKeyCode.ESCAPE },
-            { "spacebar",      VirtualKeyCode.SPACE },
+            { "spacebar",      VirtualKeyCode.SPACE }, { "space", VirtualKeyCode.SPACE },
             { "pageup",        VirtualKeyCode.PRIOR },
             { "pagedown",      VirtualKeyCode.NEXT },
             { "end",           VirtualKeyCode.END },

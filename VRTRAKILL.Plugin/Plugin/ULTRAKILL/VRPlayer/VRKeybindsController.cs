@@ -11,12 +11,12 @@ namespace VRBasePlugin.ULTRAKILL.VRPlayer
 
         public void Update()
         {
-            if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.ToggleDesktopView))
+            if (UnityEngine.Input.GetKeyDown((KeyCode)Prefs.ConfigMaster.ToggleDesktopView))
             {
                 SubtitleController.Instance.DisplaySubtitle("VR: Toggling desktop view");
                 ToggleDesktopView();
             }
-            if (UnityEngine.Input.GetKeyDown((KeyCode)Config.ConfigMaster.ToggleAvatarSizeAdj))
+            if (UnityEngine.Input.GetKeyDown((KeyCode)Prefs.ConfigMaster.ToggleAvatarSizeAdj))
             {
                 try
                 {

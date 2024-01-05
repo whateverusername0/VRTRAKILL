@@ -124,7 +124,7 @@ namespace VRBasePlugin.ULTRAKILL.VRAvatar
         private void HandleBodyTransform()
         {
             // Smooth body's position and rotation towards the camera
-            Rig.Root.position = Vector3.Lerp(Rig.Root.position, Vars.MainCamera.transform.position, Time.deltaTime * 5f);
+            Rig.Root.position = Vector3.Lerp(Rig.Root.position, Vars.MainCamera.transform.position, Time.deltaTime * 10f);
             Quaternion Rotation = Quaternion.Lerp(Rig.Abdomen.rotation, Vars.MainCamera.transform.rotation, Time.deltaTime * 2.5f);
             Rig.Root.rotation = Quaternion.Euler(0, Rotation.eulerAngles.y, 0);
         }

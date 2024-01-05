@@ -2,7 +2,7 @@
 using Valve.VR;
 using WindowsInput;
 using WindowsInput.Native;
-using VRBasePlugin.ULTRAKILL.Config;
+using VRBasePlugin.Prefs;
 
 namespace VRBasePlugin.ULTRAKILL.Input
 {
@@ -189,7 +189,7 @@ namespace VRBasePlugin.ULTRAKILL.Input
 
         // Quick swap & Weapon wheel
         private static void OpenWeaponWheelH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != OpenWeaponWheel) { OpenWeaponWheel = newState; TriggerKey(OpenWeaponWheel, !OpenWeaponWheel, ConfigMaster.KLastWeaponUsed, ConfigMaster.MLastWeaponUsed); } }
+        { if (newState != OpenWeaponWheel) { OpenWeaponWheel = newState; TriggerKey(OpenWeaponWheel, !OpenWeaponWheel, ConfigMaster.KLastWeapon, ConfigMaster.MLastWeapon); } }
         private static void WeaponWheelScrollH(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
         { InputVars.WWVector = axis; }
 
@@ -217,6 +217,6 @@ namespace VRBasePlugin.ULTRAKILL.Input
 
         // Go back, pause, etc.
         private static void EscapeH(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        { if (newState != Escape) { Escape = newState; TriggerKey(Escape, !Escape, ConfigMaster.KEscape, ConfigMaster.MEscape); } }
+        { if (newState != Escape) { Escape = newState; TriggerKey(Escape, !Escape, VirtualKeyCode.ESCAPE, null); } }
     }
 }

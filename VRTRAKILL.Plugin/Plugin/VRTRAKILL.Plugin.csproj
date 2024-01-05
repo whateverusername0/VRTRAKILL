@@ -152,7 +152,6 @@
   <ItemGroup>
     <Compile Include="PluginInfo.cs" />
     <Compile Include="Prefs\UKBindings.cs" />
-    <Compile Include="ULTRAKILL\VRPlayer\Patches.cs" />
     <Compile Include="Versioning.cs" />
     <Compile Include="ULTRAKILL\Assets.cs" />
     <Compile Include="Prefs\NewConfig.cs" />
@@ -230,7 +229,6 @@
     <Compile Include="ULTRAKILL\VRCamera\Patches\CameraConverterP.cs" />
     <Compile Include="ULTRAKILL\Vars.cs" />
     <Compile Include="ULTRAKILL\VRPlayer\VRKeybindsController.cs" />
-    <Compile Include="ULTRAKILL\VRPlayer\VRPlayerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CopyToGameRoot\ULTRAKILL\BepInEx\config\BepInEx.cfg">

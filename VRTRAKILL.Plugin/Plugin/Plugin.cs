@@ -44,7 +44,6 @@ namespace VRBasePlugin
             {
                 typeof(ULTRAKILL.Controllers.Patches.ControllerAdder),
                 typeof(ULTRAKILL.Input.ControlMessages.Patches),
-                typeof(ULTRAKILL.VRPlayer.Patches),
             };
             if (Vars.Config.Controllers.EnableHaptics) Types.Add(typeof(ULTRAKILL.Controllers.Patches.ControllerHaptics));
             if (Vars.Config.EnableCBS)                 Namespaces.Add(typeof(ULTRAKILL.Guns.Patches.A).Namespace);
