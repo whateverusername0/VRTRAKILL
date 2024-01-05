@@ -33,7 +33,12 @@ namespace VRBasePlugin.ULTRAKILL.VRAvatar
 
         public void Update()
         {
-            if (Anim?.GetBool("Jumping") == true || Anim?.GetBool("Sliding") == true) { transform.localPosition = LastFootPos; return; }
+            if ((Anim?.GetBool("Jumping") == true || Anim?.GetBool("Sliding") == true) // animations
+            || (Input.InputVars.MoveVector.magnitude == 0 && NewMovement.Instance.rb.velocity.magnitude > 0)) // moving platforms fix
+            {
+                transform.localPosition = LastFootPos;
+                return;
+            }
 
             if (Input.InputVars.MoveVector.magnitude > 0)
             {
