@@ -20,10 +20,10 @@ namespace VRBasePlugin.ULTRAKILL.VRPlayer
             {
                 try
                 {
-                    if ((bool)(ULTRAKILL.VRAvatar.AvatarSizeAdjustor.Instance?.enabled))
+                    if ((bool)(VRAvatar.AvatarSizeAdjustor.Instance?.enabled))
                         ULTRAKILL.VRAvatar.AvatarSizeAdjustor.Instance.enabled = false;
-                    else if ((bool)!ULTRAKILL.VRAvatar.AvatarSizeAdjustor.Instance?.enabled)
-                        ULTRAKILL.VRAvatar.AvatarSizeAdjustor.Instance.enabled = true;
+                    else if ((bool)!VRAvatar.AvatarSizeAdjustor.Instance?.enabled)
+                        VRAvatar.AvatarSizeAdjustor.Instance.enabled = true;
                 } catch (System.NullReferenceException) { SubtitleController.Instance.DisplaySubtitle("Unable to toggle avatar size adjustment!"); }
             }
         }
