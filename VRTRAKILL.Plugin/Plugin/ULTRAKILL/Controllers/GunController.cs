@@ -40,19 +40,19 @@ namespace VRBasePlugin.ULTRAKILL.Controllers
                 && GunControl.Instance.currentWeapon.HasComponent<Sandbox.Arm.SandboxArm>()
                 && !Vars.IsMainMenu)
                 {
-                    RM.SetActive(false);
-                    SandboxHandRM.SetActive(true);
+                    RM?.SetActive(false);
+                    SandboxHandRM?.SetActive(true);
                 }
                 else
                 {
-                    RM.SetActive(true);
-                    SandboxHandRM.SetActive(false);
+                    RM?.SetActive(true);
+                    SandboxHandRM?.SetActive(false);
                 }
             }
             else
             {
-                RM.SetActive(false);
-                SandboxHandRM.SetActive(false);
+                RM?.SetActive(false);
+                SandboxHandRM?.SetActive(false);
             }
         }
     }

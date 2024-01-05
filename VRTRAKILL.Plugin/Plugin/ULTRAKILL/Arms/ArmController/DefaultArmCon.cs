@@ -16,7 +16,7 @@ namespace VRBasePlugin.ULTRAKILL.Arms.ArmController
 
         public override void LateUpdate()
         {
-            if (Vars.IsMainMenu || Arm == null) { Vars.Log.LogWarning("No arm found!"); return; }
+            if (Vars.IsMainMenu || Arm == null) return;
 
             if (!gameObject.HasComponent<HookArm>()) base.LateUpdate();
             Arm.GameObjecT.position = Target.position;

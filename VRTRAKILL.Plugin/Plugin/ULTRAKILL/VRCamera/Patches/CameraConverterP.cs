@@ -29,13 +29,17 @@ namespace VRBasePlugin.ULTRAKILL.VRCamera.Patches
             DesktopWorldCam.transform.parent = Vars.MainCamera.transform;
             DesktopWorldCam.transform.localPosition = Vector3.zero;
             DesktopWorldCam.gameObject.AddComponent<DesktopCamera>();
-            DesktopWorldCam.gameObject.SetActive(false);
-
+            
             DesktopUICam = new GameObject("Desktop UI Camera").AddComponent<Camera>();
             DesktopUICam.transform.parent = Vars.MainCamera.transform;
             DesktopUICam.transform.localPosition = Vector3.zero;
             DesktopUICam.gameObject.AddComponent<DesktopUICamera>();
-            DesktopUICam.gameObject.SetActive(false);
+            
+            if (!Vars.Config.DesktopView.Enabled)
+            {
+                DesktopWorldCam.gameObject.SetActive(false);
+                DesktopUICam.gameObject.SetActive(false);
+            }
             #endregion
         }
         [HarmonyPostfix] [HarmonyPatch(typeof(NewMovement), nameof(NewMovement.Start))] static void ScaleObjects(NewMovement __instance)

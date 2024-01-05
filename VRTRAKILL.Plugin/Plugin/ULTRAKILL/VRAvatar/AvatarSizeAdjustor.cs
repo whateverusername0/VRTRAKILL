@@ -29,11 +29,11 @@ namespace VRBasePlugin.ULTRAKILL.VRAvatar
         {
             if (InputManager.Instance.InputSource.Fire1.WasPerformedThisFrame && !IsHoldingKey)
             { IsHoldingKey = true; ChangeSize(ScalePercentage, NewMovement.Instance.transform); }
-            else if (InputManager.Instance.InputSource.Fire2.WasPerformedThisFrame && !IsHoldingKey)
-            { IsHoldingKey = true; ChangeSize(-ScalePercentage, NewMovement.Instance.transform); }
-            else if (InputManager.Instance.InputSource.Fire1.WasCanceledThisFrame
-                 || InputManager.Instance.InputSource.Fire2.WasCanceledThisFrame
-                 && IsHoldingKey) IsHoldingKey = false;
+            if (InputManager.Instance.InputSource.Fire2.WasPerformedThisFrame && !IsHoldingKey)
+            { IsHoldingKey = true; ChangeSize(ScalePercentage * -1, NewMovement.Instance.transform); }
+            if (InputManager.Instance.InputSource.Fire1.WasCanceledThisFrame
+            || InputManager.Instance.InputSource.Fire2.WasCanceledThisFrame
+            && IsHoldingKey) IsHoldingKey = false;
         }
         public void OnDisable()
         {
