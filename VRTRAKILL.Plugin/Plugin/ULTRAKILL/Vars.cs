@@ -29,7 +29,7 @@ namespace VRBasePlugin.ULTRAKILL
     }
     public static class Vars
     {
-        public static Config.NewConfig Config => ULTRAKILL.Config.ConfigJSON.GetConfig().Config;
+        public static Prefs.NewConfig Config => Prefs.ConfigJSON.GetConfig().Config;
         public static BepInEx.Logging.ManualLogSource Log => Plugin.PLog;
 
         #region Checks n' Shits

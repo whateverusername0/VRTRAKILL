@@ -22,7 +22,7 @@ namespace VRBasePlugin
 
             Versioning.CheckForUpdates();
 
-            ULTRAKILL.Config.ConfigMaster.Init();
+            Prefs.ConfigMaster.Init();
             PatchStuff();
             SceneWorker.Init();
 
@@ -38,13 +38,13 @@ namespace VRBasePlugin
 
                 typeof(ULTRAKILL.VRCamera.Patches.A).Namespace,
                 typeof(ULTRAKILL.UI.Patches.A).Namespace,
-                typeof(ULTRAKILL.Patches.A).Namespace,
                 typeof(ULTRAKILL.Movement.Patches.A).Namespace,
             };
             System.Collections.Generic.List<System.Type> Types = new System.Collections.Generic.List<System.Type>
             {
                 typeof(ULTRAKILL.Controllers.Patches.ControllerAdder),
-                typeof(ULTRAKILL.Input.ControlMessages.Patches)
+                typeof(ULTRAKILL.Input.ControlMessages.Patches),
+                typeof(ULTRAKILL.VRPlayer.Patches),
             };
             if (Vars.Config.Controllers.EnableHaptics) Types.Add(typeof(ULTRAKILL.Controllers.Patches.ControllerHaptics));
             if (Vars.Config.EnableCBS)                 Namespaces.Add(typeof(ULTRAKILL.Guns.Patches.A).Namespace);
