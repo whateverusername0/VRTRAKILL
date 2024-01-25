@@ -26,7 +26,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\</OutputPath>
+    <OutputPath>..\..\bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -34,51 +34,51 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>Libraries\BepInEx\0Harmony.dll</HintPath>
+      <HintPath>..\..\lib\BepInEx\0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>Libraries\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\lib\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="BepInEx">
-      <HintPath>Libraries\BepInEx\BepInEx.dll</HintPath>
+      <HintPath>..\..\lib\BepInEx\BepInEx.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="BepInEx.Harmony">
-      <HintPath>Libraries\BepInEx\BepInEx.Harmony.dll</HintPath>
+      <HintPath>..\..\lib\BepInEx\BepInEx.Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="BepInEx.Preloader">
-      <HintPath>Libraries\BepInEx\BepInEx.Preloader.dll</HintPath>
+      <HintPath>..\..\lib\BepInEx\BepInEx.Preloader.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="HarmonyXInterop">
-      <HintPath>Libraries\BepInEx\HarmonyXInterop.dll</HintPath>
+      <HintPath>..\..\lib\BepInEx\HarmonyXInterop.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Cecil">
-      <HintPath>Libraries\BepInEx\Mono.Cecil.dll</HintPath>
+      <HintPath>..\..\lib\BepInEx\Mono.Cecil.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Cecil.Mdb">
-      <HintPath>Libraries\BepInEx\Mono.Cecil.Mdb.dll</HintPath>
+      <HintPath>..\..\lib\BepInEx\Mono.Cecil.Mdb.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Cecil.Pdb">
-      <HintPath>Libraries\BepInEx\Mono.Cecil.Pdb.dll</HintPath>
+      <HintPath>..\..\lib\BepInEx\Mono.Cecil.Pdb.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Cecil.Rocks">
-      <HintPath>Libraries\BepInEx\Mono.Cecil.Rocks.dll</HintPath>
+      <HintPath>..\..\lib\BepInEx\Mono.Cecil.Rocks.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="MonoMod.RuntimeDetour">
-      <HintPath>Libraries\BepInEx\MonoMod.RuntimeDetour.dll</HintPath>
+      <HintPath>..\..\lib\BepInEx\MonoMod.RuntimeDetour.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="MonoMod.Utils">
-      <HintPath>Libraries\BepInEx\MonoMod.Utils.dll</HintPath>
+      <HintPath>..\..\lib\BepInEx\MonoMod.Utils.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json">
@@ -101,51 +101,51 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="Unity.InputSystem">
-      <HintPath>Libraries\Unity\Unity.InputSystem.dll</HintPath>
+      <HintPath>..\..\lib\Unity\Unity.InputSystem.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>Libraries\Unity\UnityEngine.dll</HintPath>
+      <HintPath>..\..\lib\Unity\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.AnimationModule">
-      <HintPath>Libraries\Unity\UnityEngine.AnimationModule.dll</HintPath>
+      <HintPath>..\..\lib\Unity\UnityEngine.AnimationModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.AssetBundleModule">
-      <HintPath>Libraries\Unity\UnityEngine.AssetBundleModule.dll</HintPath>
+      <HintPath>..\..\lib\Unity\UnityEngine.AssetBundleModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.AudioModule">
-      <HintPath>Libraries\Unity\UnityEngine.AudioModule.dll</HintPath>
+      <HintPath>..\..\lib\Unity\UnityEngine.AudioModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>Libraries\Unity\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\..\lib\Unity\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>Libraries\Unity\UnityEngine.InputLegacyModule.dll</HintPath>
+      <HintPath>..\..\lib\Unity\UnityEngine.InputLegacyModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.InputModule">
-      <HintPath>Libraries\Unity\UnityEngine.InputModule.dll</HintPath>
+      <HintPath>..\..\lib\Unity\UnityEngine.InputModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.PhysicsModule">
-      <HintPath>Libraries\Unity\UnityEngine.PhysicsModule.dll</HintPath>
+      <HintPath>..\..\lib\Unity\UnityEngine.PhysicsModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>Libraries\Unity\UnityEngine.UI.dll</HintPath>
+      <HintPath>..\..\lib\Unity\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UIModule">
-      <HintPath>Libraries\Unity\UnityEngine.UIModule.dll</HintPath>
+      <HintPath>..\..\lib\Unity\UnityEngine.UIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.VRModule">
-      <HintPath>Libraries\Unity\UnityEngine.VRModule.dll</HintPath>
+      <HintPath>..\..\lib\Unity\UnityEngine.VRModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>

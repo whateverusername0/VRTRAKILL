@@ -1,6 +1,8 @@
 ﻿using HarmonyLib;
 using System.Collections.Generic;
+using ULTRAKILL.Cheats;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 
 namespace VRBasePlugin.ULTRAKILL.Arms.Patches
 {
@@ -14,28 +16,24 @@ namespace VRBasePlugin.ULTRAKILL.Arms.Patches
                 else return Vars.NonDominantHand.transform.forward;
             }
         }
-        // Unholster
-        /*[HarmonyPostfix] [HarmonyPatch(nameof(Punch.Start))]*/ static void Start(Punch __instance)
-        {
-            GameObject H = Object.Instantiate(__instance.gameObject, __instance.transform.parent);
-        } 
         [HarmonyPrefix] [HarmonyPatch(nameof(Punch.Update))] static bool Update(Punch __instance)
         {
-            if (MonoSingleton<OptionsManager>.Instance.paused) return false;
+            if (MonoSingleton<OptionsManager>.Instance.paused)
+                return false;
+
+            __instance.fc.fistCooldown = 0f;
 
             if (Vars.NDHC.Speed >= Vars.Config.MBP.PunchingSpeed
-                && MonoSingleton<InputManager>.Instance.InputSource.Punch.IsPressed
-                && __instance.ready && !__instance.shopping
-                && /* __instance.fc.fistCooldown <= 0f && */ __instance.fc.activated
-                && !GameStateManager.Instance.PlayerInputLocked)
+            && MonoSingleton<InputManager>.Instance.InputSource.Punch.WasPerformedThisFrame
+            && __instance.ready && !__instance.shopping
+            && __instance.fc.activated
+            && !GameStateManager.Instance.PlayerInputLocked)
             {
-                //__instance.fc.weightCooldown += __instance.cooldownCost * 0.25f + __instance.fc.weightCooldown * __instance.cooldownCost * 0.1f;
-                //__instance.fc.fistCooldown += .1f; //__instance.fc.weightCooldown;
+                __instance.heldAction = MonoSingleton<InputManager>.Instance.InputSource.Punch.Action;
                 __instance.PunchStart();
-                __instance.holdingInput = true;
             }
 
-            if (__instance.holdingInput && MonoSingleton<InputManager>.Instance.InputSource.Punch.WasCanceledThisFrame)
+            if (__instance.holdingInput && __instance.heldAction.WasReleasedThisFrame())
                 __instance.holdingInput = false;
 
             float layerWeight = __instance.anim.GetLayerWeight(1);
@@ -45,27 +43,30 @@ namespace VRBasePlugin.ULTRAKILL.Arms.Patches
                 __instance.anim.SetLayerWeight(1, Mathf.MoveTowards(layerWeight, 0f, Time.deltaTime / 10f + 5f * Time.deltaTime * layerWeight));
 
             if (!MonoSingleton<InputManager>.Instance.PerformingCheatMenuCombo()
-                && MonoSingleton<InputManager>.Instance.InputSource.Fire1.WasPerformedThisFrame && __instance.shopping)
+            && MonoSingleton<InputManager>.Instance.InputSource.Fire1.WasPerformedThisFrame && __instance.shopping)
                 __instance.anim.SetTrigger("ShopTap");
 
             if (__instance.returnToOrigRot)
             {
-                __instance.transform.parent.localRotation =
-                    Quaternion.RotateTowards(__instance.transform.parent.localRotation,
-                                             Quaternion.identity,
-                                             (Quaternion.Angle(__instance.transform.parent.localRotation,
-                                                               Quaternion.identity) * 5f + 5f)
-                                                               * Time.deltaTime * 5f);
+                __instance.transform.parent.localRotation = Quaternion.RotateTowards(__instance.transform.parent.localRotation,
+                                                                                     Quaternion.identity,
+                                                                                     (Quaternion.Angle(__instance.transform.parent.localRotation,
+                                                                                                       Quaternion.identity) * 5f + 5f)
+                                                                                     * Time.deltaTime * 5f);
                 if (__instance.transform.parent.localRotation == Quaternion.identity)
                     __instance.returnToOrigRot = false;
             }
 
-            if (__instance.fc.shopping && !__instance.shopping) __instance.ShopMode();
-            else if (!__instance.fc.shopping && __instance.shopping) __instance.StopShop();
+            if (__instance.fc.shopping && !__instance.shopping)
+                __instance.ShopMode();
+            else if (!__instance.fc.shopping && __instance.shopping)
+                __instance.StopShop();
 
-            if (__instance.holding && (bool)__instance.heldItem)
+            if (__instance.holding)
             {
-                if (!__instance.heldItem.noHoldingAnimation && __instance.fc.forceNoHold <= 0)
+                if (__instance.heldItem.Equals(null))
+                    MonoSingleton<FistControl>.Instance.currentPunch.ResetHeldState();
+                else if (!__instance.heldItem.noHoldingAnimation && __instance.fc.forceNoHold <= 0)
                 {
                     __instance.anim.SetBool("SemiHolding", value: false);
                     __instance.anim.SetBool("Holding", value: true);
@@ -74,203 +75,273 @@ namespace VRBasePlugin.ULTRAKILL.Arms.Patches
             }
             return false;
         }
-        [HarmonyPrefix] [HarmonyPatch(nameof(Punch.ActiveStart))] static bool ActiveStart(Punch __instance)
+        [HarmonyPrefix] [HarmonyPatch(nameof(Punch.ActiveFrame))] static bool ActiveFrame(Punch __instance, bool firstFrame = false)
         {
-            if (__instance.ignoreDoublePunch) { __instance.ignoreDoublePunch = false; return false; }
-            __instance.returnToOrigRot = false;
-            __instance.hitSomething = false;
-            if (__instance.type == FistType.Standard)
+            if (__instance.type == FistType.Standard && !__instance.parriedSomething)
             {
-                Collider[] array = Physics.OverlapSphere(Vars.NonDominantHand.transform.position, 0.01f,
-                                                         __instance.deflectionLayerMask, QueryTriggerInteraction.Collide);
+                Collider[] array = Physics.OverlapSphere(Vars.NonDominantHand.transform.position, 0.01f, __instance.deflectionLayerMask, QueryTriggerInteraction.Collide);
                 List<Transform> list = new List<Transform>();
-                if (array.Length != 0)
+                Collider[] array2 = array;
+                foreach (Collider collider in array2)
                 {
-                    foreach (Collider collider in array)
-                    {
-                        list.Add(collider.transform);
-                        if (__instance.CheckForProjectile((collider.attachedRigidbody != null) 
-                                                           ? collider.attachedRigidbody.transform
-                                                           : collider.transform)) break;
-                    }
+                    list.Add(collider.transform);
+                    if (__instance.TryParryProjectile((collider.attachedRigidbody != null)
+                        ? collider.attachedRigidbody.transform : collider.transform, firstFrame))
+                        break;
                 }
-                if ((!Physics.Raycast(Vars.NonDominantHand.transform.position,
-                                      Thing,
-                                      out __instance.hit, 4f,
-                                      __instance.deflectionLayerMask)
-                    && !Physics.BoxCast(Vars.NonDominantHand.transform.position,
-                                        Vector3.one * 0.3f,
-                                        Thing,
-                                        out __instance.hit,
-                                        Vars.NonDominantHand.transform.rotation, 4f,
-                                        __instance.deflectionLayerMask))
-                    || list.Contains(__instance.hit.transform)
-                    || !__instance.CheckForProjectile(__instance.hit.transform))
+
+                bool flag = Physics.Raycast(Vars.NonDominantHand.transform.position,
+                                            Thing,
+                                            out __instance.hit, 4f,
+                                            __instance.deflectionLayerMask);
+                if (!flag)
+                    flag = Physics.BoxCast(Vars.NonDominantHand.transform.position,
+                                           Vector3.one * 0.3f,
+                                           Thing,
+                                           out __instance.hit,
+                                           Vars.NonDominantHand.transform.rotation, 4f,
+                                           __instance.deflectionLayerMask);
+
+                if (!flag || list.Contains(__instance.hit.transform) || !__instance.TryParryProjectile(__instance.hit.transform, firstFrame))
                 {
-                    if (__instance.ppz == null) __instance.ppz = __instance.transform.parent.GetComponentInChildren<ProjectileParryZone>();
+                    if (__instance.ppz == null)
+                        __instance.ppz = __instance.transform.parent.GetComponentInChildren<ProjectileParryZone>();
+
                     if (__instance.ppz != null)
                     {
                         Projectile projectile = __instance.ppz.CheckParryZone();
-                        if (projectile != null
-                            && !list.Contains(projectile.transform)
-                            && !projectile.undeflectable
-                            && (!__instance.alreadyBoostedProjectile || !projectile.playerBullet))
+                        if (projectile != null)
                         {
-                            __instance.ParryProjectile(projectile);
-                            __instance.hitSomething = true;
-                        }
-                    }
-                }
-                Collider[] array3 = Physics.OverlapSphere(Vars.NonDominantHand.transform.position + Thing * 3f,
-                                                          3f, __instance.deflectionLayerMask, QueryTriggerInteraction.Collide);
-                bool flag = false;
-                foreach (Collider collider2 in array3)
-                {
-                    if ((collider2.attachedRigidbody
-                        ? collider2.attachedRigidbody.TryGetComponent(out Nail nail)
-                        : collider2.TryGetComponent(out nail)) && nail.sawblade && nail.punchable)
-                    {
-                        flag = true;
-                        if (nail.stopped)
-                        {
-                            nail.stopped = false;
-                            nail.rb.velocity = (Punch.GetParryLookTarget() - nail.transform.position).normalized * nail.originalVelocity.magnitude;
-                        }
-                        else nail.rb.velocity = (Punch.GetParryLookTarget() - nail.transform.position).normalized * nail.rb.velocity.magnitude;
-                        nail.punched = true;
-                        if (nail.magnets.Count > 0) nail.punchDistance = Vector3.Distance(nail.transform.position, nail.GetTargetMagnet().transform.position);
-                    }
-                }
-                if (!flag)
-                {
-                    foreach (Collider collider3 in Physics.OverlapSphere(Vars.NonDominantHand.transform.position + Thing,
-                                                                         1f, 1, QueryTriggerInteraction.Collide))
-                    {
-                        float num = Vector3.Distance(Vars.NonDominantHand.transform.position + Thing, collider3.transform.position);
-                        if (num >= 6f && num <= 12f
-                            && Mathf.Abs((Vars.NonDominantHand.transform.position + Thing).y - collider3.transform.position.y)
-                                          <= 3f && collider3.TryGetComponent(out Magnet magnet) && magnet.sawblades.Count > 0)
-                        {
-                            float num2 = float.PositiveInfinity; int num3 = -1;
-                            for (int j = magnet.sawblades.Count - 1; j >= 0; j--)
+                            bool flag2 = !__instance.alreadyBoostedProjectile && firstFrame;
+                            if (!list.Contains(projectile.transform) && !projectile.undeflectable && (flag2 || !projectile.playerBullet))
                             {
-                                if (magnet.sawblades[j] == null)
-                                {
-                                    magnet.sawblades.RemoveAt(j);
-                                    if (flag) num3--;
-                                }
-                                else
-                                {
-                                    float num4 = Vector3.Distance(magnet.sawblades[j].transform.position,
-                                                                  Vars.NonDominantHand.transform.position);
-                                    if (magnet.sawblades[j] != null && (num3 < 0 || num2 < num4))
-                                    { num3 = j; num2 = num4; flag = true; }
-                                }
-                            }
-                            if (flag && magnet.sawblades[num3].TryGetComponent(out Nail nail2))
-                            {
-                                nail2.transform.position = Vars.NonDominantHand.transform.position + __instance.cc.transform.forward;
-                                if (nail2.stopped)
-                                {
-                                    nail2.stopped = false;
-                                    nail2.rb.velocity = (Punch.GetParryLookTarget() - nail2.transform.position).normalized * nail2.originalVelocity.magnitude;
-                                }
-                                else nail2.rb.velocity = (Punch.GetParryLookTarget() - nail2.transform.position).normalized * nail2.rb.velocity.magnitude;
-                                nail2.punched = true;
-                                if (nail2.magnets.Count <= 0) break;
-                                Magnet targetMagnet = nail2.GetTargetMagnet();
-                                if (Vector3.Distance(nail2.transform.position + nail2.rb.velocity.normalized, targetMagnet.transform.position)
-                                                     > Vector3.Distance(nail2.transform.position, targetMagnet.transform.position))
-                                { nail2.MagnetRelease(targetMagnet); break; }
-                                nail2.punchDistance = Vector3.Distance(nail2.transform.position, targetMagnet.transform.position); break;
+                                __instance.ParryProjectile(projectile);
+                                __instance.parriedSomething = true;
+                                __instance.hitSomething = true;
                             }
                         }
                     }
-                }
-                if (flag)
-                {
-                    Object.Instantiate<AudioSource>(__instance.specialHit, __instance.transform.position, Quaternion.identity);
-                    MonoSingleton<TimeController>.Instance.HitStop(0.1f);
-                    __instance.anim.Play("Hook", -1, 0.065f);
-                    __instance.hitSomething = true;
                 }
             }
-            else if (Physics.Raycast(Vars.NonDominantHand.transform.position, Thing,
+            else if (!__instance.hitSomething
+                 && (Physics.Raycast(Vars.NonDominantHand.transform.position,
+                                     Thing,
                                      out __instance.hit, 4f, __instance.deflectionLayerMask)
-                  || Physics.BoxCast(Vars.NonDominantHand.transform.position, Vector3.one * 0.3f,
-                                     Thing, out __instance.hit,
-                                     Vars.NonDominantHand.transform.rotation, 4f, __instance.deflectionLayerMask))
+                 || Physics.BoxCast(Vars.NonDominantHand.transform.position,
+                                    Vector3.one * 0.3f,
+                                    Thing,
+                                    out __instance.hit,
+                                    Vars.NonDominantHand.transform.rotation, 4f,
+                                    __instance.deflectionLayerMask)))
             {
                 MassSpear component = __instance.hit.transform.gameObject.GetComponent<MassSpear>();
                 if (component != null && component.hitPlayer)
                 {
                     Object.Instantiate(__instance.specialHit, __instance.transform.position, Quaternion.identity);
                     MonoSingleton<TimeController>.Instance.HitStop(0.1f);
-                    __instance.cc.CameraShake(0.5f * __instance.screenShakeMultiplier);
                     component.GetHurt(25f);
                     __instance.hitSomething = true;
                 }
             }
-            bool flag2 = __instance.holding;
-            Collider[] array4 = Physics.OverlapSphere(Vars.NonDominantHand.transform.position, 0.1f,
-                                                      __instance.ignoreEnemyTrigger, QueryTriggerInteraction.Collide);
-            if (array4 != null && array4.Length != 0)
+
+            bool flag3 = Physics.Raycast(Vars.NonDominantHand.transform.position,
+                                         Thing,
+                                         out __instance.hit, 4f,
+                                         __instance.ignoreEnemyTrigger, QueryTriggerInteraction.Collide);
+            if (!flag3)
+                flag3 = Physics.SphereCast(Vars.NonDominantHand.transform.position,
+                                           1f, Thing,
+                                           out __instance.hit, 4f, __instance.ignoreEnemyTrigger,
+                                           QueryTriggerInteraction.Collide);
+
+            if (flag3)
             {
-                foreach (Collider collider4 in array4) __instance.PunchSuccess(Vars.NonDominantHand.transform.position, collider4.transform);
+                if (!__instance.alreadyHitCoin && __instance.type == FistType.Standard && __instance.hit.collider.CompareTag("Coin"))
+                {
+                    Coin component2 = __instance.hit.collider.GetComponent<Coin>();
+                    if ((bool)component2 && component2.doubled)
+                    {
+                        __instance.anim.Play("Hook", 0, 0.065f);
+                        component2.DelayedPunchflection();
+                        __instance.alreadyHitCoin = true;
+                    }
+                }
+
+                if (__instance.hitSomething)
+                    return false;
+
+                bool flag4 = false;
+                if (Physics.Raycast(Vars.NonDominantHand.transform.position,
+                                    __instance.hit.point - Vars.NonDominantHand.transform.position,
+                                    out var hitInfo, 5f,
+                                    __instance.environmentMask)
+                && Vector3.Distance(Vars.NonDominantHand.transform.position, __instance.hit.point)
+                   > Vector3.Distance(Vars.NonDominantHand.transform.position, hitInfo.point)) flag4 = true;
+
+                if (!flag4)
+                {
+                    __instance.PunchSuccess(__instance.hit.point, __instance.hit.transform);
+                    __instance.hitSomething = true;
+                }
+            }
+
+            if (__instance.hitSomething)
+                return false;
+
+            Collider[] array3 = Physics.OverlapSphere(Vars.NonDominantHand.transform.position, 0.1f,
+                                                      __instance.ignoreEnemyTrigger, QueryTriggerInteraction.Collide);
+            if (array3 != null && array3.Length != 0)
+            {
+                Collider[] array2 = array3;
+                foreach (Collider collider2 in array2)
+                    __instance.PunchSuccess(Vars.NonDominantHand.transform.position, collider2.transform);
+
                 __instance.hitSomething = true;
             }
-            else if (Physics.Raycast(Vars.NonDominantHand.transform.position, Thing,
-                                     out __instance.hit, 4f, __instance.ignoreEnemyTrigger, QueryTriggerInteraction.Collide)
-                 || Physics.SphereCast(Vars.NonDominantHand.transform.position, 1f, Thing,
-                                       out __instance.hit, 4f, __instance.ignoreEnemyTrigger, QueryTriggerInteraction.Collide))
+
+            if (__instance.type == FistType.Standard && !__instance.hitSomething && !__instance.parriedSomething)
             {
-                bool flag3 = false;
-                if (Physics.Raycast(Vars.NonDominantHand.transform.position, __instance.hit.point - Vars.NonDominantHand.transform.position,
-                                    out RaycastHit raycastHit, 5f, __instance.environmentMask)
-                    && Vector3.Distance(Vars.NonDominantHand.transform.position, __instance.hit.point)
-                    > Vector3.Distance(Vars.NonDominantHand.transform.position, raycastHit.point)) flag3 = true;
-                if (!flag3) { __instance.PunchSuccess(__instance.hit.point, __instance.hit.transform); __instance.hitSomething = true; }
+                Collider[] array4 = Physics.OverlapSphere(Vars.NonDominantHand.transform.position + Thing * 3f,
+                                                          3f, __instance.deflectionLayerMask, QueryTriggerInteraction.Collide);
+                bool flag5 = false;
+                Collider[] array2 = array4;
+                foreach (Collider collider3 in array2)
+                {
+                    Nail nail = ((!collider3.attachedRigidbody) ? collider3.GetComponent<Nail>() : collider3.attachedRigidbody.GetComponent<Nail>());
+                    if (!(nail == null) && nail.sawblade && nail.punchable)
+                    {
+                        flag5 = true;
+                        if (nail.stopped)
+                        {
+                            nail.stopped = false;
+                            nail.rb.velocity = (Punch.GetParryLookTarget() - nail.transform.position).normalized * nail.originalVelocity.magnitude;
+                        }
+                        else nail.rb.velocity = (Punch.GetParryLookTarget() - nail.transform.position).normalized * nail.rb.velocity.magnitude;
+
+                        nail.punched = true;
+                        if (nail.magnets.Count > 0)
+                            nail.punchDistance = Vector3.Distance(nail.transform.position, nail.GetTargetMagnet().transform.position);
+                    }
+                }
+
+                if (!flag5)
+                {
+                    array2 = Physics.OverlapSphere(Vars.NonDominantHand.transform.position + Thing,
+                                                   1f, 1, QueryTriggerInteraction.Collide);
+                    foreach (Collider collider4 in array2)
+                    {
+                        float num = Vector3.Distance(Vars.NonDominantHand.transform.position + Thing,
+                                                     collider4.transform.position);
+                        if (num < 6f || num > 12f
+                        || Mathf.Abs((Vars.NonDominantHand.transform.position + Thing).y
+                           - collider4.transform.position.y) > 3f
+                        || !collider4.TryGetComponent<Magnet>(out var component3) || component3.sawblades.Count <= 0)
+                            continue;
+
+                        float num2 = float.PositiveInfinity;
+                        float num3 = 0f;
+                        int num4 = -1;
+                        for (int num5 = component3.sawblades.Count - 1; num5 >= 0; num5--)
+                        {
+                            if (component3.sawblades[num5] == null)
+                            {
+                                component3.sawblades.RemoveAt(num5);
+                                if (flag5) num4--;
+                            }
+                            else
+                            {
+                                num3 = Vector3.Distance(component3.sawblades[num5].transform.position, Vars.NonDominantHand.transform.position);
+                                if (component3.sawblades[num5] != null && (num4 < 0 || num2 < num3))
+                                {
+                                    num4 = num5;
+                                    num2 = num3;
+                                    flag5 = true;
+                                }
+                            }
+                        }
+
+                        if (!flag5 || !component3.sawblades[num4].TryGetComponent<Nail>(out var component4))
+                            continue;
+
+                        component4.transform.position = Vars.NonDominantHand.transform.position + Thing;
+                        if (component4.stopped)
+                        {
+                            component4.stopped = false;
+                            component4.rb.velocity = (Punch.GetParryLookTarget() - component4.transform.position).normalized
+                                                      * component4.originalVelocity.magnitude;
+                        }
+                        else
+                            component4.rb.velocity = (Punch.GetParryLookTarget() - component4.transform.position).normalized
+                                                      * component4.rb.velocity.magnitude;
+
+                        component4.punched = true;
+                        if (component4.magnets.Count > 0)
+                        {
+                            Magnet targetMagnet = component4.GetTargetMagnet();
+                            if (Vector3.Distance(component4.transform.position + component4.rb.velocity.normalized,
+                              targetMagnet.transform.position)
+                              > Vector3.Distance(component4.transform.position, targetMagnet.transform.position))
+                                component4.MagnetRelease(targetMagnet);
+                            else
+                                component4.punchDistance = Vector3.Distance(component4.transform.position, targetMagnet.transform.position);
+                        }
+
+                        break;
+                    }
+                }
+
+                if (flag5)
+                {
+                    Object.Instantiate(__instance.specialHit, __instance.transform.position, Quaternion.identity);
+                    MonoSingleton<TimeController>.Instance.HitStop(0.1f);
+                    __instance.anim.Play("Hook", -1, 0.065f);
+                    __instance.parriedSomething = true;
+                    __instance.hitSomething = true;
+                }
             }
+
             if (Physics.CheckSphere(Vars.NonDominantHand.transform.position, 0.01f, __instance.environmentMask, QueryTriggerInteraction.Collide))
             {
-                foreach (Collider collider5 in Physics.OverlapSphere(Vars.NonDominantHand.transform.position, 0.01f, __instance.environmentMask))
-                {
-                    __instance.hitSomething = true;
+                Collider[] array2 = Physics.OverlapSphere(Vars.NonDominantHand.transform.position, 0.01f, __instance.environmentMask);
+                foreach (Collider collider5 in array2)
                     __instance.AltHit(collider5.transform);
-                }
             }
-            else if (Physics.Raycast(Vars.NonDominantHand.transform.position, Thing, out __instance.hit, 4f, __instance.environmentMask))
+            else
             {
-                __instance.AltHit(__instance.hit.transform);
-                if (!__instance.hitSomething && (__instance.hit.transform.gameObject.layer == 8 || __instance.hit.transform.gameObject.layer == 24))
-                {
-                    __instance.transform.parent.localRotation = Quaternion.identity;
-                    __instance.cc.CameraShake(0.2f * __instance.screenShakeMultiplier);
-                    Object.Instantiate<AudioSource>(__instance.normalHit, __instance.transform.position, Quaternion.identity);
-                    __instance.currentDustParticle = Object.Instantiate<GameObject>(__instance.dustParticle, __instance.hit.point, __instance.transform.rotation);
-                    __instance.currentDustParticle.transform.forward = __instance.hit.normal;
-                    Breakable component2 = __instance.hit.transform.gameObject.GetComponent<Breakable>();
-                    if (component2 != null && !component2.precisionOnly && (component2.weak || __instance.type == FistType.Heavy)) component2.Break();
-                    if (__instance.hit.collider.gameObject.TryGetComponent<Bleeder>(out Bleeder bleeder))
-                    {
-                        if (__instance.type == FistType.Standard) bleeder.GetHit(__instance.hit.point, GoreType.Body);
-                        else bleeder.GetHit(__instance.hit.point, GoreType.Head);
-                    }
-                    if (__instance.type == FistType.Heavy)
-                    {
-                        Glass component3 = __instance.hit.collider.gameObject.GetComponent<Glass>();
-                        if (component3 != null && !component3.broken) component3.Shatter();
-                    }
-                }
-            }
-            if (flag2 && __instance.holding && __instance.heldItem != null)
-            {
-                __instance.ForceThrow();
-                __instance.cc.CameraShake(0.2f * __instance.screenShakeMultiplier);
-                return false;
-            }
-            __instance.cc.CameraShake(0.2f * __instance.screenShakeMultiplier);
+                if (!Physics.Raycast(Vars.NonDominantHand.transform.position,
+                                     Thing,
+                                     out __instance.hit, 4f,
+                                     __instance.environmentMask))
+                    return false;
 
+                __instance.AltHit(__instance.hit.transform);
+                if (__instance.hit.transform.gameObject.layer != 8 && __instance.hit.transform.gameObject.layer != 24)
+                    return false;
+
+                __instance.hitSomething = true;
+                __instance.transform.parent.localRotation = Quaternion.identity;
+                Object.Instantiate(__instance.normalHit, __instance.transform.position, Quaternion.identity);
+                __instance.currentDustParticle = Object.Instantiate(__instance.dustParticle, __instance.hit.point, __instance.transform.rotation);
+                __instance.currentDustParticle.transform.forward = __instance.hit.normal;
+                Breakable component5 = __instance.hit.transform.gameObject.GetComponent<Breakable>();
+                if (component5 != null && !component5.precisionOnly && (component5.weak || __instance.type == FistType.Heavy))
+                    component5.Break();
+
+                if (__instance.hit.collider.gameObject.TryGetComponent<Bleeder>(out var component6))
+                {
+                    if (__instance.type == FistType.Standard)
+                        component6.GetHit(__instance.hit.point, GoreType.Body);
+                    else
+                        component6.GetHit(__instance.hit.point, GoreType.Head);
+                }
+
+                if (__instance.type == FistType.Heavy)
+                {
+                    Glass component7 = __instance.hit.collider.gameObject.GetComponent<Glass>();
+                    if (component7 != null && !component7.broken)
+                        component7.Shatter();
+                }
+            }
             return false;
         }
         [HarmonyPrefix] [HarmonyPatch(nameof(Punch.BlastCheck))] static bool BlastCheck(Punch __instance)
@@ -279,8 +350,8 @@ namespace VRBasePlugin.ULTRAKILL.Arms.Patches
             {
                 __instance.holdingInput = false;
                 __instance.anim.SetTrigger("PunchBlast");
-                Vector3 position = Vars.NonDominantHand.transform.position + Vars.NonDominantHand.transform.forward * 2f;
-                if (Physics.Raycast(Vars.NonDominantHand.transform.position, Vars.NonDominantHand.transform.forward, out var hitInfo,
+                Vector3 position = Vars.NonDominantHand.transform.position + Thing * 2f;
+                if (Physics.Raycast(Vars.NonDominantHand.transform.position, Thing, out var hitInfo,
                                     2f, LayerMaskDefaults.Get(LMD.EnvironmentAndBigEnemies))) position = hitInfo.point - Thing * 0.1f;
 
                 Object.Instantiate(__instance.blastWave, position, Vars.NonDominantHand.transform.rotation);
