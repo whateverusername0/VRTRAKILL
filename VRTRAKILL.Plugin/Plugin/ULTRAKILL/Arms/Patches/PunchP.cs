@@ -21,6 +21,8 @@ namespace VRBasePlugin.ULTRAKILL.Arms.Patches
             if (MonoSingleton<OptionsManager>.Instance.paused)
                 return false;
 
+            __instance.fc.fistCooldown = 0f;
+
             if (Vars.NDHC.Speed >= Vars.Config.MBP.PunchingSpeed
             && MonoSingleton<InputManager>.Instance.InputSource.Punch.WasPerformedThisFrame
             && __instance.ready && !__instance.shopping
@@ -46,7 +48,11 @@ namespace VRBasePlugin.ULTRAKILL.Arms.Patches
 
             if (__instance.returnToOrigRot)
             {
-                __instance.transform.parent.localRotation = Quaternion.RotateTowards(__instance.transform.parent.localRotation, Quaternion.identity, (Quaternion.Angle(__instance.transform.parent.localRotation, Quaternion.identity) * 5f + 5f) * Time.deltaTime * 5f);
+                __instance.transform.parent.localRotation = Quaternion.RotateTowards(__instance.transform.parent.localRotation,
+                                                                                     Quaternion.identity,
+                                                                                     (Quaternion.Angle(__instance.transform.parent.localRotation,
+                                                                                                       Quaternion.identity) * 5f + 5f)
+                                                                                     * Time.deltaTime * 5f);
                 if (__instance.transform.parent.localRotation == Quaternion.identity)
                     __instance.returnToOrigRot = false;
             }
