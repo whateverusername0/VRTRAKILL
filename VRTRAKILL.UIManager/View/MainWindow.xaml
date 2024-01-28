@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VRTRAKILL.UIManager.View"
         mc:Ignorable="d"
-        Title="VRTRAKILL UI Manager"
+        Title="VRTRAKILL Launcher"
         Height="360" Width="640"
         ResizeMode="NoResize">
     
@@ -14,14 +14,20 @@
             <RowDefinition/>
             <RowDefinition Height="24"/>
         </Grid.RowDefinitions>
-        
-        
+
+        <Label Grid.Row="0" Content="HI"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               FontSize="64"/>
+
+        <Frame Grid.Row="0" Source="null"/>
+
         <!-- Bottom panel -->
         <StackPanel Grid.Row="1"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Orientation="Horizontal">
-            <Button Content="INSTALL"/>
+            <Button Content="INSTALL/UPDATE"/>
             <Button Content="HELP"/>
             <Button Content="RUN ULTRAKILL"/>
             <CheckBox Content="IN VR"/>

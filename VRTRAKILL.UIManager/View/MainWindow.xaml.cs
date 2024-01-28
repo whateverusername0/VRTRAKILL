@@ -10,6 +10,11 @@ namespace VRTRAKILL.UIManager.View
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainWindowVM();
         }
+    }
+    public sealed class MainWindowVM
+    {
+
     }
 }
