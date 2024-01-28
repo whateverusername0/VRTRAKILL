@@ -24,7 +24,7 @@ namespace VRBasePlugin.ULTRAKILL.Arms.Patches
             __instance.fc.fistCooldown = 0f;
 
             if (Vars.NDHC.Speed >= Vars.Config.MBP.PunchingSpeed
-            && MonoSingleton<InputManager>.Instance.InputSource.Punch.WasPerformedThisFrame
+            && MonoSingleton<InputManager>.Instance.InputSource.Punch.IsPressed
             && __instance.ready && !__instance.shopping
             && __instance.fc.activated
             && !GameStateManager.Instance.PlayerInputLocked)
