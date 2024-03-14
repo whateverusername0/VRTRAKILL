@@ -1,9 +1,12 @@
 # VRTRAKILL
+
+### The mod is not dead. Updates are delayed until the next ultrakill patch to prevent me from going insane. You can still contribute, I check every issue/pr every now and then. Thanks for understanding.
+
 [![](https://img.shields.io/github/downloads/whateverusername0/VRTRAKILL/total)](https://github.com/whateverusername0/VRTRAKILL/releases)
 [![](https://img.shields.io/github/downloads/whateverusername0/VRTRAKILL/latest/total)](https://github.com/whateverusername0/VRTRAKILL/releases)
 [![](https://img.shields.io/github/v/release/whateverusername0/VRTRAKILL)](https://github.com/whateverusername0/VRTRAKILL/releases/latest)  
 ![](/GithubStuff/thypunishmentisdeath.gif) ![](/GithubStuff/youcantescape.gif) ![](/GithubStuff/+execution.gif) ![](/GithubStuff/v2warmup.gif)  
-**[Installation (credits to JamesTRG30)](https://www.youtube.com/watch?v=Do0dkeXdIjU) | [Controls](https://github.com/whateverusername0/VRTRAKILL/wiki/Controls) | [Development](https://github.com/whateverusername0/VRTRAKILL/wiki/Installation-%7C-Build#building-from-source) | [Common issues](https://github.com/whateverusername0/VRTRAKILL/wiki/Common-issues) | [Discord server](https://discord.gg/TTUw5Aevce)**
+**[Installation (credits to JamesTRG30)](https://www.youtube.com/watch?v=Do0dkeXdIjU) | [Controls](https://github.com/whateverusername0/VRTRAKILL/wiki/Default-controller-bindings) | [Development](https://github.com/whateverusername0/VRTRAKILL/wiki/Installation-%7C-Build#building-from-source) | [Common issues](https://github.com/whateverusername0/VRTRAKILL/wiki/Common-issues) | [Discord server](https://discord.gg/TTUw5Aevce)**
 
 ULTRAKILLing in VR is now a thing.  
 This mod exists because [HuskVR](https://github.com/TeamDoodz/HuskVR) was not being updated for a whole year, so I was like "Fine, I'll do it myself".  
