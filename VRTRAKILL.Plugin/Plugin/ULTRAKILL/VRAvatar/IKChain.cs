@@ -47,7 +47,7 @@ namespace VRBasePlugin.ULTRAKILL.VRAvatar
         // Start is called before the first frame update
         public void Start() => Init();
 
-        void Init()
+        public void Init()
         {
             //initial array
             Bones = new Transform[ChainLength + 1];

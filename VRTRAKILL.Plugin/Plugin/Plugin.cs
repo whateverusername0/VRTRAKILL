@@ -1,15 +1,13 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
+using UnityEngine;
 using Valve.VR;
 using VRBasePlugin.ULTRAKILL;
 using VRTRAKILL.Utilities;
 
 namespace VRBasePlugin
 {
-    /* If you're reading this and don't plan on stopping, then
-     * welcome to the codebase where all hopes and dreams go die.
-     * This is a dumpster fire of spaghetti, inconsistent
-     * naming, questionable life choices and shitty performance. Amen. */
+    // note: i will NEVER use transpilers IN THIS LIFETIME!! OVER MY DEAD BODY!!
 
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
     public sealed partial class Plugin : BaseUnityPlugin
@@ -19,6 +17,7 @@ namespace VRBasePlugin
         public void Awake()
         {
             PLog = Logger;
+            Debug.unityLogger.filterLogType = LogType.Warning;
 
             Versioning.CheckForUpdates();
 

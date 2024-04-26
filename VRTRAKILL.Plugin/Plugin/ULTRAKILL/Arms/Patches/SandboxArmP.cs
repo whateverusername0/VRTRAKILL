@@ -59,7 +59,7 @@ namespace VRBasePlugin.ULTRAKILL.Arms.Patches
             if (ExperimentalArmRotation.Enabled)
             {
                 Quaternion lhs;
-                if (MonoSingleton<InputManager>.Instance.InputSource.ChangeVariation.IsPressed)
+                if (MonoSingleton<InputManager>.Instance.InputSource.NextVariation.IsPressed)
                 {
                     Vector2 vector = Input.InputVars.TurnVector;
                     lhs = Quaternion.AngleAxis(vector.x * -0.1f, Vector3.up) * Quaternion.AngleAxis(vector.y * 0.1f, Vector3.right);

@@ -7,12 +7,10 @@ namespace VRBasePlugin.ULTRAKILL.Guns.Patches
     [HarmonyPatch] internal class TransformP
     {
         /* Template for transform values:
-         static Vector3 Position = new Vector3(),
-                        Rotation = new Vector3(),
-                        Scale = new Vector3(),
-                        AltPosition = new Vector3(),
-                        AltRotation = new Vector3(),
-                        AltScale = new Vector3();
+         static Vector3
+                Position = new Vector3(),
+                Rotation = new Vector3(),
+                Scale = new Vector3();
          */
         [HarmonyPatch(typeof(Revolver))] static class RevolverT
         {
@@ -37,16 +35,42 @@ namespace VRBasePlugin.ULTRAKILL.Guns.Patches
         }
         [HarmonyPatch(typeof(Shotgun))] static class ShotgunT
         {
-            static Vector3 Position = new Vector3(-.02f, .2f, .26f),
-                           Rotation = new Vector3(),
-                           Scale = new Vector3(.1f, .1f, .1f),
-                           AltPosition = new Vector3(),
-                           AltRotation = new Vector3(),
-                           AltScale = new Vector3();
+            static Vector3
+                Position = new Vector3(-.02f, .2f, .26f),
+                Rotation = new Vector3(),
+                Scale = new Vector3(.1f, .1f, .1f);
 
-            [HarmonyPostfix] [HarmonyPatch(nameof(Shotgun.Start))] static void Retransform(Shotgun __instance)
+            [HarmonyPostfix] [HarmonyPatch(nameof(Shotgun.Start))]
+            static void Retransform(Shotgun __instance)
             {
                 ApplyTransform(ref __instance.wpos, Position, Rotation, Scale);
+            }
+
+            [HarmonyPostfix] [HarmonyPatch(nameof(Shotgun.Update))] static void Update(Shotgun __instance)
+            {
+                if (__instance.anim.GetBool("Sawing"))
+                    __instance.transform.GetChild(2).localEulerAngles = new Vector3(__instance.transform.GetChild(2).localEulerAngles.x, __instance.transform.GetChild(2).localEulerAngles.y, 25);
+                else
+                    __instance.transform.GetChild(2).localEulerAngles = new Vector3(__instance.transform.GetChild(2).localEulerAngles.x, __instance.transform.GetChild(2).localEulerAngles.y, 0);
+            }
+        }
+        [HarmonyPatch(typeof(ShotgunHammer))] static class ShotgunHammerT
+        {
+            static Vector3
+                Position = new Vector3(0, -.15f, .25f),
+                Rotation = new Vector3(),
+                Scale = new Vector3(.45f, .45f, .45f);
+
+            [HarmonyPostfix] [HarmonyPatch(nameof(ShotgunHammer.OnEnable))] static void Retransform(ShotgunHammer __instance)
+            {
+                ApplyTransform(ref __instance.wpos, Position, Rotation, Scale);
+                __instance.transform.GetChild(1).localRotation = Quaternion.Euler(0, 180, 0);
+                __instance.gameObject.GetComponent<Animator>().enabled = false;
+            }
+            [HarmonyPostfix] [HarmonyPatch(nameof(ShotgunHammer.LateUpdate))] static void More(ShotgunHammer __instance)
+            {
+                __instance.transform.GetChild(1).GetChild(0).localPosition = new Vector3(.375f, .415f, .3f);
+                __instance.transform.GetChild(1).GetChild(0).localEulerAngles = new Vector3(60,0,0);
             }
         }
         [HarmonyPatch(typeof(Nailgun))] static class NailgunT
@@ -91,6 +115,13 @@ namespace VRBasePlugin.ULTRAKILL.Guns.Patches
                     __instance.transform.GetChild(0).localPosition = Vector3.zero;
             }
         }
+        [HarmonyPatch(typeof(Chainsaw))] static class ChainsawT
+        {
+            [HarmonyPostfix] [HarmonyPatch(nameof(Chainsaw.Start))] static void ChainSaw(Chainsaw __instance)
+            {
+                __instance.lineStartTransform = GunControl.Instance?.currentWeapon != null ? GunControl.Instance?.currentWeapon.transform : Vars.DominantHand.transform;
+            }
+        }
         
         [HarmonyPatch(typeof(Sandbox.Arm.SandboxArm))] static class SandboxArmT
         {
@@ -119,6 +150,54 @@ namespace VRBasePlugin.ULTRAKILL.Guns.Patches
                 Arms.ArmController.WeaponArmCon WAC = __instance.gameObject.AddComponent<Arms.ArmController.WeaponArmCon>();
                 Arm A = Arm.FeedbackerPreset(__instance.transform);
                 WAC.Arm = A; WAC.OffsetPos = Vector3.zero;
+            }
+        }
+        [HarmonyPatch(typeof(WeaponIdentifier))] static class WasherT
+        {
+            static Vector3
+                Position = new Vector3(0.065f, -0.075f, -0.175f),
+                Rotation = new Vector3(10, 90, 20),
+                Scale = new Vector3(-.0025f, .0025f, .0025f);
+            [HarmonyPostfix] [HarmonyPatch(nameof(WeaponIdentifier.Start))] static void Retransform(WeaponIdentifier __instance)
+            {
+                var washer = __instance.GetComponentInChildren<Washer>();
+                if (washer)
+                {
+                    ApplyTransform(__instance.GetComponent<WeaponPos>(), Position, Rotation, Scale);
+
+                    var WAC = __instance.gameObject.AddComponent<Arms.ArmController.WeaponArmCon>();
+                    var A = Arm.FeedbackerPreset(__instance.transform);
+                    WAC.Arm = A; WAC.OffsetPos = Vector3.zero;
+
+                    washer.defaultSprayPos = new Vector3(.35f, -4.25f, -.675f);
+                    washer.defaultSprayRot = Quaternion.Euler(90, 0, 0);
+
+                    var sprayStart = __instance.GetComponentInChildren<CorrectCameraView>();
+                    if (sprayStart)
+                    {
+                        sprayStart.transform.localPosition = new Vector3(.35f, -4.25f, -.675f);
+                        sprayStart.transform.localEulerAngles = new Vector3(90, 0, 0);
+                        sprayStart.enabled = false;
+                    }
+                }
+            }
+        }
+        [HarmonyPatch(typeof(WeaponIdentifier))] static class VacuumT
+        {
+            static Vector3
+                Position = new Vector3(0, -.35f, 2.15f),
+                Rotation = new Vector3(0, 90, 20),
+                Scale = new Vector3(.125f, .125f, .125f);
+            [HarmonyPostfix] [HarmonyPatch(nameof(WeaponIdentifier.Start))] static void Retransform(WeaponIdentifier __instance)
+            {
+                if (__instance.GetComponentInChildren<Vacuum>())
+                {
+                    ApplyTransform(__instance.GetComponent<WeaponPos>(), Position, Rotation, Scale);
+
+                    var WAC = __instance.gameObject.AddComponent<Arms.ArmController.WeaponArmCon>();
+                    var A = Arm.FeedbackerPreset(__instance.transform);
+                    WAC.Arm = A; WAC.OffsetPos = Vector3.zero;
+                }
             }
         }
 

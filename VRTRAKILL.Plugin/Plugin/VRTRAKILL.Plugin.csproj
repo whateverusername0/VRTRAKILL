@@ -132,6 +132,10 @@
       <HintPath>..\..\lib\Unity\UnityEngine.InputModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule">
+      <HintPath>..\..\lib\Unity\UnityEngine.ParticleSystemModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEngine.PhysicsModule">
       <HintPath>..\..\lib\Unity\UnityEngine.PhysicsModule.dll</HintPath>
       <Private>False</Private>
@@ -152,6 +156,7 @@
   <ItemGroup>
     <Compile Include="PluginInfo.cs" />
     <Compile Include="Prefs\UKBindings.cs" />
+    <Compile Include="ULTRAKILL\Guns\Patches\AutoAimP.cs" />
     <Compile Include="Versioning.cs" />
     <Compile Include="ULTRAKILL\Assets.cs" />
     <Compile Include="Prefs\NewConfig.cs" />

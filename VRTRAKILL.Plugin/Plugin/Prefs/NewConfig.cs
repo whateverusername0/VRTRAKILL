@@ -87,7 +87,7 @@ namespace VRBasePlugin.Prefs
 
         public NewConfig()
         {
-            UKBinds = UKBindings.GetBinds().Actions;
+            UKBinds = UKBindings.GetBinds();
             VRBinds = new _VRBinds();
             Controllers = new _Controllers();
             CBS = new _CBS();

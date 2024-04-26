@@ -2,6 +2,7 @@
 using VRTRAKILL.Utilities;
 using VRBasePlugin.Util.Libraries.EZhex1991.EZSoftBone;
 using UnityEngine;
+using Valve.VR;
 
 namespace VRBasePlugin.ULTRAKILL.VRAvatar
 {
@@ -40,7 +41,7 @@ namespace VRBasePlugin.ULTRAKILL.VRAvatar
             Rig.GameObjectT.localRotation = Quaternion.Euler(Vector3.zero);
 
             Rig.Root.localScale *= 3;
-            Rig.Root.GetChild(0).localPosition = new Vector3(0, -.015f, -.0005f);
+            Rig.Root.GetChild(0).localPosition = new Vector3(0, -.015f, -.001f);
 
 
             if (Vars.Config.VRBody.EnableArmsIK)
@@ -119,6 +120,7 @@ namespace VRBasePlugin.ULTRAKILL.VRAvatar
                 HandleAnimations();
                 HandlePelvisRotation();
             }
+            MakeArmCannonsFun();
         }
 
         private void HandleBodyTransform()
@@ -235,6 +237,30 @@ namespace VRBasePlugin.ULTRAKILL.VRAvatar
             Quaternion Rotation = Quaternion.Euler(0, Quaternion.LookRotation(Direction, Vector3.up).eulerAngles.y + 90, 0);
             if (Input.InputVars.MoveVector.y < 0) Rotation = Quaternion.Euler(0, -Rotation.eulerAngles.y - 180, 0);
             Rig.Pelvis.rotation = Quaternion.Lerp(Rig.Pelvis.rotation, Rotation, Time.deltaTime * 5);
+        }
+
+        private bool macf = false;
+        private void MakeArmCannonsFun()
+        {
+            if (!GunControl.Instance || !GunControl.Instance.currentWeapon) return;
+            if (GunControl.Instance.currentWeapon.HasComponent<RocketLauncher>())
+            {
+                macf = true;
+                //Rig.FeedbackerB.Forearm.localScale = new Vector3(.5f, .5f, .5f);
+                //Rig.FeedbackerB.Hand.Root.gameObject.GetComponent<IKChain>().Init();
+            }
+            else if (GunControl.Instance.currentWeapon.HasComponent<ShotgunHammer>())
+            {
+                macf = true;
+                //Rig.FeedbackerB.Forearm.localScale = new Vector3(.85f, .85f, .85f);
+                //Rig.FeedbackerB.Hand.Root.gameObject.GetComponent<IKChain>().Init();
+            }
+            else if (macf)
+            {
+                macf = false;
+                //Rig.FeedbackerB.Forearm.localScale = Vector3.one;
+                //Rig.FeedbackerB.Hand.Root.gameObject.GetComponent<IKChain>().Init();
+            }
         }
     }
 }

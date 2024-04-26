@@ -14,9 +14,11 @@ namespace VRBasePlugin.ULTRAKILL.Guns.Patches
             [HarmonyPostfix] [HarmonyPatch(nameof(Shotgun.Start))] static void AddHand(Shotgun __instance)
             {
                 Transform Hand = Object.Instantiate(Assets.HandPose_Shotgun.transform);
-                // Shotgun ******(Clone)/Shotgun_New/GunArmature/MainBone
-                Hand.SetParent(__instance.transform.GetChild(2).GetChild(2).GetChild(0), false);
+                // Shotgun ******(Clone)/ShogunNewAnims/GunArmature/MainBone
+                Hand.SetParent(__instance.transform.GetChild(2).GetChild(0).GetChild(0), false);
                 Hand.localPosition = Vector3.zero;
+                Hand.localEulerAngles = new Vector3(0, 0, 270);
+                Hand.localScale = new Vector3(.1f, .1f, .1f);
 
                 Hand.GetChild(1).GetChild(0).localPosition = Position;
                 Hand.GetChild(1).GetChild(0).localEulerAngles = Rotation;

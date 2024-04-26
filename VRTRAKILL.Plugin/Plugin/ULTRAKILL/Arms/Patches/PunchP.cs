@@ -350,9 +350,9 @@ namespace VRBasePlugin.ULTRAKILL.Arms.Patches
             {
                 __instance.holdingInput = false;
                 __instance.anim.SetTrigger("PunchBlast");
-                Vector3 position = Vars.NonDominantHand.transform.position + Thing * 2f;
-                if (Physics.Raycast(Vars.NonDominantHand.transform.position, Thing, out var hitInfo,
-                                    2f, LayerMaskDefaults.Get(LMD.EnvironmentAndBigEnemies))) position = hitInfo.point - Thing * 0.1f;
+                Vector3 position = Vars.NonDominantHand.transform.position + Vars.NonDominantHand.transform.forward * 2f;
+                if (Physics.Raycast(Vars.NonDominantHand.transform.position, Vars.NonDominantHand.transform.forward, out var hitInfo,
+                                    2f, LayerMaskDefaults.Get(LMD.EnvironmentAndBigEnemies))) position = hitInfo.point - Vars.NonDominantHand.transform.forward * 0.1f;
 
                 Object.Instantiate(__instance.blastWave, position, Vars.NonDominantHand.transform.rotation);
             }

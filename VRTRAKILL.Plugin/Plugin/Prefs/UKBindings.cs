@@ -91,10 +91,12 @@ namespace VRBasePlugin.Prefs
         [JsonProperty("controlScheme")] public string ControlScheme { get; set; } = "Keyboard & Mouse";
         [JsonProperty("modifiedActions")] public ModifiedActions Actions { get; set; }
 
-        public static UKBindings GetBinds()
+        public static ModifiedActions GetBinds()
         {
             UKBindings Json = JsonConvert.DeserializeObject<UKBindings>(File.ReadAllText($"{PluginInfo.GamePath}\\Preferences\\Binds.json"));
             var Binds = new ModifiedActions();
+
+            if (Json == null) return Binds;
 
             // What this does is basically scroll thru all the properties in the Binds object
             // For each property in Binds scroll through all the properties in the Json.Actions obejct
@@ -109,7 +111,7 @@ namespace VRBasePlugin.Prefs
                         PropInfo[i].SetValue(Binds, JsonPropInfo.GetValue(Json.Actions));
             }
             Json.Actions = Binds;
-            return Json;
+            return Json.Actions;
         }
     }
 }
