@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using VRBasePlugin.ULTRAKILL.Guns;
 using VRTRAKILL.Utilities;
 
 namespace VRBasePlugin.ULTRAKILL.UI
@@ -19,8 +20,12 @@ namespace VRBasePlugin.ULTRAKILL.UI
                 transform.position = Vars.MainCamera.transform.position + (Vars.MainCamera.transform.forward * Length * .25f) + Offset;
             else
             {
-                if (GunControl.Instance != null && GunControl.Instance.currentWeapon.HasComponent<RocketLauncher>())
-                    Target = GunControl.Instance.currentWeapon.transform;
+                if (GunControl.Instance != null)
+                {
+                    if (GunControl.Instance.currentWeapon?.GetComponent<RocketLauncher>() || GunControl.Instance.currentWeapon?.GetComponent<ShotgunHammer>())
+                        Target = GunControl.Instance.currentWeapon.transform;
+                    else Target = GunControl.Instance.transform;
+                }
                 else Target = Vars.DominantHand.transform;
 
                 transform.position = Target.position + (Target.forward * Length) + Offset;

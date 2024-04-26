@@ -6,7 +6,7 @@ namespace VRBasePlugin.ULTRAKILL.Movement.Patches
 {
     // change move vector to joystick axis, fix dash, jump, etc.
     // CHANGE THIS
-    [HarmonyPatch(typeof(PlatformerMovement))] internal class PlatformerMovementP
+    /*[HarmonyPatch(typeof(PlatformerMovement))]*/ internal class PlatformerMovementP
     {
         // change movement vector to vr one
         [HarmonyPrefix] [HarmonyPatch(nameof(PlatformerMovement.Update))] static bool Update(PlatformerMovement __instance)

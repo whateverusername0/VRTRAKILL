@@ -19,7 +19,7 @@ namespace VRBasePlugin
                 using (HttpClient HC = new HttpClient())
                 {
                     var HRQM = new HttpRequestMessage(HttpMethod.Get, $"{PluginInfo.GithubRepoLink}/releases/latest");
-                    HRQM.Headers.Add("User-Agent", "User-Agent");
+                    HRQM.Headers.Add("User-Agent", "GamingToilet-HondaCivic2007");
                     var Response = HC.SendAsync(HRQM, HttpCompletionOption.ResponseContentRead); Response.Wait();
 
                     var Stream = Response.Result.Content.ReadAsStringAsync(); Stream.Wait();
