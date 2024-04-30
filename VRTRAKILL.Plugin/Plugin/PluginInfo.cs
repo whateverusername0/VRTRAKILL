@@ -9,7 +9,7 @@ namespace VRBasePlugin
         public const string
             PLUGIN_GUID = "VRTRAKILL", // do not change this string EVER
             PLUGIN_NAME = "VRTRAKILL",
-            PLUGIN_VERSION = "0.20.0"; // never use spaces
+            PLUGIN_VERSION = "0.20.1"; // never use spaces
 
         public static readonly string
             PluginPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), // "~/BepInEx/plugins/VRTRAKILL"

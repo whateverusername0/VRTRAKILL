@@ -845,7 +845,7 @@ namespace VRBasePlugin.ULTRAKILL.Guns.Patches
         }
         [HarmonyPrefix] [HarmonyPatch(typeof(ShotgunHammer), nameof(ShotgunHammer.ThrowNade))] static bool HammerTN(ShotgunHammer __instance)
         {
-            __instance.grenadeCooldown = 0f;
+            MonoSingleton<WeaponCharges>.Instance.shoAltNadeCharge = 0f;
             __instance.pulledOut = 0.3f;
             __instance.gunReady = false;
             __instance.aboutToSecondary = false;
@@ -1040,7 +1040,7 @@ namespace VRBasePlugin.ULTRAKILL.Guns.Patches
             }
 
             __instance.modelTransform.localPosition = new Vector3(__instance.defaultModelPosition.x + Random.Range((0f - __instance.swingCharge) / 30f, __instance.swingCharge / 30f), __instance.defaultModelPosition.y + Random.Range((0f - __instance.swingCharge) / 30f, __instance.swingCharge / 30f), __instance.defaultModelPosition.z + Random.Range((0f - __instance.swingCharge) / 30f, __instance.swingCharge / 30f));
-            if (MonoSingleton<InputManager>.Instance.InputSource.Fire2.IsPressed && __instance.variation != 2 && (__instance.variation == 1 || (float)__instance.grenadeCooldown >= 2f) && !__instance.aboutToSecondary && __instance.gunReady && __instance.gc.activated && !GameStateManager.Instance.PlayerInputLocked)
+            if (MonoSingleton<InputManager>.Instance.InputSource.Fire2.IsPressed && __instance.variation != 2 && (__instance.variation == 1 || MonoSingleton<WeaponCharges>.Instance.shoAltNadeCharge >= 2f) && !__instance.aboutToSecondary && __instance.gunReady && __instance.gc.activated && !GameStateManager.Instance.PlayerInputLocked)
             {
                 __instance.gunReady = false;
                 if (!__instance.wid || __instance.wid.delay == 0f)
@@ -1081,10 +1081,10 @@ namespace VRBasePlugin.ULTRAKILL.Guns.Patches
 
             if (NoWeaponCooldown.NoCooldown)
             {
-                __instance.grenadeCooldown = 2f;
+                MonoSingleton<WeaponCharges>.Instance.shoAltNadeCharge = 2f;
             }
 
-            if ((float)__instance.grenadeCooldown < 2f)
+            if (MonoSingleton<WeaponCharges>.Instance.shoAltNadeCharge < 2f)
             {
                 __instance.nadeCharging = true;
             }
