@@ -536,12 +536,10 @@ namespace VRBasePlugin.ULTRAKILL.Movement.Patches
             __instance.boost = false;
             return false;
         }
-        [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Launch))] static bool Launch(NewMovement __instance, Vector3 direction)
+        [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.Launch))] static bool Launch(NewMovement __instance, Vector3 direction, float multiplier = 8f, bool ignoreMass = false)
         {
             if (((bool)__instance.groundProperties && !__instance.groundProperties.launchable) || (direction == Vector3.down && __instance.gc.onGround))
-            {
                 return false;
-            }
 
             __instance.jumping = true;
             __instance.Invoke("NotJumping", 0.5f);
@@ -553,39 +551,39 @@ namespace VRBasePlugin.ULTRAKILL.Movement.Patches
                 __instance.fallSpeed = 0f;
                 __instance.gc.heavyFall = false;
                 if (__instance.currentFallParticle != null)
-                {
-                    Object.Destroy(__instance.currentFallParticle);
-                }
+                   Object.Destroy(__instance.currentFallParticle);
             }
 
             if (direction.magnitude > 0f)
-            {
                 __instance.rb.velocity = Vector3.zero;
-            }
 
-            direction *= 1000f;
-            __instance.rb.AddForce(Vector3.ClampMagnitude(direction, 1000000f * Vars.Config.MovementMultiplier));
+            __instance.rb.AddForce(Vector3.ClampMagnitude(direction, 1000f) * multiplier, (!ignoreMass) ? ForceMode.Impulse : ForceMode.VelocityChange);
             return false;
         }
         [HarmonyPrefix] [HarmonyPatch(nameof(NewMovement.LaunchFromPoint))] static bool LaunchFromPoint(NewMovement __instance, Vector3 position, float strength, float maxDistance = 1)
         {
             if (!__instance.groundProperties || __instance.groundProperties.launchable)
             {
-                bool flag = false;
-                if (__instance.jumping)
-                {
-                    flag = true;
-                }
-
                 Vector3 vector = (__instance.transform.position - position).normalized;
                 if (position == __instance.transform.position)
                 {
                     vector = Vector3.up;
                 }
 
-                int num = 1;
-                Vector3 vector2 = ((!flag) ? new Vector3(vector.x * (maxDistance - Vector3.Distance(__instance.transform.position, position)) * strength * 1000f, strength * 500f * (maxDistance - Vector3.Distance(__instance.transform.position, position)) * (float)num, vector.z * (maxDistance - Vector3.Distance(__instance.transform.position, position)) * strength * 1000f) : new Vector3(vector.x * maxDistance * strength * 1000f, strength * 500f * maxDistance * (float)num, vector.z * maxDistance * strength * 1000f));
-                __instance.Launch(vector2 / 1000f * Vars.Config.MovementMultiplier);
+                Vector3 direction;
+                if (__instance.jumping)
+                {
+                    direction = vector * maxDistance * strength;
+                    direction.y = 0.5f * maxDistance * strength;
+                }
+                else
+                {
+                    float num = maxDistance - Vector3.Distance(__instance.transform.position, position);
+                    direction = vector * num * strength;
+                    direction.y = 0.5f * num * strength;
+                }
+
+                __instance.Launch(direction);
             }
 
             return false;

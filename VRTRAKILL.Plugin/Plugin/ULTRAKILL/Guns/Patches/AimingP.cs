@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using ULTRAKILL.Cheats;
 using UnityEngine;
 
 namespace VRBasePlugin.ULTRAKILL.Guns.Patches
@@ -915,15 +914,11 @@ namespace VRBasePlugin.ULTRAKILL.Guns.Patches
             float num = Mathf.Min(MonoSingleton<PlayerTracker>.Instance.GetPlayerVelocity().magnitude / 60f, 1f);
             __instance.currentSpeed = (__instance.overheated ? 0f : Mathf.MoveTowards(__instance.currentSpeed, num, Time.deltaTime * 2f));
             if (MonoSingleton<HookArm>.Instance.beingPulled)
-            {
                 __instance.currentSpeed = Mathf.Min(__instance.currentSpeed, 0.5f);
-            }
 
             __instance.UpdateMeter();
             if ((float)__instance.pulledOut >= 0.5f)
-            {
                 __instance.gunReady = true;
-            }
 
             if (!MonoSingleton<InputManager>.Instance.PerformingCheatMenuCombo() && !__instance.chargingSwing && __instance.hammerCooldown <= 0f && !__instance.overheated && MonoSingleton<InputManager>.Instance.InputSource.Fire1.IsPressed && (!__instance.fireHeldOnPullOut || (float)__instance.pulledOut >= 0.25f) && __instance.gc.activated)
             {
@@ -935,9 +930,7 @@ namespace VRBasePlugin.ULTRAKILL.Guns.Patches
                 __instance.chargingSwing = false;
                 __instance.swingCharge = 0f;
                 if (!__instance.wid || __instance.wid.delay == 0f)
-                {
                     __instance.Impact();
-                }
                 else
                 {
                     __instance.gunReady = false;
@@ -963,9 +956,7 @@ namespace VRBasePlugin.ULTRAKILL.Guns.Patches
                     {
                         __instance.tempChargeSound.volume -= __instance.wid.delay * 2f;
                         if (__instance.tempChargeSound.volume < 0f)
-                        {
                             __instance.tempChargeSound.volume = 0f;
-                        }
                     }
                 }
 
@@ -988,71 +979,46 @@ namespace VRBasePlugin.ULTRAKILL.Guns.Patches
                 }
 
                 if ((bool)__instance.tempChargeSound)
-                {
                     Object.Destroy(__instance.tempChargeSound.gameObject);
-                }
             }
 
             if (__instance.variation == 2)
             {
                 if (__instance.charging && __instance.chainsawBladeScroll.scrollSpeedX == 0f)
-                {
                     __instance.chainsawBladeRenderer.material = __instance.chainsawBladeMotionMaterial;
-                }
                 else if (!__instance.charging && __instance.chainsawBladeScroll.scrollSpeedX > 0f)
-                {
                     __instance.chainsawBladeRenderer.material = __instance.chainsawBladeMaterial;
-                }
 
                 __instance.chainsawBladeScroll.scrollSpeedX = __instance.chargeForce / 6f;
                 __instance.anim.SetBool("Sawing", __instance.charging);
                 __instance.sawZone.enabled = __instance.charging;
-                if (__instance.charging && Physics.Raycast(__instance.transform.position, __instance.transform.forward, out var hitInfo, 3f, LayerMaskDefaults.Get(LMD.Environment), QueryTriggerInteraction.Ignore))
+                if (__instance.charging && Physics.Raycast(Vars.DominantHand.transform.position, Vars.DominantHand.transform.transform.forward, out var hitInfo, 3f, LayerMaskDefaults.Get(LMD.Environment), QueryTriggerInteraction.Ignore))
                 {
                     __instance.environmentalSawSpark.transform.position = hitInfo.point;
                     if (!__instance.environmentalSawSpark.isEmitting)
-                    {
                         __instance.environmentalSawSpark.Play();
-                    }
 
                     if (!__instance.environmentalSawSound.isPlaying)
-                    {
                         __instance.environmentalSawSound.Play();
-                    }
                 }
                 else
                 {
-                    if (__instance.environmentalSawSpark.isEmitting)
-                    {
-                        __instance.environmentalSawSpark.Stop();
-                    }
+                    if (__instance.environmentalSawSpark.isEmitting) __instance.environmentalSawSpark.Stop(); 
 
-                    if (__instance.environmentalSawSound.isPlaying)
-                    {
-                        __instance.environmentalSawSound.Stop();
-                    }
+                    if (__instance.environmentalSawSound.isPlaying) __instance.environmentalSawSound.Stop(); 
                 }
             }
 
-            if (__instance.chargingSwing)
-            {
-                __instance.swingCharge = Mathf.MoveTowards(__instance.swingCharge, 1f, Time.deltaTime * 2f);
-            }
+            if (__instance.chargingSwing) __instance.swingCharge = Mathf.MoveTowards(__instance.swingCharge, 1f, Time.deltaTime * 2f);
 
             __instance.modelTransform.localPosition = new Vector3(__instance.defaultModelPosition.x + Random.Range((0f - __instance.swingCharge) / 30f, __instance.swingCharge / 30f), __instance.defaultModelPosition.y + Random.Range((0f - __instance.swingCharge) / 30f, __instance.swingCharge / 30f), __instance.defaultModelPosition.z + Random.Range((0f - __instance.swingCharge) / 30f, __instance.swingCharge / 30f));
-            if (MonoSingleton<InputManager>.Instance.InputSource.Fire2.IsPressed && __instance.variation != 2 && (__instance.variation == 1 || MonoSingleton<WeaponCharges>.Instance.shoAltNadeCharge >= 2f) && !__instance.aboutToSecondary && __instance.gunReady && __instance.gc.activated && !GameStateManager.Instance.PlayerInputLocked)
+            if (MonoSingleton<InputManager>.Instance.InputSource.Fire2.IsPressed && __instance.variation != 2 && (__instance.variation == 1 || MonoSingleton<WeaponCharges>.Instance.shoAltNadeCharge >= 1f) && !__instance.aboutToSecondary && __instance.gunReady && __instance.gc.activated && !GameStateManager.Instance.PlayerInputLocked)
             {
                 __instance.gunReady = false;
                 if (!__instance.wid || __instance.wid.delay == 0f)
                 {
-                    if (__instance.variation == 0)
-                    {
-                        __instance.ThrowNade();
-                    }
-                    else
-                    {
-                        __instance.Pump();
-                    }
+                    if (__instance.variation == 0) __instance.ThrowNade();
+                    else __instance.Pump();
                 }
                 else
                 {
@@ -1061,33 +1027,14 @@ namespace VRBasePlugin.ULTRAKILL.Guns.Patches
                 }
             }
 
-            if (__instance.secondaryMeterFill >= 1f)
-            {
-                __instance.secondaryMeter.fillAmount = 1f;
-            }
-            else if (__instance.secondaryMeterFill <= 0f)
-            {
-                __instance.secondaryMeter.fillAmount = 0f;
-            }
-            else
-            {
-                __instance.secondaryMeter.fillAmount = Mathf.Lerp(0.275f, 0.625f, __instance.secondaryMeterFill);
-            }
+            if (__instance.secondaryMeterFill >= 1f) __instance.secondaryMeter.fillAmount = 1f;
+            else if (__instance.secondaryMeterFill <= 0f) __instance.secondaryMeter.fillAmount = 0f;
+            else __instance.secondaryMeter.fillAmount = Mathf.Lerp(0.275f, 0.625f, __instance.secondaryMeterFill);
 
-            if (__instance.hammerCooldown > 0f)
-            {
-                __instance.hammerCooldown = Mathf.MoveTowards(__instance.hammerCooldown, 0f, Time.deltaTime);
-            }
+            if (__instance.hammerCooldown > 0f) __instance.hammerCooldown = Mathf.MoveTowards(__instance.hammerCooldown, 0f, Time.deltaTime);
 
-            if (NoWeaponCooldown.NoCooldown)
-            {
-                MonoSingleton<WeaponCharges>.Instance.shoAltNadeCharge = 2f;
-            }
-
-            if (MonoSingleton<WeaponCharges>.Instance.shoAltNadeCharge < 2f)
-            {
+            if (MonoSingleton<WeaponCharges>.Instance.shoAltNadeCharge < 1f)
                 __instance.nadeCharging = true;
-            }
             else if (__instance.nadeCharging)
             {
                 __instance.nadeCharging = false;
@@ -1096,6 +1043,7 @@ namespace VRBasePlugin.ULTRAKILL.Guns.Patches
 
             return false;
         }
+
 
         [HarmonyPostfix] [HarmonyPatch(typeof(ShotgunHammer), nameof(ShotgunHammer.LateUpdate))] static void Hammer_VRIK(ShotgunHammer __instance)
         {
