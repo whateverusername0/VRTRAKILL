@@ -1,5 +1,7 @@
 # VRTRAKILL
 
+**This is the only valid link to the mod. I _don't_ have a thunderstore page, I _don't_ have a page on nexus mods. I will _never_ post vrtrakill to any mod portal whatsoever. Every side link might and WILL contain malware.**
+
 ### The mod is not dead. Updates are delayed until the next ultrakill patch to prevent me from going insane. You can still contribute, I check every issue/pr every now and then. Thanks for understanding.
 
 [![](https://img.shields.io/github/downloads/whateverusername0/VRTRAKILL/total)](https://github.com/whateverusername0/VRTRAKILL/releases)
