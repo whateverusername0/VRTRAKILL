@@ -2,11 +2,11 @@
 
 ## Future of the mod
 Future of the mod entirely depends on the community it gathered throughout all this time.
-If you know how to code or even do basic git interactions, feel free to open a pull request and add something of your own, be it new keybindings, wiki entries, bugfixes or even new features, if you ever dare to dig through this dumpster fire of a codebase that I ignored for over a year now.
+If you know how to code or even do basic git interactions, feel free to open a pull request and add something of your own, be it new keybindings, wiki entries, bugfixes or even new features, if you ever dare to dig through this dumpster fire of a codebase that I ignored for over two years now.
 
 I'm also planning on rewriting it with applying all of my current knowledge, but I won't guarantee it will happen any time soon since I finally got a life, education and other related problems.
 
-### I remembered this repo exists after an entire year of procrastination. Don't expect updates unless Hakita releases another ULTRAKILL update.
+### I remembered this repo exists after two years of procrastination. Don't expect updates unless Hakita releases another ULTRAKILL update.
 
 [![](https://img.shields.io/github/downloads/whateverusername0/VRTRAKILL/total)](https://github.com/whateverusername0/VRTRAKILL/releases)
 [![](https://img.shields.io/github/downloads/whateverusername0/VRTRAKILL/latest/total)](https://github.com/whateverusername0/VRTRAKILL/releases)
