@@ -1,8 +1,12 @@
 # VRTRAKILL
 
-**This is the only valid link to the mod. I _don't_ have a thunderstore page, I _don't_ have a page on nexus mods. I will _never_ post vrtrakill to any mod portal whatsoever. Every side link might and WILL contain malware.**
+## Future of the mod
+Future of the mod entirely depends on the community it gathered throughout all this time.
+If you know how to code or even do basic git interactions, feel free to open a pull request and add something of your own, be it new keybindings, wiki entries, bugfixes or even new features, if you ever dare to dig through this dumpster fire of a codebase that I ignored for over a year now.
 
-### The mod is not dead. Updates are delayed until the next ultrakill patch to prevent me from going insane. You can still contribute, I check every issue/pr every now and then. Thanks for understanding.
+I'm also planning on rewriting it with applying all of my current knowledge, but I won't guarantee it will happen any time soon since I finally got a life, education and other related problems.
+
+### I remembered this repo exists after an entire year of procrastination. Don't expect updates unless Hakita releases another ULTRAKILL update.
 
 [![](https://img.shields.io/github/downloads/whateverusername0/VRTRAKILL/total)](https://github.com/whateverusername0/VRTRAKILL/releases)
 [![](https://img.shields.io/github/downloads/whateverusername0/VRTRAKILL/latest/total)](https://github.com/whateverusername0/VRTRAKILL/releases)
@@ -11,17 +15,12 @@
 **[Installation (credits to JamesTRG30)](https://www.youtube.com/watch?v=Do0dkeXdIjU) | [Controls](https://github.com/whateverusername0/VRTRAKILL/wiki/Default-controller-bindings) | [Development](https://github.com/whateverusername0/VRTRAKILL/wiki/Installation-%7C-Build#building-from-source) | [Common issues](https://github.com/whateverusername0/VRTRAKILL/wiki/Common-issues) | [Discord server](https://discord.gg/TTUw5Aevce)**
 
 ULTRAKILLing in VR is now a thing.  
-This mod exists because [HuskVR](https://github.com/TeamDoodz/HuskVR) was not being updated for a whole year, so I was like "Fine, I'll do it myself".  
-Also it does not require any other mods to function.  
+This mod exists because [HuskVR](https://github.com/TeamDoodz/HuskVR) was not being updated for a whole year (ironic), so I was like "Fine, I'll do it myself".  
 
-## Features
-### What works right now:
-It'll be much easier to describe what **doesn't** work.
-### What doesn't work right now:
-- Accessibility stuff. (e.g. left-handed mode)
-- 4-S.
-### Planned stuff:
-**1.0**: Full release (when i think that nothing more can be done)  
-**1.x.x**: Mods compatibility (JAKET, ultraballing, etc.)
-**Future**: Maintenance updates  
-...and a separate UI for config edit, setup, uninstalling and updating.
+It doesn't have any dependencies aside from BepInEx, like UMM or whatever mod manager/loader they will come up with.  
+Heck the mod might break if you had them installed.  
+
+### If you hate having too much money and you want to give me a decent kick in the ass by forcing me to develop the mod out of conscience you can dump it on me here:
+XMR: 44iS3E6YhrqVbCegapmQjrZBTJ1YuCxvGLzNZnuTHMQr2vJqW579jeTiB5oFVEA6WhJ5quwkGE2RaGkt1HvvTKBsQ82ToDY  
+TON: UQB9Yf4aiNaV2EFIfwgM-n2JUIz8nMiO83HWjbI6rC2R6PaZ  
+ETH: 0xF49392e1593FB25b3ea347C9e498d530B4576E6a  
