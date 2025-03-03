@@ -127,15 +127,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\BindingManager.cs" />
+    <Compile Include="Configuration\ConfigManager.cs" />
+    <Compile Include="Input\KeybindMap.cs" />
+    <Compile Include="Input\Actions\ModifiedAction.cs" />
+    <Compile Include="Input\Actions\ModifiedActionMap.cs" />
+    <Compile Include="Input\InputManager.cs" />
     <Compile Include="Input\InputMap.cs" />
     <Compile Include="Input\InputVars.cs" />
     <Compile Include="Input\SVRActionsManager.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Configuration\ConfigJSON.cs" />
     <Compile Include="Configuration\ConfigMaster.cs" />
-    <Compile Include="Configuration\NewConfig.cs" />
-    <Compile Include="Configuration\UKBindings.cs" />
+    <Compile Include="Configuration\JSONNewConfig.cs" />
+    <Compile Include="Input\Actions\UltrakillBindings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Versioning\Version.cs" />
     <Compile Include="Versioning\Versioning.cs" />

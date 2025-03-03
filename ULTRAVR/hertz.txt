@@ -1,0 +1,6 @@
+headset to multiplier
+
+72hz 0.575
+90hz 0.71875
+120hz 0.96005
+144hz 1.15

@@ -8,54 +8,9 @@ namespace ULTRAVR.Configuration
     {
         public static string ConfigPath = $"{Plugin.PluginPath}\\VRTRAKILL_Config.json";
 
-        public static VirtualKeyCode?
-            KShoot = null, KAltShoot = null, KPunch = null ,
+        
 
-            KJump = null, KSlide = null, KDash = null,
-
-            KLastWeapon = null, KPrevWeapon = null, KNextWeapon = null,
-            KChangeVariation = null,
-
-            KSwapHand = null,
-            KWhiplash = null,
-            
-            KSlot0 = null, KSlot1 = null, KSlot2 = null,
-            KSlot3 = null, KSlot4 = null, KSlot5 = null,
-            KSlot6 = null, KSlot7 = null, KSlot8 = null, KSlot9 = null;
-        public static MouseButton?
-            MShoot = null, MAltShoot = null, MPunch = null,
-
-            MJump = null, MSlide = null, MDash = null,
-
-            MLastWeapon = null, MPrevWeapon = null, MNextWeapon = null,
-            MChangeVariation = null,
-
-            MSwapHand = null,
-            MWhiplash = null,
-
-            MSlot0 = null, MSlot1 = null, MSlot2 = null,
-            MSlot3 = null, MSlot4 = null, MSlot5 = null,
-            MSlot6 = null, MSlot7 = null, MSlot8 = null, MSlot9 = null;
-
-        // joystickwhateverbutton is there because unity is angry when you pass it as null
-        public static UnityEngine.KeyCode?
-            ToggleDesktopView = UnityEngine.KeyCode.Joystick8Button9,
-
-            TPCamUp = UnityEngine.KeyCode.Joystick8Button9,
-            TPCamDown = UnityEngine.KeyCode.Joystick8Button9,
-            TPCamLeft = UnityEngine.KeyCode.Joystick8Button9,
-            TPCamRight = UnityEngine.KeyCode.Joystick8Button9,
-            TPCamHoldMoveMode = UnityEngine.KeyCode.Joystick8Button9,
-
-            ToggleAvatarSizeAdj = UnityEngine.KeyCode.Joystick8Button9;
-
-        public static void Init()
-        {
-            ConvertJSONToKeys(Vars.Config.UKBinds);
-            ConvertJSONToKeys(Vars.Config.VRBinds);
-        }
-
-        private static void ConvertJSONToKeys(UKBindings.ModifiedActions Binds)
+        private static void ConvertJSONToKeys(ActionMap.ModifiedActions Binds)
         {
             try
             {
@@ -119,7 +74,7 @@ namespace ULTRAVR.Configuration
                                   "Check spelling and replace every null key either with \"\", \"Empty\" or assign a value to it.");
             }
         }
-        private static void ConvertJSONToKeys(NewConfig._VRBinds VRConfig)
+        private static void ConvertJSONToKeys(JSONNewConfig._VRBinds VRConfig)
         {
             try
             {

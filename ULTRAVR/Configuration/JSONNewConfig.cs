@@ -1,14 +1,15 @@
 ﻿using Newtonsoft.Json;
+using System.IO;
 
 #pragma warning disable IDE1006 // Naming Styles
 namespace ULTRAVR.Configuration
 {
-    public class NewConfig
+    public class JSONNewConfig
     {
         // since ultrakill is running on basic Update and headset refresh rates are different we gotta do sth about it.
         [JsonProperty("Movement multiplier")] public float MovementMultiplier { get; set; } = 0.575f;
 
-        [JsonIgnore] public UKBindings.ModifiedActions UKBinds { get; set; }
+        [JsonIgnore] public ActionMap.ModifiedActions UKBinds { get; set; }
         [JsonProperty("VRTRAKILL Keybinds")] public _VRBinds VRBinds { get; set; } public class _VRBinds
         {
             [JsonProperty("Toggle Desktop View")] public string ToggleDV { get; set; } = "T";
@@ -67,10 +68,45 @@ namespace ULTRAVR.Configuration
             [JsonProperty("UI view FOV")] public float UICamFOV { get; set; } = 90;
         }
 
-        public NewConfig()
+        public JSONNewConfig()
         {
-            UKBinds = UKBindings.GetBinds();
+            UKBinds = ActionMap.GetBinds();
             VRBinds = new _VRBinds();
+        }
+
+        public static JSONNewConfig Deserialize(string filepath)
+        {
+            try
+            {
+                var json = File.ReadAllText(filepath);
+                var config = JsonConvert.DeserializeObject<JSONNewConfig>(json);
+                return config;
+            }
+            catch (FileNotFoundException)
+            {
+                Plugin.Log.LogError(
+                    "Unable to find VRTRAKILL_Config.json." +
+                    "Generating a new one. Please quit the game and fill it out." +
+                    "Starting up using default settings.");
+
+                Serialize(new JSONNewConfig(), filepath);
+                return new JSONNewConfig();
+            }
+            catch (JsonException)
+            {
+                Plugin.Log.LogError(
+                    "Something went wrong during parsing VRTRAKILL_Config.json" +
+                    "\nFix any typos, formatting errors, etc." +
+                    "\nOr delete the config and let it generate once more." +
+                    "\nStarting up using default settings.");
+
+                return new JSONNewConfig();
+            }
+        }
+        public static void Serialize(JSONNewConfig config, string filepath)
+        {
+            var json = JsonConvert.SerializeObject(config, Formatting.Indented);
+            File.WriteAllText(filepath, json);
         }
     }
 }

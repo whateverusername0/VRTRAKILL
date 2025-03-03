@@ -5,13 +5,13 @@ namespace ULTRAVR.Configuration
 {
     public class ConfigJSON
     {
-        [JsonProperty("VRTRAKILL Settings")] public NewConfig Config { get; set; }
+        [JsonProperty("VRTRAKILL Settings")] public JSONNewConfig Config { get; set; }
 
         public static ConfigJSON Instance { get; set; }
 
         public ConfigJSON()
         {
-            Config = new NewConfig();
+            Config = new JSONNewConfig();
         }
 
         public static ConfigJSON GetConfig()
