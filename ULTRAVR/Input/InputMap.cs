@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace ULTRAVR.Input
 {
-    // Converts config strings into keycodes
     public static class InputMap
     {
         // InputSimulator
@@ -106,7 +105,7 @@ namespace ULTRAVR.Input
             // Empty keys
             { "", null }, { "empty", null }, { "null", null }
         };
-        public static readonly Dictionary<string, MouseButton?> KeysM = new Dictionary<string, MouseButton?>(System.StringComparer.OrdinalIgnoreCase)
+        public static readonly Dictionary<string, MouseButton?> MouseKeys = new Dictionary<string, MouseButton?>(System.StringComparer.OrdinalIgnoreCase)
         {
             { "leftmouse", MouseButton.RightButton },{ "mouseleft",  MouseButton.LeftButton}, { "mouse0", MouseButton.LeftButton },
             { "lmb",  MouseButton.LeftButton}, { "m0", MouseButton.LeftButton },
@@ -129,6 +128,7 @@ namespace ULTRAVR.Input
             // Empty keys
             { "", null }, { "empty", null }, { "null", null }
         };
+
         public static readonly Dictionary<KeyCode, VirtualKeyCode> KeysU = new Dictionary<KeyCode, VirtualKeyCode>
         {
             #region SpecialKeys
@@ -222,7 +222,7 @@ namespace ULTRAVR.Input
             { KeyCode.Z,             VirtualKeyCode.VK_Z },
             #endregion
         };
-        public static readonly Dictionary<KeyCode, MouseButton> KeysUM = new Dictionary<KeyCode, MouseButton>
+        public static readonly Dictionary<KeyCode, MouseButton> MouseKeysU = new Dictionary<KeyCode, MouseButton>
         {
             { KeyCode.Mouse0, MouseButton.LeftButton },
             { KeyCode.Mouse1, MouseButton.RightButton },
@@ -234,7 +234,7 @@ namespace ULTRAVR.Input
         };
 
         // UnityEngine
-        public static readonly Dictionary<string, KeyCode?> UKeys = new Dictionary<string, KeyCode?>(System.StringComparer.OrdinalIgnoreCase)
+        public static readonly Dictionary<string, KeyCode?> UnityKeys = new Dictionary<string, KeyCode?>(System.StringComparer.OrdinalIgnoreCase)
         {
             #region SpecialKeys
             { "backspace",     KeyCode.Backspace },

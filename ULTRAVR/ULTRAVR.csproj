@@ -128,12 +128,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\ConfigManager.cs" />
-    <Compile Include="Input\KeybindMap.cs" />
+    <Compile Include="Input\ActionsMap.cs" />
     <Compile Include="Input\Actions\ModifiedAction.cs" />
     <Compile Include="Input\Actions\ModifiedActionMap.cs" />
     <Compile Include="Input\InputManager.cs" />
     <Compile Include="Input\InputMap.cs" />
-    <Compile Include="Input\InputVars.cs" />
     <Compile Include="Input\SVRActionsManager.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Configuration\ConfigJSON.cs" />

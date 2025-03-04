@@ -3,14 +3,8 @@ using WindowsInput.Native;
 
 namespace ULTRAVR.Input
 {
-    public class KeybindMap
+    public class ActionsMap
     {
-        // Dodge Slide Jump ChangeFist Punch Hook PrimaryFire SecondaryFire ChangeVariation
-        // Slot0 Slot1 Slot2 Slot3 Slot4 Slot5 Slot6 Slot7 Slot8 Slot9
-        // NextWeapon
-        // PrevWeapon
-        // LastWeapon
-
         public static VirtualKeyCode?
             KPrimaryFire = null,
             KSecondaryFire = null,
@@ -60,15 +54,13 @@ namespace ULTRAVR.Input
             MSlot9 = null;
 
         // joystickwhateverbutton is there because unity is angry when you pass it as null
-        public static UnityEngine.KeyCode?
+        public static UnityEngine.KeyCode
             ToggleDesktopView = UnityEngine.KeyCode.Joystick8Button9,
-
             TPCamUp = UnityEngine.KeyCode.Joystick8Button9,
             TPCamDown = UnityEngine.KeyCode.Joystick8Button9,
             TPCamLeft = UnityEngine.KeyCode.Joystick8Button9,
             TPCamRight = UnityEngine.KeyCode.Joystick8Button9,
             TPCamHoldMoveMode = UnityEngine.KeyCode.Joystick8Button9,
-
             ToggleAvatarSizeAdj = UnityEngine.KeyCode.Joystick8Button9;
     }
 }
