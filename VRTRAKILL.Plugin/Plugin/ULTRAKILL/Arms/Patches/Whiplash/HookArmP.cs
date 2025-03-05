@@ -74,7 +74,8 @@ namespace VRBasePlugin.ULTRAKILL.Arms.Patches.Whiplash
                     __instance.aud.Play();
                     __instance.aud.pitch = Random.Range(0.9f, 1.1f);
                     __instance.semiBlocked = 0f;
-                    MonoSingleton<RumbleManager>.Instance.SetVibrationTracked(RumbleProperties.WhiplashThrow, __instance.gameObject);
+                    //MonoSingleton<RumbleManager>.Instance.SetVibrationTracked(RumbleProperties.WhiplashThrow, __instance.gameObject);
+                    //dont uncomment the rumble lines they make your controllers die
                 }
             }
             if (__instance.cooldown != 0f) __instance.cooldown = Mathf.MoveTowards(__instance.cooldown, 0f, Time.deltaTime); 
@@ -134,8 +135,9 @@ namespace VRBasePlugin.ULTRAKILL.Arms.Patches.Whiplash
         }
         [HarmonyPrefix] [HarmonyPatch(nameof(HookArm.StopThrow))] static bool StopThrow(HookArm __instance, float animationTime = 0f, bool sparks = false)
         {
-            MonoSingleton<RumbleManager>.Instance.StopVibration(RumbleProperties.WhiplashThrow);
-            MonoSingleton<RumbleManager>.Instance.StopVibration(RumbleProperties.WhiplashPull);
+            //MonoSingleton<RumbleManager>.Instance.StopVibration(RumbleProperties.WhiplashThrow);
+            //MonoSingleton<RumbleManager>.Instance.StopVibration(RumbleProperties.WhiplashPull);
+            //these two rumble lines are poopy butt so dont uncomment
             if (animationTime == 0f)
             {
                 Object.Instantiate(__instance.pullSound);
