@@ -75,7 +75,7 @@ namespace VRBasePlugin.ULTRAKILL.Arms.Patches.Whiplash
                     __instance.aud.pitch = Random.Range(0.9f, 1.1f);
                     __instance.semiBlocked = 0f;
                     //MonoSingleton<RumbleManager>.Instance.SetVibrationTracked(RumbleProperties.WhiplashThrow, __instance.gameObject);
-                    //dont uncomment the rumble lines they make your controllers die
+                    //dont uncomment the rumble lines they make your controllers die (unless you have a working fix now)
                 }
             }
             if (__instance.cooldown != 0f) __instance.cooldown = Mathf.MoveTowards(__instance.cooldown, 0f, Time.deltaTime); 
@@ -137,7 +137,7 @@ namespace VRBasePlugin.ULTRAKILL.Arms.Patches.Whiplash
         {
             //MonoSingleton<RumbleManager>.Instance.StopVibration(RumbleProperties.WhiplashThrow);
             //MonoSingleton<RumbleManager>.Instance.StopVibration(RumbleProperties.WhiplashPull);
-            //these two rumble lines are poopy butt so dont uncomment
+            //these two rumble lines are poopy butt so dont uncomment unless a fix has been made
             if (animationTime == 0f)
             {
                 Object.Instantiate(__instance.pullSound);
