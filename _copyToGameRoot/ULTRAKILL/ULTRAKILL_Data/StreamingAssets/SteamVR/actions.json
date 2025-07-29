@@ -1,0 +1,241 @@
+{
+  "actions": [
+    {
+      "name": "/actions/default/in/Movement",
+      "type": "vector2",
+      "requirement": "suggested"
+    },
+    {
+      "name": "/actions/default/in/Turn",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/default/in/Shoot",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/AltShoot",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/Jump",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/Slide",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/Dash",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/Escape",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/OpenWeaponWheel",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/ChangeWeaponVariation",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/IterateWeapon",
+      "type": "vector2",
+      "requirement": "suggested"
+    },
+    {
+      "name": "/actions/default/in/SwapHand",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/Slot1",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/Slot2",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/Slot3",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/Slot4",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/Slot5",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/Slot6",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/Slot7",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/Slot8",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/Slot9",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/Slot0",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/Whiplash",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/Punch",
+      "type": "boolean",
+      "requirement": "suggested"
+    },
+    {
+      "name": "/actions/default/in/LeftPose",
+      "type": "pose",
+      "requirement": "mandatory"
+    },
+    {
+      "name": "/actions/default/in/RightPose",
+      "type": "pose",
+      "requirement": "mandatory"
+    },
+    {
+      "name": "/actions/default/in/WeaponWheelScroll",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/default/in/NextWeapon",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/PrevWeapon",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/out/Haptic",
+      "type": "vibration",
+      "requirement": "optional"
+    }
+  ],
+  "action_sets": [
+    {
+      "name": "/actions/default",
+      "usage": "leftright"
+    }
+  ],
+  "default_bindings": [
+    {
+      "controller_type": "vive_controller",
+      "binding_url": "bindings_vive_controller.json"
+    },
+    {
+      "controller_type": "oculus_touch",
+      "binding_url": "bindings_oculus_touch.json"
+    },
+    {
+      "controller_type": "knuckles",
+      "binding_url": "bindings_knuckles.json"
+    },
+    {
+      "controller_type": "holographic_controller",
+      "binding_url": "bindings_holographic_controller.json"
+    },
+    {
+      "controller_type": "vive_cosmos_controller",
+      "binding_url": "bindings_vive_cosmos_controller.json"
+    },
+    {
+      "controller_type": "logitech_stylus",
+      "binding_url": "bindings_logitech_stylus.json"
+    },
+    {
+      "controller_type": "vive_cosmos",
+      "binding_url": "binding_vive_cosmos.json"
+    },
+    {
+      "controller_type": "vive",
+      "binding_url": "binding_vive.json"
+    },
+    {
+      "controller_type": "indexhmd",
+      "binding_url": "binding_index_hmd.json"
+    },
+    {
+      "controller_type": "vive_pro",
+      "binding_url": "binding_vive_pro.json"
+    },
+    {
+      "controller_type": "rift",
+      "binding_url": "binding_rift.json"
+    },
+    {
+      "controller_type": "holographic_hmd",
+      "binding_url": "binding_holographic_hmd.json"
+    },
+    {
+      "controller_type": "vive_tracker_camera",
+      "binding_url": "binding_vive_tracker_camera.json"
+    }
+  ],
+  "localization": [
+    {
+      "language_tag": "en_US",
+      "/actions/Default/in/Movement": "Movement",
+      "/actions/Default/in/Turn": "Turn",
+      "/actions/Default/in/Shoot": "Shoot",
+      "/actions/Default/in/AltShoot": "Alternative Shoot",
+      "/actions/Default/in/Slide": "Slide",
+      "/actions/Default/in/Dash": "Dash",
+      "/actions/default/in/Escape": "Escape (Pause, etc.)",
+      "/actions/default/in/Slide": "Slide (or Slam)",
+      "/actions/default/in/OpenWeaponWheel": "(Press) Quick Swap / (Hold) Open Weapon Wheel",
+      "/actions/default/in/ChangeWeaponVariation": "Change Weapon Variation",
+      "/actions/default/in/IterateWeapon": "Weapon Scroll",
+      "/actions/default/in/SwapHand": "Change Hand",
+      "/actions/default/in/Slot1": "Weapon Slot 1",
+      "/actions/default/in/Slot2": "Weapon Slot 2",
+      "/actions/default/in/Slot3": "Weapon Slot 3",
+      "/actions/default/in/Slot4": "Weapon Slot 4",
+      "/actions/default/in/Slot5": "Weapon Slot 5",
+      "/actions/default/in/Slot6": "Weapon Slot 6",
+      "/actions/default/in/Slot7": "Weapon Slot 7",
+      "/actions/default/in/Slot8": "Weapon Slot 8",
+      "/actions/default/in/Slot9": "Weapon Slot 9",
+      "/actions/default/in/Slot0": "Weapon Slot 0",
+      "/actions/default/in/Whiplash": "Whiplash",
+      "/actions/default/in/AltShoot": "Alternative Shoot",
+      "/actions/default/in/Shoot": "Shoot",
+      "/actions/default/in/Movement": "Move",
+      "/actions/default/in/Turn": "Turning",
+      "/actions/default/in/Jump": "Jump",
+      "/actions/default/in/Dash": "Dash",
+      "/actions/default/in/Punch": "Punch",
+      "/actions/default/in/LeftPose": "Left Controller",
+      "/actions/default/in/RightPose": "Right Controller",
+      "/actions/default/in/WeaponWheelScroll": "Weapon Wheel Scroll"
+    }
+  ]
+}

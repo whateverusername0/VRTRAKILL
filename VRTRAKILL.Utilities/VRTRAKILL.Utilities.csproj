@@ -97,7 +97,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions.cs" />
     <Compile Include="Libraries\EZSoftBone.cs" />
     <Compile Include="Libraries\WindowsInput\IInputDeviceStateAdaptor.cs" />
     <Compile Include="Libraries\WindowsInput\IInputMessageDispatcher.cs" />
