@@ -2,9 +2,9 @@
 using Valve.VR;
 using WindowsInput;
 using WindowsInput.Native;
-using VRBasePlugin.Prefs;
+using Plugin.Prefs;
 
-namespace VRBasePlugin.ULTRAKILL.Input
+namespace Plugin.Systems.Input
 {
     internal static class SVRActionsManager
     {

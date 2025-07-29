@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace VRBasePlugin.ULTRAKILL.Input
+namespace Plugin.Systems.Input
 {
     public static class InputVars
     {

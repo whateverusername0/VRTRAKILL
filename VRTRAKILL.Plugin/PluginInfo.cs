@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace VRBasePlugin
+namespace Plugin
 {
     public static class PluginInfo
     {

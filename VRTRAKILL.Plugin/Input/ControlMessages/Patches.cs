@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 
-namespace VRBasePlugin.ULTRAKILL.Input.ControlMessages
+namespace Plugin.Systems.Input.ControlMessages
 {
     [HarmonyPatch] internal static class Patches
     {

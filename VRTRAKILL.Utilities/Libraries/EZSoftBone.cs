@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace VRBasePlugin.Util.Libraries.EZhex1991.EZSoftBone
+namespace Plugin.Util.Libraries.EZhex1991.EZSoftBone
 {
     public class EZSoftBone : MonoBehaviour
     {

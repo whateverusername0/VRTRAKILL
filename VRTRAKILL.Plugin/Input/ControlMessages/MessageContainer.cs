@@ -1,7 +1,7 @@
 ﻿using Valve.VR;
 using System.Collections.Generic;
 
-namespace VRBasePlugin.ULTRAKILL.Input.ControlMessages
+namespace Plugin.Systems.Input.ControlMessages
 {
     internal class MessageContainer
     {

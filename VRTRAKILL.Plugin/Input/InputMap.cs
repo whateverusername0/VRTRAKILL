@@ -3,7 +3,7 @@ using WindowsInput.Native;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace VRBasePlugin.ULTRAKILL.Input
+namespace Plugin.Systems.Input
 {
     // Converts config strings into keycodes
     public static class InputMap
