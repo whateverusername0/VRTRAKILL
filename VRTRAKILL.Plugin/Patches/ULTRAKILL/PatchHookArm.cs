@@ -1,8 +1,8 @@
 ﻿using HarmonyLib;
 using UnityEngine;
-using Plugin.Systems;
 using Plugin.Systems.Arms;
 using Plugin.Systems.VRAvatar.Armature;
+using Plugin.Data;
 
 namespace Plugin.Patches.ULTRAKILL;
 

@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using HarmonyLib;
 using VRTRAKILL.Utilities;
+using Plugin.Data;
 
 namespace Plugin.Systems.UI.Patches
 {
@@ -51,10 +52,10 @@ namespace Plugin.Systems.UI.Patches
             UI_GTFOTW.transform.localPosition = Vector3.zero;
 
             UIConverter.ConvertCanvas(UI_GTFOTW.GetComponent<Canvas>());
-            VRTRAKILL.Utilities.Unity.RecursiveChangeLayer(UI_GTFOTW, (int)Layers.UI);
+            VRTRAKILL.Utilities.UnityExtensions.RecursiveChangeLayer(UI_GTFOTW, (int)Layers.UI);
 
-            GTFOTW GTFOTW = UI_GTFOTW.AddComponent<GTFOTW>();
-            GTFOTW.DetectorTransform = Vars.MainCamera.transform;
+            NoclipPreventionSystem GTFOTW = UI_GTFOTW.AddComponent<NoclipPreventionSystem>();
+            GTFOTW.Pivot = Vars.MainCamera.transform;
         }
 
         [HarmonyPostfix] [HarmonyPatch(typeof(ScreenZone), nameof(ScreenZone.OnTriggerEnter))] static void ConvertThing()

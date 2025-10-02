@@ -3,6 +3,7 @@ using Valve.VR;
 using WindowsInput;
 using WindowsInput.Native;
 using Plugin.Prefs;
+using Plugin.Data;
 
 namespace Plugin.Systems.Input
 {

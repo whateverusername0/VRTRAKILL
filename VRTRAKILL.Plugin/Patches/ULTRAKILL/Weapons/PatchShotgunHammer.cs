@@ -1,5 +1,5 @@
 ﻿using HarmonyLib;
-using Plugin.Systems;
+using Plugin.Data;
 using Plugin.Systems.VRAvatar;
 using UnityEngine;
 

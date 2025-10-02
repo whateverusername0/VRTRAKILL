@@ -4,7 +4,7 @@ using WindowsInput.Native;
 using Plugin.Systems.Input;
 using UnityEngine.InputSystem.Utilities;
 using UnityEngine.InputSystem;
-using Plugin.Systems;
+using Plugin.Data;
 
 namespace Plugin.Prefs
 {

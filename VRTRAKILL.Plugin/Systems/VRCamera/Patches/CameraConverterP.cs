@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using Plugin.Data;
 using UnityEngine;
 using UnityEngine.XR;
 

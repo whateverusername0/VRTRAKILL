@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using Plugin.Data;
 using ULTRAKILL.Cheats;
 using UnityEngine;
 
@@ -6,7 +7,8 @@ namespace Plugin.Systems.Movement.Patches
 {
     // change move vector to joystick axis, fix dash, jump, etc.
     // CHANGE THIS
-    /*[HarmonyPatch(typeof(PlatformerMovement))]*/ internal class PlatformerMovementP
+    /*[HarmonyPatch(typeof(PlatformerMovement))]*/
+    internal class PlatformerMovementP
     {
         // change movement vector to vr one
         [HarmonyPrefix] [HarmonyPatch(nameof(PlatformerMovement.Update))] static bool Update(PlatformerMovement __instance)
@@ -16,7 +18,7 @@ namespace Plugin.Systems.Movement.Patches
             Vector2 vector = Vector2.zero;
             if (__instance.activated)
             {
-                vector = Input.InputVars.MoveVector * Vars.Config.MovementMultiplier;
+                vector = Plugin.Data.InputVars.MoveVector * Vars.Config.MovementMultiplier;
                 __instance.movementDirection = Vector3.ClampMagnitude(vector.x * Vector3.right + vector.y * Vector3.forward, 1f);
                 __instance.movementDirection = Quaternion.Euler(0f, __instance.platformerCamera.rotation.eulerAngles.y, 0f) * __instance.movementDirection;
             }

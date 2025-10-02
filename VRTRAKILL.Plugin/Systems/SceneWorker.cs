@@ -2,6 +2,7 @@
 using UnityEngine.SceneManagement;
 using System.Reflection;
 using VRTRAKILL.Utilities;
+using Plugin.Data;
 
 namespace Plugin.Systems
 {
@@ -14,7 +15,7 @@ namespace Plugin.Systems
         // cool message suppersion :)
         private static void SceneChanged(Scene S)
         {
-            VRTRAKILL.Utilities.Unity.EnableOffscreenRendering();
+            VRTRAKILL.Utilities.UnityExtensions.EnableOffscreenRendering();
 
             // reload config
             Prefs.ConfigJSON.Instance = null;

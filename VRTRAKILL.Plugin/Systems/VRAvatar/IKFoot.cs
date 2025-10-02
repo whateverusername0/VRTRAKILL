@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Plugin.Data;
+using UnityEngine;
 
 namespace Plugin.Systems.VRAvatar
 {
@@ -42,10 +43,10 @@ namespace Plugin.Systems.VRAvatar
 
             if (NewMovement.Instance.rb.velocity.magnitude > 0)
             {
-                Speed = ((Input.InputVars.MoveVector.magnitude * 7.5f) - Speed) > 0 ? Input.InputVars.MoveVector.magnitude * 7.5f : 5;
-                StepDistance = Input.InputVars.MoveVector.magnitude * 2.5f;
-                StepLength = Input.InputVars.MoveVector.magnitude * 5f;
-                StepHeight = Input.InputVars.MoveVector.magnitude * 1.5f;
+                Speed = ((Plugin.Data.InputVars.MoveVector.magnitude * 7.5f) - Speed) > 0 ? Plugin.Data.InputVars.MoveVector.magnitude * 7.5f : 5;
+                StepDistance = Plugin.Data.InputVars.MoveVector.magnitude * 2.5f;
+                StepLength = Plugin.Data.InputVars.MoveVector.magnitude * 5f;
+                StepHeight = Plugin.Data.InputVars.MoveVector.magnitude * 1.5f;
             }
             else
             {

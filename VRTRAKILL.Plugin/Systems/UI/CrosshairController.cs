@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Plugin.Systems.Guns;
 using VRTRAKILL.Utilities;
+using Plugin.Data;
 
 namespace Plugin.Systems.UI
 {

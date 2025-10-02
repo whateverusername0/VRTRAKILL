@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using Plugin.Data;
 using VRTRAKILL.Utilities;
 
 namespace Plugin.Systems.VRAvatar.Patches

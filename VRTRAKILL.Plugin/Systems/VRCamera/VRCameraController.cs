@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Plugin.Systems.Input;
 using Valve.VR.InteractionSystem;
 using Valve.VR;
+using Plugin.Data;
 
 namespace Plugin.Systems.VRCamera
 {

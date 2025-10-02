@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.IO;
-using Plugin.Systems;
+using Plugin.Data;
 
 namespace Plugin.Prefs
 {

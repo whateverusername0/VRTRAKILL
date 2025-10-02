@@ -1,5 +1,5 @@
 ﻿using HarmonyLib;
-using Plugin.Systems;
+using Plugin.Data;
 using UnityEngine;
 
 namespace Plugin.Patches.ULTRAKILL.Weapons;

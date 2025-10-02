@@ -15,7 +15,7 @@ namespace Plugin.Systems.Movement.Patches
                     __instance.PlayerRideEnd();
                     return false;
                 }
-                Vector2 vector = Input.InputVars.MoveVector;
+                Vector2 vector = Plugin.Data.InputVars.MoveVector;
                 __instance.transform.Rotate(vector.y * Time.deltaTime * 165f, vector.x * Time.deltaTime * 165f, 0f, Space.Self);
                 if (Physics.Raycast(__instance.transform.position + __instance.transform.forward, __instance.transform.up, 4f, LayerMaskDefaults.Get(LMD.Environment)))
                 {

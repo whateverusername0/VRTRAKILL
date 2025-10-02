@@ -2,8 +2,7 @@
 using UnityEngine;
 using Sandbox.Arm;
 using ULTRAKILL.Cheats;
-using Plugin.Systems;
-using Plugin.Systems.Input;
+using Plugin.Data;
 
 namespace Plugin.Patches.ULTRAKILL;
 

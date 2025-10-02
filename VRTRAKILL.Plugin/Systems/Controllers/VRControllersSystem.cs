@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Plugin.Data;
+using UnityEngine;
 using Valve.VR;
 using VRTRAKILL.Utilities;
 

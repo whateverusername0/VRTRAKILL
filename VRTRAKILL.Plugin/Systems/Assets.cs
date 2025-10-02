@@ -48,7 +48,7 @@ namespace Plugin.Systems
         {
             T Asset = Bundle.LoadAsset<T>($"{PathToPrefab}/{PrefabName}");
             if (Asset != null) return Asset;
-            else { Systems.Vars.Log.LogError($"Failed to load {PrefabName}."); return null; }
+            else { Plugin.Data.Vars.Log.LogError($"Failed to load {PrefabName}."); return null; }
         }
         public static AssetBundle LoadBundle(string BundleName, string Path = null)
         {

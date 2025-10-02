@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 using UnityEngine;
-using Plugin.Systems.Input;
+using Plugin.Data;
 
 namespace Plugin.Systems.Guns.Patches
 {

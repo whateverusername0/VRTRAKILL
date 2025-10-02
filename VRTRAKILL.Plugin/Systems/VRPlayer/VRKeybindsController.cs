@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Plugin.Data;
+using UnityEngine;
 
 namespace Plugin.Systems.VRPlayer
 {

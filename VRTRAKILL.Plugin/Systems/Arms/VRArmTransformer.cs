@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Plugin.Systems.VRAvatar.Armature;
+using Plugin.Data;
 
 namespace Plugin.Systems.Arms;
 

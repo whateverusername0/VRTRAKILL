@@ -2,6 +2,7 @@
 using UnityEngine;
 using Plugin.Systems.VRAvatar.Armature;
 using Plugin.Systems.Arms;
+using Plugin.Data;
 
 namespace Plugin.Systems.Guns.Patches;
 
