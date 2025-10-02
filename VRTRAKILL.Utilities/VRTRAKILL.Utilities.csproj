@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <LangVersion>10</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -97,7 +98,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Libraries\EZSoftBone.cs" />
+    <Compile Include="Libraries\EZSoftBone\EZCurveRectAttribute.cs" />
+    <Compile Include="Libraries\EZSoftBone\EZNestedEditorAttribute.cs" />
+    <Compile Include="Libraries\EZSoftBone\EZSoftBoneCollider.cs" />
+    <Compile Include="Libraries\EZSoftBone\EZSoftBoneColliderBase.cs" />
+    <Compile Include="Libraries\EZSoftBone\EZSoftBoneColliderCylinder.cs" />
+    <Compile Include="Libraries\EZSoftBone\EZSoftBoneForce.cs" />
+    <Compile Include="Libraries\EZSoftBone\EZSoftBoneForceField.cs" />
+    <Compile Include="Libraries\EZSoftBone\EZSoftBoneMaterial.cs" />
+    <Compile Include="Libraries\EZSoftBone\EZSoftBoneUtility.cs" />
+    <Compile Include="WindowsInputMap.cs" />
+    <Compile Include="Libraries\EZSoftBone\EZSoftBone.cs" />
     <Compile Include="Libraries\WindowsInput\IInputDeviceStateAdaptor.cs" />
     <Compile Include="Libraries\WindowsInput\IInputMessageDispatcher.cs" />
     <Compile Include="Libraries\WindowsInput\IInputSimulator.cs" />
@@ -123,7 +134,10 @@
     <Compile Include="Libraries\WindowsInput\WindowsInputMessageDispatcher.cs" />
     <Compile Include="Patcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Unity.cs" />
+    <Compile Include="UnityExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Libraries\EZSoftBone\COPYRIGHT.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
