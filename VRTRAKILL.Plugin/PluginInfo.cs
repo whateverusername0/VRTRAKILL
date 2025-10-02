@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace Plugin
+namespace VRTRAKILL
 {
     public static class PluginInfo
     {

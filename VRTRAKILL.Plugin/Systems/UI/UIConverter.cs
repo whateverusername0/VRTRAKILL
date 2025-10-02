@@ -1,10 +1,10 @@
-﻿using Plugin.Data;
-using Plugin.Systems.Controllers;
+﻿using VRTRAKILL.Data;
+using VRTRAKILL.Systems.Controllers;
 using UnityEngine;
 using UnityEngine.UI;
 using VRTRAKILL.Utilities;
 
-namespace Plugin.Systems.UI
+namespace VRTRAKILL.Systems.UI
 {
     // mostly "borrowed" from huskvr
     internal class UIConverter

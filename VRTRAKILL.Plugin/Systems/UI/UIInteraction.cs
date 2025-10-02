@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Plugin.Systems.UI
+namespace VRTRAKILL.Systems.UI
 {
     // "borrowed" from huskvr, ty you pretty
     internal class UIInteraction : MonoBehaviour

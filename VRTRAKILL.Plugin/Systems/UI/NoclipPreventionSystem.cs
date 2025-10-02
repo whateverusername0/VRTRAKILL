@@ -1,9 +1,9 @@
-﻿using Plugin.Data;
+﻿using VRTRAKILL.Data;
 using ULTRAKILL.Cheats;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Plugin.Systems.UI;
+namespace VRTRAKILL.Systems.UI;
 
 internal sealed class NoclipPreventionSystem : MonoBehaviour
 {

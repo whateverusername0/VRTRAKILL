@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 
-namespace Plugin.Systems.Patches
+namespace VRTRAKILL.Systems.Patches
 {
     
     [HarmonyPatch(typeof(NewMovement))] internal class PlayerP

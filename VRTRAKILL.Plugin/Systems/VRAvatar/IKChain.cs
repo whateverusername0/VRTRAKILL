@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Plugin.Systems.VRAvatar
+namespace VRTRAKILL.Systems.VRAvatar
 {
     // code from.. uh.. i frogot.
     internal class IKChain : MonoBehaviour

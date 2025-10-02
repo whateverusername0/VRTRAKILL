@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Plugin.Systems.VRAvatar
+namespace VRTRAKILL.Systems.VRAvatar
 {
     [RequireComponent(typeof(VRigController))]
     internal class AvatarSizeAdjustor : MonoBehaviour

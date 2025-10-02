@@ -1,9 +1,9 @@
 ﻿using HarmonyLib;
-using Plugin.Data;
-using Plugin.Systems.VRAvatar;
+using VRTRAKILL.Data;
+using VRTRAKILL.Systems.VRAvatar;
 using UnityEngine;
 
-namespace Plugin.Patches.ULTRAKILL.Weapons;
+namespace VRTRAKILL.Patches.ULTRAKILL.Weapons;
 
 [HarmonyPatch(typeof(RocketLauncher))] internal class PatchRocketLauncher
 {

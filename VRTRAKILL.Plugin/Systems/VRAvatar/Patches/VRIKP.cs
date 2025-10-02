@@ -1,8 +1,8 @@
 ﻿using HarmonyLib;
-using Plugin.Data;
+using VRTRAKILL.Data;
 using VRTRAKILL.Utilities;
 
-namespace Plugin.Systems.VRAvatar.Patches
+namespace VRTRAKILL.Systems.VRAvatar.Patches
 {
     [HarmonyPatch] internal class VRIKP
     {

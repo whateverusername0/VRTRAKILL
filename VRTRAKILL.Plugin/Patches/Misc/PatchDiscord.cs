@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 
-namespace Plugin.Patches.Misc;
+namespace VRTRAKILL.Patches.Misc;
 
 // contains necessary patches (and not so necessary)
 [HarmonyPatch] internal sealed class PatchDiscord

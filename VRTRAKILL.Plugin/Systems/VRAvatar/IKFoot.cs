@@ -1,7 +1,7 @@
-﻿using Plugin.Data;
+﻿using VRTRAKILL.Data;
 using UnityEngine;
 
-namespace Plugin.Systems.VRAvatar
+namespace VRTRAKILL.Systems.VRAvatar
 {
     internal class IKFoot : MonoBehaviour
     {

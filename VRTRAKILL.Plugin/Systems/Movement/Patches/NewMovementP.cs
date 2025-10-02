@@ -1,9 +1,9 @@
 ﻿using HarmonyLib;
 using ULTRAKILL.Cheats;
 using UnityEngine;
-using Plugin.Data;
+using VRTRAKILL.Data;
 
-namespace Plugin.Systems.Movement.Patches
+namespace VRTRAKILL.Systems.Movement.Patches
 {
     [HarmonyPatch(typeof(NewMovement))] internal sealed class NewMovementP
     {

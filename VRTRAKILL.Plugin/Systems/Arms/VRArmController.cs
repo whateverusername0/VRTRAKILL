@@ -1,8 +1,8 @@
 ﻿using VRTRAKILL.Utilities;
 using UnityEngine;
-using Plugin.Data;
+using VRTRAKILL.Data;
 
-namespace Plugin.Systems.Arms;
+namespace VRTRAKILL.Systems.Arms;
 
 internal class VRArmController : VRArmControllerBase
 {

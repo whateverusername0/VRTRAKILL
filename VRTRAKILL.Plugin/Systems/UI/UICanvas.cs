@@ -1,7 +1,7 @@
-﻿using Plugin.Data;
+﻿using VRTRAKILL.Data;
 using UnityEngine;
 
-namespace Plugin.Systems.UI
+namespace VRTRAKILL.Systems.UI
 {
     // "borrowed" from huskvr
     internal sealed class UICanvas : MonoBehaviour

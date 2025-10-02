@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 
-namespace Plugin.Systems.Input.ControlMessages
+namespace VRTRAKILL.Systems.Input.ControlMessages
 {
     [HarmonyPatch] internal static class Patches
     {

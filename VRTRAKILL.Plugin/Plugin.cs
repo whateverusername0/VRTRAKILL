@@ -2,44 +2,41 @@
 using BepInEx.Logging;
 using UnityEngine;
 using Valve.VR;
-using Plugin.Systems;
+using VRTRAKILL.Systems;
 using VRTRAKILL.Utilities;
-using Plugin.Data;
+using VRTRAKILL.Data;
 
-namespace Plugin
+namespace VRTRAKILL;
+
+[BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
+public sealed partial class Plugin : BaseUnityPlugin
 {
-    // note: i will NEVER use transpilers IN THIS LIFETIME!! OVER MY DEAD BODY!!
+    internal static ManualLogSource Log { get; private set; }
 
-    [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
-    public sealed partial class Plugin : BaseUnityPlugin
+    public void Awake()
     {
-        internal static ManualLogSource Log { get; private set; }
+        Log = Logger;
+        Debug.unityLogger.filterLogType = LogType.Warning;
 
-        public void Awake()
+        Prefs.ConfigMaster.Init();
+        PatchStuff();
+        SceneWorker.Init();
+
+        InitializeSteamVR();
+    }
+
+    private void PatchStuff()
+    {
+        new Patcher(new HarmonyLib.Harmony(PluginInfo.PLUGIN_GUID))
         {
-            Log = Logger;
-            Debug.unityLogger.filterLogType = LogType.Warning;
+            Log = Vars.Log,
+        }.PatchAll();
+    }
 
-            Prefs.ConfigMaster.Init();
-            PatchStuff();
-            SceneWorker.Init();
-
-            InitializeSteamVR();
-        }
-
-        private void PatchStuff()
-        {
-            new Patcher(new HarmonyLib.Harmony(PluginInfo.PLUGIN_GUID))
-            {
-                Log = Vars.Log,
-            }.PatchAll();
-        }
-
-        private void InitializeSteamVR()
-        {
-            SteamVR_Actions.PreInitialize();
-            SteamVR.Initialize();
-            Systems.Input.SVRActionsManager.Init();
-        }
+    private void InitializeSteamVR()
+    {
+        SteamVR_Actions.PreInitialize();
+        SteamVR.Initialize();
+        Systems.Input.SVRActionsManager.Init();
     }
 }

@@ -2,9 +2,9 @@
 using UnityEngine;
 using Sandbox.Arm;
 using ULTRAKILL.Cheats;
-using Plugin.Data;
+using VRTRAKILL.Data;
 
-namespace Plugin.Patches.ULTRAKILL;
+namespace VRTRAKILL.Patches.ULTRAKILL;
 
 [HarmonyPatch] internal sealed class PatchSandboxArm
 {

@@ -1,8 +1,8 @@
 ﻿using VRTRAKILL.Utilities;
 using UnityEngine;
-using Plugin.Data;
+using VRTRAKILL.Data;
 
-namespace Plugin.Systems.Controllers
+namespace VRTRAKILL.Systems.Controllers
 {
     public class VRGunsSystem : MonoSingleton<VRGunsSystem>
     {

@@ -1,11 +1,11 @@
 ﻿using HarmonyLib;
-using Plugin.Data;
-using Plugin.Systems;
-using Plugin.Systems.Controllers;
+using VRTRAKILL.Data;
+using VRTRAKILL.Systems;
+using VRTRAKILL.Systems.Controllers;
 using UnityEngine;
 using Valve.VR;
 
-namespace Plugin.Patches.Controllers;
+namespace VRTRAKILL.Patches.Controllers;
 
 [HarmonyPatch(typeof(NewMovement))] internal sealed class PatchControllerAdder
 {

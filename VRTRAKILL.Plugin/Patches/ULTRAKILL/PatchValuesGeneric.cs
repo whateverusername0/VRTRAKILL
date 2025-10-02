@@ -1,8 +1,8 @@
 ﻿using HarmonyLib;
-using Plugin.Data;
+using VRTRAKILL.Data;
 using System.Collections.Generic;
 
-namespace Plugin.Patches.ULTRAKILL;
+namespace VRTRAKILL.Patches.ULTRAKILL;
 
 [HarmonyPatch] internal class PatchValuesGeneric
 {

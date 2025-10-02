@@ -1,13 +1,13 @@
 ﻿using HarmonyLib;
-using Plugin.Data;
-using Plugin.Systems.Input;
+using VRTRAKILL.Data;
+using VRTRAKILL.Systems.Input;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 using ULTRAKILL.Cheats;
 using UnityEngine;
 
-namespace Plugin.Patches.ULTRAKILL.Movement;
+namespace VRTRAKILL.Patches.ULTRAKILL.Movement;
 
 [HarmonyPatch(typeof(NewMovement))] internal class PatchNewMovement
 {

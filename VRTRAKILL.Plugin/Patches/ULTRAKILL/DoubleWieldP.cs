@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 
-namespace Plugin.Systems.Guns.Patches
+namespace VRTRAKILL.Systems.Guns.Patches
 {
     // Dual wielding has this funny bug where it makes third, fourth guns far far away and it looks cool but no
     [HarmonyPatch(typeof(DualWieldPickup))] internal class DoubleWieldP

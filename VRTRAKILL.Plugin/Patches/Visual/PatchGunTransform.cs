@@ -1,10 +1,10 @@
 ﻿using HarmonyLib;
 using UnityEngine;
-using Plugin.Systems.VRAvatar.Armature;
-using Plugin.Systems.Arms;
-using Plugin.Data;
+using VRTRAKILL.Systems.VRAvatar.Armature;
+using VRTRAKILL.Systems.Arms;
+using VRTRAKILL.Data;
 
-namespace Plugin.Systems.Guns.Patches;
+namespace VRTRAKILL.Systems.Guns.Patches;
 
 [HarmonyPatch] internal class PatchGunTransform
 {

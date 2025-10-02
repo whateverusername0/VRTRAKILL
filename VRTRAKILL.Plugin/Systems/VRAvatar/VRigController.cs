@@ -1,11 +1,11 @@
-﻿using Plugin.Systems.Controllers;
+﻿using VRTRAKILL.Systems.Controllers;
 using VRTRAKILL.Utilities;
 using UnityEngine;
 using Valve.VR;
-using Plugin.Data;
+using VRTRAKILL.Data;
 using VRTRAKILL.Utilities.Libraries;
 
-namespace Plugin.Systems.VRAvatar
+namespace VRTRAKILL.Systems.VRAvatar
 {
     // the NewMovement of the player's avatar
     internal class VRigController : MonoBehaviour

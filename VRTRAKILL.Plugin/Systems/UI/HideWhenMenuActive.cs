@@ -1,7 +1,7 @@
-﻿using Plugin.Data;
+﻿using VRTRAKILL.Data;
 using UnityEngine;
 
-namespace Plugin.Systems.UI
+namespace VRTRAKILL.Systems.UI
 {
     internal class HideWhenMenuActive : MonoBehaviour
     {

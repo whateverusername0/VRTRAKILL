@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System.IO;
-using Plugin.Data;
+using VRTRAKILL.Data;
 
-namespace Plugin.Prefs
+namespace VRTRAKILL.Prefs
 {
     public class ConfigJSON
     {

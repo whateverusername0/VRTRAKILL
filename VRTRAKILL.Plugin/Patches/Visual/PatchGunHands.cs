@@ -1,8 +1,8 @@
 ﻿using HarmonyLib;
-using Plugin.Systems;
+using VRTRAKILL.Systems;
 using UnityEngine;
 
-namespace Plugin.Patches.Visual;
+namespace VRTRAKILL.Patches.Visual;
 
 [HarmonyPatch] internal sealed class PatchGunHands
 {

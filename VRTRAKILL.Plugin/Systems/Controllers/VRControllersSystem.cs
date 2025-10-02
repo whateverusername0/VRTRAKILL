@@ -1,9 +1,9 @@
-﻿using Plugin.Data;
+﻿using VRTRAKILL.Data;
 using UnityEngine;
 using Valve.VR;
 using VRTRAKILL.Utilities;
 
-namespace Plugin.Systems.Controllers
+namespace VRTRAKILL.Systems.Controllers
 {
     // lol the name
     public class VRControllersSystem : MonoBehaviour

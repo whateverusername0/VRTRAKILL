@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using Plugin.Systems.VRAvatar.Armature;
-using Plugin.Data;
+using VRTRAKILL.Systems.VRAvatar.Armature;
+using VRTRAKILL.Data;
 
-namespace Plugin.Systems.Arms;
+namespace VRTRAKILL.Systems.Arms;
 
 internal class VRArmTransformer : MonoBehaviour
 {

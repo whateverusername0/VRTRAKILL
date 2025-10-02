@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 
-namespace Plugin.Systems.Movement.Patches
+namespace VRTRAKILL.Systems.Movement.Patches
 {
     // ClimbStep fix (make you climb stairs like a real machine)
     [HarmonyPatch(typeof(ClimbStep))] internal class ClimbStepP

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using Plugin.Util;
-using Plugin.Data;
+using VRTRAKILL.Util;
+using VRTRAKILL.Data;
 
-namespace Plugin.Systems.VRCamera
+namespace VRTRAKILL.Systems.VRCamera
 {
     internal class DesktopCamera : MonoBehaviour
     {

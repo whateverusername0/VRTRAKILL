@@ -2,9 +2,9 @@
 using UnityEngine.UI;
 using HarmonyLib;
 using VRTRAKILL.Utilities;
-using Plugin.Data;
+using VRTRAKILL.Data;
 
-namespace Plugin.Systems.UI.Patches
+namespace VRTRAKILL.Systems.UI.Patches
 {
     [HarmonyPatch] internal class HUDOptionsP
     {

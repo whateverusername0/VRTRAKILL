@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
-using Plugin.Systems.VRAvatar.Armature;
-using Plugin.Data;
+using VRTRAKILL.Systems.VRAvatar.Armature;
+using VRTRAKILL.Data;
 
 #pragma warning disable IDE1006 // Naming Styles
-namespace Plugin.Systems.VRAvatar
+namespace VRTRAKILL.Systems.VRAvatar
 {
     internal class MetaRig
     {

@@ -1,11 +1,11 @@
 ﻿using HarmonyLib;
-using Plugin.Data;
-using Plugin.Systems.Arms;
-using Plugin.Systems.VRAvatar.Armature;
+using VRTRAKILL.Data;
+using VRTRAKILL.Systems.Arms;
+using VRTRAKILL.Systems.VRAvatar.Armature;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Plugin.Patches.ULTRAKILL;
+namespace VRTRAKILL.Patches.ULTRAKILL;
 
 [HarmonyPatch(typeof(Punch))] internal sealed class PatchPunch
 {

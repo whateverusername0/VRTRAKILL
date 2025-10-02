@@ -2,9 +2,9 @@
 using UnityEngine.SceneManagement;
 using System.Reflection;
 using VRTRAKILL.Utilities;
-using Plugin.Data;
+using VRTRAKILL.Data;
 
-namespace Plugin.Systems
+namespace VRTRAKILL.Systems
 {
     // does what needs to be done before anything else
     internal static class SceneWorker

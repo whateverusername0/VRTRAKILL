@@ -1,10 +1,10 @@
 ﻿using HarmonyLib;
-using Plugin.Data;
+using VRTRAKILL.Data;
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 
-namespace Plugin.Patches.Controllers;
+namespace VRTRAKILL.Patches.Controllers;
 
 [HarmonyPatch(typeof(RumbleManager))] internal sealed class PatchControllerHaptics
 {

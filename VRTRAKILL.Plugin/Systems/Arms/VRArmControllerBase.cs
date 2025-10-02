@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using Plugin.Systems.VRAvatar.Armature;
+using VRTRAKILL.Systems.VRAvatar.Armature;
 
-namespace Plugin.Systems.Arms;
+namespace VRTRAKILL.Systems.Arms;
 
 internal class VRArmControllerBase : MonoBehaviour
 {

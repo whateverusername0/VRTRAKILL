@@ -1,8 +1,8 @@
 ﻿using HarmonyLib;
-using Plugin.Data;
+using VRTRAKILL.Data;
 using UnityEngine;
 
-namespace Plugin.Patches.ULTRAKILL.Weapons;
+namespace VRTRAKILL.Patches.ULTRAKILL.Weapons;
 
 [HarmonyPatch(typeof(Nailgun))] internal class PatchNailgun
 {

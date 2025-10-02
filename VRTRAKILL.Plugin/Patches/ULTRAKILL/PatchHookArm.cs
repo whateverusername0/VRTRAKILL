@@ -1,10 +1,10 @@
 ﻿using HarmonyLib;
 using UnityEngine;
-using Plugin.Systems.Arms;
-using Plugin.Systems.VRAvatar.Armature;
-using Plugin.Data;
+using VRTRAKILL.Systems.Arms;
+using VRTRAKILL.Systems.VRAvatar.Armature;
+using VRTRAKILL.Data;
 
-namespace Plugin.Patches.ULTRAKILL;
+namespace VRTRAKILL.Patches.ULTRAKILL;
 
 [HarmonyPatch(typeof(HookArm))] internal sealed class PatchHookArm
 {

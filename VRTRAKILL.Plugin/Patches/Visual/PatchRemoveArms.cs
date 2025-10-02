@@ -1,10 +1,10 @@
 ﻿using HarmonyLib;
-using Plugin.Data;
-using Plugin.Systems.Arms;
+using VRTRAKILL.Data;
+using VRTRAKILL.Systems.Arms;
 using Sandbox.Arm;
 using System;
 
-namespace Plugin.Patches.Visual;
+namespace VRTRAKILL.Patches.Visual;
 
 // Removes hands from revolver & shotgun
 [HarmonyPatch] internal class PatchRemoveArms

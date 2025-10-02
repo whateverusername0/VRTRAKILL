@@ -3,7 +3,7 @@ using WindowsInput.Native;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Plugin.Systems.Input
+namespace VRTRAKILL.Systems.Input
 {
     // Converts config strings into keycodes
     public static class InputMap

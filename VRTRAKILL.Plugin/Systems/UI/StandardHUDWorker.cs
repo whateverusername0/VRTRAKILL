@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Plugin.Systems.UI
+namespace VRTRAKILL.Systems.UI
 {
     internal class StandardHUDWorker : MonoBehaviour
     {

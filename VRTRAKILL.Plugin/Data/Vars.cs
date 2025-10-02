@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Plugin.Data;
+namespace VRTRAKILL.Data;
 
 public static class Vars
 {

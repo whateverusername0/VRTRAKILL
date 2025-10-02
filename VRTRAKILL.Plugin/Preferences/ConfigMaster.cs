@@ -1,12 +1,12 @@
 ﻿using System;
 using WindowsInput;
 using WindowsInput.Native;
-using Plugin.Systems.Input;
+using VRTRAKILL.Systems.Input;
 using UnityEngine.InputSystem.Utilities;
 using UnityEngine.InputSystem;
-using Plugin.Data;
+using VRTRAKILL.Data;
 
-namespace Plugin.Prefs
+namespace VRTRAKILL.Prefs
 {
     public sealed class ConfigMaster
     {

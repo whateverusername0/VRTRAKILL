@@ -2,7 +2,7 @@
 using UnityEngine;
 using Valve.VR;
 
-namespace Plugin.Patches.Misc;
+namespace VRTRAKILL.Patches.Misc;
 
 [HarmonyPatch] internal static class PatchSteamVR
 {

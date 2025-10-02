@@ -2,9 +2,9 @@
 using System.Collections;
 using Valve.VR.InteractionSystem;
 using Valve.VR;
-using Plugin.Data;
+using VRTRAKILL.Data;
 
-namespace Plugin.Systems.VRCamera
+namespace VRTRAKILL.Systems.VRCamera
 {
     internal class VRCameraController : MonoSingleton<VRCameraController>
     {

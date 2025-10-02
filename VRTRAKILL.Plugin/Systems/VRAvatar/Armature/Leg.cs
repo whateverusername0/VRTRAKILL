@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Plugin.Systems.VRAvatar.Armature
+namespace VRTRAKILL.Systems.VRAvatar.Armature
 {
     internal class Leg
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Plugin.Systems
+namespace VRTRAKILL.Systems
 {
     // check manifests in VRTRAKILL/AssetBundles to know which one is which
     internal static class Assets

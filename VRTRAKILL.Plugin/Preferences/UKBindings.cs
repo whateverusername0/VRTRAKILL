@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace Plugin.Prefs
+namespace VRTRAKILL.Prefs
 {
     /// <summary>
     /// Represents the Binds.json file located in ULTRAKILL\\Preferences\\Binds.json

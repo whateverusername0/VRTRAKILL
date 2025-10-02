@@ -1,7 +1,7 @@
-﻿using Plugin.Data;
+﻿using VRTRAKILL.Data;
 using UnityEngine;
 
-namespace Plugin.Systems.VRPlayer
+namespace VRTRAKILL.Systems.VRPlayer
 {
     // acts as many things in one
     public class VRKeybindsController : MonoSingleton<VRKeybindsController>

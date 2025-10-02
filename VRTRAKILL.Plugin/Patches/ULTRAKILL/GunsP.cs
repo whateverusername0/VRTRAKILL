@@ -1,8 +1,8 @@
 ﻿using HarmonyLib;
 using UnityEngine;
-using Plugin.Data;
+using VRTRAKILL.Data;
 
-namespace Plugin.Systems.Guns.Patches
+namespace VRTRAKILL.Systems.Guns.Patches
 {
     [HarmonyPatch] internal sealed class GunsP
     {

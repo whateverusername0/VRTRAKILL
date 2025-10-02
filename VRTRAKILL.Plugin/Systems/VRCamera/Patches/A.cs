@@ -1,4 +1,4 @@
-﻿namespace Plugin.Systems.VRCamera.Patches
+﻿namespace VRTRAKILL.Systems.VRCamera.Patches
 {
     internal class A { /* This is a. Placeholder. For use in namespaces. Do not remove me. */ }
 }

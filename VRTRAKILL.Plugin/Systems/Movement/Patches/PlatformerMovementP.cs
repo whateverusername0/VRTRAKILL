@@ -1,9 +1,9 @@
 ﻿using HarmonyLib;
-using Plugin.Data;
+using VRTRAKILL.Data;
 using ULTRAKILL.Cheats;
 using UnityEngine;
 
-namespace Plugin.Systems.Movement.Patches
+namespace VRTRAKILL.Systems.Movement.Patches
 {
     // change move vector to joystick axis, fix dash, jump, etc.
     // CHANGE THIS

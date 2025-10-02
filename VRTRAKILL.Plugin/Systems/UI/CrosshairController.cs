@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
-using Plugin.Systems.Guns;
+using VRTRAKILL.Systems.Guns;
 using VRTRAKILL.Utilities;
-using Plugin.Data;
+using VRTRAKILL.Data;
 
-namespace Plugin.Systems.UI
+namespace VRTRAKILL.Systems.UI
 {
     /// <summary> Controls the behavior of player's crosshair. </summary>
     internal class CrosshairController : MonoBehaviour

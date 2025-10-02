@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 
-namespace Plugin.Systems.UI.Patches
+namespace VRTRAKILL.Systems.UI.Patches
 {
     [HarmonyPatch] internal class CrosshairP
     {

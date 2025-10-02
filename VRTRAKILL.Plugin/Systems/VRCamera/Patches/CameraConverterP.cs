@@ -1,10 +1,10 @@
 ﻿using HarmonyLib;
-using Plugin.Data;
+using VRTRAKILL.Data;
 using UnityEngine;
 using UnityEngine.XR;
 
 using Valve.VR;
-namespace Plugin.Systems.VRCamera.Patches
+namespace VRTRAKILL.Systems.VRCamera.Patches
 {
     [HarmonyPatch] public class CameraConverterP
     {

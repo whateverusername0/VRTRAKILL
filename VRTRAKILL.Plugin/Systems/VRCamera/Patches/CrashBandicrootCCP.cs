@@ -4,7 +4,7 @@ using UnityEngine.XR;
 
 using Valve.VR;
 
-namespace Plugin.Systems.VRCamera.Patches
+namespace VRTRAKILL.Systems.VRCamera.Patches
 {
     [HarmonyPatch] internal class CrashBandicrootCCP
     {

@@ -2,10 +2,10 @@
 using Valve.VR;
 using WindowsInput;
 using WindowsInput.Native;
-using Plugin.Prefs;
-using Plugin.Data;
+using VRTRAKILL.Prefs;
+using VRTRAKILL.Data;
 
-namespace Plugin.Systems.Input
+namespace VRTRAKILL.Systems.Input
 {
     internal static class SVRActionsManager
     {
