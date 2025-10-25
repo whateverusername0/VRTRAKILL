@@ -53,12 +53,12 @@ namespace VRTRAKILL.Systems.VRAvatar
         public Transform Leg_IKPole_Right { get; private set; }
         #endregion
 
-        public static MetaRig VCustomPreset(Transform T)
+        public static MetaRig VCustomPreset(Transform t)
         {
             MetaRig MR = new MetaRig
             {
-                GameObjectT = T, // V1
-                Root = T.GetChild(1) // Armature
+                GameObjectT = t, // V1
+                Root = t.GetChild(1) // Armature
             };
             MR.Body = MR.Root.GetChild(0).GetChild(0).GetChild(0); // Body
             MR.Abdomen = MR.Body.GetChild(0); // Abdomen
@@ -78,20 +78,10 @@ namespace VRTRAKILL.Systems.VRAvatar
             MR._RWhiplash = Arm.MRWhiplashPreset(MR.RShoulder.GetChild(2));
             MR._RSandboxer = Arm.MRSandboxerPreset(MR.RShoulder.GetChild(3));
 
-            if (Vars.Config.Controllers.LeftHanded)
-            {
-                MR.FeedbackerA = MR._RFeedbacker; MR.FeedbackerB = MR._LFeedbacker;
-                MR.Knuckleblaster = MR._RKnuckleblaster;
-                MR.Whiplash = MR._RWhiplash;
-                MR.Sandboxer = MR._LSandboxer;
-            }
-            else
-            {
-                MR.FeedbackerA = MR._LFeedbacker; MR.FeedbackerB = MR._RFeedbacker;
-                MR.Knuckleblaster = MR._LKnuckleblaster;
-                MR.Whiplash = MR._LWhiplash;
-                MR.Sandboxer = MR._RSandboxer;
-            }
+            MR.FeedbackerA = MR._LFeedbacker; MR.FeedbackerB = MR._RFeedbacker;
+            MR.Knuckleblaster = MR._LKnuckleblaster;
+            MR.Whiplash = MR._LWhiplash;
+            MR.Sandboxer = MR._RSandboxer;
 
             MR.Pelvis = MR.Root.GetChild(0).GetChild(0).GetChild(1);
             MR.LeftLeg = Leg.MRPreset(MR.Root.GetChild(0).GetChild(0).GetChild(1).GetChild(0));
@@ -105,10 +95,10 @@ namespace VRTRAKILL.Systems.VRAvatar
             MR.Leg_IKPole_Right = MR.Root.GetChild(0).GetChild(0).GetChild(1).GetChild(5);
             return MR;
         }
-        public static MetaRig CreateVCustomPreset(GameObject Parent, string Name = null)
+        public static MetaRig CreateVCustomPreset(Transform parent, string name = null)
         {
-            GameObject V1mdlGO = Object.Instantiate(Assets.VRig, Parent.transform, true);
-            if (Name != null) V1mdlGO.name = Name;
+            var V1mdlGO = Object.Instantiate(Assets.VRig, parent, true);
+            if (name != null) V1mdlGO.name = name;
             return VCustomPreset(V1mdlGO.transform);
         }
     }

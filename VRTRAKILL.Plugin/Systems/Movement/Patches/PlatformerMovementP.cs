@@ -18,7 +18,7 @@ namespace VRTRAKILL.Systems.Movement.Patches
             Vector2 vector = Vector2.zero;
             if (__instance.activated)
             {
-                vector = Plugin.Data.InputVars.MoveVector * Vars.Config.MovementMultiplier;
+                vector = Plugin.Data.InputVars.MoveVector * Vars.Config.UpdateMultiplier;
                 __instance.movementDirection = Vector3.ClampMagnitude(vector.x * Vector3.right + vector.y * Vector3.forward, 1f);
                 __instance.movementDirection = Quaternion.Euler(0f, __instance.platformerCamera.rotation.eulerAngles.y, 0f) * __instance.movementDirection;
             }
@@ -88,9 +88,9 @@ namespace VRTRAKILL.Systems.Movement.Patches
                     __instance.boost = true;
                     __instance.anim.Play("Dash", -1, 0f);
 
-                    __instance.dodgeDirection = __instance.movementDirection.normalized * Vars.Config.MovementMultiplier;
+                    __instance.dodgeDirection = __instance.movementDirection.normalized * Vars.Config.UpdateMultiplier;
                     if (__instance.dodgeDirection == Vector3.zero)
-                        __instance.dodgeDirection = __instance.playerModel.forward * Vars.Config.MovementMultiplier;
+                        __instance.dodgeDirection = __instance.playerModel.forward * Vars.Config.UpdateMultiplier;
 
                     Quaternion identity = Quaternion.identity;
                     identity.SetLookRotation(__instance.dodgeDirection * -1f);

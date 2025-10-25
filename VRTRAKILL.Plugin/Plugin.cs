@@ -27,6 +27,7 @@ public sealed partial class Plugin : BaseUnityPlugin
 
     private void PatchStuff()
     {
+        // just patch everything at this point. nobody is looking at the settings anyway.
         new Patcher(new HarmonyLib.Harmony(PluginInfo.PLUGIN_GUID))
         {
             Log = Vars.Log,
@@ -36,7 +37,9 @@ public sealed partial class Plugin : BaseUnityPlugin
     private void InitializeSteamVR()
     {
         SteamVR_Actions.PreInitialize();
-        SteamVR.Initialize();
+        SteamVR.Initialize(true);
+        Log.LogMessage($"SteamVR Active: {SteamVR.active}, Connected: {SteamVR.initializedState}");
+
         Systems.Input.SVRActionsManager.Init();
     }
 }

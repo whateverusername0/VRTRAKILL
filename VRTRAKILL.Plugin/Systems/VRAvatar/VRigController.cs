@@ -1,9 +1,8 @@
 ﻿using VRTRAKILL.Systems.Controllers;
 using VRTRAKILL.Utilities;
 using UnityEngine;
-using Valve.VR;
 using VRTRAKILL.Data;
-using VRTRAKILL.Utilities.Libraries;
+using VRTRAKILL.Utilities.Libraries.EZSoftBone;
 
 namespace VRTRAKILL.Systems.VRAvatar
 {
@@ -45,7 +44,7 @@ namespace VRTRAKILL.Systems.VRAvatar
             Rig.Root.GetChild(0).localPosition = new Vector3(0, -.015f, -.001f);
 
 
-            if (Vars.Config.VRBody.EnableArmsIK)
+            if (Vars.Config.Avatar.DrawArms)
             {
                 Armature.Arm[] LArms =
                 {
@@ -53,7 +52,7 @@ namespace VRTRAKILL.Systems.VRAvatar
                     Rig._LWhiplash, Rig._LSandboxer,
                 };
                 foreach (Armature.Arm Arm in LArms)
-                    AddIK(Arm.Hand.Root.gameObject, VRArmsSystem.Instance.CC.ArmOffset.transform, Pole: Rig.Arm_IKPole_Left);
+                    AddIK(Arm.Hand.Root.gameObject, VRArmsSystem.Instance.CC.ArmOffset, Pole: Rig.Arm_IKPole_Left);
 
                 Armature.Arm[] RArms =
                 {
@@ -61,10 +60,10 @@ namespace VRTRAKILL.Systems.VRAvatar
                     Rig._RWhiplash, Rig._RSandboxer,
                 };
                 foreach (Armature.Arm Arm in RArms)
-                    AddIK(Arm.Hand.Root.gameObject, VRGunsSystem.Instance.CC.ArmOffset.transform, Pole: Rig.Arm_IKPole_Right);
+                    AddIK(Arm.Hand.Root.gameObject, VRGunsSystem.Instance.CC.ArmOffset, Pole: Rig.Arm_IKPole_Right);
             }
 
-            if (Vars.Config.VRBody.EnableLegsIK)
+            if (Vars.Config.Avatar.DrawLegs)
             {
                 Anim = Rig.GameObjectT.GetComponent<Animator>();
                 AddIK(Rig.LeftLegIK.Foot.gameObject, Rig.LeftLeg.Foot, Pole: Rig.Leg_IKPole_Left);
@@ -116,7 +115,7 @@ namespace VRTRAKILL.Systems.VRAvatar
             HandleHead();
             HandleArms();
             HandleWings();
-            if (Vars.Config.VRBody.EnableLegsIK)
+            if (Vars.Config.Avatar.DrawLegs)
             {
                 HandleAnimations();
                 HandlePelvisRotation();
@@ -127,14 +126,14 @@ namespace VRTRAKILL.Systems.VRAvatar
         private void HandleBodyTransform()
         {
             // Smooth body's position and rotation towards the camera
-            Rig.Root.position = Vector3.Lerp(Rig.Root.position, Vars.MainCamera.transform.position, Time.deltaTime * 10f);
-            Quaternion Rotation = Quaternion.Lerp(Rig.Abdomen.rotation, Vars.MainCamera.transform.rotation, Time.deltaTime * 2.5f);
+            Rig.Root.position = Vector3.Lerp(Rig.Root.position, Vars.MainCamera.position, Time.deltaTime * 10f);
+            Quaternion Rotation = Quaternion.Lerp(Rig.Abdomen.rotation, Vars.MainCamera.rotation, Time.deltaTime * 2.5f);
             Rig.Root.rotation = Quaternion.Euler(0, Rotation.eulerAngles.y, 0);
         }
         private void HandleHead()
         {
-            Rig.Head.GetChild(0).position = Vars.MainCamera.transform.position;
-            Rig.Head.GetChild(0).eulerAngles = Vars.MainCamera.transform.eulerAngles;
+            Rig.Head.GetChild(0).position = Vars.MainCamera.position;
+            Rig.Head.GetChild(0).eulerAngles = Vars.MainCamera.eulerAngles;
         }
         private void HandleArms()
         {
@@ -236,7 +235,7 @@ namespace VRTRAKILL.Systems.VRAvatar
             // this exists because my foot placement logic does not want to work *horizontally*
             Vector3 Direction = new Vector3(-NewMovement.Instance.rb.velocity.z, 0, NewMovement.Instance.rb.velocity.x);
             Quaternion Rotation = Quaternion.Euler(0, Quaternion.LookRotation(Direction, Vector3.up).eulerAngles.y + 90, 0);
-            if (Plugin.Data.InputVars.MoveVector.y < 0) Rotation = Quaternion.Euler(0, -Rotation.eulerAngles.y - 180, 0);
+            if (InputVars.MoveVector.y < 0) Rotation = Quaternion.Euler(0, -Rotation.eulerAngles.y - 180, 0);
             Rig.Pelvis.rotation = Quaternion.Lerp(Rig.Pelvis.rotation, Rotation, Time.deltaTime * 5);
         }
 

@@ -56,7 +56,6 @@ namespace VRTRAKILL.Prefs
         public static void Init()
         {
             ConvertJSONToKeys(Vars.Config.UKBinds);
-            ConvertJSONToKeys(Vars.Config.VRBinds);
         }
 
         private static void ConvertJSONToKeys(UKBindings.ModifiedActions Binds)
@@ -116,19 +115,6 @@ namespace VRTRAKILL.Prefs
                 InputMap.KeysM.TryGetValue(Binds.Slot8[0].Path, out MSlot8);
                 InputMap.KeysM.TryGetValue(Binds.Slot9[0].Path, out MSlot9);
                 #endregion
-            }
-            catch (Exception)
-            {
-                Vars.Log.LogError("Unable to convert keys in config. Perhaps mismatch? Perhaps keys are null?" +
-                                  "Check spelling and replace every null key either with \"\", \"Empty\" or assign a value to it.");
-            }
-        }
-        private static void ConvertJSONToKeys(NewConfig._VRBinds VRConfig)
-        {
-            try
-            {
-                InputMap.UKeys.TryGetValue(VRConfig.ToggleDV, out ToggleDesktopView);
-                InputMap.UKeys.TryGetValue(VRConfig.ToggleAvatarSizeAdj, out ToggleAvatarSizeAdj);
             }
             catch (Exception)
             {

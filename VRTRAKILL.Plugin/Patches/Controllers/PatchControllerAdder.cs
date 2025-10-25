@@ -20,7 +20,7 @@ namespace VRTRAKILL.Patches.Controllers;
         LCon.RenderModelOffsetEulerAngles = new Vector3(75, 0, 0);
         LCon.RenderModelOffsetScale = new Vector3(.65f, .65f, .65f);
 
-        LHGO.transform.parent = Vars.VRCameraContainer.transform;
+        LHGO.transform.parent = Vars.VRCameraContainer;
 
         GameObject RHGO = CreateController("Right Controller", SteamVR_Input_Sources.RightHand);
 
@@ -29,7 +29,7 @@ namespace VRTRAKILL.Patches.Controllers;
         RCon.RenderModelOffsetEulerAngles = new Vector3(75, 0, 0);
         RCon.RenderModelOffsetScale = new Vector3(-.65f, .65f, .65f);
 
-        RHGO.transform.parent = Vars.VRCameraContainer.transform;
+        RHGO.transform.parent = Vars.VRCameraContainer;
 
         if (Vars.Config.Controllers.DrawControllers)
         {
@@ -40,16 +40,8 @@ namespace VRTRAKILL.Patches.Controllers;
             RHMGO.transform.parent = RHGO.transform;
         }
 
-        if (Vars.Config.Controllers.LeftHanded)
-        {
-            RHGO.AddComponent<VRArmsSystem>();
-            LHGO.AddComponent<VRGunsSystem>();
-        }
-        else
-        {
-            LHGO.AddComponent<VRArmsSystem>();
-            RHGO.AddComponent<VRGunsSystem>();
-        }
+        LHGO.AddComponent<VRArmsSystem>();
+        RHGO.AddComponent<VRGunsSystem>();
 
         __instance.gameObject.SetActive(true);
     }
@@ -80,25 +72,15 @@ namespace VRTRAKILL.Patches.Controllers;
         Transform T;
         if (Source == SteamVR_Input_Sources.LeftHand)
         {
-            if (Vars.Config.Controllers.LeftHanded)
-            {
-                T = Object.Instantiate(Assets.Controller_D).transform;
-                SandboxRM = Object.Instantiate(Assets.Controller_D_Sandbox);
-            }
-            else T = Object.Instantiate(Assets.Controller_ND).transform;
+            T = Object.Instantiate(Assets.Controller_ND).transform;
             T.parent = GO.transform;
             T.localPosition = Vector3.zero;
         }
         else if (Source == SteamVR_Input_Sources.RightHand)
         {
 
-            if (Vars.Config.Controllers.LeftHanded)
-                T = Object.Instantiate(Assets.Controller_ND).transform;
-            else
-            {
-                T = Object.Instantiate(Assets.Controller_D).transform;
-                SandboxRM = Object.Instantiate(Assets.Controller_D_Sandbox);
-            }
+            T = Object.Instantiate(Assets.Controller_D).transform;
+            SandboxRM = Object.Instantiate(Assets.Controller_D_Sandbox);
             T.parent = GO.transform;
             T.localPosition = Vector3.zero;
         }

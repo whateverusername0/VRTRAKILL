@@ -6,12 +6,14 @@ using Valve.VR;
 
 namespace VRTRAKILL.Patches.Controllers;
 
-[HarmonyPatch(typeof(RumbleManager))] internal sealed class PatchControllerHaptics
+[HarmonyPatch(typeof(RumbleManager))] internal class PatchRumbleManager
 {
-    static readonly SteamVR_Action_Vibration HapticAction = SteamVR_Actions._default.Haptic;
+    private static readonly SteamVR_Action_Vibration HapticAction = SteamVR_Actions._default.Haptic;
 
     // I can't believe it worked first try without any corrections.
-    [HarmonyPrefix] [HarmonyPatch(nameof(RumbleManager.Update))] static bool Update(RumbleManager __instance)
+    // TODO fix (LOL)
+    [HarmonyPrefix] [HarmonyPatch(nameof(RumbleManager.Update))]
+    private static bool Update(RumbleManager __instance)
     {
         __instance.discardedKeys.Clear();
         foreach (KeyValuePair<RumbleKey, PendingVibration> pendingVibration in __instance.pendingVibrations)
@@ -42,11 +44,12 @@ namespace VRTRAKILL.Patches.Controllers;
 
         return false;
     }
+
     [HarmonyPrefix]
     [HarmonyPatch(nameof(RumbleManager.OnDisable))]
     [HarmonyPatch(nameof(RumbleManager.StopVibration))]
     [HarmonyPatch(nameof(RumbleManager.StopAllVibrations))]
-    static bool DisableRumble()
+    private static bool DisableRumble()
     {
         Vibrate(1, 0, 0, 0);
         return false;
@@ -54,7 +57,7 @@ namespace VRTRAKILL.Patches.Controllers;
 
     // Number 7:
     public static void Vibrate(float Duration, float Frequency, float Amplitude, SteamVR_Input_Sources Source)
-    { HapticAction.Execute(0, Duration, Frequency, Amplitude, Source); }
+        => HapticAction.Execute(0, Duration, Frequency, Amplitude, Source);
 
     public static SteamVR_Input_Sources ResolveController(string Key)
     {

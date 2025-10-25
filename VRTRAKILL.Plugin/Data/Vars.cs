@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using BepInEx.Logging;
+using UnityEngine;
+using VRTRAKILL.Prefs;
 
 namespace VRTRAKILL.Data;
 
 public static class Vars
 {
-    public static Prefs.NewConfig Config => Prefs.ConfigJSON.GetConfig().Config;
-    public static BepInEx.Logging.ManualLogSource Log => Plugin.Log;
+    public static VrtrakillConfigJSON Config => ConfigJSON.Instance.Config;
+    public static ManualLogSource Log => Plugin.Log;
 
     #region Checks n' Shits
     public static bool IsMainMenu
@@ -23,35 +25,29 @@ public static class Vars
     #endregion
 
     #region Cameras
-    public static GameObject VRCameraContainer
-        => Systems.VRCamera.Patches.CameraConverterP.Container;
-    private static Camera _MainCamera; public static Camera MainCamera
-    {
-        get
-        {
-            if (_MainCamera == null)
-            {
-                _MainCamera = GameObject.FindGameObjectWithTag("MainCamera")?.gameObject.GetComponent<Camera>();
-                return _MainCamera;
-            }
-            else return _MainCamera;
-        }
-    }
+    public static Transform VRCameraContainer
+        => Systems.VRCamera.Patches.CameraConverterP.Container.transform;
+
+    public static Transform MainCamera
+        => Camera.main.transform;
+
     public static Camera UICamera
         => Systems.UI.UIConverter.UICamera;
-    public static Camera DesktopCamera
-        => Systems.VRCamera.Patches.CameraConverterP.DesktopWorldCam;
-    public static Camera DesktopUICamera
-        => Systems.VRCamera.Patches.CameraConverterP.DesktopUICam;
+
+    public static GameObject DesktopCamera
+        => Systems.VRCamera.Patches.CameraConverterP.DesktopWorldCam.gameObject;
+
+    public static GameObject DesktopUICamera
+        => Systems.VRCamera.Patches.CameraConverterP.DesktopUICam.gameObject;
     #endregion
 
     #region Controllers
-    public static GameObject NonDominantHand
-        => Systems.Controllers.VRArmsSystem.Instance.GunOffset;
+    public static Transform NonDominantHand
+        => Systems.Controllers.VRArmsSystem.Instance.GunOffset.transform;
     public static Systems.Controllers.VRArmsSystem NDHC
         => Systems.Controllers.VRArmsSystem.Instance;
-    public static GameObject DominantHand
-        => Systems.Controllers.VRGunsSystem.Instance.GunOffset;
+    public static Transform DominantHand
+        => Systems.Controllers.VRGunsSystem.Instance.GunOffset.transform;
     public static Systems.Controllers.VRGunsSystem DHC
         => Systems.Controllers.VRGunsSystem.Instance;
     #endregion

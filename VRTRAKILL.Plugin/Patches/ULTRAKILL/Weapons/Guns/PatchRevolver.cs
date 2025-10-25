@@ -2,7 +2,7 @@
 using VRTRAKILL.Data;
 using UnityEngine;
 
-namespace VRTRAKILL.Patches.ULTRAKILL.Weapons;
+namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
 
 [HarmonyPatch(typeof(Revolver))] internal class PatchRevolver
 {
@@ -11,14 +11,14 @@ namespace VRTRAKILL.Patches.ULTRAKILL.Weapons;
     {
         __instance.shootReady = false;
         __instance.shootCharge = 0f;
-        if (__instance.altVersion) MonoSingleton<WeaponCharges>.Instance.revaltpickupcharges[__instance.gunVariation] = 2f;
-        var altShootPos = Vars.DominantHand.transform.position + (Vars.DominantHand.transform.forward * 1.25f) + new Vector3(0, .035f, 0);
+        if (__instance.altVersion) WeaponCharges.Instance.revaltpickupcharges[__instance.gunVariation] = 2f;
+        var altShootPos = Vars.DominantHand.position + (Vars.DominantHand.forward * 1.25f) + new Vector3(0, .035f, 0);
 
         switch (shotType)
         {
             case 1:
                 {
-                    GameObject gameObject2 = Object.Instantiate(__instance.revolverBeam, Vars.DominantHand.transform.position, Vars.DominantHand.transform.rotation);
+                    GameObject gameObject2 = Object.Instantiate(__instance.revolverBeam, Vars.DominantHand.position, Vars.DominantHand.rotation);
                     if ((bool)__instance.targeter.CurrentTarget && __instance.targeter.IsAutoAimed)
                         gameObject2.transform.LookAt(__instance.targeter.CurrentTarget.bounds.center);
 
@@ -34,12 +34,12 @@ namespace VRTRAKILL.Patches.ULTRAKILL.Weapons;
                     __instance.gunAud.volume = 0.55f;
                     __instance.gunAud.pitch = Random.Range(0.9f, 1.1f);
                     __instance.gunAud.Play();
-                    MonoSingleton<RumbleManager>.Instance.SetVibrationTracked(RumbleProperties.GunFire, __instance.gameObject);
+                    RumbleManager.Instance.SetVibrationTracked(RumbleProperties.GunFire, __instance.gameObject);
                     break;
                 }
             case 2:
                 {
-                    GameObject gameObject = Object.Instantiate(__instance.revolverBeamSuper, Vars.DominantHand.transform.position, Vars.DominantHand.transform.rotation);
+                    GameObject gameObject = Object.Instantiate(__instance.revolverBeamSuper, Vars.DominantHand.position, Vars.DominantHand.rotation);
                     if ((bool)__instance.targeter.CurrentTarget && __instance.targeter.IsAutoAimed)
                     {
                         gameObject.transform.LookAt(__instance.targeter.CurrentTarget.bounds.center);
@@ -76,7 +76,7 @@ namespace VRTRAKILL.Patches.ULTRAKILL.Weapons;
 
                     if (__instance.gunVariation == 2 && (bool)__instance.twirlShotSound)
                         Object.Instantiate(__instance.twirlShotSound, __instance.transform.position, Quaternion.identity);
-                    MonoSingleton<RumbleManager>.Instance.SetVibrationTracked(RumbleProperties.GunFireStrong, __instance.gameObject);
+                    RumbleManager.Instance.SetVibrationTracked(RumbleProperties.GunFireStrong, __instance.gameObject);
                     break;
                 }
         }
@@ -97,32 +97,24 @@ namespace VRTRAKILL.Patches.ULTRAKILL.Weapons;
     private static bool ThrowCoin(Revolver __instance)
     {
         if (__instance.punch == null || !__instance.punch.gameObject.activeInHierarchy)
-            __instance.punch = MonoSingleton<FistControl>.Instance.currentPunch;
+            __instance.punch = FistControl.Instance.currentPunch;
 
         if ((bool)__instance.punch) __instance.punch.CoinFlip();
 
         GameObject obj;
-        if (Vars.Config.EnableMBP)
-            obj = Object.Instantiate(__instance.coin,
-                                     Vars.NonDominantHand.transform.position + Vars.NonDominantHand.transform.up * -.5f,
-                                     Vars.NonDominantHand.transform.rotation);
-        else if (Vars.Config.EnableCBS)
-            obj = Object.Instantiate(__instance.coin,
-                                     Vars.DominantHand.transform.position + Vars.DominantHand.transform.up * -.5f,
-                                     Vars.DominantHand.transform.rotation);
-        else obj = Object.Instantiate(__instance.coin,
-                                      __instance.camObj.transform.position + __instance.camObj.transform.up * -0.5f,
-                                      __instance.camObj.transform.rotation);
+        obj = Object.Instantiate(__instance.coin,
+            Vars.NonDominantHand.position + Vars.NonDominantHand.up * -.5f,
+            Vars.NonDominantHand.rotation);
 
         obj.GetComponent<Coin>().sourceWeapon = __instance.gc.currentWeapon;
 
-        MonoSingleton<RumbleManager>.Instance.SetVibration(RumbleProperties.CoinToss);
+        RumbleManager.Instance.SetVibration(RumbleProperties.CoinToss);
 
         Vector3 zero = Vector3.zero;
-        obj.GetComponent<Rigidbody>().AddForce(Vars.DominantHand.transform.forward * 20f + Vector3.up * 15f
-                                               + (MonoSingleton<NewMovement>.Instance.ridingRocket
-                                                  ? MonoSingleton<NewMovement>.Instance.ridingRocket.rb.velocity
-                                                  : MonoSingleton<NewMovement>.Instance.rb.velocity) + zero,
+        obj.GetComponent<Rigidbody>().AddForce(Vars.DominantHand.forward * 20f + Vector3.up * 15f
+            + (NewMovement.Instance.ridingRocket
+            ? NewMovement.Instance.ridingRocket.rb.velocity
+            : NewMovement.Instance.rb.velocity) + zero,
                                                ForceMode.VelocityChange);
         __instance.pierceCharge = 0f;
         __instance.pierceReady = false;

@@ -2,53 +2,55 @@
 using System.IO;
 using VRTRAKILL.Data;
 
-namespace VRTRAKILL.Prefs
+namespace VRTRAKILL.Prefs;
+
+public class ConfigJSON
 {
-    public class ConfigJSON
+    [JsonProperty("VRTRAKILL Settings")] public VrtrakillConfigJSON Config { get; set; }
+
+    private static ConfigJSON _instance { get; set; }
+    public static ConfigJSON Instance
     {
-        [JsonProperty("VRTRAKILL Settings")] public NewConfig Config { get; set; }
-
-        public static ConfigJSON Instance { get; set; }
-
-        public ConfigJSON()
+        get
         {
-            Config = new NewConfig();
+            if (_instance == null) _instance = Deserialize();
+            return _instance;
         }
+    }
 
-        public static ConfigJSON GetConfig()
-        {
-            if (Instance == null) Instance = Deserialize();
-            return Instance;
-        }
+    public ConfigJSON()
+    {
+        Config = new VrtrakillConfigJSON();
+    }
 
-        public static ConfigJSON Deserialize()
+    public static ConfigJSON Deserialize()
+    {
+        try
         {
-            try
-            {
-                string Temp = File.ReadAllText(ConfigMaster.ConfigPath);
-                ConfigJSON Config = JsonConvert.DeserializeObject<ConfigJSON>(Temp);
-                return Config;
-            }
-            catch (FileNotFoundException)
-            {
-                Vars.Log.LogError("Unable to find VRTRAKILL_Config.json.\n" +
-                                     "Generating a new one. Please quit the game and fill it out.\n" +
-                                     "Starting up using default settings.");
-                Serialize(new ConfigJSON()); return new ConfigJSON();
-            }
-            catch (JsonException)
-            {
-                Vars.Log.LogError("Something went wrong when trying to read VRTRAKILL_Config.json\n" +
-                                     "Please fix any typos, formatting errors, etc.\n" +
-                                     "Or delete the config and let it generate once more.\n" +
-                                     "Starting up using default settings.");
-                return new ConfigJSON();
-            }
+            string Temp = File.ReadAllText(ConfigMaster.ConfigPath);
+            ConfigJSON Config = JsonConvert.DeserializeObject<ConfigJSON>(Temp);
+            return Config;
         }
-        public static void Serialize(ConfigJSON Config)
+        catch (FileNotFoundException)
         {
-            string JSON = JsonConvert.SerializeObject(Config, Formatting.Indented);
-            File.WriteAllText(ConfigMaster.ConfigPath, JSON);
+            Vars.Log.LogError("Unable to find VRTRAKILL_Config.json.\n" +
+                              "Generating a new one. Please quit the game and fill it out.\n" +
+                              "Starting up using default settings.");
+            Serialize(new ConfigJSON()); return new ConfigJSON();
         }
+        catch (JsonException)
+        {
+            Vars.Log.LogError("Something went wrong when trying to read VRTRAKILL_Config.json\n" +
+                              "Please fix any typos, formatting errors, etc.\n" +
+                              "Or delete the config and let it generate once more.\n" +
+                              "Starting up using default settings.");
+            return new ConfigJSON();
+        }
+    }
+
+    public static void Serialize(ConfigJSON Config)
+    {
+        string JSON = JsonConvert.SerializeObject(Config, Formatting.Indented);
+        File.WriteAllText(ConfigMaster.ConfigPath, JSON);
     }
 }

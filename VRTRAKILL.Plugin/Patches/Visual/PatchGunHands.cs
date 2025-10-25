@@ -4,15 +4,16 @@ using UnityEngine;
 
 namespace VRTRAKILL.Patches.Visual;
 
-[HarmonyPatch] internal sealed class PatchGunHands
+[HarmonyPatch] internal class PatchGunHands
 {
-    [HarmonyPatch(typeof(Shotgun))] static class ShotgunH
+    [HarmonyPatch(typeof(Shotgun))] internal class TransformShotgun
     {
-        static Vector3 Position = new Vector3(-.5f, -.95f, -.45f),
-                       Rotation = new Vector3(0, 180, 0),
-                       Scale    = new Vector3(1500, 1500, 1500);
+        static Vector3 Position = new(-.5f, -.95f, -.45f),
+                       Rotation = new(0, 180, 0),
+                       Scale    = new(1500, 1500, 1500);
 
-        [HarmonyPostfix] [HarmonyPatch(nameof(Shotgun.Start))] static void AddHand(Shotgun __instance)
+        [HarmonyPostfix] [HarmonyPatch(nameof(Shotgun.Start))]
+        private static void Start(Shotgun __instance)
         {
             Transform Hand = Object.Instantiate(Assets.HandPose_Shotgun.transform);
             // Shotgun ******(Clone)/ShogunNewAnims/GunArmature/MainBone
@@ -26,16 +27,18 @@ namespace VRTRAKILL.Patches.Visual;
             Hand.GetChild(1).GetChild(0).localScale = Scale;
         }
     }
-    [HarmonyPatch(typeof(Nailgun))] static class NailgunH
-    {
-        static Vector3 Position    = new Vector3(-.0008f, -.0053f, .0003f),
-                       Rotation    = new Vector3(0, 180, 0),
-                       Scale       = new Vector3(.035f, .035f, .035f),
-                       AltPosition = new Vector3(.001f, -.006f, .002f),
-                       AltRotation = new Vector3(0, 0, 0),
-                       AltScale    = new Vector3(3.5f, 3.5f, 3.5f);
 
-        [HarmonyPostfix] [HarmonyPatch(nameof(Nailgun.Start))] static void AddHand(Nailgun __instance)
+    [HarmonyPatch(typeof(Nailgun))] internal class NailgunH
+    {
+        static Vector3 Position    = new(-.0008f, -.0053f, .0003f),
+                       Rotation    = new(0, 180, 0),
+                       Scale       = new(.035f, .035f, .035f),
+                       AltPosition = new(.001f, -.006f, .002f),
+                       AltRotation = new(0, 0, 0),
+                       AltScale    = new(3.5f, 3.5f, 3.5f);
+
+        [HarmonyPostfix] [HarmonyPatch(nameof(Nailgun.Start))]
+        private static void Start(Nailgun __instance)
         {
             // Nailgun ******(Clone)/Nailgun New New/Armature/Main
             // Sawblade Launcher ******(Clone)/Sawblade Launcher/Armature/Base
@@ -61,13 +64,15 @@ namespace VRTRAKILL.Patches.Visual;
             }
         }
     }
-    [HarmonyPatch(typeof(Railcannon))] static class RailgunH
-    {
-        static Vector3 Position = new Vector3(-.1f, -.325f, -.025f),
-                       Rotation = new Vector3(30, 180, 0),
-                       Scale    = new Vector3(350, 350, 350);
 
-        [HarmonyPostfix] [HarmonyPatch(nameof(Railcannon.Start))] static void AddHand(Railcannon __instance)
+    [HarmonyPatch(typeof(Railcannon))] internal class RailgunH
+    {
+        static Vector3 Position = new(-.1f, -.325f, -.025f),
+                       Rotation = new(30, 180, 0),
+                       Scale    = new(350, 350, 350);
+
+        [HarmonyPostfix] [HarmonyPatch(nameof(Railcannon.Start))]
+        private static void Start(Railcannon __instance)
         {
             Transform Hand = Object.Instantiate(Assets.HandPose_Railgun.transform);
             // Railcannon ******(Clone)/Railgun/Armature/Base

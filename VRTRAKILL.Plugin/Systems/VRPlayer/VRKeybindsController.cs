@@ -31,12 +31,12 @@ namespace VRTRAKILL.Systems.VRPlayer
 
         public void ToggleDesktopView()
         {
-            if (!Vars.DesktopCamera.gameObject.activeSelf) Vars.DesktopCamera.gameObject.SetActive(true);
-            else Vars.DesktopCamera.gameObject.SetActive(false);
+            if (!Vars.DesktopCamera.activeSelf) Vars.DesktopCamera.SetActive(true);
+            else Vars.DesktopCamera.SetActive(false);
 
-            if (!Vars.DesktopUICamera.gameObject.activeSelf) Vars.DesktopUICamera.gameObject.SetActive(true);
-            else if (Vars.DesktopUICamera.gameObject.activeSelf)
-                Vars.DesktopUICamera.gameObject.SetActive(false);
+            if (!Vars.DesktopUICamera.activeSelf) Vars.DesktopUICamera.SetActive(true);
+            else if (Vars.DesktopUICamera.activeSelf)
+                Vars.DesktopUICamera.SetActive(false);
         }
     }
 }

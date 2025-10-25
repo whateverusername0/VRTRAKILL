@@ -2,7 +2,7 @@
 using VRTRAKILL.Data;
 using UnityEngine;
 
-namespace VRTRAKILL.Patches.ULTRAKILL.Weapons;
+namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
 
 [HarmonyPatch(typeof(Vacuum))]
 internal class PatchVacuum

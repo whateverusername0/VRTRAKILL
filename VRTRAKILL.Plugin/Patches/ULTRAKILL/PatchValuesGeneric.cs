@@ -9,7 +9,7 @@ namespace VRTRAKILL.Patches.ULTRAKILL;
     /// <summary>
     ///     See <see cref="PlayerInput"/> or <see cref="InputActions"/> for reference.
     /// </summary>
-    private static Dictionary<string, object> Pairs = new()
+    private static readonly Dictionary<string, object> _pairs = new()
     {
         { nameof(InputActions.MovementActions.Move), InputVars.MoveVector }
     };
@@ -18,10 +18,10 @@ namespace VRTRAKILL.Patches.ULTRAKILL;
     private static bool ReadValue<T>(InputActionState __instance, ref T __result) where T : struct
     {
         var name = __instance.Action.name;
-        if (!Pairs.ContainsKey(name))
+        if (!_pairs.ContainsKey(name))
             return true;
 
-        __result = (T)Pairs[name];
+        __result = (T)_pairs[name];
         return false;
     }
 }

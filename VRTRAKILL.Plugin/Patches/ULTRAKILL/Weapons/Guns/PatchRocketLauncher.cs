@@ -3,7 +3,7 @@ using VRTRAKILL.Data;
 using VRTRAKILL.Systems.VRAvatar;
 using UnityEngine;
 
-namespace VRTRAKILL.Patches.ULTRAKILL.Weapons;
+namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
 
 [HarmonyPatch(typeof(RocketLauncher))] internal class PatchRocketLauncher
 {

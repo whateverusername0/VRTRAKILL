@@ -14,8 +14,8 @@ namespace VRTRAKILL.Patches.ULTRAKILL.Movement;
     [HarmonyPatch(nameof(NewMovement.Start))]
     private static void Start(NewMovement __instance)
     {
-        __instance.walkSpeed *= Vars.Config.MovementMultiplier;
-        __instance.jumpPower *= Vars.Config.MovementMultiplier;
-        __instance.wallJumpPower *= Vars.Config.MovementMultiplier;
+        __instance.walkSpeed *= Vars.Config.UpdateMultiplier;
+        __instance.jumpPower *= Vars.Config.UpdateMultiplier;
+        __instance.wallJumpPower *= Vars.Config.UpdateMultiplier;
     }
 }
