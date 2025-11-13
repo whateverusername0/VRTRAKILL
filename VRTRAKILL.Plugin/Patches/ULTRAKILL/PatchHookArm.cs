@@ -6,7 +6,7 @@ using VRTRAKILL.Data;
 
 namespace VRTRAKILL.Patches.ULTRAKILL;
 
-[HarmonyPatch(typeof(HookArm))] internal sealed class PatchHookArm
+[HarmonyPatch(typeof(HookArm))] internal static class PatchHookArm
 {
     [HarmonyPostfix] [HarmonyPatch(nameof(HookArm.Start))]
     static void Start(HookArm __instance)

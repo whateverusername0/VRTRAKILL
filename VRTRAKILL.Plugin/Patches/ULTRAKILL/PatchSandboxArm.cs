@@ -3,12 +3,24 @@ using UnityEngine;
 using Sandbox.Arm;
 using ULTRAKILL.Cheats;
 using VRTRAKILL.Data;
+using VRTRAKILL.Systems.Arms;
+using VRTRAKILL.Systems.VRAvatar.Armature;
 
 namespace VRTRAKILL.Patches.ULTRAKILL;
 
-[HarmonyPatch] internal sealed class PatchSandboxArm
+[HarmonyPatch] internal static class PatchSandboxArm
 {
-    [HarmonyPrefix] [HarmonyPatch(typeof(SandboxArm), nameof(SandboxArm.Update))] static bool Update(SandboxArm __instance)
+    [HarmonyPostfix] [HarmonyPatch(nameof(SandboxArm.Awake))]
+    static void Transform(SandboxArm __instance)
+    {
+        VRArmController DAC = __instance.gameObject.AddComponent<VRArmController>();
+        Arm A = Arm.SandboxerPreset(__instance.transform);
+        DAC.Arm = A; DAC.OffsetPos = new(-.15f, -.3f, -.55f);
+        __instance.transform.localScale = new(-.275f, .275f, .275f);
+    }
+
+    [HarmonyPrefix] [HarmonyPatch(typeof(SandboxArm), nameof(SandboxArm.Update))]
+    static bool Update(SandboxArm __instance)
     {
         if (Time.timeScale == 0f)
         {
@@ -53,7 +65,9 @@ namespace VRTRAKILL.Patches.ULTRAKILL;
         __instance.currentMode?.Update();
         return false;
     }
-    [HarmonyPrefix] [HarmonyPatch(typeof(MoveMode), nameof(MoveMode.Update))] static bool Move(MoveMode __instance)
+
+    [HarmonyPrefix] [HarmonyPatch(typeof(MoveMode), nameof(MoveMode.Update))]
+    static bool UpdateMove(MoveMode __instance)
     {
         __instance.IntegrityCheck();
         if (__instance.manipulatedObject == null) return false;
@@ -108,7 +122,9 @@ namespace VRTRAKILL.Patches.ULTRAKILL;
         __instance.manipulatedObject.distance = Mathf.Max(0f, __instance.manipulatedObject.distance);
         return false;
     }
-    [HarmonyPrefix] [HarmonyPatch(typeof(BuildMode), nameof(BuildMode.Update))] static bool Build(BuildMode __instance)
+
+    [HarmonyPrefix] [HarmonyPatch(typeof(BuildMode), nameof(BuildMode.Update))]
+    static bool UpdateBuild(BuildMode __instance)
     {
         if (__instance.tickDelay > 0f) __instance.tickDelay = Mathf.MoveTowards(__instance.tickDelay, 0f, Time.deltaTime);
 

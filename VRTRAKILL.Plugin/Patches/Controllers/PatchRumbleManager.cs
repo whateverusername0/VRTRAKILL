@@ -1,68 +1,48 @@
 ﻿using HarmonyLib;
 using VRTRAKILL.Data;
-using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
+using System.Linq;
 
 namespace VRTRAKILL.Patches.Controllers;
 
-[HarmonyPatch(typeof(RumbleManager))] internal class PatchRumbleManager
+[HarmonyPatch(typeof(RumbleManager))] internal static class PatchRumbleManager
 {
-    private static readonly SteamVR_Action_Vibration HapticAction = SteamVR_Actions._default.Haptic;
+    static readonly SteamVR_Action_Vibration HapticAction = SteamVR_Actions._default.Haptic;
+    static SteamVR_Input_Sources _nonDomHand => Vars.NDHC.GetComponent<SteamVR_Behaviour_Pose>().inputSource;
+    static SteamVR_Input_Sources _domHand => Vars.DHC.GetComponent<SteamVR_Behaviour_Pose>().inputSource;
 
-    // I can't believe it worked first try without any corrections.
-    // TODO fix (LOL)
-    [HarmonyPrefix] [HarmonyPatch(nameof(RumbleManager.Update))]
-    private static bool Update(RumbleManager __instance)
+    [HarmonyPostfix] [HarmonyPatch(nameof(RumbleManager.Update))]
+    static void Update(RumbleManager __instance)
     {
-        __instance.discardedKeys.Clear();
-        foreach (KeyValuePair<RumbleKey, PendingVibration> pendingVibration in __instance.pendingVibrations)
-        {
-            if (pendingVibration.Value.isTracking && (pendingVibration.Value.trackedObject == null || !pendingVibration.Value.trackedObject.activeInHierarchy))
-                __instance.discardedKeys.Add(pendingVibration.Key);
-            else if (pendingVibration.Value.IsFinished)
-                __instance.discardedKeys.Add(pendingVibration.Key);
-        }
+        var any = __instance.pendingVibrations.Max((q) => q.Value.Intensity);
+        var nd = __instance.pendingVibrations.Where((q) => ResolveController(q.Key.name) == _nonDomHand).Max(q => q.Value.Intensity);
+        var d = __instance.pendingVibrations.Where((q) => ResolveController(q.Key.name) == _domHand).Max(q => q.Value.Intensity);
 
-        foreach (RumbleKey discardedKey in __instance.discardedKeys)
-            __instance.pendingVibrations.Remove(discardedKey);
-
-        float num = 0f;
-        SteamVR_Input_Sources source = 0;
-        foreach (KeyValuePair<RumbleKey, PendingVibration> pendingVibration2 in __instance.pendingVibrations)
-            if (pendingVibration2.Value.Intensity > num)
-            {
-                num = pendingVibration2.Value.Intensity;
-                source = ResolveController(pendingVibration2.Key.name);
-            }
-
-        num *= MonoSingleton<PrefsManager>.Instance.GetFloat("totalRumbleIntensity");
-        if ((bool)MonoSingleton<OptionsManager>.Instance && MonoSingleton<OptionsManager>.Instance.paused)
-            num = 0f;
-
-        Vibrate(1, num, num, source);
-
-        return false;
+        if (any > 0) Vibrate(1, any, any, SteamVR_Input_Sources.Any);
+        if (nd > 0) Vibrate(1, nd, nd, _nonDomHand);
+        if (d > 0) Vibrate(1, d, d, _domHand);
     }
 
     [HarmonyPrefix]
     [HarmonyPatch(nameof(RumbleManager.OnDisable))]
     [HarmonyPatch(nameof(RumbleManager.StopVibration))]
     [HarmonyPatch(nameof(RumbleManager.StopAllVibrations))]
-    private static bool DisableRumble()
+    static bool DisableRumble()
     {
         Vibrate(1, 0, 0, 0);
         return false;
     }
 
     // Number 7:
-    public static void Vibrate(float Duration, float Frequency, float Amplitude, SteamVR_Input_Sources Source)
-        => HapticAction.Execute(0, Duration, Frequency, Amplitude, Source);
+    public static void Vibrate(float duration, float frequency, float amplitude, SteamVR_Input_Sources source)
+        => HapticAction.Execute(0, duration, frequency, amplitude, source);
 
-    public static SteamVR_Input_Sources ResolveController(string Key)
+    public static SteamVR_Input_Sources ResolveController(string key)
     {
-        switch (Key)
+        switch (key)
         {
+            case "rumble.parry_flash":
             case "rumble.slide":
             case "rumble.dash":
             case "rumble.fall_impact":
@@ -72,11 +52,10 @@ namespace VRTRAKILL.Patches.Controllers;
                 return SteamVR_Input_Sources.Any;
 
             case "rumble.punch":
-            case "rumble.parry_flash":
             case "rumble.coin_toss":
             case "rumble.whiplash.throw":
             case "rumble.whiplash.pull":
-                return Vars.NDHC.GetComponent<SteamVR_Behaviour_Pose>().inputSource;
+                return _nonDomHand;
 
             case "rumble.gun.fire":
             case "rumble.gun.fire_strong":
@@ -88,10 +67,10 @@ namespace VRTRAKILL.Patches.Controllers;
             case "rumble.gun.sawblade":
             case "rumble.gun.revolver_charge":
             case "rumble.magnet_released":
-                return Vars.DHC.GetComponent<SteamVR_Behaviour_Pose>().inputSource;
+                return _domHand;
 
             default:
-                Debug.LogError("No intensity found for key: " + Key);
+                Debug.LogError("No intensity found for key: " + key);
                 return SteamVR_Input_Sources.Any;
         }
     }

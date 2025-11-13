@@ -4,11 +4,11 @@ using VRTRAKILL.Data;
 
 namespace VRTRAKILL.Patches.ULTRAKILL.Weapons;
 
-[HarmonyPatch(typeof(WeaponWheel))] internal class PatchWeaponWheel
+[HarmonyPatch(typeof(WeaponWheel))] internal static class PatchWeaponWheel
 {
     // Makes weapon wheel act using your controller's joystick input.
-    [HarmonyPrefix] [HarmonyPatch(typeof(WeaponWheel), nameof(WeaponWheel.Update))]
-    private static bool Update(WeaponWheel __instance)
+    [HarmonyPrefix] [HarmonyPatch(nameof(WeaponWheel.Update))]
+    static bool Update(WeaponWheel __instance)
     {
         if (!GunControl.Instance
         || !GunControl.Instance.activated

@@ -7,12 +7,12 @@ using UnityEngine;
 
 namespace VRTRAKILL.Patches.ULTRAKILL;
 
-[HarmonyPatch(typeof(Punch))] internal sealed class PatchPunch
+[HarmonyPatch(typeof(Punch))] internal static class PatchPunch
 {
     public static Vector3 Direction;
 
     [HarmonyPostfix] [HarmonyPatch(nameof(Punch.Start))]
-    private static void Start(Punch __instance)
+    static void Start(Punch __instance)
     {
         Arm A = null;
         switch (__instance.type)
@@ -29,10 +29,9 @@ namespace VRTRAKILL.Patches.ULTRAKILL;
         foreach (SkinnedMeshRenderer SMR in __instance.GetComponentsInChildren<SkinnedMeshRenderer>())
             SMR.updateWhenOffscreen = true;
     }
-
     
     [HarmonyPrefix] [HarmonyPatch(nameof(Punch.Update))]
-    private static bool Update(Punch __instance)
+    static bool Update(Punch __instance)
     {
         if (MonoSingleton<OptionsManager>.Instance.paused)
             return false;
@@ -91,8 +90,9 @@ namespace VRTRAKILL.Patches.ULTRAKILL;
         }
         return false;
     }
+
     [HarmonyPrefix] [HarmonyPatch(nameof(Punch.ActiveFrame))]
-    private static bool ActiveFrame(Punch __instance, bool firstFrame = false)
+    static bool ActiveFrame(Punch __instance, bool firstFrame = false)
     {
         var _i = __instance;
         var nonDomHand = Vars.NDHC.transform;
@@ -401,7 +401,7 @@ namespace VRTRAKILL.Patches.ULTRAKILL;
     }
 
     [HarmonyPrefix] [HarmonyPatch(nameof(Punch.BlastCheck))]
-    private static bool BlastCheck(Punch __instance)
+    static bool BlastCheck(Punch __instance)
     {
         if (MonoSingleton<InputManager>.Instance.InputSource.Punch.IsPressed)
         {
@@ -417,7 +417,7 @@ namespace VRTRAKILL.Patches.ULTRAKILL;
     }
 
     [HarmonyPrefix] [HarmonyPatch(nameof(Punch.GetParryLookTarget))]
-    private static bool GetParryLookTarget(ref Vector3 __result)
+    static bool GetParryLookTarget(ref Vector3 __result)
     {
         Vector3 vector = Vars.NDHC.transform.forward;
         //if ((bool)MonoSingleton<CameraFrustumTargeter>.Instance && (bool)MonoSingleton<CameraFrustumTargeter>.Instance.CurrentTarget && MonoSingleton<CameraFrustumTargeter>.Instance.IsAutoAimed)

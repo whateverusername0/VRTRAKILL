@@ -2,11 +2,20 @@
 using VRTRAKILL.Data;
 using VRTRAKILL.Systems.VRAvatar;
 using UnityEngine;
+using VRTRAKILL.Systems;
 
 namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
 
-[HarmonyPatch(typeof(ShotgunHammer))] internal class PatchShotgunHammer
+[HarmonyPatch(typeof(ShotgunHammer))] internal static class PatchShotgunHammer
 {
+    [HarmonyPostfix] [HarmonyPatch(nameof(ShotgunHammer.OnEnable))]
+    static void Transform(ShotgunHammer __instance)
+    {
+        WeaponTransform.ApplyTransform(ref __instance.wpos, new(0, -.15f, .25f), new(), new(.45f, .45f, .45f));
+        __instance.transform.GetChild(1).localRotation = Quaternion.Euler(0, 180, 0);
+        __instance.gameObject.GetComponent<Animator>().enabled = false;
+    }
+
     [HarmonyPrefix] [HarmonyPatch(nameof(ShotgunHammer.Impact))]
     static bool Impact(ShotgunHammer __instance)
     {
@@ -562,12 +571,16 @@ namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
     }
 
     [HarmonyPostfix] [HarmonyPatch(nameof(ShotgunHammer.LateUpdate))]
-    static void LateUpdate_AddIK(ShotgunHammer __instance)
+    static void LateUpdate(ShotgunHammer __instance)
     {
         if (VRigController.Instance != null)
         {
             __instance.transform.position = VRigController.Instance.Rig.FeedbackerB.Forearm.position;
             __instance.transform.LookAt(VRigController.Instance.Rig.FeedbackerB.Hand.Root.position);
         }
+
+        // despise animator
+        __instance.transform.GetChild(1).GetChild(0).localPosition = new(.375f, .415f, .3f);
+        __instance.transform.GetChild(1).GetChild(0).localEulerAngles = new(60, 0, 0);
     }
 }

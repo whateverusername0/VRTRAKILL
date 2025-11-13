@@ -5,10 +5,10 @@ namespace VRTRAKILL.Patches.ULTRAKILL.Weapons;
 
 // Dual wielding has this bug where it makes third, fourth guns far far away.
 // This patch fixes it.
-[HarmonyPatch(typeof(DualWieldPickup))] internal class PatchDualWieldPickup
+[HarmonyPatch(typeof(DualWieldPickup))] internal static class PatchDualWieldPickup
 {
     [HarmonyPrefix] [HarmonyPatch(nameof(DualWieldPickup.PickedUp))]
-    private static bool FixTransform(DualWieldPickup __instance)
+    static bool FixTransform(DualWieldPickup __instance)
     {
         if (!GunControl.Instance) return false;
 

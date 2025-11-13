@@ -4,10 +4,18 @@ using UnityEngine;
 
 namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
 
-[HarmonyPatch(typeof(Chainsaw))] internal class PatchChainsaw
+[HarmonyPatch(typeof(Chainsaw))] internal static class PatchChainsaw
 {
+    [HarmonyPostfix] [HarmonyPatch(nameof(Chainsaw.Start))]
+    static void Transform(Chainsaw __instance)
+    {
+        __instance.lineStartTransform = GunControl.Instance?.currentWeapon != null
+            ? GunControl.Instance?.currentWeapon.transform
+            : Vars.DominantHand.transform;
+    }
+
     [HarmonyPrefix] [HarmonyPatch(nameof(Chainsaw.Update))]
-    private static bool Update(Chainsaw __instance)
+    static bool Update(Chainsaw __instance)
     {
         __instance.lr.SetPosition(0, Vars.DominantHand.transform.position);
         __instance.lr.SetPosition(1, __instance.transform.position);

@@ -2,13 +2,22 @@
 using VRTRAKILL.Data;
 using VRTRAKILL.Systems.VRAvatar;
 using UnityEngine;
+using VRTRAKILL.Systems;
 
 namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
 
-[HarmonyPatch(typeof(RocketLauncher))] internal class PatchRocketLauncher
+[HarmonyPatch(typeof(RocketLauncher))] internal static class PatchRocketLauncher
 {
+    [HarmonyPostfix] [HarmonyPatch(nameof(RocketLauncher.Start))]
+    static void Transform(RocketLauncher __instance)
+    {
+        WeaponTransform.ApplyTransform(__instance.GetComponent<WeaponPos>(), new(-.3f, .3f, -.1f), new(), new(.65f, .65f, .65f));
+        if (VRigController.Instance != null)
+            __instance.transform.GetChild(0).localPosition = Vector3.zero;
+    }
+
     [HarmonyPrefix] [HarmonyPatch(nameof(RocketLauncher.Shoot))]
-    private static bool Shoot(RocketLauncher __instance)
+    static bool Shoot(RocketLauncher __instance)
     {
         if (__instance.aud)
         {
@@ -39,7 +48,7 @@ namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
     }
 
     [HarmonyPrefix] [HarmonyPatch(nameof(RocketLauncher.ShootCannonball))]
-    private static bool ShootCannonball(RocketLauncher __instance)
+    static bool ShootCannonball(RocketLauncher __instance)
     {
         if (__instance.aud)
         {
@@ -66,7 +75,7 @@ namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
     }
 
     [HarmonyPrefix] [HarmonyPatch(nameof(RocketLauncher.ShootNapalm))]
-    private static bool ShootNapalm(RocketLauncher __instance)
+    static bool ShootNapalm(RocketLauncher __instance)
     {
         __instance.anim.SetTrigger("Spray");
         __instance.napalmProjectileCooldown = 0.02f;
@@ -84,7 +93,7 @@ namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
     }
 
     [HarmonyPostfix] [HarmonyPatch(nameof(RocketLauncher.Update))]
-    private static void Update_AddIK(RocketLauncher __instance)
+    static void Update_AddIK(RocketLauncher __instance)
     {
         if (VRigController.Instance != null)
         {

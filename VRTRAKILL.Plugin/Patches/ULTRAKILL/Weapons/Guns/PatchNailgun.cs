@@ -1,13 +1,45 @@
 ﻿using HarmonyLib;
 using VRTRAKILL.Data;
 using UnityEngine;
+using VRTRAKILL.Systems;
 
 namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
 
-[HarmonyPatch(typeof(Nailgun))] internal class PatchNailgun
+[HarmonyPatch(typeof(Nailgun))] internal static class PatchNailgun
 {
+    [HarmonyPostfix] [HarmonyPatch(nameof(Nailgun.Start))]
+    static void Transform(Nailgun __instance)
+    {
+        if (__instance.altVersion) { WeaponTransform.ApplyTransform(ref __instance.wpos, new(-.165f, .2f, .065f), new(), new(.35f, .35f, .35f)); }
+        else { WeaponTransform.ApplyTransform(ref __instance.wpos, new(-.165f, .1f, .045f), new(), new(.4f, .3275f, .4f)); }
+
+        // add our own hand until hakita decides otherwise.
+        // Nailgun ******(Clone)/Nailgun New New/Armature/Main
+        // Sawblade Launcher ******(Clone)/Sawblade Launcher/Armature/Base
+        if (__instance.altVersion)
+        {
+            Transform Hand = Object.Instantiate(Assets.HandPose_Sawblade.transform);
+            Hand.SetParent(__instance.transform.GetChild(0).GetChild(0).GetChild(0), false);
+            Hand.localPosition = Vector3.zero;
+
+            Hand.GetChild(1).GetChild(0).localPosition = new(.001f, -.006f, .002f);
+            Hand.GetChild(1).GetChild(0).localEulerAngles = new(0, 0, 0);
+            Hand.GetChild(1).GetChild(0).localScale = new(3.5f, 3.5f, 3.5f);
+        }
+        else
+        {
+            Transform Hand = Object.Instantiate(Assets.HandPose_Nailgun.transform);
+            Hand.SetParent(__instance.transform.GetChild(0).GetChild(0).GetChild(0), false);
+            Hand.localPosition = Vector3.zero;
+
+            Hand.localPosition = new(-.0008f, -.0053f, .0003f);
+            Hand.localEulerAngles = new(0, 180, 0);
+            Hand.GetChild(1).GetChild(0).localScale = new(.035f, .035f, .035f);
+        }
+    }
+
     [HarmonyPrefix] [HarmonyPatch(nameof(Nailgun.Shoot))]
-    private static bool Shoot(Nailgun __instance)
+    static bool Shoot(Nailgun __instance)
     {
         __instance.UpdateAnimationWeight();
         __instance.fireCooldown = __instance.currentFireRate;
@@ -113,7 +145,7 @@ namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
     }
 
     [HarmonyPrefix] [HarmonyPatch(nameof(Nailgun.ShootMagnet))]
-    private static bool ShootMagnet(Nailgun __instance)
+    static bool ShootMagnet(Nailgun __instance)
     {
         __instance.UpdateAnimationWeight();
         GameObject gameObject = Object.Instantiate(__instance.magnetNail, Vars.DominantHand.transform.position, __instance.transform.rotation);
@@ -139,7 +171,7 @@ namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
     }
 
     [HarmonyPrefix] [HarmonyPatch(nameof(Nailgun.SuperSaw))]
-    private static bool SuperSaw(Nailgun __instance)
+    static bool SuperSaw(Nailgun __instance)
     {
         __instance.fireCooldown = __instance.currentFireRate;
         __instance.shotSuccesfully = true;
@@ -186,7 +218,7 @@ namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
     }
 
     [HarmonyPrefix] [HarmonyPatch(nameof(Nailgun.ShootZapper))]
-    private static bool ShootZapper(Nailgun __instance)
+    static bool ShootZapper(Nailgun __instance)
     {
         __instance.UpdateAnimationWeight();
         if ((bool)__instance.currentZapper)

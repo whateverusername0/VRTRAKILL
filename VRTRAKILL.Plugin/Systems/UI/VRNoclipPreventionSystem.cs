@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace VRTRAKILL.Systems.UI;
 
-internal sealed class NoclipPreventionSystem : MonoBehaviour
+public class VRNoclipPreventionSystem : MonoBehaviour
 {
     public Transform Pivot;
 

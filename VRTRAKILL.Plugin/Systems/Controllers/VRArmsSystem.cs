@@ -32,7 +32,7 @@ namespace VRTRAKILL.Systems.Controllers
             LastPosition = transform.position;
 
             if (Vars.Config.UIInteraction.ControllerBased)
-                UI.UIConverter.UIEventCamera.transform.parent = Vars.NonDominantHand.transform;
+                UI.VRUIConverter.UIEventCamera.transform.parent = Vars.NonDominantHand.transform;
         }
 
         public void Update()

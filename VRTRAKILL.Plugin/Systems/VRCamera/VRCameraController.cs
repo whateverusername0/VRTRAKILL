@@ -1,58 +1,50 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Valve.VR.InteractionSystem;
-using Valve.VR;
 using VRTRAKILL.Data;
 
-namespace VRTRAKILL.Systems.VRCamera
+namespace VRTRAKILL.Systems.VRCamera;
+
+public class VRCameraController : MonoSingleton<VRCameraController>
 {
-    internal class VRCameraController : MonoSingleton<VRCameraController>
+    public void Update()
     {
-        Vector2 TurnVector; float TurnOffset;
+        if (Vars.Config.Controllers.SnapTurn) StartCoroutine(SnapTurn());
+        else StartCoroutine(SmoothTurn());
 
-        public void Update()
-        {
-            TurnVector = InputVars.TurnVector;
-            TurnOffset = InputVars.TurnOffset;
+        // Follow MC rotation
+        if (NewMovement.Instance.dead) return;
+        NewMovement.Instance.gameObject.transform.rotation =
+            Quaternion.Euler(NewMovement.Instance.transform.rotation.eulerAngles.x,
+                             Vars.MainCamera.transform.rotation.eulerAngles.y,
+                             NewMovement.Instance.transform.rotation.eulerAngles.z);
 
-            if (Vars.Config.Controllers.SnapTurn) StartCoroutine(SnapTurn());
-            else StartCoroutine(SmoothTurn());
+        transform.rotation = Quaternion.Euler(0f, InputVars.TurnOffset, 0f);
+    }
 
-            // Follow MC rotation
-            if (NewMovement.Instance.dead) return;
-            NewMovement.Instance.gameObject.transform.rotation =
-                Quaternion.Euler(NewMovement.Instance.transform.rotation.eulerAngles.x,
-                                 Vars.MainCamera.transform.rotation.eulerAngles.y,
-                                 NewMovement.Instance.transform.rotation.eulerAngles.z);
+    private IEnumerator SmoothTurn()
+    {
+            if (InputVars.TurnVector.x > 0 + Vars.Config.Controllers.Deadzone)
+                InputVars.TurnOffset += Vars.Config.Controllers.SmoothSpeed * Time.deltaTime;
+            if (InputVars.TurnVector.x < 0 - Vars.Config.Controllers.Deadzone)
+                InputVars.TurnOffset -= Vars.Config.Controllers.SmoothSpeed * Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+    }
 
-            transform.rotation = Quaternion.Euler(0f, InputVars.TurnOffset, 0f);
-        }
-
-        private IEnumerator SmoothTurn()
-        {
+    private bool IsTurning; private float SnapTurnTimer;
+    private IEnumerator SnapTurn()
+    {
+            if (IsTurning)
+            {
+                SnapTurnTimer += Time.deltaTime;
+                if (SnapTurnTimer >= .2f || InputVars.TurnVector.x == 0) { IsTurning = false; SnapTurnTimer = 0; }
+            }
+            else
+            {
                 if (InputVars.TurnVector.x > 0 + Vars.Config.Controllers.Deadzone)
-                    InputVars.TurnOffset += Vars.Config.Controllers.SmoothSpeed * Time.deltaTime;
-                if (InputVars.TurnVector.x < 0 - Vars.Config.Controllers.Deadzone)
-                    InputVars.TurnOffset -= Vars.Config.Controllers.SmoothSpeed * Time.deltaTime;
-                yield return new WaitForEndOfFrame();
-        }
-
-        private bool IsTurning; private float SnapTurnTimer;
-        private IEnumerator SnapTurn()
-        {
-                if (IsTurning)
-                {
-                    SnapTurnTimer += Time.deltaTime;
-                    if (SnapTurnTimer >= .2f || InputVars.TurnVector.x == 0) { IsTurning = false; SnapTurnTimer = 0; }
-                }
-                else
-                {
-                    if (InputVars.TurnVector.x > 0 + Vars.Config.Controllers.Deadzone)
-                    { IsTurning = true; InputVars.TurnOffset += Vars.Config.Controllers.SnapAngles; }
-                    else if (InputVars.TurnVector.x < 0 - Vars.Config.Controllers.Deadzone)
-                    { IsTurning = true; InputVars.TurnOffset -= Vars.Config.Controllers.SnapAngles; }
-                }
-                yield return new WaitForEndOfFrame();
-        }
+                { IsTurning = true; InputVars.TurnOffset += Vars.Config.Controllers.SnapAngles; }
+                else if (InputVars.TurnVector.x < 0 - Vars.Config.Controllers.Deadzone)
+                { IsTurning = true; InputVars.TurnOffset -= Vars.Config.Controllers.SnapAngles; }
+            }
+            yield return new WaitForEndOfFrame();
     }
 }

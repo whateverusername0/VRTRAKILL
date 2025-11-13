@@ -7,9 +7,10 @@ using Valve.VR;
 
 namespace VRTRAKILL.Patches.Controllers;
 
-[HarmonyPatch(typeof(NewMovement))] internal sealed class PatchControllerAdder
+[HarmonyPatch(typeof(NewMovement))] internal static partial class PatchNewMovement
 {
-    [HarmonyPostfix] [HarmonyPatch(nameof(NewMovement.Start))] public static void AddHands(NewMovement __instance)
+    [HarmonyPostfix] [HarmonyPatch(nameof(NewMovement.Start))]
+    static void AddControllers(NewMovement __instance)
     {
         __instance.gameObject.SetActive(false);
 
@@ -46,7 +47,7 @@ namespace VRTRAKILL.Patches.Controllers;
         __instance.gameObject.SetActive(true);
     }
 
-    private static GameObject CreateController(string Name, SteamVR_Input_Sources Source)
+    static GameObject CreateController(string Name, SteamVR_Input_Sources Source)
     {
         GameObject GO = new GameObject(Name) { layer = (int)Layers.IgnoreRaycast };
         SteamVR_Behaviour_Pose Controller = GO.AddComponent<SteamVR_Behaviour_Pose>();
@@ -64,7 +65,8 @@ namespace VRTRAKILL.Patches.Controllers;
         else throw new System.NotImplementedException();
         return GO;
     }
-    private static GameObject CreateControllerModel(SteamVR_Input_Sources Source, out GameObject SandboxRM, string Name = "Model")
+
+    static GameObject CreateControllerModel(SteamVR_Input_Sources Source, out GameObject SandboxRM, string Name = "Model")
     {
         GameObject GO = new GameObject(Name) { layer = (int)Layers.IgnoreRaycast };
         SandboxRM = null;

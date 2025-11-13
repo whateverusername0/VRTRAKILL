@@ -1,13 +1,32 @@
 ﻿using HarmonyLib;
 using VRTRAKILL.Data;
 using UnityEngine;
+using VRTRAKILL.Systems;
 
 namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
 
-[HarmonyPatch(typeof(Shotgun))] internal class PatchShotgun
+[HarmonyPatch(typeof(Shotgun))] internal static class PatchShotgun
 {
+    [HarmonyPostfix] [HarmonyPatch(nameof(Shotgun.Start))]
+    static void Transform(Shotgun __instance)
+    {
+        WeaponTransform.ApplyTransform(ref __instance.wpos, new(-.02f, .2f, .26f), new(), new(.1f, .1f, .1f));
+
+        // add our own hand until hakita decides otherwise.
+        Transform Hand = Object.Instantiate(Assets.HandPose_Shotgun.transform);
+        // Shotgun ******(Clone)/ShogunNewAnims/GunArmature/MainBone
+        Hand.SetParent(__instance.transform.GetChild(2).GetChild(0).GetChild(0), false);
+        Hand.localPosition = Vector3.zero;
+        Hand.localEulerAngles = new Vector3(0, 0, 270);
+        Hand.localScale = new Vector3(.1f, .1f, .1f);
+
+        Hand.GetChild(1).GetChild(0).localPosition = new(-.5f, -.95f, -.45f);
+        Hand.GetChild(1).GetChild(0).localEulerAngles = new(0, 180, 0);
+        Hand.GetChild(1).GetChild(0).localScale = new(1500, 1500, 1500);
+    }
+
     [HarmonyPrefix] [HarmonyPatch(nameof(Shotgun.Shoot))]
-    private static bool Shoot(Shotgun __instance)
+    static bool Shoot(Shotgun __instance)
     {
         __instance.gunReady = false;
         int num = 12;
@@ -158,7 +177,7 @@ namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
     }
 
     [HarmonyPrefix] [HarmonyPatch(nameof(Shotgun.Update))]
-    private static bool Update(Shotgun __instance)
+    static bool UpdatePrefix(Shotgun __instance)
     {
 
         if (!MonoSingleton<InputManager>.Instance.PerformingCheatMenuCombo() && MonoSingleton<InputManager>.Instance.InputSource.Fire1.IsPressed && __instance.gunReady && __instance.gc.activated && !GameStateManager.Instance.PlayerInputLocked && !__instance.charging)
@@ -316,8 +335,18 @@ namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
         return false;
     }
 
+    [HarmonyPostfix] [HarmonyPatch(nameof(Shotgun.Update))]
+    static void UpdatePostfix(Shotgun __instance)
+    {
+        // reset shitty animator angles ruining my immersion
+        if (__instance.anim.GetBool("Sawing"))
+            __instance.transform.GetChild(2).localEulerAngles = new(__instance.transform.GetChild(2).localEulerAngles.x, __instance.transform.GetChild(2).localEulerAngles.y, 25);
+        else
+            __instance.transform.GetChild(2).localEulerAngles = new(__instance.transform.GetChild(2).localEulerAngles.x, __instance.transform.GetChild(2).localEulerAngles.y, 0);
+    }
+
     [HarmonyPrefix] [HarmonyPatch(nameof(Shotgun.ShootSinks))]
-    private static bool ShootSinks(Shotgun __instance)
+    static bool ShootSinks(Shotgun __instance)
     {
         __instance.gunReady = false;
         __instance.transform.localPosition = __instance.wpos.currentDefault;
@@ -351,7 +380,7 @@ namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
     }
 
     [HarmonyPrefix] [HarmonyPatch(nameof(Shotgun.ShootSaw))]
-    private static bool ShootSaw(Shotgun __instance)
+    static bool ShootSaw(Shotgun __instance)
     {
         __instance.gunReady = true;
         Transform[] array = __instance.shootPoints;

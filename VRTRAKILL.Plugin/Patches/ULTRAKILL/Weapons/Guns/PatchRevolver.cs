@@ -1,13 +1,29 @@
 ﻿using HarmonyLib;
 using VRTRAKILL.Data;
 using UnityEngine;
+using VRTRAKILL.Systems.Arms;
+using VRTRAKILL.Systems.VRAvatar.Armature;
+using VRTRAKILL.Systems;
 
 namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
 
-[HarmonyPatch(typeof(Revolver))] internal class PatchRevolver
+[HarmonyPatch(typeof(Revolver))] internal static class PatchRevolver
 {
+    [HarmonyPostfix] [HarmonyPatch(nameof(Revolver.Start))]
+    static void Transform(Revolver __instance)
+    {
+        // add our own legally distinct prosthetic joint
+        VRWeaponArmController WAC = __instance.gameObject.AddComponent<VRWeaponArmController>();
+        Arm A = Arm.FeedbackerPreset(__instance.transform);
+        WAC.Arm = A; WAC.OffsetRot = new(0, -90, -90);
+
+        __instance.wpos.enabled = false;
+        if (__instance.altVersion) WeaponTransform.ApplyTransform(ref __instance.wpos, new(.05f, -.075f, .5f), new(), new(.085f, .085f, .085f));
+        else WeaponTransform.ApplyTransform(ref __instance.wpos, new(.05f, -.1f, .6f), new(), new(.1f, .1f, .1f));
+    }
+
     [HarmonyPrefix] [HarmonyPatch(nameof(Revolver.Shoot))]
-    private static bool Shoot(int shotType, Revolver __instance)
+    static bool Shoot(int shotType, Revolver __instance)
     {
         __instance.shootReady = false;
         __instance.shootCharge = 0f;
@@ -94,7 +110,7 @@ namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
     }
 
     [HarmonyPrefix] [HarmonyPatch(nameof(Revolver.ThrowCoin))]
-    private static bool ThrowCoin(Revolver __instance)
+    static bool ThrowCoin(Revolver __instance)
     {
         if (__instance.punch == null || !__instance.punch.gameObject.activeInHierarchy)
             __instance.punch = FistControl.Instance.currentPunch;

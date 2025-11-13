@@ -4,11 +4,10 @@ using UnityEngine;
 
 namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
 
-[HarmonyPatch(typeof(Vacuum))]
-internal class PatchVacuum
+[HarmonyPatch(typeof(Vacuum))] internal static class PatchVacuum
 {
     [HarmonyPrefix] [HarmonyPatch(nameof(Vacuum.SuckObjects))]
-    private static bool SuckObjects(Vacuum __instance)
+    static bool SuckObjects(Vacuum __instance)
     {
         if ((!__instance._isSucking && !__instance._isBlowing) || __instance._stuckObject.rigidbody != null)
         {
@@ -88,7 +87,7 @@ internal class PatchVacuum
     }
 
     [HarmonyPrefix] [HarmonyPatch(nameof(Vacuum.UpdateStuckObject))]
-    private static bool UpdateStuckObject(Vacuum __instance)
+    static bool UpdateStuckObject(Vacuum __instance)
     {
         if (!(__instance._stuckObject.rigidbody == null))
         {

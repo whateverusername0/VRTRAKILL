@@ -24,7 +24,7 @@ namespace VRTRAKILL.Systems
             Assets.LoadAllCustomAssets();
             RelayerAssetsStuff();
 
-            UI.UIConverter.ConvertAllCanvases();
+            UI.VRUIConverter.ConvertAllCanvases();
         }
         private static void RelayerAssetsStuff()
         {

@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
 
-[HarmonyPatch(typeof(Washer))] internal class PatchWasher
+[HarmonyPatch(typeof(Washer))] internal static class PatchWasher
 {
     [HarmonyPrefix] [HarmonyPatch(nameof(Washer.Update))]
-    private static bool Update(Washer __instance)
+    static bool Update(Washer __instance)
     {
         Transform transform = Vars.DominantHand.transform;
         if (Physics.Raycast(transform.position, transform.forward, out var hitInfo, 50f, LayerMaskDefaults.Get(LMD.Environment)))

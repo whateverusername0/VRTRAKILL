@@ -2,20 +2,20 @@
 using VRTRAKILL.Data;
 using System.Collections.Generic;
 
-namespace VRTRAKILL.Patches.ULTRAKILL;
+namespace VRTRAKILL.Patches.Input;
 
-[HarmonyPatch] internal class PatchValuesGeneric
+[HarmonyPatch(typeof(InputActionState))] internal static class PatchInputActionState
 {
     /// <summary>
     ///     See <see cref="PlayerInput"/> or <see cref="InputActions"/> for reference.
     /// </summary>
-    private static readonly Dictionary<string, object> _pairs = new()
+    static readonly Dictionary<string, object> _pairs = new()
     {
         { nameof(InputActions.MovementActions.Move), InputVars.MoveVector }
     };
 
-    [HarmonyPrefix] [HarmonyPatch(typeof(InputActionState), nameof(InputActionState.ReadValue))]
-    private static bool ReadValue<T>(InputActionState __instance, ref T __result) where T : struct
+    [HarmonyPrefix] [HarmonyPatch(nameof(InputActionState.ReadValue))]
+    static bool ReadValue<T>(InputActionState __instance, ref T __result) where T : struct
     {
         var name = __instance.Action.name;
         if (!_pairs.ContainsKey(name))
