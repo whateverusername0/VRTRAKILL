@@ -7,7 +7,7 @@ namespace VRTRAKILL.Systems.Controllers
     public class VRGunsSystem : MonoSingleton<VRGunsSystem>
     {
         public VRControllersSystem CC;
-        public GameObject GunOffset;
+        public Transform GunOffset;
         public GameObject RM, SandboxHandRM;
 
         public Vector3 ArmIKOffset = new Vector3(.05f, .0525f, -.1765f);

@@ -221,12 +221,6 @@
     <Compile Include="Input\SVRActionsManager.cs" />
     <Compile Include="Patches\Visual\PatchRemoveArms.cs" />
     <Compile Include="Patches\Visual\PatchWeaponPos.cs" />
-    <Compile Include="Systems\Movement\Patches\ClimbStepP.cs" />
-    <Compile Include="Systems\Movement\Patches\FlightNoclipP.cs" />
-    <Compile Include="Systems\Movement\Patches\NewMovementP.cs" />
-    <Compile Include="Systems\Movement\Patches\GrenadeP.cs" />
-    <Compile Include="Systems\Movement\Patches\A.cs" />
-    <Compile Include="Systems\Movement\Patches\PlatformerMovementP.cs" />
     <Compile Include="Systems\Patches\PlayerP.cs" />
     <Compile Include="Systems\VRCamera\DesktopCamera.cs" />
     <Compile Include="Systems\VRCamera\DesktopUICamera.cs" />

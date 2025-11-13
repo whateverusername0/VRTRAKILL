@@ -8,7 +8,7 @@ namespace VRTRAKILL.Systems.UI.Patches
 {
     [HarmonyPatch] internal class HUDOptionsP
     {
-        [HarmonyPostfix] [HarmonyPatch(typeof(HUDOptions), nameof(HUDOptions.Start))] static void ResizeCanvases(HUDOptions __instance)
+        [HarmonyPostfix] [HarmonyPatch(typeof(HUDPos), nameof(HUDPos.Start))] static void ResizeCanvases(HUDPos __instance)
         {
             // Stretches screen effects so it's not a small square in the middle of the hud
             string[] ScreenEffects =
@@ -40,7 +40,7 @@ namespace VRTRAKILL.Systems.UI.Patches
             // Relayer skybox in 2-4
             try { GameObject.Find("CityFromAbove").layer = 0; } catch {}
         }
-        [HarmonyPostfix] [HarmonyPatch(typeof(HUDOptions), nameof(HUDOptions.Start))] static void DeployGTFOTW(HUDOptions __instance)
+        [HarmonyPostfix] [HarmonyPatch(typeof(HUDPos), nameof(HUDPos.Start))] static void DeployGTFOTW(HUDPos __instance)
         {
             GameObject UI_GTFOTW = Object.Instantiate(Assets.UI_GTFOTW, Vector3.zero, Quaternion.identity, __instance.transform);
 

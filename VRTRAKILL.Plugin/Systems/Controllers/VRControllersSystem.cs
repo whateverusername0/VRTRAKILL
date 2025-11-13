@@ -17,7 +17,7 @@ namespace VRTRAKILL.Systems.Controllers
         public Transform ArmOffset = new GameObject("Arm Offset") { layer = (int)Layers.IgnoreRaycast }.transform;
 
         LineRenderer LR; Vector3 EndPosition;
-        public float DefaultLength => Vars.Config.CBS.CrosshairDistance;
+        public float DefaultLength => Vars.Config.Controllers.CrosshairDistance;
 
         private void SetupOffsets()
         {
@@ -71,14 +71,14 @@ namespace VRTRAKILL.Systems.Controllers
 
             SetupOffsets();
 
-            if (Vars.Config.UIInteraction.ControllerLines.Enabled && gameObject.HasComponent<VRArmsSystem>())
+            if (gameObject.HasComponent<VRArmsSystem>())
                 SetupControllerLines();
         }
         public void Update()
         {
             // controller-based ui interaction
-            if (Vars.Config.UIInteraction.ControllerBased) CPRaycast();
-            if (Vars.Config.UIInteraction.ControllerLines.Enabled) DrawControllerLines();
+            CPRaycast();
+            DrawControllerLines();
 
             // controller model
             if (Vars.Config.Controllers.DrawControllers)

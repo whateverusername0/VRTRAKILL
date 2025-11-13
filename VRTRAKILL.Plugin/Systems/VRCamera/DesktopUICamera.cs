@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using VRTRAKILL.Util;
 using VRTRAKILL.Data;
 
 namespace VRTRAKILL.Systems.VRCamera
