@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3FBB1FC9-B424-404C-B0C5-1A8AFFF14F5B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VRTRAKILL</RootNamespace>
+    <AssemblyName>VRTRAKILL</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <LangVersion>10</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\lib\BepInEx\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\lib\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="BepInEx">
+      <HintPath>..\lib\BepInEx\BepInEx.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="BepInEx.Harmony">
+      <HintPath>..\lib\BepInEx\BepInEx.Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="BepInEx.Preloader">
+      <HintPath>..\lib\BepInEx\BepInEx.Preloader.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="HarmonyXInterop">
+      <HintPath>..\lib\BepInEx\HarmonyXInterop.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>..\lib\BepInEx\Mono.Cecil.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil.Mdb">
+      <HintPath>..\lib\BepInEx\Mono.Cecil.Mdb.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb">
+      <HintPath>..\lib\BepInEx\Mono.Cecil.Pdb.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil.Rocks">
+      <HintPath>..\lib\BepInEx\Mono.Cecil.Rocks.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MonoMod.RuntimeDetour">
+      <HintPath>..\lib\BepInEx\MonoMod.RuntimeDetour.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MonoMod.Utils">
+      <HintPath>..\lib\BepInEx\MonoMod.Utils.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Libraries\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="SteamVR, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\SteamVR\SteamVR.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="SteamVR_Actions, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\SteamVR\SteamVR_Actions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="Unity.InputSystem">
+      <HintPath>..\lib\Unity\Unity.InputSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\lib\Unity\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>..\lib\Unity\UnityEngine.AnimationModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule">
+      <HintPath>..\lib\Unity\UnityEngine.AssetBundleModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>..\lib\Unity\UnityEngine.AudioModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\lib\Unity\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>..\lib\Unity\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputModule">
+      <HintPath>..\lib\Unity\UnityEngine.InputModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule">
+      <HintPath>..\lib\Unity\UnityEngine.ParticleSystemModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>..\lib\Unity\UnityEngine.PhysicsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\lib\Unity\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>..\lib\Unity\UnityEngine.UIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.VRModule">
+      <HintPath>..\lib\Unity\UnityEngine.VRModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data\Layers.cs" />
+    <Compile Include="Patches\ULTRAKILL\Movement\PatchNewMovement.cs" />
+    <Compile Include="Patches\ULTRAKILL\PatchValuesGeneric.cs" />
+    <Compile Include="Patches\ULTRAKILL\Weapons\Guns\PatchChainsaw.cs" />
+    <Compile Include="Patches\ULTRAKILL\Weapons\PatchGunSetter.cs" />
+    <Compile Include="Patches\ULTRAKILL\Weapons\Guns\PatchNailgun.cs" />
+    <Compile Include="Patches\ULTRAKILL\Weapons\Guns\PatchRailcannon.cs" />
+    <Compile Include="Patches\ULTRAKILL\Weapons\Guns\PatchRevolver.cs" />
+    <Compile Include="Patches\ULTRAKILL\Weapons\Guns\PatchRocketLauncher.cs" />
+    <Compile Include="Patches\ULTRAKILL\Weapons\Guns\PatchShotgun.cs" />
+    <Compile Include="Patches\ULTRAKILL\Weapons\Guns\PatchShotgunHammer.cs" />
+    <Compile Include="Patches\ULTRAKILL\Weapons\Guns\PatchVacuum.cs" />
+    <Compile Include="Patches\ULTRAKILL\Weapons\Guns\PatchWasher.cs" />
+    <Compile Include="Patches\ULTRAKILL\Weapons\PatchWeaponWheel.cs" />
+    <Compile Include="PluginInfo.cs" />
+    <Compile Include="Preferences\UKBindings.cs" />
+    <Compile Include="Systems\Assets.cs" />
+    <Compile Include="Preferences\VrtrakillConfigJSON.cs" />
+    <Compile Include="Input\ControlMessages\MessageContainer.cs" />
+    <Compile Include="Input\ControlMessages\Patches.cs" />
+    <Compile Include="Patches\Misc\PatchDiscord.cs" />
+    <Compile Include="Systems\SceneWorker.cs" />
+    <Compile Include="Systems\UI\NoclipPreventionSystem.cs" />
+    <Compile Include="Systems\UI\StandardHUDWorker.cs" />
+    <Compile Include="Systems\Arms\VRArmController.cs" />
+    <Compile Include="Systems\Arms\VRArmControllerBase.cs" />
+    <Compile Include="Systems\Arms\VRWeaponArmController.cs" />
+    <Compile Include="Patches\Visual\PatchGunHands.cs" />
+    <Compile Include="Systems\Patches\A.cs" />
+    <Compile Include="Systems\VRAvatar\Armature\Finger.cs" />
+    <Compile Include="Systems\VRAvatar\Armature\Hand.cs" />
+    <Compile Include="Systems\VRAvatar\AvatarSizeAdjustor.cs" />
+    <Compile Include="Systems\VRAvatar\IKChain.cs" />
+    <Compile Include="Plugin.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Patches\Misc\PatchSteamVR.cs" />
+    <Compile Include="Systems\UI\CrosshairController.cs" />
+    <Compile Include="Systems\UI\HideWhenMenuActive.cs" />
+    <Compile Include="Systems\UI\Patches\A.cs" />
+    <Compile Include="Systems\UI\Patches\HUDOptionsP.cs" />
+    <Compile Include="Systems\UI\Patches\CrosshairP.cs" />
+    <Compile Include="Systems\UI\Patches\HudP.cs" />
+    <Compile Include="Systems\UI\UICanvas.cs" />
+    <Compile Include="Systems\UI\UIConverter.cs" />
+    <Compile Include="Systems\UI\UIInteraction.cs" />
+    <Compile Include="Systems\VRAvatar\Armature\Arm.cs" />
+    <Compile Include="Systems\Arms\VRArmTransformer.cs" />
+    <Compile Include="Patches\ULTRAKILL\PatchPunch.cs" />
+    <Compile Include="Patches\ULTRAKILL\PatchSandboxArm.cs" />
+    <Compile Include="Patches\ULTRAKILL\PatchHookArm.cs" />
+    <Compile Include="Systems\VRAvatar\Armature\Leg.cs" />
+    <Compile Include="Systems\VRAvatar\IKFoot.cs" />
+    <Compile Include="Systems\VRAvatar\MetaRig.cs" />
+    <Compile Include="Systems\VRAvatar\Patches\A.cs" />
+    <Compile Include="Systems\VRAvatar\Patches\VRIKP.cs" />
+    <Compile Include="Systems\VRAvatar\VRigController.cs" />
+    <Compile Include="Systems\Controllers\VRControllersSystem.cs" />
+    <Compile Include="Patches\Controllers\PatchRumbleManager.cs" />
+    <Compile Include="Systems\Controllers\VRArmsSystem.cs" />
+    <Compile Include="Patches\Controllers\PatchControllerAdder.cs" />
+    <Compile Include="Systems\Controllers\VRGunsSystem.cs" />
+    <Compile Include="Patches\ULTRAKILL\Weapons\PatchDualWieldPickup.cs" />
+    <Compile Include="Patches\ULTRAKILL\Weapons\PatchGunControl.cs" />
+    <Compile Include="Input\SVRActionsManager.cs" />
+    <Compile Include="Patches\Visual\PatchRemoveArms.cs" />
+    <Compile Include="Patches\Visual\PatchWeaponPos.cs" />
+    <Compile Include="Systems\Movement\Patches\ClimbStepP.cs" />
+    <Compile Include="Systems\Movement\Patches\FlightNoclipP.cs" />
+    <Compile Include="Systems\Movement\Patches\NewMovementP.cs" />
+    <Compile Include="Systems\Movement\Patches\GrenadeP.cs" />
+    <Compile Include="Systems\Movement\Patches\A.cs" />
+    <Compile Include="Systems\Movement\Patches\PlatformerMovementP.cs" />
+    <Compile Include="Systems\Patches\PlayerP.cs" />
+    <Compile Include="Systems\VRCamera\DesktopCamera.cs" />
+    <Compile Include="Systems\VRCamera\DesktopUICamera.cs" />
+    <Compile Include="Systems\VRCamera\Patches\A.cs" />
+    <Compile Include="Systems\VRCamera\Patches\CrashBandicrootCCP.cs" />
+    <Compile Include="Systems\VRCamera\VRCameraController.cs" />
+    <Compile Include="Preferences\ConfigJSON.cs" />
+    <Compile Include="Preferences\ConfigMaster.cs" />
+    <Compile Include="Input\InputMap.cs" />
+    <Compile Include="Data\InputVars.cs" />
+    <Compile Include="Systems\VRCamera\Patches\CameraConverterP.cs" />
+    <Compile Include="Data\Vars.cs" />
+    <Compile Include="Systems\VRPlayer\VRKeybindsController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VRTRAKILL.Utilities\VRTRAKILL.Utilities.csproj">
+      <Project>{3709e33e-4c44-43f8-a947-f71fe9f67233}</Project>
+      <Name>VRTRAKILL.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
