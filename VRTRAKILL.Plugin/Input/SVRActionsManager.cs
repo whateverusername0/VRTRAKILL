@@ -38,27 +38,6 @@ namespace VRTRAKILL.Systems.Input
 
         public static bool Escape = false;
 
-        // Helper methods
-        public static string FriendlyBindingName(this ISteamVR_Action_In SVRAI)
-        {
-            string Direction;
-            switch (SVRAI.activeDevice)
-            {
-                case SteamVR_Input_Sources.LeftHand:
-                case SteamVR_Input_Sources.LeftFoot:
-                case SteamVR_Input_Sources.LeftShoulder:
-                    Direction = "Left"; break;
-                case SteamVR_Input_Sources.RightHand:
-                case SteamVR_Input_Sources.RightFoot:
-                case SteamVR_Input_Sources.RightShoulder:
-                    Direction = "Right"; break;
-                default: Direction = string.Empty; break;
-            }
-            if (string.IsNullOrEmpty(Direction))
-                return SVRAI.GetLocalizedOriginPart(SteamVR_Input_Sources.Any, EVRInputStringBits.VRInputString_InputSource);
-            else return $"{Direction} {SVRAI.GetLocalizedOriginPart(SteamVR_Input_Sources.Any, EVRInputStringBits.VRInputString_InputSource)}";
-        }
-
         // Simulate keyboard input
         private static void TriggerKey(bool Started, bool Ended, VirtualKeyCode? KeyCode = null, MouseButton? Button = null)
         {
@@ -101,41 +80,41 @@ namespace VRTRAKILL.Systems.Input
         public static void Init()
         {
             // Movement
-            SteamVR_Actions._default.Movement.AddOnUpdateListener(MovementH, SteamVR_Input_Sources.Any);
-            SteamVR_Actions._default.Turn.AddOnUpdateListener(TurnH, SteamVR_Input_Sources.Any);
-            SteamVR_Actions._default.Jump.AddOnUpdateListener(JumpH, SteamVR_Input_Sources.Any);
-            SteamVR_Actions._default.Slide.AddOnUpdateListener(SlideH, SteamVR_Input_Sources.Any);
-            SteamVR_Actions._default.Dash.AddOnUpdateListener(DashH, SteamVR_Input_Sources.Any);
+            //SteamVR_Actions._default.Movement.AddOnUpdateListener(MovementH, SteamVR_Input_Sources.Any);
+            //SteamVR_Actions._default.Turn.AddOnUpdateListener(TurnH, SteamVR_Input_Sources.Any);
+            //SteamVR_Actions._default.Jump.AddOnUpdateListener(JumpH, SteamVR_Input_Sources.Any);
+            //SteamVR_Actions._default.Slide.AddOnUpdateListener(SlideH, SteamVR_Input_Sources.Any);
+            //SteamVR_Actions._default.Dash.AddOnUpdateListener(DashH, SteamVR_Input_Sources.Any);
 
-            // Arms
-            SteamVR_Actions._default.Punch.AddOnUpdateListener(PunchH, SteamVR_Input_Sources.Any);
-            SteamVR_Actions._default.SwapHand.AddOnUpdateListener(SwapHandH, SteamVR_Input_Sources.Any);
-            SteamVR_Actions._default.Whiplash.AddOnUpdateListener(WhiplashH, SteamVR_Input_Sources.Any);
+            //// Arms
+            //SteamVR_Actions._default.Punch.AddOnUpdateListener(PunchH, SteamVR_Input_Sources.Any);
+            //SteamVR_Actions._default.SwapHand.AddOnUpdateListener(SwapHandH, SteamVR_Input_Sources.Any);
+            //SteamVR_Actions._default.Whiplash.AddOnUpdateListener(WhiplashH, SteamVR_Input_Sources.Any);
 
-            // Guns
-            SteamVR_Actions._default.Shoot.AddOnUpdateListener(RHShootH, SteamVR_Input_Sources.Any);
-            SteamVR_Actions._default.AltShoot.AddOnUpdateListener(RHAltShootH, SteamVR_Input_Sources.Any);
-            SteamVR_Actions._default.IterateWeapon.AddOnUpdateListener(IterateWeaponH, SteamVR_Input_Sources.Any);
-            SteamVR_Actions._default.ChangeWeaponVariation.AddOnUpdateListener(ChangeWeaponVariationH, SteamVR_Input_Sources.Any);
-            SteamVR_Actions._default.NextWeapon.AddOnUpdateListener(NextWeaponH, SteamVR_Input_Sources.Any);
-            SteamVR_Actions._default.PrevWeapon.AddOnUpdateListener(PrevWeaponH, SteamVR_Input_Sources.Any);
+            //// Guns
+            //SteamVR_Actions._default.Shoot.AddOnUpdateListener(RHShootH, SteamVR_Input_Sources.Any);
+            //SteamVR_Actions._default.AltShoot.AddOnUpdateListener(RHAltShootH, SteamVR_Input_Sources.Any);
+            //SteamVR_Actions._default.IterateWeapon.AddOnUpdateListener(IterateWeaponH, SteamVR_Input_Sources.Any);
+            //SteamVR_Actions._default.ChangeWeaponVariation.AddOnUpdateListener(ChangeWeaponVariationH, SteamVR_Input_Sources.Any);
+            //SteamVR_Actions._default.NextWeapon.AddOnUpdateListener(NextWeaponH, SteamVR_Input_Sources.Any);
+            //SteamVR_Actions._default.PrevWeapon.AddOnUpdateListener(PrevWeaponH, SteamVR_Input_Sources.Any);
 
-            // Weapon quick switch, open weapon wheel
-            SteamVR_Actions._default.OpenWeaponWheel.AddOnUpdateListener(OpenWeaponWheelH, SteamVR_Input_Sources.Any);
-            SteamVR_Actions._default.WeaponWheelScroll.AddOnUpdateListener(WeaponWheelScrollH, SteamVR_Input_Sources.Any);
+            //// Weapon quick switch, open weapon wheel
+            //SteamVR_Actions._default.OpenWeaponWheel.AddOnUpdateListener(OpenWeaponWheelH, SteamVR_Input_Sources.Any);
+            //SteamVR_Actions._default.WeaponWheelScroll.AddOnUpdateListener(WeaponWheelScrollH, SteamVR_Input_Sources.Any);
 
-            // Slots
-            SteamVR_Actions._default.Slot0.AddOnUpdateListener(Slot0H, SteamVR_Input_Sources.Any);
-            SteamVR_Actions._default.Slot1.AddOnUpdateListener(Slot1H, SteamVR_Input_Sources.Any);
-            SteamVR_Actions._default.Slot2.AddOnUpdateListener(Slot2H, SteamVR_Input_Sources.Any);
-            SteamVR_Actions._default.Slot2.AddOnUpdateListener(Slot2H, SteamVR_Input_Sources.Any);
-            SteamVR_Actions._default.Slot3.AddOnUpdateListener(Slot3H, SteamVR_Input_Sources.Any);
-            SteamVR_Actions._default.Slot4.AddOnUpdateListener(Slot4H, SteamVR_Input_Sources.Any);
-            SteamVR_Actions._default.Slot5.AddOnUpdateListener(Slot5H, SteamVR_Input_Sources.Any);
-            SteamVR_Actions._default.Slot6.AddOnUpdateListener(Slot6H, SteamVR_Input_Sources.Any);
-            SteamVR_Actions._default.Slot7.AddOnUpdateListener(Slot7H, SteamVR_Input_Sources.Any);
-            SteamVR_Actions._default.Slot8.AddOnUpdateListener(Slot8H, SteamVR_Input_Sources.Any);
-            SteamVR_Actions._default.Slot9.AddOnUpdateListener(Slot9H, SteamVR_Input_Sources.Any);
+            //// Slots
+            //SteamVR_Actions._default.Slot0.AddOnUpdateListener(Slot0H, SteamVR_Input_Sources.Any);
+            //SteamVR_Actions._default.Slot1.AddOnUpdateListener(Slot1H, SteamVR_Input_Sources.Any);
+            //SteamVR_Actions._default.Slot2.AddOnUpdateListener(Slot2H, SteamVR_Input_Sources.Any);
+            //SteamVR_Actions._default.Slot2.AddOnUpdateListener(Slot2H, SteamVR_Input_Sources.Any);
+            //SteamVR_Actions._default.Slot3.AddOnUpdateListener(Slot3H, SteamVR_Input_Sources.Any);
+            //SteamVR_Actions._default.Slot4.AddOnUpdateListener(Slot4H, SteamVR_Input_Sources.Any);
+            //SteamVR_Actions._default.Slot5.AddOnUpdateListener(Slot5H, SteamVR_Input_Sources.Any);
+            //SteamVR_Actions._default.Slot6.AddOnUpdateListener(Slot6H, SteamVR_Input_Sources.Any);
+            //SteamVR_Actions._default.Slot7.AddOnUpdateListener(Slot7H, SteamVR_Input_Sources.Any);
+            //SteamVR_Actions._default.Slot8.AddOnUpdateListener(Slot8H, SteamVR_Input_Sources.Any);
+            //SteamVR_Actions._default.Slot9.AddOnUpdateListener(Slot9H, SteamVR_Input_Sources.Any);
 
             // Go back, pause, etc.
             SteamVR_Actions._default.Escape.AddOnUpdateListener(EscapeH, SteamVR_Input_Sources.Any);

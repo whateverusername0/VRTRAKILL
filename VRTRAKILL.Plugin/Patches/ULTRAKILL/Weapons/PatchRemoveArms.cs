@@ -1,6 +1,5 @@
 ﻿using HarmonyLib;
 using VRTRAKILL.Data;
-using VRTRAKILL.Systems.Arms;
 using Sandbox.Arm;
 using System;
 using UnityEngine;
@@ -25,7 +24,7 @@ namespace VRTRAKILL.Patches.Visual;
                     .gameObject.transform.Find("RightArm")
                     .gameObject.SetActive(false);
             }
-            else __instance.gameObject.AddComponent<VRArmTransformer>();
+            //else __instance.gameObject.AddComponent<VRArmTransformer>();
         }
         catch (NullReferenceException) { Vars.Log.LogWarning($"{__instance.gameObject.name} is null???"); }
     }

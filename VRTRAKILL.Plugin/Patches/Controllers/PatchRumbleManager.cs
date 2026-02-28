@@ -8,7 +8,6 @@ namespace VRTRAKILL.Patches.Controllers;
 
 [HarmonyPatch(typeof(RumbleManager))] internal static class PatchRumbleManager
 {
-    static readonly SteamVR_Action_Vibration HapticAction = SteamVR_Actions._default.Haptic;
     static SteamVR_Input_Sources _nonDomHand => Vars.NDHC.GetComponent<SteamVR_Behaviour_Pose>().inputSource;
     static SteamVR_Input_Sources _domHand => Vars.DHC.GetComponent<SteamVR_Behaviour_Pose>().inputSource;
 
@@ -36,7 +35,7 @@ namespace VRTRAKILL.Patches.Controllers;
 
     // Number 7:
     public static void Vibrate(float duration, float frequency, float amplitude, SteamVR_Input_Sources source)
-        => HapticAction.Execute(0, duration, frequency, amplitude, source);
+    { } //HapticAction.Execute(0, duration, frequency, amplitude, source);
 
     public static SteamVR_Input_Sources ResolveController(string key)
     {

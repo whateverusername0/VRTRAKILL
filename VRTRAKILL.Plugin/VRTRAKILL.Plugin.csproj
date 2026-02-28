@@ -27,7 +27,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\bin\</OutputPath>
+    <OutputPath>..\bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -83,18 +83,17 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>Libraries\Newtonsoft.Json.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="SteamVR, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\SteamVR\SteamVR.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="SteamVR_Actions, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\SteamVR\SteamVR_Actions.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -104,6 +103,12 @@
     <Reference Include="Unity.InputSystem">
       <HintPath>..\lib\Unity\Unity.InputSystem.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.XR.Management">
+      <HintPath>..\lib\Unity.XR.Management.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.XR.OpenVR">
+      <HintPath>..\lib\Unity.XR.OpenVR.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
       <HintPath>..\lib\Unity\UnityEngine.dll</HintPath>
@@ -141,6 +146,9 @@
       <HintPath>..\lib\Unity\UnityEngine.PhysicsModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.SubsystemsModule">
+      <HintPath>..\lib\UnityEngine.SubsystemsModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>..\lib\Unity\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
@@ -149,13 +157,13 @@
       <HintPath>..\lib\Unity\UnityEngine.UIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.VRModule">
-      <HintPath>..\lib\Unity\UnityEngine.VRModule.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="UnityEngine.XRModule">
+      <HintPath>..\lib\Unity\UnityEngine.XRModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Layers.cs" />
+    <Compile Include="Patches\Misc\PatchInitGame.cs" />
     <Compile Include="Patches\UI\PatchFinalRank.cs" />
     <Compile Include="Patches\UI\PatchFlashImage.cs" />
     <Compile Include="Patches\UI\PatchHUDPos.cs" />
@@ -182,19 +190,10 @@
     <Compile Include="Preferences\UKBindings.cs" />
     <Compile Include="Systems\Assets.cs" />
     <Compile Include="Preferences\VrtrakillConfigJSON.cs" />
-    <Compile Include="Input\ControlMessages\MessageContainer.cs" />
-    <Compile Include="Input\ControlMessages\Patches.cs" />
     <Compile Include="Patches\Misc\PatchDiscordController.cs" />
     <Compile Include="Systems\SceneWorker.cs" />
     <Compile Include="Systems\UI\VRNoclipPreventionSystem.cs" />
     <Compile Include="Systems\UI\StandardHUDToggle.cs" />
-    <Compile Include="Systems\Arms\VRArmController.cs" />
-    <Compile Include="Systems\Arms\VRArmControllerBase.cs" />
-    <Compile Include="Systems\Arms\VRWeaponArmController.cs" />
-    <Compile Include="Systems\VRAvatar\Armature\Finger.cs" />
-    <Compile Include="Systems\VRAvatar\Armature\Hand.cs" />
-    <Compile Include="Systems\VRAvatar\AvatarSizeAdjustor.cs" />
-    <Compile Include="Systems\VRAvatar\IKChain.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Patches\Misc\PatchSteamVR.cs" />
@@ -206,15 +205,9 @@
     <Compile Include="Systems\UI\VRUICanvas.cs" />
     <Compile Include="Systems\UI\VRUIConverter.cs" />
     <Compile Include="Systems\UI\VRUIInteraction.cs" />
-    <Compile Include="Systems\VRAvatar\Armature\Arm.cs" />
-    <Compile Include="Systems\Arms\VRArmTransformer.cs" />
     <Compile Include="Patches\ULTRAKILL\PatchPunch.cs" />
     <Compile Include="Patches\ULTRAKILL\PatchSandboxArm.cs" />
     <Compile Include="Patches\ULTRAKILL\PatchHookArm.cs" />
-    <Compile Include="Systems\VRAvatar\Armature\Leg.cs" />
-    <Compile Include="Systems\VRAvatar\IKFoot.cs" />
-    <Compile Include="Systems\VRAvatar\MetaRig.cs" />
-    <Compile Include="Systems\VRAvatar\VRigController.cs" />
     <Compile Include="Systems\Controllers\VRControllersSystem.cs" />
     <Compile Include="Patches\Controllers\PatchRumbleManager.cs" />
     <Compile Include="Systems\Controllers\VRArmsSystem.cs" />
@@ -233,7 +226,6 @@
     <Compile Include="Input\InputMap.cs" />
     <Compile Include="Data\InputVars.cs" />
     <Compile Include="Data\Vars.cs" />
-    <Compile Include="Systems\VRPlayer\VRKeybindsController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VRTRAKILL.Utilities\VRTRAKILL.Utilities.csproj">

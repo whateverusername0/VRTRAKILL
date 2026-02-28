@@ -1,10 +1,17 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
+using System;
+using System.Collections.Generic;
+using Unity.XR.OpenVR;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.XR;
+using UnityEngine.XR.Management;
 using Valve.VR;
-using VRTRAKILL.Systems;
-using VRTRAKILL.Utilities;
 using VRTRAKILL.Data;
+using VRTRAKILL.Patches.Misc;
+using VRTRAKILL.Patches.ULTRAKILL;
+using VRTRAKILL.Utilities;
 
 namespace VRTRAKILL;
 
@@ -16,30 +23,77 @@ public sealed partial class Plugin : BaseUnityPlugin
     public void Awake()
     {
         Log = Logger;
-        Debug.unityLogger.filterLogType = LogType.Warning;
+        //Debug.unityLogger.filterLogType = LogType.Warning;
 
-        Prefs.ConfigMaster.Init();
+        //Prefs.ConfigMaster.Init();
         PatchStuff();
-        SceneWorker.Init();
+        //SceneWorker.Init();
 
         InitializeSteamVR();
+        SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
+    }
+
+    private void SceneManager_activeSceneChanged(Scene arg0, Scene arg1)
+    {
+        if (XRGeneralSettings.Instance == null || XRGeneralSettings.Instance.Manager == null)
+        {
+            Log.LogError("XR General Settings are null!");
+            return;
+        }
+
+        var loader = XRGeneralSettings.Instance.Manager.activeLoader;
+        if (loader == null)
+            XRGeneralSettings.Instance.Manager.InitializeLoaderSync();
     }
 
     private void PatchStuff()
     {
         // just patch everything at this point. nobody is looking at the settings anyway.
+        //new Patcher(new HarmonyLib.Harmony(PluginInfo.PLUGIN_GUID))
+        //{
+        //    Log = Vars.Log,
+        //}.PatchAll();
+
         new Patcher(new HarmonyLib.Harmony(PluginInfo.PLUGIN_GUID))
         {
             Log = Vars.Log,
-        }.PatchAll();
+        }.Patch(new Type[]
+        {
+            typeof(PatchSteamVR),
+            typeof(PatchCameraController),
+            typeof(PatchInitGame)
+        });
     }
 
     private void InitializeSteamVR()
     {
+        Log.LogMessage("Initiaizing XR Loader");
+        var generalSettings = ScriptableObject.CreateInstance<XRGeneralSettings>();
+        var managerSettings = ScriptableObject.CreateInstance<XRManagerSettings>();
+        var xrLoader = ScriptableObject.CreateInstance<OpenVRLoader>();
+
+        var settings = OpenVRSettings.GetSettings();
+        settings.StereoRenderingMode = OpenVRSettings.StereoRenderingModes.MultiPass;
+
+        generalSettings.Manager = managerSettings;
+        ((List<XRLoader>)managerSettings.activeLoaders).Clear();
+        ((List<XRLoader>)managerSettings.activeLoaders).Add(xrLoader);
+        managerSettings.InitializeLoaderSync();
+
+        var loader = XRGeneralSettings.Instance.Manager.activeLoader;
+        if (loader == null) Log.LogFatal("Unable to load XR Display Subsystem!");
+
+        managerSettings.activeLoader.GetLoadedSubsystem<XRDisplaySubsystem>().Start();
+
+        Log.LogMessage("Active loader: " + managerSettings.activeLoader);
+
+        Log.LogMessage("Initializing SteamVR");
+
         SteamVR_Actions.PreInitialize();
         SteamVR.Initialize(true);
+
         Log.LogMessage($"SteamVR Active: {SteamVR.active}, Connected: {SteamVR.initializedState}");
 
-        Systems.Input.SVRActionsManager.Init();
+        //Systems.Input.SVRActionsManager.Init();
     }
 }

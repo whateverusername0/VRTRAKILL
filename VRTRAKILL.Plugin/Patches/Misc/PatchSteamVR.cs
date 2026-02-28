@@ -6,12 +6,20 @@ namespace VRTRAKILL.Patches.Misc;
 
 [HarmonyPatch] internal static class PatchSteamVR
 {
-    // since SteamVR_Camera is a tasty piece and I don't want to reinvent the wheel
-    // by fucking around w/ namings and break the game halfway through, i made this.
+    /// <summary>
+    ///     PATCH: Culled Expand() method since it's useless and adds more headache.
+    /// </summary>
     [HarmonyPrefix] [HarmonyPatch(typeof(SteamVR_Camera), nameof(SteamVR_Camera.Expand))]
     static bool SVRCExpand(SteamVR_Camera __instance, Transform ____ears, Transform ____head)
     {
-        __instance.gameObject.AddComponent<SteamVR_Ears>();
+        foreach (var aud in Object.FindObjectsOfType<AudioListener>())
+            Object.DestroyImmediate(aud);
+
+        var inst = __instance;
+        inst.gameObject.AddComponent<AudioListener>();
+        inst.gameObject.AddComponent<SteamVR_Ears>();
+
+
         ____ears = __instance.transform;
         ____head = __instance.transform;
 

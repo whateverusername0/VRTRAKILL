@@ -18,7 +18,6 @@ namespace VRTRAKILL.Systems
             VRTRAKILL.Utilities.UnityExtensions.EnableOffscreenRendering();
 
             // reload config
-            Prefs.ConfigJSON._instance = null;
             Prefs.ConfigMaster.Init();
 
             Assets.LoadAllCustomAssets();

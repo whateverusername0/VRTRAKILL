@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using VRTRAKILL.Data;
+using VRTRAKILL.Patches.ULTRAKILL;
 
 namespace VRTRAKILL.Systems.Controllers
 {
     public class VRArmsSystem : MonoSingleton<VRArmsSystem>
     {
         public VRControllersSystem CC;
-        public GameObject GunOffset;
+        public Transform GunOffset;
 
         public Vector3 ArmIKOffset = new Vector3(0, .05f, -.11f);
 
@@ -24,15 +25,13 @@ namespace VRTRAKILL.Systems.Controllers
             Speed = _CurrentVelocity.magnitude;
         }
 
-        public override void Awake()
+        public void Awake()
         {
-            base.Awake();
             CC = gameObject.GetComponent<VRControllersSystem>();
             GunOffset = CC.GunOffset;
             LastPosition = transform.position;
 
-            if (Vars.Config.UIInteraction.ControllerBased)
-                UI.VRUIConverter.UIEventCamera.transform.parent = Vars.NonDominantHand.transform;
+            UI.VRUIConverter.UIEventCamera.transform.parent = Vars.NonDominantHand.transform;
         }
 
         public void Update()
@@ -44,7 +43,7 @@ namespace VRTRAKILL.Systems.Controllers
             if (LastPosition != transform.position)
             {
                 Velocity = (transform.position - LastPosition).normalized;
-                Arms.Patches.PatchPunch.Direction = Velocity;
+                PatchPunch.Direction = Velocity;
                 LastPosition = transform.position;
             }
 
@@ -56,8 +55,8 @@ namespace VRTRAKILL.Systems.Controllers
             if ((FistControl.Instance?.spawnedArms.Count == 0 && !Vars.IsPlayerFrozen)
             || ((bool)!FistControl.Instance?.activated && FistControl.Instance?.spawnedArms.Count == 0)
             || Vars.IsMainMenu)
-                CC.RenderModel.SetActive(true);
-            else CC.RenderModel.SetActive(false);
+                CC.RenderModel.gameObject.SetActive(true);
+            else CC.RenderModel.gameObject.SetActive(false);
         }
     }
 }
