@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using UnityEngine;
-using Valve.VR;
+using VRTRAKILL.Systems.VRCamera;
+using VRTRAKILL.Utilities;
 
 namespace VRTRAKILL.Patches.Misc;
 
@@ -9,12 +10,6 @@ namespace VRTRAKILL.Patches.Misc;
     [HarmonyPostfix] [HarmonyPatch(nameof(InitGame.Awake))] static void Awake()
     {
         var mainCam = Camera.main;
-
-        var r = mainCam.gameObject.AddComponent<SteamVR_Render>();
-
-        var cam = mainCam.gameObject.AddComponent<SteamVR_Camera>();
-
-        var tr = mainCam.gameObject.AddComponent<SteamVR_TrackedObject>();
-        tr.index = SteamVR_TrackedObject.EIndex.Hmd;
+        mainCam.gameObject.EnsureComponent<SteamVRBridge>();
     }
 }

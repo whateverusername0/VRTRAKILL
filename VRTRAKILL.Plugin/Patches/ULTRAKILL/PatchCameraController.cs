@@ -1,15 +1,21 @@
 ﻿using HarmonyLib;
 using UnityEngine;
-using UnityEngine.XR;
-using UnityEngine.XR.Management;
 using Valve.VR;
 using VRTRAKILL.Data;
+using VRTRAKILL.Systems.VRCamera;
+using VRTRAKILL.Utilities;
 
 namespace VRTRAKILL.Patches.ULTRAKILL;
 
 [HarmonyPatch(typeof(CameraController))] internal class PatchCameraController
 {
     public static SteamVR_TrackedObject HMD;
+
+    [HarmonyPrefix] [HarmonyPatch(typeof(Camera), "set_fieldOfView")]
+    // Unity already prevents this, but it also nags you constantly about it.
+    // Some games try to change the FOV every frame, and all those logs can reduce performance.
+    private static bool Set_FieldOfView()
+        => false;
 
     /// <summary>
     ///     PATCH: Add <see cref="Layers.AlwaysOnTop"/> to the Main Camera.
@@ -39,11 +45,9 @@ namespace VRTRAKILL.Patches.ULTRAKILL;
         HMD = go.AddComponent<SteamVR_TrackedObject>();
         HMD.index = SteamVR_TrackedObject.EIndex.Hmd;
 
-        var vc = GameObject.Find("Virtual Camera").GetComponent<Camera>();
-        var xrman = XRGeneralSettings.Instance.Manager;
-        var display = xrman.activeLoader.GetLoadedSubsystem<XRDisplaySubsystem>();
-        vc.targetTexture = display.GetRenderTextureForRenderPass(0);
-        vc.gameObject.AddComponent<SteamVR_Render>();
+        var svrb = __instance.gameObject.EnsureComponent<SteamVRBridge>();
+        var vc = GameObject.Find("Virtual Camera");
+        if (vc != null) svrb.RenderingCamera = vc.GetComponent<Camera>();
     }
 
     /// <summary>
@@ -75,9 +79,6 @@ namespace VRTRAKILL.Patches.ULTRAKILL;
             __instance.rotationX = 90f * Mathf.Sign(f);
 
         __instance.ApplyRotations();
-
-        // reset fov
-        __instance.cam.fieldOfView = __instance.defaultFov;
 
         return false;
     }

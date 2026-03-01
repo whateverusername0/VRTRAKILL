@@ -9,6 +9,8 @@ public static class Vars
     public static VrtrakillConfigJSON Config => ConfigJSON.Instance.Config;
     public static ManualLogSource Log => Plugin.Log;
 
+    public static float RefreshRate = 72f;
+
     // checks
     public static bool IsMainMenu
         => OptionsManager.Instance?.mainMenu ?? false;

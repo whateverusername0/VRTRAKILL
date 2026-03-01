@@ -46,4 +46,7 @@ public static class UnityExtensions
 
     public static bool HasComponent<T>(this GameObject GM) where T : Component
     { return GM.GetComponent<T>() != null; }
+
+    public static T EnsureComponent<T>(this GameObject @gameOject) where T : Component
+        => !@gameOject.TryGetComponent<T>(out var comp) ? gameOject.AddComponent<T>() : comp;
 }

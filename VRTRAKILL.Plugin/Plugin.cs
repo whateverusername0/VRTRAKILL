@@ -23,9 +23,8 @@ public sealed partial class Plugin : BaseUnityPlugin
     public void Awake()
     {
         Log = Logger;
-        //Debug.unityLogger.filterLogType = LogType.Warning;
+        Debug.unityLogger.filterLogType = LogType.Log;
 
-        //Prefs.ConfigMaster.Init();
         PatchStuff();
         //SceneWorker.Init();
 
@@ -44,11 +43,12 @@ public sealed partial class Plugin : BaseUnityPlugin
         var loader = XRGeneralSettings.Instance.Manager.activeLoader;
         if (loader == null)
             XRGeneralSettings.Instance.Manager.InitializeLoaderSync();
+
+        UnityExtensions.EnableOffscreenRendering();
     }
 
     private void PatchStuff()
     {
-        // just patch everything at this point. nobody is looking at the settings anyway.
         //new Patcher(new HarmonyLib.Harmony(PluginInfo.PLUGIN_GUID))
         //{
         //    Log = Vars.Log,
@@ -83,7 +83,12 @@ public sealed partial class Plugin : BaseUnityPlugin
         var loader = XRGeneralSettings.Instance.Manager.activeLoader;
         if (loader == null) Log.LogFatal("Unable to load XR Display Subsystem!");
 
-        managerSettings.activeLoader.GetLoadedSubsystem<XRDisplaySubsystem>().Start();
+        var display = managerSettings.activeLoader.GetLoadedSubsystem<XRDisplaySubsystem>();
+        display.Start();
+
+        // for future reference
+        if (display.TryGetDisplayRefreshRate(out var refreshRate))
+            Vars.RefreshRate = refreshRate;
 
         Log.LogMessage("Active loader: " + managerSettings.activeLoader);
 

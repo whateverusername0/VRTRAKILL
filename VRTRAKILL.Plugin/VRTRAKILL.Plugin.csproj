@@ -163,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Layers.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Patches\Misc\PatchInitGame.cs" />
     <Compile Include="Patches\UI\PatchFinalRank.cs" />
     <Compile Include="Patches\UI\PatchFlashImage.cs" />
@@ -215,14 +216,11 @@
     <Compile Include="Systems\Controllers\VRGunsSystem.cs" />
     <Compile Include="Patches\ULTRAKILL\Weapons\PatchDualWieldPickup.cs" />
     <Compile Include="Patches\ULTRAKILL\Weapons\PatchGunControl.cs" />
-    <Compile Include="Input\SVRActionsManager.cs" />
     <Compile Include="Patches\ULTRAKILL\Weapons\PatchRemoveArms.cs" />
+    <Compile Include="Systems\VRCamera\SteamVRBridge.cs" />
     <Compile Include="Systems\WeaponTransform.cs" />
-    <Compile Include="Systems\VRCamera\VRDesktopCamera.cs" />
-    <Compile Include="Systems\VRCamera\VRDesktopUICamera.cs" />
     <Compile Include="Systems\VRCamera\VRCameraController.cs" />
     <Compile Include="Preferences\ConfigJSON.cs" />
-    <Compile Include="Preferences\ConfigMaster.cs" />
     <Compile Include="Input\InputMap.cs" />
     <Compile Include="Data\InputVars.cs" />
     <Compile Include="Data\Vars.cs" />

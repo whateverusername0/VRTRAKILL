@@ -15,11 +15,6 @@ namespace VRTRAKILL.Systems
         // cool message suppersion :)
         private static void SceneChanged(Scene S)
         {
-            VRTRAKILL.Utilities.UnityExtensions.EnableOffscreenRendering();
-
-            // reload config
-            Prefs.ConfigMaster.Init();
-
             Assets.LoadAllCustomAssets();
             RelayerAssetsStuff();
 

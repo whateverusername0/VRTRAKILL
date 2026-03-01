@@ -6,6 +6,7 @@ namespace VRTRAKILL.Prefs;
 
 public class ConfigJSON
 {
+    public static string ConfigPath = $"{PluginInfo.PluginPath}\\VRTRAKILL_Config.json";
     [JsonProperty("VRTRAKILL Settings")] public VrtrakillConfigJSON Config { get; set; }
 
     private static ConfigJSON _instance { get; set; }
@@ -27,7 +28,7 @@ public class ConfigJSON
     {
         try
         {
-            string Temp = File.ReadAllText(ConfigMaster.ConfigPath);
+            string Temp = File.ReadAllText(ConfigPath);
             ConfigJSON Config = JsonConvert.DeserializeObject<ConfigJSON>(Temp);
             return Config;
         }
@@ -51,6 +52,6 @@ public class ConfigJSON
     public static void Serialize(ConfigJSON Config)
     {
         string JSON = JsonConvert.SerializeObject(Config, Formatting.Indented);
-        File.WriteAllText(ConfigMaster.ConfigPath, JSON);
+        File.WriteAllText(ConfigPath, JSON);
     }
 }
