@@ -82,18 +82,17 @@
       <HintPath>..\lib\BepInEx\MonoMod.Utils.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="SteamVR, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\SteamVR\SteamVR.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\lib\SteamVR.dll</HintPath>
     </Reference>
     <Reference Include="SteamVR_Actions, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\SteamVR\SteamVR_Actions.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\lib\SteamVR_Actions.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -104,10 +103,12 @@
       <HintPath>..\lib\Unity\Unity.InputSystem.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.XR.Management">
+    <Reference Include="Unity.XR.Management, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Unity.XR.Management.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.XR.OpenVR">
+    <Reference Include="Unity.XR.OpenVR, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Unity.XR.OpenVR.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
@@ -146,7 +147,8 @@
       <HintPath>..\lib\Unity\UnityEngine.PhysicsModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.SubsystemsModule">
+    <Reference Include="UnityEngine.SubsystemsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\UnityEngine.SubsystemsModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
@@ -157,8 +159,16 @@
       <HintPath>..\lib\Unity\UnityEngine.UIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.XRModule">
-      <HintPath>..\lib\Unity\UnityEngine.XRModule.dll</HintPath>
+    <Reference Include="UnityEngine.VRModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\UnityEngine.VRModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.XR.LegacyInputHelpers">
+      <HintPath>..\lib\UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.XRModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\UnityEngine.XRModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -217,7 +227,7 @@
     <Compile Include="Patches\ULTRAKILL\Weapons\PatchDualWieldPickup.cs" />
     <Compile Include="Patches\ULTRAKILL\Weapons\PatchGunControl.cs" />
     <Compile Include="Patches\ULTRAKILL\Weapons\PatchRemoveArms.cs" />
-    <Compile Include="Systems\VRCamera\SteamVRBridge.cs" />
+    <Compile Include="Systems\VRCamera\OpenVRBridge.cs" />
     <Compile Include="Systems\WeaponTransform.cs" />
     <Compile Include="Systems\VRCamera\VRCameraController.cs" />
     <Compile Include="Preferences\ConfigJSON.cs" />

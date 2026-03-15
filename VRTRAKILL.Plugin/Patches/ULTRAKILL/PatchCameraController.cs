@@ -22,7 +22,7 @@ namespace VRTRAKILL.Patches.ULTRAKILL;
     ///     Also tweak a couple values for convenience.
     /// </summary>
     [HarmonyPrefix] [HarmonyPatch(nameof(CameraController.Start))]
-    static void ConvertCameras(CameraController __instance)
+    static void StartPrefix(CameraController __instance)
     {
         while (__instance.cam == null && __instance.hudCamera == null) { }
 
@@ -39,15 +39,17 @@ namespace VRTRAKILL.Patches.ULTRAKILL;
     ///     PATCH: Add head tracking, make it render on your headset.
     /// </summary>
     [HarmonyPostfix] [HarmonyPatch(nameof(CameraController.Start))]
-    static void AddSVRCam(CameraController __instance)
+    static void StartPostfix(CameraController __instance)
     {
-        var go = new GameObject("SteamVR Tracked HMD");
-        HMD = go.AddComponent<SteamVR_TrackedObject>();
-        HMD.index = SteamVR_TrackedObject.EIndex.Hmd;
-
-        var svrb = __instance.gameObject.EnsureComponent<SteamVRBridge>();
         var vc = GameObject.Find("Virtual Camera");
-        if (vc != null) svrb.RenderingCamera = vc.GetComponent<Camera>();
+        if (vc != null && vc.TryGetComponent<Camera>(out var cam))
+        {
+            var ovrb = vc.EnsureComponent<OpenVRBridge>();
+            ovrb.RenderingCamera = cam;
+        }
+
+        HMD = __instance.gameObject.EnsureComponent<SteamVR_TrackedObject>();
+        HMD.index = SteamVR_TrackedObject.EIndex.Hmd;
     }
 
     /// <summary>

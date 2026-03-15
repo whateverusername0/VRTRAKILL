@@ -10,6 +10,7 @@ namespace VRTRAKILL.Patches.Misc;
     [HarmonyPostfix] [HarmonyPatch(nameof(InitGame.Awake))] static void Awake()
     {
         var mainCam = Camera.main;
-        mainCam.gameObject.EnsureComponent<SteamVRBridge>();
+        var ovrb = mainCam.gameObject.EnsureComponent<OpenVRBridge>();
+        ovrb.RenderingCamera = mainCam;
     }
 }
