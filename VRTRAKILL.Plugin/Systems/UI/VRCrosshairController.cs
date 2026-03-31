@@ -7,7 +7,7 @@ namespace VRTRAKILL.Systems.UI;
 public class VRCrosshairController : MonoBehaviour
 {
     // Distance between the object and the crosshair
-    public float Length => Vars.Config.Controllers.CrosshairDistance;
+    public float Length => GlobalVars.Config.Controllers.CrosshairDistance;
 
     // A magic number which gives us the most accurate center
     Vector3 Offset = new(-.2f, -2.75f, 0);
@@ -15,8 +15,8 @@ public class VRCrosshairController : MonoBehaviour
 
     public void LateUpdate()
     {
-        if (Vars.IsPlayerFrozen || Vars.IsPlayerUsingShop)
-            transform.position = Vars.MainCamera.position + (Vars.MainCamera.forward * Length * .25f) + Offset;
+        if (GlobalVars.IsPlayerFrozen || GlobalVars.IsPlayerUsingShop)
+            transform.position = GlobalVars.MainCamera.position + (GlobalVars.MainCamera.forward * Length * .25f) + Offset;
         else
         {
             if (GunControl.Instance != null)
@@ -26,7 +26,7 @@ public class VRCrosshairController : MonoBehaviour
                     Target = GunControl.Instance.currentWeapon.transform;
                 else Target = GunControl.Instance.transform;
             }
-            else Target = Vars.DominantHand;
+            else Target = GlobalVars.DominantHand;
 
             transform.position = Target.position + (Target.forward * Length) + Offset;
             transform.rotation = Target.rotation;

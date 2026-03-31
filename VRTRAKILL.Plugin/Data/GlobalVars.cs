@@ -4,7 +4,7 @@ using VRTRAKILL.Prefs;
 
 namespace VRTRAKILL.Data;
 
-public static class Vars
+public static class GlobalVars
 {
     public static VrtrakillConfigJSON Config => ConfigJSON.Instance.Config;
     public static ManualLogSource Log => Plugin.Log;

@@ -21,7 +21,7 @@ namespace VRTRAKILL.Patches.Controllers;
         LCon.RenderModelOffsetEulerAngles = new Vector3(75, 0, 0);
         LCon.RenderModelOffsetScale = new Vector3(.65f, .65f, .65f);
 
-        LHGO.transform.parent = Vars.VRCameraContainer;
+        LHGO.transform.parent = GlobalVars.VRCameraContainer;
 
         GameObject RHGO = CreateController("Right Controller", SteamVR_Input_Sources.RightHand);
 
@@ -30,9 +30,9 @@ namespace VRTRAKILL.Patches.Controllers;
         RCon.RenderModelOffsetEulerAngles = new Vector3(75, 0, 0);
         RCon.RenderModelOffsetScale = new Vector3(-.65f, .65f, .65f);
 
-        RHGO.transform.parent = Vars.VRCameraContainer;
+        RHGO.transform.parent = GlobalVars.VRCameraContainer;
 
-        if (Vars.Config.Controllers.DrawControllers)
+        if (GlobalVars.Config.Controllers.DrawControllers)
         {
             GameObject LHMGO = CreateControllerModel(SteamVR_Input_Sources.LeftHand, out GameObject _);
             LHMGO.transform.parent = LHGO.transform;

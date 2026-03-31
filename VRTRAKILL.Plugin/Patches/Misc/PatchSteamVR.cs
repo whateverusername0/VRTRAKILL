@@ -10,7 +10,7 @@ namespace VRTRAKILL.Patches.Misc;
     ///     PATCH: Tweaked Expand() method, making it provide less headache.
     /// </summary>
     [HarmonyPrefix] [HarmonyPatch(typeof(SteamVR_Camera), nameof(SteamVR_Camera.Expand))]
-    static bool SVRCExpand(SteamVR_Camera __instance, Transform ____ears, Transform ____head)
+    static bool Expand(SteamVR_Camera __instance, Transform ____ears, Transform ____head)
     {
         foreach (var aud in Object.FindObjectsOfType<AudioListener>())
             Object.DestroyImmediate(aud);

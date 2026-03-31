@@ -8,8 +8,8 @@ namespace VRTRAKILL.Patches.Controllers;
 
 [HarmonyPatch(typeof(RumbleManager))] internal static class PatchRumbleManager
 {
-    static SteamVR_Input_Sources _nonDomHand => Vars.NDHC.GetComponent<SteamVR_Behaviour_Pose>().inputSource;
-    static SteamVR_Input_Sources _domHand => Vars.DHC.GetComponent<SteamVR_Behaviour_Pose>().inputSource;
+    static SteamVR_Input_Sources _nonDomHand => GlobalVars.NDHC.GetComponent<SteamVR_Behaviour_Pose>().inputSource;
+    static SteamVR_Input_Sources _domHand => GlobalVars.DHC.GetComponent<SteamVR_Behaviour_Pose>().inputSource;
 
     [HarmonyPostfix] [HarmonyPatch(nameof(RumbleManager.Update))]
     static void Update(RumbleManager __instance)

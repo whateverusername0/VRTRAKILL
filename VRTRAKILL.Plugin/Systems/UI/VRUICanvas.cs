@@ -9,7 +9,7 @@ public class VRUICanvas : MonoBehaviour
     private Vector3 LastCamFwd = Vector3.zero;
 
     private const float Distance = 72f;
-    private static float Scale => Vars.Config.UISize;
+    private static float Scale => GlobalVars.Config.UISize;
 
     private void UpdatePos()
     {
@@ -31,7 +31,7 @@ public class VRUICanvas : MonoBehaviour
     }
     public void Update()
     {
-        if (!Vars.IsPlayerFrozen) UpdatePos(); else ResetPos();
+        if (!GlobalVars.IsPlayerFrozen) UpdatePos(); else ResetPos();
         transform.position = VRUIConverter.UICamera.transform.position + LastCamFwd;
     }
 }

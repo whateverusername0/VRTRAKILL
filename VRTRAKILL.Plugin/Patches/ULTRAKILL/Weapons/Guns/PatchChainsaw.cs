@@ -10,7 +10,7 @@ namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
     {
         __instance.lineStartTransform = GunControl.Instance?.currentWeapon != null
             ? GunControl.Instance?.currentWeapon.transform
-            : Vars.DominantHand.transform;
+            : GlobalVars.DominantHand.transform;
     }
 
     // TODO

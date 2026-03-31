@@ -26,7 +26,6 @@ public sealed partial class Plugin : BaseUnityPlugin
         Debug.unityLogger.filterLogType = LogType.Log;
 
         PatchStuff();
-        //SceneWorker.Init();
 
         InitializeSteamVR();
         SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
@@ -56,7 +55,7 @@ public sealed partial class Plugin : BaseUnityPlugin
 
         new Patcher(new HarmonyLib.Harmony(PluginInfo.PLUGIN_GUID))
         {
-            Log = Vars.Log,
+            Log = GlobalVars.Log,
         }.Patch(new Type[]
         {
             typeof(PatchSteamVR),
@@ -88,7 +87,7 @@ public sealed partial class Plugin : BaseUnityPlugin
 
         // for future reference
         if (display.TryGetDisplayRefreshRate(out var refreshRate))
-            Vars.RefreshRate = refreshRate;
+            GlobalVars.RefreshRate = refreshRate;
 
         Log.LogMessage("Active loader: " + managerSettings.activeLoader);
 

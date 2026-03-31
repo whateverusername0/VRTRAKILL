@@ -26,6 +26,6 @@ namespace VRTRAKILL.Patches.Visual;
             }
             //else __instance.gameObject.AddComponent<VRArmTransformer>();
         }
-        catch (NullReferenceException) { Vars.Log.LogWarning($"{__instance.gameObject.name} is null???"); }
+        catch (NullReferenceException) { GlobalVars.Log.LogWarning($"{__instance.gameObject.name} is null???"); }
     }
 }

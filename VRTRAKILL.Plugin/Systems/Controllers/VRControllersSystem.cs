@@ -17,7 +17,7 @@ namespace VRTRAKILL.Systems.Controllers
         public Transform ArmOffset = new GameObject("Arm Offset") { layer = (int)Layers.IgnoreRaycast }.transform;
 
         LineRenderer LR; Vector3 EndPosition;
-        public float DefaultLength => Vars.Config.Controllers.CrosshairDistance;
+        public float DefaultLength => GlobalVars.Config.Controllers.CrosshairDistance;
 
         private void SetupOffsets()
         {
@@ -55,7 +55,7 @@ namespace VRTRAKILL.Systems.Controllers
         {
             if (LR == null) return;
 
-            if (Vars.IsPlayerFrozen || Vars.IsPlayerUsingShop) LR.enabled = true;
+            if (GlobalVars.IsPlayerFrozen || GlobalVars.IsPlayerUsingShop) LR.enabled = true;
             else LR.enabled = false;
 
             if (LR.enabled)
@@ -81,7 +81,7 @@ namespace VRTRAKILL.Systems.Controllers
             DrawControllerLines();
 
             // controller model
-            if (Vars.Config.Controllers.DrawControllers)
+            if (GlobalVars.Config.Controllers.DrawControllers)
             {
                 RenderModel.localPosition = RenderModelOffsetPos;
                 RenderModel.localRotation = Quaternion.Euler(RenderModelOffsetEulerAngles);

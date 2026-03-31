@@ -38,7 +38,7 @@ namespace VRTRAKILL.Systems.Controllers
                 if (GunControl.Instance != null
                 && GunControl.Instance.currentWeapon != null
                 && GunControl.Instance.currentWeapon.HasComponent<Sandbox.Arm.SandboxArm>()
-                && !Vars.IsMainMenu)
+                && !GlobalVars.IsMainMenu)
                 {
                     RM?.SetActive(false);
                     SandboxHandRM?.SetActive(true);

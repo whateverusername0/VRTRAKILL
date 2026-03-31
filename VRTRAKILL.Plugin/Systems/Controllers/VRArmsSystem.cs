@@ -31,7 +31,7 @@ namespace VRTRAKILL.Systems.Controllers
             GunOffset = CC.GunOffset;
             LastPosition = transform.position;
 
-            UI.VRUIConverter.UIEventCamera.transform.parent = Vars.NonDominantHand.transform;
+            UI.VRUIConverter.UIEventCamera.transform.parent = GlobalVars.NonDominantHand.transform;
         }
 
         public void Update()
@@ -52,9 +52,9 @@ namespace VRTRAKILL.Systems.Controllers
 
         private void SetControllers()
         {
-            if ((FistControl.Instance?.spawnedArms.Count == 0 && !Vars.IsPlayerFrozen)
+            if ((FistControl.Instance?.spawnedArms.Count == 0 && !GlobalVars.IsPlayerFrozen)
             || ((bool)!FistControl.Instance?.activated && FistControl.Instance?.spawnedArms.Count == 0)
-            || Vars.IsMainMenu)
+            || GlobalVars.IsMainMenu)
                 CC.RenderModel.gameObject.SetActive(true);
             else CC.RenderModel.gameObject.SetActive(false);
         }

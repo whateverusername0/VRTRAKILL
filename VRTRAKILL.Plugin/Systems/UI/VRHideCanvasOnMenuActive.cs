@@ -5,7 +5,7 @@ namespace VRTRAKILL.Systems.UI;
 
 public class VRHideCanvasOnMenuActive : MonoBehaviour
 {
-    private bool ShouldHide => Vars.IsPlayerFrozen;
+    private bool ShouldHide => GlobalVars.IsPlayerFrozen;
 
     public void Update()
     {

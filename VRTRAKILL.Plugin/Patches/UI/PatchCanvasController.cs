@@ -61,6 +61,6 @@ namespace VRTRAKILL.Patches.UI;
         UnityExtensions.RecursiveChangeLayer(UI_GTFOTW, (int)Layers.UI);
 
         VRNoclipPreventionSystem GTFOTW = UI_GTFOTW.AddComponent<VRNoclipPreventionSystem>();
-        GTFOTW.Pivot = Vars.MainCamera.transform;
+        GTFOTW.Pivot = GlobalVars.MainCamera.transform;
     }
 }
