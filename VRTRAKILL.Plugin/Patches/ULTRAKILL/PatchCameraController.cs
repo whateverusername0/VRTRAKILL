@@ -13,7 +13,7 @@ namespace VRTRAKILL.Patches.ULTRAKILL;
 
     [HarmonyPrefix] [HarmonyPatch(typeof(Camera), "set_fieldOfView")]
     // Unity already prevents this, but it also nags you constantly about it.
-    // Some games try to change the FOV every frame, and all those logs can reduce performance.
+    // Some games try to change the FOV every frame, and all those logs can and WILL clot your console output.
     private static bool Set_FieldOfView()
         => false;
 
@@ -30,7 +30,7 @@ namespace VRTRAKILL.Patches.ULTRAKILL;
         __instance.cam.stereoTargetEye = StereoTargetEyeMask.Both;
 
         // AlwaysOnTop responds for your weapons view.
-        __instance.cam.cullingMask |= 1 << (int)Layers.AlwaysOnTop;
+        //__instance.cam.cullingMask |= 1 << (int)Layers.AlwaysOnTop;
 
         __instance.hudCamera.stereoTargetEye = StereoTargetEyeMask.Both;
     }
@@ -44,7 +44,7 @@ namespace VRTRAKILL.Patches.ULTRAKILL;
         var vc = GameObject.Find("Virtual Camera");
         if (vc != null && vc.TryGetComponent<Camera>(out var cam))
         {
-            var ovrb = vc.EnsureComponent<OpenVRBridge>();
+            var ovrb = vc.EnsureComponent<OpenXRBridge>();
             ovrb.RenderingCamera = cam;
         }
 
@@ -71,7 +71,7 @@ namespace VRTRAKILL.Patches.ULTRAKILL;
         __instance.gravityRotation = Quaternion.FromToRotation(fromDirection, toDirection) * __instance.gravityRotation;
 
         var vec = SteamVR_Actions._default.Turn.delta;
-        var speed = Vars.Config.Controllers.SmoothSpeed;
+        var speed = GlobalVars.Config.Controllers.SmoothSpeed;
         var y = vec.y * speed;
 
         __instance.rotationY += __instance.reverseX ? -y : y;
@@ -87,7 +87,7 @@ namespace VRTRAKILL.Patches.ULTRAKILL;
 
     /// <summary>
     ///     PATCH: Seamlessly integrate HMD rotation to the player.
-    ///     Seamlessly as in the player will not notice any camera bullshit happening in front of him.
+    ///     Seamlessly as in the player will not notice any camera bullshit happening up front.
     /// </summary>
     [HarmonyPostfix] [HarmonyPatch(nameof(CameraController.ApplyRotations))]
     static void ApplyRotations(CameraController __instance)

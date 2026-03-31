@@ -1,32 +1,35 @@
 ﻿using UnityEngine;
 using System.Collections;
 using VRTRAKILL.Data;
+using VRTRAKILL.Systems.Input;
 
 namespace VRTRAKILL.Systems.VRCamera;
 
 public class VRCameraController : MonoSingleton<VRCameraController>
 {
+    public float TurnOffset = 0;
+
     public void Update()
     {
-        if (Vars.Config.Controllers.SnapTurn) StartCoroutine(SnapTurn());
+        if (GlobalVars.Config.Controllers.SnapTurn) StartCoroutine(SnapTurn());
         else StartCoroutine(SmoothTurn());
 
         // Follow MC rotation
         if (NewMovement.Instance.dead) return;
         NewMovement.Instance.gameObject.transform.rotation =
             Quaternion.Euler(NewMovement.Instance.transform.rotation.eulerAngles.x,
-                             Vars.MainCamera.transform.rotation.eulerAngles.y,
+                             GlobalVars.MainCamera.transform.rotation.eulerAngles.y,
                              NewMovement.Instance.transform.rotation.eulerAngles.z);
 
-        transform.rotation = Quaternion.Euler(0f, InputVars.TurnOffset, 0f);
+        transform.rotation = Quaternion.Euler(0f, TurnOffset, 0f);
     }
 
     private IEnumerator SmoothTurn()
     {
-            if (InputVars.TurnVector.x > 0 + Vars.Config.Controllers.Deadzone)
-                InputVars.TurnOffset += Vars.Config.Controllers.SmoothSpeed * Time.deltaTime;
-            if (InputVars.TurnVector.x < 0 - Vars.Config.Controllers.Deadzone)
-                InputVars.TurnOffset -= Vars.Config.Controllers.SmoothSpeed * Time.deltaTime;
+            if (SteamVRPlayerInput.LookVector.x > 0 + GlobalVars.Config.Controllers.Deadzone)
+                TurnOffset += GlobalVars.Config.Controllers.SmoothSpeed * Time.deltaTime;
+            if (SteamVRPlayerInput.LookVector.x < 0 - GlobalVars.Config.Controllers.Deadzone)
+                TurnOffset -= GlobalVars.Config.Controllers.SmoothSpeed * Time.deltaTime;
             yield return new WaitForEndOfFrame();
     }
 
@@ -36,14 +39,14 @@ public class VRCameraController : MonoSingleton<VRCameraController>
             if (IsTurning)
             {
                 SnapTurnTimer += Time.deltaTime;
-                if (SnapTurnTimer >= .2f || InputVars.TurnVector.x == 0) { IsTurning = false; SnapTurnTimer = 0; }
+                if (SnapTurnTimer >= .2f || SteamVRPlayerInput.LookVector.x == 0) { IsTurning = false; SnapTurnTimer = 0; }
             }
             else
             {
-                if (InputVars.TurnVector.x > 0 + Vars.Config.Controllers.Deadzone)
-                { IsTurning = true; InputVars.TurnOffset += Vars.Config.Controllers.SnapAngles; }
-                else if (InputVars.TurnVector.x < 0 - Vars.Config.Controllers.Deadzone)
-                { IsTurning = true; InputVars.TurnOffset -= Vars.Config.Controllers.SnapAngles; }
+                if (SteamVRPlayerInput.LookVector.x > 0 + GlobalVars.Config.Controllers.Deadzone)
+                { IsTurning = true; TurnOffset += GlobalVars.Config.Controllers.SnapAngles; }
+                else if (SteamVRPlayerInput.LookVector.x < 0 - GlobalVars.Config.Controllers.Deadzone)
+                { IsTurning = true; TurnOffset -= GlobalVars.Config.Controllers.SnapAngles; }
             }
             yield return new WaitForEndOfFrame();
     }

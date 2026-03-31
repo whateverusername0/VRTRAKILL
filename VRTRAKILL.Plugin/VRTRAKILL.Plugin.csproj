@@ -85,14 +85,17 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="SteamVR, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\SteamVR.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="SteamVR_Actions, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\SteamVR_Actions.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -103,13 +106,43 @@
       <HintPath>..\lib\Unity\Unity.InputSystem.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.XR.CoreUtils">
+      <HintPath>..\lib\Unity\Unity.XR.CoreUtils.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.XR.Management, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\Unity.XR.Management.dll</HintPath>
+      <HintPath>..\lib\Unity\Unity.XR.Management.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Unity.XR.OpenVR, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\Unity.XR.OpenVR.dll</HintPath>
+      <HintPath>..\lib\Unity\Unity.XR.OpenVR.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.XR.OpenXR">
+      <HintPath>..\lib\Unity\Unity.XR.OpenXR.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.XR.OpenXR.Features.ConformanceAutomation">
+      <HintPath>..\lib\Unity\Unity.XR.OpenXR.Features.ConformanceAutomation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.XR.OpenXR.Features.MetaQuestSupport">
+      <HintPath>..\lib\Unity\Unity.XR.OpenXR.Features.MetaQuestSupport.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.XR.OpenXR.Features.MockRuntime">
+      <HintPath>..\lib\Unity\Unity.XR.OpenXR.Features.MockRuntime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.XR.OpenXR.Features.OculusQuestSupport">
+      <HintPath>..\lib\Unity\Unity.XR.OpenXR.Features.OculusQuestSupport.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.XR.OpenXR.Features.RuntimeDebugger">
+      <HintPath>..\lib\Unity\Unity.XR.OpenXR.Features.RuntimeDebugger.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine">
       <HintPath>..\lib\Unity\UnityEngine.dll</HintPath>
@@ -149,7 +182,8 @@
     </Reference>
     <Reference Include="UnityEngine.SubsystemsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\UnityEngine.SubsystemsModule.dll</HintPath>
+      <HintPath>..\lib\Unity\UnityEngine.SubsystemsModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>..\lib\Unity\UnityEngine.UI.dll</HintPath>
@@ -161,19 +195,24 @@
     </Reference>
     <Reference Include="UnityEngine.VRModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\UnityEngine.VRModule.dll</HintPath>
+      <HintPath>..\lib\Unity\UnityEngine.VRModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.XR.LegacyInputHelpers">
-      <HintPath>..\lib\UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+    <Reference Include="UnityEngine.XR.LegacyInputHelpers, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Unity\UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.XRModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\UnityEngine.XRModule.dll</HintPath>
+      <HintPath>..\lib\Unity\UnityEngine.XRModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Layers.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Patches\Input\PatchInputManager.cs" />
     <Compile Include="Patches\Misc\PatchInitGame.cs" />
     <Compile Include="Patches\UI\PatchFinalRank.cs" />
     <Compile Include="Patches\UI\PatchFlashImage.cs" />
@@ -202,6 +241,7 @@
     <Compile Include="Systems\Assets.cs" />
     <Compile Include="Preferences\VrtrakillConfigJSON.cs" />
     <Compile Include="Patches\Misc\PatchDiscordController.cs" />
+    <Compile Include="Systems\Input\SteamVRPlayerInput.cs" />
     <Compile Include="Systems\SceneWorker.cs" />
     <Compile Include="Systems\UI\VRNoclipPreventionSystem.cs" />
     <Compile Include="Systems\UI\StandardHUDToggle.cs" />
@@ -227,18 +267,17 @@
     <Compile Include="Patches\ULTRAKILL\Weapons\PatchDualWieldPickup.cs" />
     <Compile Include="Patches\ULTRAKILL\Weapons\PatchGunControl.cs" />
     <Compile Include="Patches\ULTRAKILL\Weapons\PatchRemoveArms.cs" />
-    <Compile Include="Systems\VRCamera\OpenVRBridge.cs" />
+    <Compile Include="Systems\VRCamera\OpenXRBridge.cs" />
     <Compile Include="Systems\WeaponTransform.cs" />
     <Compile Include="Systems\VRCamera\VRCameraController.cs" />
     <Compile Include="Preferences\ConfigJSON.cs" />
-    <Compile Include="Input\InputMap.cs" />
-    <Compile Include="Data\InputVars.cs" />
-    <Compile Include="Data\Vars.cs" />
+    <Compile Include="Data\GlobalVars.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VRTRAKILL.Utilities\VRTRAKILL.Utilities.csproj">
       <Project>{3709e33e-4c44-43f8-a947-f71fe9f67233}</Project>
       <Name>VRTRAKILL.Utilities</Name>
+      <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
