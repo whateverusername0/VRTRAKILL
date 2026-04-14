@@ -212,6 +212,7 @@
   <ItemGroup>
     <Compile Include="Data\Layers.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Patches\VRCamera\PatchCameraController.cs" />
     <Compile Include="Patches\Input\PatchInputManager.cs" />
     <Compile Include="Patches\Misc\PatchInitGame.cs" />
     <Compile Include="Patches\UI\PatchFinalRank.cs" />
@@ -242,6 +243,7 @@
     <Compile Include="Preferences\VrtrakillConfigJSON.cs" />
     <Compile Include="Patches\Misc\PatchDiscordController.cs" />
     <Compile Include="Systems\Input\SteamVRPlayerInput.cs" />
+    <Compile Include="Systems\Input\VRCharacterController.cs" />
     <Compile Include="Systems\SceneWorker.cs" />
     <Compile Include="Systems\UI\VRNoclipPreventionSystem.cs" />
     <Compile Include="Systems\UI\StandardHUDToggle.cs" />
@@ -267,9 +269,7 @@
     <Compile Include="Patches\ULTRAKILL\Weapons\PatchDualWieldPickup.cs" />
     <Compile Include="Patches\ULTRAKILL\Weapons\PatchGunControl.cs" />
     <Compile Include="Patches\ULTRAKILL\Weapons\PatchRemoveArms.cs" />
-    <Compile Include="Systems\VRCamera\OpenXRBridge.cs" />
     <Compile Include="Systems\WeaponTransform.cs" />
-    <Compile Include="Systems\VRCamera\VRCameraController.cs" />
     <Compile Include="Preferences\ConfigJSON.cs" />
     <Compile Include="Data\GlobalVars.cs" />
   </ItemGroup>

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Valve.VR;
@@ -50,10 +51,13 @@ public static class SteamVRPlayerInput
     public static void Initialize()
     {
         if (_initialized) return;
+
+        SteamVR_Actions._default.Activate();
+
         _initialized = true;
 
-        Move.AddOnUpdateListener(UpdateVector2, SteamVR_Input_Sources.Any);
-        Look.AddOnUpdateListener(UpdateVector2, SteamVR_Input_Sources.Any);
+        Move.AddOnUpdateListener(UpdateMove, SteamVR_Input_Sources.Any);
+        Look.AddOnUpdateListener(UpdateLook, SteamVR_Input_Sources.Any);
         //WheelLook.AddOnUpdateListener(UpdateVector2, SteamVR_Input_Sources.Any); // inherits from Move
         Punch.AddOnUpdateListener(UpdateBool, SteamVR_Input_Sources.Any);
         Hook.AddOnUpdateListener(UpdateBool, SteamVR_Input_Sources.Any);
@@ -81,8 +85,17 @@ public static class SteamVRPlayerInput
         Slot6.AddOnUpdateListener(UpdateBool, SteamVR_Input_Sources.Any);
     }
 
-    private static void UpdateVector2(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
-        => ResolveInternal(fromAction);
+    private static void UpdateLook(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
+    {
+        ResolveInternal(fromAction);
+        MoveVector = axis;
+    }
+
+    private static void UpdateMove(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
+    {
+        ResolveInternal(fromAction);
+        LookVector = axis;
+    }
 
     public static void UpdateBool(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
         => ResolveInternal(fromAction);
@@ -110,7 +123,7 @@ public static class SteamVRPlayerInput
             return;
 
         var control = action.controls[0];
-        var actionType = svrAction.GetType();
+        //var actionType = svrAction.GetType(); // todo fix
         UpdatePerformedInternal(control, (dynamic)svrAction);
     }
 

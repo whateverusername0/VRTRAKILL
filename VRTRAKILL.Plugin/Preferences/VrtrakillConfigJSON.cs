@@ -22,6 +22,7 @@ public class VrtrakillConfigJSON
         [JsonProperty("Deadzone (from 0 to 1)")] public float Deadzone { get; set; } = 0.4f;
         [JsonProperty("Smooth turning speed")] public float SmoothSpeed { get; set; } = 300;
         [JsonProperty("Snap turning")] public bool SnapTurn { get; set; } = false;
+        [JsonProperty("Snap turn frequency")] public float SnapTurnSpeed { get; set; } = .2f;
         [JsonProperty("Snap turning angles")] public float SnapAngles { get; set; } = 45;
         [JsonProperty("Draw controller models")] public bool DrawControllers { get; set; } = true;
         [JsonProperty("Enable Crosshair")] public bool EnableCrosshair { get; set; } = true;
