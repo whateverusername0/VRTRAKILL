@@ -108,41 +108,41 @@
     </Reference>
     <Reference Include="Unity.XR.CoreUtils">
       <HintPath>..\lib\Unity\Unity.XR.CoreUtils.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Unity.XR.Management, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Unity\Unity.XR.Management.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Unity.XR.OpenVR, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Unity\Unity.XR.OpenVR.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Unity.XR.OpenXR">
       <HintPath>..\lib\Unity\Unity.XR.OpenXR.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Unity.XR.OpenXR.Features.ConformanceAutomation">
       <HintPath>..\lib\Unity\Unity.XR.OpenXR.Features.ConformanceAutomation.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Unity.XR.OpenXR.Features.MetaQuestSupport">
       <HintPath>..\lib\Unity\Unity.XR.OpenXR.Features.MetaQuestSupport.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Unity.XR.OpenXR.Features.MockRuntime">
       <HintPath>..\lib\Unity\Unity.XR.OpenXR.Features.MockRuntime.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Unity.XR.OpenXR.Features.OculusQuestSupport">
       <HintPath>..\lib\Unity\Unity.XR.OpenXR.Features.OculusQuestSupport.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Unity.XR.OpenXR.Features.RuntimeDebugger">
       <HintPath>..\lib\Unity\Unity.XR.OpenXR.Features.RuntimeDebugger.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="UnityEngine">
       <HintPath>..\lib\Unity\UnityEngine.dll</HintPath>

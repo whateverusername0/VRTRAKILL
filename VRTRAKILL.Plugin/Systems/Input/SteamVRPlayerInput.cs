@@ -124,8 +124,13 @@ public static class SteamVRPlayerInput
             return;
 
         var control = action.controls[0];
-        //var actionType = svrAction.GetType(); // todo fix
-        UpdatePerformedInternal(control, (dynamic)svrAction);
+        var actionType = svrAction.GetType();
+
+        if (svrAction is SteamVR_Action_Boolean svrBoolAction)
+            UpdatePerformedInternal(control, svrBoolAction);
+
+        if (svrAction is SteamVR_Action_Vector2 svrVectorAction)
+            UpdatePerformedInternal(control, svrVectorAction);
     }
 
     private static void UpdatePerformedInternal(InputControl control, SteamVR_Action_Boolean svrAction)
