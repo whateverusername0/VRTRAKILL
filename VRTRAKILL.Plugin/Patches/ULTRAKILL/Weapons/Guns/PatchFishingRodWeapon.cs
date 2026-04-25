@@ -8,6 +8,6 @@ namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
     [HarmonyPostfix] [HarmonyPatch(nameof(FishingRodWeapon.Awake))]
     static void Transform(FishingRodWeapon __instance)
     {
-        WeaponTransform.ApplyTransform(__instance.GetComponent<WeaponPos>(), new(.05f, -.06f, -.185f), new(10, 90, 20), new(-.0023f, .0023f, .0023f));
+        WeaponTransformHelper.ApplyTransform(__instance.GetComponent<WeaponPos>(), new(.05f, -.06f, -.185f), new(10, 90, 20), new(-.0023f, .0023f, .0023f));
     }
 }

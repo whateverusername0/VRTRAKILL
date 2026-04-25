@@ -12,7 +12,7 @@ namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
         var washer = __instance.GetComponentInChildren<Washer>();
         if (washer)
         {
-            WeaponTransform.ApplyTransform(__instance.GetComponent<WeaponPos>(), new(0.065f, -0.075f, -0.175f), new(10, 90, 20), new(-.0025f, .0025f, .0025f));
+            WeaponTransformHelper.ApplyTransform(__instance.GetComponent<WeaponPos>(), new(0.065f, -0.075f, -0.175f), new(10, 90, 20), new(-.0025f, .0025f, .0025f));
 
             washer.defaultSprayPos = new(.35f, -4.25f, -.675f);
             washer.defaultSprayRot = Quaternion.Euler(90, 0, 0);
@@ -30,7 +30,7 @@ namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
         var vacuum = __instance.GetComponentInChildren<Vacuum>();
         if (vacuum)
         {
-            WeaponTransform.ApplyTransform(__instance.GetComponent<WeaponPos>(), new(0, -.35f, 2.15f), new(0, 90, 20), new(.125f, .125f, .125f));
+            WeaponTransformHelper.ApplyTransform(__instance.GetComponent<WeaponPos>(), new(0, -.35f, 2.15f), new(0, 90, 20), new(.125f, .125f, .125f));
             return;
         }
     }

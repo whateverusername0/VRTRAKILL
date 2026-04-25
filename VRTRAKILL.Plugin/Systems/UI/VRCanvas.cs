@@ -4,7 +4,7 @@ using UnityEngine;
 namespace VRTRAKILL.Systems.UI;
 
 // "borrowed" from huskvr
-public class VRUICanvas : MonoBehaviour
+public class VRCanvas : MonoBehaviour
 {
     private Vector3 LastCamFwd = Vector3.zero;
 
@@ -13,13 +13,13 @@ public class VRUICanvas : MonoBehaviour
 
     private void UpdatePos()
     {
-        LastCamFwd = VRUIConverter.UICamera.transform.forward * Distance;
-        transform.rotation = VRUIConverter.UICamera.transform.rotation;
+        LastCamFwd = VRCanvasHelper.UICamera.transform.forward * Distance;
+        transform.rotation = VRCanvasHelper.UICamera.transform.rotation;
     }
     private void ResetPos()
     {
         LastCamFwd = new Vector3(LastCamFwd.x, 0f, LastCamFwd.z);
-        transform.LookAt(VRUIConverter.UICamera.transform);
+        transform.LookAt(VRCanvasHelper.UICamera.transform);
         transform.forward = new Vector3(-transform.forward.x, 0f, -transform.forward.z);
     }
 
@@ -32,6 +32,6 @@ public class VRUICanvas : MonoBehaviour
     public void Update()
     {
         if (!GlobalVars.IsPlayerFrozen) UpdatePos(); else ResetPos();
-        transform.position = VRUIConverter.UICamera.transform.position + LastCamFwd;
+        transform.position = VRCanvasHelper.UICamera.transform.position + LastCamFwd;
     }
 }

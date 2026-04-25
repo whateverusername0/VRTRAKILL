@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using UnityEngine;
+using VRTRAKILL.Systems;
 using VRTRAKILL.Systems.UI;
 using VRTRAKILL.Utilities;
 
@@ -12,7 +13,7 @@ namespace VRTRAKILL.Patches.UI;
     {
         // convert again
         foreach (Canvas C in Resources.FindObjectsOfTypeAll(typeof(Canvas)))
-            if (!C.gameObject.HasComponent<VRUICanvas>())
-                VRUIConverter.RecursiveConvertCanvas();
+            if (!C.gameObject.HasComponent<VRCanvas>())
+                VRCanvasHelper.RecursiveConvertCanvas();
     }
 }

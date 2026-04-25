@@ -1,6 +1,5 @@
 ﻿using HarmonyLib;
 using VRTRAKILL.Data;
-using VRTRAKILL.Systems;
 using VRTRAKILL.Systems.Controllers;
 using UnityEngine;
 using Valve.VR;
@@ -14,86 +13,86 @@ namespace VRTRAKILL.Patches.Controllers;
     {
         __instance.gameObject.SetActive(false);
 
-        GameObject LHGO = CreateController("Left Controller", SteamVR_Input_Sources.LeftHand);
+        var lefthandgo = CreateController("Left Controller", SteamVR_Input_Sources.LeftHand);
 
-        VRControllersSystem LCon = LHGO.AddComponent<VRControllersSystem>();
-        LCon.RenderModelOffsetPos = new Vector3(.055f, -.1f, -.1f);
-        LCon.RenderModelOffsetEulerAngles = new Vector3(75, 0, 0);
-        LCon.RenderModelOffsetScale = new Vector3(.65f, .65f, .65f);
+        var leftController = lefthandgo.AddComponent<VRControllerController>();
+        leftController.RenderModelOffsetPos = new Vector3(.055f, -.1f, -.1f);
+        leftController.RenderModelOffsetEulerAngles = new Vector3(75, 0, 0);
+        leftController.RenderModelOffsetScale = new Vector3(.65f, .65f, .65f);
 
-        LHGO.transform.parent = GlobalVars.VRCameraContainer;
+        lefthandgo.transform.parent = GlobalVars.VRCameraContainer;
 
-        GameObject RHGO = CreateController("Right Controller", SteamVR_Input_Sources.RightHand);
+        var righthandgo = CreateController("Right Controller", SteamVR_Input_Sources.RightHand);
 
-        VRControllersSystem RCon = RHGO.AddComponent<VRControllersSystem>();
-        RCon.RenderModelOffsetPos = new Vector3(-.015f, -.105f, -.15f);
-        RCon.RenderModelOffsetEulerAngles = new Vector3(75, 0, 0);
-        RCon.RenderModelOffsetScale = new Vector3(-.65f, .65f, .65f);
+        var rightController = righthandgo.AddComponent<VRControllerController>();
+        rightController.RenderModelOffsetPos = new Vector3(-.015f, -.105f, -.15f);
+        rightController.RenderModelOffsetEulerAngles = new Vector3(75, 0, 0);
+        rightController.RenderModelOffsetScale = new Vector3(-.65f, .65f, .65f);
 
-        RHGO.transform.parent = GlobalVars.VRCameraContainer;
+        righthandgo.transform.parent = GlobalVars.VRCameraContainer;
 
         if (GlobalVars.Config.Controllers.DrawControllers)
         {
-            GameObject LHMGO = CreateControllerModel(SteamVR_Input_Sources.LeftHand, out GameObject _);
-            LHMGO.transform.parent = LHGO.transform;
+            var lefthandmodelgo = CreateControllerModel(SteamVR_Input_Sources.LeftHand, out GameObject _);
+            lefthandmodelgo.transform.parent = lefthandgo.transform;
 
-            GameObject RHMGO = CreateControllerModel(SteamVR_Input_Sources.RightHand, out GameObject _);
-            RHMGO.transform.parent = RHGO.transform;
+            var righthandmodelgo = CreateControllerModel(SteamVR_Input_Sources.RightHand, out GameObject _);
+            righthandmodelgo.transform.parent = righthandgo.transform;
         }
 
-        LHGO.AddComponent<VRArmsSystem>();
-        RHGO.AddComponent<VRGunsSystem>();
+        lefthandgo.AddComponent<ArmsVRController>();
+        righthandgo.AddComponent<GunsVRController>();
 
         __instance.gameObject.SetActive(true);
     }
 
-    static GameObject CreateController(string Name, SteamVR_Input_Sources Source)
+    static GameObject CreateController(string name, SteamVR_Input_Sources source)
     {
-        GameObject GO = new GameObject(Name) { layer = (int)Layers.IgnoreRaycast };
-        SteamVR_Behaviour_Pose Controller = GO.AddComponent<SteamVR_Behaviour_Pose>();
-        Controller.onTransformUpdatedEvent += VRControllersSystem.onTransformUpdatedH;
-        if (Source == SteamVR_Input_Sources.LeftHand)
+        var go = new GameObject(name) { layer = (int)Layers.IgnoreRaycast };
+        var pose = go.AddComponent<SteamVR_Behaviour_Pose>();
+        pose.onTransformUpdatedEvent += VRControllerController.onTransformUpdatedH;
+        if (source == SteamVR_Input_Sources.LeftHand)
         {
-            Controller.poseAction = SteamVR_Actions._default.LeftPose;
-            Controller.inputSource = SteamVR_Input_Sources.LeftHand;
+            pose.poseAction = SteamVR_Actions._default.LeftPose;
+            pose.inputSource = SteamVR_Input_Sources.LeftHand;
         }
-        else if (Source == SteamVR_Input_Sources.RightHand)
+        else if (source == SteamVR_Input_Sources.RightHand)
         {
-            Controller.poseAction = SteamVR_Actions._default.RightPose;
-            Controller.inputSource = SteamVR_Input_Sources.RightHand;
+            pose.poseAction = SteamVR_Actions._default.RightPose;
+            pose.inputSource = SteamVR_Input_Sources.RightHand;
         }
         else throw new System.NotImplementedException();
-        return GO;
+        return go;
     }
 
-    static GameObject CreateControllerModel(SteamVR_Input_Sources Source, out GameObject SandboxRM, string Name = "Model")
+    static GameObject CreateControllerModel(SteamVR_Input_Sources source, out GameObject sandboxRM)
     {
-        GameObject GO = new GameObject(Name) { layer = (int)Layers.IgnoreRaycast };
-        SandboxRM = null;
+        var go = new GameObject("model") { layer = (int)Layers.IgnoreRaycast };
+        sandboxRM = null;
 
         Transform T;
-        if (Source == SteamVR_Input_Sources.LeftHand)
+        if (source == SteamVR_Input_Sources.LeftHand)
         {
             T = Object.Instantiate(Assets.Controller_ND).transform;
-            T.parent = GO.transform;
+            T.parent = go.transform;
             T.localPosition = Vector3.zero;
         }
-        else if (Source == SteamVR_Input_Sources.RightHand)
+        else if (source == SteamVR_Input_Sources.RightHand)
         {
 
             T = Object.Instantiate(Assets.Controller_D).transform;
-            SandboxRM = Object.Instantiate(Assets.Controller_D_Sandbox);
-            T.parent = GO.transform;
+            sandboxRM = Object.Instantiate(Assets.Controller_D_Sandbox);
+            T.parent = go.transform;
             T.localPosition = Vector3.zero;
         }
         else throw new System.NotImplementedException();
 
-        if (SandboxRM != null)
+        if (sandboxRM != null)
         {
-            SandboxRM.transform.parent = GO.transform;
-            SandboxRM.transform.localPosition = Vector3.zero;
+            sandboxRM.transform.parent = go.transform;
+            sandboxRM.transform.localPosition = Vector3.zero;
         }
 
-        return GO;
+        return go;
     }
 }

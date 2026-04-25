@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 using UnityEngine;
-using VRTRAKILL.Systems.UI;
+using VRTRAKILL.Systems;
 
 namespace VRTRAKILL.Patches.UI;
 
@@ -10,7 +10,7 @@ namespace VRTRAKILL.Patches.UI;
     static void Start(FinalRank __instance)
     {
         // makes it visible and larger.
-        VRUIConverter.ConvertCanvas(__instance.transform.parent.GetComponent<Canvas>(), force: true);
+        VRCanvasHelper.ConvertCanvas(__instance.transform.parent.GetComponent<Canvas>(), force: true);
         __instance.transform.localPosition = Vector3.zero;
         __instance.transform.localScale = new Vector3(16, 8, 8);
     }

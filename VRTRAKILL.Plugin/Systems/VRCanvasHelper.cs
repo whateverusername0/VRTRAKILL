@@ -2,10 +2,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 using VRTRAKILL.Utilities;
+using VRTRAKILL.Systems.UI;
 
-namespace VRTRAKILL.Systems.UI;
+namespace VRTRAKILL.Systems;
 
-internal static class VRUIConverter
+internal static class VRCanvasHelper
 {
     public static Camera UICamera { get; private set; }
     public static Camera UIEventCamera { get; private set; }
@@ -20,10 +21,10 @@ internal static class VRUIConverter
         UIEventCamera = new GameObject("UI Event Camera").AddComponent<Camera>();
         UIEventCamera.enabled = false;
 
-        UIEventCamera.gameObject.AddComponent<VRUIInteraction>();
+        UIEventCamera.gameObject.AddComponent<VRCanvasInteraction>();
 
         foreach (Canvas C in Resources.FindObjectsOfTypeAll<Canvas>())
-            if (!C.gameObject.HasComponent<VRUICanvas>())
+            if (!C.gameObject.HasComponent<VRCanvas>())
                 RecursiveConvertCanvas();
     }
 
@@ -40,7 +41,7 @@ internal static class VRUIConverter
         else
         {
             foreach (Canvas C in Object.FindObjectsOfType<Canvas>())
-                if (!C.gameObject.HasComponent<VRUICanvas>())
+                if (!C.gameObject.HasComponent<VRCanvas>())
                     try { ConvertCanvas(C); } catch {}
         }
     }
@@ -52,7 +53,7 @@ internal static class VRUIConverter
         if (!force && c.renderMode != RenderMode.ScreenSpaceOverlay) return;
         c.renderMode = RenderMode.WorldSpace;
         c.gameObject.layer = (int)Layers.UI;
-        if (addComponent) c.gameObject.AddComponent<VRUICanvas>();
+        if (addComponent) c.gameObject.AddComponent<VRCanvas>();
 
         foreach (Transform Child in c.transform) ConvertElement(Child);
     }

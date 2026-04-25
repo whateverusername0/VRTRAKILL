@@ -2,7 +2,7 @@
 
 namespace VRTRAKILL.Systems;
 
-internal static class WeaponTransform
+internal static class WeaponTransformHelper
 {
     public static void ApplyTransform(ref WeaponPos wPos, Vector3 position = new(), Vector3 euler = new(), Vector3 scale = new())
     {

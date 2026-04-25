@@ -4,11 +4,10 @@ using ULTRAKILL.Portal;
 using UnityEngine;
 using UnityEngine.XR;
 using VRTRAKILL.Data;
-using VRTRAKILL.Systems;
 using VRTRAKILL.Systems.Controllers;
 using VRTRAKILL.Systems.Input;
 
-namespace VRTRAKILL.Patches.VRCamera;
+namespace VRTRAKILL.Patches.VRCameraController;
 
 [HarmonyPatch(typeof(CameraController))] internal static class PatchCameraController
 {
@@ -49,24 +48,7 @@ namespace VRTRAKILL.Patches.VRCamera;
 
         __instance.cam.enabled = false;
 
-        #region Desktop View
-
-        //DesktopWorldCam = new GameObject("Desktop World Camera").AddComponent<Camera>();
-        //DesktopWorldCam.transform.parent = leftEye.transform;
-        //DesktopWorldCam.transform.localPosition = Vector3.zero;
-        //DesktopWorldCam.gameObject.AddComponent<DesktopCamera>();
-
-        //DesktopUICam = new GameObject("Desktop UI Camera").AddComponent<Camera>();
-        //DesktopUICam.transform.parent = leftEye.transform;
-        //DesktopUICam.transform.localPosition = Vector3.zero;
-        //DesktopUICam.gameObject.AddComponent<DesktopUICamera>();
-        //if (!Vars.Config.DesktopView.Enabled)
-        //{
-        //    DesktopWorldCam.gameObject.SetActive(false);
-        //    DesktopUICam.gameObject.SetActive(false);
-        //}
-
-        #endregion
+        // TODO add back desktop view in case it's necessary
     }
 
     [HarmonyPostfix, HarmonyPatch(nameof(CameraController.LateUpdate))]
@@ -174,7 +156,7 @@ namespace VRTRAKILL.Patches.VRCamera;
     [HarmonyPrefix, HarmonyPatch(nameof(CameraController.GetDefaultPos))]
     private static bool GetDefaultPos(ref Vector3 __result)
     {
-        __result = VRGunsSystem.Instance != null
+        __result = GunsVRController.Instance != null
             ? GlobalVars.DominantHand.transform.position
             : Vector3.zero;
         return false;
@@ -186,10 +168,12 @@ namespace VRTRAKILL.Patches.VRCamera;
         // remove player model
         // TODO reuse player model from uk and avoid using specific asset one
 
-        var head = GameObject.Instantiate(Assets.VHead, LeftEye.transform);
+        var head = Object.Instantiate(Assets.VHead, LeftEye.transform);
         head.transform.localPosition = new Vector3(0, 0, -0.07f);
         head.transform.localScale *= 2f;
-        Object.Destroy(head.GetComponent<CapsuleCollider>());
+        if (head.TryGetComponent<CapsuleCollider>(out var cc))
+            Object.Destroy(cc);
+
         foreach (Transform t in head.GetComponentsInChildren<Transform>(true))
             t.gameObject.layer = LayerMask.NameToLayer("Portal");
 

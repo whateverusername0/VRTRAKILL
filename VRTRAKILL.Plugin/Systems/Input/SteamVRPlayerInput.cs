@@ -58,7 +58,8 @@ public static class SteamVRPlayerInput
 
         Move.AddOnUpdateListener(UpdateMove, SteamVR_Input_Sources.Any);
         Look.AddOnUpdateListener(UpdateLook, SteamVR_Input_Sources.Any);
-        //WheelLook.AddOnUpdateListener(UpdateVector2, SteamVR_Input_Sources.Any); // inherits from Move
+        // inherits from Move
+        //WheelLook.AddOnUpdateListener(UpdateVector2, SteamVR_Input_Sources.Any);
         Punch.AddOnUpdateListener(UpdateBool, SteamVR_Input_Sources.Any);
         Hook.AddOnUpdateListener(UpdateBool, SteamVR_Input_Sources.Any);
         Fire1.AddOnUpdateListener(UpdateBool, SteamVR_Input_Sources.Any);
@@ -85,20 +86,20 @@ public static class SteamVRPlayerInput
         Slot6.AddOnUpdateListener(UpdateBool, SteamVR_Input_Sources.Any);
     }
 
-    private static void UpdateLook(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
+    private static void UpdateLook(SteamVR_Action_Vector2 from, SteamVR_Input_Sources source, Vector2 axis, Vector2 delta)
     {
-        ResolveInternal(fromAction);
+        ResolveInternal(from);
         MoveVector = axis;
     }
 
-    private static void UpdateMove(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
+    private static void UpdateMove(SteamVR_Action_Vector2 from, SteamVR_Input_Sources source, Vector2 axis, Vector2 delta)
     {
-        ResolveInternal(fromAction);
+        ResolveInternal(from);
         LookVector = axis;
     }
 
-    public static void UpdateBool(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
-        => ResolveInternal(fromAction);
+    public static void UpdateBool(SteamVR_Action_Boolean from, SteamVR_Input_Sources source, bool newState)
+        => ResolveInternal(from);
 
     private static void ResolveInternal(ISteamVR_Action_Source svrAction)
     {

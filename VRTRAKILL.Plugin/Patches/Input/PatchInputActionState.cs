@@ -13,6 +13,7 @@ namespace VRTRAKILL.Patches.Input;
         { nameof(PlayerInput.WheelLook), SteamVRPlayerInput.WheelLook },
     };
 
+    // player.move.ReadValue translates to VRPlayerInput.Move.ReadValue, which is good.
     [HarmonyPrefix] [HarmonyPatch(nameof(InputActionState.ReadValue))]
     private static bool ReadValue<T>(InputActionState __instance, ref T __result) where T : struct
     {

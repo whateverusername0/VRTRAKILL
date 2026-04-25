@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using UnityEngine;
+using VRTRAKILL.Systems;
 using VRTRAKILL.Systems.UI;
 
 namespace VRTRAKILL.Patches.UI;
@@ -9,7 +10,7 @@ namespace VRTRAKILL.Patches.UI;
     [HarmonyPrefix] [HarmonyPatch(nameof(HUDPos.Start))]
     static void Start(HUDPos __instance)
     {
-        VRUIConverter.ConvertCanvas(__instance.GetComponent<Canvas>(), force: true, addComponent: false);
+        VRCanvasHelper.ConvertCanvas(__instance.GetComponent<Canvas>(), force: true, addComponent: false);
         __instance.gameObject.AddComponent<VRHideCanvasOnMenuActive>();
 
         __instance.transform.localScale = new Vector3(.5f, .35f, .5f);

@@ -1,6 +1,5 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
-using System;
 using System.Collections.Generic;
 using Unity.XR.OpenVR;
 using UnityEngine;
@@ -9,8 +8,7 @@ using UnityEngine.XR;
 using UnityEngine.XR.Management;
 using Valve.VR;
 using VRTRAKILL.Data;
-using VRTRAKILL.Patches.Misc;
-using VRTRAKILL.Patches.ULTRAKILL;
+using VRTRAKILL.Systems.Input;
 using VRTRAKILL.Utilities;
 
 namespace VRTRAKILL;
@@ -48,20 +46,10 @@ public sealed partial class Plugin : BaseUnityPlugin
 
     private void PatchStuff()
     {
-        //new Patcher(new HarmonyLib.Harmony(PluginInfo.PLUGIN_GUID))
-        //{
-        //    Log = Vars.Log,
-        //}.PatchAll();
-
         new Patcher(new HarmonyLib.Harmony(PluginInfo.PLUGIN_GUID))
         {
-            Log = GlobalVars.Log,
-        }.Patch(new Type[]
-        {
-            typeof(PatchSteamVR),
-            typeof(PatchCameraController),
-            typeof(PatchInitGame)
-        });
+            LogSource = Plugin.Log,
+        }.PatchAll();
     }
 
     private void InitializeSteamVR()
@@ -87,7 +75,7 @@ public sealed partial class Plugin : BaseUnityPlugin
 
         // for future reference
         if (display.TryGetDisplayRefreshRate(out var refreshRate))
-            GlobalVars.RefreshRate = refreshRate;
+            GlobalVars.DefaultRefreshRate = refreshRate;
 
         Log.LogMessage("Active loader: " + managerSettings.activeLoader);
 
@@ -98,6 +86,6 @@ public sealed partial class Plugin : BaseUnityPlugin
 
         Log.LogMessage($"SteamVR Active: {SteamVR.active}, Connected: {SteamVR.initializedState}");
 
-        //Systems.Input.SVRActionsManager.Init();
+        SteamVRPlayerInput.Initialize();
     }
 }

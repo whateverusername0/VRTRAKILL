@@ -5,15 +5,16 @@ using VRTRAKILL.Patches.ULTRAKILL;
 
 namespace VRTRAKILL.Systems.Controllers
 {
-    public class VRArmsSystem : MonoSingleton<VRArmsSystem>
+    public class ArmsVRController : MonoSingleton<ArmsVRController>
     {
-        public VRControllersSystem CC;
+        public VRControllerController CC;
         public Transform GunOffset;
 
-        public Vector3 ArmIKOffset = new Vector3(0, .05f, -.11f);
+        public Vector3 ArmIKOffset = new(0, .05f, -.11f);
 
         private Vector3 _PreviousPosition, _CurrentVelocity; public float Speed = 0; // for punch detection
         private Vector3 LastPosition, Velocity; // for direction
+
         // note: do not fucking delete this
         private IEnumerator CalculateSpeed()
         {
@@ -27,11 +28,11 @@ namespace VRTRAKILL.Systems.Controllers
 
         public void Awake()
         {
-            CC = gameObject.GetComponent<VRControllersSystem>();
+            CC = gameObject.GetComponent<VRControllerController>();
             GunOffset = CC.GunOffset;
             LastPosition = transform.position;
 
-            UI.VRUIConverter.UIEventCamera.transform.parent = GlobalVars.NonDominantHand.transform;
+            VRCanvasHelper.UIEventCamera.transform.parent = GlobalVars.NonDominantHand.transform;
         }
 
         public void Update()

@@ -22,7 +22,7 @@ public class Patcher
     public Type Type { get; set; }
     public Type[] Types { get; set; }
 
-    public BepInEx.Logging.ManualLogSource Log { get; set; }
+    public BepInEx.Logging.ManualLogSource LogSource { get; set; }
 
     public Patcher(Harmony _Harmony) { Harmony = _Harmony; }
     public Patcher(Harmony _Harmony, string _Namespace) : this(_Harmony) { Namespace = _Namespace; }
@@ -69,7 +69,7 @@ public class Patcher
         List<Type> L = new List<Type>();
 
         if (Namespace == null && Namespaces == null && Type == null && Types == null)
-            try { Harmony.PatchAll(); } catch (NullReferenceException) { Log.LogFatal("Could not find any patches(???) wtf?"); }
+            try { Harmony.PatchAll(); } catch (NullReferenceException) { LogSource.LogFatal("Could not find any patches(???) wtf?"); }
         else
         {
             if (Type != null) L.Add(Type);
@@ -83,18 +83,18 @@ public class Patcher
 
     public void Patch(string _Namespace)
     {
-        Log.LogInfo($"Patching Namespace \"{_Namespace}\"...");
+        LogSource.LogInfo($"Patching Namespace \"{_Namespace}\"...");
         IEnumerable<Type> Q = GetTypes(_Namespace);
-        foreach (Type T in Q) try { Harmony.PatchAll(T); } catch { Log.LogError($"Nullref with type {T}"); }
+        foreach (Type T in Q) try { Harmony.PatchAll(T); } catch { LogSource.LogError($"Nullref with type {T}"); }
     }
     public void Patch(string[] _Namespaces)
     {
         IEnumerable<Type> Q = GetTypes(_Namespaces);
-        foreach (Type T in Q) try { Harmony.PatchAll(T); } catch { Log.LogError($"Nullref with type {T}"); }
+        foreach (Type T in Q) try { Harmony.PatchAll(T); } catch { LogSource.LogError($"Nullref with type {T}"); }
     }
     public void Patch(Type _T)
     {
-        Log.LogInfo($"Patching Type \"{nameof(_T)}\"...");
+        LogSource.LogInfo($"Patching Type \"{nameof(_T)}\"...");
         Harmony.PatchAll(_T);
     }
     public void Patch(Type[] _T)

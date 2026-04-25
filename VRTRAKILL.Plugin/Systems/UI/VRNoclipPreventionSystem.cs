@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 namespace VRTRAKILL.Systems.UI;
 
+// VRNPS or GTFOTW system
 public class VRNoclipPreventionSystem : MonoBehaviour
 {
     public Transform Pivot;
@@ -16,12 +17,10 @@ public class VRNoclipPreventionSystem : MonoBehaviour
     private readonly string[] _flavorText = new string[]
     {
         "Get out of the wall.",
-        "Get the fuck out of the wall!",
-        "Hey, the level is THIS way!",
-        "Not gonna let you noclip out of this one!",
-        "Please stop trespassing.",
+        "Get out of the wall!",
+        "The level is THIS way!",
+        "Nothing to see here.",
         "Go back!",
-        "Nothing to see here!"
     };
     private bool _shouldChangeText = false;
 

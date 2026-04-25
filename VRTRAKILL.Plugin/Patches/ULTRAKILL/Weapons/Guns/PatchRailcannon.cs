@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 using UnityEngine;
-using VRTRAKILL.Systems;
+using VRTRAKILL.Data;
 
 namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
 

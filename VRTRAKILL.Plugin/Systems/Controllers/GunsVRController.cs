@@ -4,19 +4,20 @@ using VRTRAKILL.Data;
 
 namespace VRTRAKILL.Systems.Controllers;
 
-public class VRGunsSystem : MonoSingleton<VRGunsSystem>
+public class GunsVRController : MonoSingleton<GunsVRController>
 {
-    public VRControllersSystem CC;
+    public VRControllerController CC;
     public Transform GunOffset;
     public GameObject RM, SandboxHandRM;
 
-    public Vector3 ArmIKOffset = new Vector3(.05f, .0525f, -.1765f);
+    public Vector3 ArmIKOffset = new(.05f, .0525f, -.1765f);
 
     public void Awake()
     {
-        CC = gameObject.GetComponent<VRControllersSystem>();
+        CC = gameObject.GetComponent<VRControllerController>();
         GunOffset = CC.GunOffset;
     }
+
     public void Start()
     {
         RM = CC.RenderModel.transform.GetChild(0).gameObject;

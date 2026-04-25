@@ -1,8 +1,5 @@
-﻿// This file is used by Code Analysis to maintain SuppressMessage
-// attributes that are applied to this project.
-// Project-level suppressions either have no target or are given
-// a specific target and scoped to a namespace, type, member, etc.
+﻿using System.Diagnostics.CodeAnalysis;
 
-using System.Diagnostics.CodeAnalysis;
-
+// this is worhtless because null coalesc uses it's own method while UnityEngine has an override to it
+// which shouldn't even count as a fucking warning. grrrrr
 [assembly: SuppressMessage("Style", "IDE0029:Use coalesce expression", Justification = "UnityEngine", Scope = "module")]

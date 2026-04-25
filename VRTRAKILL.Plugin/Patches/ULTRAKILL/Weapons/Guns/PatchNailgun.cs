@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using UnityEngine;
+using VRTRAKILL.Data;
 using VRTRAKILL.Systems;
 
 namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
@@ -9,8 +10,8 @@ namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
     [HarmonyPostfix] [HarmonyPatch(nameof(Nailgun.Start))]
     static void Transform(Nailgun __instance)
     {
-        if (__instance.altVersion) { WeaponTransform.ApplyTransform(ref __instance.wpos, new(-.165f, .2f, .065f), new(), new(.35f, .35f, .35f)); }
-        else { WeaponTransform.ApplyTransform(ref __instance.wpos, new(-.165f, .1f, .045f), new(), new(.4f, .3275f, .4f)); }
+        if (__instance.altVersion) { WeaponTransformHelper.ApplyTransform(ref __instance.wpos, new(-.165f, .2f, .065f), new(), new(.35f, .35f, .35f)); }
+        else { WeaponTransformHelper.ApplyTransform(ref __instance.wpos, new(-.165f, .1f, .045f), new(), new(.4f, .3275f, .4f)); }
 
         // add our own hand until hakita decides otherwise.
         // Nailgun ******(Clone)/Nailgun New New/Armature/Main

@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using UnityEngine;
+using VRTRAKILL.Data;
 using VRTRAKILL.Systems;
 
 namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
@@ -9,7 +10,7 @@ namespace VRTRAKILL.Patches.ULTRAKILL.Weapons.Guns;
     [HarmonyPostfix] [HarmonyPatch(nameof(Shotgun.Start))]
     static void Transform(Shotgun __instance)
     {
-        WeaponTransform.ApplyTransform(ref __instance.wpos, new(-.02f, .2f, .26f), new(), new(.1f, .1f, .1f));
+        WeaponTransformHelper.ApplyTransform(ref __instance.wpos, new(-.02f, .2f, .26f), new(), new(.1f, .1f, .1f));
 
         // add our own hand until hakita decides otherwise.
         Transform Hand = Object.Instantiate(Assets.HandPose_Shotgun.transform);

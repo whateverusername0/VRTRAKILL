@@ -5,8 +5,7 @@ using VRTRAKILL.Utilities;
 
 namespace VRTRAKILL.Systems.Controllers
 {
-    // lol the name
-    public class VRControllersSystem : MonoBehaviour
+    public class VRControllerController : MonoBehaviour
     {
         public Transform RenderModel;
         public Vector3 RenderModelOffsetPos,
@@ -18,6 +17,31 @@ namespace VRTRAKILL.Systems.Controllers
 
         LineRenderer LR; Vector3 EndPosition;
         public float DefaultLength => GlobalVars.Config.Controllers.CrosshairDistance;
+
+        public void Start()
+        {
+            RenderModel = RenderModel == null ? transform.Find("Model") : RenderModel;
+
+            SetupOffsets();
+
+            if (gameObject.HasComponent<ArmsVRController>())
+                SetupControllerLines();
+        }
+
+        public void Update()
+        {
+            // controller-based ui interaction
+            CPRaycast();
+            DrawControllerLines();
+
+            // controller model
+            if (GlobalVars.Config.Controllers.DrawControllers)
+            {
+                RenderModel.localPosition = RenderModelOffsetPos;
+                RenderModel.localRotation = Quaternion.Euler(RenderModelOffsetEulerAngles);
+                RenderModel.localScale = RenderModelOffsetScale;
+            }
+        }
 
         private void SetupOffsets()
         {
@@ -37,20 +61,21 @@ namespace VRTRAKILL.Systems.Controllers
             LR.useWorldSpace = true;
             LR.material = new Material(Shader.Find("GUI/Text Shader"));
 
-            Color C1 = new Color(1, 1, 1, .4f),
-                  C2 = new Color(1, 1, 1, .1f);
+            Color startcolor = new(1, 1, 1, .4f),
+                  endcolor = new(1, 1, 1, .1f);
 
             LR.startWidth = 0.02f; LR.endWidth = 0.001f;
-            LR.startColor = C1; LR.endColor = C2;
+            LR.startColor = startcolor; LR.endColor = endcolor;
         }
 
-        private void CPRaycast()
+        private void CPRaycast() // no matter how funny this looks it's never as funny...
         {
             bool Raycast = Physics.Raycast(GunOffset.position, GunOffset.forward,
                                            out RaycastHit Hit, float.PositiveInfinity, (int)Layers.UI);
             EndPosition = GunOffset.position + (GunOffset.forward * DefaultLength);
             if (Raycast) EndPosition = Hit.point;
         }
+        
         private void DrawControllerLines()
         {
             if (LR == null) return;
@@ -65,31 +90,7 @@ namespace VRTRAKILL.Systems.Controllers
             }
         }
 
-        public void Start()
-        {
-            RenderModel = RenderModel ?? transform.Find("Model");
-
-            SetupOffsets();
-
-            if (gameObject.HasComponent<VRArmsSystem>())
-                SetupControllerLines();
-        }
-        public void Update()
-        {
-            // controller-based ui interaction
-            CPRaycast();
-            DrawControllerLines();
-
-            // controller model
-            if (GlobalVars.Config.Controllers.DrawControllers)
-            {
-                RenderModel.localPosition = RenderModelOffsetPos;
-                RenderModel.localRotation = Quaternion.Euler(RenderModelOffsetEulerAngles);
-                RenderModel.localScale = RenderModelOffsetScale;
-            }
-        }
-
-        public static Vector3 ControllerOffset = new Vector3(0, 2.85f, 0);
+        public static Vector3 ControllerOffset = new(0, 2.85f, 0);
         public static void onTransformUpdatedH(SteamVR_Behaviour_Pose fromAction, SteamVR_Input_Sources fromSource)
         => fromAction.transform.position += ControllerOffset;
     }

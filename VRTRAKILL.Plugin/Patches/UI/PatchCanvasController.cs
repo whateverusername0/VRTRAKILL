@@ -3,8 +3,8 @@ using UnityEngine.UI;
 using HarmonyLib;
 using VRTRAKILL.Utilities;
 using VRTRAKILL.Data;
-using VRTRAKILL.Systems;
 using VRTRAKILL.Systems.UI;
+using VRTRAKILL.Systems;
 
 namespace VRTRAKILL.Patches.UI;
 
@@ -57,7 +57,7 @@ namespace VRTRAKILL.Patches.UI;
         UI_GTFOTW.transform.localScale = Vector3.one;
         UI_GTFOTW.transform.localPosition = Vector3.zero;
 
-        VRUIConverter.ConvertCanvas(UI_GTFOTW.GetComponent<Canvas>());
+        VRCanvasHelper.ConvertCanvas(UI_GTFOTW.GetComponent<Canvas>());
         UnityExtensions.RecursiveChangeLayer(UI_GTFOTW, (int)Layers.UI);
 
         VRNoclipPreventionSystem GTFOTW = UI_GTFOTW.AddComponent<VRNoclipPreventionSystem>();
