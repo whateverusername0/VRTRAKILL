@@ -215,7 +215,6 @@
     <Compile Include="Patches\VRCameraController\TranspilerArmCameraController.cs" />
     <Compile Include="Patches\VRCameraController\TranspilerGunCameraController.cs" />
     <Compile Include="Patches\VRCameraController\PatchCameraController.cs" />
-    <Compile Include="Patches\Misc\PatchInitGame.cs" />
     <Compile Include="Patches\UI\PatchFinalRank.cs" />
     <Compile Include="Patches\UI\PatchFlashImage.cs" />
     <Compile Include="Patches\UI\PatchHUDPos.cs" />
