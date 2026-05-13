@@ -1,3 +1,5 @@
+### Due to a lot of stuff happening at my plate VRTRAKILL development is put on an indefinite hold. I will still be reviewing issues and pull requests created at ULTRA_REVAMP branch. Until I have enough free time on me I will not be actively updating the mod.
+
 ## Quick note
 **This mod does not work after ULTRA_REVAMP update.**
 
