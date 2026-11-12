@@ -143,6 +143,9 @@
     <Reference Include="UnityEngine.UI">
       <HintPath>..\lib\Unity\UnityEngine.UI.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>..\lib\Unity\UnityEngine.UIModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.VRModule">
       <HintPath>..\lib\Unity\UnityEngine.VRModule.dll</HintPath>
     </Reference>
