@@ -26,6 +26,30 @@ public class VRDesktopCameraController : MonoSingleton<VRDesktopCameraController
         _vrcc.LeftEye.stereoTargetEye = StereoTargetEyeMask.None;
         _vrcc.LeftEye.cullingMask |= 1 << (int)Layers.AlwaysOnTop;
 
+        Validate();
+    }
+
+    // yeah yeah everything is inside of Update whatever
+    // i'm making this shit bulletproof
+
+    protected void LateUpdate()
+    {
+        if (_vrcc == null || _vrcc.LeftEye == null)
+            return;
+
+        Validate();
+
+        // setting it once doesn't work. maybe. test that later.
+        DesktopCamera.CopyFrom(_vrcc.LeftEye);
+        DesktopCamera.depth = 100;
+
+        // setting it once doesn't work. maybe. test that later.
+        DesktopUICamera.CopyFrom(_vrcc.LeftEye);
+        DesktopUICamera.depth = 101;
+    }
+
+    protected void Validate()
+    {
         if (DesktopCamera == null)
         {
             var c = AddChildCamera("Desktop camera", _vrcc.LeftEye);
@@ -39,27 +63,6 @@ public class VRDesktopCameraController : MonoSingleton<VRDesktopCameraController
             c.transform.SetParent(_vrcc.transform.parent);
             c.stereoTargetEye = StereoTargetEyeMask.None;
             c.cullingMask = 1 << (int)Layers.UI;
-        }
-    }
-
-    // yeah yeah everything is inside of Update whatever
-    // i'm making this shit bulletproof
-
-    protected void Update()
-    {
-        if (_vrcc == null || _vrcc.LeftEye == null)
-            return;
-
-        if (DesktopCamera != null)
-        {
-            DesktopCamera.CopyFrom(_vrcc.LeftEye);
-            DesktopCamera.depth = 100; // setting it once doesn't work. maybe. test that later.
-        }
-
-        if (DesktopUICamera != null)
-        {
-            DesktopUICamera.CopyFrom(_vrcc.LeftEye);
-            DesktopUICamera.depth = 101;
         }
     }
 

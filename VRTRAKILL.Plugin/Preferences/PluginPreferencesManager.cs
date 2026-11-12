@@ -9,7 +9,7 @@ public class PluginPreferencesManager : MonoSingleton<PluginPreferencesManager>
 
     [JsonIgnore] public static string ConfigPath = $"{PluginInfo.PluginPath}\\VRTRAKILL_Config.json";
 
-    public PreferencesJson Config { get; set; }
+    public PreferencesJson Config { get; private set; }
 
     public static void Serialize(PluginPreferencesManager config)
     {

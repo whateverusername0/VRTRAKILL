@@ -11,20 +11,17 @@ internal class ControlMessageData
 
     public static string FriendlyBindingName(ISteamVR_Action_In action)
     {
-        var direction = string.Empty;
-        switch (action.activeDevice)
+        var direction = action.activeDevice switch
         {
-            case SteamVR_Input_Sources.LeftHand:
-            case SteamVR_Input_Sources.LeftFoot:
-            case SteamVR_Input_Sources.LeftShoulder:
-                direction = "Left"; break;
-            case SteamVR_Input_Sources.RightHand:
-            case SteamVR_Input_Sources.RightFoot:
-            case SteamVR_Input_Sources.RightShoulder:
-                direction = "Right"; break;
-            default: direction = string.Empty; break;
-        }
+            SteamVR_Input_Sources.LeftHand
+            or SteamVR_Input_Sources.LeftFoot
+            or SteamVR_Input_Sources.LeftShoulder => "Left",
 
+            SteamVR_Input_Sources.RightHand
+            or SteamVR_Input_Sources.RightFoot
+            or SteamVR_Input_Sources.RightShoulder => "Right",
+            _ => string.Empty,
+        };
         if (string.IsNullOrEmpty(direction))
             return action.GetLocalizedOriginPart(SteamVR_Input_Sources.Any);
         else return $"{direction} {action.GetLocalizedOriginPart(SteamVR_Input_Sources.Any)}";
@@ -37,6 +34,7 @@ internal class ControlMessageData
 
         if (Bindings.Length == 0)
             return Replacement;
+
         else return string.Format(Replacement, Bindings);
     }
 

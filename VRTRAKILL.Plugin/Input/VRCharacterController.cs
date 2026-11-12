@@ -100,7 +100,7 @@ public class VRCharacterController : MonoSingleton<VRCharacterController>
 
         _leftHand.gameObject.SetActive(false);
         _rightHand.gameObject.SetActive(false);
-        yield return null;
+        yield return null; // wait till next frame
 
         _leftHand.gameObject.SetActive(true);
         _rightHand.gameObject.SetActive(true);

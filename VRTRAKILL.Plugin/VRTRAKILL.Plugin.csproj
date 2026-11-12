@@ -163,6 +163,7 @@
     <Compile Include="Data\Assets.cs" />
     <Compile Include="Data\GlobalVars.cs" />
     <Compile Include="Data\Layers.cs" />
+    <Compile Include="Input\NoMouseInput.cs" />
     <Compile Include="Input\SteamVRInputBridge.cs" />
     <Compile Include="Input\PluginTimingManager.cs" />
     <Compile Include="Input\VRCharacterController.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="PluginSceneManager.cs" />
     <Compile Include="Systems\VRCameraController.cs" />
     <Compile Include="Systems\VRDesktopCameraController.cs" />
+    <Compile Include="Systems\VRUIInteractor.cs" />
     <Compile Include="Utilities\Patcher.cs" />
     <Compile Include="Utilities\UnityExtensions.cs" />
   </ItemGroup>
