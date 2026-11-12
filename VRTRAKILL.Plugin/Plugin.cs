@@ -1,91 +1,173 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
-using System.Collections.Generic;
+using System;
+using System.IO;
+using System.Linq;
 using Unity.XR.OpenVR;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.XR;
 using UnityEngine.XR.Management;
 using Valve.VR;
-using VRTRAKILL.Data;
-using VRTRAKILL.Systems.Input;
+using VRTRAKILL.Plugin.Input;
+using VRTRAKILL.Plugin.Preferences;
+using VRTRAKILL.Plugin.Utilities;
 using VRTRAKILL.Utilities;
 
-namespace VRTRAKILL;
+namespace VRTRAKILL.Plugin;
 
 [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
 public sealed partial class Plugin : BaseUnityPlugin
 {
-    internal static ManualLogSource Log { get; private set; }
+    public static Plugin Instance { get; private set; }
+    internal ManualLogSource Log { get; private set; }
+
+    public XRGeneralSettings XRGeneralSettings { get; private set; }
+    public XRManagerSettings XRManagerSettings { get; private set; }
+    public OpenVRLoader OpenVRLoader { get; private set; }
+
+    public GameObject ControllerGameObject { get; private set; }
 
     public void Awake()
     {
+        var timestamp = Time.time;
+
+        Instance = this;
+
         Log = Logger;
         Debug.unityLogger.filterLogType = LogType.Log;
 
-        PatchStuff();
-
-        InitializeSteamVR();
-        SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
-    }
-
-    private void SceneManager_activeSceneChanged(Scene arg0, Scene arg1)
-    {
-        if (XRGeneralSettings.Instance == null || XRGeneralSettings.Instance.Manager == null)
+        if (!ArgumentExists("--vr"))
         {
-            Log.LogError("XR General Settings are null!");
+            Log.LogWarning(
+                "Argument of --vr is missing.\n" +
+                "Add it in the command line arguments for the mod to run.\n" +
+                "The game will now start normally!");
             return;
         }
 
-        var loader = XRGeneralSettings.Instance.Manager.activeLoader;
-        if (loader == null)
-            XRGeneralSettings.Instance.Manager.InitializeLoaderSync();
+        if (!IsGameVersionValid())
+        {
+            var unintended =
+                "This version of VRTRAKILL was NOT DESIGNED for this version of ULTRAKILL!\n" +
+                "To run it regardless you have to add --forceVersion in the command line arguments.\n";
 
-        UnityExtensions.EnableOffscreenRendering();
-    }
+            if (!ArgumentExists("--forceVersion"))
+            {
+                unintended += "Which you did not! The game will now start normally!";
+                Log.LogFatal(unintended);
+                return;
+            }
+            else unintended += "Which you did! Do keep in mind that this voids all warranty!";
 
-    private void PatchStuff()
-    {
+            Log.LogWarning(unintended);
+        }
+
+        Log.LogInfo("Initializing OpenXR.");
+        if (!TryInitializeXR())
+        {
+            Log.LogFatal("Unable to initialize OpenXR. Aborting and starting in normal mode. Sorry!");
+
+            Destroy(XRGeneralSettings);
+            Destroy(XRManagerSettings);
+            Destroy(OpenVRLoader);
+            return;
+        }
+
+        Log.LogInfo("Applying patches.");
         new Patcher(new HarmonyLib.Harmony(PluginInfo.PLUGIN_GUID))
         {
-            LogSource = Plugin.Log,
+            LogSource = Log,
         }.PatchAll();
+
+        Log.LogInfo("Adding singletons.");
+        ControllerGameObject = new GameObject("VRTRAKILL Managed");
+        DontDestroyOnLoad(ControllerGameObject);
+
+        ControllerGameObject.EnsureComponent<PluginSceneManager>();
+        ControllerGameObject.EnsureComponent<PluginTimingManager>();
+        ControllerGameObject.EnsureComponent<PluginPreferencesManager>();
+
+        Log.LogInfo($"Initialized in {Time.time - timestamp}s.");
     }
 
-    private void InitializeSteamVR()
+    public bool TryInitializeXR()
     {
-        Log.LogMessage("Initiaizing XR Loader");
-        var generalSettings = ScriptableObject.CreateInstance<XRGeneralSettings>();
-        var managerSettings = ScriptableObject.CreateInstance<XRManagerSettings>();
-        var xrLoader = ScriptableObject.CreateInstance<OpenVRLoader>();
+        Log.LogInfo("Initializing OpenXR with OpenVR as the main loader.");
 
-        var settings = OpenVRSettings.GetSettings();
-        settings.StereoRenderingMode = OpenVRSettings.StereoRenderingModes.MultiPass;
+        var gs = ScriptableObject.CreateInstance<XRGeneralSettings>();
+        var xrm = ScriptableObject.CreateInstance<XRManagerSettings>();
+        var vrl = ScriptableObject.CreateInstance<OpenVRLoader>();
 
-        generalSettings.Manager = managerSettings;
-        ((List<XRLoader>)managerSettings.activeLoaders).Clear();
-        ((List<XRLoader>)managerSettings.activeLoaders).Add(xrLoader);
-        managerSettings.InitializeLoaderSync();
+        XRGeneralSettings = gs;
+        XRManagerSettings = xrm;
+        OpenVRLoader = vrl;
+
+        gs.Manager = xrm;
+        var ovrs = OpenVRSettings.GetSettings();
+        ovrs.StereoRenderingMode = OpenVRSettings.StereoRenderingModes.MultiPass;
+
+        if (!xrm.TryAddLoader(vrl))
+        {
+            Log.LogError("Unable to add OpenVR loader!");
+            return false;
+        }
+        xrm.InitializeLoaderSync();
+        xrm.StartSubsystems();
 
         var loader = XRGeneralSettings.Instance.Manager.activeLoader;
-        if (loader == null) Log.LogFatal("Unable to load XR Display Subsystem!");
+        if (loader == null)
+        {
+            Log.LogError("Unable to load XR display subsystem!");
+            return false;
+        }
 
-        var display = managerSettings.activeLoader.GetLoadedSubsystem<XRDisplaySubsystem>();
-        display.Start();
+        Log.LogMessage("Active loader: " + loader);
 
-        // for future reference
-        if (display.TryGetDisplayRefreshRate(out var refreshRate))
-            GlobalVars.DefaultRefreshRate = refreshRate;
+        // unsure if this is neccessary
+        var displaySubsystem = loader.GetLoadedSubsystem<XRDisplaySubsystem>();
+        if (displaySubsystem != null && !displaySubsystem.running)
+            displaySubsystem.Start();
 
-        Log.LogMessage("Active loader: " + managerSettings.activeLoader);
+        return true;
+    }
 
-        Log.LogMessage("Initializing SteamVR");
+    public bool TryInitializeSteamVR()
+    {
+        Log.LogMessage("Initializing SteamVR.");
 
-        SteamVR_Actions.PreInitialize();
-        SteamVR.Initialize(true);
+        try
+        {
+            SteamVR_Actions.PreInitialize();
+            SteamVR.Initialize(true);
+        }
+        catch (Exception e)
+        {
+            Log.LogError($"Failed to initialize SteamVR! Exception:\n{e}");
+            return false;
+        }
 
         Log.LogMessage($"SteamVR Active: {SteamVR.active}, Connected: {SteamVR.initializedState}");
 
-        SteamVRPlayerInput.Initialize();
+        SteamVRInputBridge.Initialize();
+
+        return true;
     }
+
+    public bool IsGameVersionValid()
+    {
+        var path = Path.Combine(PluginInfo.GamePath, "ULTRAKILL_Data", "boot.config");
+        if (!File.Exists(path)) return true;
+
+        var bootConfig = File.ReadAllLines(path);
+        var build = bootConfig.FirstOrDefault(q => q.Contains("build-guid"));
+        if (build == default) return true;
+
+        var version = build.Split('=').LastOrDefault();
+        if (version == default) return true;
+
+        return version == PluginInfo.INTENDED_BUILD_GUID;
+    }
+
+    public bool ArgumentExists(string arg)
+        => Environment.GetCommandLineArgs().Contains(arg);
 }

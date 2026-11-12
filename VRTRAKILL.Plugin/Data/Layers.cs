@@ -1,4 +1,4 @@
-﻿namespace VRTRAKILL.Data;
+﻿namespace VRTRAKILL.Plugin.Data;
 
 public enum Layers
 {
@@ -8,10 +8,14 @@ public enum Layers
     Water = 4,
     UI = 5,
     Environment = 8,
-    Gib = 9, Limb = 10, BigCorpse = 11,
-    EnemyTrigger = 12, AlwaysOnTop = 13,
+    Gib = 9,
+    Limb = 10,
+    BigCorpse = 11,
+    EnemyTrigger = 12,
+    AlwaysOnTop = 13,
     Projectile = 14,
-    Invincible = 15, Invisible = 16,
+    Invincible = 15,
+    Invisible = 16,
     BrokenGlass = 17,
     PlayerOnly = 18,
     VirtualScreen = 19,
